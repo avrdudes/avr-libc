@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -93,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_74edb07caae428933d09e0931d8b44f5.html">avr</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_03a82f3aa35cf08870ad32fdb7b82511.html">avr-libc-onlinedocs</a></li><li class="navelem"><a class="el" href="dir_0afb6d57297c803a398862ed6efffcd6.html">include</a></li><li class="navelem"><a class="el" href="dir_3fe77a03ade96643e882b88e34f07fde.html">avr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -108,7 +111,7 @@ Macros</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Global manipulation of the interrupt flag</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>The global interrupt flag is maintained in the I bit of the status register (SREG).</p>
 <p>Handling interrupts frequently requires attention regarding atomic access to objects that could be altered by code running within an interrupt context, see &lt;<a class="el" href="atomic_8h.html">util/atomic.h</a>&gt;.</p>
-<p>Frequently, interrupts are being disabled for periods of time in order to perform certain operations without being disturbed; see <a class="el" href="optimization.html#optim_code_reorder">Problems with reordering code</a> for things to be taken into account with respect to compiler optimizations. </p>
+<p>Frequently, interrupts are being disabled for periods of time in order to perform certain operations without being disturbed; see <a class="el" href="optimization.html#optim_code_reorder">Problems with Reordering Code</a> for things to be taken into account with respect to compiler optimizations. </p>
 </div></td></tr>
 <tr class="memitem:gaad5ebd34cb344c26ac87594f79b06b73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a>()&#160;&#160;&#160;__asm__ __volatile__ (&quot;sei&quot; ::: &quot;memory&quot;)</td></tr>
 <tr class="separator:gaad5ebd34cb344c26ac87594f79b06b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +120,8 @@ Macros</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Macros for writing interrupt handler functions</div></td></tr>
 <tr class="memitem:gad28590624d422cdf30d626e0a506255f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a>(vector,  attributes)</td></tr>
 <tr class="separator:gad28590624d422cdf30d626e0a506255f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga48ae9a7647627e76a69f814510566d6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a>(vector_num,  attributes)</td></tr>
+<tr class="separator:ga48ae9a7647627e76a69f814510566d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga67cd0dea412157775c2f2a3ffe9fb8ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#ga67cd0dea412157775c2f2a3ffe9fb8ff">SIGNAL</a>(vector)</td></tr>
 <tr class="separator:ga67cd0dea412157775c2f2a3ffe9fb8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga751c22101f7e8f2fbe792c64a81f8dba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__interrupts.html#ga751c22101f7e8f2fbe792c64a81f8dba">EMPTY_INTERRUPT</a>(vector)</td></tr>
@@ -147,7 +152,7 @@ Macros</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:41 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:37 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

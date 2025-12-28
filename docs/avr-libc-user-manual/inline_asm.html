@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -102,6 +105,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="inline_asm.html#inline_asm_about">About this Document</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_building_blocks">Building Blocks</a><ul>
 <li><a class="el" href="inline_asm.html#inline_asm_anatomy">The Anatomy of a GCC asm Statement</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_size">The Size of an asm</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_special_sequences">Special Sequences</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_constraints">Constraints</a><ul>
 <li><a class="el" href="inline_asm.html#constraint_modifiers">Constraint Modifiers</a></li>
@@ -119,10 +123,11 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="inline_asm.html#inline_asm_bytes">Accessing Bytes of wider Expressions</a></li>
 <li><a class="el" href="inline_asm.html#builtin_constant_p_in_inline_functions">Inline Functions and __builtin_constant_p</a></li>
 <li><a class="el" href="inline_asm.html#inline_asm_jumping">Jumping and Branching</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_abi_interface">Interfacing non-ABI Functions</a><ul>
+<li><a class="el" href="inline_asm.html#inline_asm_local_vars">Binding local Variables to Registers</a></li>
+<li><a class="el" href="inline_asm.html#inline_asm_hrc">Hard-Register Constraints</a></li>
 </ul>
 </li>
-<li><a class="el" href="inline_asm.html#inline_asm_local_vars">Binding local Variables to Registers</a><ul>
-<li><a class="el" href="inline_asm.html#inline_asm_abi_interface">Interfacing non-ABI Functions</a></li>
 </ul>
 </li>
 <li><a class="el" href="inline_asm.html#c_names_in_asm">Specifying the Assembly Name of Static Objects</a></li>
@@ -135,7 +140,7 @@ About this Document</h1>
 <p>Note that this document does not cover files written completely in assembly language, refer to <a class="el" href="assembler.html">AVR-LibC and Assembler Programs</a> for this.</p>
 <p>Copyright (C) 2001-2002 by egnite Software GmbH</p>
 <p>Permission is granted to copy and distribute verbatim copies of this manual provided that the copyright notice and this permission notice are preserved on all copies. Permission is granted to copy and distribute modified versions of this manual provided that the entire resulting derived work is distributed under the terms of a permission notice identical to this one.</p>
-<p>This document describes version 4.7 of the compiler or newer.</p>
+<p>This document describes version 4.8 of the compiler or newer.</p>
 <p>Herne, 17th of May 2002 Harald Kipp harald.kipp-at-egnite.de</p>
 <p><a class="anchor" id="inline_asm_building_blocks"></a> </p>
 <h1><a class="anchor" id="inline_asm_anatomy"></a>
@@ -144,21 +149,19 @@ The Anatomy of a GCC asm Statement</h1>
 <p>In its simplest form, the inline assembly statement has no operands and injects just one instruction into the code stream, like in </p><div class="fragment"><div class="line">__asm (<span class="stringliteral">&quot;nop&quot;</span>);</div>
 </div><!-- fragment --><p> In its generic form, an asm statements can have one of the following three forms:</p>
 <dl>
-<dt>A simple asm without operands </dt>
-<dd><div class="fragment"><div class="line">__asm (code-string);</div>
-</div><!-- fragment --><p> <code>code-string</code> is a string literal that will be added as is into the generated assembly code. This even applies to the % character. The only replacement is that \n and \t are interpreted as newline resp. TAB character.</p>
-<p class="interdd">This type of asm statement may occur at top level, outside any function as global asm. When its placement relative to functions is important, consider <code>-fno-toplevel-reorder</code>. </p>
+<dt>__asm (code-string); </dt>
+<dd><p class="startdd">A simple asm without operands: <code>code-string</code> is a string literal that will be added as is into the generated assembly code. This even applies to the % character. The only replacement is that \n and \t are interpreted as newline resp. TAB character.</p>
+<p class="interdd">This type of asm statement may occur at top level, outside any function as global asm. When its placement relative to functions is important, consider <code>-fno-toplevel-reorder</code>.</p>
+<p class="interdd">In <a href="https://gcc.gnu.org/gcc-15/changes.html#c-family">GCC v15</a> and up, <a href="https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html">extended inline asm</a> can be used with some limitations outside of functions as well. </p>
 <p class="enddd"></p>
 </dd>
-<dt>An asm with operands </dt>
-<dd><div class="fragment"><div class="line">__asm volatile (code-string : output-operands : input-operands : clobbers);</div>
-</div><!-- fragment --><p> This is the most widely used form of an asm statement. It must be located in a function.</p>
-<p class="interdd"><code>output-operands</code>, <code>input-operands</code> and <code>clobbers</code> are comma-separated lists of operands resp. clobber specifications. Any of them may be empty, for example when the asm has no outputs. At least one <code></code>: (colon) must be present, otherwise it will be a simple asm without operands and without <code>%</code> replacements. </p>
+<dt>__asm volatile (code-string : output-operands : input-operands : clobbers); </dt>
+<dd><p class="startdd">An asm with operands: This is the most widely used form of an asm statement. It must be located in a function.</p>
+<p class="interdd"><code>output-operands</code>, <code>input-operands</code> and <code>clobbers</code> are comma-separated lists of operands resp. clobber specifications. Any of them may be empty, for example when the asm has no outputs. At least one <code>:</code> (colon) must be present, otherwise it will be a simple asm without operands and without <code>%</code> replacements. </p>
 <p class="enddd"></p>
 </dd>
-<dt>An asm goto statement </dt>
-<dd><div class="fragment"><div class="line">__asm goto (code-string : : input-operands : clobbers : labels);</div>
-</div><!-- fragment --> Like the asm above, but <code>labels</code> is a comma-separated list of C/C++ code labels which would be valid in a <code>goto</code> statement. And <code>output-operands</code> must be empty, because it is impossible to generate output reloads after the code has transferred control to one of the labels. <br  />
+<dt>__asm goto (code-string : : input-operands : clobbers : labels); </dt>
+<dd>An asm goto statement: Like the asm above, but <code>labels</code> is a comma-separated list of C/C++ code labels which would be valid in a <code>goto</code> statement. And <code>output-operands</code> must be empty, because it is impossible to generate output reloads after the code has transferred control to one of the labels. <br  />
  As there are no output operands, asm goto is implicitly volatile. When <code>volatile</code> is specified explicitly, the <code>goto</code> keyword may be placed after or before the <code>volatile</code>.  </dd>
 </dl>
 <p>Notes on the various parts:</p>
@@ -167,7 +170,7 @@ The Anatomy of a GCC asm Statement</h1>
 <dd><p class="startdd">Keyword <code>volatile</code> is optional and means that the asm statement has side effects that are not expressed in terms of the operands or clobbers. The asm statement must not be optimized away or reordered with respect to other volatile statements like volatile memory accesses or other volatile asm.</p>
 <p class="interdd">Any asm statement without <code>output-operands</code> is implicitly volatile.</p>
 <p class="interdd">A non-volatile asm statement with output operands that are all unused may be optimized away when all output operands are unused.</p>
-<p class="interdd">Instead of <code>volatile</code>, <code>__volatile</code> or <code>__volatile__</code> can be used. </p>
+<p class="interdd">Instead of <code>volatile</code>, <code>__volatile</code> or <code>__volatile__</code> can be used as well. </p>
 <p class="enddd"></p>
 </dd>
 <dt><code>code-string</code> </dt>
@@ -195,21 +198,21 @@ The Anatomy of a GCC asm Statement</h1>
 </dd>
 <dt><code>clobbers</code> </dt>
 <dd><p class="startdd">A comma-separated list of string literals like <code>"16"</code>, "r16" or "memory".</p>
-<p class="interdd">The first two clobbers mean that the asm destroys register R16. Only the lower-case form is allowed, and register names like Z are not recognized.</p>
+<p class="interdd">The first two clobbers mean that the asm destroys register R16. Only the lower-case form is allowed, and register names like Z are not recognized. A register that's clobbered will not be used as (part of) an input or output operand.</p>
 <p class="interdd"><code>"memory"</code> means that the asm touches memory in some way. When the asm writes to some RAM location for example, the compiler must not optimize RAM accesses across the asm because the memory may change.</p>
 <p class="interdd">Clobbering <code><a class="el" href="FAQ.html#tmp_reg">__tmp_reg__</a></code> by means of <code>"r0"</code> has no effect, but such a clobber may be added to indicate to the reader that the asm clobbers R0.</p>
-<p class="interdd">Clobbering <code><a class="el" href="FAQ.html#zero_reg">__zero_reg__</a></code> by means of <code>"r1"</code> has no effect. When the asm destroys the zero register, for example by means of a <code>MUL</code> instruction, then the code must restore the register at the end by means of <code>"clr __zero_reg__"</code> </p>
-<p class="enddd"></p>
-</dd>
-<dt>The size of an asm<a class="anchor" id="inline_asm_size"></a> </dt>
-<dd><p class="startdd">The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
-<p class="enddd">The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.  </p>
+<p class="enddd">Clobbering <code><a class="el" href="FAQ.html#zero_reg">__zero_reg__</a></code> by means of <code>"r1"</code> has no effect. When the asm destroys the zero register, for example by means of a <code>MUL</code> instruction, then the code must restore the register at the end by means of <code>"clr __zero_reg__"</code>.  </p>
 </dd>
 </dl>
-<p>Before we start with the first examples, we list all the bells and whistles that can be used to compose an inline assembly statement: <a class="el" href="inline_asm.html#special_sequences">special sequences</a>, <a class="el" href="inline_asm.html#constraints">constraints</a>, <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifiers</a>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> and <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a>.</p>
+<p>Before we start with the first examples, we list all the bells and whistles that can be used to compose an inline assembly statement: <a class="el" href="inline_asm.html#special_sequences">special sequences</a>, <a class="el" href="inline_asm.html#constraints">constraints</a>, <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifiers</a>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a> and the <a class="el" href="inline_asm.html#inline_asm_size">size of an asm</a>.</p>
+<h1><a class="anchor" id="inline_asm_size"></a>
+The Size of an asm</h1>
+<p>The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
+<p>The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.</p>
 <h1><a class="anchor" id="inline_asm_special_sequences"></a>
 Special Sequences</h1>
 <p>There are special sequences that can be used in the assembly template.</p>
+<p>Resolution of <code>%</code> is only performed when the inline asm has operands or clobbers. For example, <code>asm("%%")</code> inserts <em>two</em> <code>%</code>'s whereas <code>asm("%%":)</code> only inserts one.</p>
 <p><a class="anchor" id="special_sequences"></a></p><table class="doxtable">
 <caption>Inline asm Special Sequences</caption>
 <tr>
@@ -221,7 +224,7 @@ Special Sequences</h1>
 <tr>
 <td><code>__zero_reg__</code> </td><td>The <a class="el" href="FAQ.html#zero_reg">zero register</a> R1, always zero (R17 on reduced Tiny)  </td></tr>
 <tr>
-<td><code>$</code> </td><td>A logical line separator, used to separate multiple instruction in one physical line  </td></tr>
+<td><code>$</code> </td><td>A logical line separator, used to separate multiple instructions in one physical line  </td></tr>
 <tr>
 <td><code>\n</code> </td><td>A physical newline, used to separate multiple instructions  </td></tr>
 <tr>
@@ -294,7 +297,7 @@ Constraints</h1>
 <tr>
 <td><code>i</code> </td><td>Immediate value known at link-time, like the address of a variable in static storage</td><td></td></tr>
 <tr>
-<td><code>EF</code> </td><td>Floating-point constant</td><td></td></tr>
+<td><code>F</code> </td><td>floating-point constant</td><td></td></tr>
 <tr>
 <td><code>Ynn</code> </td><td>Fixed-point or integer constant</td><td></td></tr>
 <tr>
@@ -306,11 +309,13 @@ Constraints</h1>
 <tr>
 <td><code>0</code> ... <code>9</code> </td><td>Matches the respective operand number</td><td></td></tr>
 </table>
+<p>GCC v16 also supports <a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">hard-register constraints</a>. They allow to specify a register in a constraint. For example, <code>"{r20}"</code> specifies register(s) starting at R20.</p>
 <p><a class="anchor" id="constraint_modifiers"></a></p><ul>
 <li>Constraints without a modifier specify input operands.</li>
 <li>Constraints with a modifier specify output operands.</li>
 <li>More than one constraint like in <code>"rn"</code> specifies the union of the specified constraints; <code>"r"</code> and <code>"n"</code> in this case.</li>
 <li>All constraints listed above are single-letter constraints, except <code>Ynn</code> which is a 3-letter constraint.</li>
+<li>According to the avr-gcc ABI, values that occupy more than one register will start at an even register number.</li>
 </ul>
 <p>Constraint modifiers are:</p>
 <table class="doxtable">
@@ -324,6 +329,25 @@ Constraints</h1>
 <tr>
 <td><code>=&amp;</code> </td><td>"Early-clobber". Register should be used for output only and won't overlap with any input operand(s)  </td></tr>
 </table>
+<p>Examples:</p>
+<dl>
+<dt><code>"a" (10)</code> </dt>
+<dd>Load the value of 10 into a register in the range of the <code>a</code> constraint, i.e. R16...R23. As <code>int</code> is a 16-bit value, so is <code>10</code>, and the constant will occupy two consecutive hard registers.  </dd>
+<dt><code>"a" ((uint8_t) 10)</code> </dt>
+<dd>Same, but this time the constant only occupies one register.  </dd>
+<dt><code>"I" (10)</code> </dt>
+<dd>The literal value <code>10</code> can be used in the according <code>%</code> operand.  </dd>
+<dt><code>"J" (10)</code> </dt>
+<dd>An error: The value 10 is not in the range &minus;63...0 of the <code>J</code> constraint.  </dd>
+<dt><code>"=a" (10)</code> </dt>
+<dd>An error: <code>10</code> is not an lvalue and cannot be written to.  </dd>
+<dt><code>"a" (var)</code> </dt>
+<dd>The variable <code>var</code> will be loaded into a register in the range R16...R23. A 4-byte value will occupy 4 consecutive registers etc.  </dd>
+<dt><code>"+a" (var)</code> </dt>
+<dd>The variable <code>var</code> will be loaded into a register in the range R16...R23. It is an input as well as an output of the inline asm, i.e. it must be an lvalue. Otherwise, e.g. when <code>var</code> is read-only, the compiler will complain.  </dd>
+<dt><code>"I" (var)</code> </dt>
+<dd>In most cases, this is an error because <code>var</code> is not known at compile-time. Only when <code>__builtin_constant_p(var)</code> is true and <code>var</code> is in the range 0...63, then <code>var</code> is accepted by the compiler.  </dd>
+</dl>
 <p>The selection of the proper constraint depends on the range of the constants or registers, which must be acceptable to the AVR instruction they are used with. The C compiler doesn't check any line of your assembler code. But it is able to check the constraint against your C expression. However, if you specify the wrong constraints, then the compiler may silently pass wrong code to the assembler. And, of course, the assembler will fail with some cryptic output or internal errors, or in the worst case wrong code may be the result.</p>
 <p>For example, if you specify the constraint <code>"r"</code> and you are using this register with an <code>ORI</code> instruction, then the compiler may select any register. This will fail if the compiler chooses <code>R2</code> to <code>R15</code>. (It will never choose <code>R0</code> or <code>R1</code>, because these are uses for special purposes.) That's why the correct constraint in that case is <code>"d"</code>. On the other hand, if you use the constraint <code>"M"</code>, the compiler will make sure that you don't pass anything else but an 8-bit unsigned integer value known at compile-time.</p>
 <p>The following table shows all AVR assembler mnemonics which require operands, and the related constraints.</p>
@@ -446,8 +470,7 @@ Operand Modifiers</h1>
 <tr>
 <th>Modifier </th><th>Explanation </th><th>Purpose  </th></tr>
 <tr>
-<td><code>lo8()</code> </td><td>1<sup>st</sup> Byte of a link-time constant, bits 0...7 </td><td rowspan="5">Getting parts<br  />
-of a byte-address  </td></tr>
+<td><code>lo8()</code> </td><td>1<sup>st</sup> Byte of a link-time constant, bits 0...7 </td><td rowspan="5">Getting parts of a byte-address  </td></tr>
 <tr>
 <td><code>hi8()</code> </td><td>2<sup>nd</sup> Byte of a link-time constant, bits 8...15  </td></tr>
 <tr>
@@ -457,8 +480,7 @@ of a byte-address  </td></tr>
 <tr>
 <td><code>hh8()</code> </td><td>Same like <code>hlo8</code>  </td></tr>
 <tr>
-<td><code>pm_lo8()</code> </td><td>1<sup>st</sup> Byte of a link-time constant divided by 2, bits 1...8 </td><td rowspan="3">Getting parts<br  />
-of a word-address  </td></tr>
+<td><code>pm_lo8()</code> </td><td>1<sup>st</sup> Byte of a link-time constant divided by 2, bits 1...8 </td><td rowspan="3">Getting parts of a word-address  </td></tr>
 <tr>
 <td><code>pm_hi8()</code> </td><td>2<sup>nd</sup> Byte of a link-time constant divided by 2, bits 9...16  </td></tr>
 <tr>
@@ -469,13 +491,13 @@ of a word-address  </td></tr>
 <td><code>gs()</code> </td><td>Function address divided by 2 in order to get a (word) addresses, like in <code>lo8(gs(main))</code>. <b>G</b>enerate <b>s</b>tub (trampoline) as needed. This is required to calculate the address of a code label on devices with more than 128&#160;KiB of program memory that's supposed to be used in <code>EICALL</code>. For rationale, see the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind">GCC documentation</a>. On devices with less program memory, <code>gs()</code> behaves like <code>pm()</code> </td><td>Function address<br  />
 for <code>[E]ICALL</code>  </td></tr>
 </table>
-<p>When the argument of a modifier is not computable at assembler-time, then the assembler has to encode the expression in an abstract form using <a href="https://github.com/bminor/binutils-gdb/blob/master/include/elf/avr.h">RELOCs</a>. Consequence is that only a very limited number of argument expressions is supported when they are not computable at assembler-time.</p>
+<p>When the argument of a modifier is not computable at assembler-time, then the assembler has to encode the expression in an abstract form using <a href="https://github.com/bminor/binutils-gdb/blob/master/include/elf/avr.h">RELOCs</a>. The consequence is that only a very limited number of argument expressions is supported when they are not computable at assembler-time.</p>
 <h1><a class="anchor" id="inline_asm_examples"></a>
 Examples</h1>
 <p>Some examples show the assembly code as generated by the compiler. It's the code from the <code>.s</code> files as generated with option <code>-save-temps</code>. Adding the high-level source to the generated assembly can be turned on with <code><a class="el" href="using_tools.html#opt_fverbose_asm">-fverbose-asm</a></code> since GCC v8.</p>
 <h2><a class="anchor" id="inline_asm_swap_nibbles"></a>
 Swapping Nibbles</h2>
-<p>The fist example uses the <code>swap</code> instruction to swap the nibbles of a byte. Input and output of <code>swap</code> are located in the same general purpose register. This means the input operand, operand 1 below, must be located in the same register(s) like operand 0, so that the right <a class="el" href="inline_asm.html#constraints">constraint</a> for operand 1 is <code>"0"</code>: </p><div class="fragment"><div class="line"><span class="keyword">asm</span> (<span class="stringliteral">&quot;swap&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (value) : <span class="stringliteral">&quot;0&quot;</span> (value));</div>
+<p>The first example uses the <code>swap</code> instruction to swap the nibbles of a byte. Input and output of <code>swap</code> are located in the same general purpose register. This means the input operand, operand 1 below, must be located in the same register(s) like operand 0, so that the right <a class="el" href="inline_asm.html#constraints">constraint</a> for operand 1 is <code>"0"</code>: </p><div class="fragment"><div class="line"><span class="keyword">asm</span> (<span class="stringliteral">&quot;swap&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (value) : <span class="stringliteral">&quot;0&quot;</span> (value));</div>
 </div><!-- fragment --><p> All side effects of the code are described by the constraints and the clobbers, so that there is no need for this asm to be volatile. In particular, this asm may be optimized out when the output value is unused.<br  />
  A shorter pattern to state that <code>value</code> is both input and output is by means of <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifier</a> <code>+</code> </p><div class="fragment"><div class="line"><span class="keyword">asm</span> (<span class="stringliteral">&quot;swap&quot;</span> : <span class="stringliteral">&quot;+r&quot;</span> (value));</div>
 </div><!-- fragment --><h2><a class="anchor" id="inline_asm_swap_bytes"></a>
@@ -541,11 +563,11 @@ Accessing Memory</h2>
 <li>Provide the address by means of an inline asm operand.</li>
 </ol>
 <p>Approach 1 is simpler as it does not require an asm operand, while approach 2 is in many cases more powerful because macros defined per, say, <code>#include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code> can be used as operands, whereas such headers are not included in the assembly code as generated by the compiler.</p>
-<p>Reading a SFR like <code>PORTB</code> can be performed by </p><div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;in %0, %1&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (result) : <span class="stringliteral">&quot;I&quot;</span> _SFR_IO_ADDR (PORTB));</div>
-</div><!-- fragment --><p> Macro <code>_SFR_IO_ADDR</code> is provided by <code><a class="el" href="sfr__defs_8h_source.html">avr/sfr_defs.h</a></code> which is included by <code><a class="el" href="io_8h.html">avr/io.h</a></code>.</p>
-<p>Since GCC v4.7, <a class="el" href="inline_asm.html#print_modifiers">print modifier</a> <code>%i</code> is supported, which prints RAM addresses like <code>&amp; PORTB</code> as an I/O address:</p>
-<div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;in %0, %i1&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (result) : <span class="stringliteral">&quot;I&quot;</span> (&amp; PORTB));</div>
-</div><!-- fragment --><p>When the address is not an I/O address, then <code>LDS</code> or <code>LD</code> must be used, depending on whether the address is known at link-time or only at run-time. For example, the following macro provides the functionality to clear an SFR. The code discriminates between the possibilities that</p><ul>
+<p>Reading a SFR like <code>PORTB</code> can be performed by </p><div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;in %0, %i1&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (result) : <span class="stringliteral">&quot;I&quot;</span> (&amp; PORTB));</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;in %0, %1&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (result) : <span class="stringliteral">&quot;I&quot;</span> (_SFR_IO_ADDR (PORTB)));</div>
+</div><!-- fragment --><p>where the former with <a class="el" href="inline_asm.html#print_modifiers">print modifier</a> <code>%i</code> is only supported since GCC v4.7. Macro <code>_SFR_IO_ADDR</code> is provided by <code><a class="el" href="sfr__defs_8h_source.html">avr/sfr_defs.h</a></code> which is included by <code><a class="el" href="io_8h.html">avr/io.h</a></code>.</p>
+<p>When the address is not an I/O address, then <code>LDS</code> or <code>LD</code> must be used, depending on whether the address is known at link-time or only at run-time. For example, the following macro provides the functionality to clear an SFR. The code discriminates between the possibilities that</p><ul>
 <li>The SFR address is known at compile-time and is an I/O address.</li>
 <li>The SFR address is known at compile-time but is not in the I/O range.</li>
 <li>The SFR address is not known at compile-time.</li>
@@ -573,7 +595,7 @@ Accessing Memory</h2>
 <div class="line">    CLEAR_REG (UDR0);</div>
 <div class="line">    CLEAR_REG (*psfr);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:83</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 </div><!-- fragment --><p>compiles for ATmega328 and with optimization turned on to</p>
 <div class="fragment"><div class="line">clear_3_regs:</div>
 <div class="line">    movw r30,r24</div>
@@ -608,7 +630,7 @@ Accessing Memory</h2>
 <div class="line">  clear_reg (&amp; UDR0);</div>
 <div class="line">  clear_reg (psfr);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__stdint_html_ga2c8c1b9f53772a86b0827ce7399b68aa"><div class="ttname"><a href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a></div><div class="ttdeci">uint16_t uintptr_t</div><div class="ttdef"><b>Definition:</b> stdint.h:151</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga2c8c1b9f53772a86b0827ce7399b68aa"><div class="ttname"><a href="group__avr__stdint.html#ga2c8c1b9f53772a86b0827ce7399b68aa">uintptr_t</a></div><div class="ttdeci">uint16_t uintptr_t</div><div class="ttdef"><b>Definition:</b> stdint.h:183</div></div>
 </div><!-- fragment --><p><b>Casting the address <code>psfr</code> to an integer type in the inline function is required</b> so that the compiler will recognize constant addresses.<br  />
  Also notice that we have to pass the <em>address of the SFR</em> to the inline function. Passing the SFR directly like in the marco approach won't work for obvious reasons.</p>
 <h2><a class="anchor" id="inline_asm_bytes"></a>
@@ -642,10 +664,10 @@ Accessing Bytes of wider Expressions</h2>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">                  : [addr] <span class="stringliteral">&quot;i&quot;</span> (&amp; data));</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:93</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
 </div><!-- fragment --><p>Notice there are three different ways required to access the different bytes of the involved 16-bit entities:</p>
 <ul>
-<li>For the 16-bit general purpose register <code>%</code>[temp], <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> <code>%A</code> and <code>%B</code> are used.</li>
+<li>For the 16-bit general purpose register <code>%[temp]</code>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> <code>%A</code> and <code>%B</code> are used.</li>
 <li>For the 16-bit value <code>data</code> in static storage, <code>%[addr]+1</code> is used to access the high byte. The resulting expression <code>data+1</code> is computable at link-time and evaluated by the linker.</li>
 <li>In the compilation variant for Reduced Tiny, the bytes of the 16-bit subtrahend <code>&minus;1</code> are accessed with the <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a> <code>lo8</code> and <code>hi8</code> that are evaluated by the assembler because <code>&minus;1</code> is known at assembler-time.</li>
 </ul>
@@ -685,20 +707,22 @@ Jumping and Branching</h2>
 <div class="line">          <span class="stringliteral">&quot;1: ;; all fine&quot;</span></div>
 <div class="line">          :::: panic);</div>
 </div><!-- fragment --><p>Sequence <code>"%~jmp"</code> yields <code>"rjmp"</code> or <code>"jmp"</code> depending on the architecture. Notice that a <code>jmp</code> can be relaxed to an <code>rjmp</code> with option <code>-mrelax</code> provided the jump offset fits.</p>
-<h1><a class="anchor" id="inline_asm_local_vars"></a>
-Binding local Variables to Registers</h1>
-<p>One use of GCC's <code>asm</code> keyword is to bind local register variables to hardware registers.<br  />
- <b>Such bindings of local variables to registers are only guaranteed during inline asm which has these variables as operands.</b></p>
 <h2><a class="anchor" id="inline_asm_abi_interface"></a>
 Interfacing non-ABI Functions</h2>
 <p>Suppose we want to interface a non-<a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">ABI</a> assembly function <code>mul_8_16</code> that multiplies R24 with R27:R26, clobbers R0, R1 and R25, and returns the 24-bit result in R20:R19:R18. One way to implement such an interface would be to provide an assembly function that performs the required copying and call to <code>mul_8_16</code>. Such a function would destroy some of the performance gain obtained by using assembly for <code>mul_8_16:</code> Additional copying back and forth and extra <code>CALL</code> and <code>RET</code> instructions.</p>
-<p>The compiler comes to the rescue. We can bind local variables to the required registers: </p><div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
+<h3><a class="anchor" id="inline_asm_local_vars"></a>
+Binding local Variables to Registers</h3>
+<p>The compiler comes to the rescue. We can bind local variables to the required registers.</p>
+<p>One use of GCC's <code>asm</code> keyword is to bind local register variables to hardware registers.<br  />
+ <b>Such bindings of local variables to registers are only guaranteed during inline asm which has these variables as operands.</b></p>
+<p>Here is an example how interfacing <code>mul_8_16</code> could look like:</p>
+<div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
-<div class="line">__uint24 mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val8, <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val16)</div>
+<div class="line"><a class="code hl_typedef" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val8, <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val16)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">register</span> <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> r24 __asm(<span class="stringliteral">&quot;r24&quot;</span>) = val8;</div>
-<div class="line">    <span class="keyword">register</span> __uint24 r18 __asm(<span class="stringliteral">&quot;r18&quot;</span>);</div>
+<div class="line">    <span class="keyword">register</span> <a class="code hl_typedef" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> r18 __asm(<span class="stringliteral">&quot;r18&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">asm</span> (<span class="stringliteral">&quot;%~call %x[func]&quot;</span>  <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line">         <span class="stringliteral">&quot;clr    __zero_reg__&quot;</span></div>
@@ -708,6 +732,7 @@ Interfacing non-ABI Functions</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> r18;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__avr__stdint_html_gad54a78971d0d22159cd0908dbffa9196"><div class="ttname"><a href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a></div><div class="ttdeci">__uint24 uint24_t</div><div class="ttdef"><b>Definition:</b> stdint.h:106</div></div>
 </div><!-- fragment --><ul>
 <li>The 8-bit parameter is bound to R24, and the 24-bit return value is bound to R18...R20.</li>
 <li>The <code>register</code> keyword is mandatory.</li>
@@ -715,7 +740,7 @@ Interfacing non-ABI Functions</h2>
 <li>The 16-bit parameter of <code>mul_8_16</code> happens to be required in R27:R26, which is the X register for which there is <a class="el" href="inline_asm.html#constraints">register constraint</a> <code>"x"</code>. Therefore, no register binding is required for <code>val16</code>.</li>
 <li>As <code>mul_8_16</code> clobbers the zero register R1, it has to be restored by means of <div class="fragment"><div class="line">clr __zero_reg__</div>
 </div><!-- fragment --></li>
-<li>The asm is pure arithmetic and hence not volatile. (It might be advisable to make it volatile anyway, so that it won't be reorderd across <code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code> or <code><a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli()</a></code> instructions.)</li>
+<li>The asm is pure arithmetic and hence not volatile. (It might be advisable to make it volatile anyway, so that it won't be reordered across <code><a class="el" href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei()</a></code> or <code><a class="el" href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli()</a></code> instructions.)</li>
 </ul>
 <p>Let's have a look at how this performs in a test case: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> use_mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> a, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> b)</div>
 <div class="line">{</div>
@@ -739,13 +764,32 @@ Interfacing non-ABI Functions</h2>
 <div class="line">    ret</div>
 <div class="ttc" id="agroup__avr__stdlib_html_ga8dec7c95227ff149687066cf04029191"><div class="ttname"><a href="group__avr__stdlib.html#ga8dec7c95227ff149687066cf04029191">abort</a></div><div class="ttdeci">void abort(void)</div><div class="ttdef"><b>Definition:</b> abort.c:34</div></div>
 </div><!-- fragment --><p>No superfluous register moves. Great!</p>
-<h1><a class="anchor" id="c_names_in_asm"></a>
+<h3><a class="anchor" id="inline_asm_hrc"></a>
+Hard-Register Constraints</h3>
+<p>GCC v16 supports <a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">hard-register constraints</a> that are easier to use than local register variables. With that feature, the code from above can be simplified to:</p>
+<div class="fragment"><div class="line"><span class="keyword">extern</span> <span class="keywordtype">void</span> mul_8_16 (<span class="keywordtype">void</span>); <span class="comment">// Non-ABI function. Don&#39;t call in C/C++!</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> __attribute__((__always_inline__))</div>
+<div class="line"><a class="code hl_typedef" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> mul_8_16_gccabi (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> val8, <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> val16)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_typedef" href="group__avr__stdint.html#gad54a78971d0d22159cd0908dbffa9196">uint24_t</a> result;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">asm</span> (<span class="stringliteral">&quot;%~call %x[func]&quot;</span>  <span class="stringliteral">&quot;\n\t&quot;</span></div>
+<div class="line">         <span class="stringliteral">&quot;clr    __zero_reg__&quot;</span></div>
+<div class="line">         : <span class="stringliteral">&quot;={r18}&quot;</span> (result)</div>
+<div class="line">         : <span class="stringliteral">&quot;{r24}&quot;</span> (val8), <span class="stringliteral">&quot;{r26}&quot;</span> (val16), [func] <span class="stringliteral">&quot;i&quot;</span> (mul_8_16)</div>
+<div class="line">         : <span class="stringliteral">&quot;r25&quot;</span>, <span class="stringliteral">&quot;r0&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> result;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="c_names_in_asm"></a>
 Specifying the Assembly Name of Static Objects</h1>
 <p>Sometimes, it is desirable to use a different name for an object or function rather than the (mangled) name from the C/C++ implementation. Just add an asm specifier with the desired name as a string literal at the end of the declaration.</p>
-<p>For example, this is how <code><a class="el" href="eeprom_8h_source.html">avr/eeprom.h</a></code> implements the <code><a class="el" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double()</a></code> function: </p><div class="fragment"><div class="line"><span class="preprocessor">#if __SIZEOF_DOUBLE__ == 4</span></div>
-<div class="line"><span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a> (<span class="keyword">const</span> <span class="keywordtype">double</span>*) __asm(<span class="stringliteral">&quot;eeprom_read_dword&quot;</span>);</div>
+<p>For example, this is how <code><a class="el" href="eeprom_8h.html">avr/eeprom.h</a></code> desclares the <code><a class="el" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double()</a></code> function:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#if __SIZEOF_DOUBLE__ == 4</span></div>
+<div class="line"><span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a> (<span class="keyword">const</span> <span class="keywordtype">double</span>*)  __asm(<span class="stringliteral">&quot;eeprom_read_dword&quot;</span>);</div>
 <div class="line"><span class="preprocessor">#elif __SIZEOF_DOUBLE__ == 8</span></div>
-<div class="line"><span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a> (<span class="keyword">const</span> <span class="keywordtype">double</span>*) __asm(<span class="stringliteral">&quot;eeprom_read_qword&quot;</span>);</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code hl_function" href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a> (<span class="keyword">const</span> <span class="keywordtype">double</span>*)  __asm(<span class="stringliteral">&quot;eeprom_read_qword&quot;</span>);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="agroup__avr__eeprom_html_ga5c995e0556de15665502891c4f08076a"><div class="ttname"><a href="group__avr__eeprom.html#ga5c995e0556de15665502891c4f08076a">eeprom_read_double</a></div><div class="ttdeci">double eeprom_read_double(const double *__p)</div></div>
 </div><!-- fragment --><ul>
@@ -756,7 +800,7 @@ Specifying the Assembly Name of Static Objects</h1>
 What won't work</h1>
 <p>GCC inline asm has some limitations.</p>
 <h2><a class="anchor" id="inline_asm_fails_split"></a>
-Setting a Register on one asm and using it in a different one</h2>
+Setting a Register in one asm and using it in a different one</h2>
 <p>Sequences like the following are not supposed to work: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> var;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> set_var (<span class="keywordtype">char</span> c)</div>
@@ -765,7 +809,7 @@ Setting a Register on one asm and using it in a different one</h2>
 <div class="line">    __asm (<span class="stringliteral">&quot;sts var, r24&quot;</span>);</div>
 <div class="line">}</div>
 </div><!-- fragment --><ul>
-<li>There is no guarantee whatsoever that the value in R24 will survive from one asm to the next. Such code might work in many situations, but it is still wrong and the compiler may very well put instructions bewtween the asm statements that change R24 prior to the first asm and also between the asm statements.</li>
+<li>There is no guarantee whatsoever that the value in R24 will survive from one asm to the next. <b>Such code might work in many situations, but it is still wrong.</b> The compiler may very well put instructions between the asm statements that change R24.</li>
 <li>R24 is changed without noticing the compiler. When R24 contains other data, then that data will be trashed.</li>
 </ul>
 <p>A correct code would be </p><div class="fragment"><div class="line">__asm (<span class="stringliteral">&quot;inc %0&quot;</span>    <span class="stringliteral">&quot;\n\t&quot;</span></div>
@@ -774,10 +818,19 @@ Setting a Register on one asm and using it in a different one</h2>
 </div><!-- fragment --><p> or </p><div class="fragment"><div class="line">__asm (<span class="stringliteral">&quot;inc %1&quot;</span>    <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line">       <span class="stringliteral">&quot;sts %0, %1&quot;</span></div>
 <div class="line">       : <span class="stringliteral">&quot;=m&quot;</span> (var) : <span class="stringliteral">&quot;r&quot;</span> (c));</div>
+</div><!-- fragment --><h2><a class="anchor" id="inline_asm_fails_lreg"></a>
+Referring to a Local Register Variable that's not an Operand to the asm</h2>
+<p>Code like the following won't work:</p>
+<div class="fragment"><div class="line"><span class="keyword">register</span> <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> reg2 __asm(<span class="stringliteral">&quot;r2&quot;</span>);</div>
+<div class="line">__asm (<span class="stringliteral">&quot;clr r2&quot;</span>);</div>
+</div><!-- fragment --><p>That code assumes that the local register variable <code>reg2</code> is bound to register R2 in the inline asm, but that is not the case. Only when a local register variable is used as an operand it will be loaded to the specified register:</p>
+<div class="fragment"><div class="line">__asm (<span class="stringliteral">&quot;clr r2&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (reg2));</div>
+<div class="line"><span class="comment">// or</span></div>
+<div class="line">__asm (<span class="stringliteral">&quot;clr %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (reg2));</div>
 </div><!-- fragment --><h2><a class="anchor" id="inline_asm_fails_regvar"></a>
 Letting an Operand cross the Boundaries of the Y Register</h2>
 <p>It is not possible to bind a value to a local register variable that crosses the boundaries of the Y register. For example, trying to bind a 32-bit value to R31:R28 by means of </p><div class="fragment"><div class="line"><span class="keyword">register</span> <a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> r28 __asm (<span class="stringliteral">&quot;28&quot;</span>);</div>
-<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:103</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:114</div></div>
 </div><!-- fragment --><p> will result in an error message like </p><div class="fragment"><div class="line">error: register specified for &#39;r28&#39; isn&#39;t suitable for data type</div>
 </div><!-- fragment --><p>Similarly, an operand described by a constraint will be located either completely below the Y register, as part of Y register, or above it.</p>
 <h2><a class="anchor" id="asm_fails_output_match"></a>
@@ -789,7 +842,7 @@ Using Matching Constraints "=0"..."=9" with Output Operands</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

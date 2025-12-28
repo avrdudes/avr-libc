@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,20 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
     <td align="center" colspan=4>
       <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
       <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
-      </td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -104,25 +104,29 @@ Introduction</h1>
 <p>The latest version of this document is always available from <a href="https://avrdudes.github.io/avr-libc/">https://avrdudes.github.io/avr-libc/</a></p>
 <p>This documentation is distributed under the same licensing conditions as the entire library itself, see <a class="el" href="index.html#license">License</a> below.</p>
 <p>The AVR-LibC package provides a subset of the standard C library for <a href="https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/avr-mcus">Microchip (formerly Atmel) AVR 8-bit RISC microcontrollers</a>. In addition, the library provides the basic startup code needed by most applications.</p>
-<p>There is a wealth of information in this document which goes beyond simply describing the interfaces and routines provided by the library. We hope that this document provides enough information to get a new AVR developer up to speed quickly using the freely available development tools: binutils, gcc, AVR-LibC and many others.</p>
-<p>If you find yourself stuck on a problem which this document doesn't quite address, you may wish to post a message to the avr-gcc mailing list. Most of the developers of the AVR Binutils and GCC ports in addition to the devleopers of AVR-LibC subscribe to the list, so you will usually be able to get your problem resolved. You can subscribe to the list at <a href="http://lists.nongnu.org/mailman/listinfo/avr-gcc-list">http://lists.nongnu.org/mailman/listinfo/avr-gcc-list</a> . Before posting to the list, you might want to try reading the <a class="el" href="FAQ.html">Frequently Asked Questions</a> chapter of this document.</p>
-<dl class="section note"><dt>Note</dt><dd>If you think you've found a bug, or have a suggestion for an improvement, either in this documentation or in the library itself, please use the <a href="https://github.com/avrdudes/avr-libc/issues">bug tracker</a> to ensure the issue won't be forgotten.</dd></dl>
+<p>There is a wealth of information in this document which goes beyond simply describing the interfaces and routines provided by the library. We hope that this document provides enough information to get a new AVR developer up to speed quickly using the freely available development tools: Binutils, GCC, AVR-LibC and many others.</p>
+<p>If you think you've found a bug, or have a suggestion for an improvement, either in this documentation or in the library itself, please use the <a href="https://github.com/avrdudes/avr-libc/issues">bug tracker</a> to ensure the issue won't be forgotten. Before reporting a new issue, you might want to try reading the <a class="el" href="FAQ.html">Frequently Asked Questions</a> chapter of this document.</p>
 <h1><a class="anchor" id="avr_libc_general"></a>
 General Information about this Library</h1>
 <p>In general, it has been the goal to stick as best as possible to established standards while implementing this library. Commonly, this refers to the C library as described by the ANSI X3.159-1989 and ISO/IEC 9899:1990 ("ANSI-C") standard, as well as parts of their successor ISO/IEC 9899:1999 ("C99"). Some additions have been inspired by other standards like IEEE Std 1003.1-1988 ("POSIX.1"), while other extensions are purely AVR-specific (like the entire program-space string interface).</p>
-<p>Unless otherwise noted, functions of this library are <em>not</em> guaranteed to be reentrant. In particular, any functions that store local state are known to be non-reentrant, as well as functions that manipulate I/O registers like the <a class="el" href="group__avr__eeprom.html">EEPROM</a> access routines. If these functions are used within both standard and interrupt contexts undefined behaviour will result. See the <a class="el" href="FAQ.html#faq_reentrant">FAQ</a> for a more detailed discussion.</p>
+<p>Unless otherwise noted, functions of this library are <em>not</em> guaranteed to be reentrant. In particular, any functions that store local state are known to be non-reentrant, as well as functions that manipulate I/O registers like the <a class="el" href="group__avr__eeprom.html">EEPROM</a> access routines. If these functions are used within both standard and interrupt contexts, then undefined behaviour will result. See the <a class="el" href="FAQ.html#faq_reentrant">FAQ</a> for a more detailed discussion.</p>
+<h1><a class="anchor" id="supp_compilers"></a>
+Supported Compilers</h1>
+<p><a id="a16_supported:20compilers" name="a16_supported:20compilers"></a></p>
+<p>The current AVR-LibC can be used with the most recent AVR GCC back to <a href="https://gcc.gnu.org/gcc-4.8">GCC 4.8</a>.</p>
+<p>Always use AVR-LibC with the  GCC and Binutils version  for which the library has been configured and built.</p>
 <h1><a class="anchor" id="supp_devices"></a>
 Supported Devices</h1>
 <p><a id="a17_supported:20devices" name="a17_supported:20devices"></a></p>
-<p>The following is a list of AVR devices currently supported by the library. Note that actual support for some newer devices depends on the ability of the compiler to support these devices at library compile-time.</p>
+<p>The following is a list of AVR devices currently supported by the library. Note that the actual support for a particular device depends on whether it is supported by the compiler at library compile-time.</p>
 <p></p>
 <dl>
 <dt>megaAVR Devices: </dt>
-<dd>ATmega103, ATmega128, ATmega128A, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega16, ATmega161, ATmega162, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega16A, ATmega2560, ATmega2561, ATmega32, ATmega32A, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega325A, ATmega325P, ATmega325PA, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega328, ATmega328P, ATmega328PB, ATmega48, ATmega48A, ATmega48PA, ATmega48PB, ATmega48P, ATmega64, ATmega64A, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega645, ATmega645A, ATmega645P, ATmega6450, ATmega6450A, ATmega6450P, ATmega8, ATmega8A, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega8515, ATmega8535  </dd>
+<dd>ATmega48, ATmega48A, ATmega48PA, ATmega48PB, ATmega48P, ATmega8, ATmega8A, ATmega88, ATmega88A, ATmega88P, ATmega88PA, ATmega88PB, ATmega8515, ATmega8535 ATmega16, ATmega161, ATmega162, ATmega163, ATmega164A, ATmega164P, ATmega164PA, ATmega165, ATmega165A, ATmega165P, ATmega165PA, ATmega168, ATmega168A, ATmega168P, ATmega168PA, ATmega168PB, ATmega16A, ATmega32, ATmega32A, ATmega323, ATmega324A, ATmega324P, ATmega324PA, ATmega324PB, ATmega325, ATmega325A, ATmega325P, ATmega325PA, ATmega3250, ATmega3250A, ATmega3250P, ATmega3250PA, ATmega328, ATmega328P, ATmega328PB, ATmega64, ATmega64A, ATmega640, ATmega644, ATmega644A, ATmega644P, ATmega644PA, ATmega645, ATmega645A, ATmega645P, ATmega6450, ATmega6450A, ATmega6450P, ATmega103, ATmega128, ATmega128A, ATmega1280, ATmega1281, ATmega1284, ATmega1284P, ATmega2560, ATmega2561  </dd>
 <dt>megaAVR 0-Series Devices: </dt>
 <dd>ATmega808, ATmega809, ATmega1608, ATmega1609, ATmega3208, ATmega3209, ATmega4808, ATmega4809  </dd>
 <dt>tinyAVR Devices: </dt>
-<dd>ATtiny11 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny12 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny13, ATtiny13A, ATtiny15 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny22, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny2313, ATtiny2313A, ATtiny4313, ATtiny43U, ATtiny44, ATtiny44A, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny828, ATtiny84, ATtiny84A, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny88, ATtiny1634  </dd>
+<dd>ATtiny11 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny12 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny13, ATtiny13A, ATtiny15 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny22, ATtiny2313, ATtiny2313A, ATtiny24, ATtiny24A, ATtiny25, ATtiny26, ATtiny261, ATtiny261A, ATtiny28 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, ATtiny4313, ATtiny43U, ATtiny44, ATtiny44A, ATtiny441, ATtiny45, ATtiny461, ATtiny461A, ATtiny48, ATtiny828, ATtiny84, ATtiny84A, ATtiny841, ATtiny85, ATtiny861, ATtiny861A, ATtiny88, ATtiny1634  </dd>
 <dt>tinyAVR 0-Series Devices: </dt>
 <dd>ATtiny202, ATtiny204, ATtiny402, ATtiny404, ATtiny406, ATtiny804, ATtiny806, ATtiny807, ATtiny1604, ATtiny1606, ATtiny1607  </dd>
 <dt>tinyAVR 1-Series Devices: </dt>
@@ -132,7 +136,7 @@ Supported Devices</h1>
 <dt>Reduced tinyAVR Devices with only 16 GPRs: </dt>
 <dd>ATtiny4, ATtiny5, ATtiny9, ATtiny10, ATtiny102, ATtiny104, ATtiny20, ATtiny40  </dd>
 <dt>Automotive AVR Devices: </dt>
-<dd>ATtiny87, ATtiny167, ATA5505, ATA5272, ATA5702M322, ATA5782, ATA5790, ATA5790N, ATA5831, ATA5795, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251  </dd>
+<dd>ATtiny416auto, ATtiny87, ATtiny167, ATA5505, ATA5272, ATA5700M322, ATA5702M322, ATA5782, ATA5787, ATA5790, ATA5790N, ATA5791, ATA5831, ATA5835, ATA5795, ATA6285, ATA6286, ATA6289, ATA6612C, ATA6613C, ATA6614Q, ATA6616C, ATA6617C, ATA664251, ATA8210, ATA8510  </dd>
 <dt>Automotive CAN AVR Devices: </dt>
 <dd>ATmega16M1, ATmega32C1, ATmega32M1, ATmega64C1, ATmega64M1  </dd>
 <dt>CAN AVR Devices: </dt>
@@ -144,21 +148,25 @@ Supported Devices</h1>
 <dt>Smart Battery AVR Devices: </dt>
 <dd>ATmega8HVA, ATmega16HVA, ATmega16HVA2, ATmega16HVB, ATmega16HVBREVB, ATmega32HVB, ATmega32HVBREVB, ATmega64HVE, ATmega64HVE2, ATmega406  </dd>
 <dt>USB AVR Devices: </dt>
-<dd>AT76C711 <a class="el" href="index.html#supp_dev_footnote_three">[3]</a>, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287, ATmega8U2, ATmega16U2, ATmega16U4, ATmega32U2, ATmega32U4, ATmega32U6, AT43USB320, AT43USB355  </dd>
+<dd>ATmega8U2, ATmega16U2, ATmega16U4, ATmega32U2, ATmega32U4, ATmega32U6, AT43USB320, AT43USB355, AT76C711 <a class="el" href="index.html#supp_dev_footnote_three">[3]</a>, AT90SCR100, AT90USB82, AT90USB162, AT90USB646, AT90USB647, AT90USB1286, AT90USB1287  </dd>
 <dt>XMEGA Devices: </dt>
-<dd>ATxmega8E5, ATxmega16A4, ATxmega16D4, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega64A1, ATxmega64A3, ATxmega64D3, ATxmega64D4, ATxmega128A1, ATxmega128A3, ATxmega128D3, ATxmega128D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3  </dd>
+<dd>ATxmega8E5, ATxmega16A4, ATxmega16D4, ATxmega16E5, ATxmega32A4, ATxmega32D3, ATxmega32D4, ATxmega32E5, ATxmega64A1, ATxmega64A3, ATxmega64D3, ATxmega64D4, ATxmega128A1, ATxmega128A3, ATxmega128D3, ATxmega128D4, ATxmega192A3, ATxmega192D3, ATxmega256A3, ATxmega256A3B, ATxmega256D3  </dd>
 <dt>USB XMEGA Devices: </dt>
 <dd>ATxmega16A4U, ATxmega16C4, ATxmega32A4U, ATxmega32C3, ATxmega32C4, ATxmega64A1U, ATxmega64A3U, ATxmega64A4U, ATxmega64B1, ATxmega64B3, ATxmega64C3, ATxmega128A1U, ATxmega128A3U, ATxmega128A4U, ATxmega128B1, ATxmega128B3, ATxmega128C3, ATxmega192A3U, ATxmega192C3, ATxmega256A3U, ATxmega256A3BU, ATxmega256C3, ATxmega384C3, ATxmega384D3  </dd>
 <dt>AVR-Dx Devices: </dt>
-<dd>AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR32DA28, AVR32DA32, AVR32DA48, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR64DA28, AVR64DA32, AVR64DA48, AVR64DA64, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR128DA28, AVR128DA32, AVR128DA48, AVR128DA64, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64  </dd>
+<dd>AVR16DD14, AVR16DD20, AVR16DD28, AVR16DD32, AVR32DA28, AVR32DA28S, AVR32DA32, AVR32DA32S, AVR32DA48, AVR32DA48S, AVR32DB28, AVR32DB32, AVR32DB48, AVR32DD14, AVR32DD20, AVR32DD28, AVR32DD32, AVR64DA28, AVR64DA28S, AVR64DA32, AVR64DA32S, AVR64DA48, AVR64DA48S, AVR64DA64, AVR64DA64S, AVR64DB28, AVR64DB32, AVR64DB48, AVR64DB64, AVR64DD14, AVR64DD20, AVR64DD28, AVR64DD32, AVR128DA28, AVR128DA28S, AVR128DA32, AVR128DA32S, AVR128DA48, AVR128DA48S, AVR128DA64, AVR128DA64S, AVR128DB28, AVR128DB32, AVR128DB48, AVR128DB64  </dd>
 <dt>USB AVR-Dx Devices: </dt>
-<dd>AVR64DU28, AVR64DU32  </dd>
+<dd>AVR16DU14, AVR16DU20, AVR16DU28, AVR16DU32, AVR32DU14, AVR32DU20, AVR32DU28, AVR32DU32, AVR64DU28, AVR64DU32  </dd>
 <dt>AVR-Ex Devices: </dt>
-<dd>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR64EA28, AVR64EA32, AVR64EA48  </dd>
+<dd>AVR16EA28, AVR16EA32, AVR16EA48, AVR16EB14, AVR16EB20, AVR16EB28, AVR16EB32, AVR32EA28, AVR32EA32, AVR32EA48, AVR32EB14, AVR32EB20, AVR32EB28, AVR32EB32, AVR64EA28, AVR64EA32, AVR64EA48  </dd>
+<dt>AVR-Lx Devices: </dt>
+<dd>AVR16LA14, AVR16LA20, AVR16LA28, AVR16LA32, AVR32LA14, AVR32LA20, AVR32LA28, AVR32LA32  </dd>
+<dt>AVR-SD Functional Safety Devices: </dt>
+<dd>AVR32SD20, AVR32SD28, AVR32SD32  </dd>
 <dt>Wireless AVR Devices: </dt>
-<dd>ATmega644RFR2, ATmega64RFR2, ATmega128RFA1, ATmega1284RFR2, ATmega128RFR2, ATmega2564RFR2, ATmega256RFR2  </dd>
+<dd>ATmega64RFR2, ATmega644RFR2, ATmega128RFA1, ATmega128RFR2, ATmega1284RFR2, ATmega256RFR2, ATmega2564RFR2, AT86RF401  </dd>
 <dt>Miscellaneous Devices: </dt>
-<dd>AT94K <a class="el" href="index.html#supp_dev_footnote_two">[2]</a>, AT86RF401, AT90SCR100, M3000 <a class="el" href="index.html#supp_dev_footnote_four">[4]</a>  </dd>
+<dd>AT94K <a class="el" href="index.html#supp_dev_footnote_two">[2]</a>, M3000 <a class="el" href="index.html#supp_dev_footnote_four">[4]</a>  </dd>
 <dt>Classic AVR Devices: </dt>
 <dd>AT90S1200 <a class="el" href="index.html#supp_dev_footnote_one">[1]</a>, AT90S2313, AT90S2323, AT90S2333, AT90S2343, AT90S4414, AT90S4433, AT90S4434, AT90S8515, AT90C8534, AT90S8535  </dd>
 </dl>
@@ -191,45 +199,72 @@ See the license information in the individual source files for details.
 Additions and corrections to this file are welcome.
 
 *******************************************************************************
-Portions of avr-libc are Copyright (c) 1999-2024
+Portions of AVR-LibC are Copyright (c) 1999-2025
+Petteri Aimonen,
 Werner Boellmann,
+Anitha Boyapati,
+Gerben van den Broeke,
+Marian Buschsieweke,
 Dean Camera,
 Pieter Conradie,
 Brian Dean,
+Ricardo Ribalda Delgado,
+Ruud v Gessel,
+Ian Gregg,
 Keith Gudger,
 Wouter van Gulik,
 Bjoern Haase,
+Junio C Hamano,
 Steinar Haugen,
+Dave Hylands,
+Joel Holdsworth,
 Peter Jansen,
+Aurelien Jarno,
 Reinhard Jessich,
 Magnus Johansson,
-Georg Johann Lay,
+Aleksandar Kanchev,
 Harald Kipp,
 Carlos Lamas,
 Cliff Lawson,
+Georg-Johann Lay,
 Artur Lipowski,
+Matthijs Kooijman,
 Marek Michalkiewicz,
 Todd C. Miller,
+Frédéric Nadeau,
 Rich Neswold,
 Colin O'Flynn,
 Bob Paddock,
+Kamil Palkowski,
 Andrey Pashchenko,
 Reiner Patommel,
 Florin-Viorel Petrov,
+Lucy Phipps,
+Gabriel-Andrew Pollo-Guilbert,
 Alexander Popov,
+Igor Proskurin,
+Michael Duane Rice,
 Michael Rickman,
+Gregor Riepl,
 Theodore A. Roth,
+Stefan Rueger,
 Juergen Schilling,
+Senthil Kumar Selvaraj,
+Pitchumani Sivanupandi,
 Philip Soeberg,
 Anatoly Sokolov,
+David Sparks,
 Nils Kristian Strom,
 Michael Stumpf,
 Stefan Swanepoel,
+Jan Waclawek,
 Helmut Wallner,
 Eric B. Weddington,
 Joerg Wunsch,
 Dmitry Xmelkov,
+Atmel Corporation,
 egnite Software GmbH,
+Microchip Technology Inc.,
 The Regents of the University of California.
 All rights reserved.
 
@@ -266,7 +301,7 @@ All rights reserved.
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:49 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

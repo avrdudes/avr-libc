@@ -1,7 +1,17 @@
 var searchData=
 [
-  ['ultoa_0',['ultoa',['../group__avr__stdlib.html#gadfc2bdc0b74aaeba28efe5af3085a89f',1,'stdlib.h']]],
-  ['ungetc_1',['ungetc',['../group__avr__stdio.html#gab4f9b130166e5811519513d6178c1ae3',1,'ungetc(int __c, FILE *__stream):&#160;ungetc.c'],['../group__avr__stdio.html#gab4f9b130166e5811519513d6178c1ae3',1,'ungetc(int c, FILE *stream):&#160;ungetc.c']]],
-  ['usa_5fdst_2',['usa_dst',['../group__usa__dst.html#gab3bd07c5bd5ac5ef1abfa40b45759b51',1,'usa_dst(const time_t *timer, int32_t *z):&#160;usa_dst.c'],['../group__usa__dst.html#gab3bd07c5bd5ac5ef1abfa40b45759b51',1,'usa_dst(const time_t *timer, int32_t *z):&#160;usa_dst.c']]],
-  ['utoa_3',['utoa',['../group__avr__stdlib.html#gae73ba2b460809c0b7fee30ffe347083c',1,'stdlib.h']]]
+  ['tan_0',['tan',['../group__avr__math.html#gaa48fdfd5eea5f4f9c33496402b9e4039',1,'math.h']]],
+  ['tanf_1',['tanf',['../group__avr__math.html#ga67d5bfe80effce6adebf5fcbc5a7dae0',1,'math.h']]],
+  ['tanh_2',['tanh',['../group__avr__math.html#gaf85bcf153d7ae805733927f12329dac1',1,'math.h']]],
+  ['tanhf_3',['tanhf',['../group__avr__math.html#ga74e8f87bb37a338d2cebbb6b1d696593',1,'math.h']]],
+  ['tanhl_4',['tanhl',['../group__avr__math.html#ga94ee8c57b6b2d0bc5466c75bea2bffcf',1,'math.h']]],
+  ['tanl_5',['tanl',['../group__avr__math.html#ga2151fba6c1e9b4fa5d2af2dcb5c68b17',1,'math.h']]],
+  ['time_6',['time',['../group__avr__time.html#ga26c7d1dbf93fa8c23c5effbacec91f8c',1,'time(time_t *timer):&#160;time.c'],['../group__avr__time.html#ga26c7d1dbf93fa8c23c5effbacec91f8c',1,'time(time_t *timer):&#160;time.c']]],
+  ['timer_5fenable_5fint_7',['timer_enable_int',['../group__deprecated__items.html#gac76f82fd247e7a0a3707a69f0b102270',1,'deprecated.h']]],
+  ['toascii_8',['toascii',['../group__ctype.html#ga21d5ec3792b2704ecca5778b758dd91f',1,'ctype.h']]],
+  ['tolower_9',['tolower',['../group__ctype.html#ga9ba1fce7148e9b63ca6296e02c79bedd',1,'ctype.h']]],
+  ['toupper_10',['toupper',['../group__ctype.html#ga924ed052807e23cfa160d5f171cf5e2a',1,'ctype.h']]],
+  ['trunc_11',['trunc',['../group__avr__math.html#ga82a151adfde56b28fa8a50355c4f2ff6',1,'math.h']]],
+  ['truncf_12',['truncf',['../group__avr__math.html#gaa8bb2049c170c9ac5b131fdba029991a',1,'math.h']]],
+  ['truncl_13',['truncl',['../group__avr__math.html#ga8f9695496a9bb839eb5f728b6bf0c856',1,'math.h']]]
 ];

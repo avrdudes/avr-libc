@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -107,9 +110,9 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"> </div>
 <div class="line"><span class="comment">// Disable all timer interrupts.</span></div>
 <div class="line"><a class="code hl_function" href="group__deprecated__items.html#gac76f82fd247e7a0a3707a69f0b102270">timer_enable_int</a>(0);</div>
-<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:208</div></div>
-<div class="ttc" id="agroup__deprecated__items_html_gac76f82fd247e7a0a3707a69f0b102270"><div class="ttname"><a href="group__deprecated__items.html#gac76f82fd247e7a0a3707a69f0b102270">timer_enable_int</a></div><div class="ttdeci">static void timer_enable_int(unsigned char ints)</div><div class="ttdef"><b>Definition:</b> deprecated.h:107</div></div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Be careful when you use these functions. If you already have a different interrupt enabled, you could inadvertantly disable it by enabling another intterupt. </dd></dl>
+<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:206</div></div>
+<div class="ttc" id="agroup__deprecated__items_html_gac76f82fd247e7a0a3707a69f0b102270"><div class="ttname"><a href="group__deprecated__items.html#gac76f82fd247e7a0a3707a69f0b102270">timer_enable_int</a></div><div class="ttdeci">static void timer_enable_int(unsigned char ints)</div><div class="ttdef"><b>Definition:</b> deprecated.h:115</div></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Be careful when you use these functions. If you already have a different interrupt enabled, you could inadvertently disable it by enabling another interrupt. </dd></dl>
 </td></tr>
 <tr class="memitem:gac76f82fd247e7a0a3707a69f0b102270"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__deprecated__items.html#gac76f82fd247e7a0a3707a69f0b102270">timer_enable_int</a> (unsigned char ints)</td></tr>
 <tr class="separator:gac76f82fd247e7a0a3707a69f0b102270"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,9 +120,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <tr class="separator:ga9a3fe82a7199e9e84f7be6a5f23127bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa0b2d3a87492967c01615f32f30d06d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__deprecated__items.html#gaa0b2d3a87492967c01615f32f30d06d5">INTERRUPT</a>(signame)</td></tr>
 <tr class="separator:gaa0b2d3a87492967c01615f32f30d06d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga65483663c17f94d50d9e24e277bd7bbb"><td class="memItemLeft" align="right" valign="top"><a id="ga65483663c17f94d50d9e24e277bd7bbb" name="ga65483663c17f94d50d9e24e277bd7bbb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>__INTR_ATTRS</b>&#160;&#160;&#160;__used__</td></tr>
-<tr class="separator:ga65483663c17f94d50d9e24e277bd7bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Obsolete IO macros</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>Back in a time when AVR-GCC and AVR-LibC could not handle IO port access in the direct assignment form as they are handled now, all IO port access had to be done through specific macros that eventually resulted in inline assembly instructions performing the desired action.</p>
@@ -142,7 +142,8 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This header file contains several items that used to be available in previous versions of this library, but have eventually been deprecated over time.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;compat/deprecated.h&gt;</span> </div>
-</div><!-- fragment --><p>These items are supplied within that header file for backward compatibility reasons only, so old source code that has been written for previous library versions could easily be maintained until its end-of-life. Use of any of these items in new code is strongly discouraged. </p>
+</div><!-- fragment --><p>These items are supplied within that header file for backward compatibility reasons only, so old source code that has been written for previous library versions could easily be maintained until its end-of-life. Use of any of these items in new code is strongly discouraged.</p>
+<p>Some device headers provide deprecated vector names starting with <code>SIG_</code>, followed by a relatively verbose but arbitrarily chosen name describing the interrupt vector. This has been the only available style in AVR-LibC up to version 1.2.x. This historical naming style is not recommended for new projects, and some headers require that the macro <code>__AVR_LIBC_DEPRECATED_ENABLE__</code> is defined so that the <code>SIG_</code> names ISR names are available. For available <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> vector names and <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> vector numbers, see <a class="el" href="FAQ.html#faq_isr_names">What ISR names are available for my device?</a> in the FAQ. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ga08ee265dc07048dbb5a8b6c84551d520" name="ga08ee265dc07048dbb5a8b6c84551d520"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga08ee265dc07048dbb5a8b6c84551d520">&#9670;&#160;</a></span>cbi</h2>
@@ -380,7 +381,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

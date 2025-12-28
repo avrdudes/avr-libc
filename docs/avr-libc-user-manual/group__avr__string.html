@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -139,6 +142,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga21e4788b4a0ae39b11aa32e9a1079f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga54e4f23104fa6f722f9459d2673a1eba"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__string.html#ga54e4f23104fa6f722f9459d2673a1eba">strcpy</a> (char *, const char *)</td></tr>
 <tr class="separator:ga54e4f23104fa6f722f9459d2673a1eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac170f846204cc6431fabd8f13390636b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__string.html#gac170f846204cc6431fabd8f13390636b">stpcpy</a> (char *, const char *)</td></tr>
+<tr class="separator:gac170f846204cc6431fabd8f13390636b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga91ca23db677fbf51663c03060776457d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__string.html#ga91ca23db677fbf51663c03060776457d">strcasecmp</a> (const char *, const char *)</td></tr>
 <tr class="separator:ga91ca23db677fbf51663c03060776457d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac75c55f679ed9d632442e90b44336fa4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__string.html#gac75c55f679ed9d632442e90b44336fa4">strcasestr</a> (const char *, const char *)</td></tr>
@@ -190,7 +195,13 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">string.h</a>&gt;</span> </div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div></div>
 </div><!-- fragment --><p>The string functions perform string operations on <code>NULL</code> terminated strings.</p>
-<dl class="section note"><dt>Note</dt><dd>If the strings you are working on resident in program space (flash), you will need to use the string functions described in <a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the strings you are working on reside in program memory (flash), then you will need to use the string functions provided by one of the following headers:<ul>
+<li><a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a></li>
+<li><a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;: Utilities for named address-spaces __flash and __flashx</a> </li>
+</ul>
+</dd>
+<dd>
+When the strings are defined with <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a> or <a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a>, then use the first header. When they are defined with <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a> or <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a>, then use the second one. </dd></dl>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="gaedb0e7bb7333d6122472acddb5df20ac" name="gaedb0e7bb7333d6122472acddb5df20ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaedb0e7bb7333d6122472acddb5df20ac">&#9670;&#160;</a></span>_FFS</h2>
@@ -209,7 +220,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This macro finds the first (least significant) bit set in the input value.</p>
 <p>This macro is very similar to the function <a class="el" href="group__avr__string.html#gab978764fd2814cd14f9f1a3620aa4ca2" title="This function finds the first (least significant) bit set in the input value.">ffs()</a> except that it evaluates its argument at compile-time, so it should only be applied to compile-time constant expressions where it will reduce to a constant itself. Application of this macro to expressions that are not constant at compile-time is not recommended, and might result in a huge amount of code generated.</p>
-<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#gaedb0e7bb7333d6122472acddb5df20ac">_FFS()</a> macro returns the position of the first (least significant) bit set in the word val, or 0 if no bits are set. The least significant bit is position 1. Only 16 bits of argument are evaluted. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#gaedb0e7bb7333d6122472acddb5df20ac">_FFS()</a> macro returns the position of the first (least significant) bit set in the word val, or 0 if no bits are set. The least significant bit is position 1. Only 16 bits of argument are evaluated. </dd></dl>
 
 </div>
 </div>
@@ -590,6 +601,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gac170f846204cc6431fabd8f13390636b" name="gac170f846204cc6431fabd8f13390636b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac170f846204cc6431fabd8f13390636b">&#9670;&#160;</a></span>stpcpy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * stpcpy </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>src</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy a string. </p>
+<p>The <a class="el" href="group__avr__string.html#gac170f846204cc6431fabd8f13390636b" title="Copy a string.">stpcpy()</a> function copies the string pointed to by <code>src</code> (including the terminating '\0' character) to the array pointed to by <code>dest</code>. The strings may not overlap, and the destination string <code>dest</code> must be large enough to receive the copy.</p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#gac170f846204cc6431fabd8f13390636b" title="Copy a string.">stpcpy()</a> function returns a pointer to the <b>end</b> of the string <code>dest</code> (that is, the address of the terminating null byte) rather than the beginning.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>AVR-LibC v2.3 </dd></dl>
+
+</div>
+</div>
 <a id="ga91ca23db677fbf51663c03060776457d" name="ga91ca23db677fbf51663c03060776457d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga91ca23db677fbf51663c03060776457d">&#9670;&#160;</a></span>strcasecmp()</h2>
 
@@ -808,7 +852,7 @@ Functions</h2></td></tr>
 <p>Copy a string. </p>
 <p>The <a class="el" href="group__avr__string.html#ga54e4f23104fa6f722f9459d2673a1eba" title="Copy a string.">strcpy()</a> function copies the string pointed to by src (including the terminating '\0' character) to the array pointed to by dest. The strings may not overlap, and the destination string dest must be large enough to receive the copy.</p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#ga54e4f23104fa6f722f9459d2673a1eba" title="Copy a string.">strcpy()</a> function returns a pointer to the destination string dest.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>If the destination string of a <a class="el" href="group__avr__string.html#ga54e4f23104fa6f722f9459d2673a1eba" title="Copy a string.">strcpy()</a> is not large enough (that is, if the programmer was stupid/lazy, and failed to check the size before copying) then anything might happen. Overflowing fixed length strings is a favourite cracker technique. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__avr__string.html#ga81577c743915e4fb8759ef9081f10838" title="Copy a string.">strncpy()</a>, <a class="el" href="group__avr__string.html#gac170f846204cc6431fabd8f13390636b" title="Copy a string.">stpcpy()</a>, <a class="el" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P()</a>, <a class="el" href="group__avr__flash.html#gaccef35e5e8a9b57c10647be92227facd">strcpy_F()</a>. </dd></dl>
 
 </div>
 </div>
@@ -860,7 +904,7 @@ Functions</h2></td></tr>
 
 <p>Duplicate a string. </p>
 <p>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function allocates memory and copies into it the string addressed by <code>s1</code>, including the terminating null character.</p>
-<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function calls malloc() to allocate the memory for the duplicated string! The user is responsible for freeing the memory by calling free().</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function calls <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> to allocate the memory for the duplicated string! The user is responsible for freeing the memory by calling free().</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function returns a pointer to the resulting string dest. If malloc() cannot allocate enough storage for the string, <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> will return <code>NULL</code>.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Be sure to check the return value of the <a class="el" href="group__avr__string.html#ga8569f20e38a030b5a28fd951abec2c9b" title="Duplicate a string.">strdup()</a> function to make sure that the function has succeeded in allocating the memory! </dd></dl>
 
@@ -1486,7 +1530,7 @@ strlen(initial dst)). If retval &gt;= siz, truncation occurred. </dd></dl>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

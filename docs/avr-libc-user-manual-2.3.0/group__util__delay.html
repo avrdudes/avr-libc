@@ -172,7 +172,7 @@ Functions</h2></td></tr>
 <p>Perform a delay of <code>__ms</code> milliseconds.</p>
 <p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency in Hertz.</p>
 <ul>
-<li>If <code>__builtin_avr_delay_cycles()</code> is  <a class="el" href="FAQ.html#faq_toolchain_support">supported</a>  by the compiler, then the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
+<li>If <code>__builtin_avr_delay_cycles()</code> is  supported  by the compiler, then the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
 <li>Otherwise, <a class="el" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2()</a> is used as a fallback, and the maximal possible delay is 262.14 / f<sub>CPU</sub> milliseconds. When the user requests a delay which exceeds the maximum possible one, <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> provides a decreased resolution functionality. In this mode <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> will work with a resolution of 1/10&#160;ms, providing delays up to 6.5535 seconds (independent from CPU frequency). The user will not be informed about decreased resolution.</li>
 </ul>
 <p>Conversion of <code>__ms</code> into clock cycles may not always result in an integral value. By default, the clock cycles are rounded up to the next integer. This ensures that the user gets at least <code>__ms</code> microseconds of delay. Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
@@ -206,7 +206,7 @@ Functions</h2></td></tr>
 <p>Perform a delay of <code>__us</code> microseconds.</p>
 <p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency in Hertz.</p>
 <ul>
-<li>If <code>__builtin_avr_delay_cycles()</code> is  <a class="el" href="FAQ.html#faq_toolchain_support">supported</a>  by the compiler, then the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
+<li>If <code>__builtin_avr_delay_cycles()</code> is  supported  by the compiler, then the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
 <li>Otherwise, <a class="el" href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1()</a> is used as a fallback, and the maximal possible delay is 768 / f<sub>CPU</sub> microseconds. If the user requests a delay greater than the maximal possible one, <a class="el" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us()</a> will automatically call <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> instead. The user will not be informed about this case.</li>
 </ul>
 <p>Conversion of <code>__us</code> into clock cycles may not always result in an integral value. By default, the clock cycles are rounded up to next integer. This ensures that the user gets at least <code>__us</code> microseconds of delay. Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
@@ -218,7 +218,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 23 2025 14:19:02 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

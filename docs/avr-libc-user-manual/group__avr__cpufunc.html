@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -102,17 +105,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga46388d9db8422abfea56ae2323f7a77c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga46388d9db8422abfea56ae2323f7a77c">_NOP</a>()</td></tr>
+<tr class="memitem:ga46388d9db8422abfea56ae2323f7a77c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga46388d9db8422abfea56ae2323f7a77c">_NOP</a>()&#160;&#160;&#160;__asm__ __volatile__(&quot;nop&quot;)</td></tr>
 <tr class="separator:ga46388d9db8422abfea56ae2323f7a77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1060ab52075a71b61c88636e204321b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga1060ab52075a71b61c88636e204321b2">_MemoryBarrier</a>()</td></tr>
+<tr class="memitem:ga1060ab52075a71b61c88636e204321b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga1060ab52075a71b61c88636e204321b2">_MemoryBarrier</a>()&#160;&#160;&#160;__asm__ __volatile__(&quot;&quot; ::: &quot;memory&quot;)</td></tr>
 <tr class="separator:ga1060ab52075a71b61c88636e204321b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga89d819c032df8d8ec04c5b4e2431ec0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga89d819c032df8d8ec04c5b4e2431ec0d">ccp_write_io</a> (volatile <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__ioaddr, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
-<tr class="separator:ga89d819c032df8d8ec04c5b4e2431ec0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga116f0aa57ac1b8db9a22d24469aa2624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga116f0aa57ac1b8db9a22d24469aa2624">ccp_write_spm</a> (volatile <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *__ioaddr, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
-<tr class="separator:ga116f0aa57ac1b8db9a22d24469aa2624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1bf33088bafcf47c11ad8f51ca2c9da2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga1bf33088bafcf47c11ad8f51ca2c9da2">ccp_write_io</a> (volatile void *__ioaddr, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
+<tr class="separator:ga1bf33088bafcf47c11ad8f51ca2c9da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e11eac249a90fc2cbaa6dc30e1eb589"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__cpufunc.html#ga8e11eac249a90fc2cbaa6dc30e1eb589">ccp_write_spm</a> (volatile void *__ioaddr, <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __value)</td></tr>
+<tr class="separator:ga8e11eac249a90fc2cbaa6dc30e1eb589"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="cpufunc_8h.html">avr/cpufunc.h</a>&gt;</span> </div>
@@ -129,12 +132,12 @@ Functions</h2></td></tr>
           <td class="memname">#define _MemoryBarrier</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;__asm__ __volatile__(&quot;&quot; ::: &quot;memory&quot;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Implement a read/write <em>memory barrier</em>. A memory barrier instructs the compiler to not cache any memory data in registers beyond the barrier. This can sometimes be more effective than blocking certain optimizations by declaring some object with a <code>volatile</code> qualifier.</p>
-<p>See <a class="el" href="optimization.html#optim_code_reorder">Problems with reordering code</a> for things to be taken into account with respect to compiler optimizations. </p>
+<p>See <a class="el" href="optimization.html#optim_code_reorder">Problems with Reordering Code</a> for things to be taken into account with respect to compiler optimizations. </p>
 
 </div>
 </div>
@@ -148,7 +151,7 @@ Functions</h2></td></tr>
           <td class="memname">#define _NOP</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;__asm__ __volatile__(&quot;nop&quot;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,8 +160,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga89d819c032df8d8ec04c5b4e2431ec0d" name="ga89d819c032df8d8ec04c5b4e2431ec0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga89d819c032df8d8ec04c5b4e2431ec0d">&#9670;&#160;</a></span>ccp_write_io()</h2>
+<a id="ga1bf33088bafcf47c11ad8f51ca2c9da2" name="ga1bf33088bafcf47c11ad8f51ca2c9da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1bf33088bafcf47c11ad8f51ca2c9da2">&#9670;&#160;</a></span>ccp_write_io()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +169,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void ccp_write_io </td>
           <td>(</td>
-          <td class="paramtype">volatile <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *&#160;</td>
+          <td class="paramtype">volatile void *&#160;</td>
           <td class="paramname"><em>__ioaddr</em>, </td>
         </tr>
         <tr>
@@ -182,12 +185,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Write <em>__value</em> to IO Register Protected (CCP) IO register at <em>__ioaddr</em>. . See also <code><a class="el" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE()</a></code>. </p>
+<p>Write <em>__value</em> to IO Register Protected (CCP) 8-bit IO register at <em>__ioaddr</em>. See also <code><a class="el" href="group__avr__io.html#gaaaa396e67cc85f68fa0474d70edf3d4c">_PROTECTED_WRITE()</a></code>. </p>
 
 </div>
 </div>
-<a id="ga116f0aa57ac1b8db9a22d24469aa2624" name="ga116f0aa57ac1b8db9a22d24469aa2624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga116f0aa57ac1b8db9a22d24469aa2624">&#9670;&#160;</a></span>ccp_write_spm()</h2>
+<a id="ga8e11eac249a90fc2cbaa6dc30e1eb589" name="ga8e11eac249a90fc2cbaa6dc30e1eb589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e11eac249a90fc2cbaa6dc30e1eb589">&#9670;&#160;</a></span>ccp_write_spm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,7 +198,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void ccp_write_spm </td>
           <td>(</td>
-          <td class="paramtype">volatile <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *&#160;</td>
+          <td class="paramtype">volatile void *&#160;</td>
           <td class="paramname"><em>__ioaddr</em>, </td>
         </tr>
         <tr>
@@ -211,7 +214,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Write <em>__value</em> to SPM Instruction Protected (CCP) IO register at <em>__ioaddr</em>. See also <code><a class="el" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM()</a></code>. </p>
+<p>Write <em>__value</em> to SPM Instruction Protected (CCP) 8-bit IO register at <em>__ioaddr</em>. See also <code><a class="el" href="group__avr__io.html#gaa908245395513b1c44d76b8feab3c4a4">_PROTECTED_WRITE_SPM()</a></code>. </p>
 
 </div>
 </div>
@@ -219,7 +222,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

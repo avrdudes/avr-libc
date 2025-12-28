@@ -1,5 +1,3 @@
-/* $Id$ */
-
 div.line {
     /* The original doxgen.css has a line-height of 1.0 at this place.
        Use more space so that underscores at the bottom line are not hidden
@@ -8,6 +6,15 @@ div.line {
     line-height: 1.2 !important;
 }
 
+h1 {
+    /* doxygen.css has a catch-all "line-height 22px;" in div even for
+       the large fonts from h1.  This leads to overlapping text when
+       h1 wraps to more than one line, e.g. in the FAQ.  */
+    line-height: 105% !important;
+}
+
+/* This switches between the "normal" and the tone-inverted logo,
+   based on whether the browser reports using a dark-mode theme. */
 .logo {
     display: block;
 }

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['nan_0',['NAN',['../group__avr__math.html#ga8abfcc76130f3f991d124dd22d7e69bc',1,'math.h']]],
-  ['nan_1',['nan',['../group__avr__math.html#gab32e765886af78ddb0e7bd4fb7bb6eb8',1,'math.h']]],
+  ['nan_0',['nan',['../group__avr__math.html#gab32e765886af78ddb0e7bd4fb7bb6eb8',1,'math.h']]],
+  ['nan_1',['NAN',['../group__avr__math.html#ga8abfcc76130f3f991d124dd22d7e69bc',1,'math.h']]],
   ['nanf_2',['nanf',['../group__avr__math.html#gaac73102e3e984863ba50d88bafdd92d4',1,'math.h']]],
   ['nanl_3',['nanl',['../group__avr__math.html#ga0908e64825490873c2845235605f103a',1,'math.h']]],
   ['nonatomic_5fblock_4',['NONATOMIC_BLOCK',['../group__util__atomic.html#ga6e195ee2117559a25f77fbba9054674a',1,'atomic.h']]],

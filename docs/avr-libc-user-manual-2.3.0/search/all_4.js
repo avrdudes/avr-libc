@@ -10,7 +10,7 @@ var searchData=
   ['ceil_7',['ceil',['../group__avr__math.html#ga1ea6d7b591132268abc2e843ababd084',1,'math.h']]],
   ['ceilf_8',['ceilf',['../group__avr__math.html#ga8c1a8db0710bb3f25f643a0fca68fc60',1,'math.h']]],
   ['ceill_9',['ceill',['../group__avr__math.html#gae11b7781f057eb7ba5d7ed95be7fdbee',1,'math.h']]],
-  ['clearerr_10',['clearerr',['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *__stream):&#160;clearerr.c'],['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *stream):&#160;clearerr.c']]],
+  ['clearerr_10',['clearerr',['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *stream):&#160;clearerr.c'],['../group__avr__stdio.html#gaaa6d255675688c736c99ebd32f2a7214',1,'clearerr(FILE *__stream):&#160;clearerr.c']]],
   ['cli_11',['cli',['../group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162',1,'interrupt.h']]],
   ['clock_5fprescale_5fget_12',['clock_prescale_get',['../group__avr__power.html#ga7154fa3046d3387af8d6c5f489bf7194',1,'power.h']]],
   ['clock_5fprescale_5fset_13',['clock_prescale_set',['../group__avr__power.html#gae2d32c0c4f18f0019e680354bcc1c3ef',1,'power.h']]],

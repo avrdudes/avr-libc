@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -93,85 +96,123 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">&lt;avr/fuse.h&gt;: Fuse Support</div></div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga23174175833ce2c027ab3c5b758c2090"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__fuse.html#ga23174175833ce2c027ab3c5b758c2090">FUSEMEM</a>&#160;&#160;&#160;__attribute__((__used__, __section__ (&quot;.fuse&quot;)))</td></tr>
+<tr class="separator:ga23174175833ce2c027ab3c5b758c2090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga590ce98ab3113727c67df6f1d77d61a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__fuse.html#ga590ce98ab3113727c67df6f1d77d61a7">FUSES</a></td></tr>
+<tr class="separator:ga590ce98ab3113727c67df6f1d77d61a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span> </div>
+<div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
+</div><!-- fragment --><p>The &lt;<a class="el" href="fuse_8h.html">avr/fuse.h</a>&gt; header is included by &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;.</p>
 <dl class="section user"><dt>Introduction</dt><dd></dd></dl>
 <p>The Fuse API allows a user to specify the fuse settings for the specific AVR device they are compiling for. These fuse settings will be placed in a special section in the ELF output file, after linking.</p>
 <p>Programming tools can take advantage of the fuse information embedded in the ELF file, by extracting this information and determining if the fuses need to be programmed before programming the Flash and EEPROM memories. This also allows a single ELF file to contain all the information needed to program an AVR.</p>
 <p>To use the Fuse API, include the &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt; header file, which in turn automatically includes the individual I/O header file and the &lt;<a class="el" href="fuse_8h.html">avr/fuse.h</a>&gt; file. These other two files provides everything necessary to set the AVR fuses.</p>
 <dl class="section user"><dt>Fuse API</dt><dd></dd></dl>
-<p>Each I/O header file must define the FUSE_MEMORY_SIZE macro which is defined to the number of fuse bytes that exist in the AVR device.</p>
-<p>A new type, __fuse_t, is defined as a structure. The number of fields in this structure are determined by the number of fuse bytes in the FUSE_MEMORY_SIZE macro.</p>
-<p>If FUSE_MEMORY_SIZE == 1, there is only a single field: byte, of type unsigned char.</p>
-<p>If FUSE_MEMORY_SIZE == 2, there are two fields: low, and high, of type unsigned char.</p>
-<p>If FUSE_MEMORY_SIZE == 3, there are three fields: low, high, and extended, of type unsigned char.</p>
-<p>If FUSE_MEMORY_SIZE &gt; 3, there is a single field: byte, which is an array of unsigned char with the size of the array being FUSE_MEMORY_SIZE.</p>
-<p>A convenience macro, FUSEMEM, is defined as a GCC attribute for a custom-named section of ".fuse".</p>
-<p>A convenience macro, FUSES, is defined that declares a variable, __fuse, of type __fuse_t with the attribute defined by FUSEMEM. This variable allows the end user to easily set the fuse data.</p>
-<dl class="section note"><dt>Note</dt><dd>If a device-specific I/O header file has previously defined FUSEMEM, then FUSEMEM is not redefined. If a device-specific I/O header file has previously defined FUSES, then FUSES is not redefined.</dd></dl>
-<p>Each AVR device I/O header file has a set of defined macros which specify the actual fuse bits available on that device. The AVR fuses have inverted values, logical 1 for an unprogrammed (disabled) bit and logical 0 for a programmed (enabled) bit. The defined macros for each individual fuse bit represent this in their definition by a bit-wise inversion of a mask. For example, the FUSE_EESAVE fuse in the ATmega128 is defined as: </p><div class="fragment"><div class="line"><span class="preprocessor">#define FUSE_EESAVE      ~_BV(3)</span></div>
-</div><!-- fragment --> <dl class="section note"><dt>Note</dt><dd>The _BV macro creates a bit mask from a bit number. It is then inverted to represent logical values for a fuse memory byte.</dd></dl>
-<p>To combine the fuse bits macros together to represent a whole fuse byte, use the bitwise AND operator, like so: </p><div class="fragment"><div class="line">(FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN)</div>
-</div><!-- fragment --><p>Each device I/O header file also defines macros that provide default values for each fuse byte that is available. LFUSE_DEFAULT is defined for a Low Fuse byte. HFUSE_DEFAULT is defined for a High Fuse byte. EFUSE_DEFAULT is defined for an Extended Fuse byte.</p>
-<p>If FUSE_MEMORY_SIZE &gt; 3, then the I/O header file defines macros that provide default values for each fuse byte like so: FUSE0_DEFAULT FUSE1_DEFAULT FUSE2_DEFAULT FUSE3_DEFAULT FUSE4_DEFAULT ....</p>
-<dl class="section user"><dt>API Usage Example</dt><dd></dd></dl>
+<p>Each I/O header file must define the <code>FUSE_MEMORY_SIZE</code> macro which is defined to the number of fuse bytes that exist in the AVR device.</p>
+<p>A new type, __fuse_t, is defined as a structure. The number of fields in this structure are determined by the number of fuse bytes in the <code>FUSE_MEMORY_SIZE</code> macro:</p>
+<ul>
+<li><code>If</code> FUSE_MEMORY_SIZE == 1, there is only a single field: byte, of type <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>.</li>
+<li>If <code>FUSE_MEMORY_SIZE</code> == 2, there are two fields: low, and high, of type <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>.</li>
+<li>If FUSE_MEMORY_SIZE == 3, there are three fields: low, high, and extended, of type <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>.</li>
+<li>If <code>FUSE_MEMORY_SIZE</code> &gt; 3, there is a single field: byte, which is an array of <a class="el" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> with the size of the array being <code>FUSE_MEMORY_SIZE</code>.</li>
+</ul>
+<p>A convenience macro, <code><a class="el" href="group__avr__fuse.html#ga23174175833ce2c027ab3c5b758c2090">FUSEMEM</a></code>, is defined as a GCC attribute for a custom-named section of <code>".fuse"</code>.</p>
+<p>A convenience macro, <code><a class="el" href="group__avr__fuse.html#ga590ce98ab3113727c67df6f1d77d61a7">FUSES</a></code>, is defined that declares a variable, <code>__fuse</code>, of type <code>__fuse_t</code> with the attribute defined by <code><a class="el" href="group__avr__fuse.html#ga23174175833ce2c027ab3c5b758c2090">FUSEMEM</a></code>. This variable allows the end user to easily set the fuse data.</p>
+<dl class="section note"><dt>Note</dt><dd>If a device-specific I/O header file has previously defined <code>FUSEMEM</code>, then <code>FUSEMEM</code> is not redefined. If a device-specific I/O header file has previously defined <code>FUSES</code>, then <code>FUSES</code> is not redefined.</dd></dl>
+<p>Each AVR device I/O header file has a set of defined macros which specify the actual fuse bits available on that device. The AVR fuses have inverted values, logical 1 for an unprogrammed (disabled) bit and logical 0 for a programmed (enabled) bit. The defined macros for each individual fuse bit represent this in their definition by a bit-wise inversion of a mask. For example, the <code>FUSE_EESAVE</code> fuse in the ATmega128 is defined as: </p><div class="fragment"><div class="line"><span class="preprocessor">#define FUSE_EESAVE  ~_BV(3)</span></div>
+</div><!-- fragment --><p> The <code><a class="el" href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></code> macro creates a bit mask from a bit number. It is then inverted to represent logical values for a fuse memory byte. To combine the fuse bits macros together to represent a whole fuse byte, use the bitwise AND operator, like so: </p><div class="fragment"><div class="line">(FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN)</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>Many device headers define fuse macros for <b>not inverted</b> fuse bits, like for example devices from the 0-series, 1-series and 2-series. Make sure you are using the right logic operations when using fuse values, or otherwise you can damage a device.</dd></dl>
+<p>Each device I/O header file also defines macros that provide default values for each fuse byte that is available. <code>LFUSE_DEFAULT</code> is defined for a Low Fuse byte. <code>HFUSE_DEFAULT</code> is defined for a High Fuse byte. <code>EFUSE_DEFAULT</code> is defined for an Extended Fuse byte.</p>
+<p>If <code>FUSE_MEMORY_SIZE</code> &gt; 3, then the I/O header file defines macros that provide default values for each fuse byte like so: </p><div class="fragment"><div class="line">FUSE0_DEFAULT</div>
+<div class="line">FUSE1_DEFAULT</div>
+<div class="line">FUSE2_DEFAULT</div>
+<div class="line">FUSE3_DEFAULT</div>
+<div class="line">FUSE4_DEFAULT</div>
+<div class="line">...</div>
+</div><!-- fragment --><dl class="section user"><dt>API Usage Example</dt><dd></dd></dl>
 <p>Putting all of this together is easy. Using C99's designated initializers:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">FUSES =</div>
+<div class="line"><a class="code hl_define" href="group__avr__fuse.html#ga590ce98ab3113727c67df6f1d77d61a7">FUSES</a> =</div>
 <div class="line">{</div>
 <div class="line">    .low = LFUSE_DEFAULT,</div>
-<div class="line">    .high = (FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN),</div>
-<div class="line">    .extended = EFUSE_DEFAULT,</div>
+<div class="line">    .high = FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN,</div>
+<div class="line">    .extended = EFUSE_DEFAULT</div>
 <div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
+<div class="ttc" id="agroup__avr__fuse_html_ga590ce98ab3113727c67df6f1d77d61a7"><div class="ttname"><a href="group__avr__fuse.html#ga590ce98ab3113727c67df6f1d77d61a7">FUSES</a></div><div class="ttdeci">#define FUSES</div><div class="ttdef"><b>Definition:</b> fuse.h:235</div></div>
 </div><!-- fragment --><p>Or, using the variable directly instead of the FUSES macro,</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">__fuse_t __fuse __attribute__((section (<span class="stringliteral">&quot;.fuse&quot;</span>))) =</div>
+<div class="line">__fuse_t __fuse <a class="code hl_define" href="group__avr__fuse.html#ga23174175833ce2c027ab3c5b758c2090">FUSEMEM</a> =</div>
 <div class="line">{</div>
 <div class="line">    .low = LFUSE_DEFAULT,</div>
-<div class="line">    .high = (FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN),</div>
-<div class="line">    .extended = EFUSE_DEFAULT,</div>
+<div class="line">    .high = FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN,</div>
+<div class="line">    .extended = EFUSE_DEFAULT</div>
 <div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>If you are compiling in C++, you cannot use the designated intializers so you must do:</p>
+<div class="ttc" id="agroup__avr__fuse_html_ga23174175833ce2c027ab3c5b758c2090"><div class="ttname"><a href="group__avr__fuse.html#ga23174175833ce2c027ab3c5b758c2090">FUSEMEM</a></div><div class="ttdeci">#define FUSEMEM</div><div class="ttdef"><b>Definition:</b> fuse.h:222</div></div>
+</div><!-- fragment --><p>If you are compiling in C++, you cannot use the designated initializers so you must do:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="io_8h.html">avr/io.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">FUSES =</div>
+<div class="line"><a class="code hl_define" href="group__avr__fuse.html#ga590ce98ab3113727c67df6f1d77d61a7">FUSES</a> =</div>
 <div class="line">{</div>
 <div class="line">    LFUSE_DEFAULT, <span class="comment">// .low</span></div>
-<div class="line">    (FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN), <span class="comment">// .high</span></div>
-<div class="line">    EFUSE_DEFAULT, <span class="comment">// .extended</span></div>
+<div class="line">    FUSE_BOOTSZ0 &amp; FUSE_BOOTSZ1 &amp; FUSE_EESAVE &amp; FUSE_SPIEN &amp; FUSE_JTAGEN, <span class="comment">// .high</span></div>
+<div class="line">    EFUSE_DEFAULT  <span class="comment">// .extended</span></div>
 <div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
 </div><!-- fragment --><p>However there are a number of caveats that you need to be aware of to use this API properly.</p>
 <p>Be sure to include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt; to get all of the definitions for the API. The FUSES macro defines a global variable to store the fuse data. This variable is assigned to its own linker section. Assign the desired fuse values immediately in the variable initialization.</p>
-<p>The .fuse section in the ELF file will get its values from the initial variable assignment ONLY. This means that you can NOT assign values to this variable in functions and the new values will not be put into the ELF .fuse section.</p>
-<p>The global variable is declared in the FUSES macro has two leading underscores, which means that it is reserved for the "implementation", meaning the library, so it will not conflict with a user-named variable.</p>
-<p>You must initialize ALL fields in the __fuse_t structure. This is because the fuse bits in all bytes default to a logical 1, meaning unprogrammed. Normal uninitialized data defaults to all locgial zeros. So it is vital that all fuse bytes are initialized, even with default data. If they are not, then the fuse bits may not programmed to the desired settings.</p>
-<p>Be sure to have the -mmcu=<em>device</em> flag in your compile command line and your linker command line to have the correct device selected and to have the correct I/O header file included when you include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;.</p>
+<p>The .fuse section in the ELF file will get its values from the initial variable assignment ONLY. This means that you can NOT assign values to this variable in functions and the new values will not be put into the ELF <code>.fuse</code> section.</p>
+<p>The global variable is declared in the <code>FUSES</code> macro has two leading underscores, which means that it is reserved for the "implementation", meaning the library, so it will not conflict with a user-named variable.</p>
+<p>You must initialize ALL fields in the <code>__fuse_t</code> structure. This is because the fuse bits in all bytes default to a logical 1, meaning unprogrammed. Normal uninitialized data defaults to all logical zeros. So it is vital that all fuse bytes are initialized, even with default data. If they are not, then the fuse bits may not programmed to the desired settings.</p>
+<p>Be sure to have the <code>-mmcu=<em>device</em></code> flag in your compile command line and your linker command line to have the correct device selected and to have the correct I/O header file included when you include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;.</p>
 <p>You can print out the contents of the .fuse section in the ELF file by using this command line: </p><div class="fragment"><div class="line">avr-objdump -s -j .fuse &lt;ELF file&gt;</div>
 </div><!-- fragment --><p> The section contents shows the address on the left, then the data going from lower address to a higher address, left to right. </p>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga23174175833ce2c027ab3c5b758c2090" name="ga23174175833ce2c027ab3c5b758c2090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga23174175833ce2c027ab3c5b758c2090">&#9670;&#160;</a></span>FUSEMEM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FUSEMEM&#160;&#160;&#160;__attribute__((__used__, __section__ (&quot;.fuse&quot;)))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga590ce98ab3113727c67df6f1d77d61a7" name="ga590ce98ab3113727c67df6f1d77d61a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga590ce98ab3113727c67df6f1d77d61a7">&#9670;&#160;</a></span>FUSES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FUSES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A convenience macro. On Xmega devices, it is defined as </p><div class="fragment"><div class="line"><span class="preprocessor">#define FUSES NVM_FUSES_t __fuse FUSEMEM</span></div>
+</div><!-- fragment --><p> Otherwise, the definition is: </p><div class="fragment"><div class="line"><span class="preprocessor">#define FUSES __fuse_t __fuse FUSEMEM</span></div>
+</div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

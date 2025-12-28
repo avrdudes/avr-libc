@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -159,6 +162,7 @@ Macros</h2></td></tr>
 <dl class="section user"><dt>API Usage Example</dt><dd>The following code shows typical usage of the boot API.</dd></dl>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stdint_8h.html">stdint.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="eeprom_8h.html">avr/eeprom.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> boot_program_page (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> page, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *buf)</div>
@@ -191,16 +195,17 @@ Macros</h2></td></tr>
 <div class="line">    <span class="comment">// Re-enable interrupts (if they were ever enabled).</span></div>
 <div class="line">    SREG = sreg;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__boot_html_ga013d6d8c679ebdbc0e5fac179c38c9aa"><div class="ttname"><a href="group__avr__boot.html#ga013d6d8c679ebdbc0e5fac179c38c9aa">boot_page_write</a></div><div class="ttdeci">#define boot_page_write(address)</div><div class="ttdef"><b>Definition:</b> boot.h:638</div></div>
-<div class="ttc" id="agroup__avr__boot_html_ga24900c15109e8b419736d4b81b093fb8"><div class="ttname"><a href="group__avr__boot.html#ga24900c15109e8b419736d4b81b093fb8">boot_spm_busy_wait</a></div><div class="ttdeci">#define boot_spm_busy_wait()</div><div class="ttdef"><b>Definition:</b> boot.h:184</div></div>
-<div class="ttc" id="agroup__avr__boot_html_ga61add108c778273ff68233d044c3acca"><div class="ttname"><a href="group__avr__boot.html#ga61add108c778273ff68233d044c3acca">boot_page_fill</a></div><div class="ttdeci">#define boot_page_fill(address, data)</div><div class="ttdef"><b>Definition:</b> boot.h:636</div></div>
-<div class="ttc" id="agroup__avr__boot_html_ga7249d12e06789cd306583abf7def8176"><div class="ttname"><a href="group__avr__boot.html#ga7249d12e06789cd306583abf7def8176">boot_page_erase</a></div><div class="ttdeci">#define boot_page_erase(address)</div><div class="ttdef"><b>Definition:</b> boot.h:637</div></div>
-<div class="ttc" id="agroup__avr__boot_html_ga8d2baaca2991318e0b06fdf9a5264923"><div class="ttname"><a href="group__avr__boot.html#ga8d2baaca2991318e0b06fdf9a5264923">boot_rww_enable</a></div><div class="ttdeci">#define boot_rww_enable()</div><div class="ttdef"><b>Definition:</b> boot.h:639</div></div>
-<div class="ttc" id="agroup__avr__eeprom_html_ga44c64ebb425fcb34b8d4dc19c4079869"><div class="ttname"><a href="group__avr__eeprom.html#ga44c64ebb425fcb34b8d4dc19c4079869">eeprom_busy_wait</a></div><div class="ttdeci">#define eeprom_busy_wait()</div><div class="ttdef"><b>Definition:</b> eeprom.h:132</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:90</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:93</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:103</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:83</div></div>
+<div class="ttc" id="aeeprom_8h_html"><div class="ttname"><a href="eeprom_8h.html">eeprom.h</a></div></div>
+<div class="ttc" id="agroup__avr__boot_html_ga013d6d8c679ebdbc0e5fac179c38c9aa"><div class="ttname"><a href="group__avr__boot.html#ga013d6d8c679ebdbc0e5fac179c38c9aa">boot_page_write</a></div><div class="ttdeci">#define boot_page_write(address)</div><div class="ttdef"><b>Definition:</b> boot.h:637</div></div>
+<div class="ttc" id="agroup__avr__boot_html_ga24900c15109e8b419736d4b81b093fb8"><div class="ttname"><a href="group__avr__boot.html#ga24900c15109e8b419736d4b81b093fb8">boot_spm_busy_wait</a></div><div class="ttdeci">#define boot_spm_busy_wait()</div><div class="ttdef"><b>Definition:</b> boot.h:183</div></div>
+<div class="ttc" id="agroup__avr__boot_html_ga61add108c778273ff68233d044c3acca"><div class="ttname"><a href="group__avr__boot.html#ga61add108c778273ff68233d044c3acca">boot_page_fill</a></div><div class="ttdeci">#define boot_page_fill(address, data)</div><div class="ttdef"><b>Definition:</b> boot.h:635</div></div>
+<div class="ttc" id="agroup__avr__boot_html_ga7249d12e06789cd306583abf7def8176"><div class="ttname"><a href="group__avr__boot.html#ga7249d12e06789cd306583abf7def8176">boot_page_erase</a></div><div class="ttdeci">#define boot_page_erase(address)</div><div class="ttdef"><b>Definition:</b> boot.h:636</div></div>
+<div class="ttc" id="agroup__avr__boot_html_ga8d2baaca2991318e0b06fdf9a5264923"><div class="ttname"><a href="group__avr__boot.html#ga8d2baaca2991318e0b06fdf9a5264923">boot_rww_enable</a></div><div class="ttdeci">#define boot_rww_enable()</div><div class="ttdef"><b>Definition:</b> boot.h:638</div></div>
+<div class="ttc" id="agroup__avr__eeprom_html_ga44c64ebb425fcb34b8d4dc19c4079869"><div class="ttname"><a href="group__avr__eeprom.html#ga44c64ebb425fcb34b8d4dc19c4079869">eeprom_busy_wait</a></div><div class="ttdeci">#define eeprom_busy_wait()</div><div class="ttdef"><b>Definition:</b> eeprom.h:129</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:114</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 <div class="ttc" id="ainterrupt_8h_html"><div class="ttname"><a href="interrupt_8h.html">interrupt.h</a></div></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 <div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
@@ -248,8 +253,8 @@ Macros</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>In this context, a 'set bit' will be written to a zero value. Note also that only BLBxx bits can be programmed by this command.</dd></dl>
 <p>For example, to disallow the SPM instruction from writing to the Boot Loader memory section of flash, you would use this macro as such:</p>
 <div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__boot.html#gadaa352690ac1c82c535da9d8faf77590">boot_lock_bits_set</a> (<a class="code hl_define" href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a> (BLB11));</div>
-<div class="ttc" id="agroup__avr__boot_html_gadaa352690ac1c82c535da9d8faf77590"><div class="ttname"><a href="group__avr__boot.html#gadaa352690ac1c82c535da9d8faf77590">boot_lock_bits_set</a></div><div class="ttdeci">#define boot_lock_bits_set(lock_bits)</div><div class="ttdef"><b>Definition:</b> boot.h:640</div></div>
-<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:208</div></div>
+<div class="ttc" id="agroup__avr__boot_html_gadaa352690ac1c82c535da9d8faf77590"><div class="ttname"><a href="group__avr__boot.html#gadaa352690ac1c82c535da9d8faf77590">boot_lock_bits_set</a></div><div class="ttdeci">#define boot_lock_bits_set(lock_bits)</div><div class="ttdef"><b>Definition:</b> boot.h:639</div></div>
+<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:206</div></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Like any lock bits, the Boot Loader Lock Bits, once set, cannot be cleared again except by a chip erase which will in turn also erase the boot loader itself. </dd></dl>
 
 </div>
@@ -707,7 +712,7 @@ Macros</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

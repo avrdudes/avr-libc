@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calloc_0',['calloc',['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t __nele, size_t __size):&#160;calloc.c'],['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t nele, size_t size):&#160;calloc.c']]],
+  ['calloc_0',['calloc',['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t nele, size_t size):&#160;calloc.c'],['../group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963',1,'calloc(size_t __nele, size_t __size):&#160;calloc.c']]],
   ['cbrt_1',['cbrt',['../group__avr__math.html#ga8af00e2203928978e0242b4afd1d899f',1,'math.h']]],
   ['cbrtf_2',['cbrtf',['../group__avr__math.html#ga396c6a553500a355627741e234045bf4',1,'math.h']]],
   ['cbrtl_3',['cbrtl',['../group__avr__math.html#ga521c2f4c10b7bb5363bad058ef56794c',1,'math.h']]],

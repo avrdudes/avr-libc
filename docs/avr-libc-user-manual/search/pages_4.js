@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frequently_20asked_20questions_0',['Frequently Asked Questions',['../FAQ.html',1,'']]]
+  ['global_20index_0',['Global Index',['../Global_01Index.html',1,'']]]
 ];

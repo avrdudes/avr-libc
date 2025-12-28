@@ -262,25 +262,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .bss          00000003  00800100  00800100  000001d4  2**0
                   ALLOC
-  3 .comment      00000012  00000000  00000000  000001d4  2**0
+  3 .comment      0000001a  00000000  00000000  000001d4  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001e8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001f0  2**2
                   CONTENTS, READONLY, OCTETS
-  5 .debug_aranges 00000068  00000000  00000000  00000228  2**3
+  5 .debug_aranges 00000068  00000000  00000000  00000230  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  6 .debug_info   0000075b  00000000  00000000  00000290  2**0
+  6 .debug_info   00000760  00000000  00000000  00000298  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  7 .debug_abbrev 000006c1  00000000  00000000  000009eb  2**0
+  7 .debug_abbrev 000006c3  00000000  00000000  000009f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  8 .debug_line   00000312  00000000  00000000  000010ac  2**0
+  8 .debug_line   00000388  00000000  00000000  000010bb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  9 .debug_frame  00000050  00000000  00000000  000013c0  2**2
+  9 .debug_frame  00000050  00000000  00000000  00001444  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 10 .debug_str    00000361  00000000  00000000  00001410  2**0
+ 10 .debug_str    0000038f  00000000  00000000  00001494  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 11 .debug_line_str 000000d0  00000000  00000000  00001771  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 12 .debug_rnglists 00000019  00000000  00000000  00001841  2**0
+ 11 .debug_ranges 00000018  00000000  00000000  00001823  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -350,27 +348,42 @@ Disassembly of section .text:
   72:	cd bf       	out	0x3d, r28	; 61
 
 00000074 &lt;__do_clear_bss&gt;:
+/* __do_clear_bss is only necessary if there is anything in .bss section.  */
+
+#ifdef L_clear_bss
+	.section .init4,"ax",@progbits
+DEFUN __do_clear_bss
+	ldi	r18, hi8(__bss_end)
   74:	21 e0       	ldi	r18, 0x01	; 1
 
 00000076 &lt;.Loc.1&gt;:
+	ldi	r26, lo8(__bss_start)
   76:	a0 e0       	ldi	r26, 0x00	; 0
 
 00000078 &lt;.Loc.2&gt;:
+	ldi	r27, hi8(__bss_start)
   78:	b1 e0       	ldi	r27, 0x01	; 1
 
 0000007a &lt;.Loc.3&gt;:
+	rjmp	.do_clear_bss_start
   7a:	01 c0       	rjmp	.+2      	; 0x7e &lt;.Loc.5&gt;
 
 0000007c &lt;.Loc.4&gt;:
+.do_clear_bss_loop:
+	st	X+, __zero_reg__
   7c:	1d 92       	st	X+, r1
 
 0000007e &lt;.Loc.5&gt;:
+.do_clear_bss_start:
+	cpi	r26, lo8(__bss_end)
   7e:	a3 30       	cpi	r26, 0x03	; 3
 
 00000080 &lt;.Loc.6&gt;:
+	cpc	r27, r18
   80:	b2 07       	cpc	r27, r18
 
 00000082 &lt;.Loc.7&gt;:
+	brne	.do_clear_bss_loop
   82:	e1 f7       	brne	.-8      	; 0x7c &lt;.Loc.4&gt;
 
 00000084 &lt;__call_main&gt;:
@@ -403,18 +416,10 @@ ISR(TIMER1_CAPT_vect)           // Note [2]
     static uint8_t direction;
 
     switch (direction)          // Note [5]
-  98:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 &lt;direction.1&gt;
-
-0000009c &lt;.Loc.6&gt;:
-    {
-        case UP:
-            if (++pwm == TIMER1_TOP)
-  9c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 &lt;pwm.0&gt;
-  a0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 &lt;pwm.0+0x1&gt;
-
-000000a4 &lt;.Loc.7&gt;:
-    switch (direction)          // Note [5]
-  a4:	21 15       	cp	r18, r1
+  98:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 &lt;direction.1561&gt;
+  9c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 &lt;pwm.1560&gt;
+  a0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 &lt;pwm.1560+0x1&gt;
+  a4:	22 23       	and	r18, r18
   a6:	89 f0       	breq	.+34     	; 0xca &lt;.L2&gt;
   a8:	21 30       	cpi	r18, 0x01	; 1
   aa:	d9 f0       	breq	.+54     	; 0xe2 &lt;.L3&gt;
@@ -426,12 +431,12 @@ ISR(TIMER1_CAPT_vect)           // Note [2]
     }
 
     OCR1A = pwm;                // Note [6]
-  ac:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 &lt;pwm.0&gt;
-  b0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 &lt;pwm.0+0x1&gt;
+  ac:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 &lt;pwm.1560&gt;
+  b0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 &lt;pwm.1560+0x1&gt;
   b4:	90 93 89 00 	sts	0x0089, r25	; 0x800089 &lt;__TEXT_REGION_LENGTH__+0x7f8089&gt;
   b8:	80 93 88 00 	sts	0x0088, r24	; 0x800088 &lt;__TEXT_REGION_LENGTH__+0x7f8088&gt;
 
-000000bc &lt;.Loc.10&gt;:
+000000bc &lt;.Loc.8&gt;:
 }
   bc:	9f 91       	pop	r25
   be:	8f 91       	pop	r24
@@ -445,32 +450,32 @@ ISR(TIMER1_CAPT_vect)           // Note [2]
             if (++pwm == TIMER1_TOP)
   ca:	01 96       	adiw	r24, 0x01	; 1
 
-000000cc &lt;.Loc.13&gt;:
-  cc:	90 93 01 01 	sts	0x0101, r25	; 0x800101 &lt;pwm.0+0x1&gt;
-  d0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 &lt;pwm.0&gt;
+000000cc &lt;.Loc.11&gt;:
+  cc:	90 93 01 01 	sts	0x0101, r25	; 0x800101 &lt;pwm.1560+0x1&gt;
+  d0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 &lt;pwm.1560&gt;
   d4:	8f 3f       	cpi	r24, 0xFF	; 255
   d6:	93 40       	sbci	r25, 0x03	; 3
   d8:	49 f7       	brne	.-46     	; 0xac &lt;.L4&gt;
 
-000000da &lt;.Loc.14&gt;:
+000000da &lt;.Loc.12&gt;:
                 direction = DOWN;
   da:	81 e0       	ldi	r24, 0x01	; 1
-  dc:	80 93 02 01 	sts	0x0102, r24	; 0x800102 &lt;direction.1&gt;
+  dc:	80 93 02 01 	sts	0x0102, r24	; 0x800102 &lt;direction.1561&gt;
   e0:	e5 cf       	rjmp	.-54     	; 0xac &lt;.L4&gt;
 
 000000e2 &lt;.L3&gt;:
             if (--pwm == 0)
   e2:	01 97       	sbiw	r24, 0x01	; 1
 
-000000e4 &lt;.Loc.18&gt;:
-  e4:	90 93 01 01 	sts	0x0101, r25	; 0x800101 &lt;pwm.0+0x1&gt;
-  e8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 &lt;pwm.0&gt;
+000000e4 &lt;.Loc.16&gt;:
+  e4:	90 93 01 01 	sts	0x0101, r25	; 0x800101 &lt;pwm.1560+0x1&gt;
+  e8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 &lt;pwm.1560&gt;
   ec:	89 2b       	or	r24, r25
   ee:	f1 f6       	brne	.-68     	; 0xac &lt;.L4&gt;
 
-000000f0 &lt;.Loc.19&gt;:
+000000f0 &lt;.Loc.17&gt;:
                 direction = UP;
-  f0:	10 92 02 01 	sts	0x0102, r1	; 0x800102 &lt;direction.1&gt;
+  f0:	10 92 02 01 	sts	0x0102, r1	; 0x800102 &lt;direction.1561&gt;
   f4:	db cf       	rjmp	.-74     	; 0xac &lt;.L4&gt;
 
 000000f6 &lt;__vector_11&gt;:
@@ -481,7 +486,7 @@ ISR(TIMER1_COMPA_vect)
     LED_PORT &amp;= ~LED_PIN;       // Note [7]
   f6:	2d 98       	cbi	0x05, 5	; 5
 
-000000f8 &lt;.Loc.24&gt;:
+000000f8 &lt;.Loc.22&gt;:
 }
   f8:	18 95       	reti
 
@@ -500,16 +505,16 @@ ioinit(void)                    // Note [8]
  100:	90 93 87 00 	sts	0x0087, r25	; 0x800087 &lt;__TEXT_REGION_LENGTH__+0x7f8087&gt;
  104:	80 93 86 00 	sts	0x0086, r24	; 0x800086 &lt;__TEXT_REGION_LENGTH__+0x7f8086&gt;
 
-00000108 &lt;.Loc.30&gt;:
+00000108 &lt;.Loc.28&gt;:
     TCCR1A = 0;
  108:	10 92 80 00 	sts	0x0080, r1	; 0x800080 &lt;__TEXT_REGION_LENGTH__+0x7f8080&gt;
 
-0000010c &lt;.Loc.32&gt;:
+0000010c &lt;.Loc.30&gt;:
     TCCR1B = _BV(WGM13) | _BV(WGM12) | 2;
  10c:	8a e1       	ldi	r24, 0x1A	; 26
  10e:	80 93 81 00 	sts	0x0081, r24	; 0x800081 &lt;__TEXT_REGION_LENGTH__+0x7f8081&gt;
 
-00000112 &lt;.Loc.34&gt;:
+00000112 &lt;.Loc.32&gt;:
 
     /* Set PWM value to 0. */
     OCR1A = 1;
@@ -518,20 +523,20 @@ ioinit(void)                    // Note [8]
  116:	90 93 89 00 	sts	0x0089, r25	; 0x800089 &lt;__TEXT_REGION_LENGTH__+0x7f8089&gt;
  11a:	80 93 88 00 	sts	0x0088, r24	; 0x800088 &lt;__TEXT_REGION_LENGTH__+0x7f8088&gt;
 
-0000011e &lt;.Loc.36&gt;:
+0000011e &lt;.Loc.34&gt;:
 
     /* Enable OC1 as output. */
     LED_DDR |= LED_PIN;
  11e:	25 9a       	sbi	0x04, 5	; 4
 
-00000120 &lt;.Loc.38&gt;:
+00000120 &lt;.Loc.36&gt;:
 
     /* Enable timer 1 overflow and compare A interrupt. */
     TIMSK1 = _BV(ICIE1) | _BV(OCIE1A);
  120:	82 e2       	ldi	r24, 0x22	; 34
  122:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f &lt;__TEXT_REGION_LENGTH__+0x7f806f&gt;
 
-00000126 &lt;.Loc.40&gt;:
+00000126 &lt;.Loc.38&gt;:
     sei ();
  126:	78 94       	sei
 
@@ -546,15 +551,15 @@ ioinit(void)                    // Note [8]
  12a:	81 60       	ori	r24, 0x01	; 1
  12c:	83 bf       	out	0x33, r24	; 51
 
-0000012e &lt;.Loc.45&gt;:
+0000012e &lt;.Loc.43&gt;:
  12e:	88 95       	sleep
 
-00000130 &lt;.Loc.48&gt;:
+00000130 &lt;.Loc.46&gt;:
  130:	83 b7       	in	r24, 0x33	; 51
  132:	8e 7f       	andi	r24, 0xFE	; 254
  134:	83 bf       	out	0x33, r24	; 51
 
-00000136 &lt;.Loc.51&gt;:
+00000136 &lt;.Loc.49&gt;:
     for (;;)                    // Note [9]
  136:	f8 cf       	rjmp	.-16     	; 0x128 &lt;.L9&gt;
 
@@ -563,9 +568,11 @@ ioinit(void)                    // Note [8]
  13a:	00 c0       	rjmp	.+0      	; 0x13c &lt;_exit&gt;
 
 0000013c &lt;_exit&gt;:
+	cli
  13c:	f8 94       	cli
 
 0000013e &lt;__stop_program&gt;:
+	rjmp	__stop_program
  13e:	ff cf       	rjmp	.-2      	; 0x13e &lt;__stop_program&gt;
 </pre><h1><a class="anchor" id="demo_project_map"></a>
 Linker Map Files</h1>
@@ -578,7 +585,7 @@ Linker Map Files</h1>
 <div class="line"> </div>
 <div class="line">.text           0x00000000      0x140</div>
 <div class="line"> *(.vectors)</div>
-<div class="line"> .vectors       0x00000000       0x68 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/crtatmega328p.o</div>
+<div class="line"> .vectors       0x00000000       0x68 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/crtatmega328p.o</div>
 <div class="line">                0x00000000                __vectors</div>
 <div class="line">                0x00000000                __vector_default</div>
 <div class="line"> *(.vectors)</div>
@@ -604,7 +611,7 @@ Linker Map Files</h1>
 <div class="line"> *(.fini1)</div>
 <div class="line"> *(.fini1)</div>
 <div class="line"> *(.fini0)</div>
-<div class="line"> .fini0         0x0000013c        0x4 /usr/local/lib/gcc/avr/14.2.0/avr5/libgcc.a(_exit.o)</div>
+<div class="line"> .fini0         0x0000013c        0x4 /home/DATA/gnu/install/gcc-8.5-avr/bin/../lib/gcc/avr/8.5.1/avr5/libgcc.a(_exit.o)</div>
 <div class="line"> *(.fini0)</div>
 <div class="line"> *(.hightext)</div>
 <div class="line"> *(.hightext*)</div>
@@ -618,12 +625,12 @@ Linker Map Files</h1>
 <div class="line">                [!provide]                        PROVIDE (__data_start = .)</div>
 <div class="line"> *(.data)</div>
 <div class="line"> .data          0x00800100        0x0 demo.o</div>
-<div class="line"> .data          0x00800100        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/crtatmega328p.o</div>
-<div class="line"> .data          0x00800100        0x0 /usr/local/lib/gcc/avr/14.2.0/avr5/libgcc.a(_clear_bss.o)</div>
-<div class="line"> .data          0x00800100        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/libatmega328p.a(init_sp.o)</div>
-<div class="line"> .data          0x00800100        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/libatmega328p.a(call_main.o)</div>
-<div class="line"> .data          0x00800100        0x0 /home/joerg/src/avr-libc/build/avr/lib/avr5/libc.a(exit.o)</div>
-<div class="line"> .data          0x00800100        0x0 /usr/local/lib/gcc/avr/14.2.0/avr5/libgcc.a(_exit.o)</div>
+<div class="line"> .data          0x00800100        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/crtatmega328p.o</div>
+<div class="line"> .data          0x00800100        0x0 /home/DATA/gnu/install/gcc-8.5-avr/bin/../lib/gcc/avr/8.5.1/avr5/libgcc.a(_clear_bss.o)</div>
+<div class="line"> .data          0x00800100        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/libatmega328p.a(init_sp.o)</div>
+<div class="line"> .data          0x00800100        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/libatmega328p.a(call_main.o)</div>
+<div class="line"> .data          0x00800100        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/lib/avr5/libc.a(exit.o)</div>
+<div class="line"> .data          0x00800100        0x0 /home/DATA/gnu/install/gcc-8.5-avr/bin/../lib/gcc/avr/8.5.1/avr5/libgcc.a(_exit.o)</div>
 <div class="line"> *(.data*)</div>
 <div class="line"> *(.gnu.linkonce.d*)</div>
 <div class="line"> *(.rodata)</div>
@@ -637,12 +644,12 @@ Linker Map Files</h1>
 <div class="line">                0x00800100                        PROVIDE (__bss_start = .)</div>
 <div class="line"> *(.bss)</div>
 <div class="line"> .bss           0x00800100        0x3 demo.o</div>
-<div class="line"> .bss           0x00800103        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/crtatmega328p.o</div>
-<div class="line"> .bss           0x00800103        0x0 /usr/local/lib/gcc/avr/14.2.0/avr5/libgcc.a(_clear_bss.o)</div>
-<div class="line"> .bss           0x00800103        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/libatmega328p.a(init_sp.o)</div>
-<div class="line"> .bss           0x00800103        0x0 /home/joerg/src/avr-libc/build/avr/devices/atmega328p/libatmega328p.a(call_main.o)</div>
-<div class="line"> .bss           0x00800103        0x0 /home/joerg/src/avr-libc/build/avr/lib/avr5/libc.a(exit.o)</div>
-<div class="line"> .bss           0x00800103        0x0 /usr/local/lib/gcc/avr/14.2.0/avr5/libgcc.a(_exit.o)</div>
+<div class="line"> .bss           0x00800103        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/crtatmega328p.o</div>
+<div class="line"> .bss           0x00800103        0x0 /home/DATA/gnu/install/gcc-8.5-avr/bin/../lib/gcc/avr/8.5.1/avr5/libgcc.a(_clear_bss.o)</div>
+<div class="line"> .bss           0x00800103        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/libatmega328p.a(init_sp.o)</div>
+<div class="line"> .bss           0x00800103        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/devices/atmega328p/libatmega328p.a(call_main.o)</div>
+<div class="line"> .bss           0x00800103        0x0 /home/john/gnu/build/avr-libc-onlinedocs/avr/lib/avr5/libc.a(exit.o)</div>
+<div class="line"> .bss           0x00800103        0x0 /home/DATA/gnu/install/gcc-8.5-avr/bin/../lib/gcc/avr/8.5.1/avr5/libgcc.a(_exit.o)</div>
 <div class="line"> *(.bss*)</div>
 <div class="line"> *(COMMON)</div>
 <div class="line">                0x00800103                        PROVIDE (__bss_end = .)</div>
@@ -690,7 +697,7 @@ Hex" or "Motorola SRecord" format. For them, portions of the binary need to be e
 :10007000DEBFCDBF21E0A0E0B1E001C01D92A33002
 :10008000B207E1F73BD058C01F921FB61F92112450
 :100090002F938F939F932D9A2091020180910001BD
-:1000A00090910101211589F02130D9F08091000152
+:1000A00090910101222389F02130D9F08091000143
 :1000B0009091010190938900809388009F918F9186
 :1000C0002F911F901FBE1F901895019690930101CC
 :1000D000809300018F3F934049F781E080930201B4
@@ -844,7 +851,7 @@ Reference to the source code</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 23 2025 14:19:03 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

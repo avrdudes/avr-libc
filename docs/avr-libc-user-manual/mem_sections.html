@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -120,7 +123,10 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </ul>
 </li>
 <li><a class="el" href="mem_sections.html#sec_ld_script">Output Sections of the Default Linker Script</a><ul>
-<li><a class="el" href="mem_sections.html#sec_dot_text">.text</a></li>
+<li><a class="el" href="mem_sections.html#sec_dot_text">.text</a><ul>
+<li><a class="el" href="mem_sections.html#sec_dot_init">.initN: startup code</a></li>
+</ul>
+</li>
 <li><a class="el" href="mem_sections.html#sec_dot_data">.data</a></li>
 <li><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></li>
 <li><a class="el" href="mem_sections.html#sec_dot_noinit">.noinit</a></li>
@@ -166,7 +172,7 @@ Section Flags</h3>
 <tr>
 <td><code>G</code> </td><td>A section <b>g</b>roup, like used with <code>comdat</code> objects  </td></tr>
 </table>
-<p>The last three flags are listed for completeness. They are used by the compiler, for example for header-only C++ modules and to ensure that multiplle instanciations of the same template in different compilaton units does occur at most once in the executable file.</p>
+<p>The last three flags are listed for completeness. They are used by the compiler, for example for header-only C++ modules and to ensure that multiple instantiations of the same template in different compilation units does occur at most once in the executable file.</p>
 <h3><a class="anchor" id="sec_type"></a>
 Section Type</h3>
 <p>The <em>section type</em> can be specified with the <code>.section</code> and <code>.pushsection</code> directives, like in </p><div class="fragment"><div class="line">.section .text.myfunc,<span class="stringliteral">&quot;ax&quot;</span>,@progbits</div>
@@ -193,14 +199,15 @@ Subsections</h3>
 <h2><a class="anchor" id="sec_orphan"></a>
 Orphan Sections</h2>
 <p><em>Orphan sections</em> are sections that are not mentioned in the linker description file. When an input section is orphan, then the GNU linker implicitly generates an output section of the same name. The linker implements various heuristics to determine sections flags, section type and location of orphaned sections. One use of orphan sections is to <a class="el" href="FAQ.html#faq_reloc_code">locate code to a fixed address</a>.</p>
-<p>Like for any other output section, the start address can be specified by means of linking with <code>-Wl,--section-start,<em>secname</em>=<em>address</em></code></p>
+<p>Like for any other output section, the start address can be specified by means of linking with<br  />
+ <code>-Wl,--section-start,<em>secname</em>=<em>address</em></code></p>
 <h2><a class="anchor" id="sec_lma"></a>
 LMA: Load Memory Address</h2>
 <p>The LMA of an object is the address where a loader like <code>avrdude</code> puts the object when the binary is being uploaded to the target device.</p>
 <h2><a class="anchor" id="sec_vma"></a>
 VMA: Virtual Memory Address</h2>
 <p>The VMA is the address of an object as used by the running program.</p>
-<p>VMA and LMA may be different: Suppose a small ATmega8 program with executable code that extends from byte address 0x0 to 0x20f, and one variable <code>my_var</code> in static strorage. The default linker script puts the content of the <code>.data</code> output section after the <code>.text</code> output section and into the <code>text</code> <a class="el" href="mem_sections.html#sec_memory_regions">segment</a>. The startup code then copies <code>my_data</code> from its LMA location beginning at 0x210 to its VMA location beginning at 0x800060, because C/C++ requires that all data in static storage must have been initialized when <code>main</code> is entered.</p>
+<p>VMA and LMA may be different: Suppose a small ATmega8 program with executable code that extends from byte address 0x0 to 0x20f, and one variable <code>my_var</code> in static storage. The default linker script puts the content of the <code>.data</code> output section after the <code>.text</code> output section and into the <code>text</code> <a class="el" href="mem_sections.html#sec_memory_regions">segment</a>. The startup code then copies <code>my_data</code> from its LMA location beginning at 0x210 to its VMA location beginning at 0x800060, because C/C++ requires that all data in static storage must have been initialized when <code>main</code> is entered.</p>
 <p>The internal SRAM of ATmega8 starts at RAM address 0x60, which is offset by 0x800000 in order to linearize the address space (VMA 0x60 is a flash address). The AVR program only ever uses the lower 16 bits of VMAs in static storage so that the offset of 0x800000 is masked out. But code like <code>"LDI r24,hh8(my_data)"</code> actually sets R24 to 0x80 and reveals that <code>my_data</code> is an object located in RAM.</p>
 <h1><a class="anchor" id="sec_ld_script_blocks"></a>
 The Linker Script: Building Blocks</h1>
@@ -209,13 +216,13 @@ The Linker Script: Building Blocks</h1>
 <h2><a class="anchor" id="sec_input_output"></a>
 Input Sections and Output Sections</h2>
 <p><em>Input sections</em> are sections that are inputs to the linker. Functions and static variables but also additional notes and debug information are assigned to different input sections by means of <a class="el" href="assembler.html#ass_directives">assembler directives</a> like <code>.section</code> or <code>.text</code>. The linker takes all these sections and assigns them to output sections as specified in the linker script.</p>
-<p><em>Output sections</em> are defind in the linker description file. Contrary to the unlimited number of input sections a program can come up with, there is only a handfull of output sections like <code>.text</code> and <code>.data</code>, that roughly correspond to the memory spaces of the target device.</p>
+<p><em>Output sections</em> are defined in the linker description file. Contrary to the unlimited number of input sections a program can come up with, there is only a handful of output sections like <code>.text</code> and <code>.data</code>, that roughly correspond to the memory spaces of the target device.</p>
 <p>One step in the final link is to <em>locate</em> the sections, that is the linker/locator determines at which memory location to put the output sections, and how to arrange the many input sections within their assigned output section. <em>Locating</em> means that the linker assigns <a class="el" href="mem_sections.html#sec_lma">Load Memory Addresses</a> &mdash; addresses as used by a loader like <code>avrdude</code> &mdash; and <a class="el" href="mem_sections.html#sec_vma">Virtual Memory Addresses</a>, which are the addresses as used by the running program.</p>
 <p>While it is possible to directly assign LMAs and VMAs to output sections in the linker script, the default linker scripts provided by Binutils assign <em>memory regions</em> (aka. <em>memory segments</em>) to the output sections. This has some advantages like a linker script that is easier to maintain. An output sections can be assigned to more than one memory region. For example, non-zero data in static storage (<code>.data</code>) goes to</p><ol type="1">
 <li>the <code>data</code> region (VMA), because such variables occupy RAM which has to be allocated</li>
 <li>the <code>text</code> region (LMA), because the initializers for such data has to be kept in some non-volatile memory (program ROM), so that the startup code can initialize that data so that the variables have their expected initial values when <code>main()</code> is entered.</li>
 </ol>
-<p>The <code>SECTIONS{}</code> portion of a linker script models the input and output section, and it assignes the output section to the memory regions defined in the <code>MEMORY{}</code> part.</p>
+<p>The <code>SECTIONS{}</code> portion of a linker script models the input and output section, and it assigns the output section to the memory regions defined in the <code>MEMORY{}</code> part.</p>
 <h2><a class="anchor" id="sec_memory_regions"></a>
 Memory Regions</h2>
 <p>The <em>memory regions</em> defined in the default linker script model and correspond to the different kinds of memories of a device.</p>
@@ -225,7 +232,7 @@ Memory Regions</h2>
 <th>Region </th><th>Virtual<br  />
 Address<sup>1</sup> </th><th>Flags </th><th>Purpose  </th></tr>
 <tr>
-<td><code>text</code> </td><td><code>0</code><sup>2</sup> </td><td><code>rx</code> </td><td><a class="el" href="mem_sections.html#sec_text_text">Executable code</a>, <a class="el" href="mem_sections.html#sec_dot_vectors">vector table</a>, data in <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, <code>__flash</code> and <code>__memx</code>, <a class="el" href="mem_sections.html#sec_dot_init">startup code</a>, <a class="el" href="mem_sections.html#sec_dot_trampolines">linker stubs</a>, initializers for <code>.data</code>  </td></tr>
+<td><code>text</code> </td><td><code>0</code><sup>2</sup> </td><td><code>rx</code> </td><td><a class="el" href="mem_sections.html#sec_text_text">Executable code</a>, <a class="el" href="mem_sections.html#sec_dot_vectors">vector table</a>, data in <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>, <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and <a class="el" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a>, <a class="el" href="mem_sections.html#sec_dot_init">startup code</a>, <a class="el" href="mem_sections.html#sec_dot_trampolines">linker stubs</a>, initializers for <code>.data</code>  </td></tr>
 <tr>
 <td><code>data</code> </td><td><code>0x800000</code><sup>2</sup> </td><td><code>rw</code> </td><td>Data in static storage  </td></tr>
 <tr>
@@ -285,7 +292,7 @@ Output Sections of the Default Linker Script</h1>
 <li>On <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega2">AVR64</a> and <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avrxmega4">AVR128</a> devices without <code>-mrodata-in-ram</code>.</li>
 <li>With an offset <code>__RODATA_PM_OFFSET__</code> of 0x4000 or 0x8000 depending on the device.</li>
 <li>The value of symbol <code>__flmap</code> defaults to the last 32 KiB block of program memory, see the GCC <a href="https://gcc.gnu.org/gcc-14/changes.html#avr">v14 release notes</a>.</li>
-<li>The <a class="el" href="mem_sections.html#sec_lma">LMA</a> actually equals the <a class="el" href="mem_sections.html#sec_vma">VMA</a>, but is unused. The flash loader like avrdude knows where to put the data,</li>
+<li>The <a class="el" href="mem_sections.html#sec_lma">LMA</a> actually equals the <a class="el" href="mem_sections.html#sec_vma">VMA</a>, but is unused. The flash loader like avrdude knows where to put the data.</li>
 </ol>
 <h2><a class="anchor" id="sec_dot_text"></a>
 The .text Output Section</h2>
@@ -294,15 +301,15 @@ The .text Output Section</h2>
 <dl>
 <dt><a class="anchor" id="sec_dot_vectors"></a><code>.vectors</code> </dt>
 <dd><p class="startdd">The <code>.vectors</code> sections contains the interrupt vector table which consists of jumps to <a class="el" href="assembler.html#dot_weak">weak</a>ly defined labels: To <code>__init</code> for the first entry at index&#160;0, and to <code>__vector_<em>N</em></code> for the entry at index <code><em>N</em></code>&#160;&ge;&#160;1. The default value for <code>__vector_<em>N</em></code> is <code>__bad_interrupt</code>, which jumps to weakly defined <code>__vector_default</code>, which jumps to <code>__vectors</code>, which is the start of the <code>.vectors</code> section.</p>
-<p class="enddd">Implementing an interrupt service ruotine (ISR) is performed with the help of the <code><a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></code> macro in C/C++ code.  </p>
+<p class="enddd">Implementing an interrupt service routine (ISR) is performed with the help of the <code><a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></code> macro in C/C++ code.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_progmem"></a><code>.progmem.data</code> </dt>
 <dd></dd>
 <dt><code>.progmem.data.*</code> </dt>
 <dd></dd>
 <dt><code>.progmem.gcc.*</code> </dt>
-<dd><p class="startdd">This section is used for read-only data declared with attribute <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, and for data in address-space <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html">__flash</a>.</p>
-<p class="enddd">The compiler assumes that the <code>.progmem</code> sectons are located in the lower 64 KiB of program memory. When it does not fit in the lower 64 KiB block, then the program reads garbage except <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> is used. In that case however, code can be located in the <a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx</a> section which does not require to be located in the lower program memory.  </p>
+<dd><p class="startdd">This section is used for read-only data declared with attribute <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, and for data in address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>.</p>
+<p class="enddd">The compiler assumes that the <code>.progmem.data</code> sections are located in the lower 64 KiB of program memory. When it does not fit in the lower 64 KiB block, then the program reads garbage except address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> or <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> is used. In that case however, data can be located in the <a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx.data</a> section which does not require to be located in the lower program memory.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_trampolines"></a>.trampolines </dt>
 <dd>Linker stubs for indirect jumps and calls on devices with more than 128 KiB of program memory. This section must be located in the same 128 KiB block like the interrupt vector table. For some background on linker stubs, see the GCC documentation on <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind">EIND</a>.  </dd>
@@ -317,7 +324,7 @@ The .text Output Section</h2>
 <dt><a class="anchor" id="sec_dot_init"></a>The <code>.init<em>N</em></code> Sections </dt>
 <dd><p class="startdd">These sections are used to hold the startup code from reset up through the start of main().</p>
 <p class="interdd">The <code>.init<em>N</em></code> sections are executed in order from 0 to 9: The code from one init section falls through to the next higher init section. This is the reason for why code in these sections must be naked (more precisely, it must not contain return instructions), and why code in these sections must never be called explicitly.</p>
-<p class="interdd">When several modules put code in the same init section, the order of execuation is not specified.</p>
+<p class="interdd">When several modules put code in the same init section, the order of execution is not specified.</p>
 <table class="doxtable">
 <caption>The <code>.init<em>N</em></code> Sections</caption>
 <tr>
@@ -329,13 +336,18 @@ The .text Output Section</h2>
 <tr>
 <td><code>.init2</code> </td><td><ul>
 <li>Clears <a class="el" href="FAQ.html#zero_reg"><code>__zero_reg__</code> </a></li>
-<li>Initializes the stack pointer to the value of weak symbol <code>__stack</code>, which has a default value of <code>RAMEND</code> as defined in <code><a class="el" href="io_8h.html">avr/io.h</a></code></li>
 <li>Initializes <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"><code>EIND</code></a> to <code>hh8(pm(__vectors))</code> on devices that have it</li>
 <li>Initializes <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp"><code>RAMPX</code>, <code>RAMPY</code>, <code>RAMPZ</code> and <code>RAMPD</code></a> on devices that have all of them </li>
 </ul>
 </td><td>AVR-LibC  </td></tr>
 <tr>
-<td><code>.init3</code> </td><td>Initializes the <code>NVMCTRLB.FLMAP</code> bit-field on devices that have it, except when <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a> is specified </td><td>AVR-LibC </td><td><code>__do_flmap_init</code>  </td></tr>
+<td><code>.init2</code> </td><td>Initializes the stack pointer to the value of weak symbol <code>__stack</code>, which has a default value of <code>RAMEND</code> as defined in <code><a class="el" href="io_8h.html">avr/io.h</a></code>. On devices that have it, set <code>SPLIM</code> to one less than the value of symbol <a class="el" href="mem_sections.html#__heap_start">__heap_start</a> </td><td>AVR-LibC </td><td><code>__init_sp<sup>3</sup></code>  </td></tr>
+<tr>
+<td><code>.init3</code> </td><td>Initializes the <code>NVMCTRLB.FLMAP</code> bit-field on devices that have it, except when <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a> is specified </td><td>AVR-LibC </td><td><code>__do_flmap_init<sup>v2.2</sup></code>  </td></tr>
+<tr>
+<td><code>.init3</code> </td><td>Sets the <code>CPUINT_CTRLA.CPUINT_CVT</code> bit provided a compact vector table is in effect (<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"><code>-mcvt</code></a>). </td><td>AVR-LibC </td><td><code>__init_cvt<sup>v2.3</sup></code>  </td></tr>
+<tr>
+<td><code>.init3</code> </td><td>Paints the RAM from <a class="el" href="mem_sections.html#__heap_start">__heap_start</a> up to RAMEND in preparation for <a class="el" href="group__util__ram__usage.html#ga9913f782c88128a7e05f61d09c046965">_get_ram_unused()</a>. </td><td>AVR-LibC </td><td><code>__init_ram_color<sup>v2.3</sup></code>  </td></tr>
 <tr>
 <td><code>.init4</code> </td><td>Initializes data in static storage: Initializes <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code> and clears <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code> </td><td>libgcc </td><td><code>__do_copy_data</code> <br  />
 <code>__do_clear_bss</code>  </td></tr>
@@ -344,16 +356,17 @@ The .text Output Section</h2>
 <tr>
 <td><code>.init6</code> </td><td>Run static C++ constructors and functions defined with <code>__attribute__((constructor))</code>. </td><td>libgcc </td><td><code>__do_global_ctors</code>  </td></tr>
 <tr>
-<td><code>.init7</code> </td><td>Unused </td><td>&mdash; </td><td rowspan="3"></td></tr>
+<td><code>.init7</code> </td><td>Unused </td><td>&mdash; </td><td rowspan="2"></td></tr>
 <tr>
 <td><code>.init8</code> </td><td>Unused </td><td>&mdash;  </td></tr>
 <tr>
-<td><code>.init9</code> </td><td>Calls <code>main</code> and then jumps to <code><a class="el" href="group__avr__stdlib.html#ga037e1211798125c945a26bfbfdf26b8f">exit</a></code> </td><td>AVR-LibC  </td></tr>
+<td><code>.init9</code> </td><td>Calls <code>main</code> and then jumps to <code><a class="el" href="group__avr__stdlib.html#ga037e1211798125c945a26bfbfdf26b8f">exit</a></code> </td><td>AVR-LibC </td><td><code>__call_main<sup>3</sup></code>  </td></tr>
 </table>
 <p class="enddd">Notes</p><ol type="1">
 <li>Code in the <code>.init3</code>, <code>.init4</code> and <code>.init6</code> sections is optional; it will only be present when there is something to do. This will be tracked by the compiler &mdash; or has to be tracked by the assembly programmer &mdash; which pulls in the code from the respective library by means of the mentioned symbols, e.g. by linking with <code>-Wl,-u,__do_flmap_init</code> or by means of <div class="fragment"><div class="line">.global __do_copy_data</div>
 </div><!-- fragment --> Conversely, when the respective code is not desired for some reason, the symbol can be satisfied by defining it with, say, <code>-Wl,--defsym,__do_copy_data=0</code> so that the code is not pulled in any more.</li>
-<li>The code is provided by <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"><code>gcrt1.S</code></a>.  </li>
+<li>The code is provided by <a href="https://github.com/avrdudes/avr-libc/blob/main/crt1/gcrt1.S"><code>gcrt1.S</code></a>.</li>
+<li>Since AVR-LibC v2.3, the startup code pulls in the respective code from <code>lib<em>mcu</em>.a</code>. Prior to that, the code was located in <code>gcrt1.S</code>.  </li>
 </ol>
 </dd>
 <dt><a class="anchor" id="sec_dot_fini"></a>The <code>.fini<em>N</em></code> Sections </dt>
@@ -372,16 +385,20 @@ The .text Output Section</h2>
 <tr>
 <td><code>.fini6</code> </td><td>Run static C++ destructors and functions defined with <code>__attribute__((destructor))</code> </td><td>libgcc </td><td><code>__do_global_dtors</code>  </td></tr>
 <tr>
-<td><code>.fini5...1</code> </td><td>Unused </td><td>&mdash; </td><td rowspan="2"></td></tr>
+<td><code>.fini5</code> </td><td>Unused </td><td>&mdash; </td><td rowspan="4"></td></tr>
+<tr>
+<td><code>.fini4</code> </td><td>Weakly defines <code>__abort</code>, used by <a class="el" href="group__avr__stdlib.html#ga8dec7c95227ff149687066cf04029191">abort()</a> </td><td>AVR-LibC  </td></tr>
+<tr>
+<td><code>.fini3...1</code> </td><td>Unused </td><td>&mdash;  </td></tr>
 <tr>
 <td><code>.fini0</code> </td><td>Globally disables interrupts and enters an infinite loop to label <code>__stop_program</code> </td><td>libgcc  </td></tr>
 </table>
-<p>It is unlikely that ordinary code uses the fini sections. When there are no static destructors and <code><a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a></code> is not used, then the respective code is not pulled in form the libraries, and the fini code just consumes four bytes: a <code>CLI</code> and a RJMP to itself. Common use cases of fini code is when running the GCC test suite where it reduces fallout, and in simulators to determine (un)orderly termination of a simulated program.  </p>
+<p>It is unlikely that ordinary code uses the fini sections. When there are no static destructors and <code><a class="el" href="group__avr__stdlib.html#ga7fd89c82095df80e5e12d6b2834a2acc">atexit()</a></code> is not used, then the respective code is not pulled in from the libraries, and the fini code just consumes four bytes: a <code>CLI</code> and a RJMP to itself. Common use cases of fini code is when running the GCC test suite where it reduces fallout, and in simulators to determine (un)orderly termination of a simulated program.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_progmemx"></a><code>.progmemx.*</code> </dt>
-<dd>Read-only data in program memory without the requirement that it must reside in the lower 64 KiB. The compiler uses this section for data in the named address-space <code>__memx</code>. Data can be accessed with <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> when it is not in a named address-space: <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
+<dd><p class="startdd">Read-only data in program memory without the requirement that it must reside in the lower 64 KiB. The compiler uses this section for data in the named address-spaces <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> and <a class="el" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a>. Data can be accessed with <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> when it is not in a named address-space: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">const</span> __memx <span class="keywordtype">int</span> array1[] = { 1, 4, 9, 16, 25, 36 };</div>
+<div class="line"><span class="keyword">const</span> <a class="code hl_variable" href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a> <span class="keywordtype">int</span> array1[] = { 1, 4, 9, 16, 25, 36 };</div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> array2[] = { 2, 3, 5, 7, 11, 13, 17 };</div>
@@ -389,17 +406,20 @@ The .text Output Section</h2>
 <div class="line"><span class="keywordtype">int</span> add (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> id1, <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> id2)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> p_array2 = <a class="code hl_define" href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a> (array2);</div>
-<div class="line">    <span class="keywordtype">int</span> val2 = <a class="code hl_function" href="group__avr__pgmspace.html#ga900da8fbfc76178d800a922da1c67ea2">pgm_read_int_far</a> (p_array2 + <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>) * id2);</div>
+<div class="line">    <span class="keywordtype">int</span> val2 = <a class="code hl_function" href="group__avr__pgmspace.html#ga648b8a8d347731d6fef81929255a04c6">pgm_read_int_far</a> (p_array2 + <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>) * id2);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> val2 + array1[id1];</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__avr__flash_html_gad830b33caf116de308322d13e2a768d2"><div class="ttname"><a href="group__avr__flash.html#gad830b33caf116de308322d13e2a768d2">__memx</a></div><div class="ttdeci">__memx</div><div class="ttdef"><b>Definition:</b> flash.h:1019</div></div>
 <div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:83</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:1243</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_ga900da8fbfc76178d800a922da1c67ea2"><div class="ttname"><a href="group__avr__pgmspace.html#ga900da8fbfc76178d800a922da1c67ea2">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t __addr)</div></div>
-<div class="ttc" id="agroup__avr__pgmspace_html_gae59d3b5091405672ec394d3903ee60c5"><div class="ttname"><a href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div><div class="ttdeci">#define PROGMEM_FAR</div><div class="ttdef"><b>Definition:</b> pgmspace.h:125</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:83</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga648b8a8d347731d6fef81929255a04c6"><div class="ttname"><a href="group__avr__pgmspace.html#ga648b8a8d347731d6fef81929255a04c6">pgm_read_int_far</a></div><div class="ttdeci">static int pgm_read_int_far(uint_farptr_t addr)</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_ga8ddf0e398bde8078aa9395ac77c83f0a"><div class="ttname"><a href="group__avr__pgmspace.html#ga8ddf0e398bde8078aa9395ac77c83f0a">pgm_get_far_address</a></div><div class="ttdeci">#define pgm_get_far_address(var)</div><div class="ttdef"><b>Definition:</b> pgmspace.h:926</div></div>
+<div class="ttc" id="agroup__avr__pgmspace_html_gae59d3b5091405672ec394d3903ee60c5"><div class="ttname"><a href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a></div><div class="ttdeci">#define PROGMEM_FAR</div><div class="ttdef"><b>Definition:</b> pgmspace.h:119</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
-</div><!-- fragment -->  </dd>
+</div><!-- fragment --><p> For data in address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> there are support functions in <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a>.</p>
+<p class="enddd">The <code>.progmemx.*</code> input section pattern was added in Binutils v2.30. In older versions, there was a catch all <code>.progmem*</code> pattern for all data in program space, which will cause problems when progmem data pushes the <code>.trampolines</code> out of the lower 128 KiB segment.  </p>
+</dd>
 <dt><a class="anchor" id="sec_dot_jumptables"></a><code>.jumptables*</code> </dt>
 <dd>Used to place jump tables in some cases.  </dd>
 </dl>
@@ -413,11 +433,11 @@ The .data Output Section</h2>
 <dd>Read-only data. These input sections are only included on devices that host read-only data in RAM.  </dd>
 </dl>
 <p>It is possible to tell the linker the SRAM address of the beginning of the <code>.data</code> section. This is accomplished by linking with </p><div class="fragment"><div class="line">avr-gcc ... -Tdata addr -Wl,--defsym,__DATA_REGION_START__=addr</div>
-</div><!-- fragment --><p>Note that <code>addr</code> must be <a class="el" href="mem_sections.html#harvard_arch">offset</a> by adding 0x800000 the to real SRAM address so that the linker knows that the address is in the SRAM memory segment. Thus, if you want the <code>.data</code> section to start at <code>0x1100</code>, pass <code>0x801100</code> as the address to the linker.</p>
-<dl class="section note"><dt>Note</dt><dd>When using <code>malloc()</code> in the application (which could even happen inside library calls), <a class="el" href="malloc.html#malloc_extram">additional adjustments</a> are required.</dd></dl>
+</div><!-- fragment --><p>Note that <code>addr</code> must be <a class="el" href="mem_sections.html#harvard_arch">offset</a> by adding 0x800000 to the real SRAM address so that the linker knows that the address is in the SRAM memory segment. Thus, if you want the <code>.data</code> section to start at <code>0x1100</code>, pass <code>0x801100</code> as the address to the linker.</p>
+<dl class="section note"><dt>Note</dt><dd>When using <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> in the application (which could even happen inside library calls), <a class="el" href="malloc.html#malloc_extram">additional adjustments</a> are required.</dd></dl>
 <h2><a class="anchor" id="sec_dot_bss"></a>
 The .bss Output Section</h2>
-<p>Data in static storage that will be zeroed by the startup code. This are data objects without explicit initializer, and data objects with initializers that are all zeroes.</p>
+<p>Data in static storage that will be zeroed by the startup code. These are data objects without explicit initializer, and data objects with initializers that are all zeroes.</p>
 <p>Input sections are <code>.bss*</code> and <code>COMMON</code>. Common symbols are defined with directives <code>.comm</code> or <code>.lcomm</code>.</p>
 <h2><a class="anchor" id="sec_dot_noinit"></a>
 The .noinit Output Section</h2>
@@ -432,11 +452,11 @@ The .eeprom Output Section</h2>
 <p>This is where EEPROM variables are stored, for example variables declared with the <code><a class="el" href="group__avr__eeprom.html#ga79a42ec6c6c8bbbe6e34ed57a52aac59">EEMEM</a></code> attribute. The only input section (pattern) is <code>.eeprom*</code>.</p>
 <h2><a class="anchor" id="sec_dot_fuse"></a>
 The .fuse, .lock and .signature Output Sections</h2>
-<p>These sections contain fuse bytes, lock bytes and device signature bytes, respectively. The respective input section patterns are <code>.fuse*</code> <code>.lock*</code> and <code>.signature*</code>.</p>
+<p>These sections contain fuse bytes, lock bytes and device signature bytes, respectively. The respective input section patterns are <code>.fuse*</code>, <code>.lock*</code> and <code>.signature*</code>.</p>
 <h2><a class="anchor" id="sec_dot_note"></a>
 The .note.gnu.avr.deviceinfo Section</h2>
 <p>This section is actually <em>not mentioned</em> in the default linker script, which means it is an <a class="el" href="mem_sections.html#sec_orphan">orphan section</a> and hence the respective output section is implicit.</p>
-<p>The startup code from AVR-LibC puts device information in that section to be picked up by simulators or tools like avr-size, avr-objdump, avr-readelf, etc,</p>
+<p>The startup code from AVR-LibC puts device information in that section to be picked up by simulators or tools like <code>avr-size</code>, <code>avr-objdump</code>, <code>avr-readelf</code>, etc,</p>
 <p>The section is contained in the ELF file but not loaded onto the target. Source of the device specific information are the device header file and compiler builtin macros. The layout conforms to the standard <a href="https://man7.org/linux/man-pages/man5/elf.5.html">ELF note section</a> layout and is laid out as follows.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;elf.h&gt;</span></div>
 <div class="line"> </div>
@@ -482,14 +502,19 @@ The .note.gnu.avr.deviceinfo Section</h2>
 </ul>
 <h1><a class="anchor" id="sec_symbols"></a>
 Symbols in the Default Linker Script</h1>
-<p>Most of the symbols like <code>main</code> are defined in the code of the application, but some symbols are defined in the default linker script:</p>
+<p>Most of the symbols like <code>main</code> are defined in the code of the application, but some symbols are defined in the default linker script.</p>
+<p>The following two groups of symbols have architecture specific default values and can be adjusted by defining the respective symbol. One use case is to adjust the <code>.data</code> region when external RAM should be used. Most of the symbols get their default value from the startup code according to the memory layout of the respective device.</p>
 <dl>
 <dt><code>__<em>name</em>_REGION_ORIGIN__</code> </dt>
-<dd>Describes the physical properties of memory region <code><em>name</em></code>, where <code><em>name</em></code> is one of <code>TEXT</code> or <code>DATA</code>. The address is a VMA and offset at explained above. <br  />
- The linker script only supplies a default for the symbol values when they have not been defined by other means, like for example in the startup code or by <code><a class="el" href="using_tools.html#opt_defsym">--defsym</a></code>. For example, to let the code start at address <code>0x100</code>, one can link with <pre class="fragment">avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100</pre>  </dd>
+<dd><p class="startdd">Describes the physical properties of memory region <code><em>name</em></code>, where <code><em>name</em></code> is one of <code>TEXT</code> or <code>DATA</code>. The address is a VMA and offset as explained above. <br  />
+ The linker script only supplies a default for the symbol values when they have not been defined by other means, like for example in the startup code or by <code><a class="el" href="using_tools.html#opt_defsym">--defsym</a></code>. For example, to let the code start at address <code>0x100</code>, one can link with </p><pre class="fragment">avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100</pre><p class="enddd">Notice that <code>__DATA_REGION_ORIGIN__</code> was only introduced since Binutils <a href="https://sourceware.org/PR29741">v2.40</a>. Prior to that, a core specific default value was used for the beginning of the data region, and thus defining this symbol had no effect.  </p>
+</dd>
 <dt><code>__<em>name</em>_REGION_LENGTH__</code> </dt>
 <dd>Describes the physical properties of memory region <code><em>name</em></code>, where <code><em>name</em></code> is one of: <code>TEXT</code>, <code>DATA</code>, <code>EEPROM</code>, <code>LOCK</code>, <code>FUSE</code>, <code>SIGNATURE</code> or <code>USER_SIGNATURE</code>. <br  />
  Only a default is supplied when the symbol is not yet defined by other means. Most of these symbols are <a class="el" href="assembler.html#dot_weak">weakly</a> defined in the startup code.  </dd>
+</dl>
+<p>The following symbols are provided by the default linker script. The application can read them to infer properties of the binary.</p>
+<dl>
 <dt><code>__data_start</code> </dt>
 <dd></dd>
 <dt><code>__data_end</code> </dt>
@@ -510,12 +535,14 @@ Symbols in the Default Linker Script</h1>
 <dd></dd>
 <dt><code>__rodata_load_end</code> </dt>
 <dd>Start and (one past the) end VMA resp. LMA address of the <code>.rodata</code> output section. These symbols are only defined when <code>.rodata</code> is not output to the <code>text</code> region, which is the case for emulations <code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code>.  </dd>
-<dt><code>__heap_start</code> </dt>
-<dd>One past the last object located in static storage. Immediately follows the <code><a class="el" href="mem_sections.html#sec_dot_noinit">.noinit</a></code> section (which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code>, which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code>). Used by <a class="el" href="malloc.html">malloc()</a> and friends.  </dd>
+<dt><a class="anchor" id="__heap_start"></a><code>__heap_start</code> </dt>
+<dd>One past the last object located in static storage. Immediately follows the <code><a class="el" href="mem_sections.html#sec_dot_noinit">.noinit</a></code> section (which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code>, which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code>). Used by <a class="el" href="malloc.html#malloc_tunables">malloc() tunables</a> to determine the start of the heap. On devices that have it, the startup code sets <code>SPLIM</code> to the value of <code>__heap_start-1</code>.  </dd>
+<dt><code>_etext</code> </dt>
+<dd>One byte past the last byte in the <code>.text</code> output section.  </dd>
 </dl>
 <p>Code that computes a checksum over all relevant code and data in program memory has to consider:</p><ul>
-<li>The range from the beginning of the <code>.text</code> section (address 0x0 in the default layout) up to <code>__data_load_start</code>.</li>
-<li>For emulations that have the <code>rodata</code> <a class="el" href="mem_sections.html#sec_memory_regions">memory region</a>, the range from <code>__rodata_load_start</code> to <code>__rodata_load_end</code> has also to be taken into account.</li>
+<li>The range from the beginning of the <code>.text</code> section (address 0x0 in the default layout) up to <code>__data_load_end</code>.</li>
+<li>For emulations that have the <code>rodata</code> <a class="el" href="mem_sections.html#sec_memory_regions">memory region</a> (<code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code>), the range from <code>__rodata_load_start</code> to <code>__rodata_load_end</code> has also to be taken into account, too.</li>
 </ul>
 <h1><a class="anchor" id="sec_size"></a>
 Output Sections and Code Size</h1>
@@ -568,18 +595,18 @@ In Assembly Code</h2>
 <div class="line">    clr     r25</div>
 <div class="line">    rjmp    <a class="code hl_define" href="group__avr__stdio.html#ga61e2590ae5f2f2e351365640d2ac755a">putchar</a></div>
 <div class="line">    .size main, .-main</div>
-<div class="ttc" id="agroup__avr__stdio_html_ga61e2590ae5f2f2e351365640d2ac755a"><div class="ttname"><a href="group__avr__stdio.html#ga61e2590ae5f2f2e351365640d2ac755a">putchar</a></div><div class="ttdeci">#define putchar(__c)</div><div class="ttdef"><b>Definition:</b> stdio.h:658</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_ga61e2590ae5f2f2e351365640d2ac755a"><div class="ttname"><a href="group__avr__stdio.html#ga61e2590ae5f2f2e351365640d2ac755a">putchar</a></div><div class="ttdeci">#define putchar(__c)</div><div class="ttdef"><b>Definition:</b> stdio.h:677</div></div>
 </div><!-- fragment --><ul>
 <li>The <code>"ax"</code> <a class="el" href="mem_sections.html#sec_flags">flags</a> tells that the sections is <b>a</b>llocatable (consumes space on the target hardware) and is e<b>x</b>ecutable.</li>
 <li>The <code>@progbits</code> <a class="el" href="mem_sections.html#sec_type">type</a> tells that the section contains bits that have to be uploaded to the target hardware.</li>
 </ul>
-<p>For more detais, see the see the gas user manual on the <a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"><code>.section</code></a> directive. </p>
+<p>For more details, see the gas user manual on the <a href="https://sourceware.org/binutils/docs/as/Section.html#ELF-Version"><code>.section</code></a> directive. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:38 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

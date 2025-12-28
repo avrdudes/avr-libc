@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -100,10 +103,10 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <p>The objective of the demo is to decode radio-controlled model PWM signals, and control an output PWM based on the current input signal's value. The incoming PWM pulses follow a standard encoding scheme where a pulse width of 920 microseconds denotes one end of the scale (represented as 0 % pulse width on output), and 2120 microseconds mark the other end (100 % output PWM). Normally, multiple channels would be encoded that way in subsequent pulses, followed by a larger gap, so the entire frame will repeat each 14 through 20 ms, but this is ignored for the purpose of the demo, so only a single input PWM channel is assumed.</p>
 <p>The basic challenge is to use the cheapest controller available for the task, an ATtiny13 that has only a single timer channel. As this timer channel is required to run the outgoing PWM signal generation, the incoming PWM decoding had to be adjusted to the constraints set by the outgoing PWM.</p>
 <p>As PWM generation toggles the counting direction of timer 0 between up and down after each 256 timer cycles, the current time cannot be deduced by reading TCNT0 only, but the current counting direction of the timer needs to be considered as well. This requires servicing interrupts whenever the timer hits <em>TOP</em> (255) and <em>BOTTOM</em> (0) to learn about each change of the counting direction. For PWM generation, it is usually desired to run it at the highest possible speed so filtering the PWM frequency from the modulated output signal is made easy. Thus, the PWM timer runs at full CPU speed. This causes the overflow and compare match interrupts to be triggered each 256 CPU clocks, so they must run with the minimal number of processor cycles possible in order to not impose a too high CPU load by these interrupt service routines. This is the main reason to implement the entire interrupt handling in fine-tuned assembly code rather than in C.</p>
-<p>In order to verify parts of the algorithm, and the underlying hardware, the demo has been set up in a way so the pin-compatible but more expensive ATtiny45 (or its siblings ATtiny25 and ATtiny85) could be used as well. In that case, no separate assembly code is required, as two timer channels are avaible.</p>
+<p>In order to verify parts of the algorithm, and the underlying hardware, the demo has been set up in a way so the pin-compatible but more expensive ATtiny45 (or its siblings ATtiny25 and ATtiny85) could be used as well. In that case, no separate assembly code is required, as two timer channels are available.</p>
 <h1><a class="anchor" id="asmdemo_hw"></a>
 Hardware setup</h1>
-<p>The incoming PWM pulse train is fed into PB4. It will generate a pin change interrupt there on eache edge of the incoming signal.</p>
+<p>The incoming PWM pulse train is fed into PB4. It will generate a pin change interrupt there on each edge of the incoming signal.</p>
 <p>The outgoing PWM is generated through OC0B of timer channel 0 (PB1). For demonstration purposes, a LED should be connected to that pin (like, one of the LEDs of an STK500).</p>
 <p>The controllers run on their internal calibrated RC oscillators, 1.2 MHz on the ATtiny13, and 1.0 MHz on the ATtiny45.</p>
 <h1><a class="anchor" id="asmdemo_code"></a>
@@ -129,14 +132,14 @@ isrs.S</h2>
 <p>As the C preprocessor strips all C-style comments, preprocessed assembly source files can have both, C-style (<code>/</code><code>* ... *</code><code>/</code>, <code>// ...</code>) as well as assembly-style (<code>; ...</code>) comments.</p>
 <p>At the top, the IO register definition file <code><a class="el" href="io_8h.html">avr/io.h</a></code> and the project declaration file <code><a class="el" href="project_8h_source.html">project.h</a></code> are included. The remainder of the file is conditionally assembled only if the target MCU type is an ATtiny13, so it will be completely ignored for the ATtiny45 option.</p>
 <p>Next are the two interrupt service routines for timer 0 compare A match (timer 0 hits <em>TOP</em>, as OCR0A is set to 255) and timer 0 overflow (timer 0 hits <em>BOTTOM</em>). As discussed above, these are kept as short as possible. They only save <code>SREG</code> (as the flags will be modified by the <code>INC</code> instruction), increment the <code>counter_hi</code> variable which forms the high part of the current time counter (the low part is formed by querying <code>TCNT0</code> directly), and clear or set the variable <code>flags</code>, respectively, in order to note the current counting direction. The <code>RETI</code> instruction terminates these interrupt service routines. Total cycle count is 8 CPU cycles, so together with the 4 CPU cycles needed for interrupt setup, and the 2 cycles for the RJMP from the interrupt vector to the handler, these routines will require 14 out of each 256 CPU cycles, or about 5 % of the overall CPU time.</p>
-<p>The pin-change interrupt <code>PCINT0</code> will be handled in the final part of this file. The basic algorithm is to quickly evaluate the current system time by fetching the current timer value of <code>TCNT0</code>, and combining it with the overflow part in <code>counter_hi</code>. If the counter is currently counting down rather than up, the value fetched from <code>TCNT0</code> must be negated. Finally, if this pin-change interrupt was triggered by a rising edge, the time computed will be recorded as the start time only. Then, at the falling edge, this start time will be subracted from the current time to compute the actual pulse width seen (left in <code>pwm_incoming</code>), and the upper layers are informed of the new value by setting bit 0 in the <code>intbits</code> flags. At the same time, this pin-change interrupt will be disabled so no new measurement can be performed until the upper layer had a chance to process the current value.</p>
+<p>The pin-change interrupt <code>PCINT0</code> will be handled in the final part of this file. The basic algorithm is to quickly evaluate the current system time by fetching the current timer value of <code>TCNT0</code>, and combining it with the overflow part in <code>counter_hi</code>. If the counter is currently counting down rather than up, the value fetched from <code>TCNT0</code> must be negated. Finally, if this pin-change interrupt was triggered by a rising edge, the time computed will be recorded as the start time only. Then, at the falling edge, this start time will be subtracted from the current time to compute the actual pulse width seen (left in <code>pwm_incoming</code>), and the upper layers are informed of the new value by setting bit 0 in the <code>intbits</code> flags. At the same time, this pin-change interrupt will be disabled so no new measurement can be performed until the upper layer had a chance to process the current value.</p>
 <h1><a class="anchor" id="asmdemo_src"></a>
 The source code</h1>
 <p> 
 <ul>
-  <li><a href="../examples/asmdemo/asmdemo.c">asmdemo.c</a></li>
-  <li><a href="../examples/asmdemo/project.h">project.h</a></li>
-  <li><a href="../examples/asmdemo/isrs.S">isrs.S</a></li>
+  <li><a href="examples/asmdemo/asmdemo.c">asmdemo.c</a></li>
+  <li><a href="examples/asmdemo/project.h">project.h</a></li>
+  <li><a href="examples/asmdemo/isrs.S">isrs.S</a></li>
 </ul>
 </p>
 <p> </p>
@@ -144,7 +147,7 @@ The source code</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

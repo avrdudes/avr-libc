@@ -1,27 +1,5 @@
 var searchData=
 [
-  ['labs_0',['labs',['../group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230',1,'stdlib.h']]],
-  ['ldexp_1',['ldexp',['../group__avr__math.html#ga3da3666d3f374e3747bf14975c528381',1,'math.h']]],
-  ['ldexpf_2',['ldexpf',['../group__avr__math.html#gaac7102634b797e696c7344f289a20d6f',1,'math.h']]],
-  ['ldexpl_3',['ldexpl',['../group__avr__math.html#ga117ef260a3978efe149ab9f3ec3184e1',1,'math.h']]],
-  ['ldiv_4',['ldiv',['../group__avr__stdlib.html#ga5b688b463f9faaa82f31ac7587e06849',1,'stdlib.h']]],
-  ['ldtostre_5',['ldtostre',['../group__avr__stdlib.html#ga8741c23a75d598221ca983f7599bce0f',1,'stdlib.h']]],
-  ['ldtostrf_6',['ldtostrf',['../group__avr__stdlib.html#ga0b8b4fe3639157dbb90ea78d480b01fb',1,'stdlib.h']]],
-  ['lm_5fsidereal_7',['lm_sidereal',['../group__avr__time.html#ga9136313e476a6277cb6ca759542b83e3',1,'lm_sidereal(const time_t *timer):&#160;lm_sidereal.c'],['../group__avr__time.html#ga9136313e476a6277cb6ca759542b83e3',1,'lm_sidereal(const time_t *timer):&#160;lm_sidereal.c']]],
-  ['localtime_8',['localtime',['../group__avr__time.html#ga47dad42d50a51f3ba4033320084c833b',1,'localtime(const time_t *timer):&#160;localtime.c'],['../group__avr__time.html#ga47dad42d50a51f3ba4033320084c833b',1,'localtime(const time_t *timer):&#160;localtime.c']]],
-  ['localtime_5fr_9',['localtime_r',['../group__avr__time.html#gacd9715002deaf28b432a8f2b54dd9aa5',1,'localtime_r(const time_t *timer, struct tm *timeptr):&#160;localtime_r.c'],['../group__avr__time.html#gacd9715002deaf28b432a8f2b54dd9aa5',1,'localtime_r(const time_t *timer, struct tm *timeptr):&#160;localtime_r.c']]],
-  ['log_10',['log',['../group__avr__math.html#gadb302c9aafbaa5e180d9f60ee954bb82',1,'math.h']]],
-  ['log10_11',['log10',['../group__avr__math.html#ga6572e82a4891917a9ba7fb2a964f8182',1,'math.h']]],
-  ['log10f_12',['log10f',['../group__avr__math.html#gae207b1eb007a6c23394dcb6fc7f16adf',1,'math.h']]],
-  ['log10l_13',['log10l',['../group__avr__math.html#gae824e49a04221dcf66b9791c5df8d6b6',1,'math.h']]],
-  ['logf_14',['logf',['../group__avr__math.html#ga8246b3e17a39b137d0c62670d0c6e336',1,'math.h']]],
-  ['logl_15',['logl',['../group__avr__math.html#gaf67da1c28ce33b403f955103f201dfb8',1,'math.h']]],
-  ['longjmp_16',['longjmp',['../group__setjmp.html#gaa20677ae1bc5160a64a3051bccf1245a',1,'setjmp.h']]],
-  ['lrint_17',['lrint',['../group__avr__math.html#ga1351e1d70c415b6c6ea6bf064e671608',1,'math.h']]],
-  ['lrintf_18',['lrintf',['../group__avr__math.html#ga70ecfb1ddc57fba0ccd2c6575f51b4fc',1,'math.h']]],
-  ['lrintl_19',['lrintl',['../group__avr__math.html#ga82da4b549630427829642452b3d7a3e0',1,'math.h']]],
-  ['lround_20',['lround',['../group__avr__math.html#gadc629d108d0570a7945a8703109399a4',1,'math.h']]],
-  ['lroundf_21',['lroundf',['../group__avr__math.html#gaffcda80892c517707644d57172f2279a',1,'math.h']]],
-  ['lroundl_22',['lroundl',['../group__avr__math.html#gae97623015efe933031029e442b7f65d9',1,'math.h']]],
-  ['ltoa_23',['ltoa',['../group__avr__stdlib.html#ga0fd3ced14fa7c0d51d59a00efcdbbfc7',1,'stdlib.h']]]
+  ['kbits_0',['kbits',['../group__avr__stdfix.html#gad40faa97dc00d7ad2349fb503b217ae0',1,'stdfix-avrlibc.h']]],
+  ['ktoa_1',['ktoa',['../group__avr__stdfix.html#ga6fa7b06670f1241ab1d05be4a33f5465',1,'stdfix-avrlibc.h']]]
 ];

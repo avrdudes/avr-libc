@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -123,10 +126,10 @@ Data Fields</h2></td></tr>
 <tr class="separator:a80da4505676f51d0c484412698284ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The tm structure contains a representation of time 'broken down' into components of the Gregorian calendar.</p>
+<div class="textblock"><p>The <code>tm</code> structure contains a representation of time 'broken down' into components of the Gregorian calendar.</p>
 <p>The value of tm_isdst is zero if Daylight Saving Time is not in effect, and is negative if the information is not available.</p>
 <p>When Daylight Saving Time is in effect, the value represents the number of seconds the clock is advanced.</p>
-<p>See the <a class="el" href="group__avr__time.html#ga3b0c7666163850cc95f0f231f388eb2c">set_dst()</a> function for more information about Daylight Saving. </p>
+<p>See the <code><a class="el" href="group__avr__time.html#ga3b0c7666163850cc95f0f231f388eb2c">set_dst()</a></code> function for more information about Daylight Saving. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="abf64a483b8212f2b39af13c6dd34d9aa" name="abf64a483b8212f2b39af13c6dd34d9aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf64a483b8212f2b39af13c6dd34d9aa">&#9670;&#160;</a></span>tm_hour</h2>
@@ -139,7 +142,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>hours since midnight - [ 0 to 23 ] </p>
+<p>Hours since midnight (0 to 23) </p>
 
 </div>
 </div>
@@ -169,7 +172,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>day of the month - [ 1 to 31 ] </p>
+<p>Day of the month (1 to 31) </p>
 
 </div>
 </div>
@@ -184,7 +187,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>minutes after the hour - [ 0 to 59 ] </p>
+<p>Minutes after the hour (0 to 59) </p>
 
 </div>
 </div>
@@ -199,7 +202,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>months since January - [ 0 to 11 ] </p>
+<p>Months since January (0 to 11) </p>
 
 </div>
 </div>
@@ -214,7 +217,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>seconds after the minute - [ 0 to 59 ] </p>
+<p>Seconds after the minute (0 to 59) </p>
 
 </div>
 </div>
@@ -229,7 +232,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>days since Sunday - [ 0 to 6 ] </p>
+<p>Days since Sunday (0 to 6) </p>
 
 </div>
 </div>
@@ -244,7 +247,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>days since January 1 - [ 0 to 365 ] </p>
+<p>Days since January 1 (0 to 365) </p>
 
 </div>
 </div>
@@ -259,7 +262,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>years since 1900 </p>
+<p>Years since 1900 </p>
 
 </div>
 </div>
@@ -270,7 +273,7 @@ Data Fields</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:49 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

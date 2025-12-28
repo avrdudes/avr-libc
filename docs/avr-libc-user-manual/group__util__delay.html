@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -107,20 +110,22 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gad22e7a36b80e2f917324dc43a425e9d3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms</a> (double __ms)</td></tr>
-<tr class="separator:gad22e7a36b80e2f917324dc43a425e9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab20bfffeacc678cb960944f5519c0c4f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us</a> (double __us)</td></tr>
-<tr class="separator:gab20bfffeacc678cb960944f5519c0c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga196087b63a6cb8c28ea71a7a13ab3520"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms</a> (double __ms)</td></tr>
+<tr class="separator:ga196087b63a6cb8c28ea71a7a13ab3520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadce96a135cbf5770428b2c679ebd28d4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us</a> (double __us)</td></tr>
+<tr class="separator:gadce96a135cbf5770428b2c679ebd28d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define F_CPU 1000000UL  </span><span class="comment">// 1 MHz</span></div>
 <div class="line"><span class="comment">//#define F_CPU 14.7456e6</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="delay_8h.html">util/delay.h</a>&gt;</span></div>
 <div class="ttc" id="adelay_8h_html"><div class="ttname"><a href="delay_8h.html">delay.h</a></div></div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>As an alternative method, it is possible to pass the F_CPU macro down to the compiler from the Makefile. Obviously, in that case, no <code>#define</code> statement should be used.</dd></dl>
-<p>The functions in this header file are wrappers around the basic busy-wait functions from <code>&lt;<a class="el" href="delay__basic_8h.html">util/delay_basic.h</a>&gt;</code>. They are meant as convenience functions where actual time values can be specified rather than a number of cycles to wait for. The idea behind is that compile-time constant expressions will be eliminated by compiler optimization so floating-point expressions can be used to calculate the number of delay cycles needed based on the CPU frequency passed by the macro F_CPU.</p>
-<dl class="section note"><dt>Note</dt><dd>In order for these functions to work as intended, compiler optimizations <em>must</em> be enabled, and the delay time <em>must</em> be an expression that is a known constant at compile-time. If these requirements are not met, the resulting delay will be much longer (and basically unpredictable), and applications that otherwise do not use floating-point calculations will experience severe code bloat by the floating-point library routines linked into the application.</dd></dl>
-<p>The functions available allow the specification of microsecond, and millisecond delays directly, using the application-supplied macro F_CPU as the CPU clock frequency (in Hertz). </p>
+</div><!-- fragment --><p>The functions in this header are meant as convenience functions where actual time values can be specified as a delay time, rather than a number of cycles to wait for.</p>
+<p>This requires that the clock frequency of the device is provided in the <code><a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a></code> macro in units of Hertz. The macro must be defined before including the &lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt; header. It can be defined in the source code like indicated above, or it can be defined on the command line / in a Makefile by means of <code>-D F_CPU=...</code></p>
+<p>The functions in this header file are wrappers around the basic busy-wait functions from <code>&lt;<a class="el" href="delay__basic_8h.html">util/delay_basic.h</a>&gt;</code>, or, when supported by the compiler, then <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles">__builtin_avr_delay_cycles()</a> is used instead.</p>
+<p>In any case, the delay functions provided by this header will not disable interrupts, which means hat the delay time will be longer than specified when interrupts occur while a delay function is running.</p>
+<p>In order for these functions to work as intended, compiler optimizations <em>must</em> be enabled, and the delay time <em>must</em> be an expression that is a known constant at compile-time. If these requirements are not met, the resulting delay will be much longer (and basically unpredictable), and applications that otherwise do not use floating-point calculations will experience severe code bloat by the floating-point library routines linked into the application. The idea is that compile-time constant expressions will be eliminated by compiler optimization so floating-point expressions can be used to calculate the number of delay cycles needed based on the CPU frequency passed by the macro F_CPU.</p>
+<p>The functions available allow the specification of microsecond, and millisecond delays directly, using the application-supplied macro F_CPU as the CPU clock frequency in Hertz. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ga43bafb28b29491ec7f871319b5a3b2f8" name="ga43bafb28b29491ec7f871319b5a3b2f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga43bafb28b29491ec7f871319b5a3b2f8">&#9670;&#160;</a></span>F_CPU</h2>
@@ -135,14 +140,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>CPU frequency in Hz. </p>
-<p>The macro F_CPU specifies the CPU frequency to be considered by the delay macros. This macro is normally supplied by the environment (e.g. from within a project header, or the project's Makefile). The value 1 MHz here is only provided as a "vanilla" fallback if no such user-provided definition could be found.</p>
+<p>The macro F_CPU specifies the CPU frequency in Hertz to be considered by the delay functions. This macro is normally supplied by the environment (e.g. from within a project header, or the project's Makefile). The value 1 MHz here is only provided as a fallback default if no such user-provided definition could be found.</p>
 <p>In terms of the delay functions, the CPU frequency can be given as a floating-point constant (e.g. 3.6864e6 for 3.6864 MHz). However, the macros in &lt;<a class="el" href="setbaud_8h.html">util/setbaud.h</a>&gt; require it to be an integer value. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gad22e7a36b80e2f917324dc43a425e9d3" name="gad22e7a36b80e2f917324dc43a425e9d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad22e7a36b80e2f917324dc43a425e9d3">&#9670;&#160;</a></span>_delay_ms()</h2>
+<a id="ga196087b63a6cb8c28ea71a7a13ab3520" name="ga196087b63a6cb8c28ea71a7a13ab3520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga196087b63a6cb8c28ea71a7a13ab3520">&#9670;&#160;</a></span>_delay_ms()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +156,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void _delay_ms </td>
+          <td class="memname">static void _delay_ms </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>__ms</em></td><td>)</td>
@@ -164,19 +169,19 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Perform a delay of <code>__ms</code> milliseconds, using <a class="el" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2()</a>.</p>
-<p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency (in Hertz).</p>
-<p>The maximal possible delay is 262.14 ms / F_CPU in MHz.</p>
-<p>When the user request delay which exceed the maximum possible one, <a class="el" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms()</a> provides a decreased resolution functionality. In this mode <a class="el" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms()</a> will work with a resolution of 1/10&#160;ms, providing delays up to 6.5535 seconds (independent from CPU frequency). The user will not be informed about decreased resolution.</p>
-<p>If the avr-gcc toolchain has <code>__builtin_avr_delay_cycles()</code> support, maximal possible delay is 4294967.295 ms/ F_CPU in MHz. For values greater than the maximal possible delay, overflow may result in no delay i.e., 0&#160;ms.</p>
-<p>Conversion of <code>__ms</code> into clock cycles may not always result in an integral value. By default, the clock cycles are rounded up to the next integer. This ensures that the user gets at least <code>__ms</code> microseconds of delay.</p>
-<p>Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
-<dl class="section note"><dt>Note</dt><dd>The implementation of <a class="el" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms()</a> based on <code>__builtin_avr_delay_cycles()</code> is not backward compatible with older implementations. In order to get functionality backward compatible with previous versions, the macro <code>__DELAY_BACKWARD_COMPATIBLE__</code> must be defined before including this header file. </dd></dl>
+<p>Perform a delay of <code>__ms</code> milliseconds.</p>
+<p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency in Hertz.</p>
+<ul>
+<li>If <code>__builtin_avr_delay_cycles()</code> is  supported  by the compiler, then the maximal possible delay is 4294967.04 / f<sub>CPU</sub> milliseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
+<li>Otherwise, <a class="el" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2()</a> is used as a fallback, and the maximal possible delay is 262.14 / f<sub>CPU</sub> milliseconds. When the user requests a delay which exceeds the maximum possible one, <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> provides a decreased resolution functionality. In this mode <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> will work with a resolution of 1/10&#160;ms, providing delays up to 6.5535 seconds (independent from CPU frequency). The user will not be informed about decreased resolution.</li>
+</ul>
+<p>Conversion of <code>__ms</code> into clock cycles may not always result in an integral value. By default, the clock cycles are rounded up to the next integer. This ensures that the user gets at least <code>__ms</code> microseconds of delay. Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
+<dl class="section note"><dt>Note</dt><dd>The implementation of <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> based on <code>__builtin_avr_delay_cycles()</code> is not backward compatible with older implementations. In order to get a functionality backward compatible with previous versions, the macro <code>__DELAY_BACKWARD_COMPATIBLE__</code> must be defined before including this header file. </dd></dl>
 
 </div>
 </div>
-<a id="gab20bfffeacc678cb960944f5519c0c4f" name="gab20bfffeacc678cb960944f5519c0c4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab20bfffeacc678cb960944f5519c0c4f">&#9670;&#160;</a></span>_delay_us()</h2>
+<a id="gadce96a135cbf5770428b2c679ebd28d4" name="gadce96a135cbf5770428b2c679ebd28d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadce96a135cbf5770428b2c679ebd28d4">&#9670;&#160;</a></span>_delay_us()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,7 +190,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void _delay_us </td>
+          <td class="memname">static void _delay_us </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>__us</em></td><td>)</td>
@@ -198,14 +203,14 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Perform a delay of <code>__us</code> microseconds, using <a class="el" href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1()</a>.</p>
-<p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency (in Hertz).</p>
-<p>The maximal possible delay is 768 &mu;s / F_CPU in MHz.</p>
-<p>If the user requests a delay greater than the maximal possible one, <a class="el" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us()</a> will automatically call <a class="el" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms()</a> instead. The user will not be informed about this case.</p>
-<p>If the avr-gcc toolchain has __builtin_avr_delay_cycles() support, maximal possible delay is 4294967.295 &mu;s/ F_CPU in MHz. For values greater than the maximal possible delay, overflow may result in no delay i.e., 0&#160;&mu;s.</p>
-<p>Conversion of <code>__us</code> into clock cycles may not always result in integer. By default, the clock cycles are rounded up to next integer. This ensures that the user gets at least <code>__us</code> microseconds of delay.</p>
-<p>Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
-<dl class="section note"><dt>Note</dt><dd>The implementation of <a class="el" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us()</a> based on <code>__builtin_avr_delay_cycles()</code> is not backward compatible with older implementations. In order to get functionality backward compatible with previous versions, the macro <code>__DELAY_BACKWARD_COMPATIBLE__</code> must be defined before including this header file. </dd></dl>
+<p>Perform a delay of <code>__us</code> microseconds.</p>
+<p>The macro <a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a> is supposed to be defined to a constant defining the CPU clock frequency in Hertz.</p>
+<ul>
+<li>If <code>__builtin_avr_delay_cycles()</code> is  supported  by the compiler, then the maximal possible delay is 4294967040 / f<sub>CPU</sub> microseconds where f<sub>CPU</sub> denotes the CPU frequency in units of 1 MHz. This is around 71 minutes / f<sub>CPU</sub>. Values greater than that are saturated to this value.</li>
+<li>Otherwise, <a class="el" href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1()</a> is used as a fallback, and the maximal possible delay is 768 / f<sub>CPU</sub> microseconds. If the user requests a delay greater than the maximal possible one, <a class="el" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us()</a> will automatically call <a class="el" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms()</a> instead. The user will not be informed about this case.</li>
+</ul>
+<p>Conversion of <code>__us</code> into clock cycles may not always result in an integral value. By default, the clock cycles are rounded up to next integer. This ensures that the user gets at least <code>__us</code> microseconds of delay. Alternatively, by defining the macro <code>__DELAY_ROUND_DOWN__</code>, or <code>__DELAY_ROUND_CLOSEST__</code>, before including this header file, the algorithm can be made to round down, or round to closest integer, respectively.</p>
+<dl class="section note"><dt>Note</dt><dd>The implementation of <a class="el" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us()</a> based on <code>__builtin_avr_delay_cycles()</code> is not backward compatible with older implementations. In order to get a functionality backward compatible with previous versions, the macro <code>__DELAY_BACKWARD_COMPATIBLE__</code> must be defined before including this header file. </dd></dl>
 
 </div>
 </div>
@@ -213,7 +218,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

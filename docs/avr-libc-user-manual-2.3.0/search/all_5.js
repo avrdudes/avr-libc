@@ -7,7 +7,7 @@ var searchData=
   ['delay_5fbasic_2eh_4',['delay_basic.h',['../delay__basic_8h.html',1,'']]],
   ['demo_20projects_5',['Demo projects',['../group__demos.html',1,'']]],
   ['deprecated_20list_6',['Deprecated List',['../deprecated.html',1,'']]],
-  ['difftime_7',['difftime',['../group__avr__time.html#ga1732c46d47837951d399755899af5240',1,'difftime(time_t time1, time_t time0):&#160;difftime.c'],['../group__avr__time.html#ga1732c46d47837951d399755899af5240',1,'difftime(time_t t1, time_t t2):&#160;difftime.c']]],
+  ['difftime_7',['difftime',['../group__avr__time.html#ga1732c46d47837951d399755899af5240',1,'difftime(time_t t1, time_t t2):&#160;difftime.c'],['../group__avr__time.html#ga1732c46d47837951d399755899af5240',1,'difftime(time_t time1, time_t time0):&#160;difftime.c']]],
   ['div_8',['div',['../group__avr__stdlib.html#ga7486ea9a8a90ac6b93bed37d08ebbd9e',1,'stdlib.h']]],
   ['div_5ft_9',['div_t',['../structdiv__t.html',1,'']]],
   ['dtostr_5falways_5fsign_10',['DTOSTR_ALWAYS_SIGN',['../group__avr__stdlib.html#ga815d0d26e215d9b78af1cb2288d22361',1,'stdlib.h']]],

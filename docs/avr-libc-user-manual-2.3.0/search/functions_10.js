@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scanf_0',['scanf',['../group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102',1,'scanf(const char *__fmt,...):&#160;scanf.c'],['../group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102',1,'scanf(const char *fmt,...):&#160;scanf.c']]],
+  ['scanf_0',['scanf',['../group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102',1,'scanf(const char *fmt,...):&#160;scanf.c'],['../group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102',1,'scanf(const char *__fmt,...):&#160;scanf.c']]],
   ['scanf_5ff_1',['scanf_F',['../group__avr__flash.html#ga5ef40a25334cde2029187149fd5868a1',1,'flash.h']]],
   ['scanf_5fp_2',['scanf_P',['../group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3',1,'scanf_P(const char *__fmt,...):&#160;scanf_p.c'],['../group__avr__stdio.html#ga0fb7fd70cd7618f27d8219c97e61bcf3',1,'scanf_P(const char *fmt,...):&#160;scanf_p.c']]],
   ['set_5fdst_3',['set_dst',['../group__avr__time.html#ga3b0c7666163850cc95f0f231f388eb2c',1,'set_dst(int(*)(const time_t *, int32_t *)):&#160;set_dst.c'],['../group__avr__time.html#ga3b0c7666163850cc95f0f231f388eb2c',1,'set_dst(int(*d)(const time_t *, int32_t *)):&#160;set_dst.c']]],

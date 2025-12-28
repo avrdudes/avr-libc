@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -91,10 +94,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -118,6 +117,10 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga687984f47d8cce148d1b914d2b79612a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga687984f47d8cce148d1b914d2b79612a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73efe787c131b385070f25d18b7c9aa4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga73efe787c131b385070f25d18b7c9aa4">EXIT_FAILURE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga73efe787c131b385070f25d18b7c9aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga690f251553b39fd4f31894826141b61a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga690f251553b39fd4f31894826141b61a">RAND_MAX</a>&#160;&#160;&#160;0x7FFF</td></tr>
 <tr class="separator:ga690f251553b39fd4f31894826141b61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -134,8 +137,10 @@ Functions</h2></td></tr>
 <tr class="separator:gadb8c83badc195efc1229799391fececc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae017047d6d0a688ccb622ff062dcd230"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gae017047d6d0a688ccb622ff062dcd230">labs</a> (long __i)</td></tr>
 <tr class="separator:gae017047d6d0a688ccb622ff062dcd230"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf6f6b867ea6ce0dc4de2b01e949ac3d5"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaf6f6b867ea6ce0dc4de2b01e949ac3d5">bsearch</a> (const void *__key, const void *__base, size_t __nmemb, size_t __size, int(*__compar)(const void *, const void *))</td></tr>
-<tr class="separator:gaf6f6b867ea6ce0dc4de2b01e949ac3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dade76e115188d17eac92d2fef7f8d1"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5dade76e115188d17eac92d2fef7f8d1">llabs</a> (long long __i)</td></tr>
+<tr class="separator:ga5dade76e115188d17eac92d2fef7f8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9accd4525ec4c3f0484c87302ff56035"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga9accd4525ec4c3f0484c87302ff56035">bsearch</a> (const void *__key, const void *__base, size_t __nmemb, size_t __size, <a class="el" href="group__avr__stdlib.html#ga35e28bfcc8d641e0eebd66f4dc559a3f">__compar_fn_t</a> __compar)</td></tr>
+<tr class="separator:ga9accd4525ec4c3f0484c87302ff56035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7486ea9a8a90ac6b93bed37d08ebbd9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdiv__t.html">div_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga7486ea9a8a90ac6b93bed37d08ebbd9e">div</a> (int __num, int __denom) __asm__(&quot;__divmodhi4&quot;)</td></tr>
 <tr class="separator:ga7486ea9a8a90ac6b93bed37d08ebbd9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5b688b463f9faaa82f31ac7587e06849"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structldiv__t.html">ldiv_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5b688b463f9faaa82f31ac7587e06849">ldiv</a> (long __num, long __denom) __asm__(&quot;__divmodsi4&quot;)</td></tr>
@@ -144,8 +149,12 @@ Functions</h2></td></tr>
 <tr class="separator:gafd4bf2faec43342e7ad3d2ab37bac1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf8ce3b8dae3d45c34c3b172de503f7b3"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaf8ce3b8dae3d45c34c3b172de503f7b3">strtol</a> (const char *__nptr, char **__endptr, int __base)</td></tr>
 <tr class="separator:gaf8ce3b8dae3d45c34c3b172de503f7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5006f43088ee0321cf6191ce89eb78b7"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5006f43088ee0321cf6191ce89eb78b7">strtoll</a> (const char *__nptr, char **__endptr, int __base)</td></tr>
+<tr class="separator:ga5006f43088ee0321cf6191ce89eb78b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaea44aa48bda8261f794dcb2d1e7ab2b2"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaea44aa48bda8261f794dcb2d1e7ab2b2">strtoul</a> (const char *__nptr, char **__endptr, int __base)</td></tr>
 <tr class="separator:gaea44aa48bda8261f794dcb2d1e7ab2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e125b8f54ff186f1627cfea739764f1"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga1e125b8f54ff186f1627cfea739764f1">strtoull</a> (const char *__nptr, char **__endptr, int __base)</td></tr>
+<tr class="separator:ga1e125b8f54ff186f1627cfea739764f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga15ac025af527b5ecc2e15e114297a890"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga15ac025af527b5ecc2e15e114297a890">atol</a> (const char *__s)</td></tr>
 <tr class="separator:ga15ac025af527b5ecc2e15e114297a890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga644e59f576ae3cda834cdbcf81f65f29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga644e59f576ae3cda834cdbcf81f65f29">atoi</a> (const char *__s)</td></tr>
@@ -201,12 +210,24 @@ Variables</h2></td></tr>
 <tr class="separator:gae73ba2b460809c0b7fee30ffe347083c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadfc2bdc0b74aaeba28efe5af3085a89f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gadfc2bdc0b74aaeba28efe5af3085a89f">ultoa</a> (unsigned long val, char *s, int radix)</td></tr>
 <tr class="separator:gadfc2bdc0b74aaeba28efe5af3085a89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab47b5d70f2429fb71c84dac6743f1819"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gab47b5d70f2429fb71c84dac6743f1819">ulltoa</a> (unsigned long long val, char *s, int radix)</td></tr>
+<tr class="separator:gab47b5d70f2429fb71c84dac6743f1819"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2ce93a5610dfd2c4c482b52fb363be47"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga2ce93a5610dfd2c4c482b52fb363be47">ulltoa_base10</a> (unsigned long long val, char *s)</td></tr>
+<tr class="separator:ga2ce93a5610dfd2c4c482b52fb363be47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3f54f0f4d5418ac640eb53d9fc067e6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gab3f54f0f4d5418ac640eb53d9fc067e6">lltoa</a> (long long val, char *s, int radix)</td></tr>
+<tr class="separator:gab3f54f0f4d5418ac640eb53d9fc067e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga114aeb1751119382aaf3340355b22cfd"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random</a> (void)</td></tr>
 <tr class="separator:ga114aeb1751119382aaf3340355b22cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4fca27496ca29c0a723d197696641eff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga4fca27496ca29c0a723d197696641eff">srandom</a> (unsigned long __seed)</td></tr>
 <tr class="separator:ga4fca27496ca29c0a723d197696641eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa99a0733f06d2b9960a1401c2721af1e"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaa99a0733f06d2b9960a1401c2721af1e">random_r</a> (unsigned long *__ctx)</td></tr>
 <tr class="separator:gaa99a0733f06d2b9960a1401c2721af1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfa0628fac4940c39a8a81947a6c116f"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gacfa0628fac4940c39a8a81947a6c116f">sqrtu16_floor</a> (unsigned int radic)</td></tr>
+<tr class="separator:gacfa0628fac4940c39a8a81947a6c116f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a277fdc08e38ae3a42938db099298f7"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga5a277fdc08e38ae3a42938db099298f7">sqrtu32_floor</a> (unsigned long radic)</td></tr>
+<tr class="separator:ga5a277fdc08e38ae3a42938db099298f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1a74f28fd530dd6e0fe62c655c8a515"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#gaf1a74f28fd530dd6e0fe62c655c8a515">sqrtu64_floor</a> (unsigned long long radic)</td></tr>
+<tr class="separator:gaf1a74f28fd530dd6e0fe62c655c8a515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Conversion functions for double arguments.</h2></td></tr>
 <tr class="memitem:ga815d0d26e215d9b78af1cb2288d22361"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga815d0d26e215d9b78af1cb2288d22361">DTOSTR_ALWAYS_SIGN</a>&#160;&#160;&#160;0x01        /* put '+' or ' ' for positives */</td></tr>
@@ -215,10 +236,6 @@ Variables</h2></td></tr>
 <tr class="separator:ga268774f80047812307365f3113109767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga125348f1e1fed1793426f4c4dc6fb2f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga125348f1e1fed1793426f4c4dc6fb2f7">DTOSTR_UPPERCASE</a>&#160;&#160;&#160;0x04        /* put 'E' rather 'e' */</td></tr>
 <tr class="separator:ga125348f1e1fed1793426f4c4dc6fb2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga687984f47d8cce148d1b914d2b79612a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:ga687984f47d8cce148d1b914d2b79612a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga73efe787c131b385070f25d18b7c9aa4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga73efe787c131b385070f25d18b7c9aa4">EXIT_FAILURE</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ga73efe787c131b385070f25d18b7c9aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ae16bbdf51c0be563cfff9d6c05d8f1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga0ae16bbdf51c0be563cfff9d6c05d8f1">ftostre</a> (float __val, char *__s, unsigned char __prec, unsigned char __flags)</td></tr>
 <tr class="separator:ga0ae16bbdf51c0be563cfff9d6c05d8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f07a282f28b2754b0e1d23679fc92c5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdlib.html#ga3f07a282f28b2754b0e1d23679fc92c5">dtostre</a> (double __val, char *__s, unsigned char __prec, unsigned char __flags)</td></tr>
@@ -236,7 +253,7 @@ Variables</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:41 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:37 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

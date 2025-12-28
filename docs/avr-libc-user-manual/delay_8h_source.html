@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -93,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_586ad3c2f85d776b984733890d824e3e.html">util</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_001477bde49ec0a4f89b35a00ffd7ecd.html">include</a></li><li class="navelem"><a class="el" href="dir_81231b3132dc157ac9e6ffb834ce9700.html">util</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -132,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">  POSSIBILITY OF SUCH DAMAGE. */</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">/* $Id$ */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">/* include/util/delay.h.  Generated from delay.h.in by configure. */</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifndef _UTIL_DELAY_H_</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define _UTIL_DELAY_H_ 1</span></div>
@@ -142,263 +145,277 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#    define __HAS_DELAY_CYCLES 1</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#  endif</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#  ifndef __ATTR_ALWAYS_INLINE__</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#    define __ATTR_ALWAYS_INLINE__ __inline__ __attribute__((__always_inline__))</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#  endif</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif  </span><span class="comment">/* __DOXYGEN__ */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &lt;<a class="code" href="stdint_8h.html">stdint.h</a>&gt;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &lt;<a class="code" href="delay__basic_8h.html">util/delay_basic.h</a>&gt;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/** \file */</span><span class="comment"></span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/** \defgroup util_delay &lt;util/delay.h&gt;: Convenience functions for busy-wait delay loops</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    \code</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    #define F_CPU 1000000UL  // 1 MHz</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    //#define F_CPU 14.7456e6</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    #include &lt;util/delay.h&gt;</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    \endcode</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    \note As an alternative method, it is possible to pass the</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    F_CPU macro down to the compiler from the Makefile.</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    Obviously, in that case, no \c \#define statement should be</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    used.</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    The functions in this header file are wrappers around the basic</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">    busy-wait functions from &lt;tt&gt;&lt;util/delay_basic.h&gt;&lt;/tt&gt;.  They are meant as</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    convenience functions where actual time values can be specified</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    rather than a number of cycles to wait for.  The idea behind is</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">    that compile-time constant expressions will be eliminated by</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    compiler optimization so floating-point expressions can be used</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    to calculate the number of delay cycles needed based on the CPU</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">    frequency passed by the macro F_CPU.</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">    \note In order for these functions to work as intended, compiler</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    optimizations &lt;em&gt;must&lt;/em&gt; be enabled, and the delay time</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    &lt;em&gt;must&lt;/em&gt; be an expression that is a known constant at</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    compile-time.  If these requirements are not met, the resulting</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    delay will be much longer (and basically unpredictable), and</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    applications that otherwise do not use floating-point calculations</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">    will experience severe code bloat by the floating-point library</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    routines linked into the application.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">    The functions available allow the specification of microsecond, and</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    millisecond delays directly, using the application-supplied macro</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    F_CPU as the CPU clock frequency (in Hertz).</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#ifndef F_CPU</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">/* prevent compiler error by supplying a default */</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor"># warning &quot;F_CPU not defined for &lt;util/delay.h&gt;&quot;</span><span class="comment"></span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">/** \ingroup util_delay</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">    \def F_CPU</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    \brief CPU frequency in Hz</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">    The macro F_CPU specifies the CPU frequency to be considered by</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    the delay macros.  This macro is normally supplied by the</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">    environment (e.g. from within a project header, or the project&#39;s</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">    Makefile).  The value 1 MHz here is only provided as a &quot;vanilla&quot;</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">    fallback if no such user-provided definition could be found.</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"></span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">    In terms of the delay functions, the CPU frequency can be given as</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">    a floating-point constant (e.g. 3.6864e6 for 3.6864 MHz).</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    However, the macros in &lt;util/setbaud.h&gt; require it to be an</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">    integer value.</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"> */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">  107</a></span><span class="preprocessor"># define F_CPU 1000000UL</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#ifndef __OPTIMIZE__</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor"># warning &quot;Compiler optimizations disabled; functions from &lt;util/delay.h&gt; won&#39;t work as designed&quot;</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">   \ingroup util_delay</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">   Perform a delay of \c __ms milliseconds, using _delay_loop_2().</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"></span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">   The macro #F_CPU is supposed to be defined to a</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">   constant defining the CPU clock frequency (in Hertz).</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif  </span><span class="comment">/* __DOXYGEN__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &lt;<a class="code" href="stdint_8h.html">stdint.h</a>&gt;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &lt;<a class="code" href="delay__basic_8h.html">util/delay_basic.h</a>&gt;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &lt;bits/attribs.h&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">/** \file */</span><span class="comment"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/** \defgroup util_delay &lt;util/delay.h&gt;: Convenience functions for busy-wait delay loops</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    \code</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">    #define F_CPU 1000000UL  // 1 MHz</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    //#define F_CPU 14.7456e6</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    #include &lt;util/delay.h&gt;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    \endcode</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    The functions in this header are meant as convenience functions where</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    actual time values can be specified as a delay time,</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    rather than a number of cycles to wait for.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"></span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    This requires that the clock frequency of the device is provided</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    in the \c #F_CPU macro in units of Hertz.  The macro must be defined</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    before including the &lt;util/delay.h&gt; header.  It can be defined</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    in the source code like indicated above, or it can be defined on the</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    command line / in a Makefile by means of &lt;tt&gt;-D F_CPU=...&lt;/tt&gt;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    The functions in this header file are wrappers around the basic</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    busy-wait functions from &lt;tt&gt;&lt;util/delay_basic.h&gt;&lt;/tt&gt;, or, when</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">    supported by the compiler, then</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    &lt;a href=&quot;https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles&quot;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    &gt;__builtin_avr_delay_cycles()&lt;/a&gt; is used instead.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">    In any case, the delay functions provided by this header will not disable</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">    interrupts, which means hat the delay time will be longer than</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    specified when interrupts occur while a delay function is running.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    In order for these functions to work as intended, compiler</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    optimizations &lt;em&gt;must&lt;/em&gt; be enabled, and the delay time</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    &lt;em&gt;must&lt;/em&gt; be an expression that is a known constant at</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">    compile-time.  If these requirements are not met, the resulting</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    delay will be much longer (and basically unpredictable), and</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">    applications that otherwise do not use floating-point calculations</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">    will experience severe code bloat by the floating-point library</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    routines linked into the application.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    The idea is</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">    that compile-time constant expressions will be eliminated by</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">    compiler optimization so floating-point expressions can be used</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">    to calculate the number of delay cycles needed based on the CPU</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    frequency passed by the macro F_CPU.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    The functions available allow the specification of microsecond, and</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">    millisecond delays directly, using the application-supplied macro</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">    F_CPU as the CPU clock frequency in Hertz.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#ifndef F_CPU</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">/* prevent compiler error by supplying a default */</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor"># warning &quot;F_CPU not defined for &lt;util/delay.h&gt;&quot;</span><span class="comment"></span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">/** \ingroup util_delay</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">    \def F_CPU</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">    \brief CPU frequency in Hz</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"></span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    The macro F_CPU specifies the CPU frequency in Hertz to be considered by</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">    the delay functions.  This macro is normally supplied by the</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">    environment (e.g. from within a project header, or the project&#39;s</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">    Makefile).  The value 1 MHz here is only provided as a</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">    fallback default if no such user-provided definition could be found.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">    In terms of the delay functions, the CPU frequency can be given as</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">    a floating-point constant (e.g. 3.6864e6 for 3.6864 MHz).</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">    However, the macros in &lt;util/setbaud.h&gt; require it to be an</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">    integer value.</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"> */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">  115</a></span><span class="preprocessor"># define F_CPU 1000000UL</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#ifndef __OPTIMIZE__</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor"># warning &quot;Compiler optimizations disabled; functions from &lt;util/delay.h&gt; won&#39;t work as designed&quot;</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"></span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">   The maximal possible delay is 262.14 ms / F_CPU in MHz.</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"></span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">   When the user request delay which exceed the maximum possible one,</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">   _delay_ms() provides a decreased resolution functionality. In this</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">   mode _delay_ms() will work with a resolution of 1/10&amp;nbsp;ms, providing</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">   delays up to 6.5535 seconds (independent from CPU frequency).  The</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">   user will not be informed about decreased resolution.</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">   \ingroup util_delay</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"></span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">   Perform a delay of \c __ms milliseconds.</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment"></span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">   The macro #F_CPU is supposed to be defined to a</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">   constant defining the CPU clock frequency in Hertz.</span></div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"></span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">   If the avr-gcc toolchain has \c __builtin_avr_delay_cycles()</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">   support, maximal possible delay is 4294967.295 ms/ F_CPU in MHz. For</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   values greater than the maximal possible delay, overflow may result in</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">   no delay i.e., 0&amp;nbsp;ms.</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment"></span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">   Conversion of \c __ms into clock cycles may not always result in</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">   an integral value.  By default, the clock cycles are rounded up to the next</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">   integer. This ensures that the user gets at least \c __ms</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">   microseconds of delay.</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment"></span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">   \c __DELAY_ROUND_CLOSEST__, before including this header file, the</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">   algorithm can be made to round down, or round to closest integer,</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">   respectively.</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment"></span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">   \note The implementation of _delay_ms() based on</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">   \c __builtin_avr_delay_cycles() is not backward compatible with older</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">   implementations.  In order to get functionality backward compatible</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">   with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">   must be defined before including this header file.</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keyword">static</span> __ATTR_ALWAYS_INLINE__ <span class="keywordtype">void</span> <a class="code hl_function" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms</a>(<span class="keywordtype">double</span> __ms);</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keywordtype">void</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">  154</a></span><a class="code hl_function" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms</a>(<span class="keywordtype">double</span> __ms)</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>{</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">double</span> __tmp ;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#if __HAS_DELAY_CYCLES &amp;&amp; defined(__OPTIMIZE__) \</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">  &amp;&amp; !defined(__DELAY_BACKWARD_COMPATIBLE__)</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __ticks_dc;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keyword">extern</span> <span class="keywordtype">void</span> __builtin_avr_delay_cycles(<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>);</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 1e3) * __ms;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">    #if defined(__DELAY_ROUND_DOWN__)</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)__builtin_fabs(__tmp);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="preprocessor">    #elif defined(__DELAY_ROUND_CLOSEST__)</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)(__builtin_fabs(__tmp)+0.5);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">    #else</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="comment">//round up by default</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)(__builtin_ceil(__builtin_fabs(__tmp)));</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    __builtin_avr_delay_cycles(__ticks_dc);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __ticks;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e3) * __ms;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">if</span> (__tmp &lt; 1.0)</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        __ticks = 1;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp &gt; 65535)</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    {</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="comment">//  __ticks = requested delay in 1/10 ms</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>) (__ms * 10.0);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">while</span>(__ticks)</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        {</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="comment">// wait 1/10 ms</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e3) / 10);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            __ticks --;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)__tmp;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(__ticks);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>}</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"></span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">   \ingroup util_delay</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">   Perform a delay of \c __us microseconds, using _delay_loop_1().</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment"></span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">   The macro #F_CPU is supposed to be defined to a</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">   constant defining the CPU clock frequency (in Hertz).</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment"></span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">   The maximal possible delay is 768 &amp;mu;s / F_CPU in MHz.</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment"></span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">   If the user requests a delay greater than the maximal possible one,</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">   _delay_us() will automatically call _delay_ms() instead.  The user</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">   will not be informed about this case.</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment"></span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">   If the avr-gcc toolchain has __builtin_avr_delay_cycles()</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">   support, maximal possible delay is 4294967.295 &amp;mu;s/ F_CPU in MHz. For</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">   values greater than the maximal possible delay, overflow may result in</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">   no delay i.e., 0&amp;nbsp;&amp;mu;s.</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment"></span> </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">   Conversion of \c __us into clock cycles may not always result in</span></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment">   integer.  By default, the clock cycles are rounded up to next</span></div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">   integer. This ensures that the user gets at least \c __us</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">   microseconds of delay.</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment"></span> </div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">   Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">   \c __DELAY_ROUND_CLOSEST__, before including this header file, the</span></div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">   algorithm can be made to round down, or round to closest integer,</span></div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">   respectively.</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment"></span> </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">   \note The implementation of _delay_us() based on</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">   \c __builtin_avr_delay_cycles() is not backward compatible with older</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">   implementations.  In order to get functionality backward compatible</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">   with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">   must be defined before including this header file.</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="keyword">static</span> __ATTR_ALWAYS_INLINE__ <span class="keywordtype">void</span> <a class="code hl_function" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us</a>(<span class="keywordtype">double</span> __us);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keywordtype">void</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">  237</a></span><a class="code hl_function" href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us</a>(<span class="keywordtype">double</span> __us)</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>{</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">double</span> __tmp ;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="preprocessor">#if __HAS_DELAY_CYCLES &amp;&amp; defined(__OPTIMIZE__) \</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="preprocessor">  &amp;&amp; !defined(__DELAY_BACKWARD_COMPATIBLE__)</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __ticks_dc;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keyword">extern</span> <span class="keywordtype">void</span> __builtin_avr_delay_cycles(<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 1e6) * __us;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="preprocessor">    #if defined(__DELAY_ROUND_DOWN__)</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)__builtin_fabs(__tmp);</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="preprocessor">    #elif defined(__DELAY_ROUND_CLOSEST__)</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)(__builtin_fabs(__tmp)+0.5);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="preprocessor">    #else</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="comment">//round up by default</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        __ticks_dc = (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)(__builtin_ceil(__builtin_fabs(__tmp)));</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    __builtin_avr_delay_cycles(__ticks_dc);</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __ticks;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordtype">double</span> __tmp2 ;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 3e6) * __us;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    __tmp2 = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e6) * __us;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordflow">if</span> (__tmp &lt; 1.0)</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        __ticks = 1;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp2 &gt; 65535)</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    {</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <a class="code hl_function" href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms</a>(__us / 1000.0);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp &gt; 255)</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __ticks=(<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)__tmp2;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(__ticks);</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    }</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>)__tmp;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <a class="code hl_function" href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1</a>(__ticks);</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>}</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="preprocessor">#endif </span><span class="comment">/* _UTIL_DELAY_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">-  If \c __builtin_avr_delay_cycles() is</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">\if GIT_BRANCH_IS_ONLINEDOCS</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   supported</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">\else</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">   \ref faq_toolchain_support &quot;supported&quot;</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">\endif</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">   by the compiler, then</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">   the maximal possible delay is 4294967.04 / f&lt;sub&gt;CPU&lt;/sub&gt; milliseconds</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">   where f&lt;sub&gt;CPU&lt;/sub&gt; denotes the CPU frequency in units of 1 MHz.</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">   This is around 71 minutes / f&lt;sub&gt;CPU&lt;/sub&gt;.</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   Values greater than that are saturated to this value.</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment"></span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">-  Otherwise, _delay_loop_2() is used as a fallback, and the maximal</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">   possible delay is 262.14 / f&lt;sub&gt;CPU&lt;/sub&gt; milliseconds.</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">   When the user requests a delay which exceeds the maximum possible one,</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">   _delay_ms() provides a decreased resolution functionality. In this</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">   mode _delay_ms() will work with a resolution of 1/10&amp;nbsp;ms, providing</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">   delays up to 6.5535 seconds (independent from CPU frequency).  The</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">   user will not be informed about decreased resolution.</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">.</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">   Conversion of \c __ms into clock cycles may not always result in</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   an integral value.  By default, the clock cycles are rounded up to the next</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   integer. This ensures that the user gets at least \c __ms</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">   microseconds of delay.</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">   Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">   \c __DELAY_ROUND_CLOSEST__, before including this header file, the</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">   algorithm can be made to round down, or round to closest integer,</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">   respectively.</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment"></span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">   \note The implementation of _delay_ms() based on</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">   \c __builtin_avr_delay_cycles() is not backward compatible with older</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">   implementations.  In order to get a functionality backward compatible</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">   with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">   must be defined before including this header file.</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">static</span> __ATTR_ALWAYS_INLINE__ <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">  167</a></span><a class="code hl_function" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms</a>(<span class="keywordtype">double</span> __ms)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>{</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#if (__HAS_DELAY_CYCLES \</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">     &amp;&amp; defined(__OPTIMIZE__) \</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="preprocessor">     &amp;&amp; !defined(__DELAY_BACKWARD_COMPATIBLE__))</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __ticks_dc;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 1e3) * __ms;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="preprocessor">    #if defined(__DELAY_ROUND_DOWN__)</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        __tmp = __builtin_fabs (__tmp);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">    #elif defined(__DELAY_ROUND_CLOSEST__)</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        __tmp = __builtin_fabs (__tmp) + 0.5;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="comment">/* Round up by default */</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        __tmp = __builtin_ceil (__builtin_fabs (__tmp));</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="comment">/* Saturate.  Notice that the largest representable float</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">       in this context is 0xffffff00.   */</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    __ticks_dc = __tmp &gt;= 4294967040.0 ? 0xffffff00 : (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>) __tmp;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    __builtin_avr_delay_cycles(__ticks_dc);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __ticks;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">double</span> __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e3) * __ms;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">if</span> (__tmp &lt; 1.0)</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        __ticks = 1;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp &gt; 65535)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="comment">//  __ticks = requested delay in 1/10 ms</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>) (__ms * 10.0);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">while</span>(__ticks)</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="comment">// wait 1/10 ms</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e3) / 10);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            __ticks--;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)__tmp;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(__ticks);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"></span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">   \ingroup util_delay</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment"></span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">   Perform a delay of \c __us microseconds.</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment"></span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">   The macro #F_CPU is supposed to be defined to a</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">   constant defining the CPU clock frequency in Hertz.</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment"></span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment">-  If \c __builtin_avr_delay_cycles() is</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">\if GIT_BRANCH_IS_ONLINEDOCS</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">   supported</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment">\else</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">   \ref faq_toolchain_support &quot;supported&quot;</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">\endif</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">   by the compiler, then</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">   the maximal possible delay is 4294967040 / f&lt;sub&gt;CPU&lt;/sub&gt; microseconds</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">   where f&lt;sub&gt;CPU&lt;/sub&gt; denotes the CPU frequency in units of 1 MHz.</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">   This is around 71 minutes / f&lt;sub&gt;CPU&lt;/sub&gt;.</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">   Values greater than that are saturated to this value.</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment"></span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">-  Otherwise, _delay_loop_1() is used as a fallback, and the maximal</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">   possible delay is 768 / f&lt;sub&gt;CPU&lt;/sub&gt; microseconds.</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">   If the user requests a delay greater than the maximal possible one,</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">   _delay_us() will automatically call _delay_ms() instead.  The user</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">   will not be informed about this case.</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">.</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment"></span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">   Conversion of \c __us into clock cycles may not always result in an</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">   integral value.  By default, the clock cycles are rounded up to next</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment">   integer. This ensures that the user gets at least \c __us</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment">   microseconds of delay.</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment">   Alternatively, by defining the macro \c __DELAY_ROUND_DOWN__, or</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment">   \c __DELAY_ROUND_CLOSEST__, before including this header file, the</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">   algorithm can be made to round down, or round to closest integer,</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment">   respectively.</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment"></span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment">   \note The implementation of _delay_us() based on</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">   \c __builtin_avr_delay_cycles() is not backward compatible with older</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">   implementations.  In order to get a functionality backward compatible</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">   with previous versions, the macro \c __DELAY_BACKWARD_COMPATIBLE__</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">   must be defined before including this header file.</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">static</span> __ATTR_ALWAYS_INLINE__ <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">  254</a></span><a class="code hl_function" href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us</a>(<span class="keywordtype">double</span> __us)</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>{</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="preprocessor">#if (__HAS_DELAY_CYCLES \</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="preprocessor">     &amp;&amp; defined(__OPTIMIZE__) \</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="preprocessor">     &amp;&amp; !defined(__DELAY_BACKWARD_COMPATIBLE__))</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> __ticks_dc;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">double</span> __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 1e6) * __us;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="preprocessor">    #if defined(__DELAY_ROUND_DOWN__)</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        __tmp = __builtin_fabs (__tmp);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="preprocessor">    #elif defined(__DELAY_ROUND_CLOSEST__)</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        __tmp = __builtin_fabs (__tmp) + 0.5;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="comment">/* Round up by default */</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        __tmp = __builtin_ceil (__builtin_fabs (__tmp));</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="comment">/* Saturate.  Notice that the largest representable float</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">       in this context is 0xffffff00.   */</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    __ticks_dc = __tmp &gt;= 4294967040.0 ? 0xffffff00 : (<a class="code hl_typedef" href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>) __tmp;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    __builtin_avr_delay_cycles(__ticks_dc);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> __ticks;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordtype">double</span> __tmp = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 3e6) * __us;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keywordtype">double</span> __tmp2 = ((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a>) / 4e6) * __us;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">if</span> (__tmp &lt; 1.0)</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        __ticks = 1;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp2 &gt; 65535)</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <a class="code hl_function" href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms</a>(__us / 1000.0);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (__tmp &gt; 255)</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __ticks=(<a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>)__tmp2;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_function" href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a>(__ticks);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        __ticks = (<a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>)__tmp;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_function" href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1</a>(__ticks);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>}</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="preprocessor">#endif </span><span class="comment">/* _UTIL_DELAY_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="adelay__basic_8h_html"><div class="ttname"><a href="delay__basic_8h.html">delay_basic.h</a></div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:93</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:103</div></div>
-<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:83</div></div>
-<div class="ttc" id="agroup__util__delay__basic_html_ga4e3957917c4c447d0f9166dac881b4e3"><div class="ttname"><a href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1</a></div><div class="ttdeci">void _delay_loop_1(uint8_t __count)</div><div class="ttdef"><b>Definition:</b> delay_basic.h:81</div></div>
-<div class="ttc" id="agroup__util__delay__basic_html_ga74a94fec42bac9f1ff31fd443d419a6a"><div class="ttname"><a href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a></div><div class="ttdeci">void _delay_loop_2(uint16_t __count)</div><div class="ttdef"><b>Definition:</b> delay_basic.h:103</div></div>
-<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:107</div></div>
-<div class="ttc" id="agroup__util__delay_html_gab20bfffeacc678cb960944f5519c0c4f"><div class="ttname"><a href="group__util__delay.html#gab20bfffeacc678cb960944f5519c0c4f">_delay_us</a></div><div class="ttdeci">static void _delay_us(double __us)</div><div class="ttdef"><b>Definition:</b> delay.h:237</div></div>
-<div class="ttc" id="agroup__util__delay_html_gad22e7a36b80e2f917324dc43a425e9d3"><div class="ttname"><a href="group__util__delay.html#gad22e7a36b80e2f917324dc43a425e9d3">_delay_ms</a></div><div class="ttdeci">static void _delay_ms(double __ms)</div><div class="ttdef"><b>Definition:</b> delay.h:154</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__avr__stdint.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdef"><b>Definition:</b> stdint.h:114</div></div>
+<div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
+<div class="ttc" id="agroup__util__delay__basic_html_ga4e3957917c4c447d0f9166dac881b4e3"><div class="ttname"><a href="group__util__delay__basic.html#ga4e3957917c4c447d0f9166dac881b4e3">_delay_loop_1</a></div><div class="ttdeci">void _delay_loop_1(uint8_t __count)</div><div class="ttdef"><b>Definition:</b> delay_basic.h:84</div></div>
+<div class="ttc" id="agroup__util__delay__basic_html_ga74a94fec42bac9f1ff31fd443d419a6a"><div class="ttname"><a href="group__util__delay__basic.html#ga74a94fec42bac9f1ff31fd443d419a6a">_delay_loop_2</a></div><div class="ttdeci">void _delay_loop_2(uint16_t __count)</div><div class="ttdef"><b>Definition:</b> delay_basic.h:111</div></div>
+<div class="ttc" id="agroup__util__delay_html_ga196087b63a6cb8c28ea71a7a13ab3520"><div class="ttname"><a href="group__util__delay.html#ga196087b63a6cb8c28ea71a7a13ab3520">_delay_ms</a></div><div class="ttdeci">static void _delay_ms(double __ms)</div><div class="ttdef"><b>Definition:</b> delay.h:167</div></div>
+<div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:115</div></div>
+<div class="ttc" id="agroup__util__delay_html_gadce96a135cbf5770428b2c679ebd28d4"><div class="ttname"><a href="group__util__delay.html#gadce96a135cbf5770428b2c679ebd28d4">_delay_us</a></div><div class="ttdeci">static void _delay_us(double __us)</div><div class="ttdef"><b>Definition:</b> delay.h:254</div></div>
 <div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:41 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:37 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

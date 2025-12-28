@@ -1269,48 +1269,6 @@ What are the versions of the tools in my toolchain?</h1>
 <p>Linker<sup>1</sup> is the linker as called directly (<code>avr-ld</code>) whereas Linker<sup>2</sup> is the linker as called though the compiler driver <code>avr-gcc</code>. The latter is the usual way to invoke the linker. When these two versions are not the same, then the resulting toolchain may have inconsistencies.</p>
 <p>When you have more then one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
 <p>Also notice that software may come with vendor specific patches, so that the tool behaves differently than the stock version.</p>
-<p>The FAQ document you are reading right now is part of an AVR-LibC that has been configured for the following tool versions:</p>
-<table class="doxtable">
-<caption>Tool Versions</caption>
-<tr>
-<th>Software </th><th>Version </th></tr>
-<tr>
-<td>Compiler </td><td><code>avr-gcc (GCC) 14.2.0</code> </td></tr>
-<tr>
-<td>Assembler </td><td><code>GNU assembler (GNU Binutils) 2.43.1</code> </td></tr>
-<tr>
-<td>LD Linker </td><td><code>GNU ld (GNU Binutils) 2.43.1</code> </td></tr>
-<tr>
-<td>CC Linker </td><td><code>GNU ld (GNU Binutils) 2.43.1</code> </td></tr>
-<tr>
-<td>AVR-LibC </td><td><code>2.3.0</code> </td></tr>
-</table>
-<ul>
-<li><a href="https://gcc.gnu.org/gcc-14">GCC 14 documentation</a></li>
-<li><a href="https://gcc.gnu.org/gcc-14/changes.html#avr">GCC 14 release notes</a></li>
-</ul>
-<p><a class="anchor" id="faq_toolchain_support"></a> The following features have been detected when building AVR-LibC. They influence how pars of the library behave.</p>
-<table class="doxtable">
-<caption>Toolchain Features affecting AVR-LibC</caption>
-<tr>
-<th>Feature </th><th>Supported </th><th>Affects </th></tr>
-<tr>
-<td><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles"><code>__builtin_avr_delay_cycles()</code></a>  </td><td>yes </td><td><code>&lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt;</code> </td></tr>
-<tr>
-<td><a class="el" href="mem_sections.html#sec_memory_regions">text</a> starts at <code>__TEXT_REGION_ORIGIN__</code> </td><td>yes </td><td>Starup code </td></tr>
-<tr>
-<td><a class="el" href="mem_sections.html#sec_memory_regions">data</a> starts at <code>__DATA_REGION_ORIGIN__</code> </td><td>yes </td><td>Starup code </td></tr>
-<tr>
-<td>Compiler supports <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"><code>-mcvt</code></a> </td><td>no </td><td><a class="el" href="FAQ.html#faq_cvt">CVT</a> convenience </td></tr>
-<tr>
-<td>Compiler supports attribute <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"><code>signal(n)</code></a> </td><td>no </td><td><code>&lt;<a class="el" href="interrupt_8h.html">avr/interrupt.h</a>&gt;</code>, <a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a>, <a class="el" href="FAQ.html#faq_local_isr">local functions as ISRs</a> </td></tr>
-<tr>
-<td>64-bit floating-point </td><td>yes: <code>-mdouble=64</code>, <code>-mlong-double=32</code> </td><td><code>&lt;<a class="el" href="math_8h.html">math.h</a>&gt;</code>, Libraries </td></tr>
-<tr>
-<td>Fixed-point  </td><td>yes </td><td><code>&lt;<a class="el" href="group__avr__stdfix.html#stdfix_h">stdfix.h</a>&gt;</code>, Libraries </td></tr>
-<tr>
-<td>Device library <code>lib<em>mcu</em>.a</code> </td><td>yes </td><td>Startup code, Libraries </td></tr>
-</table>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_toolchain_sources"></a>
 Where can I find the source code of the tools?</h1>
@@ -1364,7 +1322,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 23 2025 14:19:01 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:38 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -96,283 +99,708 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
   <div class="headertitle"><div class="title">Benchmarks </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The results below can only give a rough estimate of the resources necessary for using certain library functions. There is a number of factors which can both increase or reduce the effort required:</p>
+<div class="textblock"><ul>
+<li><a class="el" href="benchmarks.html#bench_libc">Benchmarks for libc functions</a></li>
+<li><a class="el" href="benchmarks.html#bench_libm">Benchmarks for IEEE single floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_libf7">Benchmarks for IEEE double floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_fxlib">Benchmarks for fixed-point functions</a> from <a class="el" href="group__avr__stdfix.html">&lt;stdfix.h&gt;</a></li>
+</ul>
+<p>The results below can only give a rough estimate of the resources necessary for using certain library functions. There is a number of factors which can both increase or reduce the effort required:</p>
 <ul>
 <li>Expenses for preparation of operands and their stack are not considered.</li>
-</ul>
-<ul>
-<li>In the table, the size includes all additional functions (for example, function to multiply two integers) but they are only linked from the library.</li>
-</ul>
-<ul>
+<li>In the table, the size includes all dependent functions.</li>
 <li>Expenses of time of performance of some functions essentially depend on parameters of a call, for example, <a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort()</a> is recursive, and <a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf()</a> receives parameters in a stack.</li>
-</ul>
-<ul>
 <li>Different versions of the compiler can give a significant difference in code size and execution time. For example, the <a class="el" href="group__avr__stdlib.html#ga3f07a282f28b2754b0e1d23679fc92c5">dtostre()</a> function, compiled with avr-gcc 3.4.6, requires 930 bytes. After transition to avr-gcc 4.2.3, the size become 1088 bytes.</li>
 </ul>
 <h1><a class="anchor" id="bench_libc"></a>
-A few of libc functions.</h1>
-<p>Avr-gcc version is 4.7.1</p>
-<p>The size of function is given in view of all picked up functions. By default AVR-LibC is compiled with <code>-mcall-prologues</code> option. In brackets the size without taking into account modules of a prologue and an epilogue is resulted. Both of the size can coincide, if function does not cause a prologue/epilogue.</p>
-<p><small> </p><table class="doxtable">
+A few of libc Functions</h1>
+<p>avr-gcc version is 15.2.1</p>
+<p>The size of a function is given in view of all picked up functions. By default AVR-LibC is compiled with <code>-mcall-prologues</code>. In parenthesis the size without taking into account the code for the prologue and epilogue routines is shown. Both sizes can coincide when no prologue and epilogue routines are present, and then only one code size is shown.</p>
+<ul>
+<li><code><a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort</a></code> sorts an array of <code>char</code> with 100 elements.</li>
+<li>The used size of <code>double</code> is 4, which plays a role in the float type promotions of arguments of varargs functions like <code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a></code>.</li>
+<li>For an overview of the different AVR architectures, see <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html">avr-gcc: Command Line Options</a>. <small> <table class="doxtable">
 <tr>
-<td width="50%"><b>Function</b> </td><td width="20%"><b>Units</b> </td><td width="10%"><b>Avr2</b> </td><td width="10%"><b>Avr25</b> </td><td width="10%"><b>Avr4</b>  </td></tr>
+<th>Function </th><th>Units </th><th>avr2 </th><th>avr25 </th><th>avr4 </th><th>avr6 </th></tr>
 <tr>
-<td>atoi ("12345") </td><td>Flash bytes<br  />
+<td><code><a class="el" href="group__avr__stdlib.html#ga644e59f576ae3cda834cdbcf81f65f29">atoi</a> ("12345")</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-MCU clocks </td><td>82 (82)<br  />
-2<br  />
-155 </td><td>78 (78)<br  />
-2<br  />
-149 </td><td>74 (74)<br  />
-2<br  />
-149  </td></tr>
-<tr>
-<td>atol ("12345") </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>122 (122)<br  />
-2<br  />
-221 </td><td>118 (118)<br  />
-2<br  />
-219 </td><td>118 (118)<br  />
-2<br  />
-219  </td></tr>
-<tr>
-<td>dtostre (1.2345, s, 6, 0) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1116 (1004)<br  />
-17<br  />
-1247 </td><td>1048 (938)<br  />
-17<br  />
-1105 </td><td>1048 (938)<br  />
-17<br  />
-1105  </td></tr>
-<tr>
-<td>dtostrf (1.2345, 15, 6, s) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1616 (1616)<br  />
-38<br  />
-1634 </td><td>1508 (1508)<br  />
-38<br  />
-1462 </td><td>1508 (1508)<br  />
-38<br  />
-1462  </td></tr>
-<tr>
-<td>itoa (12345, s, 10) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>110 (110)<br  />
-2<br  />
-879 </td><td>102 (102)<br  />
-2<br  />
-875 </td><td>102 (102)<br  />
-2<br  />
-875  </td></tr>
-<tr>
-<td>ltoa (12345L, s, 10) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>134 (134)<br  />
-2<br  />
-1597 </td><td>126 (126)<br  />
-2<br  />
-1593 </td><td>126 (126)<br  />
-2<br  />
-1593  </td></tr>
-<tr>
-<td>malloc (1) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>768 (712)<br  />
+Cycles </td><td align="right">82<br  />
+4<br  />
+155 </td><td align="right">78<br  />
+4<br  />
+149 </td><td align="right">74<br  />
+4<br  />
+149 </td><td align="right">76<br  />
 6<br  />
-215 </td><td>714 (660)<br  />
+167 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga15ac025af527b5ecc2e15e114297a890">atol</a> ("12345")</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">126<br  />
+5<br  />
+221 </td><td align="right">118<br  />
+5<br  />
+209 </td><td align="right">106<br  />
+4<br  />
+205 </td><td align="right">110<br  />
 6<br  />
-201 </td><td>714 (660)<br  />
-6<br  />
-201  </td></tr>
+223 </td></tr>
 <tr>
-<td>realloc ((void *)0, 1) </td><td>Flash bytes<br  />
+<td><code><a class="el" href="group__avr__stdlib.html#ga0ae16bbdf51c0be563cfff9d6c05d8f1">ftostre</a> (1.2345f, s, 6, 0)</code> </td><td>Flash bytes<br  />
 Stack bytes<br  />
-MCU clocks </td><td>1284 (1172)<br  />
-18<br  />
-305 </td><td>1174 (1064)<br  />
-18<br  />
-286 </td><td>1174 (1064)<br  />
-18<br  />
-286  </td></tr>
-<tr>
-<td>qsort (s, sizeof(s), 1, cmp) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1252 (1140)<br  />
-42<br  />
-21996 </td><td>1022 (912)<br  />
-42<br  />
-19905 </td><td>1028 (918)<br  />
-42<br  />
-17541  </td></tr>
-<tr>
-<td>sprintf_min (s, "%d", 12345) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1224 (1112)<br  />
-53<br  />
-1841 </td><td>1092 (982)<br  />
-53<br  />
-1694 </td><td>1088 (978)<br  />
-53<br  />
-1689  </td></tr>
-<tr>
-<td>sprintf (s, "%d", 12345) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1614 (1502)<br  />
-58<br  />
-1647 </td><td>1476 (1366)<br  />
-58<br  />
-1552 </td><td>1454 (1344)<br  />
-58<br  />
-1547  </td></tr>
-<tr>
-<td>sprintf_flt (s, "%e", 1.2345) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>3228 (3116)<br  />
-67<br  />
-2573 </td><td>2990 (2880)<br  />
-67<br  />
-2311 </td><td>2968 (2858)<br  />
-67<br  />
-2311  </td></tr>
-<tr>
-<td>sscanf_min ("12345", "%d", &amp;i) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1532 (1420)<br  />
-55<br  />
-1607 </td><td>1328 (1218)<br  />
-55<br  />
-1446 </td><td>1328 (1218)<br  />
-55<br  />
-1446  </td></tr>
-<tr>
-<td>sscanf ("12345", "%d", &amp;i) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>2008 (1896)<br  />
-55<br  />
-1610 </td><td>1748 (1638)<br  />
-55<br  />
-1449 </td><td>1748 (1638)<br  />
-55<br  />
-1449  </td></tr>
-<tr>
-<td>sscanf ("point,color", "%[a-z]", s) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>2008 (1896)<br  />
-86<br  />
-3067 </td><td>1748 (1638)<br  />
-86<br  />
-2806 </td><td>1748 (1638)<br  />
-86<br  />
-2806  </td></tr>
-<tr>
-<td>sscanf_flt ("1.2345", "%e", &amp;x) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>3464 (3352)<br  />
-71<br  />
-2497 </td><td>3086 (2976)<br  />
-71<br  />
-2281 </td><td>3070 (2960)<br  />
-71<br  />
-2078  </td></tr>
-<tr>
-<td>strtod ("1.2345", &amp;p) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>1632 (1520)<br  />
+Cycles </td><td align="right">1128 (1016)<br  />
 20<br  />
-1235 </td><td>1536 (1426)<br  />
+1339 </td><td align="right">1058 (948)<br  />
 20<br  />
-1177 </td><td>1480 (1480)<br  />
+1178 </td><td align="right">1058 (948)<br  />
+20<br  />
+1178 </td><td align="right">1078 (968)<br  />
+22<br  />
+1191 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gadc15e117d82b6b613b2d3874d5ad951b">ftostrf</a> (1.2345f, 15, 6, s)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1648 (1536)<br  />
+40<br  />
+1645 </td><td align="right">1524 (1414)<br  />
+40<br  />
+1469 </td><td align="right">1524 (1414)<br  />
+40<br  />
+1469 </td><td align="right">1548 (1438)<br  />
+43<br  />
+1486 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga6fa7b06670f1241ab1d05be4a33f5465">ktoa</a> (123.45k, s, 2)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">316<br  />
+8<br  />
+479 </td><td align="right">306<br  />
+8<br  />
+466 </td><td align="right">298<br  />
+8<br  />
+466 </td><td align="right">306<br  />
+10<br  />
+488 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gaa9396cd11c895591e6bb051d121a6db0" title="Convert an integer to a string.">itoa</a> (12345, s, 10)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">110<br  />
+2<br  />
+879 </td><td align="right">102<br  />
+2<br  />
+875 </td><td align="right">102<br  />
+2<br  />
+875 </td><td align="right">106<br  />
+3<br  />
+880 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga0fd3ced14fa7c0d51d59a00efcdbbfc7" title="Convert a long integer to a string.">ltoa</a> (12345678L, s, 10)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">138<br  />
+2<br  />
+2766 </td><td align="right">130<br  />
+2<br  />
+2762 </td><td align="right">130<br  />
+2<br  />
+2762 </td><td align="right">136<br  />
+3<br  />
+2767 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gab3f54f0f4d5418ac640eb53d9fc067e6" title="Convert a signed 64-bit integer to a string.">lltoa</a> (12345678LL, s, 10)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">206<br  />
+3<br  />
+2239 </td><td align="right">194<br  />
+3<br  />
+2209 </td><td align="right">194<br  />
+3<br  />
+2209 </td><td align="right">202<br  />
+4<br  />
+2214 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga2ce93a5610dfd2c4c482b52fb363be47" title="Convert an unsigned 64-bit integer to a decimal string.">ulltoa_base10</a> (12345678ULL, s)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">182<br  />
+11<br  />
+1908 </td><td align="right">172<br  />
+11<br  />
+1852 </td><td align="right">168<br  />
+11<br  />
+1458 </td><td align="right">168<br  />
+12<br  />
+1461 </td></tr>
+<tr>
+<td><code>malloc (1)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">668<br  />
+6<br  />
+101 </td><td align="right">606<br  />
+6<br  />
+97 </td><td align="right">606<br  />
+6<br  />
+97 </td><td align="right">610<br  />
+7<br  />
+100 </td></tr>
+<tr>
+<td><code>realloc ((void*) 0, 1)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1242 (1130)<br  />
+6<br  />
+101 </td><td align="right">1114 (1004)<br  />
+6<br  />
+97 </td><td align="right">1114 (1004)<br  />
+6<br  />
+97 </td><td align="right">1096<br  />
+7<br  />
+100 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort</a> (s, sizeof(s), 1, cmp)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1130 (1018)<br  />
+146<br  />
+54683 </td><td align="right">952 (842)<br  />
+146<br  />
+50635 </td><td align="right">938 (828)<br  />
+146<br  />
+45705 </td><td align="right">984 (874)<br  />
+153<br  />
+47930 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gae23144bcbb8e3742b00eb687c36654d1">rand</a> ()</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">132<br  />
+2<br  />
+95 </td><td align="right">120<br  />
+2<br  />
+90 </td><td align="right">120<br  />
+2<br  />
+90 </td><td align="right">124<br  />
+3<br  />
+93 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga114aeb1751119382aaf3340355b22cfd">random</a> ()</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">678 (566)<br  />
+16<br  />
+1410 </td><td align="right">634 (524)<br  />
+16<br  />
+1394 </td><td align="right">630 (520)<br  />
+18<br  />
+805 </td><td align="right">584<br  />
+22<br  />
+820 </td></tr>
+<tr>
+<td><code>sprintf_min (s, "%d", 12345)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1218 (1106)<br  />
+59<br  />
+2077 </td><td align="right">1086 (976)<br  />
+59<br  />
+1940 </td><td align="right">1082 (972)<br  />
+59<br  />
+1935 </td><td align="right">1102<br  />
+62<br  />
+1887 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf</a> (s, "%d", 12345)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1636 (1524)<br  />
+59<br  />
+1885 </td><td align="right">1494 (1384)<br  />
+59<br  />
+1795 </td><td align="right">1478 (1368)<br  />
+61<br  />
+1796 </td><td align="right">1514<br  />
+64<br  />
+1734 </td></tr>
+<tr>
+<td><code>sprintf_flt (s, "%e", 1.2345)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">3250 (3138)<br  />
+68<br  />
+3089 </td><td align="right">3000 (2890)<br  />
+68<br  />
+2866 </td><td align="right">2976 (2866)<br  />
+69<br  />
+2873 </td><td align="right">3088 (2978)<br  />
+72<br  />
+2695 </td></tr>
+<tr>
+<td><code>sscanf_min ("12345", "%d", &amp;i)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">2804 (2692)<br  />
+57<br  />
+1380 </td><td align="right">2502 (2392)<br  />
+57<br  />
+1294 </td><td align="right">2498 (2388)<br  />
+57<br  />
+1294 </td><td align="right">2728<br  />
+61<br  />
+1311 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> ("12345", "%d", &amp;i)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1798 (1686)<br  />
+57<br  />
+1380 </td><td align="right">1614 (1504)<br  />
+57<br  />
+1294 </td><td align="right">1614 (1504)<br  />
+57<br  />
+1294 </td><td align="right">1716<br  />
+61<br  />
+1311 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf</a> ("point,color", "%[a-z]", s)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1798 (1686)<br  />
+90<br  />
+2748 </td><td align="right">1614 (1504)<br  />
+90<br  />
+2601 </td><td align="right">1614 (1504)<br  />
+90<br  />
+2601 </td><td align="right">1716<br  />
+94<br  />
+2502 </td></tr>
+<tr>
+<td><code>sscanf_flt ("1.2345", "%e", &amp;x)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">4866 (4754)<br  />
+40<br  />
+410 </td><td align="right">4438 (4328)<br  />
+40<br  />
+364 </td><td align="right">4414 (4304)<br  />
+40<br  />
+364 </td><td align="right">4714 (4604)<br  />
+43<br  />
+341 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga699a1d102f9ea32765752559f978a590">strtof</a> ("1.2345", &amp;end)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">1648 (1536)<br  />
+24<br  />
+1289 </td><td align="right">1490 (1380)<br  />
+24<br  />
+1172 </td><td align="right">1462 (1352)<br  />
+24<br  />
+969 </td><td align="right">1698 (1588)<br  />
+37<br  />
+1282 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#gaf8ce3b8dae3d45c34c3b172de503f7b3">strtol</a> ("12345", &amp;end, 0)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">390<br  />
+14<br  />
+606 </td><td align="right">368<br  />
+14<br  />
+583 </td><td align="right">350<br  />
+12<br  />
+351 </td><td align="right">364<br  />
+15<br  />
+373 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdlib.html#ga5006f43088ee0321cf6191ce89eb78b7">strtoll</a> ("12345", &amp;end, 0)</code> </td><td>Flash bytes<br  />
+Stack bytes<br  />
+Cycles </td><td align="right">578 (466)<br  />
+20<br  />
+832 </td><td align="right">540 (430)<br  />
+20<br  />
+785 </td><td align="right">516 (406)<br  />
+18<br  />
+488 </td><td align="right">540 (430)<br  />
 21<br  />
-1124  </td></tr>
-<tr>
-<td>strtol ("12345", &amp;p, 0) </td><td>Flash bytes<br  />
-Stack bytes<br  />
-MCU clocks </td><td>918 (806)<br  />
-22<br  />
-956 </td><td>834 (724)<br  />
-22<br  />
-891 </td><td>792 (792)<br  />
-28<br  />
-794  </td></tr>
+513 </td></tr>
 </table>
-<p></small></p>
+</small></li>
+</ul>
 <h1><a class="anchor" id="bench_libm"></a>
-Math functions.</h1>
-<p>The table contains the number of MCU clocks to calculate a function with a given argument(s). The main reason of a big difference between Avr2 and Avr4 is a hardware multiplication.</p>
+Math Functions from libm</h1>
+<p>The following tables contain benchmark values for some floating-point functions over the indicated range(s) of input values.</p>
+<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE single with its 23 fractional bits in the mantissa is  
+log<sub>10</sub>(2<sup>&minus;24</sup> &asymp; 6&middot;10<sup>&minus;8</sup>) &asymp; &minus;7.22.
+  </p>
+<p>The poor performance of <code>sinf</code>, <code>cosf</code> and <code>tanf</code> occurs for values that are close to the poles (if any) or close to the non-zero zeros.</p>
 <table class="doxtable">
+<caption>libm benchmarks for ATmega128 (avr51, with MUL)</caption>
 <tr>
-<td width="50%"><b>Function</b> </td><td width="25%"><b>Avr2</b> </td><td width="25%"><b>Avr4</b>  </td></tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
 <tr>
-<td>__addsf3 (1.234, 5.678) </td><td>113 </td><td>108  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga983a9e1aa7568df39153ea4d8e16653b">acosf</a></code> </td><td align="right">1102 </td><td>-1 </td><td>1 </td><td align="right">1957 </td><td align="right">2464 </td><td align="center">-6.66 </td></tr>
 <tr>
-<td>__mulsf3 (1.234, 5.678) </td><td>375 </td><td>138  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga7447a7400ca474ba42d127b04d6ee2b7">asinf</a></code> </td><td align="right">1092 </td><td>-1 </td><td>1 </td><td align="right">1896 </td><td align="right">2454 </td><td align="center">-6.47 </td></tr>
 <tr>
-<td>__divsf3 (1.234, 5.678) </td><td>466 </td><td>465  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa582bc257e477e805f4ec384a39a3a8e">atanf</a></code> </td><td align="right">1058 </td><td>-10 </td><td>10 </td><td align="right">2879 </td><td align="right">3073 </td><td align="center">-6.92 </td></tr>
 <tr>
-<td>acos (0.54321) </td><td>4411 </td><td>2455  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga396c6a553500a355627741e234045bf4">cbrtf</a></code> </td><td align="right">514 </td><td>-1e+06 </td><td>1e+06 </td><td align="right">2573 </td><td align="right">2665 </td><td align="center">-6.92 </td></tr>
 <tr>
-<td>asin (0.54321) </td><td>4517 </td><td>2556  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga8c1a8db0710bb3f25f643a0fca68fc60">ceilf</a></code> </td><td align="right">258 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">108 </td><td align="right">177 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>atan (0.54321) </td><td>4710 </td><td>2271  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga7b126b2344591e649c21c9ab0b8adb40">cosf</a></code> </td><td align="right">904 </td><td>-1.57 </td><td>1.58 </td><td align="right">1775 </td><td align="right">2126 </td><td align="center"><b>-2.86</b> </td></tr>
 <tr>
-<td>atan2 (1.234, 5.678) </td><td>5270 </td><td>2857  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga498b368486b7ce8677820beeb78d8f66">coshf</a></code> </td><td align="right">1366 </td><td>-20 </td><td>20 </td><td align="right">3053 </td><td align="right">3439 </td><td align="center">-5.78 </td></tr>
 <tr>
-<td>cbrt (1.2345) </td><td>2684 </td><td>2555  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga0c2bc89b8355a89542ac98d9e2120363">expf</a></code> </td><td align="right">1320 </td><td>-20 </td><td>20 </td><td align="right">2588 </td><td align="right">3247 </td><td align="center">-5.78 </td></tr>
 <tr>
-<td>ceil (1.2345) </td><td>177 </td><td>177  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga0bcc6aa4b3c37bfa73f06ebdecc0d247">floorf</a></code> </td><td align="right">258 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">108 </td><td align="right">180 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>cos (1.2345) </td><td>3387 </td><td>1671  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa903401f31809c2007484cc268fffe17">frexpf</a></code> </td><td align="right">154 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">40 </td><td align="right">40 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>cosh (1.2345) </td><td>4922 </td><td>2979  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga8246b3e17a39b137d0c62670d0c6e336">logf</a></code> </td><td align="right">1076 </td><td>0 </td><td>100 </td><td align="right">2392 </td><td align="right">2866 </td><td align="center">-6.69 </td></tr>
 <tr>
-<td>exp (1.2345) </td><td>4708 </td><td>2765  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gae207b1eb007a6c23394dcb6fc7f16adf">log10f</a></code> </td><td align="right">1076 </td><td>0 </td><td>100 </td><td align="right">2397 </td><td align="right">2866 </td><td align="center">-6.62 </td></tr>
 <tr>
-<td>fdim (5.678, 1.234) </td><td>111 </td><td>111  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga79fe62234001b88317245f7599158aaf">log2f</a></code> </td><td align="right">1052 </td><td>0 </td><td>100 </td><td align="right">2252 </td><td align="right">2723 </td><td align="center">-6.83 </td></tr>
 <tr>
-<td>floor (1.2345) </td><td>180 </td><td>180  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gad8314f66dfe8603f3a166eb466261ce1">modff</a></code> </td><td align="right">484 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">365 </td><td align="right">456 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>fmax (1.234, 5.678) </td><td>39 </td><td>37  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gade09185c0cf8101fa9e2f25c15041b81">roundf</a></code> </td><td align="right">236 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">111 </td><td align="right">156 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>fmin (1.234, 5.678) </td><td>35 </td><td>35  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga8a7dc2a88e109f4e15b661247665709a">sinf</a></code> </td><td align="right">910 </td><td>0 </td><td>3.15 </td><td align="right">1744 </td><td align="right">2146 </td><td align="center"><b>-3.67</b> </td></tr>
 <tr>
-<td>fmod (5.678, 1.234) </td><td>131 </td><td>131  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gafd3b66c913581f94690b9048a63324e9">sincosf</a></code> </td><td align="right">976 </td><td>-1.57 </td><td>3.15 </td><td align="right">3482 </td><td align="right">3883 </td><td align="center"><b>-3.43</b> </td></tr>
 <tr>
-<td>frexp (1.2345, 0) </td><td>42 </td><td>41  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga1976c7577fb97800f4b926bd042b64ac">sinhf</a></code> </td><td align="right">1466 </td><td>-20 </td><td>20 </td><td align="right">3043 </td><td align="right">3461 </td><td align="center">-5.78 </td></tr>
 <tr>
-<td>hypot (1.234, 5.678) </td><td>1341 </td><td>866  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga46c9a8d40cde7c4d5ab40a67e55316bb">sqrtf</a></code> </td><td align="right">256 </td><td>0 </td><td>1e+06 </td><td align="right">474 </td><td align="right">510 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>ldexp (1.2345, 6) </td><td>42 </td><td>42  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga67d5bfe80effce6adebf5fcbc5a7dae0">tanf</a></code> </td><td align="right">1178 </td><td>0 </td><td>3.15 </td><td align="right">2178 </td><td align="right">2946 </td><td align="center"><b>-2.86</b> </td></tr>
 <tr>
-<td>log (1.2345) </td><td>4142 </td><td>2134  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga74e8f87bb37a338d2cebbb6b1d696593">tanhf</a></code> </td><td align="right">1494 </td><td>-20 </td><td>20 </td><td align="right">3148 </td><td align="right">3620 </td><td align="center">-6.37 </td></tr>
 <tr>
-<td>log10 (1.2345) </td><td>4498 </td><td>2260  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaa8bb2049c170c9ac5b131fdba029991a">truncf</a></code> </td><td align="right">234 </td><td>-1000 </td><td>1000 </td><td align="right">140 </td><td align="right">178 </td><td align="center">-7.22 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>libm benchmarks for ATmega128 (avr51, with MUL)</caption>
 <tr>
-<td>modf (1.2345, 0) </td><td>433 </td><td>429  </td></tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>y<sub>0</sub> </th><th>y<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
 <tr>
-<td>pow (1.234, 5.678) </td><td>9293 </td><td>5047  </td></tr>
+<td><code>+</code> </td><td align="right">380 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">102 </td><td align="right">256 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>round (1.2345) </td><td>150 </td><td>150  </td></tr>
+<td><code>*</code> </td><td align="right">380 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">129 </td><td align="right">139 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>sin (1.2345) </td><td>3353 </td><td>1653  </td></tr>
+<td><code>/</code> </td><td align="right">390 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">469 </td><td align="right">501 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>sinh (1.2345) </td><td>4946 </td><td>3003  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaf9e5469acf7a7bf82f29d86a77f539d4">atan2f</a></code> </td><td align="right">1206 </td><td>-10 </td><td>10 </td><td>-10 </td><td>10 </td><td align="right">2882 </td><td align="right">3455 </td><td align="center">-6.82 </td></tr>
 <tr>
-<td>sqrt (1.2345) </td><td>494 </td><td>492  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaeee3a0bf2804c53c65199590ac4804cf">fdimf</a></code> </td><td align="right">446 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">75 </td><td align="right">218 </td><td align="center">-7.22 </td></tr>
 <tr>
-<td>tan (1.2345) </td><td>4381 </td><td>2426  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga8849bfdbec18ded429fad4772cf60f4b">fmaxf</a></code> </td><td align="right">62 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">30 </td><td align="right">34 </td><td align="center">-&infin; </td></tr>
 <tr>
-<td>tanh (1.2345) </td><td>5126 </td><td>3173  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#ga9b4132c27f31d39c91c3c6063f378103">fminf</a></code> </td><td align="right">62 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">30 </td><td align="right">34 </td><td align="center">-&infin; </td></tr>
 <tr>
-<td>trunc (1.2345) </td><td>178 </td><td>178  </td></tr>
+<td><code><a class="el" href="group__avr__math.html#gaf17ec425baca2b5f3882a05b5e19dfb5">fmodf</a></code> </td><td align="right">312 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">88 </td><td align="right">324 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga9fa4a03d7c4abfda7d9ad7b6ff7f6456">hypotf</a></code> </td><td align="right">1092 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">850 </td><td align="right">927 </td><td align="center">-6.92 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaac7102634b797e696c7344f289a20d6f">ldexpf</a></code> </td><td align="right">238 </td><td>-1e+10 </td><td>1e+10 </td><td>-10 </td><td>10 </td><td align="right">40 </td><td align="right">40 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gac6b287549be087f6f0bf03b6fe30499e">powf</a></code> </td><td align="right">1858 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">5182 </td><td align="right">5833 </td><td align="center"><b>-4.65</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a></code> </td><td align="right">732 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">648 </td><td align="right">1223 </td><td align="center">-6.39 </td></tr>
+</table>
+<p>For devices without MUL instruction, the following applies:</p><ul>
+<li>The execution times for multiplication and for the transcendental functions are roughly twice the time for devices that have MUL.</li>
+<li>The execution times for the remaining functions are roughly the same.</li>
+<li>The maximal relative errors are the same, i.e. independent of MUL.</li>
+</ul>
+<table class="doxtable">
+<caption>libm benchmarks for AT90S8515 (avr2, no MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga983a9e1aa7568df39153ea4d8e16653b">acosf</a></code> </td><td align="right">1104 </td><td>-1 </td><td>1 </td><td align="right">3513 </td><td align="right">3888 </td><td align="center">-6.66 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga7447a7400ca474ba42d127b04d6ee2b7">asinf</a></code> </td><td align="right">1096 </td><td>-1 </td><td>1 </td><td align="right">3452 </td><td align="right">3879 </td><td align="center">-6.47 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa582bc257e477e805f4ec384a39a3a8e">atanf</a></code> </td><td align="right">1054 </td><td>-10 </td><td>10 </td><td align="right">5280 </td><td align="right">5541 </td><td align="center">-6.92 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga396c6a553500a355627741e234045bf4">cbrtf</a></code> </td><td align="right">538 </td><td>-1e+06 </td><td>1e+06 </td><td align="right">2702 </td><td align="right">2795 </td><td align="center">-6.92 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8c1a8db0710bb3f25f643a0fca68fc60">ceilf</a></code> </td><td align="right">250 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">105 </td><td align="right">174 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga7b126b2344591e649c21c9ab0b8adb40">cosf</a></code> </td><td align="right">906 </td><td>-1.57 </td><td>1.58 </td><td align="right">3441 </td><td align="right">3798 </td><td align="center"><b>-2.86</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga498b368486b7ce8677820beeb78d8f66">coshf</a></code> </td><td align="right">1348 </td><td>-20 </td><td>20 </td><td align="right">4966 </td><td align="right">5346 </td><td align="center">-5.78 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga0c2bc89b8355a89542ac98d9e2120363">expf</a></code> </td><td align="right">1312 </td><td>-20 </td><td>20 </td><td align="right">4512 </td><td align="right">5140 </td><td align="center">-5.78 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga0bcc6aa4b3c37bfa73f06ebdecc0d247">floorf</a></code> </td><td align="right">250 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">105 </td><td align="right">177 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa903401f31809c2007484cc268fffe17">frexpf</a></code> </td><td align="right">150 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">39 </td><td align="right">39 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8246b3e17a39b137d0c62670d0c6e336">logf</a></code> </td><td align="right">1076 </td><td>0 </td><td>100 </td><td align="right">4562 </td><td align="right">5023 </td><td align="center">-6.69 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gae207b1eb007a6c23394dcb6fc7f16adf">log10f</a></code> </td><td align="right">1076 </td><td>0 </td><td>100 </td><td align="right">4568 </td><td align="right">5035 </td><td align="center">-6.62 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga79fe62234001b88317245f7599158aaf">log2f</a></code> </td><td align="right">1060 </td><td>0 </td><td>100 </td><td align="right">4205 </td><td align="right">4632 </td><td align="center">-6.83 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gad8314f66dfe8603f3a166eb466261ce1">modff</a></code> </td><td align="right">490 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">365 </td><td align="right">456 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gade09185c0cf8101fa9e2f25c15041b81">roundf</a></code> </td><td align="right">230 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">109 </td><td align="right">154 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8a7dc2a88e109f4e15b661247665709a">sinf</a></code> </td><td align="right">912 </td><td>0 </td><td>3.15 </td><td align="right">3408 </td><td align="right">3818 </td><td align="center"><b>-3.67</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gafd3b66c913581f94690b9048a63324e9">sincosf</a></code> </td><td align="right">978 </td><td>-1.57 </td><td>3.15 </td><td align="right">6813 </td><td align="right">7225 </td><td align="center"><b>-3.43</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga1976c7577fb97800f4b926bd042b64ac">sinhf</a></code> </td><td align="right">1434 </td><td>-20 </td><td>20 </td><td align="right">4941 </td><td align="right">5358 </td><td align="center">-5.78 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga46c9a8d40cde7c4d5ab40a67e55316bb">sqrtf</a></code> </td><td align="right">252 </td><td>0 </td><td>1e+06 </td><td align="right">474 </td><td align="right">510 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga67d5bfe80effce6adebf5fcbc5a7dae0">tanf</a></code> </td><td align="right">1164 </td><td>0 </td><td>3.15 </td><td align="right">4080 </td><td align="right">4785 </td><td align="center"><b>-2.86</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga74e8f87bb37a338d2cebbb6b1d696593">tanhf</a></code> </td><td align="right">1462 </td><td>-20 </td><td>20 </td><td align="right">5055 </td><td align="right">5544 </td><td align="center">-6.37 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa8bb2049c170c9ac5b131fdba029991a">truncf</a></code> </td><td align="right">226 </td><td>-1000 </td><td>1000 </td><td align="right">137 </td><td align="right">175 </td><td align="center">-7.22 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>libm benchmarks for AT90S8515 (avr2, no MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>y<sub>0</sub> </th><th>y<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
+<tr>
+<td><code>+</code> </td><td align="right">376 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">102 </td><td align="right">253 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code>*</code> </td><td align="right">378 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">346 </td><td align="right">386 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code>/</code> </td><td align="right">374 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">467 </td><td align="right">499 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaf9e5469acf7a7bf82f29d86a77f539d4">atan2f</a></code> </td><td align="right">1192 </td><td>-10 </td><td>10 </td><td>-10 </td><td>10 </td><td align="right">5287 </td><td align="right">5844 </td><td align="center">-6.82 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaeee3a0bf2804c53c65199590ac4804cf">fdimf</a></code> </td><td align="right">436 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">74 </td><td align="right">219 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8849bfdbec18ded429fad4772cf60f4b">fmaxf</a></code> </td><td align="right">66 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">31 </td><td align="right">36 </td><td align="center">-&infin; </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga9b4132c27f31d39c91c3c6063f378103">fminf</a></code> </td><td align="right">66 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">30 </td><td align="right">36 </td><td align="center">-&infin; </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaf17ec425baca2b5f3882a05b5e19dfb5">fmodf</a></code> </td><td align="right">302 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">86 </td><td align="right">322 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga9fa4a03d7c4abfda7d9ad7b6ff7f6456">hypotf</a></code> </td><td align="right">1068 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1297 </td><td align="right">1387 </td><td align="center">-6.92 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaac7102634b797e696c7344f289a20d6f">ldexpf</a></code> </td><td align="right">232 </td><td>-1e+10 </td><td>1e+10 </td><td>-10 </td><td>10 </td><td align="right">39 </td><td align="right">39 </td><td align="center">-7.22 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gac6b287549be087f6f0bf03b6fe30499e">powf</a></code> </td><td align="right">1820 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">9490 </td><td align="right">10180 </td><td align="center"><b>-4.65</b> </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__builtins.html#gaf42c104c8b9448937a3971c1d036b538">__builtin_powif</a></code> </td><td align="right">734 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">1143 </td><td align="right">2140 </td><td align="center">-6.39 </td></tr>
+</table>
+<h1><a class="anchor" id="bench_libf7"></a>
+Math Functions for IEEE double from LibF7</h1>
+<p>The following tables contain benchmark values for some IEEE double floating-point functions over the indicated range(s) of input values. <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">LibF7</a> is a IEEE double implementation hosted by libgcc since <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>.</p>
+<p>The code sizes include all dependencies with the exception of potential prologue and epilogue routines (<code>__prologue_saves__</code>, <code>__epilogue_restores__</code>).</p>
+<p>The sizes of functions don't add up. For example, <a class="el" href="group__avr__math.html#gaeb537bfea71fa91192234a666f3a6a25">sinl</a>, <a class="el" href="group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4">cosl</a>, <a class="el" href="group__avr__math.html#ga3ace56b4f2a4a9364993a5af676793c5">asinl</a>, <a class="el" href="group__avr__math.html#gae84dc6cff92b3417098f16a1811635e4">acosl</a> and <a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">sqrtl</a> together occupy only 4744 bytes of code <em>including</em> the prologue and epilogue routines. With <code>-mrelax</code> the code size reduces further to around 4400 bytes.</p>
+<p>Notice that the values for relative error and the Worst Case Execution Time Cycles<sub>max</sub> are only <em>lower bounds</em>. The best achievable accuracy for IEEE double with its 52 fractional bits in the mantissa is  
+log<sub>10</sub>(2<sup>&minus;53</sup> &asymp; 1.1&middot;10<sup>&minus;16</sup>) &asymp; &minus;15.95.
+  </p>
+<table class="doxtable">
+<caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gae84dc6cff92b3417098f16a1811635e4">acosl</a></code> </td><td align="right">3342 </td><td>-1 </td><td>1 </td><td align="right">16235 </td><td align="right">17997 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga3ace56b4f2a4a9364993a5af676793c5">asinl</a></code> </td><td align="right">3342 </td><td>-1 </td><td>1 </td><td align="right">16124 </td><td align="right">18008 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga650d8dd23c16c6699d84651a18827d37">atanl</a></code> </td><td align="right">2820 </td><td>-10 </td><td>10 </td><td align="right">20363 </td><td align="right">21255 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga521c2f4c10b7bb5363bad058ef56794c">cbrtl</a></code> </td><td align="right">4102 </td><td>-1e+06 </td><td>1e+06 </td><td align="right">32368 </td><td align="right">33415 </td><td align="center">-15.33 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gae11b7781f057eb7ba5d7ed95be7fdbee">ceill</a></code> </td><td align="right">1772 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1430 </td><td align="right">1768 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga659287f7399efa8d6bc66dc37c8e35f4">cosl</a></code> </td><td align="right">3900 </td><td>-1.57 </td><td>1.58 </td><td align="right">11241 </td><td align="right">13649 </td><td align="center">-15.66 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga57602cd20f8de2dceea4f05ffb516d82">coshl</a></code> </td><td align="right">3654 </td><td>-20 </td><td>20 </td><td align="right">20036 </td><td align="right">21466 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaed4eb11ef1397c751334311ce5b43920">expl</a></code> </td><td align="right">3562 </td><td>-20 </td><td>20 </td><td align="right">16965 </td><td align="right">18417 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga211df53cdf5208b9bbfa92e2d9aef97f">floorl</a></code> </td><td align="right">1710 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1354 </td><td align="right">1690 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga4caa878fa965baea202b7246b430487f">frexpl</a></code> </td><td align="right">1256 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">748 </td><td align="right">765 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaf67da1c28ce33b403f955103f201dfb8">logl</a></code> </td><td align="right">2944 </td><td>0 </td><td>100 </td><td align="right">15099 </td><td align="right">15825 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gae824e49a04221dcf66b9791c5df8d6b6">log10l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15746 </td><td align="right">16437 </td><td align="center">-15.59 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa383ae0cab6c24f1bcba661dee0fbd70">log2l</a></code> </td><td align="right">2954 </td><td>0 </td><td>100 </td><td align="right">15751 </td><td align="right">16418 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga6565127c023ae8f392ce69e3b3f30aa1">roundl</a></code> </td><td align="right">1796 </td><td>-1e+05 </td><td>1e+05 </td><td align="right">1664 </td><td align="right">1760 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaeb537bfea71fa91192234a666f3a6a25">sinl</a></code> </td><td align="right">3898 </td><td>0 </td><td>3.15 </td><td align="right">11976 </td><td align="right">14028 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga342b5fac99b2c8ea46ed260640c7ec39">sincosl</a></code> </td><td align="right">3880 </td><td>-1.57 </td><td>3.15 </td><td align="right">19913 </td><td align="right">22412 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gad160d5d1bb3f113e96135a4bebe76abe">sinhl</a></code> </td><td align="right">3862 </td><td>-20 </td><td>20 </td><td align="right">19842 </td><td align="right">21536 </td><td align="center">-15.51 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga9c028a87917b3bb9bba9e75f66cdbd43">sqrtl</a></code> </td><td align="right">1410 </td><td>0 </td><td>1e+06 </td><td align="right">3009 </td><td align="right">3087 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga2151fba6c1e9b4fa5d2af2dcb5c68b17">tanl</a></code> </td><td align="right">3946 </td><td>0 </td><td>3.15 </td><td align="right">22448 </td><td align="right">24870 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga94ee8c57b6b2d0bc5466c75bea2bffcf">tanhl</a></code> </td><td align="right">3678 </td><td>-20 </td><td>20 </td><td align="right">20646 </td><td align="right">22347 </td><td align="center">-14.70 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8f9695496a9bb839eb5f728b6bf0c856">truncl</a></code> </td><td align="right">1710 </td><td>-1000 </td><td>1000 </td><td align="right">1118 </td><td align="right">1173 </td><td align="center">-15.95 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>LibF7 Benchmarks for ATmega128 (avr51, with MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>y<sub>0</sub> </th><th>y<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>log<sub>10</sub>(Err<sub>max</sub>) </th></tr>
+<tr>
+<td><code>+</code> </td><td align="right">1470 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1531 </td><td align="right">1667 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code>*</code> </td><td align="right">1600 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1620 </td><td align="right">1661 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code>/</code> </td><td align="right">1572 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">3563 </td><td align="right">3756 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa983bf34c931b97d66be8b7bfd03dc48">atan2l</a></code> </td><td align="right">3208 </td><td>-10 </td><td>10 </td><td>-10 </td><td>10 </td><td align="right">21115 </td><td align="right">22010 </td><td align="center">-15.65 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gab88ba65d1861deddbbc5cb5384d6a02e">fdiml</a></code> </td><td align="right">1730 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">1371 </td><td align="right">1802 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga0e31e170115494fdc03b6556844232f3">fmaxl</a></code> </td><td align="right">234 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">169 </td><td align="right">188 </td><td align="center">-&infin; </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga8a301190384886aa4e327db265fb5c9f">fminl</a></code> </td><td align="right">234 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">170 </td><td align="right">189 </td><td align="center">-&infin; </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#gaa927d9996fb40db42bd3a6cbe57da9a7">fmodl</a></code> </td><td align="right">2808 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5175 </td><td align="right">5947 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga92a0e76d17c34fc1b3b2e7c0868aea6e">hypotl</a></code> </td><td align="right">2312 </td><td>-1e+10 </td><td>1e+10 </td><td>-1e+10 </td><td>1e+10 </td><td align="right">5006 </td><td align="right">5166 </td><td align="center">-15.66 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga117ef260a3978efe149ab9f3ec3184e1">ldexpl</a></code> </td><td align="right">1254 </td><td>-1e+10 </td><td>1e+10 </td><td>-10 </td><td>10 </td><td align="right">738 </td><td align="right">756 </td><td align="center">-15.95 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__math.html#ga2f4830e468138e1513b55ca6a92a0f9a">powl</a></code> </td><td align="right">4080 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">32440 </td><td align="right">34066 </td><td align="center">-14.46 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__builtins.html#ga0a5b0d3090f941af35df28a5c9072924">__builtin_powil</a></code> </td><td align="right">2224 </td><td>0 </td><td>1e+04 </td><td>-10 </td><td>10 </td><td align="right">3396 </td><td align="right">6173 </td><td align="center">-15.12 </td></tr>
+</table>
+<h1><a class="anchor" id="bench_fxlib"></a>
+Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
+<p>The following tables contain benchmark values for some <a class="el" href="group__avr__stdfix.html">fixed-point</a> functions over the indicated range of input values.</p>
+<ul>
+<li><code>V+</code> denotes the smallest value that is larger than <code>V</code> for the considered fixed-point type. Similarly, <code>V-</code> denotes the largest value that is smaller than <code>V</code> for the considered type.</li>
+<li>The code sizes include all dependencies.</li>
+</ul>
+<p>Notice that the values for absolute error Err<sub>max</sub>, and the Worst Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.</p>
+<table class="doxtable">
+<caption>Fixed-Point Benchmarks for ATmega128 (avr51, with MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>Err<sub>max</sub> </th></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga67286cd5cf0caef2d92f830c504acee2">log2uhk</a></code> </td><td align="right">78 </td><td>0+ </td><td>10 </td><td align="right">52 </td><td align="right">75 </td><td>1.25e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga211974619dda522de151c54ea7e338a0">log21puhr</a></code> </td><td align="right">32 </td><td>0 </td><td>1- </td><td align="right">22 </td><td align="right">22 </td><td>4.28e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga695b880125c9e9a101d3414e92309bae">sinuhk_deg</a></code> </td><td align="right">272 </td><td>0 </td><td>256- </td><td align="right">53 </td><td align="right">55 </td><td>6.44e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac6423e61bb8f5b78fb174a20212c4455">cosuhk_deg</a></code> </td><td align="right">318 </td><td>0 </td><td>256- </td><td align="right">73 </td><td align="right">77 </td><td>6.44e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa20273916358cc5a63841caf127a401c">sqrthk</a></code> </td><td align="right">92 </td><td>0 </td><td>256- </td><td align="right">293 </td><td align="right">309 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad4bb40a96089a0bdd0bf4bec95f69657">sqrtuhk</a></code> </td><td align="right">70 </td><td>0 </td><td>256- </td><td align="right">277 </td><td align="right">293 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">42 </td><td>0 </td><td>1- </td><td align="right">100 </td><td align="right">100 </td><td>3.84e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa0f318048cbb81596a2046b3e3fad90e">sqrtuhr</a></code> </td><td align="right">38 </td><td>0 </td><td>1- </td><td align="right">98 </td><td align="right">98 </td><td>3.90e-03 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gae08c300b072dce2c0b9e91c2df017af1">acosk</a></code> </td><td align="right">404 </td><td>-1 </td><td>1 </td><td align="right">416 </td><td align="right">572 </td><td>5.39e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga8587ee990381cb310236e45abe066467">acosuk</a></code> </td><td align="right">328 </td><td>0 </td><td>1 </td><td align="right">385 </td><td align="right">526 </td><td>4.51e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gae12565b6641de71cae6c0b84dd285470">asink</a></code> </td><td align="right">386 </td><td>-1 </td><td>1 </td><td align="right">414 </td><td align="right">589 </td><td>4.95e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaf241e7158698cf7104b3d160dd03678d">asinuk</a></code> </td><td align="right">328 </td><td>0 </td><td>1 </td><td align="right">381 </td><td align="right">539 </td><td>4.43e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga487e34d29ddecc015b2b7e212222535b">atank</a></code> </td><td align="right">368 </td><td>-1 </td><td>1 </td><td align="right">242 </td><td align="right">264 </td><td>4.04e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga487e34d29ddecc015b2b7e212222535b">atank</a></code> </td><td align="right">368 </td><td>1 </td><td>10 </td><td align="right">888 </td><td align="right">913 </td><td>4.65e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad52082d6519f111664a138ebd673e82a">atanuk</a></code> </td><td align="right">298 </td><td>0 </td><td>1 </td><td align="right">203 </td><td align="right">206 </td><td>2.52e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac44202bf8260616f01ac270080608064">atanur</a></code> </td><td align="right">152 </td><td>0 </td><td>1- </td><td align="right">188 </td><td align="right">191 </td><td>2.46e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">214 </td><td>-10 </td><td>10 </td><td align="right">255 </td><td align="right">317 </td><td>1.09e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac5c8391e087f6aed24ad0a3f0330904e">exp2uk</a></code> </td><td align="right">164 </td><td>0 </td><td>10 </td><td align="right">245 </td><td align="right">293 </td><td>1.06e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaccc7404fe551ac9f84cc4b5d22986ea4">exp2m1ur</a></code> </td><td align="right">112 </td><td>0 </td><td>1- </td><td align="right">177 </td><td align="right">180 </td><td>2.13e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaadfbb54ccbb2320e5c338343fb968e0a">log2uk</a></code> </td><td align="right">184 </td><td>0+ </td><td>10 </td><td align="right">257 </td><td align="right">305 </td><td>6.03e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaeefbf7035b7bf0d046d85d2f2f4ab67e">log21pur</a></code> </td><td align="right">114 </td><td>0 </td><td>1- </td><td align="right">212 </td><td align="right">215 </td><td>2.87e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga1e6cffab97652aed4e70a61ce18ffd51">cospi2k</a></code> </td><td align="right">182 </td><td>-4 </td><td>4 </td><td align="right">249 </td><td align="right">258 </td><td>4.52e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga717726393cdde8067439de4dedbbd124">sinpi2k</a></code> </td><td align="right">182 </td><td>-4 </td><td>4 </td><td align="right">247 </td><td align="right">256 </td><td>4.54e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad952cbb91d0897722a247a830c4deae2">sinpi2ur</a></code> </td><td align="right">120 </td><td>0 </td><td>1- </td><td align="right">215 </td><td align="right">219 </td><td>2.80e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gabb9e929246f36d7d52285723cf8a8153">sqrtk</a></code> </td><td align="right">128 </td><td>0 </td><td>65536- </td><td align="right">572 </td><td align="right">635 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga60c044763ec1bc6cb6635cec517baa42">sqrtuk</a></code> </td><td align="right">94 </td><td>0 </td><td>65536- </td><td align="right">550 </td><td align="right">613 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga87ebbdabfa4763879cbaa12aad279f6b">sqrtr</a></code> </td><td align="right">88 </td><td>0 </td><td>1- </td><td align="right">290 </td><td align="right">313 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">sqrtur</a></code> </td><td align="right">66 </td><td>0 </td><td>1- </td><td align="right">274 </td><td align="right">297 </td><td>1.53e-05 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>Fixed-Point Benchmarks for ATtiny88 (avr25, no MUL)</caption>
+<tr>
+<th>Function </th><th>Size </th><th>x<sub>0</sub> </th><th>x<sub>1</sub> </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>Err<sub>max</sub> </th></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga67286cd5cf0caef2d92f830c504acee2">log2uhk</a></code> </td><td align="right">114 </td><td>0+ </td><td>10 </td><td align="right">339 </td><td align="right">380 </td><td>1.25e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga211974619dda522de151c54ea7e338a0">log21puhr</a></code> </td><td align="right">70 </td><td>0 </td><td>1- </td><td align="right">312 </td><td align="right">332 </td><td>4.28e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa20273916358cc5a63841caf127a401c">sqrthk</a></code> </td><td align="right">88 </td><td>0 </td><td>256- </td><td align="right">291 </td><td align="right">307 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad4bb40a96089a0bdd0bf4bec95f69657">sqrtuhk</a></code> </td><td align="right">68 </td><td>0 </td><td>256- </td><td align="right">276 </td><td align="right">292 </td><td>3.91e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga578c81e880163ccc0ce18c827a61d34a">sqrthr</a></code> </td><td align="right">54 </td><td>0 </td><td>1- </td><td align="right">102 </td><td align="right">105 </td><td>3.84e-03 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaa0f318048cbb81596a2046b3e3fad90e">sqrtuhr</a></code> </td><td align="right">50 </td><td>0 </td><td>1- </td><td align="right">100 </td><td align="right">104 </td><td>3.90e-03 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gae08c300b072dce2c0b9e91c2df017af1">acosk</a></code> </td><td align="right">446 </td><td>-1 </td><td>1 </td><td align="right">1097 </td><td align="right">1233 </td><td>5.39e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga8587ee990381cb310236e45abe066467">acosuk</a></code> </td><td align="right">378 </td><td>0 </td><td>1 </td><td align="right">1070 </td><td align="right">1197 </td><td>4.51e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gae12565b6641de71cae6c0b84dd285470">asink</a></code> </td><td align="right">428 </td><td>-1 </td><td>1 </td><td align="right">1095 </td><td align="right">1249 </td><td>4.95e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaf241e7158698cf7104b3d160dd03678d">asinuk</a></code> </td><td align="right">378 </td><td>0 </td><td>1 </td><td align="right">1066 </td><td align="right">1210 </td><td>4.43e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga487e34d29ddecc015b2b7e212222535b">atank</a></code> </td><td align="right">412 </td><td>-1 </td><td>1 </td><td align="right">877 </td><td align="right">973 </td><td>4.04e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga487e34d29ddecc015b2b7e212222535b">atank</a></code> </td><td align="right">412 </td><td>1 </td><td>10 </td><td align="right">1538 </td><td align="right">1630 </td><td>4.65e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad52082d6519f111664a138ebd673e82a">atanuk</a></code> </td><td align="right">352 </td><td>0 </td><td>1 </td><td align="right">844 </td><td align="right">924 </td><td>2.52e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac44202bf8260616f01ac270080608064">atanur</a></code> </td><td align="right">212 </td><td>0 </td><td>1- </td><td align="right">830 </td><td align="right">910 </td><td>2.46e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga6738fad7e09e7f44671012b2ad0a5303">exp2k</a></code> </td><td align="right">234 </td><td>-10 </td><td>10 </td><td align="right">993 </td><td align="right">1074 </td><td>1.09e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gac5c8391e087f6aed24ad0a3f0330904e">exp2uk</a></code> </td><td align="right">184 </td><td>0 </td><td>10 </td><td align="right">982 </td><td align="right">1050 </td><td>1.06e-02 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaccc7404fe551ac9f84cc4b5d22986ea4">exp2m1ur</a></code> </td><td align="right">134 </td><td>0 </td><td>1- </td><td align="right">916 </td><td align="right">939 </td><td>2.13e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaadfbb54ccbb2320e5c338343fb968e0a">log2uk</a></code> </td><td align="right">214 </td><td>0+ </td><td>10 </td><td align="right">1222 </td><td align="right">1294 </td><td>6.03e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gaeefbf7035b7bf0d046d85d2f2f4ab67e">log21pur</a></code> </td><td align="right">146 </td><td>0 </td><td>1- </td><td align="right">1187 </td><td align="right">1228 </td><td>2.87e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga1e6cffab97652aed4e70a61ce18ffd51">cospi2k</a></code> </td><td align="right">204 </td><td>-4 </td><td>4 </td><td align="right">1235 </td><td align="right">1285 </td><td>4.52e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga717726393cdde8067439de4dedbbd124">sinpi2k</a></code> </td><td align="right">204 </td><td>-4 </td><td>4 </td><td align="right">1233 </td><td align="right">1283 </td><td>4.54e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gad952cbb91d0897722a247a830c4deae2">sinpi2ur</a></code> </td><td align="right">146 </td><td>0 </td><td>1- </td><td align="right">1203 </td><td align="right">1248 </td><td>2.80e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#gabb9e929246f36d7d52285723cf8a8153">sqrtk</a></code> </td><td align="right">124 </td><td>0 </td><td>65536- </td><td align="right">570 </td><td align="right">633 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga60c044763ec1bc6cb6635cec517baa42">sqrtuk</a></code> </td><td align="right">92 </td><td>0 </td><td>65536- </td><td align="right">549 </td><td align="right">612 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga87ebbdabfa4763879cbaa12aad279f6b">sqrtr</a></code> </td><td align="right">84 </td><td>0 </td><td>1- </td><td align="right">288 </td><td align="right">311 </td><td>1.53e-05 </td></tr>
+<tr>
+<td><code><a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">sqrtur</a></code> </td><td align="right">64 </td><td>0 </td><td>1- </td><td align="right">273 </td><td align="right">296 </td><td>1.53e-05 </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

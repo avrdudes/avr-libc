@@ -10,7 +10,7 @@ var searchData=
   ['rbits_7',['rbits',['../group__avr__stdfix.html#ga992a7284a99c3442440c456f217dcb27',1,'stdfix-avrlibc.h']]],
   ['rdivi_8',['rdivi',['../group__avr__stdfix.html#gac66ac0434168816808769162678d4086',1,'stdfix-avrlibc.h']]],
   ['realloc_9',['realloc',['../group__avr__stdlib.html#gaf145dbe75eee95212f77da6826eb7d4e',1,'realloc(void *__ptr, size_t __size):&#160;realloc.c'],['../group__avr__stdlib.html#gaf145dbe75eee95212f77da6826eb7d4e',1,'realloc(void *ptr, size_t len):&#160;realloc.c']]],
-  ['rem_10',['rem',['../structdiv__t.html#ac64389de252de53eda8b4f8dbb7c623f',1,'div_t::rem()'],['../structldiv__t.html#a0f217ff62b8640aa945ec84d6d0bd000',1,'ldiv_t::rem()']]],
+  ['rem_10',['rem',['../structldiv__t.html#a0f217ff62b8640aa945ec84d6d0bd000',1,'ldiv_t::rem()'],['../structdiv__t.html#ac64389de252de53eda8b4f8dbb7c623f',1,'div_t::rem()']]],
   ['reti_11',['reti',['../group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b',1,'interrupt.h']]],
   ['round_12',['round',['../group__avr__math.html#ga7df19cf730447c00150569250a4b5e1d',1,'math.h']]],
   ['roundf_13',['roundf',['../group__avr__math.html#gade09185c0cf8101fa9e2f25c15041b81',1,'math.h']]],

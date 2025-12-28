@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -129,7 +132,7 @@ Macros</h2></td></tr>
 <tr class="separator:ga280c47b9edff2751b8dbb9a715dc44c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaea2b6be92ead4673bc487b271b7227fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb">FDEV_SETUP_STREAM</a>(put,  get,  rwflag)</td></tr>
 <tr class="separator:gaea2b6be92ead4673bc487b271b7227fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa1226b8f734a1b5148d931ae2908c45d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gaa1226b8f734a1b5148d931ae2908c45d">fdev_close</a>()</td></tr>
+<tr class="memitem:gaa1226b8f734a1b5148d931ae2908c45d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gaa1226b8f734a1b5148d931ae2908c45d">fdev_close</a>()&#160;&#160;&#160;((void)0)</td></tr>
 <tr class="separator:gaa1226b8f734a1b5148d931ae2908c45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga247111653f3e91bf2cb4930d590d8201"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga247111653f3e91bf2cb4930d590d8201">putc</a>(__c,  __stream)&#160;&#160;&#160;<a class="el" href="group__avr__stdio.html#gaf3387285b3eb0ce4e0e7ca3ccaed9014">fputc</a>(__c, __stream)</td></tr>
 <tr class="separator:ga247111653f3e91bf2cb4930d590d8201"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,14 +172,14 @@ Functions</h2></td></tr>
 <tr class="separator:ga77070c245d4ca4f7ec7d7144260fb875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga53ff61856759709eeceae10aaa10a0a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga53ff61856759709eeceae10aaa10a0a3">snprintf_P</a> (char *__s, size_t __n, const char *__fmt,...)</td></tr>
 <tr class="separator:ga53ff61856759709eeceae10aaa10a0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaeb1bbe21a1b9b50b207ab059a67993f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gaaeb1bbe21a1b9b50b207ab059a67993f">vsprintf</a> (char *__s, const char *__fmt, va_list ap)</td></tr>
-<tr class="separator:gaaeb1bbe21a1b9b50b207ab059a67993f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf47f5141509d1e434f9da2b27287a707"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gaf47f5141509d1e434f9da2b27287a707">vsprintf_P</a> (char *__s, const char *__fmt, va_list ap)</td></tr>
-<tr class="separator:gaf47f5141509d1e434f9da2b27287a707"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac92e8c42a044c8f50aad5c2c69e638e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gac92e8c42a044c8f50aad5c2c69e638e0">vsnprintf</a> (char *__s, size_t __n, const char *__fmt, va_list ap)</td></tr>
-<tr class="separator:gac92e8c42a044c8f50aad5c2c69e638e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2071feb5c92bf50a6bd508a07ead9515"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga2071feb5c92bf50a6bd508a07ead9515">vsnprintf_P</a> (char *__s, size_t __n, const char *__fmt, va_list ap)</td></tr>
-<tr class="separator:ga2071feb5c92bf50a6bd508a07ead9515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga129a84920638c8e538e80fdeb6d69a6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga129a84920638c8e538e80fdeb6d69a6f">vsprintf</a> (char *__s, const char *__fmt, va_list __ap)</td></tr>
+<tr class="separator:ga129a84920638c8e538e80fdeb6d69a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab5cb9ba918b3c3f80399e1164a8b28d2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gab5cb9ba918b3c3f80399e1164a8b28d2">vsprintf_P</a> (char *__s, const char *__fmt, va_list __ap)</td></tr>
+<tr class="separator:gab5cb9ba918b3c3f80399e1164a8b28d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1797e15713c635606cbaf6ba56e98fe5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga1797e15713c635606cbaf6ba56e98fe5">vsnprintf</a> (char *__s, size_t __n, const char *__fmt, va_list __ap)</td></tr>
+<tr class="separator:ga1797e15713c635606cbaf6ba56e98fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0902d91baba413dedb08474f2ae4383"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#gac0902d91baba413dedb08474f2ae4383">vsnprintf_P</a> (char *__s, size_t __n, const char *__fmt, va_list __ap)</td></tr>
+<tr class="separator:gac0902d91baba413dedb08474f2ae4383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0e41285401c397eb29692205a95fcd9c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga0e41285401c397eb29692205a95fcd9c">fprintf</a> (<a class="el" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *__stream, const char *__fmt,...)</td></tr>
 <tr class="separator:ga0e41285401c397eb29692205a95fcd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga36173b4a8551b61811089198beec69d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__avr__stdio.html#ga36173b4a8551b61811089198beec69d9">fprintf_P</a> (<a class="el" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *__stream, const char *__fmt,...)</td></tr>
@@ -245,61 +248,52 @@ Functions</h2></td></tr>
 <p>For convenience, the first call to <code><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a></code> that opens a stream for reading will cause the resulting stream to be aliased to <code>stdin</code>. Likewise, the first call to <code><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a></code> that opens a stream for writing will cause the resulting stream to be aliased to both, <code>stdout</code>, and <code>stderr</code>. Thus, if the open was done with both, read and write intent, all three standard streams will be identical. Note that these aliases are indistinguishable from each other, thus calling <code><a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose()</a></code> on such a stream will also effectively close all of its aliases (<a class="el" href="group__avr__stdio.html#stdio_note3">note 3</a>).</p>
 <p>It is possible to tie additional user data to a stream, using <a class="el" href="group__avr__stdio.html#ga793fcb8f10b6b8746d4186012929ddf1">fdev_set_udata()</a>. The backend put and get functions can then extract this user data using <a class="el" href="group__avr__stdio.html#gac04f5faa8e86a4ce4ae084d85386af40">fdev_get_udata()</a>, and act appropriately. For example, a single put function could be used to talk to two different UARTs that way, or the put and get functions could keep internal state between calls there.</p>
 <h3>Format strings in flash ROM</h3>
-<p>All the <code>printf</code> and <code>scanf</code> family functions come in two flavours: the standard name, where the format string is expected to be in SRAM, as well as a version with the suffix "_P" where the format string is expected to reside in the flash ROM. The macro <a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> (explained in <a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a>) becomes very handy for declaring these format strings.</p>
+<p>All the <code>printf</code> and <code>scanf</code> family functions come in three flavours: the standard name, where the format string is expected to be in SRAM, as well as two versions with the suffix "_P" and "_F" where the format string is expected to reside in the flash ROM. The macros <a class="el" href="group__avr__pgmspace.html#ga73809107539df84eaf01f6a4dea4fbff">PSTR</a> (explained in <a class="el" href="group__avr__pgmspace.html">&lt;avr/pgmspace.h&gt;: Program Space Utilities</a>) and <a class="el" href="group__avr__flash.html#gabec036cb18588b3891217d4e0be515ee">FSTR</a> (explained in <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a>) become very handy for declaring these format strings.</p>
 <p><a class="anchor" id="stdio_without_malloc"></a> </p><h3>Running stdio without malloc()</h3>
-<p>By default, <a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> requires malloc(). As this is often not desired in the limited environment of a microcontroller, an alternative option is provided to run completely without malloc().</p>
+<p>By default, <a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> requires <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>. As this is often not desired in the limited environment of a microcontroller, an alternative option is provided to run completely without malloc().</p>
 <p>The macro <a class="el" href="group__avr__stdio.html#gaf41f158c022cbb6203ccd87d27301226" title="Setup a user-supplied buffer as an stdio stream.">fdev_setup_stream()</a> is provided to prepare a user-supplied FILE buffer for operation with stdio.</p>
 <h4>Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stdio_8h.html">stdio.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <span class="keywordtype">int</span> uart_putchar(<span class="keywordtype">char</span> c, <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *stream);</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> mystdout = <a class="code hl_define" href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb">FDEV_SETUP_STREAM</a>(uart_putchar, NULL,</div>
-<div class="line">                                         <a class="code hl_define" href="group__avr__stdio.html#ga822a791a1c06a12b95c14ace75b48ad2">_FDEV_SETUP_WRITE</a>);</div>
-<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> mystdout = <a class="code hl_define" href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb">FDEV_SETUP_STREAM</a> (uart_putchar, NULL,</div>
+<div class="line">                                          <a class="code hl_define" href="group__avr__stdio.html#ga822a791a1c06a12b95c14ace75b48ad2">_FDEV_SETUP_WRITE</a>);</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">int</span></div>
-<div class="line">uart_putchar(<span class="keywordtype">char</span> c, <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *stream)</div>
+<div class="line">uart_putchar (<span class="keywordtype">char</span> c, <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *stream)</div>
 <div class="line">{</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>)</div>
-<div class="line">    uart_putchar(<span class="charliteral">&#39;\r&#39;</span>, stream);</div>
-<div class="line">  <a class="code hl_define" href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a>(UCSRA, UDRE);</div>
-<div class="line">  UDR = c;</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">    <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line">        uart_putchar (<span class="charliteral">&#39;\r&#39;</span>, stream);</div>
+<div class="line">    <a class="code hl_define" href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a> (UCSRA, UDRE);</div>
+<div class="line">    UDR = c;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span></div>
-<div class="line">main(<span class="keywordtype">void</span>)</div>
+<div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
-<div class="line">  init_uart();</div>
-<div class="line">  <a class="code hl_define" href="group__avr__stdio.html#ga0c0ef221f95f64e8632451312fd18cc8">stdout</a> = &amp;mystdout;</div>
-<div class="line">  <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a>(<span class="stringliteral">&quot;Hello, world!\n&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">    init_uart();</div>
+<div class="line">    <a class="code hl_define" href="group__avr__stdio.html#ga0c0ef221f95f64e8632451312fd18cc8">stdout</a> = &amp;mystdout;</div>
+<div class="line">    <a class="code hl_function" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a> (<span class="stringliteral">&quot;Hello, world!\n&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__sfr_html_gaaf6857fa882da35f8685e2001e5c3bbe"><div class="ttname"><a href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a></div><div class="ttdeci">#define loop_until_bit_is_set(sfr, bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:254</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_ga0c0ef221f95f64e8632451312fd18cc8"><div class="ttname"><a href="group__avr__stdio.html#ga0c0ef221f95f64e8632451312fd18cc8">stdout</a></div><div class="ttdeci">#define stdout</div><div class="ttdef"><b>Definition:</b> stdio.h:301</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_ga4c04da4953607fa5fa4d3908fecde449"><div class="ttname"><a href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a></div><div class="ttdeci">int printf(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> printf.c:38</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_ga822a791a1c06a12b95c14ace75b48ad2"><div class="ttname"><a href="group__avr__stdio.html#ga822a791a1c06a12b95c14ace75b48ad2">_FDEV_SETUP_WRITE</a></div><div class="ttdeci">#define _FDEV_SETUP_WRITE</div><div class="ttdef"><b>Definition:</b> stdio.h:366</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_gaea2b6be92ead4673bc487b271b7227fb"><div class="ttname"><a href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb">FDEV_SETUP_STREAM</a></div><div class="ttdeci">#define FDEV_SETUP_STREAM(put, get, rwflag)</div><div class="ttdoc">Initializer for a user-supplied stdio stream.</div><div class="ttdef"><b>Definition:</b> stdio.h:393</div></div>
-<div class="ttc" id="agroup__avr__stdio_html_gaed4dabeb9f7c518ded42f930a04abce8"><div class="ttname"><a href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a></div><div class="ttdeci">struct __file FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:283</div></div>
+<div class="ttc" id="agroup__avr__sfr_html_gaaf6857fa882da35f8685e2001e5c3bbe"><div class="ttname"><a href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a></div><div class="ttdeci">#define loop_until_bit_is_set(sfr, bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:252</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_ga0c0ef221f95f64e8632451312fd18cc8"><div class="ttname"><a href="group__avr__stdio.html#ga0c0ef221f95f64e8632451312fd18cc8">stdout</a></div><div class="ttdeci">#define stdout</div><div class="ttdef"><b>Definition:</b> stdio.h:290</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_ga4c04da4953607fa5fa4d3908fecde449"><div class="ttname"><a href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf</a></div><div class="ttdeci">int printf(const char *__fmt,...)</div><div class="ttdef"><b>Definition:</b> printf.c:35</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_ga822a791a1c06a12b95c14ace75b48ad2"><div class="ttname"><a href="group__avr__stdio.html#ga822a791a1c06a12b95c14ace75b48ad2">_FDEV_SETUP_WRITE</a></div><div class="ttdeci">#define _FDEV_SETUP_WRITE</div><div class="ttdef"><b>Definition:</b> stdio.h:355</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_gaea2b6be92ead4673bc487b271b7227fb"><div class="ttname"><a href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb">FDEV_SETUP_STREAM</a></div><div class="ttdeci">#define FDEV_SETUP_STREAM(put, get, rwflag)</div><div class="ttdoc">Initializer for a user-supplied stdio stream.</div><div class="ttdef"><b>Definition:</b> stdio.h:380</div></div>
+<div class="ttc" id="agroup__avr__stdio_html_gaed4dabeb9f7c518ded42f930a04abce8"><div class="ttname"><a href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a></div><div class="ttdeci">struct __file FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:272</div></div>
 </div><!-- fragment --><p>This example uses the initializer form <a class="el" href="group__avr__stdio.html#gaea2b6be92ead4673bc487b271b7227fb" title="Initializer for a user-supplied stdio stream.">FDEV_SETUP_STREAM()</a> rather than the function-like <a class="el" href="group__avr__stdio.html#gaf41f158c022cbb6203ccd87d27301226" title="Setup a user-supplied buffer as an stdio stream.">fdev_setup_stream()</a>, so all data initialization happens during C start-up.</p>
-<p>If streams initialized that way are no longer needed, they can be destroyed by first calling the macro <a class="el" href="group__avr__stdio.html#gaa1226b8f734a1b5148d931ae2908c45d">fdev_close()</a>, and then destroying the object itself. No call to <a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose()</a> should be issued for these streams. While calling <a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose()</a> itself is harmless, it will cause an undefined reference to free() and thus cause the linker to link the malloc module into the application.</p>
-<h3>Notes</h3>
+<p>If streams initialized that way are no longer needed, they can be destroyed by first calling the macro <a class="el" href="group__avr__stdio.html#gaa1226b8f734a1b5148d931ae2908c45d">fdev_close()</a>, and then destroying the object itself. No call to <a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose()</a> should be issued for these streams. While calling <a class="el" href="group__avr__stdio.html#gad3d27a6dcc225237171196dd0739bb10">fclose()</a> itself is harmless, it will cause an undefined reference to <a class="el" href="group__avr__stdlib.html#a_free">free()</a> and thus cause the linker to pull in the <a class="el" href="group__avr__stdlib.html#a_malloc">malloc</a> module into the application.</p>
 <dl>
 <dt><a class="anchor" id="stdio_note1"></a>Note 1: </dt>
 <dd>It might have been possible to implement a device abstraction that is compatible with <code>fopen()</code> but since this would have required to parse a string, and to take all the information needed either out of this string, or out of an additional table that would need to be provided by the application, this approach was not taken.  </dd>
 <dt><a class="anchor" id="stdio_note2"></a>Note 2: </dt>
 <dd><p class="startdd">This basically follows the Unix approach: if a device such as a terminal needs special handling, it is in the domain of the terminal device driver to provide this functionality. Thus, a simple function suitable as <code>put()</code> for <code><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a></code> that talks to a UART interface might look like this:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span></div>
-<div class="line">uart_putchar(<span class="keywordtype">char</span> c, <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *stream)</div>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> uart_putchar (<span class="keywordtype">char</span> c, <a class="code hl_typedef" href="group__avr__stdio.html#gaed4dabeb9f7c518ded42f930a04abce8">FILE</a> *stream)</div>
 <div class="line">{</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>)</div>
-<div class="line">    uart_putchar(<span class="charliteral">&#39;\r&#39;</span>, stream);</div>
-<div class="line">  <a class="code hl_define" href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a>(UCSRA, UDRE);</div>
-<div class="line">  UDR = c;</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">    <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line">        uart_putchar (<span class="charliteral">&#39;\r&#39;</span>, stream);</div>
+<div class="line">    <a class="code hl_define" href="group__avr__sfr.html#gaaf6857fa882da35f8685e2001e5c3bbe">loop_until_bit_is_set</a> (UCSRA, UDRE);</div>
+<div class="line">    UDR = c;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment -->  </dd>
 <dt><a class="anchor" id="stdio_note3"></a>Note 3: </dt>
@@ -408,7 +402,7 @@ Functions</h2></td></tr>
           <td class="memname">#define fdev_close</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;((void)0)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -773,7 +767,7 @@ Functions</h2></td></tr>
 <p>If the <code>get</code> function pointer is provided, the stream is opened with read intent. The function passed as <code>get</code> shall take a pointer to FILE as its single argument, and return one character from the device, passed as an <code>int</code> type. If an error occurs when trying to read from the device, it shall return <code><a class="el" href="group__avr__stdio.html#ga132917c782a0ba854c3ae9abe57c3b12">_FDEV_ERR</a></code>. If an end-of-file condition was reached while reading from the device, <code><a class="el" href="group__avr__stdio.html#ga280c47b9edff2751b8dbb9a715dc44c5">_FDEV_EOF</a></code> shall be returned.</p>
 <p>If both functions are provided, the stream is opened with read and write intent.</p>
 <p>The first stream opened with read intent is assigned to <code>stdin</code>, and the first one opened with write intent is assigned to both, <code>stdout</code> and <code>stderr</code>.</p>
-<p><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> uses <a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc()</a> (und thus malloc()) in order to allocate the storage for the new stream.</p>
+<p><a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> uses <a class="el" href="group__avr__stdlib.html#ga62994ba3ce84fed8a5481ab68e71a963">calloc()</a> (und thus <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a>) in order to allocate the storage for the new stream.</p>
 <dl class="section note"><dt>Note</dt><dd>If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before including &lt;<a class="el" href="stdio_8h.html">stdio.h</a>&gt;, a function prototype for <a class="el" href="group__avr__stdio.html#ga4d3cf48473f17420f1960a1b27f54d00">fdevopen()</a> will be chosen that is backwards compatible with AVR-LibC version 1.2 and before. This is solely intented for providing a simple migration path without the need to immediately change all source code. Do not use for new code. </dd></dl>
 
 </div>
@@ -957,7 +951,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga0e41285401c397eb29692205a95fcd9c">fprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga0e41285401c397eb29692205a95fcd9c">fprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#gaa5cd5eb930a79579538ccfbd78675224">fprintf_F</a>. </p>
 
 </div>
 </div>
@@ -1045,7 +1039,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga19c2bbe9ce4af9f0a7e3448387004fd3">fputs()</a> where <code>str</code> resides in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga19c2bbe9ce4af9f0a7e3448387004fd3">fputs()</a> where <code>str</code> resides in program memory. See also <a class="el" href="group__avr__flash.html#gae0084052e89c1e560bcde6d6e52ed4cb">fputs_F</a>. </p>
 
 </div>
 </div>
@@ -1087,7 +1081,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Read <code>nmemb</code> objects, <code>size</code> bytes each, from <code>stream</code>, to the buffer pointed to by <code>ptr</code>.</p>
-<p>Returns the number of objects successfully read, i. e. <code>nmemb</code> unless an input error occured or end-of-file was encountered. <a class="el" href="group__avr__stdio.html#ga47b00053272d6443c9befdb1304002cb">feof()</a> and <a class="el" href="group__avr__stdio.html#gaa89248dd55efb5f59a96e82976c97758">ferror()</a> must be used to distinguish between these two conditions. </p>
+<p>Returns the number of objects successfully read, i. e. <code>nmemb</code> unless an input error occurred or end-of-file was encountered. <a class="el" href="group__avr__stdio.html#ga47b00053272d6443c9befdb1304002cb">feof()</a> and <a class="el" href="group__avr__stdio.html#gaa89248dd55efb5f59a96e82976c97758">ferror()</a> must be used to distinguish between these two conditions. </p>
 
 </div>
 </div>
@@ -1158,7 +1152,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga0beb4fd9ff6833a364e3ce60370de058">fscanf()</a> using a <code>fmt</code> string in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga0beb4fd9ff6833a364e3ce60370de058">fscanf()</a> using a <code>fmt</code> string in program memory. See also <a class="el" href="group__avr__flash.html#ga1614141bcbc1209ed6d810a5f487dc54">fscanf_F</a>. </p>
 
 </div>
 </div>
@@ -1200,7 +1194,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Write <code>nmemb</code> objects, <code>size</code> bytes each, to <code>stream</code>. The first byte of the first object is referenced by <code>ptr</code>.</p>
-<p>Returns the number of objects successfully written, i. e. <code>nmemb</code> unless an output error occured. </p>
+<p>Returns the number of objects successfully written, i. e. <code>nmemb</code> unless an output error occurred. </p>
 
 </div>
 </div>
@@ -1277,7 +1271,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#ga605c2b0b1acc3491b6ade21acd93d520">printf_F</a>. </p>
 
 </div>
 </div>
@@ -1315,7 +1309,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga33f7bd99d40bf6f68a00d5507d65363d">puts()</a> where <code>str</code> resides in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga33f7bd99d40bf6f68a00d5507d65363d">puts()</a> where <code>str</code> resides in program memory. See also <a class="el" href="group__avr__flash.html#ga52f5453f1124dbd624b649c26fc937d4">puts_F</a>. </p>
 
 </div>
 </div>
@@ -1374,7 +1368,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102">scanf()</a> where <code>fmt</code> resides in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga3f0edc16dcabb5344d59d42cf7682102">scanf()</a> where <code>fmt</code> resides in program memory. See also <a class="el" href="group__avr__flash.html#ga5ef40a25334cde2029187149fd5868a1">scanf_F</a>. </p>
 
 </div>
 </div>
@@ -1457,7 +1451,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga77070c245d4ca4f7ec7d7144260fb875">snprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga77070c245d4ca4f7ec7d7144260fb875">snprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#gafd24b3fc565ee4075ce30d00dc4d6b9d">snprintf_F</a>. </p>
 
 </div>
 </div>
@@ -1527,7 +1521,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#gaae677765fa8beb7baf57ac61c443ba7a">sprintf_F</a>. </p>
 
 </div>
 </div>
@@ -1598,7 +1592,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf()</a> using a <code>fmt</code> string in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga5507d0e1bbfd387fbb2ffcfd8f5dca6f">sscanf()</a> using a <code>fmt</code> string in program memory. See also <a class="el" href="group__avr__flash.html#gad60cdc5d6fe415d82dc922d15fe7dd5a">sscanf_F</a>. </p>
 
 </div>
 </div>
@@ -1689,9 +1683,9 @@ Functions</h2></td></tr>
 <p>The conversion specifiers and their meanings are:</p>
 <ul>
 <li><code>diouxX</code> The int (or appropriate variant) argument is converted to signed decimal (d and i), unsigned octal (o), unsigned decimal (u), or unsigned hexadecimal (x and X) notation. The letters "abcdef" are used for x conversions; the letters "ABCDEF" are used for X conversions. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits, it is padded on the left with zeros.</li>
-<li><code>p</code> The <code>void *</code> argument is taken as an unsigned integer, and converted similarly as a <code>%#x</code> command would do.</li>
+<li><code>p</code> The <code>void*</code> argument is taken as an unsigned integer, and converted similarly as a <code>%#x</code> command would do.</li>
 <li><code>c</code> The <code>int</code> argument is converted to an <code>"unsigned char"</code>, and the resulting character is written.</li>
-<li><code>s</code> The <code>"char *"</code> argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating NUL character; if a precision is specified, no more than the number specified are written. If a precision is given, no null character need be present; if the precision is not specified, or is greater than the size of the array, the array must contain a terminating NUL character.</li>
+<li><code>s</code> The <code>char*</code> argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating NUL character; if a precision is specified, no more than the number specified are written. If a precision is given, no null character need be present; if the precision is not specified, or is greater than the size of the array, the array must contain a terminating NUL character.</li>
 <li><code>%</code> A <code>%</code> is written. No argument is converted. The complete conversion specification is "%%".</li>
 <li><code>eE</code> The double argument is rounded and converted in the format <code>"[-]d.ddde±dd"</code> where there is one digit before the decimal-point character and the number of digits after it is equal to the precision; if the precision is missing, it is taken as 6; if the precision is zero, no decimal-point character appears. An <em>E</em> conversion uses the letter <code>'E'</code> (rather than <code>'e'</code>) to introduce the exponent. The exponent always contains two digits; if the value is zero, the exponent is 00.</li>
 <li><code>fF</code> The double argument is rounded and converted to decimal notation in the format <code>"[-]ddd.ddd"</code>, where the number of digits after the decimal-point character is equal to the precision specification. If the precision is missing, it is taken as 6; if the precision is explicitly zero, no decimal-point character appears. If a decimal point appears, at least one digit appears before it.</li>
@@ -1699,22 +1693,46 @@ Functions</h2></td></tr>
 <li><code>S</code> Similar to the <code>s</code> format, except the pointer is expected to point to a program-memory (ROM) string instead of a RAM string.</li>
 </ul>
 <p>In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.</p>
-<p>Since the full implementation of all the mentioned features becomes fairly large, three different flavours of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> can be selected using linker options. The default <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> implements all the mentioned functionality except floating point conversions. A minimized version of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> is available that only implements the very basic integer and string conversion facilities, but only the <code>#</code> additional option can be specified using conversion flags (these flags are parsed correctly from the format specification, but then simply ignored). This version can be requested using the following <a class="el" href="using_tools.html#gcc_minusW">compiler options</a>:</p>
-<div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a> -lprintf_min</div>
-<div class="ttc" id="agroup__avr__stdio_html_gaa3b98c0d17b35642c0f3e4649092b9f1"><div class="ttname"><a href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a></div><div class="ttdeci">int vfprintf(FILE *__stream, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vfprintf.c:129</div></div>
-</div><!-- fragment --><p>If the full functionality including the floating point conversions is required, the following options should be used:</p>
-<div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a> -lprintf_flt -lm</div>
-</div><!-- fragment --><dl class="section user"><dt>Limitations:</dt><dd><ul>
+<p>Since the full implementation of all the mentioned features becomes fairly large, three different flavours of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> can be selected using linker options:</p><ul>
+<li>The default <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> implements all the mentioned functionality except floating point conversions.</li>
+<li>A minimized version of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a> that only implements the very basic integer and string conversion facilities, but only the <code>#</code> additional option can be specified using conversion flags (these flags are parsed correctly from the format specification, but then are simply ignored).</li>
+<li>A version with floating point-support, but with the following twists:<ul>
+<li>The argument will be converted to IEEE single for output.</li>
+<li>When <code>long</code> <code>double</code> is a 64-bit type and <code>double</code> is a 32-bit type, then the former will only be printed as a single '?'. Rationale is to avoid 64-bit floating point arithmetic in printf when the used selected <code>-mdouble=32</code>. In order to print IEEE double, it can be converted to IEEE single by hand.</li>
+</ul>
+</li>
+</ul>
+<p>The respective version can be requested using the following <a class="el" href="using_tools.html#gcc_minusW">link options</a>:</p>
+<dl>
+<dt>Classic approach </dt>
+<dd><ul>
+<li>The minimal version can be requested with the following options: <div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a> -lprintf_min</div>
+<div class="ttc" id="agroup__avr__stdio_html_gaa3b98c0d17b35642c0f3e4649092b9f1"><div class="ttname"><a href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a></div><div class="ttdeci">int vfprintf(FILE *__stream, const char *__fmt, va_list __ap)</div></div>
+</div><!-- fragment --></li>
+<li>If the full functionality including the floating point conversions is required, the following options should be used: <div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a> -lprintf_flt</div>
+</div><!-- fragment --></li>
+</ul>
+<p class="enddd">This approach will always link the selected printf code, even when the application doesn't use printf.  </p>
+</dd>
+<dt>Since AVR-LibC v2.3 </dt>
+<dd><ul>
+<li>The minimal version can be requested with the following options: <div class="fragment"><div class="line">-Wl,--defsym,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a>=vfprintf_min</div>
+</div><!-- fragment --></li>
+<li>The full functionality including the floating point conversions can be requested with: <div class="fragment"><div class="line">-Wl,--defsym,<a class="code hl_function" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf</a>=vfprintf_flt</div>
+</div><!-- fragment --></li>
+</ul>
+<p class="enddd">The difference to the "classic" approach is that when no printf is used in the application and <code>-Wl,--gc-sections</code> is added to the linker options, then the printf code will not be pulled in. See <a href="https://github.com/avrdudes/avr-libc/issues/654">issue #654</a> for an example.  </p>
+</dd>
+</dl>
+<p><b>Limitations:</b></p><ul>
 <li>The specified width and precision can be at most 255.</li>
 </ul>
-</dd></dl>
-<dl class="section user"><dt>Notes:</dt><dd><ul>
-<li>For floating-point conversions, if you link default or minimized version of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a>, the symbol <code></code>? will be output and double argument will be skipped. So you output below will not be crashed. For default version the width field and the "pad to left" ( symbol minus ) option will work in this case.</li>
+<p><b>Notes:</b></p><ul>
+<li>For floating-point conversions, if you link the default or minimized version of <a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a>, the symbol <code>?</code> will be output. The same applies for the float version with <code>-mdouble=32</code> and when an IEEE double arguments is passed. For default version the width field and the "pad to left" (symbol <em>minus</em>) option will work in this case.</li>
 <li>The <code>hh</code> length modifier is ignored (<code>char</code> argument is promouted to <code>int</code>). More exactly, this realization does not check the number of <code>h</code> symbols.</li>
 <li>But the <code>ll</code> length modifier will to abort the output, as this realization does not operate <code>long</code> <code>long</code> arguments.</li>
 <li>The variable width or precision field (an asterisk <code>*</code> symbol) is not realized and will to abort the output. </li>
 </ul>
-</dd></dl>
 
 </div>
 </div>
@@ -1749,7 +1767,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#gaa3b98c0d17b35642c0f3e4649092b9f1">vfprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#ga7bcb371c72e6c4bdd1f1f60e051f3dec">vfprintf_F</a>. </p>
 
 </div>
 </div>
@@ -1808,17 +1826,35 @@ Functions</h2></td></tr>
 <li><code>e, g, F, E, G</code> Equivalent to <code>f</code>.</li>
 <li><code>s</code> Matches a sequence of non-white-space characters; the next pointer must be a pointer to <code>char</code>, and the array must be large enough to accept all the sequence and the terminating <code>NUL</code> character. The input string stops at white space or at the maximum field width, whichever occurs first.</li>
 <li><code>c</code> Matches a sequence of width count characters (default 1); the next pointer must be a pointer to <code>char</code>, and there must be enough room for all the characters (no terminating <code>NUL</code> is added). The usual skip of leading white space is suppressed. To skip white space first, use an explicit space in the format.</li>
-<li><code></code>[ Matches a nonempty sequence of characters from the specified set of accepted characters; the next pointer must be a pointer to <code>char</code>, and there must be enough room for all the characters in the string, plus a terminating <code>NUL</code> character. The usual skip of leading white space is suppressed. The string is to be made up of characters in (or not in) a particular set; the set is defined by the characters between the open bracket <code></code>[ character and a close bracket <code></code>] character. The set excludes those characters if the first character after the open bracket is a circumflex <code>^</code>. To include a close bracket in the set, make it the first character after the open bracket or the circumflex; any other position will end the set. The hyphen character <code>-</code> is also special; when placed between two other characters, it adds all intervening characters to the set. To include a hyphen, make it the last character before the final close bracket. For instance, <code>[^]0-9-]</code> means the set of <em>everything except close bracket, zero through nine, and hyphen</em>. The string ends with the appearance of a character not in the (or, with a circumflex, in) set or when the field width runs out. Note that usage of this conversion enlarges the stack expense.</li>
+<li><code>[</code> Matches a nonempty sequence of characters from the specified set of accepted characters; the next pointer must be a pointer to <code>char</code>, and there must be enough room for all the characters in the string, plus a terminating <code>NUL</code> character. The usual skip of leading white space is suppressed. The string is to be made up of characters in (or not in) a particular set; the set is defined by the characters between the open bracket <code>[</code> character and a close bracket <code>]</code> character. The set excludes those characters if the first character after the open bracket is a circumflex <code>^</code>. To include a close bracket in the set, make it the first character after the open bracket or the circumflex; any other position will end the set. The hyphen character <code>-</code> is also special; when placed between two other characters, it adds all intervening characters to the set. To include a hyphen, make it the last character before the final close bracket. For instance, <code>[^]0-9-]</code> means the set of <em>everything except close bracket, zero through nine, and hyphen</em>. The string ends with the appearance of a character not in the (or, with a circumflex, in) set or when the field width runs out. Note that usage of this conversion enlarges the stack expense.</li>
 <li><code>p</code> Matches a pointer value (as printed by <code>p</code> in <a class="el" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf()</a>); the next pointer must be a pointer to <code>void</code>.</li>
-<li><p class="startli"><code>n</code> Nothing is expected; instead, the number of characters consumed thus far from the input is stored through the next pointer, which must be a pointer to <code>int</code>. This is not a conversion, although it can be suppressed with the <code>*</code> flag.</p>
-<p class="startli">These functions return the number of input items assigned, which can be fewer than provided for, or even zero, in the event of a matching failure. Zero indicates that, while there was input available, no conversions were assigned; typically this is due to an invalid input character, such as an alphabetic character for a <code>d</code> conversion. The value <code>EOF</code> is returned if an input failure occurs before any conversion such as an end-of-file occurs. If an error or end-of-file occurs after conversion has begun, the number of conversions which were successfully completed is returned.</p>
-<p class="startli">By default, all the conversions described above are available except the floating-point conversions and the width is limited to 255 characters. The float-point conversion will be available in the extended version provided by the library <code>libscanf_flt.a</code>. Also in this case the width is not limited (exactly, it is limited to 65535 characters). To link a program against the extended version, use the following compiler flags in the link stage:</p>
-<div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a> -lscanf_flt -lm</div>
-<div class="ttc" id="agroup__avr__stdio_html_ga67bae1ad3af79809fd770be392f90e21"><div class="ttname"><a href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a></div><div class="ttdeci">int vfscanf(FILE *__stream, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vfscanf.c:744</div></div>
-</div><!-- fragment --><p class="startli">A third version is available for environments that are tight on space. In addition to the restrictions of the standard one, this version implements no <code>%[</code> specification. This version is provided in the library <code>libscanf_min.a</code>, and can be requested using the following options in the link stage:</p>
-<div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a> -lscanf_min -lm</div>
-</div><!-- fragment --> </li>
+<li><code>n</code> Nothing is expected; instead, the number of characters consumed thus far from the input is stored through the next pointer, which must be a pointer to <code>int</code>. This is not a conversion, although it can be suppressed with the <code>*</code> flag.</li>
 </ul>
+<p>These functions return the number of input items assigned, which can be fewer than provided for, or even zero, in the event of a matching failure. Zero indicates that, while there was input available, no conversions were assigned; typically this is due to an invalid input character, such as an alphabetic character for a <code>d</code> conversion. The value <code>EOF</code> is returned if an input failure occurs before any conversion such as an end-of-file occurs. If an error or end-of-file occurs after conversion has begun, the number of conversions which were successfully completed is returned.</p>
+<p>By default, all the conversions described above are available except the floating-point conversions and the width is limited to 255 characters. The floating-point conversion will be available in the extended version. Also in this case the width is not limited (exactly, it is limited to 65535 characters).</p>
+<p>A third version is available for environments that are tight on space. In addition to the restrictions of the standard one, this version implements no <code>%[</code> specification.</p>
+<p>To link a program against the respective version, use the following <a class="el" href="using_tools.html#gcc_minusW">compiler flags</a> in the link stage:</p>
+<dl>
+<dt>Classic approach </dt>
+<dd><ul>
+<li>In order to use the extended version, link with: <div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a> -lscanf_flt</div>
+<div class="ttc" id="agroup__avr__stdio_html_ga67bae1ad3af79809fd770be392f90e21"><div class="ttname"><a href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a></div><div class="ttdeci">int vfscanf(FILE *__stream, const char *__fmt, va_list __ap)</div><div class="ttdef"><b>Definition:</b> vfscanf.c:827</div></div>
+</div><!-- fragment --></li>
+<li>In order to use the minimal version, link with: <div class="fragment"><div class="line">-Wl,-u,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a> -lscanf_min</div>
+</div><!-- fragment --></li>
+</ul>
+<p class="enddd">This approach will always link the requested scanf implementation, even when the application doesn't use scanf.  </p>
+</dd>
+<dt>Since AVR-LibC v2.3 </dt>
+<dd><ul>
+<li>In order to use the extended version, link with: <div class="fragment"><div class="line">-Wl,--defsym,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a>=vfscanf_flt</div>
+</div><!-- fragment --></li>
+<li>In order to use the minimal version, link with: <div class="fragment"><div class="line">-Wl,--defsym,<a class="code hl_function" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf</a>=vfscanf_min</div>
+</div><!-- fragment --></li>
+</ul>
+<p class="enddd">This approach will not link the requested scanf implementation provided the application doesn't use scanf, and <code>-Wl,--gc-sections</code> is added to the link options.  </p>
+</dd>
+</dl>
 
 </div>
 </div>
@@ -1853,7 +1889,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <a class="el" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf()</a> using a <code>fmt</code> string in program memory. </p>
+<p>Variant of <a class="el" href="group__avr__stdio.html#ga67bae1ad3af79809fd770be392f90e21">vfscanf()</a> using a <code>fmt</code> string in program memory. See also <a class="el" href="group__avr__flash.html#ga1c0659168754e7dedc7f9f4519b4ba6c">vfscanf_F</a>. </p>
 
 </div>
 </div>
@@ -1917,8 +1953,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gac92e8c42a044c8f50aad5c2c69e638e0" name="gac92e8c42a044c8f50aad5c2c69e638e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac92e8c42a044c8f50aad5c2c69e638e0">&#9670;&#160;</a></span>vsnprintf()</h2>
+<a id="ga1797e15713c635606cbaf6ba56e98fe5" name="ga1797e15713c635606cbaf6ba56e98fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1797e15713c635606cbaf6ba56e98fe5">&#9670;&#160;</a></span>vsnprintf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1945,7 +1981,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">va_list&#160;</td>
-          <td class="paramname"><em>ap</em>&#160;</td>
+          <td class="paramname"><em>__ap</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1954,13 +1990,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Like <code><a class="el" href="group__avr__stdio.html#gaaeb1bbe21a1b9b50b207ab059a67993f">vsprintf()</a></code>, but instead of assuming <code>s</code> to be of infinite size, no more than <code>n</code> characters (including the trailing NUL character) will be converted to <code>s</code>.</p>
+<p>Like <code><a class="el" href="group__avr__stdio.html#ga129a84920638c8e538e80fdeb6d69a6f">vsprintf()</a></code>, but instead of assuming <code>s</code> to be of infinite size, no more than <code>n</code> characters (including the trailing NUL character) will be converted to <code>s</code>.</p>
 <p>Returns the number of characters that would have been written to <code>s</code> if there were enough space. </p>
 
 </div>
 </div>
-<a id="ga2071feb5c92bf50a6bd508a07ead9515" name="ga2071feb5c92bf50a6bd508a07ead9515"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2071feb5c92bf50a6bd508a07ead9515">&#9670;&#160;</a></span>vsnprintf_P()</h2>
+<a id="gac0902d91baba413dedb08474f2ae4383" name="gac0902d91baba413dedb08474f2ae4383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0902d91baba413dedb08474f2ae4383">&#9670;&#160;</a></span>vsnprintf_P()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1987,7 +2023,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">va_list&#160;</td>
-          <td class="paramname"><em>ap</em>&#160;</td>
+          <td class="paramname"><em>__ap</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1996,12 +2032,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#gac92e8c42a044c8f50aad5c2c69e638e0">vsnprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga1797e15713c635606cbaf6ba56e98fe5">vsnprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#ga700536c6a64d8b8cdac2dedeaa5a0105">vsnprintf_F</a>. </p>
 
 </div>
 </div>
-<a id="gaaeb1bbe21a1b9b50b207ab059a67993f" name="gaaeb1bbe21a1b9b50b207ab059a67993f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaeb1bbe21a1b9b50b207ab059a67993f">&#9670;&#160;</a></span>vsprintf()</h2>
+<a id="ga129a84920638c8e538e80fdeb6d69a6f" name="ga129a84920638c8e538e80fdeb6d69a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga129a84920638c8e538e80fdeb6d69a6f">&#9670;&#160;</a></span>vsprintf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2022,7 +2058,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">va_list&#160;</td>
-          <td class="paramname"><em>ap</em>&#160;</td>
+          <td class="paramname"><em>__ap</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2035,8 +2071,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaf47f5141509d1e434f9da2b27287a707" name="gaf47f5141509d1e434f9da2b27287a707"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf47f5141509d1e434f9da2b27287a707">&#9670;&#160;</a></span>vsprintf_P()</h2>
+<a id="gab5cb9ba918b3c3f80399e1164a8b28d2" name="gab5cb9ba918b3c3f80399e1164a8b28d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab5cb9ba918b3c3f80399e1164a8b28d2">&#9670;&#160;</a></span>vsprintf_P()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2057,7 +2093,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">va_list&#160;</td>
-          <td class="paramname"><em>ap</em>&#160;</td>
+          <td class="paramname"><em>__ap</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2066,7 +2102,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Variant of <code><a class="el" href="group__avr__stdio.html#gaaeb1bbe21a1b9b50b207ab059a67993f">vsprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. </p>
+<p>Variant of <code><a class="el" href="group__avr__stdio.html#ga129a84920638c8e538e80fdeb6d69a6f">vsprintf()</a></code> that uses a <code>fmt</code> string that resides in program memory. See also <a class="el" href="group__avr__flash.html#gafcf2617ae3689c12c6495b600561a5f9">vsprintf_F</a>. </p>
 
 </div>
 </div>
@@ -2074,7 +2110,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

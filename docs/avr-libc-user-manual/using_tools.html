@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -103,27 +106,51 @@ Options for the C compiler avr-gcc</h1>
 Machine-specific options for the AVR</h2>
 <p>The following machine-specific options are recognized by the C compiler frontend. The preprocessor will define the macros <code>__AVR</code> and <code>__AVR__</code> (to the value 1) when compiling for an AVR target. The macro <code>AVR</code> will be defined as well, except in strict ANSI mode.</p>
 <p>There are many options supported by avr-gcc, which also depend on the compiler version. For a complete overview, please see the documentation of avr-gcc's command line options. Here are links to supported options of the respective release series:</p>
-<ul>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html">Current development</a> (work in progress)</li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-14.1.0/gcc/AVR-Options.html">v14</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-13.2.0/gcc/AVR-Options.html">v13.2</a>, <a href="https://gcc.gnu.org/onlinedocs/gcc-13.3.0/gcc/AVR-Options.html">v13.3</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-12.3.0/gcc/AVR-Options.html">v12.3</a>, <a href="https://gcc.gnu.org/onlinedocs/gcc-12.4.0/gcc/AVR-Options.html">v12.4</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-11.4.0/gcc/AVR-Options.html">v11</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-10.5.0/gcc/AVR-Options.html">v10</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-9.5.0/gcc/AVR-Options.html">v9</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-8.5.0/gcc/AVR-Options.html">v8</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-7.5.0/gcc/AVR-Options.html">v7</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-6.5.0/gcc/AVR-Options.html">v6</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-5.5.0/gcc/AVR-Options.html">v5</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-4.9.4/gcc/AVR-Options.html">v4.9</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/AVR-Options.html">v4.8</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/AVR-Options.html">v4.7</a></li>
-</ul>
-<p>Apart from the documentation of command line options, the linked pages also contain:</p>
+<table class="doxtable">
+<caption>GCC Release Notes and Online Documentation</caption>
+<tr>
+<th>Release Notes </th><th>Online Documentation </th></tr>
+<tr>
+<td></td><td><a href="https://gcc.gnu.org/onlinedocs/#current">Current</a> (work in progress) </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a> </td><td><a href="https://gcc.gnu.org/gcc-15">GCC v15</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-14/changes.html#avr">GCC v14</a> </td><td><a href="https://gcc.gnu.org/gcc-14">GCC v14</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-13/changes.html#avr">GCC v13</a> </td><td><a href="https://gcc.gnu.org/gcc-13">GCC v13</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-12/changes.html#avr">GCC v12</a> </td><td><a href="https://gcc.gnu.org/gcc-12">GCC v12</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-11/changes.html#avr">GCC v11</a> </td><td><a href="https://gcc.gnu.org/gcc-11">GCC v11</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a> </td><td><a href="https://gcc.gnu.org/gcc-10">GCC v10</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-9/changes.html#avr">GCC v9</a> </td><td><a href="https://gcc.gnu.org/gcc-9">GCC v9</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-8/changes.html#avr">GCC v8</a> </td><td><a href="https://gcc.gnu.org/gcc-8">GCC v8</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-7/changes.html#avr">GCC v7</a> </td><td><a href="https://gcc.gnu.org/gcc-7">GCC v7</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-6/changes.html#avr">GCC v6</a> </td><td><a href="https://gcc.gnu.org/gcc-6">GCC v6</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-5/changes.html#avr">GCC v5</a> </td><td><a href="https://gcc.gnu.org/gcc-5">GCC v5</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-4.9/changes.html#avr">GCC v4.9</a> </td><td><a href="https://gcc.gnu.org/gcc-4.9">GCC v4.9</a> </td></tr>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-4.8/changes.html#avr">GCC v4.8</a> </td><td><a href="https://gcc.gnu.org/gcc-4.8">GCC v4.8</a> </td></tr>
+</table>
+<p>GCC v4.8 is the oldest compiler version supported by AVR-LibC.</p>
+<p>Apart from the documentation of <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html">command line options</a>, the linked pages also contain:</p>
 <ul>
 <li>The documentation of <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#avr-macros">built-in macros</a> like <code>__AVR_ARCH__</code>, <code>__AVR_ATmega328P__</code> and <code>__AVR_HAVE_MUL__</code>, just to mention a few.</li>
 <li>How the compiler treats the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#ramp"><code>RAMPX</code>, <code>RAMPY</code>, <code>RAMPZ</code> and <code>RAMPD</code> special function registers</a> on devices that have (one of) them.</li>
 <li>How the compiler treats the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"><code>EIND</code> special function register</a> on devices with more than 128 KiB of program memory, and how indirect calls are realized on such devices.</li>
+</ul>
+<p>See also:</p><ul>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html">AVR variable attributes</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html">AVR function attributes</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html#AVR-Named-Address-Spaces-1">AVR named address-spaces</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html">AVR built-in functions</a></li>
 </ul>
 <dl>
 <dt><code>-mmcu=<em>arch</em></code> </dt>
@@ -140,22 +167,37 @@ Selected general compiler options</h2>
 <p>The following general gcc options might be of some interest to AVR users.</p>
 <dl>
 <dt><a class="anchor" id="gcc_optO"></a><code>-O<em>n</em></code> </dt>
-<dd><p class="startdd">Optimization level <em>n</em>. Increasing <em>n</em> is meant to optimize more.</p>
-<p class="interdd"><b><code>-O0</b></code> reduces compilation time and makes debugging produce the expected results. This is the default.<br  />
- Turning off all optimizations will prevent some warnings from being issued since the generation of those warnings depends on code analysis steps that are only performed when optimizing (unreachable code, unused variables). Moreover, the delay routines in <code>&lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt;</code> require optimization to be turned on.</p>
-<p class="interdd"><b><code>-O2</b></code> optimizes for speed, but without enabling very expensive optimizations like <code>-O3</code> does.</p>
-<p class="interdd"><b><code>-Os</b></code> turns on all <code>-O2</code> optimizations except those that often increase code size. In most cases, this is the preferred optimization level for AVR programs.</p>
-<p class="interdd"><b><code>-Og</b></code> optimizes debugging experience. This should be the optimization level of choice for the standard edit-compile-debug cycle, offering a reasonable level of optimization while maintaining fast compilation and a good debugging experience.</p>
-<p class="interdd"><b><code>-O3</b></code> attempts to inline all "simple" functions and might unroll some loops. For the AVR target, this will normally constitute a large pessimization due to the code increasement.</p>
-<p class="interdd"><b><code>-O</b></code> is equivalent to <b><code>-O1</b></code>. The compiler tries to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time.</p>
-<p class="enddd">See also the <a class="el" href="FAQ.html#faq_gdboptimize">appropriate FAQ entry</a> for issues regarding debugging optimized code.  </p>
+<dd>Optimization level <em>n</em>. <dl>
+<dt><code>-O0</code></dt>
+<dd><p class="startdd">reduces compilation time and makes debugging produce the expected results. This is the default. Turning off all optimizations will prevent some warnings from being issued since the generation of those warnings depends on code analysis steps that are only performed when optimizing (unreachable code, unused variables). Moreover, the delay routines in <code>&lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt;</code> require optimization to be turned on.</p>
+<p class="enddd"></p>
 </dd>
+<dt><code>-O2</code></dt>
+<dd><p class="startdd">optimizes for speed, but without enabling very expensive optimizations like <code>-O3</code> does.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>-Os</code></dt>
+<dd><p class="startdd">turns on all <code>-O2</code> optimizations except those that often increase code size. In most cases, this is the preferred optimization level for AVR programs.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>-Og</code></dt>
+<dd><p class="startdd">optimizes debugging experience. This should be the optimization level of choice for the standard edit-compile-debug cycle, offering a reasonable level of optimization while maintaining fast compilation and a good debugging experience.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>-O3</code></dt>
+<dd><p class="startdd">attempts to inline all "simple" functions and might unroll some loops. For the AVR target, this will normally constitute a large pessimization due to the code increase.</p>
+<p class="enddd"></p>
+</dd>
+<dt><code>-O</code></dt>
+<dd>is equivalent to <code>-O1</code>. The compiler tries to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time. </dd>
+</dl>
+See also the <a class="el" href="FAQ.html#faq_gdboptimize">respective FAQ entry</a> for issues regarding debugging optimized code.  </dd>
 <dt><a class="anchor" id="gcc_minusW"></a><code>-Wp,<em>preprocessor-options</em></code> </dt>
 <dd></dd>
 <dt><code>-Wa,<em>assembler-options</em></code> </dt>
 <dd></dd>
 <dt><code>-Wl,<em>linker-options</em></code> </dt>
-<dd><p class="startdd">Pass the listed options to the C preprocessor, the assembler or the linker, respectively. Several options can be passed at once when they are separated by a <code></code>, (comma). </p>
+<dd><p class="startdd">Pass the listed options to the C preprocessor, the assembler or the linker, respectively. Several options can be passed at once when they are separated by a <code>,</code> (comma). </p>
 <p class="enddd"></p>
 </dd>
 <dt><a class="anchor" id="opt_g"></a><code>-g</code> </dt>
@@ -168,7 +210,7 @@ Selected general compiler options</h2>
 <dt><code>-x none</code> </dt>
 <dd><p class="startdd">Compile the following files in language <em>lang</em>. Values for <em>lang</em> are: <code>c</code>, <code>c++</code>, <code>assembler</code>, <code>assembler-with-cpp</code> and <code>none</code>.</p>
 <p class="interdd">For example, GCC does not recognize the <code>.asm</code> file extension as assembly source. With <code>-x assembler-with-cpp file.asm</code>, the compiler first runs the C preprocessor on <code>file.asm</code> (so that <code>#include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code> can be used in assembly), and then calls the assembler.</p>
-<p class="interdd">Another use case is to compile a C file that's read from standard input, which is specified as <code>-</code> (dash) instead of the name of a source file. As no source file name is specified, the compiler must be told which language to use: The command </p><pre class="fragment">$ echo '#include &lt;avr/io.h&gt;' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR</pre><p> pre-processes the C file <code>#include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code> and writes all macro definitions to stdout. The output is then filtered by <code>grep</code> to show all possible <a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a> vector names for ATmega8.</p>
+<p class="interdd">Another use case is to compile a C file that's read from standard input, which is specified as <code>-</code> (dash) instead of the name of a source file. As no source file name is specified, the compiler must be told which language to use: The command </p><pre class="fragment">$ echo '#include &lt;avr/io.h&gt;' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR</pre><p> pre-processes the C file <code>#include &lt;<a class="el" href="io_8h.html">avr/io.h</a>&gt;</code> and writes all macro definitions to stdout. The output is then filtered by <code>grep</code> to show all possible ISR <a class="el" href="group__avr__interrupts.html#avr_mcu_signames">vector names</a> for ATmega8.</p>
 <p class="interdd"><code>-x none</code> returns to the default for the following inputs, i.e. infer the respective source languages from the file extensions. </p>
 <p class="enddd"></p>
 </dd>
@@ -240,22 +282,22 @@ Selected general compiler options</h2>
 <p class="enddd"></p>
 </dd>
 <dt><code>-funsigned-char</code> </dt>
-<dd><p class="startdd">This option changes the binary interface!<br  />
+<dd><p class="startdd"><b>This option changes the binary interface! </b><br  />
  Make any unqualfied <code>char</code> type an unsigned char. Without this option, they default to a signed char. </p>
 <p class="enddd"></p>
 </dd>
 <dt><code>-funsigned-bitfields</code> </dt>
-<dd><p class="startdd">This option changes the binary interface!<br  />
+<dd><p class="startdd"><b>This option changes the binary interface!</b><br  />
  Make any unqualified bitfield type unsigned. By default, they are signed. </p>
 <p class="enddd"></p>
 </dd>
 <dt><code>-fshort-enums</code> </dt>
-<dd><p class="startdd">This option changes the binary interface!<br  />
+<dd><p class="startdd"><b>This option changes the binary interface!</b><br  />
  Allocate to an <code>enum</code> type only as many bytes as it needs for the declared range of possible values. Specifically, the enum type will be equivalent to the smallest integer type which has enough room. </p>
 <p class="enddd"></p>
 </dd>
 <dt><code>-fpack-struct</code> </dt>
-<dd><p class="startdd">This option changes the binary interface!<br  />
+<dd><p class="startdd"><b>This option changes the binary interface!</b><br  />
  Pack all structure members together without holes. </p>
 <p class="enddd"></p>
 </dd>
@@ -266,7 +308,7 @@ Selected general compiler options</h2>
 </dd>
 <dt><code>-ffreestanding</code> </dt>
 <dd><p class="startdd">Assume a "freestanding" environment as per the C standard. This turns off automatic builtin functions (though they can still be reached by prepending <code>__builtin_</code> to the actual function name). It also makes the compiler not complain when <code>main()</code> is declared with a <code>void</code> return type. (In most cases, <code>main()</code> won't even return anyway, and hence using a return type of <code>int</code> has no downsides at all).</p>
-<p class="enddd">However, this option also turns off all optimizations normally done by the compiler which assume that functions known by a certain name behave as described by the standard. For example, applying the function <a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a> to a literal string will normally cause the compiler to immediately replace that call by the actual length of the string, while with <code>-ffreestanding</code>, it will always call <a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a> at run-time.  </p>
+<p class="enddd"><b>This option turns off all optimizations normally done by the compiler which assume that functions known by a certain name behave as described by the standard.</b> For example, applying the function <code><a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a></code> to a literal string will normally cause the compiler to immediately replace that call by the actual length of the string, while with <code>-ffreestanding</code>, it will always call <a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a> at run-time.  </p>
 </dd>
 </dl>
 <h1><a class="anchor" id="using_avr_as"></a>
@@ -364,31 +406,27 @@ Selected linker options</h2>
 <p class="enddd"></p>
 </dd>
 <dt><code>--section-start <em>sectionname=org</em></code> </dt>
-<dd><p class="startdd">Start section <em>sectionname</em> at absolute address <em>org</em>.</p>
-<p class="enddd"></p>
-</dd>
-<dt><code>--relax</code> </dt>
-<dd>Don't use this option directly or per <code>-Wl,--relax</code>. Instead, link with <code>avr-gcc ... -mrelax</code>.  </dd>
+<dd>Start section <em>sectionname</em> at absolute address <em>org</em>. </dd>
 </dl>
 <h2><a class="anchor" id="using_pass_ld_opts"></a>
 Passing linker options from the C compiler</h2>
 <p>By default, all unknown non-option arguments on the <code>avr-gcc</code> command-line (i. e., all filename arguments that don't have a suffix that is handled by <code>avr-gcc</code>) are passed straight to the linker. Thus, all files ending in <code>.o</code> (object files) and <code>.a</code> (object libraries) are provided to the linker.</p>
-<p>System libraries are usually not passed by their explicit filename but rather using the <code>-l</code> option which uses an abbreviated form of the archive filename (see above). AVR-LibC ships system libraries, <code>libc.a</code>, <code>libm.a</code> and <code>lib<em>mcu</em>.a</code>. While the standard library <code>libc.a</code> will always be searched for unresolved references when the linker is started using the C compiler frontend (i. e., there's always at least one implied <code>-lc</code> option), the mathematics library <code>libm.a</code> is only automatically added in GCC v4.7 and above. On older versions, it needs to be explicitly requested using <code>-lm</code>.</p>
-<p>Conventionally, Makefiles use the <code>make</code> macro <code>LDLIBS</code> to keep track of <code>-l</code> (and possibly <code>-L</code>) options that should only be appended to the C compiler command-line when linking the final binary. In contrast, the macro <code>LDFLAGS</code> is used to store other command-line options to the C compiler that should be passed as options during the linking stage. The difference is that options are placed early on the command-line, while libraries are put at the end since they are to be used to resolve global symbols that are still unresolved at this point.</p>
+<p>System libraries are usually not passed by their explicit filename but rather using the <code>-l</code> option which uses an abbreviated form of the archive filename (see above). AVR-LibC ships system libraries, <code>libc.a</code>, <code>libm.a</code> and <code>lib<em>mcu</em>.a</code>. All these standard libraries will always be searched for unresolved references when the linker is started using the C/C++ compiler frontend, i. e., there are always implied options <code>-lc</code> and <code>-lm</code>. When a device library exists, which is the case since GCC v5, then <code>-l<em>mcu</em></code> will be automatically added, too.</p>
+<p>Conventionally, Makefiles use the <code>make</code> macro <code>LIBS</code> to keep track of <code>-l</code> (and possibly <code>-L</code>) options that should only be appended to the C compiler command-line when linking the final binary. In contrast, the macro <code>LDFLAGS</code> is used to store other command-line options to the C compiler that should be passed as options during the linking stage. The difference is that options are placed early on the command-line, while libraries are put at the end since they are to be used to resolve global symbols that are still unresolved at this point.</p>
 <p>Specific linker flags can be passed from the C compiler command-line using the <code>-Wl</code> compiler option, see <a class="el" href="using_tools.html#gcc_minusW">gcc_minusW</a> above. This option requires that there be no spaces in the appended linker option, while some of the linker options above (like <code>-Map</code> or <code>--defsym</code>) would require a space. In these situations, the space can be replaced by an equal sign as well. For example, the following command-line can be used to compile <code>foo.c</code> into an executable, and also produce a link map that contains a cross-reference list in the file <code>foo.map:</code> </p>
 <pre class="fragment">$ avr-gcc -mmcu=atmega8 foo.c -o foo.elf -Wl,-Map,foo.map -Wl,--cref
 </pre><p>Alternatively, a comma as a placeholder will be replaced by a space before passing the option to the linker. So for a device with external SRAM, the following command-line would cause the linker to place the data segment at address 0x2000 in the SRAM:</p>
 <pre class="fragment">$ avr-gcc -mmcu=atmega128 foo.c -o foo.elf -Wl,-Tdata,0x802000
-</pre><p>See the explanation of the <a class="el" href="mem_sections.html#sec_dot_data">data section</a> for why 0x800000 needs to be added to the actual value. Note that the stack will still remain in internal RAM, through the symbol <code>__stack</code> that is provided by the run-time startup code. This is probably a good idea anyway (since internal RAM access is faster), and even required for some early devices that had hardware bugs preventing them from using a stack in external RAM. Note also that the heap for <code>malloc()</code> will still be placed after all the variables in the data section, so in this situation, no stack/heap collision can occur.</p>
+</pre><p>See the explanation of the <a class="el" href="mem_sections.html#sec_dot_data">data section</a> for why 0x800000 needs to be added to the actual value. Note that the stack will still remain in internal RAM, through the symbol <code>__stack</code> that is provided by the run-time startup code. This is probably a good idea anyway (since internal RAM access is faster), and even required for some early devices that had hardware bugs preventing them from using a stack in external RAM. Note also that the heap for <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> will still be placed after all the variables in the data section, so in this situation, no stack/heap collision can occur.</p>
 <p>In order to relocate the stack from its default location at the top of interns RAM, the value of the symbol <code>__stack</code> can be changed on the linker command-line. As the linker is typically called from the compiler frontend, this can be achieved using a compiler option like</p>
 <div class="fragment"><div class="line">-Wl,--defsym=__stack=0x8003ff</div>
-</div><!-- fragment --><p>The above will make the code use stack space from RAM address 0x3ff downwards. The amount of stack space available then depends on the bottom address of internal RAM for a particular device. It is the responsibility of the application to ensure the stack does not grow out of bounds, as well as to arrange for the stack to not collide with variable allocations made by the compiler (sections .data and .bss). </p>
+</div><!-- fragment --><p>The above will make the code use stack space from RAM address 0x3ff downwards. Symbol <code>__stack</code> is picked up by the startup code to initialize the <code>SP</code> register. The amount of stack space available then depends on the bottom address of internal RAM for a particular device. It is the responsibility of the application to ensure the stack does not grow out of bounds, as well as to arrange for the stack to not collide with variable allocations made by the compiler (sections .data and .bss). </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:38 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

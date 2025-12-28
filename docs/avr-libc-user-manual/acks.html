@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -103,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li>Denis Chertykov and Marek Michalkiewicz [ <a href="#" onclick="location.href='mai'+'lto:'+'mar'+'ek'+'m@l'+'in'+'ux.'+'or'+'g.p'+'l'; return false;">marek<span class="obfuscator">.nosp@m.</span>m@li<span class="obfuscator">.nosp@m.</span>nux.o<span class="obfuscator">.nosp@m.</span>rg.p<span class="obfuscator">.nosp@m.</span>l</a> ] for developing the standard libraries and startup code for <b>AVR-GCC</b>.</li>
 <li>Uros Platise for developing the AVR programmer tool, <b>uisp</b>.</li>
 <li>Joerg Wunsch [ <a href="#" onclick="location.href='mai'+'lto:'+'joe'+'rg'+'@Fr'+'ee'+'BSD'+'.O'+'RG'; return false;">joerg<span class="obfuscator">.nosp@m.</span>@Fre<span class="obfuscator">.nosp@m.</span>eBSD.<span class="obfuscator">.nosp@m.</span>ORG</a> ] for adding all the AVR development tools to the FreeBSD [ <a href="http://www.freebsd.org">http://www.freebsd.org</a> ] ports tree and for providing the basics for the <a class="el" href="group__demo__project.html">demo project</a>.</li>
-<li>Brian Dean [ <a href="#" onclick="location.href='mai'+'lto:'+'bsd'+'@b'+'sdh'+'om'+'e.c'+'om'; return false;">bsd@b<span class="obfuscator">.nosp@m.</span>sdho<span class="obfuscator">.nosp@m.</span>me.co<span class="obfuscator">.nosp@m.</span>m</a> ] for developing <b>avrdude</b> (an alternative to <b>uisp</b>) and for contributing <a class="el" href="using_avrprog.html">documentation</a> which describes how to use it. <b>Avrdude</b> was previously called <b>avrprog</b>.</li>
+<li>Brian Dean [ <a href="#" onclick="location.href='mai'+'lto:'+'bsd'+'@b'+'sdh'+'om'+'e.c'+'om'; return false;">bsd@b<span class="obfuscator">.nosp@m.</span>sdho<span class="obfuscator">.nosp@m.</span>me.co<span class="obfuscator">.nosp@m.</span>m</a> ] for developing <b>avrdude</b>, an alternative to <b>uisp</b>. <b>Avrdude</b> was previously called <b>avrprog</b>.</li>
 <li>Eric Weddington [ <a href="#" onclick="location.href='mai'+'lto:'+'ewe'+'dd'+'ing'+'to'+'n@c'+'so'+'.at'+'me'+'l.c'+'om'; return false;">ewedd<span class="obfuscator">.nosp@m.</span>ingt<span class="obfuscator">.nosp@m.</span>on@cs<span class="obfuscator">.nosp@m.</span>o.at<span class="obfuscator">.nosp@m.</span>mel.c<span class="obfuscator">.nosp@m.</span>om</a> ] for maintaining the <b>WinAVR</b> package and thus making the continued improvements to the open source AVR toolchain available to many users.</li>
 <li>Rich Neswold for writing the original avr-tools document (which he graciously allowed to be merged into this document) and his improvements to the <a class="el" href="group__demo__project.html">demo project</a>.</li>
 <li>Theodore A. Roth for having been a long-time maintainer of many of the tools (<b>AVR-LibC</b>, the AVR port of <b>GDB</b>, <b>AVaRICE</b>, <b>uisp</b>, <b>avrdude</b>).</li>
@@ -115,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">AVR-LibC
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Standard C library for AVR-GCC</div>
   </td>
@@ -49,17 +49,20 @@
 </table>
 <table>
   <tr>
-    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Documentation</h2></a></td>
-    <td align="center" colspan=4><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></td>
-    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Development Pages</h2></a></td>
+    <td align="left"><a href="https://avrdudes.github.io/avr-libc/"><h2>AVR-LibC Manual</h2></a></td>
+    <td align="center" colspan=4>
+      <div class="logo"><img src="avr-libc-logo.png" alt="Logo" align="middle" border="0"></div>
+      <div class="invlogo"><img src="avr-libc-logo-inverted.png" alt="Logo" align="middle" border="0"></div>
+    </td>
+    <td align="right"><a href="https://github.com/avrdudes/avr-libc/"><h2>AVR-LibC Sources</h2></a></td>
   </tr>
   <tr>
-    <td align="center" width="16%"><a href="index.html"><h2>Main Page</h2></a></td>
+    <td align="center" width="14%"><a href="index.html"><h2>Main Page</h2></a></td>
     <td align="center" width="16%"><a href="pages.html"><h2>User Manual</h2></a></td>
-    <td align="center" width="16%"><a href="modules.html"><h2>Library Reference</h2></a></td>
-    <td align="center" width="16%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
-    <td align="center" width="16%"><a href="group__demos.html"><h2>Example Projects</h2></a></td>
-    <td align="center" width="16%"><a href="files.html"><h2>File List</h2></a></td>
+    <td align="center" width="22%"><a href="modules.html"><h2>Lib&shy;rary Refe&shy;rence</h2></a></td>
+    <td align="center" width="7%"><a href="FAQ.html"><h2>FAQ</h2></a></td>
+    <td align="center" width="22%"><a href="group__demos.html"><h2>Exam&shy;ple Pro&shy;jects</h2></a></td>
+    <td align="center" width="14%"><a href="Global_01Index.html"><h2>Index</h2></a></td>
   </tr>
 </table>
 </div>
@@ -107,6 +110,21 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </ul>
 </li>
 <li><a class="el" href="assembler.html#ass_modifiers">Operand Modifiers</a></li>
+<li><a class="el" href="assembler.html#c_runtime">Using the C Runtime</a><ul>
+<li><a class="el" href="assembler.html#c_runtime_default">Code that is used per Default</a><ul>
+<li><a class="el" href="assembler.html#c_runtime_vectors">The Interrupt Vector Table</a></li>
+<li><a class="el" href="assembler.html#c_runtime_init">The __init Label and Code</a></li>
+</ul>
+</li>
+<li><a class="el" href="assembler.html#c_runtime_by_hand">Code that has to be pulled in by Hand</a><ul>
+<li><a class="el" href="assembler.html#c_runtime_copy_data">Initializing .data</a></li>
+<li><a class="el" href="assembler.html#c_runtime_clear_bss">Clearing .bss</a></li>
+<li><a class="el" href="assembler.html#c_runtime_ctors">Running static Constructors</a></li>
+<li><a class="el" href="assembler.html#c_runtime_misc">Other Routines</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="ass_intro"></a>
 Introduction</h1>
@@ -128,12 +146,12 @@ Invoking the Compiler</h1>
 <p>This approach has the following advantages:</p>
 <ul>
 <li>There is basically only one program to be called directly, <code>avr-gcc</code>, regardless of the actual source language used.</li>
-<li>The invokation of the C preprocessor will be automatic, and will include the appropriate options to locate required include files in the filesystem.</li>
-<li>The invokation of the linker will be automatic, and will include the appropriate options to locate additional libraries as well as the application start-up code (<code>crt<em>XXX</em>.o</code>) and linker script.</li>
+<li>The invocation of the C preprocessor will be automatic, and will include the appropriate options to locate required include files in the filesystem.</li>
+<li>The invocation of the linker will be automatic, and will include the appropriate options to locate additional libraries as well as the application start-up code (<code>crt<em>XXX</em>.o</code>) and linker script.</li>
 </ul>
-<p>Note that the invokation of the C preprocessor will be automatic when the filename provided for the assembler file ends in <code>.S</code> (the capital letter "s"). This would even apply to operating systems that use case-insensitive filesystems since the actual decision is made based on the case of the filename suffix given on the command-line, not based on the actual filename from the file system.</p>
+<p>Note that the invocation of the C preprocessor will be automatic when the filename provided for the assembler file ends in <code>.S</code> (the capital letter "S"). This would even apply to operating systems that use case-insensitive filesystems since the actual decision is made based on the case of the filename suffix given on the command-line, not based on the actual filename from the file system.</p>
 <p>As an alternative to using <code>.S</code>, the suffix <code>.sx</code> is recognized for this purpose (starting with GCC v4.3). This is primarily meant to be compatible with other compiler environments that have been providing this variant before in order to cope with operating systems where filenames are case-insensitive (and, with some versions of <code>make</code> that could not distinguish between <code>.s</code> and <code>.S</code> on such systems).</p>
-<p>Alternatively, the language can explicitly be specified using the <code><a class="el" href="using_tools.html#opt_x">-x assembler-with-cpp</a></code> option.</p>
+<p>Alternatively, the language can explicitly be specified using the <code><a class="el" href="using_tools.html#opt_x">-x assembler-with-cpp</a></code> option before the assembly source files. After the asm source file specifications a <code>-x none</code> must be added when non-assembly source files are following. Otherwise, the driver program would assume that they contain assembly code, too.</p>
 <h1><a class="anchor" id="ass_example"></a>
 Example Program</h1>
 <p>The following annotated example features a simple 100 kHz square wave generator using an AT90S1200 clocked with a 10.7 MHz crystal. Pin PD6 will be used for the square wave output.</p>
@@ -198,11 +216,11 @@ Example Program</h1>
 <div class="line">.global __vector_default            <span class="comment">// Note [10]</span></div>
 <div class="line">__vector_default:</div>
 <div class="line">    <a class="code hl_define" href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:242</div></div>
-<div class="ttc" id="agroup__avr__interrupts_html_gaad5ebd34cb344c26ac87594f79b06b73"><div class="ttname"><a href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a></div><div class="ttdeci">#define sei()</div><div class="ttdef"><b>Definition:</b> interrupt.h:76</div></div>
-<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:208</div></div>
-<div class="ttc" id="agroup__deprecated__items_html_ga014ef751e83f97569c06f3cdd888f3f7"><div class="ttname"><a href="group__deprecated__items.html#ga014ef751e83f97569c06f3cdd888f3f7">sbi</a></div><div class="ttdeci">#define sbi(port, bit)</div><div class="ttdef"><b>Definition:</b> deprecated.h:213</div></div>
-<div class="ttc" id="agroup__deprecated__items_html_ga08ee265dc07048dbb5a8b6c84551d520"><div class="ttname"><a href="group__deprecated__items.html#ga08ee265dc07048dbb5a8b6c84551d520">cbi</a></div><div class="ttdeci">#define cbi(port, bit)</div><div class="ttdef"><b>Definition:</b> deprecated.h:222</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga3b991e8168db8fc866e31f9a6d10533b"><div class="ttname"><a href="group__avr__interrupts.html#ga3b991e8168db8fc866e31f9a6d10533b">reti</a></div><div class="ttdeci">#define reti()</div><div class="ttdef"><b>Definition:</b> interrupt.h:323</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gaad5ebd34cb344c26ac87594f79b06b73"><div class="ttname"><a href="group__avr__interrupts.html#gaad5ebd34cb344c26ac87594f79b06b73">sei</a></div><div class="ttdeci">#define sei()</div><div class="ttdef"><b>Definition:</b> interrupt.h:74</div></div>
+<div class="ttc" id="agroup__avr__sfr_html_ga11643f271076024c395a93800b3d9546"><div class="ttname"><a href="group__avr__sfr.html#ga11643f271076024c395a93800b3d9546">_BV</a></div><div class="ttdeci">#define _BV(bit)</div><div class="ttdef"><b>Definition:</b> sfr_defs.h:206</div></div>
+<div class="ttc" id="agroup__deprecated__items_html_ga014ef751e83f97569c06f3cdd888f3f7"><div class="ttname"><a href="group__deprecated__items.html#ga014ef751e83f97569c06f3cdd888f3f7">sbi</a></div><div class="ttdeci">#define sbi(port, bit)</div><div class="ttdef"><b>Definition:</b> deprecated.h:223</div></div>
+<div class="ttc" id="agroup__deprecated__items_html_ga08ee265dc07048dbb5a8b6c84551d520"><div class="ttname"><a href="group__deprecated__items.html#ga08ee265dc07048dbb5a8b6c84551d520">cbi</a></div><div class="ttdeci">#define cbi(port, bit)</div><div class="ttdef"><b>Definition:</b> deprecated.h:232</div></div>
 <div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
 </div><!-- fragment --><dl>
 <dt>Note [1] </dt>
@@ -218,7 +236,7 @@ Example Program</h1>
 <p class="enddd">In order to get a 100 kHz output, we need to toggle the PD6 line 200000 times per second. Since we use timer 0 without any prescaling options in order to get the desired frequency and accuracy, we already run into serious timing considerations: while accepting and processing the timer overflow interrupt, the timer already continues to count. When pre-loading the <code>TCCNT0</code> register, we therefore have to account for the number of clock cycles required for interrupt acknowledge and for the instructions to reload <code>TCCNT0</code> (4 clock cycles for interrupt acknowledge, 2 cycles for the jump from the interrupt vector, 2 cycles for the 2 instructions that reload <code>TCCNT0</code>). This is what the constant <code>fuzz</code> is for.  </p>
 </dd>
 <dt>Note [5] </dt>
-<dd>External functions need to be declared to be <code>.global</code>. <code>main</code> is the application entry point that will be jumped to from the ininitalization routine in <code>crts1200.o</code>.  </dd>
+<dd>External functions need to be declared to be <code>.global</code>. <code>main</code> is the application entry point that will be jumped to from the initialization routine in <code>crts1200.o</code>.  </dd>
 <dt>Note [6] </dt>
 <dd>The main loop is just a single jump back to itself. Square wave generation itself is completely handled by the timer 0 overflow interrupt service. A <code>sleep</code> instruction (using idle mode) could be used as well, but probably would not conserve much energy anyway since the interrupt service is executed quite frequently.  </dd>
 <dt>Note [7] </dt>
@@ -230,7 +248,7 @@ Example Program</h1>
 <dt><a class="anchor" id="ass_isr"></a>Note [9] </dt>
 <dd><p class="startdd">Interrupt routines must not clobber the global CPU state. Thus, it is usually necessary to save at least the state of the flag bits in <code>SREG</code>. (Note that this serves as an example here only since actually, all the following instructions would not modify <code>SREG</code> either, but that's not commonly the case.)</p>
 <p class="interdd">Also, it must be made sure that registers used inside the interrupt routine do not conflict with those used outside. In the case of a RAM-less device like the AT90S1200, this can only be done by agreeing on a set of registers to be used exclusively inside the interrupt routine; there would not be any other chance to "save" a register anywhere.</p>
-<p class="enddd">If the interrupt routine is to be linked together with C modules, care must be taken to follow the <a class="el" href="FAQ.html#faq_reg_usage">register usage guidelines</a> imposed by the C compiler. Also, any register modified inside the interrupt sevice needs to be saved, usually on the stack.  </p>
+<p class="enddd">If the interrupt routine is to be linked together with C modules, care must be taken to follow the <a class="el" href="FAQ.html#faq_reg_usage">register usage guidelines</a> imposed by the C compiler. Also, any register modified inside the interrupt service needs to be saved, usually on the stack.  </p>
 </dd>
 <dt>Note [10] </dt>
 <dd>As explained in <a class="el" href="group__avr__interrupts.html">Interrupts</a>, a global "catch-all" interrupt handler that gets all unassigned interrupt vectors can be installed using the name <code>__vector_default</code>. This must be <code>.global</code>, and obviously, should end in a <code>reti</code> instruction. (By default, a jump to location 0 would be implied instead.)  </dd>
@@ -251,7 +269,7 @@ Assembler Directives</h1>
 <td><a class="anchor" id="dot_pushsection"></a><code>.pushsection ...<br  />
 .popsection</code> </td><td>Like <code>.section</code>, but also pushes the current section and subsection onto the section stack. The current section and subsection can be restored with <code>.popsection</code>.  </td></tr>
 <tr>
-<td><a class="anchor" id="dot_subsection"></a><code>.subsection <em>int</em></code> </td><td>Put the following code into subsection number <em>int</em> which is some integer. Subsections are located in order of increasing index within their input section. The default after switching to a new section by means of <code>.section</code> or <code>.pushsection</code> is subsection 0.  </td></tr>
+<td><a class="anchor" id="dot_subsection"></a><code>.subsection <em>int</em></code> </td><td>Put the following code into subsection number <em>int</em> which is some integer. Subsections are located in order of increasing index within their input section. The default after switching to a new section by means of <code>.section</code> or <code>.pushsection</code> is subsection 0. Subsections only exist on the assembly level, i.e. subsection ordering doesn't work across different modules.  </td></tr>
 <tr>
 <td><code>.text</code><br  />
 <code>.data</code><br  />
@@ -263,11 +281,11 @@ Assembler Directives</h1>
 <th>Symbol&#160;Ops </th><th>Description  </th></tr>
 <tr>
 <td><code>.global <em>sym</em> <br  />
-.globl <em>sym</em></code> </td><td>Globalize symbol <em>sym</em> so that it can be referred to in other modules. When a symbol is used without prior declaration or definition, the symbol is implicitly global. The <code>.global</code> directive can also by used to refer to that symbol, so that the linker pulls in code that defines the symbol (provided such a symbol definition exists). For example, code that puts objects in the <code>.data</code> section and that assumes that the <a class="el" href="mem_sections.html#sec_dot_init">startup code</a> initializes that area, would use <code>.global __do_copy_data</code>.  </td></tr>
+.globl <em>sym</em></code> </td><td>Globalize symbol <em>sym</em> so that it can be referred to in other modules. When a symbol is used without prior declaration or definition, the symbol is implicitly global. The <code>.global</code> directive can also be used to refer to that symbol, so that the linker pulls in code that defines the symbol (provided such a symbol definition exists). For example, code that puts objects in the <code>.data</code> section and that assumes that the <a class="el" href="mem_sections.html#sec_dot_init">startup code</a> initializes that area, would use <code>.global __do_copy_data</code>.  </td></tr>
 <tr>
 <td><a class="anchor" id="dot_weak"></a><code>.weak <em>syms</em></code> </td><td>Declare symbols <em>syms</em> as weak symbols, where <em>syms</em> is a comma-separated list of symbols. This applies only when the symbols are also defined in the same module. When the linker encounters a weak symbol that is also defined as <code>.global</code> in a different module, then the linker will use the latter without raising a diagnostic about multiple symbol definitions.  </td></tr>
 <tr>
-<td><code>.type&#160;<em>sym,@kind</em></code> </td><td>Set the type of symbol <em>sym</em> to <em>kind</em>. Commonly used symbol types are <code>@function</code> for function symbols like <code>main</code> and <code>@object</code> for data symbols. This has an affect for disassemblers, debuggers and tools that show function / object properties.  </td></tr>
+<td><code>.type&#160;<em>sym,@kind</em></code> </td><td>Set the type of symbol <em>sym</em> to <em>kind</em>. Commonly used symbol types are <code>@function</code> for function symbols like <code>main</code> and <code>@object</code> for data symbols. This has an effect for disassemblers, debuggers and tools that show function / object properties.  </td></tr>
 <tr>
 <td><code>.size <em>sym,size</em></code> </td><td>Set the size associated with symbol <em>sym</em> to expression <em>size</em>. The linker works on the level of sections, it does not even know what functions are. This directive serves book-keeping, and may be useful for debuggers, disassemblers or tools that show which function / object consumes how much memory.  </td></tr>
 <tr>
@@ -280,8 +298,8 @@ Assembler Directives</h1>
 <td><code>.org</code> </td><td>Advance the location pointer to a specified offset <em>relative</em> to the beginning of the <a class="el" href="mem_sections.html#sec_input">input section</a>. The location counter cannot be moved backwards.<br  />
  This is a fairly pointless directive in an assembler environment that uses relocatable object files. The linker determines the final location of the objects. See the <a class="el" href="FAQ.html#faq_reloc_code">FAQ</a> on how to relocate code to a fixed address. </td></tr>
 </table>
-<p><a class="anchor" id="ass_data_and_align"></a></p><table class="doxtable">
-<caption>Assembler Directives: Data and Alignment</caption>
+<p><a class="anchor" id="ass_data_and_align"></a><a class="anchor" id="ass_data"></a></p><table class="doxtable">
+<caption>Assembler Directives: Data</caption>
 <tr>
 <th>Data Ops </th><th>Description </th><th>Alias  </th></tr>
 <tr>
@@ -295,7 +313,9 @@ Assembler Directives</h1>
 <tr>
 <td><code>.ascii <em>"string"</em></code> </td><td>Allocate a string of characters without \0 termination. </td><td></td></tr>
 <tr>
-<td><code>.asciz <em>"string"</em></code> </td><td>Allocate a \0 terminated string. </td><td></td></tr>
+<td><code>.asciz <em>"string"</em></code> </td><td>Allocate a \0 terminated string. </td><td><code>.string</code>  </td></tr>
+<tr>
+<td><code>.base64 <em>"string"</em></code> </td><td>Used for more efficient encoding of (large) blocks of binary data, see <a href="https://sourceware.org/PR31964">PR31964</a>. </td><td></td></tr>
 <tr>
 <td><code>.float <em>list</em></code> </td><td>Allocate IEEE-754 single 32-bit floating-point values specified in the comma-separated <em>list</em>. </td><td></td></tr>
 <tr>
@@ -304,6 +324,9 @@ Assembler Directives</h1>
 <td><code>.space&#160;<em>num[,val]</em></code> </td><td>Allocate <em>num</em> bytes with value <em>val</em> where <em>val</em> is optional and defaults to zero. </td><td><code>.skip</code>  </td></tr>
 <tr>
 <td><code>.zero <em>num</em></code> </td><td>Insert <em>num</em> zero bytes. </td><td></td></tr>
+</table>
+<p><a class="anchor" id="ass_align"></a></p><table class="doxtable">
+<caption>Assembler Directives: Alignment</caption>
 <tr>
 <th>Alignment Ops </th><th>Description </th><th>Alias  </th></tr>
 <tr>
@@ -311,22 +334,94 @@ Assembler Directives</h1>
 <tr>
 <td><code>.p2align&#160;<em>expo</em></code> </td><td>Align the following code to 2<sup><em>expo</em></sup> bytes. </td><td></td></tr>
 </table>
-<p>Moreover, there is the <b><code>.macro</code></b> directive, which starts an assembler macro. The GNU assembler implements a powerful macro processor which even supports recursive macro definitions. For an example, see the gas documentation for <a href="https://sourceware.org/binutils/docs/as/Macro.html"><code>.macro</code></a>. A gas <code>.macro</code> can further be combined with C preprocessor directives. For some real-world examples, see the AVR-LibC sources <a href="https://github.com/avrdudes/avr-libc/blob/main/common/macros.inc"><code>macros.inc</code></a> and <a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"><code>asmdef.h</code></a>.</p>
+<p>Moreover, there is the <b><code>.macro</code></b> directive, which starts an assembler macro. The GNU assembler implements a powerful macro processor which even supports recursive macro definitions. For an example, see the gas documentation for <a href="https://sourceware.org/binutils/docs/as/Macro.html"><code>.macro</code></a>. A gas <code>.macro</code> can further be combined with C preprocessor directives. For some real-world examples, see the AVR-LibC source <a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"><code>asmdef.h</code></a>.</p>
 <h1><a class="anchor" id="ass_modifiers"></a>
 Operand Modifiers</h1>
-<p>There are some AVR-specific operators available like <code>lo8()</code>, <code>hi8()</code>, <code>pm()</code>, <code>gs()</code> etc. For an overview see the documentation of the <a class="el" href="inline_asm.html#assembly_operand_modifiers">operand modifiers</a> in the inline assembly Cookbook.</p>
+<p>There are some AVR-specific operators available like <code>lo8()</code>, <code>hi8()</code>, <code>pm()</code>, <code>gs()</code> etc. For an overview, see the documentation of the <a class="el" href="inline_asm.html#assembly_operand_modifiers">operand modifiers</a> in the inline assembly Cookbook.</p>
 <p>Example: </p><pre class="fragment">    ldi	 r24, lo8(gs(somefunc))
     ldi	 r25, hi8(gs(somefunc))
     call      something
     subi r24, lo8(-(my_var))
     sbci r25, hi8(-(my_var))
-</pre><p>This passes the address of function <code>somefunc</code> as the first parameter to function <code>something</code>, and <em>adds</em> the address of variable <code>my_var</code> to the 16-bit return value of <code>something</code>. </p>
+</pre><p>This passes the address of function <code>somefunc</code> as the first parameter to function <code>something</code>, and <em>adds</em> the address of variable <code>my_var</code> to the 16-bit return value of <code>something</code>.</p>
+<h1><a class="anchor" id="c_runtime"></a>
+Using the C Runtime</h1>
+<p>The C runtime is a collection of code that is required for a correct operation of a C/C++ program, and that is not generated by the compiler but provided by support libraries and startup-code. For example, variables in static storage like <code>int two = 2;</code> have to be initialized so that when <code>main</code> starts, these variables hold their required initial value.</p>
+<p>This support code can also be used in assembly programs. The code can be divided into two classes: Code that is used per default, and code that has to be explicitly pulled in from a target library. As explained above, the assembler should be invoked via <code>avr-gcc</code>, so that the C runtime and support libraries are available.</p>
+<h2><a class="anchor" id="c_runtime_default"></a>
+Code that is used per Default</h2>
+<h3><a class="anchor" id="c_runtime_vectors"></a>
+The Interrupt Vector Table</h3>
+<p>The code is linked against the interrupt vector table as provided by AVR-LibC, hence code like the following will work out of the box: </p><pre class="fragment">#include &lt;avr/io.h&gt;
+
+.global INT0_vect
+
+INT0_vect:
+    ;; Code for INT0 ISR
+    reti
+</pre><p>This will add the respective entry to the interrupt vector table e.g. <code>__vector_1</code> in the case of an ATmega8.</p>
+<h3><a class="anchor" id="c_runtime_init"></a>
+The __init Label and Code</h3>
+<p>The startup code from AVR-LibC also sets up the stackpointer according to the value of symbol <code>__stack</code>, and it sets <code>__zero_reg__</code> (R1) to zero. This code starts at <code>__init</code> which is jumped to from the reset vector via the very first entry in the vector table. <code>__init</code> label is located in section <code><a class="el" href="mem_sections.html#sec_dot_init">.init0</a></code>, so that all the following init sections will also be executed in a fallthrough manner until section <code>.init9</code> which finally calls <code>main</code>. Thus, the following code will be executed without any further ado: </p><pre class="fragment">.text
+.global main
+
+main:
+    ;; Code for main
+</pre><p>When you prefer to implement all this in a custom manner, then you can link with option <code>-nostartfiles</code>.</p>
+<h2><a class="anchor" id="c_runtime_by_hand"></a>
+Code that has to be pulled in by Hand</h2>
+<h3><a class="anchor" id="c_runtime_copy_data"></a>
+Initializing .data</h3>
+<p>In order to initialize variables in the <code>.data</code> section, startup routine <code>__do_copy_data</code> from libgcc has to be pulled in. It will run during <code><a class="el" href="mem_sections.html#sec_dot_init">.init4</a></code>.</p>
+<pre class="fragment">.data
+.type   var, @object
+.size   ccc, 2
+var:
+    .2byte  1234
+
+.global __do_copy_data
+</pre><h3><a class="anchor" id="c_runtime_clear_bss"></a>
+Clearing .bss</h3>
+<p>Similarly, variables that clears the <code>.bss</code> section can be pulled in by referencing <code>__do_clear_bss</code> from libgcc. It will run during <code><a class="el" href="mem_sections.html#sec_dot_init">.init4</a></code>.</p>
+<pre class="fragment">.bss
+.type  var0, @object
+.size  var0, 2
+var0:
+    .zero  2
+
+.global __do_clear_bss
+</pre><h3><a class="anchor" id="c_runtime_ctors"></a>
+Running static Constructors</h3>
+<p>Suppose you have a function <code>func</code> that you want to register as a constructor. The code that runs the constructors is <code>__do_global_ctors</code> from libgcc that runs during <code><a class="el" href="mem_sections.html#sec_dot_init">.init6</a></code>. The addresses of the constructors are listed in section <code>.ctors:</code> </p>
+<pre class="fragment">;; Define void func (void) as an ordinary function.
+.type   func, @function
+func:
+    ;; Code
+    ret
+.size  func, .-func
+
+;; Add func to the list of static constructors
+.section .ctors,"a",@progbits
+.p2align 1
+.word  gs(func)
+
+;; Pull in code to call the functions listed in .ctors
+.global __do_global_ctors
+</pre><p>Similarly, static destructors are run by <code>__do_global_dtors</code>.</p>
+<h3><a class="anchor" id="c_runtime_misc"></a>
+Other Routines</h3>
+<p>All function in libgcc, libc and libm can be used, for example the 16-bit signed integer division routine:</p>
+<pre class="fragment">    ;; R23:22 = R25:24 div R23:22
+    ;; R25:24 = R25:24 mod R23:22
+    ;; Clobbers: R21, R26, R27, SREG.
+    call __divmodhi4
+</pre><p>Notice that not all functions are following the <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">avr-gcc calling convention</a>, and availability of some functions depends on the instruction set. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 9 2024 00:30:42 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 28 2025 13:38:39 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
