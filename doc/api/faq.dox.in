@@ -2476,7 +2476,7 @@ driver <tt>avr-gcc</tt>.  The latter is the usual way to invoke the linker.
 When these two versions are not the same, then the resulting toolchain may
 have inconsistencies.
 
-When you have more then one toolchain installed, then make sure you are
+When you have more than one toolchain installed, then make sure you are
 calling the command from the intended toolchain, e.g. by specifying
 the absolute path to the tool.
 
