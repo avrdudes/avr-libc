@@ -39,7 +39,7 @@ m4_define([avr_libc_major],    [2])dnl           major version
 m4_define([avr_libc_minor],    [3])dnl           minor version
 m4_define([avr_libc_revision], [1])dnl           revision (dot-dot version)
 m4_define([avr_libc_revision_suffix], [])dnl     revision suffix (if any)
-m4_define([avr_libc_reldate],  [20260104])dnl    release date
+m4_define([avr_libc_reldate],  [20260118])dnl    release date
 dnl end of library versioning data
 
 m4_define([avr_libc_version],
