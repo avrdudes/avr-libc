@@ -264,10 +264,10 @@ extern char *strchr(const char *, int) __ATTR_PURE__;
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char * strchr(const char *__hay, int __val)
 {
-  register char *__r24 __asm("24");
-  register int __r22 __asm("22") = __val;
+  register char *__r24 __asm("r24");
+  register int __r22 __asm("r22") = __val;
   __asm ("%~call strchr"
-         : "=r" (__r24) : "0" (__hay), "r" (__r22) : "30", "31");
+         : "=r" (__r24) : "0" (__hay), "r" (__r22) : "r30", "r31");
   return __r24;
 }
 #endif /* DOXYGEN */
@@ -663,10 +663,10 @@ size_t strlen(const char *__s)
     }
   else
     {
-      register const char *__r24 __asm("24") = __s;
-      register size_t __res __asm("24");
+      register const char *__r24 __asm("r24") = __s;
+      register size_t __res __asm("r24");
       __asm ("%~call %x2" : "=r" (__res) : "r" (__r24), "i" (strlen)
-             : "30", "31", "memory");
+             : "r30", "r31", "memory");
       return __res;
     }
 }
@@ -693,7 +693,7 @@ char* stpcpy(char *__x, const char *__z)
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int strcmp(const char *__x, const char *__z)
 {
-  register int __ret __asm("24");
+  register int __ret __asm("r24");
   __asm ("%~call __strcmp"
          : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;

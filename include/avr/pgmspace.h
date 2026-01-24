@@ -1078,10 +1078,10 @@ extern const char * strchr_P(const char *, int __val) __ATTR_CONST__;
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 const char * strchr_P(const char *__hay, int __val)
 {
-  register const char *__r24 __asm("24") = __hay;
-  register int __r22 __asm("22") = __val;
+  register const char *__r24 __asm("r24") = __hay;
+  register int __r22 __asm("r22") = __val;
   __asm ("%~call strchr_P"
-         : "+r" (__r24) : "r" (__r22) : "30", "31");
+         : "+r" (__r24) : "r" (__r22) : "r30", "r31");
   return __r24;
 }
 #endif /* DOXYGEN */
@@ -1674,7 +1674,7 @@ extern int memcmp_PF(const void *, uint_farptr_t, size_t) __ATTR_PURE__;
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 void* memcpy_P(void *__x, const void *__z, size_t __s)
 {
-  register size_t __r20 __asm("20") = __s;
+  register size_t __r20 __asm("r20") = __s;
   void *__ret = __x;
   __asm volatile ("%~call __memcpy_P" : "+x" (__x), "+z" (__z), "+r" (__r20)
                   :: "0", "memory");
@@ -1691,10 +1691,10 @@ size_t strlen_P(const char *__s)
     }
   else
     {
-      register const char *__r24 __asm("24") = __s;
-      register size_t __res __asm("24");
+      register const char *__r24 __asm("r24") = __s;
+      register size_t __res __asm("r24");
       __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
-             : "0", "30", "31");
+             : "0", "r30", "r31");
       return __res;
     }
 }
@@ -1721,7 +1721,7 @@ char* stpcpy_P(char *__x, const char *__z)
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int strcmp_P(const char *__x, const char *__z)
 {
-  register int __ret __asm("24");
+  register int __ret __asm("r24");
   __asm ("%~call __strcmp_P"
          : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
