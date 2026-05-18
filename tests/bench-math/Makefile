@@ -2,7 +2,7 @@
 
 help:
 	@echo "Determine libm / float function benchmark values."
-	@echo "The result is s Doxygen file then can be used as"
+	@echo "The result is a Doxygen file that can be used as"
 	@echo "doc/api/bench-libm.dox.  Sample usage:"
 	@echo "$ JOBS=3 CC=avr-gcc-15 builddir=../../../../build/avr-libc TIMES=10 ./gen-bench.sh 2"
 	@exit 0
