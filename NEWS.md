@@ -10,6 +10,7 @@
   - AVR-Dx to: AVR-Dx_DFP.2.8.343.atpack
   - AVR-Ex to: AVR-Ex_DFP.2.12.239.atpack
   - AVR-Lx to: AVR-Lx_DFP.1.2.43.atpack
+  - AVR-Sx to: AVR-Sx_DFP.1.2.26.atpack
 
 ## Issues closed
 
