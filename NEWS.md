@@ -6,6 +6,9 @@
 
 ## Improvements and Additions
 
+- Updated I/O headers:
+  - AVR-Lx to: AVR-Lx_DFP.1.2.43.atpack
+
 ## Issues closed
 
 ## Pull Requests
