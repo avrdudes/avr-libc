@@ -1,31 +1,22 @@
 /*
- * Copyright (C) 2025, Microchip Technology Inc. and its subsidiaries ("Microchip")
- * All rights reserved.
+ * Header file for AVR32DA48
  *
- * This software is developed by Microchip Technology Inc. and its subsidiaries ("Microchip").
+ * Copyright (c) 2026 Microchip Technology Inc. and its subsidiaries.
  *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
+ * SPDX-License-Identifier: Apache-2.0
  *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other
- *        materials provided with the distribution. Publication is not required when
- *        this file is used in an embedded application.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *     3. Microchip's name may not be used to endorse or promote products derived from this
- *        software without specific prior written permission.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #ifndef _AVR_IO_H_
@@ -57,3978 +48,40 @@ typedef volatile uint8_t register8_t;
 typedef volatile uint16_t register16_t;
 typedef volatile uint32_t register32_t;
 
-
 #ifdef _WORDREGISTER
 #undef _WORDREGISTER
 #endif
-#define _WORDREGISTER(regname)   \
-    __extension__ union \
-    { \
-        register16_t regname; \
-        struct \
-        { \
+#define _WORDREGISTER(regname)        \
+    __extension__ union               \
+    {                                 \
+        register16_t regname;         \
+        struct                        \
+        {                             \
             register8_t regname ## L; \
             register8_t regname ## H; \
-        }; \
+        };                            \
     }
 
 #ifdef _DWORDREGISTER
 #undef _DWORDREGISTER
 #endif
-#define _DWORDREGISTER(regname)  \
-    __extension__ union \
-    { \
-        register32_t regname; \
-        struct \
-        { \
+#define _DWORDREGISTER(regname)       \
+    __extension__ union               \
+    {                                 \
+        register32_t regname;         \
+        struct                        \
+        {                             \
             register8_t regname ## 0; \
             register8_t regname ## 1; \
             register8_t regname ## 2; \
             register8_t regname ## 3; \
-        }; \
+        };                            \
     }
 
 
-/*
-==========================================================================
-IO Module Structures
-==========================================================================
-*/
 
-
-/*
---------------------------------------------------------------------------
-AC - Analog Comparator
---------------------------------------------------------------------------
-*/
-
-/* Analog Comparator */
-typedef struct AC_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t MUXCTRL;  /* Mux Control A */
-    register8_t reserved_1[2];
-    register8_t DACREF;  /* DAC Voltage Reference */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t STATUS;  /* Status */
-} AC_t;
-
-/* Hysteresis Mode select */
-typedef enum AC_HYSMODE_enum
-{
-    AC_HYSMODE_NONE_gc = (0x00<<1),  /* No hysteresis */
-    AC_HYSMODE_SMALL_gc = (0x01<<1),  /* Small hysteresis */
-    AC_HYSMODE_MEDIUM_gc = (0x02<<1),  /* Medium hysteresis */
-    AC_HYSMODE_LARGE_gc = (0x03<<1)  /* Large hysteresis */
-} AC_HYSMODE_t;
-
-/* AC Output Initial Value select */
-typedef enum AC_INITVAL_enum
-{
-    AC_INITVAL_LOW_gc = (0x00<<6),  /* Output initialized to 0 */
-    AC_INITVAL_HIGH_gc = (0x01<<6)  /* Output initialized to 1 */
-} AC_INITVAL_t;
-
-/* Interrupt Mode select */
-typedef enum AC_INTMODE_NORMAL_enum
-{
-    AC_INTMODE_NORMAL_BOTHEDGE_gc = (0x00<<4),  /* Positive and negative inputs crosses */
-    AC_INTMODE_NORMAL_NEGEDGE_gc = (0x02<<4),  /* Positive input goes below negative input */
-    AC_INTMODE_NORMAL_POSEDGE_gc = (0x03<<4)  /* Positive input goes above negative input */
-} AC_INTMODE_NORMAL_t;
-
-/* Interrupt Mode select */
-typedef enum AC_INTMODE_WINDOW_enum
-{
-    AC_INTMODE_WINDOW_ABOVE_gc = (0x00<<4),  /* Window interrupt when input above both references */
-    AC_INTMODE_WINDOW_INSIDE_gc = (0x01<<4),  /* Window interrupt when input betweeen references */
-    AC_INTMODE_WINDOW_BELOW_gc = (0x02<<4),  /* Window interrupt when input below both references */
-    AC_INTMODE_WINDOW_OUTSIDE_gc = (0x03<<4)  /* Window interrupt when input outside reference */
-} AC_INTMODE_WINDOW_t;
-
-/* Negative Input MUX Selection */
-typedef enum AC_MUXNEG_enum
-{
-    AC_MUXNEG_AINN0_gc = (0x00<<0),  /* Negative Pin 0 */
-    AC_MUXNEG_AINN1_gc = (0x01<<0),  /* Negative Pin 1 */
-    AC_MUXNEG_AINN2_gc = (0x02<<0),  /* Negative Pin 2 */
-    AC_MUXNEG_DACREF_gc = (0x03<<0)  /* DAC Reference */
-} AC_MUXNEG_t;
-
-/* Positive Input MUX Selection */
-typedef enum AC_MUXPOS_enum
-{
-    AC_MUXPOS_AINP0_gc = (0x00<<3),  /* Positive Pin 0 */
-    AC_MUXPOS_AINP1_gc = (0x01<<3),  /* Positive Pin 1 */
-    AC_MUXPOS_AINP2_gc = (0x02<<3),  /* Positive Pin 2 */
-    AC_MUXPOS_AINP3_gc = (0x03<<3)  /* Positive Pin 3 */
-} AC_MUXPOS_t;
-
-/* Power profile select */
-typedef enum AC_POWER_enum
-{
-    AC_POWER_PROFILE0_gc = (0x00<<3),  /* Power profile 0, Shortest response time, highest consumption */
-    AC_POWER_PROFILE1_gc = (0x01<<3),  /* Power profile 1 */
-    AC_POWER_PROFILE2_gc = (0x02<<3)  /* Power profile 2 */
-} AC_POWER_t;
-
-/* Window selection mode */
-typedef enum AC_WINSEL_enum
-{
-    AC_WINSEL_DISABLED_gc = (0x00<<0),  /* Window function disabled */
-    AC_WINSEL_UPSEL1_gc = (0x01<<0),  /* Select ACn+1 as upper limit in window compare */
-    AC_WINSEL_UPSEL2_gc = (0x02<<0)  /* Select ACn+2 as upper limit in window compare */
-} AC_WINSEL_t;
-
-/* Analog Comparator Window State select */
-typedef enum AC_WINSTATE_enum
-{
-    AC_WINSTATE_ABOVE_gc = (0x00<<6),  /* Above window */
-    AC_WINSTATE_INSIDE_gc = (0x01<<6),  /* Inside window */
-    AC_WINSTATE_BELOW_gc = (0x02<<6)  /* Below window */
-} AC_WINSTATE_t;
-
-/*
---------------------------------------------------------------------------
-ADC - Analog to Digital Converter
---------------------------------------------------------------------------
-*/
-
-/* Analog to Digital Converter */
-typedef struct ADC_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t CTRLC;  /* Control C */
-    register8_t CTRLD;  /* Control D */
-    register8_t CTRLE;  /* Control E */
-    register8_t SAMPCTRL;  /* Sample Control */
-    register8_t reserved_1[2];
-    register8_t MUXPOS;  /* Positive mux input */
-    register8_t MUXNEG;  /* Negative mux input */
-    register8_t COMMAND;  /* Command */
-    register8_t EVCTRL;  /* Event Control */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t TEMP;  /* Temporary Data */
-    _WORDREGISTER(RES);  /* ADC Accumulator Result */
-    _WORDREGISTER(WINLT);  /* Window comparator low threshold */
-    _WORDREGISTER(WINHT);  /* Window comparator high threshold */
-    register8_t reserved_2[2];
-} ADC_t;
-
-/* Conversion mode select */
-typedef enum ADC_CONVMODE_enum
-{
-    ADC_CONVMODE_SINGLEENDED_gc = (0x00<<5),  /* Single-Ended mode */
-    ADC_CONVMODE_DIFF_gc = (0x01<<5)  /* Differential mode */
-} ADC_CONVMODE_t;
-
-/* Initial Delay Selection */
-typedef enum ADC_INITDLY_enum
-{
-    ADC_INITDLY_DLY0_gc = (0x00<<5),  /* Delay 0 CLK_ADC cycles */
-    ADC_INITDLY_DLY16_gc = (0x01<<5),  /* Delay 16 CLK_ADC cycles */
-    ADC_INITDLY_DLY32_gc = (0x02<<5),  /* Delay 32 CLK_ADC cycles */
-    ADC_INITDLY_DLY64_gc = (0x03<<5),  /* Delay 64 CLK_ADC cycles */
-    ADC_INITDLY_DLY128_gc = (0x04<<5),  /* Delay 128 CLK_ADC cycles */
-    ADC_INITDLY_DLY256_gc = (0x05<<5)  /* Delay 256 CLK_ADC cycles */
-} ADC_INITDLY_t;
-
-/* Analog Channel Selection Bits */
-typedef enum ADC_MUXNEG_enum
-{
-    ADC_MUXNEG_AIN0_gc = (0x00<<0),  /* ADC input pin 0 */
-    ADC_MUXNEG_AIN1_gc = (0x01<<0),  /* ADC input pin 1 */
-    ADC_MUXNEG_AIN2_gc = (0x02<<0),  /* ADC input pin 2 */
-    ADC_MUXNEG_AIN3_gc = (0x03<<0),  /* ADC input pin 3 */
-    ADC_MUXNEG_AIN4_gc = (0x04<<0),  /* ADC input pin 4 */
-    ADC_MUXNEG_AIN5_gc = (0x05<<0),  /* ADC input pin 5 */
-    ADC_MUXNEG_AIN6_gc = (0x06<<0),  /* ADC input pin 6 */
-    ADC_MUXNEG_AIN7_gc = (0x07<<0),  /* ADC input pin 7 */
-    ADC_MUXNEG_AIN8_gc = (0x08<<0),  /* ADC input pin 8 */
-    ADC_MUXNEG_AIN9_gc = (0x09<<0),  /* ADC input pin 9 */
-    ADC_MUXNEG_AIN10_gc = (0x0A<<0),  /* ADC input pin 10 */
-    ADC_MUXNEG_AIN11_gc = (0x0B<<0),  /* ADC input pin 11 */
-    ADC_MUXNEG_GND_gc = (0x40<<0),  /* Ground */
-    ADC_MUXNEG_DAC0_gc = (0x48<<0)  /* DAC0 */
-} ADC_MUXNEG_t;
-
-/* Analog Channel Selection Bits */
-typedef enum ADC_MUXPOS_enum
-{
-    ADC_MUXPOS_AIN0_gc = (0x00<<0),  /* ADC input pin 0 */
-    ADC_MUXPOS_AIN1_gc = (0x01<<0),  /* ADC input pin 1 */
-    ADC_MUXPOS_AIN2_gc = (0x02<<0),  /* ADC input pin 2 */
-    ADC_MUXPOS_AIN3_gc = (0x03<<0),  /* ADC input pin 3 */
-    ADC_MUXPOS_AIN4_gc = (0x04<<0),  /* ADC input pin 4 */
-    ADC_MUXPOS_AIN5_gc = (0x05<<0),  /* ADC input pin 5 */
-    ADC_MUXPOS_AIN6_gc = (0x06<<0),  /* ADC input pin 6 */
-    ADC_MUXPOS_AIN7_gc = (0x07<<0),  /* ADC input pin 7 */
-    ADC_MUXPOS_AIN8_gc = (0x08<<0),  /* ADC input pin 8 */
-    ADC_MUXPOS_AIN9_gc = (0x09<<0),  /* ADC input pin 9 */
-    ADC_MUXPOS_AIN10_gc = (0x0A<<0),  /* ADC input pin 10 */
-    ADC_MUXPOS_AIN11_gc = (0x0B<<0),  /* ADC input pin 11 */
-    ADC_MUXPOS_AIN16_gc = (0x10<<0),  /* ADC input pin 16 */
-    ADC_MUXPOS_AIN17_gc = (0x11<<0),  /* ADC input pin 17 */
-    ADC_MUXPOS_AIN18_gc = (0x12<<0),  /* ADC input pin 18 */
-    ADC_MUXPOS_AIN19_gc = (0x13<<0),  /* ADC input pin 19 */
-    ADC_MUXPOS_AIN20_gc = (0x14<<0),  /* ADC input pin 20 */
-    ADC_MUXPOS_AIN21_gc = (0x15<<0),  /* ADC input pin 21 */
-    ADC_MUXPOS_GND_gc = (0x40<<0),  /* Ground */
-    ADC_MUXPOS_TEMPSENSE_gc = (0x42<<0),  /* Temperature sensor */
-    ADC_MUXPOS_DAC0_gc = (0x48<<0)  /* DAC0 */
-} ADC_MUXPOS_t;
-
-/* Clock Pre-scaler select */
-typedef enum ADC_PRESC_enum
-{
-    ADC_PRESC_DIV2_gc = (0x00<<0),  /* CLK_PER divided by 2 */
-    ADC_PRESC_DIV4_gc = (0x01<<0),  /* CLK_PER divided by 4 */
-    ADC_PRESC_DIV8_gc = (0x02<<0),  /* CLK_PER divided by 8 */
-    ADC_PRESC_DIV12_gc = (0x03<<0),  /* CLK_PER divided by 12 */
-    ADC_PRESC_DIV16_gc = (0x04<<0),  /* CLK_PER divided by 16 */
-    ADC_PRESC_DIV20_gc = (0x05<<0),  /* CLK_PER divided by 20 */
-    ADC_PRESC_DIV24_gc = (0x06<<0),  /* CLK_PER divided by 24 */
-    ADC_PRESC_DIV28_gc = (0x07<<0),  /* CLK_PER divided by 28 */
-    ADC_PRESC_DIV32_gc = (0x08<<0),  /* CLK_PER divided by 32 */
-    ADC_PRESC_DIV48_gc = (0x09<<0),  /* CLK_PER divided by 48 */
-    ADC_PRESC_DIV64_gc = (0x0A<<0),  /* CLK_PER divided by 64 */
-    ADC_PRESC_DIV96_gc = (0x0B<<0),  /* CLK_PER divided by 96 */
-    ADC_PRESC_DIV128_gc = (0x0C<<0),  /* CLK_PER divided by 128 */
-    ADC_PRESC_DIV256_gc = (0x0D<<0)  /* CLK_PER divided by 256 */
-} ADC_PRESC_t;
-
-/* Resolution selection */
-typedef enum ADC_RESSEL_enum
-{
-    ADC_RESSEL_12BIT_gc = (0x00<<2),  /* 12-bit mode */
-    ADC_RESSEL_10BIT_gc = (0x01<<2)  /* 10-bit mode */
-} ADC_RESSEL_t;
-
-/* Sampling Delay Selection */
-typedef enum ADC_SAMPDLY_enum
-{
-    ADC_SAMPDLY_DLY0_gc = (0x00<<0),  /* Delay 0 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY1_gc = (0x01<<0),  /* Delay 1 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY2_gc = (0x02<<0),  /* Delay 2 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY3_gc = (0x03<<0),  /* Delay 3 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY4_gc = (0x04<<0),  /* Delay 4 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY5_gc = (0x05<<0),  /* Delay 5 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY6_gc = (0x06<<0),  /* Delay 6 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY7_gc = (0x07<<0),  /* Delay 7 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY8_gc = (0x08<<0),  /* Delay 8 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY9_gc = (0x09<<0),  /* Delay 9 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY10_gc = (0x0A<<0),  /* Delay 10 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY11_gc = (0x0B<<0),  /* Delay 11 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY12_gc = (0x0C<<0),  /* Delay 12 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY13_gc = (0x0D<<0),  /* Delay 13 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY14_gc = (0x0E<<0),  /* Delay 14 CLK_ADC cycles */
-    ADC_SAMPDLY_DLY15_gc = (0x0F<<0)  /* Delay 15 CLK_ADC cycles */
-} ADC_SAMPDLY_t;
-
-/* Accumulation Samples select */
-typedef enum ADC_SAMPNUM_enum
-{
-    ADC_SAMPNUM_NONE_gc = (0x00<<0),  /* No accumulation */
-    ADC_SAMPNUM_ACC2_gc = (0x01<<0),  /* 2 results accumulated */
-    ADC_SAMPNUM_ACC4_gc = (0x02<<0),  /* 4 results accumulated */
-    ADC_SAMPNUM_ACC8_gc = (0x03<<0),  /* 8 results accumulated */
-    ADC_SAMPNUM_ACC16_gc = (0x04<<0),  /* 16 results accumulated */
-    ADC_SAMPNUM_ACC32_gc = (0x05<<0),  /* 32 results accumulated */
-    ADC_SAMPNUM_ACC64_gc = (0x06<<0),  /* 64 results accumulated */
-    ADC_SAMPNUM_ACC128_gc = (0x07<<0)  /* 128 results accumulated */
-} ADC_SAMPNUM_t;
-
-/* Window Comparator Mode select */
-typedef enum ADC_WINCM_enum
-{
-    ADC_WINCM_NONE_gc = (0x00<<0),  /* No Window Comparison */
-    ADC_WINCM_BELOW_gc = (0x01<<0),  /* Below Window */
-    ADC_WINCM_ABOVE_gc = (0x02<<0),  /* Above Window */
-    ADC_WINCM_INSIDE_gc = (0x03<<0),  /* Inside Window */
-    ADC_WINCM_OUTSIDE_gc = (0x04<<0)  /* Outside Window */
-} ADC_WINCM_t;
-
-/*
---------------------------------------------------------------------------
-BOD - Bod interface
---------------------------------------------------------------------------
-*/
-
-/* Bod interface */
-typedef struct BOD_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t reserved_1[6];
-    register8_t VLMCTRLA;  /* Voltage level monitor Control */
-    register8_t INTCTRL;  /* Voltage level monitor interrupt Control */
-    register8_t INTFLAGS;  /* Voltage level monitor interrupt Flags */
-    register8_t STATUS;  /* Voltage level monitor status */
-    register8_t reserved_2[4];
-} BOD_t;
-
-/* Operation in active mode select */
-typedef enum BOD_ACTIVE_enum
-{
-    BOD_ACTIVE_DIS_gc = (0x00<<2),  /* Disabled */
-    BOD_ACTIVE_ENABLED_gc = (0x01<<2),  /* Enabled */
-    BOD_ACTIVE_SAMPLED_gc = (0x02<<2),  /* Sampled */
-    BOD_ACTIVE_ENWAKE_gc = (0x03<<2)  /* Enabled with wake-up halted until BOD is ready */
-} BOD_ACTIVE_t;
-
-/* Bod level select */
-typedef enum BOD_LVL_enum
-{
-    BOD_LVL_BODLEVEL0_gc = (0x00<<0),  /* 1.9 V */
-    BOD_LVL_BODLEVEL1_gc = (0x01<<0),  /* 2.45 V */
-    BOD_LVL_BODLEVEL2_gc = (0x02<<0),  /* 2.7 V */
-    BOD_LVL_BODLEVEL3_gc = (0x03<<0)  /* 2.85 V */
-} BOD_LVL_t;
-
-/* Sample frequency select */
-typedef enum BOD_SAMPFREQ_enum
-{
-    BOD_SAMPFREQ_128HZ_gc = (0x00<<4),  /* 128Hz sampling frequency */
-    BOD_SAMPFREQ_32HZ_gc = (0x01<<4)  /* 32Hz sampling frequency */
-} BOD_SAMPFREQ_t;
-
-/* Operation in sleep mode select */
-typedef enum BOD_SLEEP_enum
-{
-    BOD_SLEEP_DIS_gc = (0x00<<0),  /* Disabled */
-    BOD_SLEEP_ENABLED_gc = (0x01<<0),  /* Enabled */
-    BOD_SLEEP_SAMPLED_gc = (0x02<<0)  /* Sampled */
-} BOD_SLEEP_t;
-
-/* Configuration select */
-typedef enum BOD_VLMCFG_enum
-{
-    BOD_VLMCFG_FALLING_gc = (0x00<<1),  /* VDD falls below VLM threshold */
-    BOD_VLMCFG_RISING_gc = (0x01<<1),  /* VDD rises above VLM threshold */
-    BOD_VLMCFG_BOTH_gc = (0x02<<1)  /* VDD crosses VLM threshold */
-} BOD_VLMCFG_t;
-
-/* voltage level monitor level select */
-typedef enum BOD_VLMLVL_enum
-{
-    BOD_VLMLVL_OFF_gc = (0x00<<0),  /* VLM Disabled */
-    BOD_VLMLVL_5ABOVE_gc = (0x01<<0),  /* VLM threshold 5% above BOD level */
-    BOD_VLMLVL_15ABOVE_gc = (0x02<<0),  /* VLM threshold 15% above BOD level */
-    BOD_VLMLVL_25ABOVE_gc = (0x03<<0)  /* VLM threshold 25% above BOD level */
-} BOD_VLMLVL_t;
-
-/* Voltage level monitor status select */
-typedef enum BOD_VLMS_enum
-{
-    BOD_VLMS_ABOVE_gc = (0x00<<0),  /* The voltage is above the VLM threshold level */
-    BOD_VLMS_BELOW_gc = (0x01<<0)  /* The voltage is below the VLM threshold level */
-} BOD_VLMS_t;
-
-/*
---------------------------------------------------------------------------
-CCL - Configurable Custom Logic
---------------------------------------------------------------------------
-*/
-
-/* Configurable Custom Logic */
-typedef struct CCL_struct
-{
-    register8_t CTRLA;  /* Control Register A */
-    register8_t SEQCTRL0;  /* Sequential Control 0 */
-    register8_t SEQCTRL1;  /* Sequential Control 1 */
-    register8_t SEQCTRL2;  /* Sequential Control 2 */
-    register8_t reserved_1[1];
-    register8_t INTCTRL0;  /* Interrupt Control 0 */
-    register8_t INTCTRL1;  /* Interrupt Control 1 */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t LUT0CTRLA;  /* LUT 0 Control A */
-    register8_t LUT0CTRLB;  /* LUT 0 Control B */
-    register8_t LUT0CTRLC;  /* LUT 0 Control C */
-    register8_t TRUTH0;  /* Truth 0 */
-    register8_t LUT1CTRLA;  /* LUT 1 Control A */
-    register8_t LUT1CTRLB;  /* LUT 1 Control B */
-    register8_t LUT1CTRLC;  /* LUT 1 Control C */
-    register8_t TRUTH1;  /* Truth 1 */
-    register8_t LUT2CTRLA;  /* LUT 2 Control A */
-    register8_t LUT2CTRLB;  /* LUT 2 Control B */
-    register8_t LUT2CTRLC;  /* LUT 2 Control C */
-    register8_t TRUTH2;  /* Truth 2 */
-    register8_t LUT3CTRLA;  /* LUT 3 Control A */
-    register8_t LUT3CTRLB;  /* LUT 3 Control B */
-    register8_t LUT3CTRLC;  /* LUT 3 Control C */
-    register8_t TRUTH3;  /* Truth 3 */
-    register8_t LUT4CTRLA;  /* LUT 4 Control A */
-    register8_t LUT4CTRLB;  /* LUT 4 Control B */
-    register8_t LUT4CTRLC;  /* LUT 4 Control C */
-    register8_t TRUTH4;  /* Truth 4 */
-    register8_t LUT5CTRLA;  /* LUT 5 Control A */
-    register8_t LUT5CTRLB;  /* LUT 5 Control B */
-    register8_t LUT5CTRLC;  /* LUT 5 Control C */
-    register8_t TRUTH5;  /* Truth 5 */
-    register8_t reserved_2[32];
-} CCL_t;
-
-/* Clock Source Selection */
-typedef enum CCL_CLKSRC_enum
-{
-    CCL_CLKSRC_CLKPER_gc = (0x00<<1),  /* Peripheral Clock */
-    CCL_CLKSRC_IN2_gc = (0x01<<1),  /* Selection by INSEL2 */
-    CCL_CLKSRC_OSCHF_gc = (0x04<<1),  /* Internal high-frequency oscillator */
-    CCL_CLKSRC_OSC32K_gc = (0x05<<1),  /* 32.768 kHz oscillator */
-    CCL_CLKSRC_OSC1K_gc = (0x06<<1)  /* 32.768 kHz oscillator divided by 32 */
-} CCL_CLKSRC_t;
-
-/* Edge Detection Enable select */
-typedef enum CCL_EDGEDET_enum
-{
-    CCL_EDGEDET_DIS_gc = (0x00<<7),  /* Edge detector is disabled */
-    CCL_EDGEDET_EN_gc = (0x01<<7)  /* Edge detector is enabled */
-} CCL_EDGEDET_t;
-
-/* Filter Selection */
-typedef enum CCL_FILTSEL_enum
-{
-    CCL_FILTSEL_DISABLE_gc = (0x00<<4),  /* Filter disabled */
-    CCL_FILTSEL_SYNCH_gc = (0x01<<4),  /* Synchronizer enabled */
-    CCL_FILTSEL_FILTER_gc = (0x02<<4)  /* Filter enabled */
-} CCL_FILTSEL_t;
-
-/* LUT Input 0 Source Selection */
-typedef enum CCL_INSEL0_enum
-{
-    CCL_INSEL0_MASK_gc = (0x00<<0),  /* Masked input */
-    CCL_INSEL0_FEEDBACK_gc = (0x01<<0),  /* Feedback input source */
-    CCL_INSEL0_LINK_gc = (0x02<<0),  /* Linked LUT input source */
-    CCL_INSEL0_EVENTA_gc = (0x03<<0),  /* Event input source A */
-    CCL_INSEL0_EVENTB_gc = (0x04<<0),  /* Event input source B */
-    CCL_INSEL0_IN0_gc = (0x05<<0),  /* IO pin LUTn-IN0 input source */
-    CCL_INSEL0_AC0_gc = (0x06<<0),  /* AC0 OUT input source */
-    CCL_INSEL0_ZCD0_gc = (0x07<<0),  /* ZCD0 OUT input source */
-    CCL_INSEL0_USART0_gc = (0x08<<0),  /* USART0 TXD input source */
-    CCL_INSEL0_SPI0_gc = (0x09<<0),  /* SPI0 MOSI input source */
-    CCL_INSEL0_TCA0_gc = (0x0A<<0),  /* TCA0 WO0 input source */
-    CCL_INSEL0_TCA1_gc = (0x0B<<0),  /* TCA1 WO0 input source */
-    CCL_INSEL0_TCB0_gc = (0x0C<<0),  /* TCB0 WO input source */
-    CCL_INSEL0_TCD0_gc = (0x0D<<0)  /* TCD0 WOA input source */
-} CCL_INSEL0_t;
-
-/* LUT Input 1 Source Selection */
-typedef enum CCL_INSEL1_enum
-{
-    CCL_INSEL1_MASK_gc = (0x00<<4),  /* Masked input */
-    CCL_INSEL1_FEEDBACK_gc = (0x01<<4),  /* Feedback input source */
-    CCL_INSEL1_LINK_gc = (0x02<<4),  /* Linked LUT input source */
-    CCL_INSEL1_EVENTA_gc = (0x03<<4),  /* Event input source A */
-    CCL_INSEL1_EVENTB_gc = (0x04<<4),  /* Event input source B */
-    CCL_INSEL1_IN1_gc = (0x05<<4),  /* IO pin LUTn-IN1 input source */
-    CCL_INSEL1_AC1_gc = (0x06<<4),  /* AC1 OUT input source */
-    CCL_INSEL1_ZCD1_gc = (0x07<<4),  /* ZCD1 OUT input source */
-    CCL_INSEL1_USART1_gc = (0x08<<4),  /* USART1 TXD input source */
-    CCL_INSEL1_SPI0_gc = (0x09<<4),  /* SPI0 MOSI input source */
-    CCL_INSEL1_TCA0_gc = (0x0A<<4),  /* TCA0 WO1 input source */
-    CCL_INSEL1_TCA1_gc = (0x0B<<4),  /* TCA1 WO1 input source */
-    CCL_INSEL1_TCB1_gc = (0x0C<<4),  /* TCB1 WO input source */
-    CCL_INSEL1_TCD0_gc = (0x0D<<4)  /* TCD0 WOB input source */
-} CCL_INSEL1_t;
-
-/* LUT Input 2 Source Selection */
-typedef enum CCL_INSEL2_enum
-{
-    CCL_INSEL2_MASK_gc = (0x00<<0),  /* Masked input */
-    CCL_INSEL2_FEEDBACK_gc = (0x01<<0),  /* Feedback input source */
-    CCL_INSEL2_LINK_gc = (0x02<<0),  /* Linked LUT input source */
-    CCL_INSEL2_EVENTA_gc = (0x03<<0),  /* Event input source A */
-    CCL_INSEL2_EVENTB_gc = (0x04<<0),  /* Event input source B */
-    CCL_INSEL2_IN2_gc = (0x05<<0),  /* IO pin LUTn-IN2 input source */
-    CCL_INSEL2_AC2_gc = (0x06<<0),  /* AC2 OUT input source */
-    CCL_INSEL2_USART2_gc = (0x08<<0),  /* USART2 TXD input source */
-    CCL_INSEL2_SPI0_gc = (0x09<<0),  /* SPI0 SCK input source */
-    CCL_INSEL2_TCA0_gc = (0x0A<<0),  /* TCA0 WO2 input source */
-    CCL_INSEL2_TCA1_gc = (0x0B<<0),  /* TCA1 WO2 input source */
-    CCL_INSEL2_TCB2_gc = (0x0C<<0),  /* TCB2 WO input source */
-    CCL_INSEL2_TCD0_gc = (0x0D<<0)  /* TCD0 WOC input source */
-} CCL_INSEL2_t;
-
-/* Interrupt Mode for LUT0 select */
-typedef enum CCL_INTMODE0_enum
-{
-    CCL_INTMODE0_INTDISABLE_gc = (0x00<<0),  /* Interrupt disabled */
-    CCL_INTMODE0_RISING_gc = (0x01<<0),  /* Sense rising edge */
-    CCL_INTMODE0_FALLING_gc = (0x02<<0),  /* Sense falling edge */
-    CCL_INTMODE0_BOTH_gc = (0x03<<0)  /* Sense both edges */
-} CCL_INTMODE0_t;
-
-/* Interrupt Mode for LUT1 select */
-typedef enum CCL_INTMODE1_enum
-{
-    CCL_INTMODE1_INTDISABLE_gc = (0x00<<2),  /* Interrupt disabled */
-    CCL_INTMODE1_RISING_gc = (0x01<<2),  /* Sense rising edge */
-    CCL_INTMODE1_FALLING_gc = (0x02<<2),  /* Sense falling edge */
-    CCL_INTMODE1_BOTH_gc = (0x03<<2)  /* Sense both edges */
-} CCL_INTMODE1_t;
-
-/* Interrupt Mode for LUT2 select */
-typedef enum CCL_INTMODE2_enum
-{
-    CCL_INTMODE2_INTDISABLE_gc = (0x00<<4),  /* Interrupt disabled */
-    CCL_INTMODE2_RISING_gc = (0x01<<4),  /* Sense rising edge */
-    CCL_INTMODE2_FALLING_gc = (0x02<<4),  /* Sense falling edge */
-    CCL_INTMODE2_BOTH_gc = (0x03<<4)  /* Sense both edges */
-} CCL_INTMODE2_t;
-
-/* Interrupt Mode for LUT3 select */
-typedef enum CCL_INTMODE3_enum
-{
-    CCL_INTMODE3_INTDISABLE_gc = (0x00<<6),  /* Interrupt disabled */
-    CCL_INTMODE3_RISING_gc = (0x01<<6),  /* Sense rising edge */
-    CCL_INTMODE3_FALLING_gc = (0x02<<6),  /* Sense falling edge */
-    CCL_INTMODE3_BOTH_gc = (0x03<<6)  /* Sense both edges */
-} CCL_INTMODE3_t;
-
-/* Interrupt Mode for LUT4 select */
-typedef enum CCL_INTMODE4_enum
-{
-    CCL_INTMODE4_INTDISABLE_gc = (0x00<<0),  /* Interrupt disabled */
-    CCL_INTMODE4_RISING_gc = (0x01<<0),  /* Sense rising edge */
-    CCL_INTMODE4_FALLING_gc = (0x02<<0),  /* Sense falling edge */
-    CCL_INTMODE4_BOTH_gc = (0x03<<0)  /* Sense both edges */
-} CCL_INTMODE4_t;
-
-/* Interrupt Mode for LUT5 select */
-typedef enum CCL_INTMODE5_enum
-{
-    CCL_INTMODE5_INTDISABLE_gc = (0x00<<2),  /* Interrupt disabled */
-    CCL_INTMODE5_RISING_gc = (0x01<<2),  /* Sense rising edge */
-    CCL_INTMODE5_FALLING_gc = (0x02<<2),  /* Sense falling edge */
-    CCL_INTMODE5_BOTH_gc = (0x03<<2)  /* Sense both edges */
-} CCL_INTMODE5_t;
-
-/* Sequential Selection */
-typedef enum CCL_SEQSEL_enum
-{
-    CCL_SEQSEL_DISABLE_gc = (0x00<<0),  /* Sequential logic disabled */
-    CCL_SEQSEL_DFF_gc = (0x01<<0),  /* D FlipFlop */
-    CCL_SEQSEL_JK_gc = (0x02<<0),  /* JK FlipFlop */
-    CCL_SEQSEL_LATCH_gc = (0x03<<0),  /* D Latch */
-    CCL_SEQSEL_RS_gc = (0x04<<0)  /* RS Latch */
-} CCL_SEQSEL_t;
-
-/*
---------------------------------------------------------------------------
-CLKCTRL - Clock controller
---------------------------------------------------------------------------
-*/
-
-/* Clock controller */
-typedef struct CLKCTRL_struct
-{
-    register8_t MCLKCTRLA;  /* MCLK Control A */
-    register8_t MCLKCTRLB;  /* MCLK Control B */
-    register8_t MCLKLOCK;  /* MCLK Lock */
-    register8_t MCLKSTATUS;  /* MCLK Status */
-    register8_t reserved_1[4];
-    register8_t OSCHFCTRLA;  /* OSCHF Control A */
-    register8_t OSCHFTUNE;  /* OSCHF Tune */
-    register8_t reserved_2[6];
-    register8_t PLLCTRLA;  /* PLL Control A */
-    register8_t reserved_3[7];
-    register8_t OSC32KCTRLA;  /* OSC32K Control A */
-    register8_t reserved_4[3];
-    register8_t XOSC32KCTRLA;  /* XOSC32K Control A */
-    register8_t reserved_5[3];
-} CLKCTRL_t;
-
-/* Clock select */
-typedef enum CLKCTRL_CLKSEL_enum
-{
-    CLKCTRL_CLKSEL_OSCHF_gc = (0x00<<0),  /* Internal high-frequency oscillator */
-    CLKCTRL_CLKSEL_OSC32K_gc = (0x01<<0),  /* Internal 32.768 kHz oscillator */
-    CLKCTRL_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz crystal oscillator */
-    CLKCTRL_CLKSEL_EXTCLK_gc = (0x03<<0)  /* External clock */
-} CLKCTRL_CLKSEL_t;
-
-/* Crystal startup time select */
-typedef enum CLKCTRL_CSUT_enum
-{
-    CLKCTRL_CSUT_1K_gc = (0x00<<4),  /* 1k cycles */
-    CLKCTRL_CSUT_16K_gc = (0x01<<4),  /* 16k cycles */
-    CLKCTRL_CSUT_32K_gc = (0x02<<4),  /* 32k cycles */
-    CLKCTRL_CSUT_64K_gc = (0x03<<4)  /* 64k cycles */
-} CLKCTRL_CSUT_t;
-
-/* Frequency select */
-typedef enum CLKCTRL_FRQSEL_enum
-{
-    CLKCTRL_FRQSEL_1M_gc = (0x00<<2),  /* 1 MHz system clock */
-    CLKCTRL_FRQSEL_2M_gc = (0x01<<2),  /* 2 MHz system clock */
-    CLKCTRL_FRQSEL_3M_gc = (0x02<<2),  /* 3 MHz system clock */
-    CLKCTRL_FRQSEL_4M_gc = (0x03<<2),  /* 4 MHz system clock (default) */
-    CLKCTRL_FRQSEL_8M_gc = (0x05<<2),  /* 8 MHz system clock */
-    CLKCTRL_FRQSEL_12M_gc = (0x06<<2),  /* 12 MHz system clock */
-    CLKCTRL_FRQSEL_16M_gc = (0x07<<2),  /* 16 MHz system clock */
-    CLKCTRL_FRQSEL_20M_gc = (0x08<<2),  /* 20 MHz system clock */
-    CLKCTRL_FRQSEL_24M_gc = (0x09<<2)  /* 24 MHz system clock */
-} CLKCTRL_FRQSEL_t;
-
-/* Multiplication factor select */
-typedef enum CLKCTRL_MULFAC_enum
-{
-    CLKCTRL_MULFAC_DISABLE_gc = (0x00<<0),  /* PLL is disabled */
-    CLKCTRL_MULFAC_2x_gc = (0x01<<0),  /* 2 x multiplication factor */
-    CLKCTRL_MULFAC_3x_gc = (0x02<<0)  /* 3 x multiplication factor */
-} CLKCTRL_MULFAC_t;
-
-/* Prescaler division select */
-typedef enum CLKCTRL_PDIV_enum
-{
-    CLKCTRL_PDIV_2X_gc = (0x00<<1),  /* 2X */
-    CLKCTRL_PDIV_4X_gc = (0x01<<1),  /* 4X */
-    CLKCTRL_PDIV_8X_gc = (0x02<<1),  /* 8X */
-    CLKCTRL_PDIV_16X_gc = (0x03<<1),  /* 16X */
-    CLKCTRL_PDIV_32X_gc = (0x04<<1),  /* 32X */
-    CLKCTRL_PDIV_64X_gc = (0x05<<1),  /* 64X */
-    CLKCTRL_PDIV_6X_gc = (0x08<<1),  /* 6X */
-    CLKCTRL_PDIV_10X_gc = (0x09<<1),  /* 10X */
-    CLKCTRL_PDIV_12X_gc = (0x0A<<1),  /* 12X */
-    CLKCTRL_PDIV_24X_gc = (0x0B<<1),  /* 24X */
-    CLKCTRL_PDIV_48X_gc = (0x0C<<1)  /* 48X */
-} CLKCTRL_PDIV_t;
-
-/*
---------------------------------------------------------------------------
-CPU - CPU
---------------------------------------------------------------------------
-*/
-
-#define CORE_VERSION  V4S
-
-/* CCP signature select */
-typedef enum CCP_enum
-{
-    CCP_SPM_gc = (0x9D<<0),  /* SPM Instruction Protection */
-    CCP_IOREG_gc = (0xD8<<0)  /* IO Register Protection */
-} CCP_t;
-
-/*
---------------------------------------------------------------------------
-CPUINT - Interrupt Controller
---------------------------------------------------------------------------
-*/
-
-/* Interrupt Controller */
-typedef struct CPUINT_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t STATUS;  /* Status */
-    register8_t LVL0PRI;  /* Interrupt Level 0 Priority */
-    register8_t LVL1VEC;  /* Interrupt Level 1 Priority Vector */
-} CPUINT_t;
-
-
-/*
---------------------------------------------------------------------------
-CRCSCAN - CRCSCAN
---------------------------------------------------------------------------
-*/
-
-/* CRCSCAN */
-typedef struct CRCSCAN_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t STATUS;  /* Status */
-    register8_t reserved_1[13];
-} CRCSCAN_t;
-
-/* CRC Source select */
-typedef enum CRCSCAN_SRC_enum
-{
-    CRCSCAN_SRC_FLASH_gc = (0x00<<0),  /* CRC on entire flash */
-    CRCSCAN_SRC_APPLICATION_gc = (0x01<<0),  /* CRC on boot and appl section of flash */
-    CRCSCAN_SRC_BOOT_gc = (0x02<<0)  /* CRC on boot section of flash */
-} CRCSCAN_SRC_t;
-
-/*
---------------------------------------------------------------------------
-DAC - Digital to Analog Converter
---------------------------------------------------------------------------
-*/
-
-/* Digital to Analog Converter */
-typedef struct DAC_struct
-{
-    register8_t CTRLA;  /* Control Register A */
-    register8_t reserved_1[1];
-    _WORDREGISTER(DATA);  /* DATA Register */
-} DAC_t;
-
-
-/*
---------------------------------------------------------------------------
-EVSYS - Event System
---------------------------------------------------------------------------
-*/
-
-/* Event System */
-typedef struct EVSYS_struct
-{
-    register8_t SWEVENTA;  /* Software Event A */
-    register8_t SWEVENTB;  /* Software Event B */
-    register8_t reserved_1[14];
-    register8_t CHANNEL0;  /* Multiplexer Channel 0 */
-    register8_t CHANNEL1;  /* Multiplexer Channel 1 */
-    register8_t CHANNEL2;  /* Multiplexer Channel 2 */
-    register8_t CHANNEL3;  /* Multiplexer Channel 3 */
-    register8_t CHANNEL4;  /* Multiplexer Channel 4 */
-    register8_t CHANNEL5;  /* Multiplexer Channel 5 */
-    register8_t CHANNEL6;  /* Multiplexer Channel 6 */
-    register8_t CHANNEL7;  /* Multiplexer Channel 7 */
-    register8_t CHANNEL8;  /* Multiplexer Channel 8 */
-    register8_t CHANNEL9;  /* Multiplexer Channel 9 */
-    register8_t reserved_2[6];
-    register8_t USERCCLLUT0A;  /* User 0 - CCL0 Event A */
-    register8_t USERCCLLUT0B;  /* User 1 - CCL0 Event B */
-    register8_t USERCCLLUT1A;  /* User 2 - CCL1 Event A */
-    register8_t USERCCLLUT1B;  /* User 3 - CCL1 Event B */
-    register8_t USERCCLLUT2A;  /* User 4 - CCL2 Event A */
-    register8_t USERCCLLUT2B;  /* User 5 - CCL2 Event B */
-    register8_t USERCCLLUT3A;  /* User 6 - CCL3 Event A */
-    register8_t USERCCLLUT3B;  /* User 7 - CCL3 Event B */
-    register8_t USERCCLLUT4A;  /* User 8 - CCL4 Event A */
-    register8_t USERCCLLUT4B;  /* User 9 - CCL4 Event B */
-    register8_t USERCCLLUT5A;  /* User 10 - CCL5 Event A */
-    register8_t USERCCLLUT5B;  /* User 11 - CCL5 Event B */
-    register8_t USERADC0START;  /* User 12 - ADC0 */
-    register8_t USERPTCSTART;  /* User 13 - PTC */
-    register8_t USEREVSYSEVOUTA;  /* User 14 - EVOUTA */
-    register8_t USEREVSYSEVOUTB;  /* User 15 - EVOUTB */
-    register8_t USEREVSYSEVOUTC;  /* User 16 - EVOUTC */
-    register8_t USEREVSYSEVOUTD;  /* User 17 - EVOUTD */
-    register8_t USEREVSYSEVOUTE;  /* User 18 - EVOUTE */
-    register8_t USEREVSYSEVOUTF;  /* User 19 - EVOUTF */
-    register8_t reserved_3[1];
-    register8_t USERUSART0IRDA;  /* User 21 - USART0 */
-    register8_t USERUSART1IRDA;  /* User 22 - USART1 */
-    register8_t USERUSART2IRDA;  /* User 23 - USART2 */
-    register8_t USERUSART3IRDA;  /* User 24 - USART3 */
-    register8_t USERUSART4IRDA;  /* User 25 - USART4 */
-    register8_t reserved_4[1];
-    register8_t USERTCA0CNTA;  /* User 27 - TCA0 Event A */
-    register8_t USERTCA0CNTB;  /* User 28 - TCA0 Event B */
-    register8_t USERTCA1CNTA;  /* User 29 - TCA1 Event A */
-    register8_t USERTCA1CNTB;  /* User 30 - TCA1 Event B */
-    register8_t USERTCB0CAPT;  /* User 31 - TCB0 Event A */
-    register8_t USERTCB0COUNT;  /* User 32 - TCB0 Event B */
-    register8_t USERTCB1CAPT;  /* User 33 - TCB1 Event A */
-    register8_t USERTCB1COUNT;  /* User 34 - TCB1 Event B */
-    register8_t USERTCB2CAPT;  /* User 35 - TCB2 Event A */
-    register8_t USERTCB2COUNT;  /* User 36 - TCB2 Event B */
-    register8_t USERTCB3CAPT;  /* User 37 - TCB3 Event A */
-    register8_t USERTCB3COUNT;  /* User 38 - TCB3 Event B */
-    register8_t reserved_5[2];
-    register8_t USERTCD0INPUTA;  /* User 41 - TCD0 Event A */
-    register8_t USERTCD0INPUTB;  /* User 42 - TCD0 Event B */
-} EVSYS_t;
-
-/* Channel 0 generator select */
-typedef enum EVSYS_CHANNEL0_enum
-{
-    EVSYS_CHANNEL0_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL0_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL0_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL0_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL0_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL0_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL0_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL0_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL0_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL0_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL0_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL0_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL0_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL0_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL0_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL0_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL0_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL0_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL0_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL0_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL0_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL0_PORTA_PIN0_gc = (0x40<<0),  /* Port A Pin 0 */
-    EVSYS_CHANNEL0_PORTA_PIN1_gc = (0x41<<0),  /* Port A Pin 1 */
-    EVSYS_CHANNEL0_PORTA_PIN2_gc = (0x42<<0),  /* Port A Pin 2 */
-    EVSYS_CHANNEL0_PORTA_PIN3_gc = (0x43<<0),  /* Port A Pin 3 */
-    EVSYS_CHANNEL0_PORTA_PIN4_gc = (0x44<<0),  /* Port A Pin 4 */
-    EVSYS_CHANNEL0_PORTA_PIN5_gc = (0x45<<0),  /* Port A Pin 5 */
-    EVSYS_CHANNEL0_PORTA_PIN6_gc = (0x46<<0),  /* Port A Pin 6 */
-    EVSYS_CHANNEL0_PORTA_PIN7_gc = (0x47<<0),  /* Port A Pin 7 */
-    EVSYS_CHANNEL0_PORTB_PIN0_gc = (0x48<<0),  /* Port B Pin 0 */
-    EVSYS_CHANNEL0_PORTB_PIN1_gc = (0x49<<0),  /* Port B Pin 1 */
-    EVSYS_CHANNEL0_PORTB_PIN2_gc = (0x4A<<0),  /* Port B Pin 2 */
-    EVSYS_CHANNEL0_PORTB_PIN3_gc = (0x4B<<0),  /* Port B Pin 3 */
-    EVSYS_CHANNEL0_PORTB_PIN4_gc = (0x4C<<0),  /* Port B Pin 4 */
-    EVSYS_CHANNEL0_PORTB_PIN5_gc = (0x4D<<0),  /* Port B Pin 5 */
-    EVSYS_CHANNEL0_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL0_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL0_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL0_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL0_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL0_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL0_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL0_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL0_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL0_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL0_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL0_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL0_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL0_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL0_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL0_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL0_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL0_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL0_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL0_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL0_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL0_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL0_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL0_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL0_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL0_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL0_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL0_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL0_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL0_t;
-
-/* Channel 1 generator select */
-typedef enum EVSYS_CHANNEL1_enum
-{
-    EVSYS_CHANNEL1_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL1_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL1_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL1_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL1_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL1_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL1_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL1_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL1_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL1_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL1_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL1_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL1_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL1_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL1_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL1_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL1_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL1_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL1_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL1_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL1_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL1_PORTA_PIN0_gc = (0x40<<0),  /* Port A Pin 0 */
-    EVSYS_CHANNEL1_PORTA_PIN1_gc = (0x41<<0),  /* Port A Pin 1 */
-    EVSYS_CHANNEL1_PORTA_PIN2_gc = (0x42<<0),  /* Port A Pin 2 */
-    EVSYS_CHANNEL1_PORTA_PIN3_gc = (0x43<<0),  /* Port A Pin 3 */
-    EVSYS_CHANNEL1_PORTA_PIN4_gc = (0x44<<0),  /* Port A Pin 4 */
-    EVSYS_CHANNEL1_PORTA_PIN5_gc = (0x45<<0),  /* Port A Pin 5 */
-    EVSYS_CHANNEL1_PORTA_PIN6_gc = (0x46<<0),  /* Port A Pin 6 */
-    EVSYS_CHANNEL1_PORTA_PIN7_gc = (0x47<<0),  /* Port A Pin 7 */
-    EVSYS_CHANNEL1_PORTB_PIN0_gc = (0x48<<0),  /* Port B Pin 0 */
-    EVSYS_CHANNEL1_PORTB_PIN1_gc = (0x49<<0),  /* Port B Pin 1 */
-    EVSYS_CHANNEL1_PORTB_PIN2_gc = (0x4A<<0),  /* Port B Pin 2 */
-    EVSYS_CHANNEL1_PORTB_PIN3_gc = (0x4B<<0),  /* Port B Pin 3 */
-    EVSYS_CHANNEL1_PORTB_PIN4_gc = (0x4C<<0),  /* Port B Pin 4 */
-    EVSYS_CHANNEL1_PORTB_PIN5_gc = (0x4D<<0),  /* Port B Pin 5 */
-    EVSYS_CHANNEL1_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL1_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL1_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL1_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL1_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL1_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL1_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL1_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL1_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL1_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL1_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL1_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL1_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL1_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL1_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL1_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL1_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL1_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL1_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL1_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL1_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL1_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL1_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL1_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL1_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL1_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL1_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL1_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL1_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL1_t;
-
-/* Channel 2 generator select */
-typedef enum EVSYS_CHANNEL2_enum
-{
-    EVSYS_CHANNEL2_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL2_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL2_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL2_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL2_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL2_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL2_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL2_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL2_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL2_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL2_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL2_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL2_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL2_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL2_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL2_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL2_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL2_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL2_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL2_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL2_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL2_PORTC_PIN0_gc = (0x40<<0),  /* Port C Pin 0 */
-    EVSYS_CHANNEL2_PORTC_PIN1_gc = (0x41<<0),  /* Port C Pin 1 */
-    EVSYS_CHANNEL2_PORTC_PIN2_gc = (0x42<<0),  /* Port C Pin 2 */
-    EVSYS_CHANNEL2_PORTC_PIN3_gc = (0x43<<0),  /* Port C Pin 3 */
-    EVSYS_CHANNEL2_PORTC_PIN4_gc = (0x44<<0),  /* Port C Pin 4 */
-    EVSYS_CHANNEL2_PORTC_PIN5_gc = (0x45<<0),  /* Port C Pin 5 */
-    EVSYS_CHANNEL2_PORTC_PIN6_gc = (0x46<<0),  /* Port C Pin 6 */
-    EVSYS_CHANNEL2_PORTC_PIN7_gc = (0x47<<0),  /* Port C Pin 7 */
-    EVSYS_CHANNEL2_PORTD_PIN0_gc = (0x48<<0),  /* Port D Pin 0 */
-    EVSYS_CHANNEL2_PORTD_PIN1_gc = (0x49<<0),  /* Port D Pin 1 */
-    EVSYS_CHANNEL2_PORTD_PIN2_gc = (0x4A<<0),  /* Port D Pin 2 */
-    EVSYS_CHANNEL2_PORTD_PIN3_gc = (0x4B<<0),  /* Port D Pin 3 */
-    EVSYS_CHANNEL2_PORTD_PIN4_gc = (0x4C<<0),  /* Port D Pin 4 */
-    EVSYS_CHANNEL2_PORTD_PIN5_gc = (0x4D<<0),  /* Port D Pin 5 */
-    EVSYS_CHANNEL2_PORTD_PIN6_gc = (0x4E<<0),  /* Port D Pin 6 */
-    EVSYS_CHANNEL2_PORTD_PIN7_gc = (0x4F<<0),  /* Port D Pin 7 */
-    EVSYS_CHANNEL2_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL2_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL2_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL2_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL2_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL2_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL2_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL2_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL2_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL2_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL2_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL2_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL2_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL2_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL2_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL2_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL2_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL2_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL2_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL2_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL2_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL2_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL2_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL2_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL2_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL2_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL2_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL2_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL2_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL2_t;
-
-/* Channel 3 generator select */
-typedef enum EVSYS_CHANNEL3_enum
-{
-    EVSYS_CHANNEL3_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL3_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL3_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL3_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL3_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL3_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL3_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL3_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL3_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL3_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL3_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL3_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL3_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL3_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL3_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL3_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL3_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL3_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL3_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL3_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL3_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL3_PORTC_PIN0_gc = (0x40<<0),  /* Port C Pin 0 */
-    EVSYS_CHANNEL3_PORTC_PIN1_gc = (0x41<<0),  /* Port C Pin 1 */
-    EVSYS_CHANNEL3_PORTC_PIN2_gc = (0x42<<0),  /* Port C Pin 2 */
-    EVSYS_CHANNEL3_PORTC_PIN3_gc = (0x43<<0),  /* Port C Pin 3 */
-    EVSYS_CHANNEL3_PORTC_PIN4_gc = (0x44<<0),  /* Port C Pin 4 */
-    EVSYS_CHANNEL3_PORTC_PIN5_gc = (0x45<<0),  /* Port C Pin 5 */
-    EVSYS_CHANNEL3_PORTC_PIN6_gc = (0x46<<0),  /* Port C Pin 6 */
-    EVSYS_CHANNEL3_PORTC_PIN7_gc = (0x47<<0),  /* Port C Pin 7 */
-    EVSYS_CHANNEL3_PORTD_PIN0_gc = (0x48<<0),  /* Port D Pin 0 */
-    EVSYS_CHANNEL3_PORTD_PIN1_gc = (0x49<<0),  /* Port D Pin 1 */
-    EVSYS_CHANNEL3_PORTD_PIN2_gc = (0x4A<<0),  /* Port D Pin 2 */
-    EVSYS_CHANNEL3_PORTD_PIN3_gc = (0x4B<<0),  /* Port D Pin 3 */
-    EVSYS_CHANNEL3_PORTD_PIN4_gc = (0x4C<<0),  /* Port D Pin 4 */
-    EVSYS_CHANNEL3_PORTD_PIN5_gc = (0x4D<<0),  /* Port D Pin 5 */
-    EVSYS_CHANNEL3_PORTD_PIN6_gc = (0x4E<<0),  /* Port D Pin 6 */
-    EVSYS_CHANNEL3_PORTD_PIN7_gc = (0x4F<<0),  /* Port D Pin 7 */
-    EVSYS_CHANNEL3_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL3_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL3_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL3_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL3_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL3_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL3_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL3_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL3_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL3_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL3_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL3_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL3_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL3_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL3_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL3_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL3_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL3_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL3_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL3_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL3_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL3_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL3_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL3_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL3_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL3_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL3_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL3_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL3_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL3_t;
-
-/* Channel 4 generator select */
-typedef enum EVSYS_CHANNEL4_enum
-{
-    EVSYS_CHANNEL4_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL4_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL4_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL4_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL4_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL4_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL4_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL4_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL4_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL4_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL4_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL4_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL4_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL4_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL4_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL4_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL4_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL4_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL4_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL4_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL4_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL4_PORTE_PIN0_gc = (0x40<<0),  /* Port E Pin 0 */
-    EVSYS_CHANNEL4_PORTE_PIN1_gc = (0x41<<0),  /* Port E Pin 1 */
-    EVSYS_CHANNEL4_PORTE_PIN2_gc = (0x42<<0),  /* Port E Pin 2 */
-    EVSYS_CHANNEL4_PORTE_PIN3_gc = (0x43<<0),  /* Port E Pin 3 */
-    EVSYS_CHANNEL4_PORTF_PIN0_gc = (0x48<<0),  /* Port F Pin 0 */
-    EVSYS_CHANNEL4_PORTF_PIN1_gc = (0x49<<0),  /* Port F Pin 1 */
-    EVSYS_CHANNEL4_PORTF_PIN2_gc = (0x4A<<0),  /* Port F Pin 2 */
-    EVSYS_CHANNEL4_PORTF_PIN3_gc = (0x4B<<0),  /* Port F Pin 3 */
-    EVSYS_CHANNEL4_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
-    EVSYS_CHANNEL4_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
-    EVSYS_CHANNEL4_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL4_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL4_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL4_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL4_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL4_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL4_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL4_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL4_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL4_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL4_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL4_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL4_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL4_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL4_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL4_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL4_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL4_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL4_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL4_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL4_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL4_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL4_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL4_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL4_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL4_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL4_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL4_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL4_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL4_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL4_t;
-
-/* Channel 5 generator select */
-typedef enum EVSYS_CHANNEL5_enum
-{
-    EVSYS_CHANNEL5_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL5_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL5_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL5_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL5_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL5_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL5_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL5_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL5_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL5_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL5_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL5_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL5_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL5_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL5_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL5_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL5_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL5_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL5_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL5_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL5_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL5_PORTE_PIN0_gc = (0x40<<0),  /* Port E Pin 0 */
-    EVSYS_CHANNEL5_PORTE_PIN1_gc = (0x41<<0),  /* Port E Pin 1 */
-    EVSYS_CHANNEL5_PORTE_PIN2_gc = (0x42<<0),  /* Port E Pin 2 */
-    EVSYS_CHANNEL5_PORTE_PIN3_gc = (0x43<<0),  /* Port E Pin 3 */
-    EVSYS_CHANNEL5_PORTF_PIN0_gc = (0x48<<0),  /* Port F Pin 0 */
-    EVSYS_CHANNEL5_PORTF_PIN1_gc = (0x49<<0),  /* Port F Pin 1 */
-    EVSYS_CHANNEL5_PORTF_PIN2_gc = (0x4A<<0),  /* Port F Pin 2 */
-    EVSYS_CHANNEL5_PORTF_PIN3_gc = (0x4B<<0),  /* Port F Pin 3 */
-    EVSYS_CHANNEL5_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
-    EVSYS_CHANNEL5_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
-    EVSYS_CHANNEL5_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL5_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL5_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL5_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL5_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL5_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL5_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL5_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL5_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL5_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL5_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL5_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL5_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL5_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL5_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL5_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL5_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL5_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL5_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL5_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL5_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL5_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL5_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL5_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL5_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL5_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL5_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL5_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL5_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL5_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL5_t;
-
-/* Channel 6 generator select */
-typedef enum EVSYS_CHANNEL6_enum
-{
-    EVSYS_CHANNEL6_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL6_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL6_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL6_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL6_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL6_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL6_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL6_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL6_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL6_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL6_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL6_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL6_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL6_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL6_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL6_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL6_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL6_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL6_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL6_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL6_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL6_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL6_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL6_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL6_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL6_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL6_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL6_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL6_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL6_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL6_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL6_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL6_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL6_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL6_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL6_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL6_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL6_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL6_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL6_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL6_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL6_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL6_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL6_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL6_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL6_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL6_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL6_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL6_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL6_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL6_t;
-
-/* Channel 7 generator select */
-typedef enum EVSYS_CHANNEL7_enum
-{
-    EVSYS_CHANNEL7_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL7_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL7_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL7_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL7_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL7_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL7_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL7_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL7_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL7_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL7_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL7_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL7_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL7_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL7_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL7_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL7_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL7_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL7_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL7_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL7_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL7_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL7_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL7_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL7_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL7_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL7_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL7_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL7_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL7_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL7_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL7_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL7_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL7_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL7_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL7_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL7_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL7_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL7_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL7_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL7_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL7_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL7_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL7_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL7_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL7_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL7_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL7_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL7_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL7_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL7_t;
-
-/* Channel 8 generator select */
-typedef enum EVSYS_CHANNEL8_enum
-{
-    EVSYS_CHANNEL8_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL8_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL8_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL8_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL8_RTC_PIT_DIV8192_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL8_RTC_PIT_DIV4096_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL8_RTC_PIT_DIV2048_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL8_RTC_PIT_DIV1024_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL8_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL8_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL8_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL8_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL8_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL8_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL8_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL8_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL8_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL8_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL8_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL8_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL8_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL8_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL8_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL8_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL8_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL8_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL8_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL8_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL8_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL8_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL8_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL8_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL8_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL8_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL8_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL8_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL8_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL8_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL8_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL8_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL8_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL8_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL8_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL8_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL8_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL8_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL8_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL8_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL8_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL8_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL8_t;
-
-/* Channel 9 generator select */
-typedef enum EVSYS_CHANNEL9_enum
-{
-    EVSYS_CHANNEL9_OFF_gc = (0x00<<0),  /* Off */
-    EVSYS_CHANNEL9_UPDI_SYNCH_gc = (0x01<<0),  /* UPDI SYNCH character */
-    EVSYS_CHANNEL9_RTC_OVF_gc = (0x06<<0),  /* Real Time Counter overflow */
-    EVSYS_CHANNEL9_RTC_CMP_gc = (0x07<<0),  /* Real Time Counter compare */
-    EVSYS_CHANNEL9_RTC_PIT_DIV512_gc = (0x08<<0),  /* Periodic Interrupt Timer output 0 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV256_gc = (0x09<<0),  /* Periodic Interrupt Timer output 1 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV128_gc = (0x0A<<0),  /* Periodic Interrupt Timer output 2 */
-    EVSYS_CHANNEL9_RTC_PIT_DIV64_gc = (0x0B<<0),  /* Periodic Interrupt Timer output 3 */
-    EVSYS_CHANNEL9_CCL_LUT0_gc = (0x10<<0),  /* Configurable Custom Logic LUT0 */
-    EVSYS_CHANNEL9_CCL_LUT1_gc = (0x11<<0),  /* Configurable Custom Logic LUT1 */
-    EVSYS_CHANNEL9_CCL_LUT2_gc = (0x12<<0),  /* Configurable Custom Logic LUT2 */
-    EVSYS_CHANNEL9_CCL_LUT3_gc = (0x13<<0),  /* Configurable Custom Logic LUT3 */
-    EVSYS_CHANNEL9_CCL_LUT4_gc = (0x14<<0),  /* Configurable Custom Logic LUT4 */
-    EVSYS_CHANNEL9_CCL_LUT5_gc = (0x15<<0),  /* Configurable Custom Logic LUT5 */
-    EVSYS_CHANNEL9_AC0_OUT_gc = (0x20<<0),  /* Analog Comparator 0 out */
-    EVSYS_CHANNEL9_AC1_OUT_gc = (0x21<<0),  /* Analog Comparator 1 out */
-    EVSYS_CHANNEL9_AC2_OUT_gc = (0x22<<0),  /* Analog Comparator 2 out */
-    EVSYS_CHANNEL9_ADC0_RESRDY_gc = (0x24<<0),  /* ADC 0 Result Ready */
-    EVSYS_CHANNEL9_PTC_RESRDY_gc = (0x28<<0),  /* PTC Result Ready */
-    EVSYS_CHANNEL9_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
-    EVSYS_CHANNEL9_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
-    EVSYS_CHANNEL9_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
-    EVSYS_CHANNEL9_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
-    EVSYS_CHANNEL9_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
-    EVSYS_CHANNEL9_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
-    EVSYS_CHANNEL9_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL9_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
-    EVSYS_CHANNEL9_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
-    EVSYS_CHANNEL9_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
-    EVSYS_CHANNEL9_TCA0_HUNF_gc = (0x81<<0),  /* Timer/Counter A0 high byte timer underflow */
-    EVSYS_CHANNEL9_TCA0_CMP0_LCMP0_gc = (0x84<<0),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL9_TCA0_CMP1_LCMP1_gc = (0x85<<0),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL9_TCA0_CMP2_LCMP2_gc = (0x86<<0),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL9_TCA1_OVF_LUNF_gc = (0x88<<0),  /* Timer/Counter A1 overflow / low byte timer underflow */
-    EVSYS_CHANNEL9_TCA1_HUNF_gc = (0x89<<0),  /* Timer/Counter A1 high byte timer underflow */
-    EVSYS_CHANNEL9_TCA1_CMP0_LCMP0_gc = (0x8C<<0),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
-    EVSYS_CHANNEL9_TCA1_CMP1_LCMP1_gc = (0x8D<<0),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
-    EVSYS_CHANNEL9_TCA1_CMP2_LCMP2_gc = (0x8E<<0),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
-    EVSYS_CHANNEL9_TCB0_CAPT_gc = (0xA0<<0),  /* Timer/Counter B0 capture */
-    EVSYS_CHANNEL9_TCB0_OVF_gc = (0xA1<<0),  /* Timer/Counter B0 overflow */
-    EVSYS_CHANNEL9_TCB1_CAPT_gc = (0xA2<<0),  /* Timer/Counter B1 capture */
-    EVSYS_CHANNEL9_TCB1_OVF_gc = (0xA3<<0),  /* Timer/Counter B1 overflow */
-    EVSYS_CHANNEL9_TCB2_CAPT_gc = (0xA4<<0),  /* Timer/Counter B2 capture */
-    EVSYS_CHANNEL9_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
-    EVSYS_CHANNEL9_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
-    EVSYS_CHANNEL9_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL9_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
-    EVSYS_CHANNEL9_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
-    EVSYS_CHANNEL9_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
-    EVSYS_CHANNEL9_TCD0_PROGEV_gc = (0xB3<<0)  /* Timer/Counter D0 event 3 */
-} EVSYS_CHANNEL9_t;
-
-/* Software event on channel select */
-typedef enum EVSYS_SWEVENTA_enum
-{
-    EVSYS_SWEVENTA_CH0_gc = (0x01<<0),  /* Software event on channel 0 */
-    EVSYS_SWEVENTA_CH1_gc = (0x02<<0),  /* Software event on channel 1 */
-    EVSYS_SWEVENTA_CH2_gc = (0x04<<0),  /* Software event on channel 2 */
-    EVSYS_SWEVENTA_CH3_gc = (0x08<<0),  /* Software event on channel 3 */
-    EVSYS_SWEVENTA_CH4_gc = (0x10<<0),  /* Software event on channel 4 */
-    EVSYS_SWEVENTA_CH5_gc = (0x20<<0),  /* Software event on channel 5 */
-    EVSYS_SWEVENTA_CH6_gc = (0x40<<0),  /* Software event on channel 6 */
-    EVSYS_SWEVENTA_CH7_gc = (0x80<<0)  /* Software event on channel 7 */
-} EVSYS_SWEVENTA_t;
-
-/* Software event on channel select */
-typedef enum EVSYS_SWEVENTB_enum
-{
-    EVSYS_SWEVENTB_CH8_gc = (0x01<<0),  /* Software event on channel 8 */
-    EVSYS_SWEVENTB_CH9_gc = (0x02<<0)  /* Software event on channel 9 */
-} EVSYS_SWEVENTB_t;
-
-/* User channel select */
-typedef enum EVSYS_USER_enum
-{
-    EVSYS_USER_OFF_gc = (0x00<<0),  /* Off, No Eventsys Channel connected */
-    EVSYS_USER_CHANNEL0_gc = (0x01<<0),  /* Connect user to event channel 0 */
-    EVSYS_USER_CHANNEL1_gc = (0x02<<0),  /* Connect user to event channel 1 */
-    EVSYS_USER_CHANNEL2_gc = (0x03<<0),  /* Connect user to event channel 2 */
-    EVSYS_USER_CHANNEL3_gc = (0x04<<0),  /* Connect user to event channel 3 */
-    EVSYS_USER_CHANNEL4_gc = (0x05<<0),  /* Connect user to event channel 4 */
-    EVSYS_USER_CHANNEL5_gc = (0x06<<0),  /* Connect user to event channel 5 */
-    EVSYS_USER_CHANNEL6_gc = (0x07<<0),  /* Connect user to event channel 6 */
-    EVSYS_USER_CHANNEL7_gc = (0x08<<0),  /* Connect user to event channel 7 */
-    EVSYS_USER_CHANNEL8_gc = (0x09<<0),  /* Connect user to event channel 8 */
-    EVSYS_USER_CHANNEL9_gc = (0x0A<<0)  /* Connect user to event channel 9 */
-} EVSYS_USER_t;
-
-/*
---------------------------------------------------------------------------
-FUSE - Fuses
---------------------------------------------------------------------------
-*/
-
-/* Fuses */
-typedef struct FUSE_struct
-{
-    register8_t WDTCFG;  /* Watchdog Configuration */
-    register8_t BODCFG;  /* BOD Configuration */
-    register8_t OSCCFG;  /* Oscillator Configuration */
-    register8_t reserved_1[2];
-    register8_t SYSCFG0;  /* System Configuration 0 */
-    register8_t SYSCFG1;  /* System Configuration 1 */
-    register8_t CODESIZE;  /* Code Section Size */
-    register8_t BOOTSIZE;  /* Boot Section Size */
-} FUSE_t;
-
-/* avr-libc typedef for avr/fuse.h */
-typedef FUSE_t NVM_FUSES_t;
-
-/* BOD Operation in Active Mode select */
-typedef enum ACTIVE_enum
-{
-    ACTIVE_DISABLE_gc = (0x00<<2),  /* BOD disabled */
-    ACTIVE_ENABLE_gc = (0x01<<2),  /* BOD enabled in continuous mode */
-    ACTIVE_SAMPLE_gc = (0x02<<2),  /* BOD enabled in sampled mode */
-    ACTIVE_ENABLEWAIT_gc = (0x03<<2)  /* BOD enabled in continuous mode. Execution is halted at wake-up until BOD is running. */
-} ACTIVE_t;
-
-/* Frequency Select */
-typedef enum CLKSEL_enum
-{
-    CLKSEL_OSCHF_gc = (0x00<<0),  /* 1-32MHz internal oscillator */
-    CLKSEL_OSC32K_gc = (0x01<<0)  /* 32.768kHz internal oscillator */
-} CLKSEL_t;
-
-/* CRC Select */
-typedef enum CRCSEL_enum
-{
-    CRCSEL_CRC16_gc = (0x00<<5),  /* Enable CRC16 */
-    CRCSEL_CRC32_gc = (0x01<<5)  /* Enable CRC32 */
-} CRCSEL_t;
-
-/* CRC Source select */
-typedef enum CRCSRC_enum
-{
-    CRCSRC_FLASH_gc = (0x00<<6),  /* CRC of full Flash (boot, application code and application data) */
-    CRCSRC_BOOT_gc = (0x01<<6),  /* CRC of boot section */
-    CRCSRC_BOOTAPP_gc = (0x02<<6),  /* CRC of application code and boot sections */
-    CRCSRC_NOCRC_gc = (0x03<<6)  /* No CRC */
-} CRCSRC_t;
-
-/* BOD Level select */
-typedef enum LVL_enum
-{
-    LVL_BODLEVEL0_gc = (0x00<<5),  /* 1.9V */
-    LVL_BODLEVEL1_gc = (0x01<<5),  /* 2.45V */
-    LVL_BODLEVEL2_gc = (0x02<<5),  /* 2.7V */
-    LVL_BODLEVEL3_gc = (0x03<<5)  /* 2.85V */
-} LVL_t;
-
-/* Watchdog Timeout Period select */
-typedef enum PERIOD_enum
-{
-    PERIOD_OFF_gc = (0x00<<0),  /* Watch-Dog timer Off */
-    PERIOD_8CLK_gc = (0x01<<0),  /* 8 cycles (8ms) */
-    PERIOD_16CLK_gc = (0x02<<0),  /* 16 cycles (16ms) */
-    PERIOD_32CLK_gc = (0x03<<0),  /* 32 cycles (32ms) */
-    PERIOD_64CLK_gc = (0x04<<0),  /* 64 cycles (64ms) */
-    PERIOD_128CLK_gc = (0x05<<0),  /* 128 cycles (0.128s) */
-    PERIOD_256CLK_gc = (0x06<<0),  /* 256 cycles (0.256s) */
-    PERIOD_512CLK_gc = (0x07<<0),  /* 512 cycles (0.512s) */
-    PERIOD_1KCLK_gc = (0x08<<0),  /* 1K cycles (1.0s) */
-    PERIOD_2KCLK_gc = (0x09<<0),  /* 2K cycles (2.0s) */
-    PERIOD_4KCLK_gc = (0x0A<<0),  /* 4K cycles (4.0s) */
-    PERIOD_8KCLK_gc = (0x0B<<0)  /* 8K cycles (8.0s) */
-} PERIOD_t;
-
-/* Reset Pin Configuration select */
-typedef enum RSTPINCFG_enum
-{
-    RSTPINCFG_GPIO_gc = (0x00<<2),  /* GPIO mode */
-    RSTPINCFG_RST_gc = (0x02<<2)  /* Reset mode */
-} RSTPINCFG_t;
-
-/* BOD Sample Frequency select */
-typedef enum SAMPFREQ_enum
-{
-    SAMPFREQ_128Hz_gc = (0x00<<4),  /* Sample frequency is 128 Hz */
-    SAMPFREQ_32Hz_gc = (0x01<<4)  /* Sample frequency is 32 Hz */
-} SAMPFREQ_t;
-
-/* BOD Operation in Sleep Mode select */
-typedef enum SLEEP_enum
-{
-    SLEEP_DISABLE_gc = (0x00<<0),  /* BOD disabled */
-    SLEEP_ENABLE_gc = (0x01<<0),  /* BOD enabled in continuous mode */
-    SLEEP_SAMPLE_gc = (0x02<<0)  /* BOD enabled in sampled mode */
-} SLEEP_t;
-
-/* Startup Time select */
-typedef enum SUT_enum
-{
-    SUT_0MS_gc = (0x00<<0),  /* 0 ms */
-    SUT_1MS_gc = (0x01<<0),  /* 1 ms */
-    SUT_2MS_gc = (0x02<<0),  /* 2 ms */
-    SUT_4MS_gc = (0x03<<0),  /* 4 ms */
-    SUT_8MS_gc = (0x04<<0),  /* 8 ms */
-    SUT_16MS_gc = (0x05<<0),  /* 16 ms */
-    SUT_32MS_gc = (0x06<<0),  /* 32 ms */
-    SUT_64MS_gc = (0x07<<0)  /* 64 ms */
-} SUT_t;
-
-/* Watchdog Window Timeout Period select */
-typedef enum WINDOW_enum
-{
-    WINDOW_OFF_gc = (0x00<<4),  /* Window mode off */
-    WINDOW_8CLK_gc = (0x01<<4),  /* 8 cycles (8ms) */
-    WINDOW_16CLK_gc = (0x02<<4),  /* 16 cycles (16ms) */
-    WINDOW_32CLK_gc = (0x03<<4),  /* 32 cycles (32ms) */
-    WINDOW_64CLK_gc = (0x04<<4),  /* 64 cycles (64ms) */
-    WINDOW_128CLK_gc = (0x05<<4),  /* 128 cycles (0.128s) */
-    WINDOW_256CLK_gc = (0x06<<4),  /* 256 cycles (0.256s) */
-    WINDOW_512CLK_gc = (0x07<<4),  /* 512 cycles (0.512s) */
-    WINDOW_1KCLK_gc = (0x08<<4),  /* 1K cycles (1.0s) */
-    WINDOW_2KCLK_gc = (0x09<<4),  /* 2K cycles (2.0s) */
-    WINDOW_4KCLK_gc = (0x0A<<4),  /* 4K cycles (4.0s) */
-    WINDOW_8KCLK_gc = (0x0B<<4)  /* 8K cycles (8.0s) */
-} WINDOW_t;
-
-/*
---------------------------------------------------------------------------
-GPR - General Purpose Registers
---------------------------------------------------------------------------
-*/
-
-/* General Purpose Registers */
-typedef struct GPR_struct
-{
-    register8_t GPR0;  /* General Purpose Register 0 */
-    register8_t GPR1;  /* General Purpose Register 1 */
-    register8_t GPR2;  /* General Purpose Register 2 */
-    register8_t GPR3;  /* General Purpose Register 3 */
-} GPR_t;
-
-
-/*
---------------------------------------------------------------------------
-LOCK - Lockbits
---------------------------------------------------------------------------
-*/
-
-/* Lockbits */
-typedef struct LOCK_struct
-{
-    _DWORDREGISTER(KEY);  /* Lock Key Bits */
-} LOCK_t;
-
-/* Lock Key select */
-typedef enum LOCK_KEY_enum
-{
-    LOCK_KEY_NOLOCK_gc = (0x5CC5C55C<<0),  /* No locks */
-    LOCK_KEY_RWLOCK_gc = (0xA33A3AA3<<0)  /* Read and write lock */
-} LOCK_KEY_t;
-
-/*
---------------------------------------------------------------------------
-NVMCTRL - Non-volatile Memory Controller
---------------------------------------------------------------------------
-*/
-
-/* Non-volatile Memory Controller */
-typedef struct NVMCTRL_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t STATUS;  /* Status */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t reserved_1[1];
-    _WORDREGISTER(DATA);  /* Data */
-    _DWORDREGISTER(ADDR);  /* Address */
-    register8_t reserved_2[4];
-} NVMCTRL_t;
-
-/* Command select */
-typedef enum NVMCTRL_CMD_enum
-{
-    NVMCTRL_CMD_NONE_gc = (0x00<<0),  /* No Command */
-    NVMCTRL_CMD_NOOP_gc = (0x01<<0),  /* No Operation */
-    NVMCTRL_CMD_FLWR_gc = (0x02<<0),  /* Flash Write */
-    NVMCTRL_CMD_FLPER_gc = (0x08<<0),  /* Flash Page Erase */
-    NVMCTRL_CMD_FLMPER2_gc = (0x09<<0),  /* Flash Multi-Page Erase 2 pages */
-    NVMCTRL_CMD_FLMPER4_gc = (0x0A<<0),  /* Flash Multi-Page Erase 4 pages */
-    NVMCTRL_CMD_FLMPER8_gc = (0x0B<<0),  /* Flash Multi-Page Erase 8 pages */
-    NVMCTRL_CMD_FLMPER16_gc = (0x0C<<0),  /* Flash Multi-Page Erase 16 pages */
-    NVMCTRL_CMD_FLMPER32_gc = (0x0D<<0),  /* Flash Multi-Page Erase 32 pages */
-    NVMCTRL_CMD_EEWR_gc = (0x12<<0),  /* EEPROM Write */
-    NVMCTRL_CMD_EEERWR_gc = (0x13<<0),  /* EEPROM Erase and Write */
-    NVMCTRL_CMD_EEBER_gc = (0x18<<0),  /* EEPROM Byte Erase */
-    NVMCTRL_CMD_EEMBER2_gc = (0x19<<0),  /* EEPROM Multi-Byte Erase 2 bytes */
-    NVMCTRL_CMD_EEMBER4_gc = (0x1A<<0),  /* EEPROM Multi-Byte Erase 4 bytes */
-    NVMCTRL_CMD_EEMBER8_gc = (0x1B<<0),  /* EEPROM Multi-Byte Erase 8 bytes */
-    NVMCTRL_CMD_EEMBER16_gc = (0x1C<<0),  /* EEPROM Multi-Byte Erase 16 bytes */
-    NVMCTRL_CMD_EEMBER32_gc = (0x1D<<0),  /* EEPROM Multi-Byte Erase 32 bytes */
-    NVMCTRL_CMD_CHER_gc = (0x20<<0),  /* Chip Erase Command */
-    NVMCTRL_CMD_EECHER_gc = (0x30<<0)  /* EEPROM Erase Command */
-} NVMCTRL_CMD_t;
-
-/* Write error select */
-typedef enum NVMCTRL_ERROR_enum
-{
-    NVMCTRL_ERROR_NOERROR_gc = (0x00<<4),  /* No Error */
-    NVMCTRL_ERROR_ILLEGALCMD_gc = (0x01<<4),  /* Write command not selected */
-    NVMCTRL_ERROR_ILLEGALSADDR_gc = (0x02<<4),  /* Write to section not allowed */
-    NVMCTRL_ERROR_DOUBLESELECT_gc = (0x03<<4),  /* Selecting new write command while write command already seleted */
-    NVMCTRL_ERROR_ONGOINGPROG_gc = (0x04<<4)  /* Starting a new programming operation before previous is completed */
-} NVMCTRL_ERROR_t;
-
-/* Flash Mapping in Data space select */
-typedef enum NVMCTRL_FLMAP_enum
-{
-    NVMCTRL_FLMAP_SECTION0_gc = (0x00<<4),  /* Flash section 0 */
-    NVMCTRL_FLMAP_SECTION1_gc = (0x01<<4),  /* Flash section 1 */
-    NVMCTRL_FLMAP_SECTION2_gc = (0x02<<4),  /* Flash section 2 */
-    NVMCTRL_FLMAP_SECTION3_gc = (0x03<<4)  /* Flash section 3 */
-} NVMCTRL_FLMAP_t;
-
-/*
---------------------------------------------------------------------------
-PORT - I/O Ports
---------------------------------------------------------------------------
-*/
-
-/* I/O Ports */
-typedef struct PORT_struct
-{
-    register8_t DIR;  /* Data Direction */
-    register8_t DIRSET;  /* Data Direction Set */
-    register8_t DIRCLR;  /* Data Direction Clear */
-    register8_t DIRTGL;  /* Data Direction Toggle */
-    register8_t OUT;  /* Output Value */
-    register8_t OUTSET;  /* Output Value Set */
-    register8_t OUTCLR;  /* Output Value Clear */
-    register8_t OUTTGL;  /* Output Value Toggle */
-    register8_t IN;  /* Input Value */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t PORTCTRL;  /* Port Control */
-    register8_t PINCONFIG;  /* Pin Control Config */
-    register8_t PINCTRLUPD;  /* Pin Control Update */
-    register8_t PINCTRLSET;  /* Pin Control Set */
-    register8_t PINCTRLCLR;  /* Pin Control Clear */
-    register8_t reserved_1[1];
-    register8_t PIN0CTRL;  /* Pin 0 Control */
-    register8_t PIN1CTRL;  /* Pin 1 Control */
-    register8_t PIN2CTRL;  /* Pin 2 Control */
-    register8_t PIN3CTRL;  /* Pin 3 Control */
-    register8_t PIN4CTRL;  /* Pin 4 Control */
-    register8_t PIN5CTRL;  /* Pin 5 Control */
-    register8_t PIN6CTRL;  /* Pin 6 Control */
-    register8_t PIN7CTRL;  /* Pin 7 Control */
-    register8_t reserved_2[8];
-} PORT_t;
-
-/* Input/Sense Configuration select */
-typedef enum PORT_ISC_enum
-{
-    PORT_ISC_INTDISABLE_gc = (0x00<<0),  /* Interrupt disabled but input buffer enabled */
-    PORT_ISC_BOTHEDGES_gc = (0x01<<0),  /* Sense Both Edges */
-    PORT_ISC_RISING_gc = (0x02<<0),  /* Sense Rising Edge */
-    PORT_ISC_FALLING_gc = (0x03<<0),  /* Sense Falling Edge */
-    PORT_ISC_INPUT_DISABLE_gc = (0x04<<0),  /* Digital Input Buffer disabled */
-    PORT_ISC_LEVEL_gc = (0x05<<0)  /* Sense low Level */
-} PORT_ISC_t;
-
-/*
---------------------------------------------------------------------------
-PORTMUX - Port Multiplexer
---------------------------------------------------------------------------
-*/
-
-/* Port Multiplexer */
-typedef struct PORTMUX_struct
-{
-    register8_t EVSYSROUTEA;  /* EVSYS route A */
-    register8_t CCLROUTEA;  /* CCL route A */
-    register8_t USARTROUTEA;  /* USART route A */
-    register8_t USARTROUTEB;  /* USART route B */
-    register8_t SPIROUTEA;  /* SPI route A */
-    register8_t TWIROUTEA;  /* TWI route A */
-    register8_t TCAROUTEA;  /* TCA route A */
-    register8_t TCBROUTEA;  /* TCB route A */
-    register8_t TCDROUTEA;  /* TCD route A */
-    register8_t ACROUTEA;  /* AC route A */
-    register8_t ZCDROUTEA;  /* ZCD route A */
-    register8_t reserved_1[5];
-} PORTMUX_t;
-
-/* Analog Comparator 0 Output select */
-typedef enum PORTMUX_AC0_enum
-{
-    PORTMUX_AC0_DEFAULT_gc = (0x00<<0),  /* OUT: PA7 */
-    PORTMUX_AC0_ALT1_gc = (0x01<<0)  /* OUT: PC6 */
-} PORTMUX_AC0_t;
-
-/* Analog Comparator 1 Output select */
-typedef enum PORTMUX_AC1_enum
-{
-    PORTMUX_AC1_DEFAULT_gc = (0x00<<1),  /* OUT: PA7 */
-    PORTMUX_AC1_ALT1_gc = (0x01<<1)  /* OUT: PC6 */
-} PORTMUX_AC1_t;
-
-/* Analog Comparator 2 Output select */
-typedef enum PORTMUX_AC2_enum
-{
-    PORTMUX_AC2_DEFAULT_gc = (0x00<<2),  /* OUT: PA7 */
-    PORTMUX_AC2_ALT1_gc = (0x01<<2)  /* OUT: PC6 */
-} PORTMUX_AC2_t;
-
-/* Event Output A select */
-typedef enum PORTMUX_EVOUTA_enum
-{
-    PORTMUX_EVOUTA_DEFAULT_gc = (0x00<<0),  /* EVOUT: PA2 */
-    PORTMUX_EVOUTA_ALT1_gc = (0x01<<0)  /* EVOUT: PA7 */
-} PORTMUX_EVOUTA_t;
-
-/* Event Output B select */
-typedef enum PORTMUX_EVOUTB_enum
-{
-    PORTMUX_EVOUTB_DEFAULT_gc = (0x00<<1)  /* EVOUT: PB2 */
-} PORTMUX_EVOUTB_t;
-
-/* Event Output C select */
-typedef enum PORTMUX_EVOUTC_enum
-{
-    PORTMUX_EVOUTC_DEFAULT_gc = (0x00<<2),  /* EVOUT: PC2 */
-    PORTMUX_EVOUTC_ALT1_gc = (0x01<<2)  /* EVOUT: PC7 */
-} PORTMUX_EVOUTC_t;
-
-/* Event Output D select */
-typedef enum PORTMUX_EVOUTD_enum
-{
-    PORTMUX_EVOUTD_DEFAULT_gc = (0x00<<3),  /* EVOUT: PD2 */
-    PORTMUX_EVOUTD_ALT1_gc = (0x01<<3)  /* EVOUT: PD7 */
-} PORTMUX_EVOUTD_t;
-
-/* Event Output E select */
-typedef enum PORTMUX_EVOUTE_enum
-{
-    PORTMUX_EVOUTE_DEFAULT_gc = (0x00<<4)  /* EVOUT: PE2 */
-} PORTMUX_EVOUTE_t;
-
-/* Event Output F select */
-typedef enum PORTMUX_EVOUTF_enum
-{
-    PORTMUX_EVOUTF_DEFAULT_gc = (0x00<<5)  /* EVOUT: PF2 */
-} PORTMUX_EVOUTF_t;
-
-/* CCL Look-Up Table 0 Signals select */
-typedef enum PORTMUX_LUT0_enum
-{
-    PORTMUX_LUT0_DEFAULT_gc = (0x00<<0),  /* In: PA0, PA1, PA2 Out: PA3 */
-    PORTMUX_LUT0_ALT1_gc = (0x01<<0)  /* In: PA0, PA1, PA2 Out: PA6 */
-} PORTMUX_LUT0_t;
-
-/* CCL Look-Up Table 1 Signals select */
-typedef enum PORTMUX_LUT1_enum
-{
-    PORTMUX_LUT1_DEFAULT_gc = (0x00<<1),  /* In: PC0, PC1, PC2 Out: PC3 */
-    PORTMUX_LUT1_ALT1_gc = (0x01<<1)  /* In: PC0, PC1, PC2 Out: PC6 */
-} PORTMUX_LUT1_t;
-
-/* CCL Look-Up Table 2 Signals select */
-typedef enum PORTMUX_LUT2_enum
-{
-    PORTMUX_LUT2_DEFAULT_gc = (0x00<<2),  /* In: PD0, PD1, PD2 Out: PD3 */
-    PORTMUX_LUT2_ALT1_gc = (0x01<<2)  /* In: PD0, PD1, PD2 Out: PD6 */
-} PORTMUX_LUT2_t;
-
-/* CCL Look-Up Table 3 Signals select */
-typedef enum PORTMUX_LUT3_enum
-{
-    PORTMUX_LUT3_DEFAULT_gc = (0x00<<3)  /* In: PF0, PF1, PF2 Out: PF3 */
-} PORTMUX_LUT3_t;
-
-/* CCL Look-Up Table 4 Signals select */
-typedef enum PORTMUX_LUT4_enum
-{
-    PORTMUX_LUT4_DEFAULT_gc = (0x00<<4),  /* In: PB0, PB1, PB2 Out: PB3 */
-    PORTMUX_LUT4_ALT1_gc = (0x01<<4)  /* In: PB0, PB1, PB2 Out: - */
-} PORTMUX_LUT4_t;
-
-/* SPI0 Signals select */
-typedef enum PORTMUX_SPI0_enum
-{
-    PORTMUX_SPI0_DEFAULT_gc = (0x00<<0),  /* MOSI: PA4, MISO: PA5, SCK: PA6, SS: PA7 */
-    PORTMUX_SPI0_ALT1_gc = (0x01<<0),  /* MOSI: PE0, MISO: PE1, SCK: PE2, SS: PE3 */
-    PORTMUX_SPI0_NONE_gc = (0x03<<0)  /* Not connected to any pins */
-} PORTMUX_SPI0_t;
-
-/* SPI1 Signals select */
-typedef enum PORTMUX_SPI1_enum
-{
-    PORTMUX_SPI1_DEFAULT_gc = (0x00<<2),  /* MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3 */
-    PORTMUX_SPI1_ALT1_gc = (0x01<<2),  /* MOSI: PC4, MISO: PC5, SCK: PC6, SS: PC7 */
-    PORTMUX_SPI1_ALT2_gc = (0x02<<2),  /* MOSI: PB4, MISO: PB5, SCK: -, SS: - */
-    PORTMUX_SPI1_NONE_gc = (0x03<<2)  /* Not connected to any pins */
-} PORTMUX_SPI1_t;
-
-/* TCA0 Signals select */
-typedef enum PORTMUX_TCA0_enum
-{
-    PORTMUX_TCA0_PORTA_gc = (0x00<<0),  /* WOn: PA0, PA1, PA2, PA3, PA4, PA5 */
-    PORTMUX_TCA0_PORTB_gc = (0x01<<0),  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
-    PORTMUX_TCA0_PORTC_gc = (0x02<<0),  /* WOn: PC0, PC1, PC2, PC3, PC4, PC5 */
-    PORTMUX_TCA0_PORTD_gc = (0x03<<0),  /* WOn: PD0, PD1, PD2, PD3, PD4, PD5 */
-    PORTMUX_TCA0_PORTE_gc = (0x04<<0),  /* WOn: PE0, PE1, PE2, PE3, -, - */
-    PORTMUX_TCA0_PORTF_gc = (0x05<<0)  /* WOn: PF0, PF1, PF2, PF3, PF4, PF5 */
-} PORTMUX_TCA0_t;
-
-/* TCA1 Signals select */
-typedef enum PORTMUX_TCA1_enum
-{
-    PORTMUX_TCA1_PORTB_gc = (0x00<<3),  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
-    PORTMUX_TCA1_PORTC_gc = (0x01<<3)  /* WOn: PC4, PC5, PC6, -, -, - */
-} PORTMUX_TCA1_t;
-
-/* TCB0 Output select */
-typedef enum PORTMUX_TCB0_enum
-{
-    PORTMUX_TCB0_DEFAULT_gc = (0x00<<0),  /* WO: PA2 */
-    PORTMUX_TCB0_ALT1_gc = (0x01<<0)  /* WO: PF4 */
-} PORTMUX_TCB0_t;
-
-/* TCB1 Output select */
-typedef enum PORTMUX_TCB1_enum
-{
-    PORTMUX_TCB1_DEFAULT_gc = (0x00<<1),  /* WO: PA3 */
-    PORTMUX_TCB1_ALT1_gc = (0x01<<1)  /* WO: PF5 */
-} PORTMUX_TCB1_t;
-
-/* TCB2 Output select */
-typedef enum PORTMUX_TCB2_enum
-{
-    PORTMUX_TCB2_DEFAULT_gc = (0x00<<2),  /* WO: PC0 */
-    PORTMUX_TCB2_ALT1_gc = (0x01<<2)  /* WO: PB4 */
-} PORTMUX_TCB2_t;
-
-/* TCB3 Output select */
-typedef enum PORTMUX_TCB3_enum
-{
-    PORTMUX_TCB3_DEFAULT_gc = (0x00<<3),  /* WO: PB5 */
-    PORTMUX_TCB3_ALT1_gc = (0x01<<3)  /* WO: PC1 */
-} PORTMUX_TCB3_t;
-
-/* TCD0 Signals select */
-typedef enum PORTMUX_TCD0_enum
-{
-    PORTMUX_TCD0_DEFAULT_gc = (0x00<<0),  /* WOx: PA4, PA5, PA6, PA7 */
-    PORTMUX_TCD0_ALT1_gc = (0x01<<0),  /* WOx: PB4, PB5, -, - */
-    PORTMUX_TCD0_ALT2_gc = (0x02<<0)  /* WOx: PF0, PF1, PF2, PF3 */
-} PORTMUX_TCD0_t;
-
-/* TWI0 Signals select */
-typedef enum PORTMUX_TWI0_enum
-{
-    PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC2, SCL: PC3. */
-    PORTMUX_TWI0_ALT1_gc = (0x01<<0),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC6, SCL: PC7. */
-    PORTMUX_TWI0_ALT2_gc = (0x02<<0)  /* SDA: PC2, SCL: PC3. Dual mode: SDA: PC6, SCL: PC7. */
-} PORTMUX_TWI0_t;
-
-/* TWI1 Signals select */
-typedef enum PORTMUX_TWI1_enum
-{
-    PORTMUX_TWI1_DEFAULT_gc = (0x00<<2),  /* SDA: PF2, SCL: PF3. Dual mode: SDA: PB2, SCL: PB3. */
-    PORTMUX_TWI1_ALT1_gc = (0x01<<2),  /* SDA: PF2, SCL: PF3. Dual mode: SDA: -, SCL: -. */
-    PORTMUX_TWI1_ALT2_gc = (0x02<<2)  /* SDA: PB2, SCL: PB3. Dual mode: SDA: -, SCL: -. */
-} PORTMUX_TWI1_t;
-
-/* USART0 Signals select */
-typedef enum PORTMUX_USART0_enum
-{
-    PORTMUX_USART0_DEFAULT_gc = (0x00<<0),  /* TxD: PA0, RxD: PA1, XCK: PA2, XDIR: PA3 */
-    PORTMUX_USART0_ALT1_gc = (0x01<<0),  /* TxD: PA4, RxD: PA5, XCK: PA6, XDIR: PA7 */
-    PORTMUX_USART0_NONE_gc = (0x03<<0)  /* Not connected to any pins */
-} PORTMUX_USART0_t;
-
-/* USART1 Signals select */
-typedef enum PORTMUX_USART1_enum
-{
-    PORTMUX_USART1_DEFAULT_gc = (0x00<<2),  /* TxD: PC0, RxD: PC1, XCK: PC2, XDIR: PC3 */
-    PORTMUX_USART1_ALT1_gc = (0x01<<2),  /* TxD: PC4, RxD: PC5, XCK: PC6, XDIR: PC7 */
-    PORTMUX_USART1_NONE_gc = (0x03<<2)  /* Not connected to any pins */
-} PORTMUX_USART1_t;
-
-/* USART2 Signals select */
-typedef enum PORTMUX_USART2_enum
-{
-    PORTMUX_USART2_DEFAULT_gc = (0x00<<4),  /* TxD: PF0, RxD: PF1, XCK: PF2, XDIR: PF3 */
-    PORTMUX_USART2_ALT1_gc = (0x01<<4),  /* TxD: PF4, RxD: PF5, XCK: -, XDIR: - */
-    PORTMUX_USART2_NONE_gc = (0x03<<4)  /* Not connected to any pins */
-} PORTMUX_USART2_t;
-
-/* USART3  Signals select */
-typedef enum PORTMUX_USART3_enum
-{
-    PORTMUX_USART3_DEFAULT_gc = (0x00<<6),  /* TxD: PB0, RxD: PB1, XCK: PB2, XDIR: PB3 */
-    PORTMUX_USART3_ALT1_gc = (0x01<<6),  /* TxD: PB4, RxD: PB5, XCK: -, XDIR: - */
-    PORTMUX_USART3_NONE_gc = (0x03<<6)  /* Not connected to any pins */
-} PORTMUX_USART3_t;
-
-/* USART4 Signals select */
-typedef enum PORTMUX_USART4_enum
-{
-    PORTMUX_USART4_DEFAULT_gc = (0x00<<0),  /* TxD: PE0, RxD: PE1, XCK: PE2, XDIR: PE3 */
-    PORTMUX_USART4_NONE_gc = (0x03<<0)  /* Not connected to any pins */
-} PORTMUX_USART4_t;
-
-/* Zero Cross Detector 0 Output select */
-typedef enum PORTMUX_ZCD0_enum
-{
-    PORTMUX_ZCD0_DEFAULT_gc = (0x00<<0),  /* OUT: PA7 */
-    PORTMUX_ZCD0_ALT1_gc = (0x01<<0)  /* OUT: PC7 */
-} PORTMUX_ZCD0_t;
-
-/* Zero Cross Detector 1 Output select */
-typedef enum PORTMUX_ZCD1_enum
-{
-    PORTMUX_ZCD1_DEFAULT_gc = (0x00<<1),  /* OUT: PA7 */
-    PORTMUX_ZCD1_ALT1_gc = (0x01<<1)  /* OUT: PC7 */
-} PORTMUX_ZCD1_t;
-
-
-/*
---------------------------------------------------------------------------
-RSTCTRL - Reset controller
---------------------------------------------------------------------------
-*/
-
-/* Reset controller */
-typedef struct RSTCTRL_struct
-{
-    register8_t RSTFR;  /* Reset Flags */
-    register8_t SWRR;  /* Software Reset */
-    register8_t reserved_1[2];
-} RSTCTRL_t;
-
-
-/*
---------------------------------------------------------------------------
-RTC - Real-Time Counter
---------------------------------------------------------------------------
-*/
-
-/* Real-Time Counter */
-typedef struct RTC_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t STATUS;  /* Status */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t TEMP;  /* Temporary */
-    register8_t DBGCTRL;  /* Debug control */
-    register8_t CALIB;  /* Calibration */
-    register8_t CLKSEL;  /* Clock Select */
-    _WORDREGISTER(CNT);  /* Counter */
-    _WORDREGISTER(PER);  /* Period */
-    _WORDREGISTER(CMP);  /* Compare */
-    register8_t reserved_1[2];
-    register8_t PITCTRLA;  /* PIT Control A */
-    register8_t PITSTATUS;  /* PIT Status */
-    register8_t PITINTCTRL;  /* PIT Interrupt Control */
-    register8_t PITINTFLAGS;  /* PIT Interrupt Flags */
-    register8_t reserved_2[1];
-    register8_t PITDBGCTRL;  /* PIT Debug control */
-    register8_t reserved_3[10];
-} RTC_t;
-
-/* Clock Select */
-typedef enum RTC_CLKSEL_enum
-{
-    RTC_CLKSEL_OSC32K_gc = (0x00<<0),  /* 32.768 kHz from OSC32K */
-    RTC_CLKSEL_OSC1K_gc = (0x01<<0),  /* 1.024 kHz from OSC32K */
-    RTC_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz from XOSC32K */
-    RTC_CLKSEL_EXTCLK_gc = (0x03<<0)  /* External Clock */
-} RTC_CLKSEL_t;
-
-/* Period select */
-typedef enum RTC_PERIOD_enum
-{
-    RTC_PERIOD_OFF_gc = (0x00<<3),  /* Off */
-    RTC_PERIOD_CYC4_gc = (0x01<<3),  /* RTC Clock Cycles 4 */
-    RTC_PERIOD_CYC8_gc = (0x02<<3),  /* RTC Clock Cycles 8 */
-    RTC_PERIOD_CYC16_gc = (0x03<<3),  /* RTC Clock Cycles 16 */
-    RTC_PERIOD_CYC32_gc = (0x04<<3),  /* RTC Clock Cycles 32 */
-    RTC_PERIOD_CYC64_gc = (0x05<<3),  /* RTC Clock Cycles 64 */
-    RTC_PERIOD_CYC128_gc = (0x06<<3),  /* RTC Clock Cycles 128 */
-    RTC_PERIOD_CYC256_gc = (0x07<<3),  /* RTC Clock Cycles 256 */
-    RTC_PERIOD_CYC512_gc = (0x08<<3),  /* RTC Clock Cycles 512 */
-    RTC_PERIOD_CYC1024_gc = (0x09<<3),  /* RTC Clock Cycles 1024 */
-    RTC_PERIOD_CYC2048_gc = (0x0A<<3),  /* RTC Clock Cycles 2048 */
-    RTC_PERIOD_CYC4096_gc = (0x0B<<3),  /* RTC Clock Cycles 4096 */
-    RTC_PERIOD_CYC8192_gc = (0x0C<<3),  /* RTC Clock Cycles 8192 */
-    RTC_PERIOD_CYC16384_gc = (0x0D<<3),  /* RTC Clock Cycles 16384 */
-    RTC_PERIOD_CYC32768_gc = (0x0E<<3)  /* RTC Clock Cycles 32768 */
-} RTC_PERIOD_t;
-
-/* Prescaling Factor select */
-typedef enum RTC_PRESCALER_enum
-{
-    RTC_PRESCALER_DIV1_gc = (0x00<<3),  /* RTC Clock / 1 */
-    RTC_PRESCALER_DIV2_gc = (0x01<<3),  /* RTC Clock / 2 */
-    RTC_PRESCALER_DIV4_gc = (0x02<<3),  /* RTC Clock / 4 */
-    RTC_PRESCALER_DIV8_gc = (0x03<<3),  /* RTC Clock / 8 */
-    RTC_PRESCALER_DIV16_gc = (0x04<<3),  /* RTC Clock / 16 */
-    RTC_PRESCALER_DIV32_gc = (0x05<<3),  /* RTC Clock / 32 */
-    RTC_PRESCALER_DIV64_gc = (0x06<<3),  /* RTC Clock / 64 */
-    RTC_PRESCALER_DIV128_gc = (0x07<<3),  /* RTC Clock / 128 */
-    RTC_PRESCALER_DIV256_gc = (0x08<<3),  /* RTC Clock / 256 */
-    RTC_PRESCALER_DIV512_gc = (0x09<<3),  /* RTC Clock / 512 */
-    RTC_PRESCALER_DIV1024_gc = (0x0A<<3),  /* RTC Clock / 1024 */
-    RTC_PRESCALER_DIV2048_gc = (0x0B<<3),  /* RTC Clock / 2048 */
-    RTC_PRESCALER_DIV4096_gc = (0x0C<<3),  /* RTC Clock / 4096 */
-    RTC_PRESCALER_DIV8192_gc = (0x0D<<3),  /* RTC Clock / 8192 */
-    RTC_PRESCALER_DIV16384_gc = (0x0E<<3),  /* RTC Clock / 16384 */
-    RTC_PRESCALER_DIV32768_gc = (0x0F<<3)  /* RTC Clock / 32768 */
-} RTC_PRESCALER_t;
-
-/*
---------------------------------------------------------------------------
-SIGROW - Signature row
---------------------------------------------------------------------------
-*/
-
-/* Signature row */
-typedef struct SIGROW_struct
-{
-    register8_t DEVICEID0;  /* Device ID Byte 0 */
-    register8_t DEVICEID1;  /* Device ID Byte 1 */
-    register8_t DEVICEID2;  /* Device ID Byte 2 */
-    register8_t reserved_1[1];
-    _WORDREGISTER(TEMPSENSE0);  /* Temperature Calibration 0 */
-    _WORDREGISTER(TEMPSENSE1);  /* Temperature Calibration 1 */
-    register8_t reserved_2[8];
-    register8_t SERNUM0;  /* LOTNUM0 */
-    register8_t SERNUM1;  /* LOTNUM1 */
-    register8_t SERNUM2;  /* LOTNUM2 */
-    register8_t SERNUM3;  /* LOTNUM3 */
-    register8_t SERNUM4;  /* LOTNUM4 */
-    register8_t SERNUM5;  /* LOTNUM5 */
-    register8_t SERNUM6;  /* RANDOM */
-    register8_t SERNUM7;  /* SCRIBE */
-    register8_t SERNUM8;  /* XPOS0 */
-    register8_t SERNUM9;  /* XPOS1 */
-    register8_t SERNUM10;  /* YPOS0 */
-    register8_t SERNUM11;  /* YPOS1 */
-    register8_t SERNUM12;  /* RES0 */
-    register8_t SERNUM13;  /* RES1 */
-    register8_t SERNUM14;  /* RES2 */
-    register8_t SERNUM15;  /* RES3 */
-    register8_t reserved_3[32];
-} SIGROW_t;
-
-
-/*
---------------------------------------------------------------------------
-SLPCTRL - Sleep Controller
---------------------------------------------------------------------------
-*/
-
-/* Sleep Controller */
-typedef struct SLPCTRL_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t VREGCTRL;  /* Control B */
-} SLPCTRL_t;
-
-/* High Temperature Low Leakage Enable select */
-typedef enum SLPCTRL_HTLLEN_enum
-{
-    SLPCTRL_HTLLEN_OFF_gc = (0x00<<4),  /* Disabled */
-    SLPCTRL_HTLLEN_ON_gc = (0x01<<4)  /* Enabled */
-} SLPCTRL_HTLLEN_t;
-
-/* Performance Mode select */
-typedef enum SLPCTRL_PMODE_enum
-{
-    SLPCTRL_PMODE_AUTO_gc = (0x00<<0),  /*  */
-    SLPCTRL_PMODE_FULL_gc = (0x01<<0)  /*  */
-} SLPCTRL_PMODE_t;
-
-/* Sleep mode select */
-typedef enum SLPCTRL_SMODE_enum
-{
-    SLPCTRL_SMODE_IDLE_gc = (0x00<<1),  /* Idle mode */
-    SLPCTRL_SMODE_STDBY_gc = (0x01<<1),  /* Standby Mode */
-    SLPCTRL_SMODE_PDOWN_gc = (0x02<<1)  /* Power-down Mode */
-} SLPCTRL_SMODE_t;
-
-#define SLEEP_MODE_IDLE (0x00<<1)
-#define SLEEP_MODE_STANDBY (0x01<<1)
-#define SLEEP_MODE_PWR_DOWN (0x02<<1)
-/*
---------------------------------------------------------------------------
-SPI - Serial Peripheral Interface
---------------------------------------------------------------------------
-*/
-
-/* Serial Peripheral Interface */
-typedef struct SPI_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t DATA;  /* Data */
-    register8_t reserved_1[11];
-} SPI_t;
-
-/* SPI Mode select */
-typedef enum SPI_MODE_enum
-{
-    SPI_MODE_0_gc = (0x00<<0),  /* SPI Mode 0 */
-    SPI_MODE_1_gc = (0x01<<0),  /* SPI Mode 1 */
-    SPI_MODE_2_gc = (0x02<<0),  /* SPI Mode 2 */
-    SPI_MODE_3_gc = (0x03<<0)  /* SPI Mode 3 */
-} SPI_MODE_t;
-
-/* Prescaler select */
-typedef enum SPI_PRESC_enum
-{
-    SPI_PRESC_DIV4_gc = (0x00<<1),  /* CLK_PER / 4 */
-    SPI_PRESC_DIV16_gc = (0x01<<1),  /* CLK_PER / 16 */
-    SPI_PRESC_DIV64_gc = (0x02<<1),  /* CLK_PER / 64 */
-    SPI_PRESC_DIV128_gc = (0x03<<1)  /* CLK_PER / 128 */
-} SPI_PRESC_t;
-
-/*
---------------------------------------------------------------------------
-SYSCFG - System Configuration Registers
---------------------------------------------------------------------------
-*/
-
-/* System Configuration Registers */
-typedef struct SYSCFG_struct
-{
-    register8_t reserved_1[1];
-    register8_t REVID;  /* Revision ID */
-    register8_t reserved_2[22];
-    register8_t OCDMCTRL;  /* OCD Message Control */
-    register8_t OCDMSTATUS;  /* OCD Message Status */
-    register8_t reserved_3[6];
-} SYSCFG_t;
-
-
-/*
---------------------------------------------------------------------------
-TCA - 16-bit Timer/Counter Type A
---------------------------------------------------------------------------
-*/
-
-/* 16-bit Timer/Counter Type A - Single Mode */
-typedef struct TCA_SINGLE_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t CTRLC;  /* Control C */
-    register8_t CTRLD;  /* Control D */
-    register8_t CTRLECLR;  /* Control E Clear */
-    register8_t CTRLESET;  /* Control E Set */
-    register8_t CTRLFCLR;  /* Control F Clear */
-    register8_t CTRLFSET;  /* Control F Set */
-    register8_t reserved_1[1];
-    register8_t EVCTRL;  /* Event Control */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t reserved_2[2];
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t TEMP;  /* Temporary data for 16-bit Access */
-    register8_t reserved_3[16];
-    _WORDREGISTER(CNT);  /* Count */
-    register8_t reserved_4[4];
-    _WORDREGISTER(PER);  /* Period */
-    _WORDREGISTER(CMP0);  /* Compare 0 */
-    _WORDREGISTER(CMP1);  /* Compare 1 */
-    _WORDREGISTER(CMP2);  /* Compare 2 */
-    register8_t reserved_5[8];
-    _WORDREGISTER(PERBUF);  /* Period Buffer */
-    _WORDREGISTER(CMP0BUF);  /* Compare 0 Buffer */
-    _WORDREGISTER(CMP1BUF);  /* Compare 1 Buffer */
-    _WORDREGISTER(CMP2BUF);  /* Compare 2 Buffer */
-    register8_t reserved_6[2];
-} TCA_SINGLE_t;
-
-/* 16-bit Timer/Counter Type A - Split Mode */
-typedef struct TCA_SPLIT_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t CTRLC;  /* Control C */
-    register8_t CTRLD;  /* Control D */
-    register8_t CTRLECLR;  /* Control E Clear */
-    register8_t CTRLESET;  /* Control E Set */
-    register8_t reserved_1[4];
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t reserved_2[2];
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t reserved_3[17];
-    register8_t LCNT;  /* Low Count */
-    register8_t HCNT;  /* High Count */
-    register8_t reserved_4[4];
-    register8_t LPER;  /* Low Period */
-    register8_t HPER;  /* High Period */
-    register8_t LCMP0;  /* Low Compare */
-    register8_t HCMP0;  /* High Compare */
-    register8_t LCMP1;  /* Low Compare */
-    register8_t HCMP1;  /* High Compare */
-    register8_t LCMP2;  /* Low Compare */
-    register8_t HCMP2;  /* High Compare */
-    register8_t reserved_5[18];
-} TCA_SPLIT_t;
-
-/* 16-bit Timer/Counter Type A */
-typedef union TCA_union
-{
-    TCA_SINGLE_t SINGLE;  /* Single Mode */
-    TCA_SPLIT_t SPLIT;  /* Split Mode */
-} TCA_t;
-
-/* Clock Selection */
-typedef enum TCA_SINGLE_CLKSEL_enum
-{
-    TCA_SINGLE_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
-    TCA_SINGLE_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
-    TCA_SINGLE_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
-    TCA_SINGLE_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
-    TCA_SINGLE_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
-    TCA_SINGLE_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
-    TCA_SINGLE_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
-    TCA_SINGLE_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
-} TCA_SINGLE_CLKSEL_t;
-
-/* Command select */
-typedef enum TCA_SINGLE_CMD_enum
-{
-    TCA_SINGLE_CMD_NONE_gc = (0x00<<2),  /* No Command */
-    TCA_SINGLE_CMD_UPDATE_gc = (0x01<<2),  /* Force Update */
-    TCA_SINGLE_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
-    TCA_SINGLE_CMD_RESET_gc = (0x03<<2)  /* Force Hard Reset */
-} TCA_SINGLE_CMD_t;
-
-/* Direction select */
-typedef enum TCA_SINGLE_DIR_enum
-{
-    TCA_SINGLE_DIR_UP_gc = (0x00<<0),  /* Count up */
-    TCA_SINGLE_DIR_DOWN_gc = (0x01<<0)  /* Count down */
-} TCA_SINGLE_DIR_t;
-
-/* Event Action A select */
-typedef enum TCA_SINGLE_EVACTA_enum
-{
-    TCA_SINGLE_EVACTA_CNT_POSEDGE_gc = (0x00<<1),  /* Count on positive edge event */
-    TCA_SINGLE_EVACTA_CNT_ANYEDGE_gc = (0x01<<1),  /* Count on any edge event */
-    TCA_SINGLE_EVACTA_CNT_HIGHLVL_gc = (0x02<<1),  /* Count on prescaled clock while event line is 1. */
-    TCA_SINGLE_EVACTA_UPDOWN_gc = (0x03<<1)  /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
-} TCA_SINGLE_EVACTA_t;
-
-/* Event Action B select */
-typedef enum TCA_SINGLE_EVACTB_enum
-{
-    TCA_SINGLE_EVACTB_NONE_gc = (0x00<<5),  /* No Action */
-    TCA_SINGLE_EVACTB_UPDOWN_gc = (0x03<<5),  /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
-    TCA_SINGLE_EVACTB_RESTART_POSEDGE_gc = (0x04<<5),  /* Restart counter at positive edge event */
-    TCA_SINGLE_EVACTB_RESTART_ANYEDGE_gc = (0x05<<5),  /* Restart counter on any edge event */
-    TCA_SINGLE_EVACTB_RESTART_HIGHLVL_gc = (0x06<<5)  /* Restart counter while event line is 1. */
-} TCA_SINGLE_EVACTB_t;
-
-/* Waveform generation mode select */
-typedef enum TCA_SINGLE_WGMODE_enum
-{
-    TCA_SINGLE_WGMODE_NORMAL_gc = (0x00<<0),  /* Normal Mode */
-    TCA_SINGLE_WGMODE_FRQ_gc = (0x01<<0),  /* Frequency Generation Mode */
-    TCA_SINGLE_WGMODE_SINGLESLOPE_gc = (0x03<<0),  /* Single Slope PWM */
-    TCA_SINGLE_WGMODE_DSTOP_gc = (0x05<<0),  /* Dual Slope PWM, overflow on TOP */
-    TCA_SINGLE_WGMODE_DSBOTH_gc = (0x06<<0),  /* Dual Slope PWM, overflow on TOP and BOTTOM */
-    TCA_SINGLE_WGMODE_DSBOTTOM_gc = (0x07<<0)  /* Dual Slope PWM, overflow on BOTTOM */
-} TCA_SINGLE_WGMODE_t;
-
-/* Clock Selection */
-typedef enum TCA_SPLIT_CLKSEL_enum
-{
-    TCA_SPLIT_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
-    TCA_SPLIT_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER / 2 */
-    TCA_SPLIT_CLKSEL_DIV4_gc = (0x02<<1),  /* CLK_PER / 4 */
-    TCA_SPLIT_CLKSEL_DIV8_gc = (0x03<<1),  /* CLK_PER / 8 */
-    TCA_SPLIT_CLKSEL_DIV16_gc = (0x04<<1),  /* CLK_PER / 16 */
-    TCA_SPLIT_CLKSEL_DIV64_gc = (0x05<<1),  /* CLK_PER / 64 */
-    TCA_SPLIT_CLKSEL_DIV256_gc = (0x06<<1),  /* CLK_PER / 256 */
-    TCA_SPLIT_CLKSEL_DIV1024_gc = (0x07<<1)  /* CLK_PER / 1024 */
-} TCA_SPLIT_CLKSEL_t;
-
-/* Command select */
-typedef enum TCA_SPLIT_CMD_enum
-{
-    TCA_SPLIT_CMD_NONE_gc = (0x00<<2),  /* No Command */
-    TCA_SPLIT_CMD_RESTART_gc = (0x02<<2),  /* Force Restart */
-    TCA_SPLIT_CMD_RESET_gc = (0x03<<2)  /* Force Hard Reset */
-} TCA_SPLIT_CMD_t;
-
-/* Command Enable select */
-typedef enum TCA_SPLIT_CMDEN_enum
-{
-    TCA_SPLIT_CMDEN_NONE_gc = (0x00<<0),  /* None */
-    TCA_SPLIT_CMDEN_BOTH_gc = (0x03<<0)  /* Both low byte and high byte counter */
-} TCA_SPLIT_CMDEN_t;
-
-/*
---------------------------------------------------------------------------
-TCB - 16-bit Timer Type B
---------------------------------------------------------------------------
-*/
-
-/* 16-bit Timer Type B */
-typedef struct TCB_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control Register B */
-    register8_t reserved_1[2];
-    register8_t EVCTRL;  /* Event Control */
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t STATUS;  /* Status */
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t TEMP;  /* Temporary Value */
-    _WORDREGISTER(CNT);  /* Count */
-    _WORDREGISTER(CCMP);  /* Compare or Capture */
-    register8_t reserved_2[2];
-} TCB_t;
-
-/* Clock Select */
-typedef enum TCB_CLKSEL_enum
-{
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
-    TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
-    TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
-    TCB_CLKSEL_TCA1_gc = (0x03<<1),  /* Use CLK_TCA from TCA1 */
-    TCB_CLKSEL_EVENT_gc = (0x07<<1)  /* Count on event edge */
-} TCB_CLKSEL_t;
-
-/* Timer Mode select */
-typedef enum TCB_CNTMODE_enum
-{
-    TCB_CNTMODE_INT_gc = (0x00<<0),  /* Periodic Interrupt */
-    TCB_CNTMODE_TIMEOUT_gc = (0x01<<0),  /* Periodic Timeout */
-    TCB_CNTMODE_CAPT_gc = (0x02<<0),  /* Input Capture Event */
-    TCB_CNTMODE_FRQ_gc = (0x03<<0),  /* Input Capture Frequency measurement */
-    TCB_CNTMODE_PW_gc = (0x04<<0),  /* Input Capture Pulse-Width measurement */
-    TCB_CNTMODE_FRQPW_gc = (0x05<<0),  /* Input Capture Frequency and Pulse-Width measurement */
-    TCB_CNTMODE_SINGLE_gc = (0x06<<0),  /* Single Shot */
-    TCB_CNTMODE_PWM8_gc = (0x07<<0)  /* 8-bit PWM */
-} TCB_CNTMODE_t;
-
-/*
---------------------------------------------------------------------------
-TCD - Timer Counter D
---------------------------------------------------------------------------
-*/
-
-/* Timer Counter D */
-typedef struct TCD_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t CTRLC;  /* Control C */
-    register8_t CTRLD;  /* Control D */
-    register8_t CTRLE;  /* Control E */
-    register8_t reserved_1[3];
-    register8_t EVCTRLA;  /* EVCTRLA */
-    register8_t EVCTRLB;  /* EVCTRLB */
-    register8_t reserved_2[2];
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t STATUS;  /* Status */
-    register8_t reserved_3[1];
-    register8_t INPUTCTRLA;  /* Input Control A */
-    register8_t INPUTCTRLB;  /* Input Control B */
-    register8_t FAULTCTRL;  /* Fault Control */
-    register8_t reserved_4[1];
-    register8_t DLYCTRL;  /* Delay Control */
-    register8_t DLYVAL;  /* Delay value */
-    register8_t reserved_5[2];
-    register8_t DITCTRL;  /* Dither Control A */
-    register8_t DITVAL;  /* Dither value */
-    register8_t reserved_6[4];
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t reserved_7[3];
-    _WORDREGISTER(CAPTUREA);  /* Capture A */
-    _WORDREGISTER(CAPTUREB);  /* Capture B */
-    register8_t reserved_8[2];
-    _WORDREGISTER(CMPASET);  /* Compare A Set */
-    _WORDREGISTER(CMPACLR);  /* Compare A Clear */
-    _WORDREGISTER(CMPBSET);  /* Compare B Set */
-    _WORDREGISTER(CMPBCLR);  /* Compare B Clear */
-    register8_t reserved_9[16];
-} TCD_t;
-
-/* Event action select */
-typedef enum TCD_ACTION_enum
-{
-    TCD_ACTION_FAULT_gc = (0x00<<2),  /* Event trigger a fault */
-    TCD_ACTION_CAPTURE_gc = (0x01<<2)  /* Event trigger a fault and capture */
-} TCD_ACTION_t;
-
-/* Event config select */
-typedef enum TCD_CFG_enum
-{
-    TCD_CFG_NEITHER_gc = (0x00<<6),  /* Neither Filter nor Asynchronous Event is enabled */
-    TCD_CFG_FILTER_gc = (0x01<<6),  /* Input Capture Noise Cancellation Filter enabled */
-    TCD_CFG_ASYNC_gc = (0x02<<6)  /* Asynchronous Event output qualification enabled */
-} TCD_CFG_t;
-
-/* Clock select */
-typedef enum TCD_CLKSEL_enum
-{
-    TCD_CLKSEL_OSCHF_gc = (0x00<<5),  /* Internal High-Frequency Oscillator */
-    TCD_CLKSEL_PLL_gc = (0x01<<5),  /* PLL */
-    TCD_CLKSEL_EXTCLK_gc = (0x02<<5),  /* External Clock */
-    TCD_CLKSEL_CLKPER_gc = (0x03<<5)  /* Peripheral Clock */
-} TCD_CLKSEL_t;
-
-/* Compare C output select */
-typedef enum TCD_CMPCSEL_enum
-{
-    TCD_CMPCSEL_PWMA_gc = (0x00<<6),  /* PWM A output */
-    TCD_CMPCSEL_PWMB_gc = (0x01<<6)  /* PWM B output */
-} TCD_CMPCSEL_t;
-
-/* Compare D output select */
-typedef enum TCD_CMPDSEL_enum
-{
-    TCD_CMPDSEL_PWMA_gc = (0x00<<7),  /* PWM A output */
-    TCD_CMPDSEL_PWMB_gc = (0x01<<7)  /* PWM B output */
-} TCD_CMPDSEL_t;
-
-/* Counter prescaler select */
-typedef enum TCD_CNTPRES_enum
-{
-    TCD_CNTPRES_DIV1_gc = (0x00<<3),  /* Sync clock divided by 1 */
-    TCD_CNTPRES_DIV4_gc = (0x01<<3),  /* Sync clock divided by 4 */
-    TCD_CNTPRES_DIV32_gc = (0x02<<3)  /* Sync clock divided by 32 */
-} TCD_CNTPRES_t;
-
-/* Dither select */
-typedef enum TCD_DITHERSEL_enum
-{
-    TCD_DITHERSEL_ONTIMEB_gc = (0x00<<0),  /* On-time ramp B */
-    TCD_DITHERSEL_ONTIMEAB_gc = (0x01<<0),  /* On-time ramp A and B */
-    TCD_DITHERSEL_DEADTIMEB_gc = (0x02<<0),  /* Dead-time rampB */
-    TCD_DITHERSEL_DEADTIMEAB_gc = (0x03<<0)  /* Dead-time ramp A and B */
-} TCD_DITHERSEL_t;
-
-/* Delay prescaler select */
-typedef enum TCD_DLYPRESC_enum
-{
-    TCD_DLYPRESC_DIV1_gc = (0x00<<4),  /* No prescaling */
-    TCD_DLYPRESC_DIV2_gc = (0x01<<4),  /* Prescale with 2 */
-    TCD_DLYPRESC_DIV4_gc = (0x02<<4),  /* Prescale with 4 */
-    TCD_DLYPRESC_DIV8_gc = (0x03<<4)  /* Prescale with 8 */
-} TCD_DLYPRESC_t;
-
-/* Delay select */
-typedef enum TCD_DLYSEL_enum
-{
-    TCD_DLYSEL_OFF_gc = (0x00<<0),  /* No delay */
-    TCD_DLYSEL_INBLANK_gc = (0x01<<0),  /* Input blanking enabled */
-    TCD_DLYSEL_EVENT_gc = (0x02<<0)  /* Event delay enabled */
-} TCD_DLYSEL_t;
-
-/* Delay trigger select */
-typedef enum TCD_DLYTRIG_enum
-{
-    TCD_DLYTRIG_CMPASET_gc = (0x00<<2),  /* Compare A set */
-    TCD_DLYTRIG_CMPACLR_gc = (0x01<<2),  /* Compare A clear */
-    TCD_DLYTRIG_CMPBSET_gc = (0x02<<2),  /* Compare B set */
-    TCD_DLYTRIG_CMPBCLR_gc = (0x03<<2)  /* Compare B clear */
-} TCD_DLYTRIG_t;
-
-/* Edge select */
-typedef enum TCD_EDGE_enum
-{
-    TCD_EDGE_FALL_LOW_gc = (0x00<<4),  /* The falling edge or low level of event generates retrigger or fault action */
-    TCD_EDGE_RISE_HIGH_gc = (0x01<<4)  /* The rising edge or high level of event generates retrigger or fault action */
-} TCD_EDGE_t;
-
-/* Input mode select */
-typedef enum TCD_INPUTMODE_enum
-{
-    TCD_INPUTMODE_NONE_gc = (0x00<<0),  /* Input has no actions */
-    TCD_INPUTMODE_JMPWAIT_gc = (0x01<<0),  /* Stop output, jump to opposite compare cycle and wait */
-    TCD_INPUTMODE_EXECWAIT_gc = (0x02<<0),  /* Stop output, execute opposite compare cycle and wait */
-    TCD_INPUTMODE_EXECFAULT_gc = (0x03<<0),  /* stop output, execute opposite compare cycle while fault active */
-    TCD_INPUTMODE_FREQ_gc = (0x04<<0),  /* Stop all outputs, maintain frequency */
-    TCD_INPUTMODE_EXECDT_gc = (0x05<<0),  /* Stop all outputs, execute dead time while fault active */
-    TCD_INPUTMODE_WAIT_gc = (0x06<<0),  /* Stop all outputs, jump to next compare cycle and wait */
-    TCD_INPUTMODE_WAITSW_gc = (0x07<<0),  /* Stop all outputs, wait for software action */
-    TCD_INPUTMODE_EDGETRIG_gc = (0x08<<0),  /* Stop output on edge, jump to next compare cycle */
-    TCD_INPUTMODE_EDGETRIGFREQ_gc = (0x09<<0),  /* Stop output on edge, maintain frequency */
-    TCD_INPUTMODE_LVLTRIGFREQ_gc = (0x0A<<0)  /* Stop output at level, maintain frequency */
-} TCD_INPUTMODE_t;
-
-/* Synchronization prescaler select */
-typedef enum TCD_SYNCPRES_enum
-{
-    TCD_SYNCPRES_DIV1_gc = (0x00<<1),  /* Selected clock source divided by 1 */
-    TCD_SYNCPRES_DIV2_gc = (0x01<<1),  /* Selected clock source divided by 2 */
-    TCD_SYNCPRES_DIV4_gc = (0x02<<1),  /* Selected clock source divided by 4 */
-    TCD_SYNCPRES_DIV8_gc = (0x03<<1)  /* Selected clock source divided by 8 */
-} TCD_SYNCPRES_t;
-
-/* Waveform generation mode select */
-typedef enum TCD_WGMODE_enum
-{
-    TCD_WGMODE_ONERAMP_gc = (0x00<<0),  /* One ramp mode */
-    TCD_WGMODE_TWORAMP_gc = (0x01<<0),  /* Two ramp mode */
-    TCD_WGMODE_FOURRAMP_gc = (0x02<<0),  /* Four ramp mode */
-    TCD_WGMODE_DS_gc = (0x03<<0)  /* Dual slope mode */
-} TCD_WGMODE_t;
-
-/*
---------------------------------------------------------------------------
-TWI - Two-Wire Interface
---------------------------------------------------------------------------
-*/
-
-/* Two-Wire Interface */
-typedef struct TWI_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t DUALCTRL;  /* Dual Control */
-    register8_t DBGCTRL;  /* Debug Control Register */
-    register8_t MCTRLA;  /* Host Control A */
-    register8_t MCTRLB;  /* Host Control B */
-    register8_t MSTATUS;  /* Host Status */
-    register8_t MBAUD;  /* Host Baud Rate Control */
-    register8_t MADDR;  /* Host Address */
-    register8_t MDATA;  /* Host Data */
-    register8_t SCTRLA;  /* Client Control A */
-    register8_t SCTRLB;  /* Client Control B */
-    register8_t SSTATUS;  /* Client Status */
-    register8_t SADDR;  /* Client Address */
-    register8_t SDATA;  /* Client Data */
-    register8_t SADDRMASK;  /* Client Address Mask */
-    register8_t reserved_1[1];
-} TWI_t;
-
-/* Acknowledge Action select */
-typedef enum TWI_ACKACT_enum
-{
-    TWI_ACKACT_ACK_gc = (0x00<<2),  /* Send ACK */
-    TWI_ACKACT_NACK_gc = (0x01<<2)  /* Send NACK */
-} TWI_ACKACT_t;
-
-/* Client Address or Stop select */
-typedef enum TWI_AP_enum
-{
-    TWI_AP_STOP_gc = (0x00<<0),  /* Stop condition generated APIF */
-    TWI_AP_ADR_gc = (0x01<<0)  /* Address detection generated APIF */
-} TWI_AP_t;
-
-/* Bus State select */
-typedef enum TWI_BUSSTATE_enum
-{
-    TWI_BUSSTATE_UNKNOWN_gc = (0x00<<0),  /* Unknown Bus State */
-    TWI_BUSSTATE_IDLE_gc = (0x01<<0),  /* Bus is Idle */
-    TWI_BUSSTATE_OWNER_gc = (0x02<<0),  /* This Module Controls The Bus */
-    TWI_BUSSTATE_BUSY_gc = (0x03<<0)  /* The Bus is Busy */
-} TWI_BUSSTATE_t;
-
-/* FM Plus Enable select */
-typedef enum TWI_FMPEN_enum
-{
-    TWI_FMPEN_OFF_gc = (0x00<<1),  /* Operating in Standard-mode or Fast-mode */
-    TWI_FMPEN_ON_gc = (0x01<<1)  /* Operating in Fast-mode Plus */
-} TWI_FMPEN_t;
-
-/* Input Voltage Transition Level select */
-typedef enum TWI_INPUTLVL_enum
-{
-    TWI_INPUTLVL_I2C_gc = (0x00<<6),  /* I2C input voltage transition level */
-    TWI_INPUTLVL_SMBUS_gc = (0x01<<6)  /* SMBus 3.0 input voltage transition level */
-} TWI_INPUTLVL_t;
-
-/* Command select */
-typedef enum TWI_MCMD_enum
-{
-    TWI_MCMD_NOACT_gc = (0x00<<0),  /* No Action */
-    TWI_MCMD_REPSTART_gc = (0x01<<0),  /* Issue Repeated Start Condition */
-    TWI_MCMD_RECVTRANS_gc = (0x02<<0),  /* Receive or Transmit Data, depending on DIR */
-    TWI_MCMD_STOP_gc = (0x03<<0)  /* Issue Stop Condition */
-} TWI_MCMD_t;
-
-/* Command select */
-typedef enum TWI_SCMD_enum
-{
-    TWI_SCMD_NOACT_gc = (0x00<<0),  /* No Action */
-    TWI_SCMD_COMPTRANS_gc = (0x02<<0),  /* Used To Complete a Transaction */
-    TWI_SCMD_RESPONSE_gc = (0x03<<0)  /* Used in Response to Address/Data Interrupt */
-} TWI_SCMD_t;
-
-/* SDA Hold Time select */
-typedef enum TWI_SDAHOLD_enum
-{
-    TWI_SDAHOLD_OFF_gc = (0x00<<2),  /* SDA hold time off */
-    TWI_SDAHOLD_50NS_gc = (0x01<<2),  /* Typical 50ns hold time */
-    TWI_SDAHOLD_300NS_gc = (0x02<<2),  /* Typical 300ns hold time */
-    TWI_SDAHOLD_500NS_gc = (0x03<<2)  /* Typical 500ns hold time */
-} TWI_SDAHOLD_t;
-
-/* SDA Setup Time select */
-typedef enum TWI_SDASETUP_enum
-{
-    TWI_SDASETUP_4CYC_gc = (0x00<<4),  /* SDA setup time is 4 clock cycles */
-    TWI_SDASETUP_8CYC_gc = (0x01<<4)  /* SDA setup time is 8 clock cycles */
-} TWI_SDASETUP_t;
-
-/* Inactive Bus Timeout select */
-typedef enum TWI_TIMEOUT_enum
-{
-    TWI_TIMEOUT_DISABLED_gc = (0x00<<2),  /* Bus Timeout Disabled */
-    TWI_TIMEOUT_50US_gc = (0x01<<2),  /* 50 Microseconds */
-    TWI_TIMEOUT_100US_gc = (0x02<<2),  /* 100 Microseconds */
-    TWI_TIMEOUT_200US_gc = (0x03<<2)  /* 200 Microseconds */
-} TWI_TIMEOUT_t;
-
-/*
---------------------------------------------------------------------------
-USART - Universal Synchronous and Asynchronous Receiver and Transmitter
---------------------------------------------------------------------------
-*/
-
-/* Universal Synchronous and Asynchronous Receiver and Transmitter */
-typedef struct USART_struct
-{
-    register8_t RXDATAL;  /* Receive Data Low Byte */
-    register8_t RXDATAH;  /* Receive Data High Byte */
-    register8_t TXDATAL;  /* Transmit Data Low Byte */
-    register8_t TXDATAH;  /* Transmit Data High Byte */
-    register8_t STATUS;  /* Status */
-    register8_t CTRLA;  /* Control A */
-    register8_t CTRLB;  /* Control B */
-    register8_t CTRLC;  /* Control C */
-    _WORDREGISTER(BAUD);  /* Baud Rate */
-    register8_t CTRLD;  /* Control D */
-    register8_t DBGCTRL;  /* Debug Control */
-    register8_t EVCTRL;  /* Event Control */
-    register8_t TXPLCTRL;  /* IRCOM Transmitter Pulse Length Control */
-    register8_t RXPLCTRL;  /* IRCOM Receiver Pulse Length Control */
-    register8_t reserved_1[1];
-} USART_t;
-
-/* Auto Baud Window select */
-typedef enum USART_ABW_enum
-{
-    USART_ABW_WDW0_gc = (0x00<<6),  /* 18% tolerance */
-    USART_ABW_WDW1_gc = (0x01<<6),  /* 15% tolerance */
-    USART_ABW_WDW2_gc = (0x02<<6),  /* 21% tolerance */
-    USART_ABW_WDW3_gc = (0x03<<6)  /* 25% tolerance */
-} USART_ABW_t;
-
-/* Character Size select */
-typedef enum USART_CHSIZE_enum
-{
-    USART_CHSIZE_5BIT_gc = (0x00<<0),  /* Character size: 5 bit */
-    USART_CHSIZE_6BIT_gc = (0x01<<0),  /* Character size: 6 bit */
-    USART_CHSIZE_7BIT_gc = (0x02<<0),  /* Character size: 7 bit */
-    USART_CHSIZE_8BIT_gc = (0x03<<0),  /* Character size: 8 bit */
-    USART_CHSIZE_9BITL_gc = (0x06<<0),  /* Character size: 9 bit read low byte first */
-    USART_CHSIZE_9BITH_gc = (0x07<<0)  /* Character size: 9 bit read high byte first */
-} USART_CHSIZE_t;
-
-/* Communication Mode select */
-typedef enum USART_CMODE_enum
-{
-    USART_CMODE_ASYNCHRONOUS_gc = (0x00<<6),  /* Asynchronous Mode */
-    USART_CMODE_SYNCHRONOUS_gc = (0x01<<6),  /* Synchronous Mode */
-    USART_CMODE_IRCOM_gc = (0x02<<6),  /* Infrared Communication */
-    USART_CMODE_MSPI_gc = (0x03<<6)  /* SPI Host Mode */
-} USART_CMODE_t;
-
-/* Parity Mode select */
-typedef enum USART_PMODE_enum
-{
-    USART_PMODE_DISABLED_gc = (0x00<<4),  /* No Parity */
-    USART_PMODE_EVEN_gc = (0x02<<4),  /* Even Parity */
-    USART_PMODE_ODD_gc = (0x03<<4)  /* Odd Parity */
-} USART_PMODE_t;
-
-/* RS485 Mode internal transmitter select */
-typedef enum USART_RS485_enum
-{
-    USART_RS485_DISABLE_gc = (0x00<<0),  /* RS485 Mode disabled */
-    USART_RS485_ENABLE_gc = (0x01<<0)  /* RS485 Mode enabled */
-} USART_RS485_t;
-
-/* Receiver Mode select */
-typedef enum USART_RXMODE_enum
-{
-    USART_RXMODE_NORMAL_gc = (0x00<<1),  /* Normal mode */
-    USART_RXMODE_CLK2X_gc = (0x01<<1),  /* CLK2x mode */
-    USART_RXMODE_GENAUTO_gc = (0x02<<1),  /* Generic autobaud mode */
-    USART_RXMODE_LINAUTO_gc = (0x03<<1)  /* LIN constrained autobaud mode */
-} USART_RXMODE_t;
-
-/* Stop Bit Mode select */
-typedef enum USART_SBMODE_enum
-{
-    USART_SBMODE_1BIT_gc = (0x00<<3),  /* 1 stop bit */
-    USART_SBMODE_2BIT_gc = (0x01<<3)  /* 2 stop bits */
-} USART_SBMODE_t;
-
-/*
---------------------------------------------------------------------------
-USERROW - User Row
---------------------------------------------------------------------------
-*/
-
-/* User Row */
-typedef struct USERROW_struct
-{
-    register8_t USERROW0;  /* User Row Byte 0 */
-    register8_t USERROW1;  /* User Row Byte 1 */
-    register8_t USERROW2;  /* User Row Byte 2 */
-    register8_t USERROW3;  /* User Row Byte 3 */
-    register8_t USERROW4;  /* User Row Byte 4 */
-    register8_t USERROW5;  /* User Row Byte 5 */
-    register8_t USERROW6;  /* User Row Byte 6 */
-    register8_t USERROW7;  /* User Row Byte 7 */
-    register8_t USERROW8;  /* User Row Byte 8 */
-    register8_t USERROW9;  /* User Row Byte 9 */
-    register8_t USERROW10;  /* User Row Byte 10 */
-    register8_t USERROW11;  /* User Row Byte 11 */
-    register8_t USERROW12;  /* User Row Byte 12 */
-    register8_t USERROW13;  /* User Row Byte 13 */
-    register8_t USERROW14;  /* User Row Byte 14 */
-    register8_t USERROW15;  /* User Row Byte 15 */
-    register8_t USERROW16;  /* User Row Byte 16 */
-    register8_t USERROW17;  /* User Row Byte 17 */
-    register8_t USERROW18;  /* User Row Byte 18 */
-    register8_t USERROW19;  /* User Row Byte 19 */
-    register8_t USERROW20;  /* User Row Byte 20 */
-    register8_t USERROW21;  /* User Row Byte 21 */
-    register8_t USERROW22;  /* User Row Byte 22 */
-    register8_t USERROW23;  /* User Row Byte 23 */
-    register8_t USERROW24;  /* User Row Byte 24 */
-    register8_t USERROW25;  /* User Row Byte 25 */
-    register8_t USERROW26;  /* User Row Byte 26 */
-    register8_t USERROW27;  /* User Row Byte 27 */
-    register8_t USERROW28;  /* User Row Byte 28 */
-    register8_t USERROW29;  /* User Row Byte 29 */
-    register8_t USERROW30;  /* User Row Byte 30 */
-    register8_t USERROW31;  /* User Row Byte 31 */
-} USERROW_t;
-
-
-/*
---------------------------------------------------------------------------
-VPORT - Virtual Ports
---------------------------------------------------------------------------
-*/
-
-/* Virtual Ports */
-typedef struct VPORT_struct
-{
-    register8_t DIR;  /* Data Direction */
-    register8_t OUT;  /* Output Value */
-    register8_t IN;  /* Input Value */
-    register8_t INTFLAGS;  /* Interrupt Flags */
-} VPORT_t;
-
-
-/*
---------------------------------------------------------------------------
-VREF - Voltage reference
---------------------------------------------------------------------------
-*/
-
-/* Voltage reference */
-typedef struct VREF_struct
-{
-    register8_t ADC0REF;  /* ADC0 Reference */
-    register8_t reserved_1[1];
-    register8_t DAC0REF;  /* DAC0 Reference */
-    register8_t reserved_2[1];
-    register8_t ACREF;  /* AC Reference */
-} VREF_t;
-
-/* Reference select */
-typedef enum VREF_REFSEL_enum
-{
-    VREF_REFSEL_1V024_gc = (0x00<<0),  /* Internal 1.024V reference */
-    VREF_REFSEL_2V048_gc = (0x01<<0),  /* Internal 2.048V reference */
-    VREF_REFSEL_4V096_gc = (0x02<<0),  /* Internal 4.096V reference */
-    VREF_REFSEL_2V500_gc = (0x03<<0),  /* Internal 2.500V reference */
-    VREF_REFSEL_VDD_gc = (0x05<<0),  /* VDD as reference */
-    VREF_REFSEL_VREFA_gc = (0x06<<0)  /* External reference on VREFA pin */
-} VREF_REFSEL_t;
-
-/*
---------------------------------------------------------------------------
-WDT - Watch-Dog Timer
---------------------------------------------------------------------------
-*/
-
-/* Watch-Dog Timer */
-typedef struct WDT_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t STATUS;  /* Status */
-    register8_t reserved_1[14];
-} WDT_t;
-
-/* Period select */
-typedef enum WDT_PERIOD_enum
-{
-    WDT_PERIOD_OFF_gc = (0x00<<0),  /* Off */
-    WDT_PERIOD_8CLK_gc = (0x01<<0),  /* 8 cycles (8ms) */
-    WDT_PERIOD_16CLK_gc = (0x02<<0),  /* 16 cycles (16ms) */
-    WDT_PERIOD_32CLK_gc = (0x03<<0),  /* 32 cycles (32ms) */
-    WDT_PERIOD_64CLK_gc = (0x04<<0),  /* 64 cycles (64ms) */
-    WDT_PERIOD_128CLK_gc = (0x05<<0),  /* 128 cycles (0.128s) */
-    WDT_PERIOD_256CLK_gc = (0x06<<0),  /* 256 cycles (0.256s) */
-    WDT_PERIOD_512CLK_gc = (0x07<<0),  /* 512 cycles (0.512s) */
-    WDT_PERIOD_1KCLK_gc = (0x08<<0),  /* 1K cycles (1.0s) */
-    WDT_PERIOD_2KCLK_gc = (0x09<<0),  /* 2K cycles (2.0s) */
-    WDT_PERIOD_4KCLK_gc = (0x0A<<0),  /* 4K cycles (4.1s) */
-    WDT_PERIOD_8KCLK_gc = (0x0B<<0)  /* 8K cycles (8.2s) */
-} WDT_PERIOD_t;
-
-/* Window select */
-typedef enum WDT_WINDOW_enum
-{
-    WDT_WINDOW_OFF_gc = (0x00<<4),  /* Off */
-    WDT_WINDOW_8CLK_gc = (0x01<<4),  /* 8 cycles (8ms) */
-    WDT_WINDOW_16CLK_gc = (0x02<<4),  /* 16 cycles (16ms) */
-    WDT_WINDOW_32CLK_gc = (0x03<<4),  /* 32 cycles (32ms) */
-    WDT_WINDOW_64CLK_gc = (0x04<<4),  /* 64 cycles (64ms) */
-    WDT_WINDOW_128CLK_gc = (0x05<<4),  /* 128 cycles (0.128s) */
-    WDT_WINDOW_256CLK_gc = (0x06<<4),  /* 256 cycles (0.256s) */
-    WDT_WINDOW_512CLK_gc = (0x07<<4),  /* 512 cycles (0.512s) */
-    WDT_WINDOW_1KCLK_gc = (0x08<<4),  /* 1K cycles (1.0s) */
-    WDT_WINDOW_2KCLK_gc = (0x09<<4),  /* 2K cycles (2.0s) */
-    WDT_WINDOW_4KCLK_gc = (0x0A<<4),  /* 4K cycles (4.1s) */
-    WDT_WINDOW_8KCLK_gc = (0x0B<<4)  /* 8K cycles (8.2s) */
-} WDT_WINDOW_t;
-
-/*
---------------------------------------------------------------------------
-ZCD - Zero Cross Detect
---------------------------------------------------------------------------
-*/
-
-/* Zero Cross Detect */
-typedef struct ZCD_struct
-{
-    register8_t CTRLA;  /* Control A */
-    register8_t reserved_1[1];
-    register8_t INTCTRL;  /* Interrupt Control */
-    register8_t STATUS;  /* Status */
-    register8_t reserved_2[4];
-} ZCD_t;
-
-/* Interrupt Mode select */
-typedef enum ZCD_INTMODE_enum
-{
-    ZCD_INTMODE_NONE_gc = (0x00<<0),  /* No interrupt */
-    ZCD_INTMODE_RISING_gc = (0x01<<0),  /* Interrupt on rising input signal */
-    ZCD_INTMODE_FALLING_gc = (0x02<<0),  /* Interrupt on falling input signal */
-    ZCD_INTMODE_BOTH_gc = (0x03<<0)  /* Interrupt on both rising and falling input signal */
-} ZCD_INTMODE_t;
-
-/* ZCD State select */
-typedef enum ZCD_STATE_enum
-{
-    ZCD_STATE_LOW_gc = (0x00<<4),  /* Output is 0 */
-    ZCD_STATE_HIGH_gc = (0x01<<4)  /* Output is 1 */
-} ZCD_STATE_t;
-/*
-==========================================================================
-IO Module Instances. Mapped to memory.
-==========================================================================
-*/
-
-#define VPORTA              (*(VPORT_t *) 0x0000) /* Virtual Ports */
-#define VPORTB              (*(VPORT_t *) 0x0004) /* Virtual Ports */
-#define VPORTC              (*(VPORT_t *) 0x0008) /* Virtual Ports */
-#define VPORTD              (*(VPORT_t *) 0x000C) /* Virtual Ports */
-#define VPORTE              (*(VPORT_t *) 0x0010) /* Virtual Ports */
-#define VPORTF              (*(VPORT_t *) 0x0014) /* Virtual Ports */
-#define GPR                   (*(GPR_t *) 0x001C) /* General Purpose Registers */
-#define RSTCTRL           (*(RSTCTRL_t *) 0x0040) /* Reset controller */
-#define SLPCTRL           (*(SLPCTRL_t *) 0x0050) /* Sleep Controller */
-#define CLKCTRL           (*(CLKCTRL_t *) 0x0060) /* Clock controller */
-#define BOD                   (*(BOD_t *) 0x0080) /* Bod interface */
-#define VREF                 (*(VREF_t *) 0x00A0) /* Voltage reference */
-#define WDT                   (*(WDT_t *) 0x0100) /* Watch-Dog Timer */
-#define CPUINT             (*(CPUINT_t *) 0x0110) /* Interrupt Controller */
-#define CRCSCAN           (*(CRCSCAN_t *) 0x0120) /* CRCSCAN */
-#define RTC                   (*(RTC_t *) 0x0140) /* Real-Time Counter */
-#define CCL                   (*(CCL_t *) 0x01C0) /* Configurable Custom Logic */
-#define EVSYS               (*(EVSYS_t *) 0x0200) /* Event System */
-#define PORTA                (*(PORT_t *) 0x0400) /* I/O Ports */
-#define PORTB                (*(PORT_t *) 0x0420) /* I/O Ports */
-#define PORTC                (*(PORT_t *) 0x0440) /* I/O Ports */
-#define PORTD                (*(PORT_t *) 0x0460) /* I/O Ports */
-#define PORTE                (*(PORT_t *) 0x0480) /* I/O Ports */
-#define PORTF                (*(PORT_t *) 0x04A0) /* I/O Ports */
-#define PORTMUX           (*(PORTMUX_t *) 0x05E0) /* Port Multiplexer */
-#define ADC0                  (*(ADC_t *) 0x0600) /* Analog to Digital Converter */
-#define AC0                    (*(AC_t *) 0x0680) /* Analog Comparator */
-#define AC1                    (*(AC_t *) 0x0688) /* Analog Comparator */
-#define AC2                    (*(AC_t *) 0x0690) /* Analog Comparator */
-#define DAC0                  (*(DAC_t *) 0x06A0) /* Digital to Analog Converter */
-#define ZCD0                  (*(ZCD_t *) 0x06C0) /* Zero Cross Detect */
-#define ZCD1                  (*(ZCD_t *) 0x06C8) /* Zero Cross Detect */
-#define USART0              (*(USART_t *) 0x0800) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART1              (*(USART_t *) 0x0820) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART2              (*(USART_t *) 0x0840) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART3              (*(USART_t *) 0x0860) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART4              (*(USART_t *) 0x0880) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define TWI0                  (*(TWI_t *) 0x0900) /* Two-Wire Interface */
-#define TWI1                  (*(TWI_t *) 0x0920) /* Two-Wire Interface */
-#define SPI0                  (*(SPI_t *) 0x0940) /* Serial Peripheral Interface */
-#define SPI1                  (*(SPI_t *) 0x0960) /* Serial Peripheral Interface */
-#define TCA0                  (*(TCA_t *) 0x0A00) /* 16-bit Timer/Counter Type A */
-#define TCA1                  (*(TCA_t *) 0x0A40) /* 16-bit Timer/Counter Type A */
-#define TCB0                  (*(TCB_t *) 0x0B00) /* 16-bit Timer Type B */
-#define TCB1                  (*(TCB_t *) 0x0B10) /* 16-bit Timer Type B */
-#define TCB2                  (*(TCB_t *) 0x0B20) /* 16-bit Timer Type B */
-#define TCB3                  (*(TCB_t *) 0x0B30) /* 16-bit Timer Type B */
-#define TCB4                  (*(TCB_t *) 0x0B40) /* 16-bit Timer Type B */
-#define TCD0                  (*(TCD_t *) 0x0B80) /* Timer Counter D */
-#define SYSCFG             (*(SYSCFG_t *) 0x0F00) /* System Configuration Registers */
-#define NVMCTRL           (*(NVMCTRL_t *) 0x1000) /* Non-volatile Memory Controller */
-#define LOCK                 (*(LOCK_t *) 0x1040) /* Lockbits */
-#define FUSE                 (*(FUSE_t *) 0x1050) /* Fuses */
-#define USERROW           (*(USERROW_t *) 0x1080) /* User Row */
-#define SIGROW             (*(SIGROW_t *) 0x1100) /* Signature row */
 
 #endif /* !defined (__ASSEMBLER__) */
-
-
-/* ========== Flattened fully qualified IO register names ========== */
-
-
-/* VPORT (VPORTA) - Virtual Ports */
-#define VPORTA_DIR  _SFR_MEM8(0x0000)
-#define VPORTA_OUT  _SFR_MEM8(0x0001)
-#define VPORTA_IN  _SFR_MEM8(0x0002)
-#define VPORTA_INTFLAGS  _SFR_MEM8(0x0003)
-
-
-/* VPORT (VPORTB) - Virtual Ports */
-#define VPORTB_DIR  _SFR_MEM8(0x0004)
-#define VPORTB_OUT  _SFR_MEM8(0x0005)
-#define VPORTB_IN  _SFR_MEM8(0x0006)
-#define VPORTB_INTFLAGS  _SFR_MEM8(0x0007)
-
-
-/* VPORT (VPORTC) - Virtual Ports */
-#define VPORTC_DIR  _SFR_MEM8(0x0008)
-#define VPORTC_OUT  _SFR_MEM8(0x0009)
-#define VPORTC_IN  _SFR_MEM8(0x000A)
-#define VPORTC_INTFLAGS  _SFR_MEM8(0x000B)
-
-
-/* VPORT (VPORTD) - Virtual Ports */
-#define VPORTD_DIR  _SFR_MEM8(0x000C)
-#define VPORTD_OUT  _SFR_MEM8(0x000D)
-#define VPORTD_IN  _SFR_MEM8(0x000E)
-#define VPORTD_INTFLAGS  _SFR_MEM8(0x000F)
-
-
-/* VPORT (VPORTE) - Virtual Ports */
-#define VPORTE_DIR  _SFR_MEM8(0x0010)
-#define VPORTE_OUT  _SFR_MEM8(0x0011)
-#define VPORTE_IN  _SFR_MEM8(0x0012)
-#define VPORTE_INTFLAGS  _SFR_MEM8(0x0013)
-
-
-/* VPORT (VPORTF) - Virtual Ports */
-#define VPORTF_DIR  _SFR_MEM8(0x0014)
-#define VPORTF_OUT  _SFR_MEM8(0x0015)
-#define VPORTF_IN  _SFR_MEM8(0x0016)
-#define VPORTF_INTFLAGS  _SFR_MEM8(0x0017)
-
-
-/* GPR - General Purpose Registers */
-#define GPR_GPR0  _SFR_MEM8(0x001C)
-#define GPR_GPR1  _SFR_MEM8(0x001D)
-#define GPR_GPR2  _SFR_MEM8(0x001E)
-#define GPR_GPR3  _SFR_MEM8(0x001F)
-
-
-/* CPU - CPU */
-#define CPU_CCP  _SFR_MEM8(0x0034)
-#define CPU_SP  _SFR_MEM16(0x003D)
-#define CPU_SPL  _SFR_MEM8(0x003D)
-#define CPU_SPH  _SFR_MEM8(0x003E)
-#define CPU_SREG  _SFR_MEM8(0x003F)
-
-
-/* RSTCTRL - Reset controller */
-#define RSTCTRL_RSTFR  _SFR_MEM8(0x0040)
-#define RSTCTRL_SWRR  _SFR_MEM8(0x0041)
-
-
-/* SLPCTRL - Sleep Controller */
-#define SLPCTRL_CTRLA  _SFR_MEM8(0x0050)
-#define SLPCTRL_VREGCTRL  _SFR_MEM8(0x0051)
-
-
-/* CLKCTRL - Clock controller */
-#define CLKCTRL_MCLKCTRLA  _SFR_MEM8(0x0060)
-#define CLKCTRL_MCLKCTRLB  _SFR_MEM8(0x0061)
-#define CLKCTRL_MCLKLOCK  _SFR_MEM8(0x0062)
-#define CLKCTRL_MCLKSTATUS  _SFR_MEM8(0x0063)
-#define CLKCTRL_OSCHFCTRLA  _SFR_MEM8(0x0068)
-#define CLKCTRL_OSCHFTUNE  _SFR_MEM8(0x0069)
-#define CLKCTRL_PLLCTRLA  _SFR_MEM8(0x0070)
-#define CLKCTRL_OSC32KCTRLA  _SFR_MEM8(0x0078)
-#define CLKCTRL_XOSC32KCTRLA  _SFR_MEM8(0x007C)
-
-
-/* BOD - Bod interface */
-#define BOD_CTRLA  _SFR_MEM8(0x0080)
-#define BOD_CTRLB  _SFR_MEM8(0x0081)
-#define BOD_VLMCTRLA  _SFR_MEM8(0x0088)
-#define BOD_INTCTRL  _SFR_MEM8(0x0089)
-#define BOD_INTFLAGS  _SFR_MEM8(0x008A)
-#define BOD_STATUS  _SFR_MEM8(0x008B)
-
-
-/* VREF - Voltage reference */
-#define VREF_ADC0REF  _SFR_MEM8(0x00A0)
-#define VREF_DAC0REF  _SFR_MEM8(0x00A2)
-#define VREF_ACREF  _SFR_MEM8(0x00A4)
-
-
-/* WDT - Watch-Dog Timer */
-#define WDT_CTRLA  _SFR_MEM8(0x0100)
-#define WDT_STATUS  _SFR_MEM8(0x0101)
-
-
-/* CPUINT - Interrupt Controller */
-#define CPUINT_CTRLA  _SFR_MEM8(0x0110)
-#define CPUINT_STATUS  _SFR_MEM8(0x0111)
-#define CPUINT_LVL0PRI  _SFR_MEM8(0x0112)
-#define CPUINT_LVL1VEC  _SFR_MEM8(0x0113)
-
-
-/* CRCSCAN - CRCSCAN */
-#define CRCSCAN_CTRLA  _SFR_MEM8(0x0120)
-#define CRCSCAN_CTRLB  _SFR_MEM8(0x0121)
-#define CRCSCAN_STATUS  _SFR_MEM8(0x0122)
-
-
-/* RTC - Real-Time Counter */
-#define RTC_CTRLA  _SFR_MEM8(0x0140)
-#define RTC_STATUS  _SFR_MEM8(0x0141)
-#define RTC_INTCTRL  _SFR_MEM8(0x0142)
-#define RTC_INTFLAGS  _SFR_MEM8(0x0143)
-#define RTC_TEMP  _SFR_MEM8(0x0144)
-#define RTC_DBGCTRL  _SFR_MEM8(0x0145)
-#define RTC_CALIB  _SFR_MEM8(0x0146)
-#define RTC_CLKSEL  _SFR_MEM8(0x0147)
-#define RTC_CNT  _SFR_MEM16(0x0148)
-#define RTC_CNTL  _SFR_MEM8(0x0148)
-#define RTC_CNTH  _SFR_MEM8(0x0149)
-#define RTC_PER  _SFR_MEM16(0x014A)
-#define RTC_PERL  _SFR_MEM8(0x014A)
-#define RTC_PERH  _SFR_MEM8(0x014B)
-#define RTC_CMP  _SFR_MEM16(0x014C)
-#define RTC_CMPL  _SFR_MEM8(0x014C)
-#define RTC_CMPH  _SFR_MEM8(0x014D)
-#define RTC_PITCTRLA  _SFR_MEM8(0x0150)
-#define RTC_PITSTATUS  _SFR_MEM8(0x0151)
-#define RTC_PITINTCTRL  _SFR_MEM8(0x0152)
-#define RTC_PITINTFLAGS  _SFR_MEM8(0x0153)
-#define RTC_PITDBGCTRL  _SFR_MEM8(0x0155)
-
-
-/* CCL - Configurable Custom Logic */
-#define CCL_CTRLA  _SFR_MEM8(0x01C0)
-#define CCL_SEQCTRL0  _SFR_MEM8(0x01C1)
-#define CCL_SEQCTRL1  _SFR_MEM8(0x01C2)
-#define CCL_SEQCTRL2  _SFR_MEM8(0x01C3)
-#define CCL_INTCTRL0  _SFR_MEM8(0x01C5)
-#define CCL_INTCTRL1  _SFR_MEM8(0x01C6)
-#define CCL_INTFLAGS  _SFR_MEM8(0x01C7)
-#define CCL_LUT0CTRLA  _SFR_MEM8(0x01C8)
-#define CCL_LUT0CTRLB  _SFR_MEM8(0x01C9)
-#define CCL_LUT0CTRLC  _SFR_MEM8(0x01CA)
-#define CCL_TRUTH0  _SFR_MEM8(0x01CB)
-#define CCL_LUT1CTRLA  _SFR_MEM8(0x01CC)
-#define CCL_LUT1CTRLB  _SFR_MEM8(0x01CD)
-#define CCL_LUT1CTRLC  _SFR_MEM8(0x01CE)
-#define CCL_TRUTH1  _SFR_MEM8(0x01CF)
-#define CCL_LUT2CTRLA  _SFR_MEM8(0x01D0)
-#define CCL_LUT2CTRLB  _SFR_MEM8(0x01D1)
-#define CCL_LUT2CTRLC  _SFR_MEM8(0x01D2)
-#define CCL_TRUTH2  _SFR_MEM8(0x01D3)
-#define CCL_LUT3CTRLA  _SFR_MEM8(0x01D4)
-#define CCL_LUT3CTRLB  _SFR_MEM8(0x01D5)
-#define CCL_LUT3CTRLC  _SFR_MEM8(0x01D6)
-#define CCL_TRUTH3  _SFR_MEM8(0x01D7)
-#define CCL_LUT4CTRLA  _SFR_MEM8(0x01D8)
-#define CCL_LUT4CTRLB  _SFR_MEM8(0x01D9)
-#define CCL_LUT4CTRLC  _SFR_MEM8(0x01DA)
-#define CCL_TRUTH4  _SFR_MEM8(0x01DB)
-#define CCL_LUT5CTRLA  _SFR_MEM8(0x01DC)
-#define CCL_LUT5CTRLB  _SFR_MEM8(0x01DD)
-#define CCL_LUT5CTRLC  _SFR_MEM8(0x01DE)
-#define CCL_TRUTH5  _SFR_MEM8(0x01DF)
-
-
-/* EVSYS - Event System */
-#define EVSYS_SWEVENTA  _SFR_MEM8(0x0200)
-#define EVSYS_SWEVENTB  _SFR_MEM8(0x0201)
-#define EVSYS_CHANNEL0  _SFR_MEM8(0x0210)
-#define EVSYS_CHANNEL1  _SFR_MEM8(0x0211)
-#define EVSYS_CHANNEL2  _SFR_MEM8(0x0212)
-#define EVSYS_CHANNEL3  _SFR_MEM8(0x0213)
-#define EVSYS_CHANNEL4  _SFR_MEM8(0x0214)
-#define EVSYS_CHANNEL5  _SFR_MEM8(0x0215)
-#define EVSYS_CHANNEL6  _SFR_MEM8(0x0216)
-#define EVSYS_CHANNEL7  _SFR_MEM8(0x0217)
-#define EVSYS_CHANNEL8  _SFR_MEM8(0x0218)
-#define EVSYS_CHANNEL9  _SFR_MEM8(0x0219)
-#define EVSYS_USERCCLLUT0A  _SFR_MEM8(0x0220)
-#define EVSYS_USERCCLLUT0B  _SFR_MEM8(0x0221)
-#define EVSYS_USERCCLLUT1A  _SFR_MEM8(0x0222)
-#define EVSYS_USERCCLLUT1B  _SFR_MEM8(0x0223)
-#define EVSYS_USERCCLLUT2A  _SFR_MEM8(0x0224)
-#define EVSYS_USERCCLLUT2B  _SFR_MEM8(0x0225)
-#define EVSYS_USERCCLLUT3A  _SFR_MEM8(0x0226)
-#define EVSYS_USERCCLLUT3B  _SFR_MEM8(0x0227)
-#define EVSYS_USERCCLLUT4A  _SFR_MEM8(0x0228)
-#define EVSYS_USERCCLLUT4B  _SFR_MEM8(0x0229)
-#define EVSYS_USERCCLLUT5A  _SFR_MEM8(0x022A)
-#define EVSYS_USERCCLLUT5B  _SFR_MEM8(0x022B)
-#define EVSYS_USERADC0START  _SFR_MEM8(0x022C)
-#define EVSYS_USERPTCSTART  _SFR_MEM8(0x022D)
-#define EVSYS_USEREVSYSEVOUTA  _SFR_MEM8(0x022E)
-#define EVSYS_USEREVSYSEVOUTB  _SFR_MEM8(0x022F)
-#define EVSYS_USEREVSYSEVOUTC  _SFR_MEM8(0x0230)
-#define EVSYS_USEREVSYSEVOUTD  _SFR_MEM8(0x0231)
-#define EVSYS_USEREVSYSEVOUTE  _SFR_MEM8(0x0232)
-#define EVSYS_USEREVSYSEVOUTF  _SFR_MEM8(0x0233)
-#define EVSYS_USERUSART0IRDA  _SFR_MEM8(0x0235)
-#define EVSYS_USERUSART1IRDA  _SFR_MEM8(0x0236)
-#define EVSYS_USERUSART2IRDA  _SFR_MEM8(0x0237)
-#define EVSYS_USERUSART3IRDA  _SFR_MEM8(0x0238)
-#define EVSYS_USERUSART4IRDA  _SFR_MEM8(0x0239)
-#define EVSYS_USERTCA0CNTA  _SFR_MEM8(0x023B)
-#define EVSYS_USERTCA0CNTB  _SFR_MEM8(0x023C)
-#define EVSYS_USERTCA1CNTA  _SFR_MEM8(0x023D)
-#define EVSYS_USERTCA1CNTB  _SFR_MEM8(0x023E)
-#define EVSYS_USERTCB0CAPT  _SFR_MEM8(0x023F)
-#define EVSYS_USERTCB0COUNT  _SFR_MEM8(0x0240)
-#define EVSYS_USERTCB1CAPT  _SFR_MEM8(0x0241)
-#define EVSYS_USERTCB1COUNT  _SFR_MEM8(0x0242)
-#define EVSYS_USERTCB2CAPT  _SFR_MEM8(0x0243)
-#define EVSYS_USERTCB2COUNT  _SFR_MEM8(0x0244)
-#define EVSYS_USERTCB3CAPT  _SFR_MEM8(0x0245)
-#define EVSYS_USERTCB3COUNT  _SFR_MEM8(0x0246)
-#define EVSYS_USERTCD0INPUTA  _SFR_MEM8(0x0249)
-#define EVSYS_USERTCD0INPUTB  _SFR_MEM8(0x024A)
-
-
-/* PORT (PORTA) - I/O Ports */
-#define PORTA_DIR  _SFR_MEM8(0x0400)
-#define PORTA_DIRSET  _SFR_MEM8(0x0401)
-#define PORTA_DIRCLR  _SFR_MEM8(0x0402)
-#define PORTA_DIRTGL  _SFR_MEM8(0x0403)
-#define PORTA_OUT  _SFR_MEM8(0x0404)
-#define PORTA_OUTSET  _SFR_MEM8(0x0405)
-#define PORTA_OUTCLR  _SFR_MEM8(0x0406)
-#define PORTA_OUTTGL  _SFR_MEM8(0x0407)
-#define PORTA_IN  _SFR_MEM8(0x0408)
-#define PORTA_INTFLAGS  _SFR_MEM8(0x0409)
-#define PORTA_PORTCTRL  _SFR_MEM8(0x040A)
-#define PORTA_PINCONFIG  _SFR_MEM8(0x040B)
-#define PORTA_PINCTRLUPD  _SFR_MEM8(0x040C)
-#define PORTA_PINCTRLSET  _SFR_MEM8(0x040D)
-#define PORTA_PINCTRLCLR  _SFR_MEM8(0x040E)
-#define PORTA_PIN0CTRL  _SFR_MEM8(0x0410)
-#define PORTA_PIN1CTRL  _SFR_MEM8(0x0411)
-#define PORTA_PIN2CTRL  _SFR_MEM8(0x0412)
-#define PORTA_PIN3CTRL  _SFR_MEM8(0x0413)
-#define PORTA_PIN4CTRL  _SFR_MEM8(0x0414)
-#define PORTA_PIN5CTRL  _SFR_MEM8(0x0415)
-#define PORTA_PIN6CTRL  _SFR_MEM8(0x0416)
-#define PORTA_PIN7CTRL  _SFR_MEM8(0x0417)
-
-
-/* PORT (PORTB) - I/O Ports */
-#define PORTB_DIR  _SFR_MEM8(0x0420)
-#define PORTB_DIRSET  _SFR_MEM8(0x0421)
-#define PORTB_DIRCLR  _SFR_MEM8(0x0422)
-#define PORTB_DIRTGL  _SFR_MEM8(0x0423)
-#define PORTB_OUT  _SFR_MEM8(0x0424)
-#define PORTB_OUTSET  _SFR_MEM8(0x0425)
-#define PORTB_OUTCLR  _SFR_MEM8(0x0426)
-#define PORTB_OUTTGL  _SFR_MEM8(0x0427)
-#define PORTB_IN  _SFR_MEM8(0x0428)
-#define PORTB_INTFLAGS  _SFR_MEM8(0x0429)
-#define PORTB_PORTCTRL  _SFR_MEM8(0x042A)
-#define PORTB_PINCONFIG  _SFR_MEM8(0x042B)
-#define PORTB_PINCTRLUPD  _SFR_MEM8(0x042C)
-#define PORTB_PINCTRLSET  _SFR_MEM8(0x042D)
-#define PORTB_PINCTRLCLR  _SFR_MEM8(0x042E)
-#define PORTB_PIN0CTRL  _SFR_MEM8(0x0430)
-#define PORTB_PIN1CTRL  _SFR_MEM8(0x0431)
-#define PORTB_PIN2CTRL  _SFR_MEM8(0x0432)
-#define PORTB_PIN3CTRL  _SFR_MEM8(0x0433)
-#define PORTB_PIN4CTRL  _SFR_MEM8(0x0434)
-#define PORTB_PIN5CTRL  _SFR_MEM8(0x0435)
-#define PORTB_PIN6CTRL  _SFR_MEM8(0x0436)
-#define PORTB_PIN7CTRL  _SFR_MEM8(0x0437)
-
-
-/* PORT (PORTC) - I/O Ports */
-#define PORTC_DIR  _SFR_MEM8(0x0440)
-#define PORTC_DIRSET  _SFR_MEM8(0x0441)
-#define PORTC_DIRCLR  _SFR_MEM8(0x0442)
-#define PORTC_DIRTGL  _SFR_MEM8(0x0443)
-#define PORTC_OUT  _SFR_MEM8(0x0444)
-#define PORTC_OUTSET  _SFR_MEM8(0x0445)
-#define PORTC_OUTCLR  _SFR_MEM8(0x0446)
-#define PORTC_OUTTGL  _SFR_MEM8(0x0447)
-#define PORTC_IN  _SFR_MEM8(0x0448)
-#define PORTC_INTFLAGS  _SFR_MEM8(0x0449)
-#define PORTC_PORTCTRL  _SFR_MEM8(0x044A)
-#define PORTC_PINCONFIG  _SFR_MEM8(0x044B)
-#define PORTC_PINCTRLUPD  _SFR_MEM8(0x044C)
-#define PORTC_PINCTRLSET  _SFR_MEM8(0x044D)
-#define PORTC_PINCTRLCLR  _SFR_MEM8(0x044E)
-#define PORTC_PIN0CTRL  _SFR_MEM8(0x0450)
-#define PORTC_PIN1CTRL  _SFR_MEM8(0x0451)
-#define PORTC_PIN2CTRL  _SFR_MEM8(0x0452)
-#define PORTC_PIN3CTRL  _SFR_MEM8(0x0453)
-#define PORTC_PIN4CTRL  _SFR_MEM8(0x0454)
-#define PORTC_PIN5CTRL  _SFR_MEM8(0x0455)
-#define PORTC_PIN6CTRL  _SFR_MEM8(0x0456)
-#define PORTC_PIN7CTRL  _SFR_MEM8(0x0457)
-
-
-/* PORT (PORTD) - I/O Ports */
-#define PORTD_DIR  _SFR_MEM8(0x0460)
-#define PORTD_DIRSET  _SFR_MEM8(0x0461)
-#define PORTD_DIRCLR  _SFR_MEM8(0x0462)
-#define PORTD_DIRTGL  _SFR_MEM8(0x0463)
-#define PORTD_OUT  _SFR_MEM8(0x0464)
-#define PORTD_OUTSET  _SFR_MEM8(0x0465)
-#define PORTD_OUTCLR  _SFR_MEM8(0x0466)
-#define PORTD_OUTTGL  _SFR_MEM8(0x0467)
-#define PORTD_IN  _SFR_MEM8(0x0468)
-#define PORTD_INTFLAGS  _SFR_MEM8(0x0469)
-#define PORTD_PORTCTRL  _SFR_MEM8(0x046A)
-#define PORTD_PINCONFIG  _SFR_MEM8(0x046B)
-#define PORTD_PINCTRLUPD  _SFR_MEM8(0x046C)
-#define PORTD_PINCTRLSET  _SFR_MEM8(0x046D)
-#define PORTD_PINCTRLCLR  _SFR_MEM8(0x046E)
-#define PORTD_PIN0CTRL  _SFR_MEM8(0x0470)
-#define PORTD_PIN1CTRL  _SFR_MEM8(0x0471)
-#define PORTD_PIN2CTRL  _SFR_MEM8(0x0472)
-#define PORTD_PIN3CTRL  _SFR_MEM8(0x0473)
-#define PORTD_PIN4CTRL  _SFR_MEM8(0x0474)
-#define PORTD_PIN5CTRL  _SFR_MEM8(0x0475)
-#define PORTD_PIN6CTRL  _SFR_MEM8(0x0476)
-#define PORTD_PIN7CTRL  _SFR_MEM8(0x0477)
-
-
-/* PORT (PORTE) - I/O Ports */
-#define PORTE_DIR  _SFR_MEM8(0x0480)
-#define PORTE_DIRSET  _SFR_MEM8(0x0481)
-#define PORTE_DIRCLR  _SFR_MEM8(0x0482)
-#define PORTE_DIRTGL  _SFR_MEM8(0x0483)
-#define PORTE_OUT  _SFR_MEM8(0x0484)
-#define PORTE_OUTSET  _SFR_MEM8(0x0485)
-#define PORTE_OUTCLR  _SFR_MEM8(0x0486)
-#define PORTE_OUTTGL  _SFR_MEM8(0x0487)
-#define PORTE_IN  _SFR_MEM8(0x0488)
-#define PORTE_INTFLAGS  _SFR_MEM8(0x0489)
-#define PORTE_PORTCTRL  _SFR_MEM8(0x048A)
-#define PORTE_PINCONFIG  _SFR_MEM8(0x048B)
-#define PORTE_PINCTRLUPD  _SFR_MEM8(0x048C)
-#define PORTE_PINCTRLSET  _SFR_MEM8(0x048D)
-#define PORTE_PINCTRLCLR  _SFR_MEM8(0x048E)
-#define PORTE_PIN0CTRL  _SFR_MEM8(0x0490)
-#define PORTE_PIN1CTRL  _SFR_MEM8(0x0491)
-#define PORTE_PIN2CTRL  _SFR_MEM8(0x0492)
-#define PORTE_PIN3CTRL  _SFR_MEM8(0x0493)
-#define PORTE_PIN4CTRL  _SFR_MEM8(0x0494)
-#define PORTE_PIN5CTRL  _SFR_MEM8(0x0495)
-#define PORTE_PIN6CTRL  _SFR_MEM8(0x0496)
-#define PORTE_PIN7CTRL  _SFR_MEM8(0x0497)
-
-
-/* PORT (PORTF) - I/O Ports */
-#define PORTF_DIR  _SFR_MEM8(0x04A0)
-#define PORTF_DIRSET  _SFR_MEM8(0x04A1)
-#define PORTF_DIRCLR  _SFR_MEM8(0x04A2)
-#define PORTF_DIRTGL  _SFR_MEM8(0x04A3)
-#define PORTF_OUT  _SFR_MEM8(0x04A4)
-#define PORTF_OUTSET  _SFR_MEM8(0x04A5)
-#define PORTF_OUTCLR  _SFR_MEM8(0x04A6)
-#define PORTF_OUTTGL  _SFR_MEM8(0x04A7)
-#define PORTF_IN  _SFR_MEM8(0x04A8)
-#define PORTF_INTFLAGS  _SFR_MEM8(0x04A9)
-#define PORTF_PORTCTRL  _SFR_MEM8(0x04AA)
-#define PORTF_PINCONFIG  _SFR_MEM8(0x04AB)
-#define PORTF_PINCTRLUPD  _SFR_MEM8(0x04AC)
-#define PORTF_PINCTRLSET  _SFR_MEM8(0x04AD)
-#define PORTF_PINCTRLCLR  _SFR_MEM8(0x04AE)
-#define PORTF_PIN0CTRL  _SFR_MEM8(0x04B0)
-#define PORTF_PIN1CTRL  _SFR_MEM8(0x04B1)
-#define PORTF_PIN2CTRL  _SFR_MEM8(0x04B2)
-#define PORTF_PIN3CTRL  _SFR_MEM8(0x04B3)
-#define PORTF_PIN4CTRL  _SFR_MEM8(0x04B4)
-#define PORTF_PIN5CTRL  _SFR_MEM8(0x04B5)
-#define PORTF_PIN6CTRL  _SFR_MEM8(0x04B6)
-#define PORTF_PIN7CTRL  _SFR_MEM8(0x04B7)
-
-
-/* PORTMUX - Port Multiplexer */
-#define PORTMUX_EVSYSROUTEA  _SFR_MEM8(0x05E0)
-#define PORTMUX_CCLROUTEA  _SFR_MEM8(0x05E1)
-#define PORTMUX_USARTROUTEA  _SFR_MEM8(0x05E2)
-#define PORTMUX_USARTROUTEB  _SFR_MEM8(0x05E3)
-#define PORTMUX_SPIROUTEA  _SFR_MEM8(0x05E4)
-#define PORTMUX_TWIROUTEA  _SFR_MEM8(0x05E5)
-#define PORTMUX_TCAROUTEA  _SFR_MEM8(0x05E6)
-#define PORTMUX_TCBROUTEA  _SFR_MEM8(0x05E7)
-#define PORTMUX_TCDROUTEA  _SFR_MEM8(0x05E8)
-#define PORTMUX_ACROUTEA  _SFR_MEM8(0x05E9)
-#define PORTMUX_ZCDROUTEA  _SFR_MEM8(0x05EA)
-
-
-/* ADC (ADC0) - Analog to Digital Converter */
-#define ADC0_CTRLA  _SFR_MEM8(0x0600)
-#define ADC0_CTRLB  _SFR_MEM8(0x0601)
-#define ADC0_CTRLC  _SFR_MEM8(0x0602)
-#define ADC0_CTRLD  _SFR_MEM8(0x0603)
-#define ADC0_CTRLE  _SFR_MEM8(0x0604)
-#define ADC0_SAMPCTRL  _SFR_MEM8(0x0605)
-#define ADC0_MUXPOS  _SFR_MEM8(0x0608)
-#define ADC0_MUXNEG  _SFR_MEM8(0x0609)
-#define ADC0_COMMAND  _SFR_MEM8(0x060A)
-#define ADC0_EVCTRL  _SFR_MEM8(0x060B)
-#define ADC0_INTCTRL  _SFR_MEM8(0x060C)
-#define ADC0_INTFLAGS  _SFR_MEM8(0x060D)
-#define ADC0_DBGCTRL  _SFR_MEM8(0x060E)
-#define ADC0_TEMP  _SFR_MEM8(0x060F)
-#define ADC0_RES  _SFR_MEM16(0x0610)
-#define ADC0_RESL  _SFR_MEM8(0x0610)
-#define ADC0_RESH  _SFR_MEM8(0x0611)
-#define ADC0_WINLT  _SFR_MEM16(0x0612)
-#define ADC0_WINLTL  _SFR_MEM8(0x0612)
-#define ADC0_WINLTH  _SFR_MEM8(0x0613)
-#define ADC0_WINHT  _SFR_MEM16(0x0614)
-#define ADC0_WINHTL  _SFR_MEM8(0x0614)
-#define ADC0_WINHTH  _SFR_MEM8(0x0615)
-
-
-/* AC (AC0) - Analog Comparator */
-#define AC0_CTRLA  _SFR_MEM8(0x0680)
-#define AC0_CTRLB  _SFR_MEM8(0x0681)
-#define AC0_MUXCTRL  _SFR_MEM8(0x0682)
-#define AC0_DACREF  _SFR_MEM8(0x0685)
-#define AC0_INTCTRL  _SFR_MEM8(0x0686)
-#define AC0_STATUS  _SFR_MEM8(0x0687)
-
-
-/* AC (AC1) - Analog Comparator */
-#define AC1_CTRLA  _SFR_MEM8(0x0688)
-#define AC1_CTRLB  _SFR_MEM8(0x0689)
-#define AC1_MUXCTRL  _SFR_MEM8(0x068A)
-#define AC1_DACREF  _SFR_MEM8(0x068D)
-#define AC1_INTCTRL  _SFR_MEM8(0x068E)
-#define AC1_STATUS  _SFR_MEM8(0x068F)
-
-
-/* AC (AC2) - Analog Comparator */
-#define AC2_CTRLA  _SFR_MEM8(0x0690)
-#define AC2_CTRLB  _SFR_MEM8(0x0691)
-#define AC2_MUXCTRL  _SFR_MEM8(0x0692)
-#define AC2_DACREF  _SFR_MEM8(0x0695)
-#define AC2_INTCTRL  _SFR_MEM8(0x0696)
-#define AC2_STATUS  _SFR_MEM8(0x0697)
-
-
-/* DAC (DAC0) - Digital to Analog Converter */
-#define DAC0_CTRLA  _SFR_MEM8(0x06A0)
-#define DAC0_DATA  _SFR_MEM16(0x06A2)
-#define DAC0_DATAL  _SFR_MEM8(0x06A2)
-#define DAC0_DATAH  _SFR_MEM8(0x06A3)
-
-
-/* ZCD (ZCD0) - Zero Cross Detect */
-#define ZCD0_CTRLA  _SFR_MEM8(0x06C0)
-#define ZCD0_INTCTRL  _SFR_MEM8(0x06C2)
-#define ZCD0_STATUS  _SFR_MEM8(0x06C3)
-
-
-/* ZCD (ZCD1) - Zero Cross Detect */
-#define ZCD1_CTRLA  _SFR_MEM8(0x06C8)
-#define ZCD1_INTCTRL  _SFR_MEM8(0x06CA)
-#define ZCD1_STATUS  _SFR_MEM8(0x06CB)
-
-
-/* USART (USART0) - Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART0_RXDATAL  _SFR_MEM8(0x0800)
-#define USART0_RXDATAH  _SFR_MEM8(0x0801)
-#define USART0_TXDATAL  _SFR_MEM8(0x0802)
-#define USART0_TXDATAH  _SFR_MEM8(0x0803)
-#define USART0_STATUS  _SFR_MEM8(0x0804)
-#define USART0_CTRLA  _SFR_MEM8(0x0805)
-#define USART0_CTRLB  _SFR_MEM8(0x0806)
-#define USART0_CTRLC  _SFR_MEM8(0x0807)
-#define USART0_BAUD  _SFR_MEM16(0x0808)
-#define USART0_BAUDL  _SFR_MEM8(0x0808)
-#define USART0_BAUDH  _SFR_MEM8(0x0809)
-#define USART0_CTRLD  _SFR_MEM8(0x080A)
-#define USART0_DBGCTRL  _SFR_MEM8(0x080B)
-#define USART0_EVCTRL  _SFR_MEM8(0x080C)
-#define USART0_TXPLCTRL  _SFR_MEM8(0x080D)
-#define USART0_RXPLCTRL  _SFR_MEM8(0x080E)
-
-
-/* USART (USART1) - Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART1_RXDATAL  _SFR_MEM8(0x0820)
-#define USART1_RXDATAH  _SFR_MEM8(0x0821)
-#define USART1_TXDATAL  _SFR_MEM8(0x0822)
-#define USART1_TXDATAH  _SFR_MEM8(0x0823)
-#define USART1_STATUS  _SFR_MEM8(0x0824)
-#define USART1_CTRLA  _SFR_MEM8(0x0825)
-#define USART1_CTRLB  _SFR_MEM8(0x0826)
-#define USART1_CTRLC  _SFR_MEM8(0x0827)
-#define USART1_BAUD  _SFR_MEM16(0x0828)
-#define USART1_BAUDL  _SFR_MEM8(0x0828)
-#define USART1_BAUDH  _SFR_MEM8(0x0829)
-#define USART1_CTRLD  _SFR_MEM8(0x082A)
-#define USART1_DBGCTRL  _SFR_MEM8(0x082B)
-#define USART1_EVCTRL  _SFR_MEM8(0x082C)
-#define USART1_TXPLCTRL  _SFR_MEM8(0x082D)
-#define USART1_RXPLCTRL  _SFR_MEM8(0x082E)
-
-
-/* USART (USART2) - Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART2_RXDATAL  _SFR_MEM8(0x0840)
-#define USART2_RXDATAH  _SFR_MEM8(0x0841)
-#define USART2_TXDATAL  _SFR_MEM8(0x0842)
-#define USART2_TXDATAH  _SFR_MEM8(0x0843)
-#define USART2_STATUS  _SFR_MEM8(0x0844)
-#define USART2_CTRLA  _SFR_MEM8(0x0845)
-#define USART2_CTRLB  _SFR_MEM8(0x0846)
-#define USART2_CTRLC  _SFR_MEM8(0x0847)
-#define USART2_BAUD  _SFR_MEM16(0x0848)
-#define USART2_BAUDL  _SFR_MEM8(0x0848)
-#define USART2_BAUDH  _SFR_MEM8(0x0849)
-#define USART2_CTRLD  _SFR_MEM8(0x084A)
-#define USART2_DBGCTRL  _SFR_MEM8(0x084B)
-#define USART2_EVCTRL  _SFR_MEM8(0x084C)
-#define USART2_TXPLCTRL  _SFR_MEM8(0x084D)
-#define USART2_RXPLCTRL  _SFR_MEM8(0x084E)
-
-
-/* USART (USART3) - Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART3_RXDATAL  _SFR_MEM8(0x0860)
-#define USART3_RXDATAH  _SFR_MEM8(0x0861)
-#define USART3_TXDATAL  _SFR_MEM8(0x0862)
-#define USART3_TXDATAH  _SFR_MEM8(0x0863)
-#define USART3_STATUS  _SFR_MEM8(0x0864)
-#define USART3_CTRLA  _SFR_MEM8(0x0865)
-#define USART3_CTRLB  _SFR_MEM8(0x0866)
-#define USART3_CTRLC  _SFR_MEM8(0x0867)
-#define USART3_BAUD  _SFR_MEM16(0x0868)
-#define USART3_BAUDL  _SFR_MEM8(0x0868)
-#define USART3_BAUDH  _SFR_MEM8(0x0869)
-#define USART3_CTRLD  _SFR_MEM8(0x086A)
-#define USART3_DBGCTRL  _SFR_MEM8(0x086B)
-#define USART3_EVCTRL  _SFR_MEM8(0x086C)
-#define USART3_TXPLCTRL  _SFR_MEM8(0x086D)
-#define USART3_RXPLCTRL  _SFR_MEM8(0x086E)
-
-
-/* USART (USART4) - Universal Synchronous and Asynchronous Receiver and Transmitter */
-#define USART4_RXDATAL  _SFR_MEM8(0x0880)
-#define USART4_RXDATAH  _SFR_MEM8(0x0881)
-#define USART4_TXDATAL  _SFR_MEM8(0x0882)
-#define USART4_TXDATAH  _SFR_MEM8(0x0883)
-#define USART4_STATUS  _SFR_MEM8(0x0884)
-#define USART4_CTRLA  _SFR_MEM8(0x0885)
-#define USART4_CTRLB  _SFR_MEM8(0x0886)
-#define USART4_CTRLC  _SFR_MEM8(0x0887)
-#define USART4_BAUD  _SFR_MEM16(0x0888)
-#define USART4_BAUDL  _SFR_MEM8(0x0888)
-#define USART4_BAUDH  _SFR_MEM8(0x0889)
-#define USART4_CTRLD  _SFR_MEM8(0x088A)
-#define USART4_DBGCTRL  _SFR_MEM8(0x088B)
-#define USART4_EVCTRL  _SFR_MEM8(0x088C)
-#define USART4_TXPLCTRL  _SFR_MEM8(0x088D)
-#define USART4_RXPLCTRL  _SFR_MEM8(0x088E)
-
-
-/* TWI (TWI0) - Two-Wire Interface */
-#define TWI0_CTRLA  _SFR_MEM8(0x0900)
-#define TWI0_DUALCTRL  _SFR_MEM8(0x0901)
-#define TWI0_DBGCTRL  _SFR_MEM8(0x0902)
-#define TWI0_MCTRLA  _SFR_MEM8(0x0903)
-#define TWI0_MCTRLB  _SFR_MEM8(0x0904)
-#define TWI0_MSTATUS  _SFR_MEM8(0x0905)
-#define TWI0_MBAUD  _SFR_MEM8(0x0906)
-#define TWI0_MADDR  _SFR_MEM8(0x0907)
-#define TWI0_MDATA  _SFR_MEM8(0x0908)
-#define TWI0_SCTRLA  _SFR_MEM8(0x0909)
-#define TWI0_SCTRLB  _SFR_MEM8(0x090A)
-#define TWI0_SSTATUS  _SFR_MEM8(0x090B)
-#define TWI0_SADDR  _SFR_MEM8(0x090C)
-#define TWI0_SDATA  _SFR_MEM8(0x090D)
-#define TWI0_SADDRMASK  _SFR_MEM8(0x090E)
-
-
-/* TWI (TWI1) - Two-Wire Interface */
-#define TWI1_CTRLA  _SFR_MEM8(0x0920)
-#define TWI1_DUALCTRL  _SFR_MEM8(0x0921)
-#define TWI1_DBGCTRL  _SFR_MEM8(0x0922)
-#define TWI1_MCTRLA  _SFR_MEM8(0x0923)
-#define TWI1_MCTRLB  _SFR_MEM8(0x0924)
-#define TWI1_MSTATUS  _SFR_MEM8(0x0925)
-#define TWI1_MBAUD  _SFR_MEM8(0x0926)
-#define TWI1_MADDR  _SFR_MEM8(0x0927)
-#define TWI1_MDATA  _SFR_MEM8(0x0928)
-#define TWI1_SCTRLA  _SFR_MEM8(0x0929)
-#define TWI1_SCTRLB  _SFR_MEM8(0x092A)
-#define TWI1_SSTATUS  _SFR_MEM8(0x092B)
-#define TWI1_SADDR  _SFR_MEM8(0x092C)
-#define TWI1_SDATA  _SFR_MEM8(0x092D)
-#define TWI1_SADDRMASK  _SFR_MEM8(0x092E)
-
-
-/* SPI (SPI0) - Serial Peripheral Interface */
-#define SPI0_CTRLA  _SFR_MEM8(0x0940)
-#define SPI0_CTRLB  _SFR_MEM8(0x0941)
-#define SPI0_INTCTRL  _SFR_MEM8(0x0942)
-#define SPI0_INTFLAGS  _SFR_MEM8(0x0943)
-#define SPI0_DATA  _SFR_MEM8(0x0944)
-
-
-/* SPI (SPI1) - Serial Peripheral Interface */
-#define SPI1_CTRLA  _SFR_MEM8(0x0960)
-#define SPI1_CTRLB  _SFR_MEM8(0x0961)
-#define SPI1_INTCTRL  _SFR_MEM8(0x0962)
-#define SPI1_INTFLAGS  _SFR_MEM8(0x0963)
-#define SPI1_DATA  _SFR_MEM8(0x0964)
-
-
-/* TCA (TCA0) - 16-bit Timer/Counter Type A - Single Mode */
-#define TCA0_SINGLE_CTRLA  _SFR_MEM8(0x0A00)
-#define TCA0_SINGLE_CTRLB  _SFR_MEM8(0x0A01)
-#define TCA0_SINGLE_CTRLC  _SFR_MEM8(0x0A02)
-#define TCA0_SINGLE_CTRLD  _SFR_MEM8(0x0A03)
-#define TCA0_SINGLE_CTRLECLR  _SFR_MEM8(0x0A04)
-#define TCA0_SINGLE_CTRLESET  _SFR_MEM8(0x0A05)
-#define TCA0_SINGLE_CTRLFCLR  _SFR_MEM8(0x0A06)
-#define TCA0_SINGLE_CTRLFSET  _SFR_MEM8(0x0A07)
-#define TCA0_SINGLE_EVCTRL  _SFR_MEM8(0x0A09)
-#define TCA0_SINGLE_INTCTRL  _SFR_MEM8(0x0A0A)
-#define TCA0_SINGLE_INTFLAGS  _SFR_MEM8(0x0A0B)
-#define TCA0_SINGLE_DBGCTRL  _SFR_MEM8(0x0A0E)
-#define TCA0_SINGLE_TEMP  _SFR_MEM8(0x0A0F)
-#define TCA0_SINGLE_CNT  _SFR_MEM16(0x0A20)
-#define TCA0_SINGLE_CNTL  _SFR_MEM8(0x0A20)
-#define TCA0_SINGLE_CNTH  _SFR_MEM8(0x0A21)
-#define TCA0_SINGLE_PER  _SFR_MEM16(0x0A26)
-#define TCA0_SINGLE_PERL  _SFR_MEM8(0x0A26)
-#define TCA0_SINGLE_PERH  _SFR_MEM8(0x0A27)
-#define TCA0_SINGLE_CMP0  _SFR_MEM16(0x0A28)
-#define TCA0_SINGLE_CMP0L  _SFR_MEM8(0x0A28)
-#define TCA0_SINGLE_CMP0H  _SFR_MEM8(0x0A29)
-#define TCA0_SINGLE_CMP1  _SFR_MEM16(0x0A2A)
-#define TCA0_SINGLE_CMP1L  _SFR_MEM8(0x0A2A)
-#define TCA0_SINGLE_CMP1H  _SFR_MEM8(0x0A2B)
-#define TCA0_SINGLE_CMP2  _SFR_MEM16(0x0A2C)
-#define TCA0_SINGLE_CMP2L  _SFR_MEM8(0x0A2C)
-#define TCA0_SINGLE_CMP2H  _SFR_MEM8(0x0A2D)
-#define TCA0_SINGLE_PERBUF  _SFR_MEM16(0x0A36)
-#define TCA0_SINGLE_PERBUFL  _SFR_MEM8(0x0A36)
-#define TCA0_SINGLE_PERBUFH  _SFR_MEM8(0x0A37)
-#define TCA0_SINGLE_CMP0BUF  _SFR_MEM16(0x0A38)
-#define TCA0_SINGLE_CMP0BUFL  _SFR_MEM8(0x0A38)
-#define TCA0_SINGLE_CMP0BUFH  _SFR_MEM8(0x0A39)
-#define TCA0_SINGLE_CMP1BUF  _SFR_MEM16(0x0A3A)
-#define TCA0_SINGLE_CMP1BUFL  _SFR_MEM8(0x0A3A)
-#define TCA0_SINGLE_CMP1BUFH  _SFR_MEM8(0x0A3B)
-#define TCA0_SINGLE_CMP2BUF  _SFR_MEM16(0x0A3C)
-#define TCA0_SINGLE_CMP2BUFL  _SFR_MEM8(0x0A3C)
-#define TCA0_SINGLE_CMP2BUFH  _SFR_MEM8(0x0A3D)
-
-
-/* TCA (TCA0) - 16-bit Timer/Counter Type A - Split Mode */
-#define TCA0_SPLIT_CTRLA  _SFR_MEM8(0x0A00)
-#define TCA0_SPLIT_CTRLB  _SFR_MEM8(0x0A01)
-#define TCA0_SPLIT_CTRLC  _SFR_MEM8(0x0A02)
-#define TCA0_SPLIT_CTRLD  _SFR_MEM8(0x0A03)
-#define TCA0_SPLIT_CTRLECLR  _SFR_MEM8(0x0A04)
-#define TCA0_SPLIT_CTRLESET  _SFR_MEM8(0x0A05)
-#define TCA0_SPLIT_INTCTRL  _SFR_MEM8(0x0A0A)
-#define TCA0_SPLIT_INTFLAGS  _SFR_MEM8(0x0A0B)
-#define TCA0_SPLIT_DBGCTRL  _SFR_MEM8(0x0A0E)
-#define TCA0_SPLIT_LCNT  _SFR_MEM8(0x0A20)
-#define TCA0_SPLIT_HCNT  _SFR_MEM8(0x0A21)
-#define TCA0_SPLIT_LPER  _SFR_MEM8(0x0A26)
-#define TCA0_SPLIT_HPER  _SFR_MEM8(0x0A27)
-#define TCA0_SPLIT_LCMP0  _SFR_MEM8(0x0A28)
-#define TCA0_SPLIT_HCMP0  _SFR_MEM8(0x0A29)
-#define TCA0_SPLIT_LCMP1  _SFR_MEM8(0x0A2A)
-#define TCA0_SPLIT_HCMP1  _SFR_MEM8(0x0A2B)
-#define TCA0_SPLIT_LCMP2  _SFR_MEM8(0x0A2C)
-#define TCA0_SPLIT_HCMP2  _SFR_MEM8(0x0A2D)
-
-
-/* TCA (TCA1) - 16-bit Timer/Counter Type A - Single Mode */
-#define TCA1_SINGLE_CTRLA  _SFR_MEM8(0x0A40)
-#define TCA1_SINGLE_CTRLB  _SFR_MEM8(0x0A41)
-#define TCA1_SINGLE_CTRLC  _SFR_MEM8(0x0A42)
-#define TCA1_SINGLE_CTRLD  _SFR_MEM8(0x0A43)
-#define TCA1_SINGLE_CTRLECLR  _SFR_MEM8(0x0A44)
-#define TCA1_SINGLE_CTRLESET  _SFR_MEM8(0x0A45)
-#define TCA1_SINGLE_CTRLFCLR  _SFR_MEM8(0x0A46)
-#define TCA1_SINGLE_CTRLFSET  _SFR_MEM8(0x0A47)
-#define TCA1_SINGLE_EVCTRL  _SFR_MEM8(0x0A49)
-#define TCA1_SINGLE_INTCTRL  _SFR_MEM8(0x0A4A)
-#define TCA1_SINGLE_INTFLAGS  _SFR_MEM8(0x0A4B)
-#define TCA1_SINGLE_DBGCTRL  _SFR_MEM8(0x0A4E)
-#define TCA1_SINGLE_TEMP  _SFR_MEM8(0x0A4F)
-#define TCA1_SINGLE_CNT  _SFR_MEM16(0x0A60)
-#define TCA1_SINGLE_CNTL  _SFR_MEM8(0x0A60)
-#define TCA1_SINGLE_CNTH  _SFR_MEM8(0x0A61)
-#define TCA1_SINGLE_PER  _SFR_MEM16(0x0A66)
-#define TCA1_SINGLE_PERL  _SFR_MEM8(0x0A66)
-#define TCA1_SINGLE_PERH  _SFR_MEM8(0x0A67)
-#define TCA1_SINGLE_CMP0  _SFR_MEM16(0x0A68)
-#define TCA1_SINGLE_CMP0L  _SFR_MEM8(0x0A68)
-#define TCA1_SINGLE_CMP0H  _SFR_MEM8(0x0A69)
-#define TCA1_SINGLE_CMP1  _SFR_MEM16(0x0A6A)
-#define TCA1_SINGLE_CMP1L  _SFR_MEM8(0x0A6A)
-#define TCA1_SINGLE_CMP1H  _SFR_MEM8(0x0A6B)
-#define TCA1_SINGLE_CMP2  _SFR_MEM16(0x0A6C)
-#define TCA1_SINGLE_CMP2L  _SFR_MEM8(0x0A6C)
-#define TCA1_SINGLE_CMP2H  _SFR_MEM8(0x0A6D)
-#define TCA1_SINGLE_PERBUF  _SFR_MEM16(0x0A76)
-#define TCA1_SINGLE_PERBUFL  _SFR_MEM8(0x0A76)
-#define TCA1_SINGLE_PERBUFH  _SFR_MEM8(0x0A77)
-#define TCA1_SINGLE_CMP0BUF  _SFR_MEM16(0x0A78)
-#define TCA1_SINGLE_CMP0BUFL  _SFR_MEM8(0x0A78)
-#define TCA1_SINGLE_CMP0BUFH  _SFR_MEM8(0x0A79)
-#define TCA1_SINGLE_CMP1BUF  _SFR_MEM16(0x0A7A)
-#define TCA1_SINGLE_CMP1BUFL  _SFR_MEM8(0x0A7A)
-#define TCA1_SINGLE_CMP1BUFH  _SFR_MEM8(0x0A7B)
-#define TCA1_SINGLE_CMP2BUF  _SFR_MEM16(0x0A7C)
-#define TCA1_SINGLE_CMP2BUFL  _SFR_MEM8(0x0A7C)
-#define TCA1_SINGLE_CMP2BUFH  _SFR_MEM8(0x0A7D)
-
-
-/* TCA (TCA1) - 16-bit Timer/Counter Type A - Split Mode */
-#define TCA1_SPLIT_CTRLA  _SFR_MEM8(0x0A40)
-#define TCA1_SPLIT_CTRLB  _SFR_MEM8(0x0A41)
-#define TCA1_SPLIT_CTRLC  _SFR_MEM8(0x0A42)
-#define TCA1_SPLIT_CTRLD  _SFR_MEM8(0x0A43)
-#define TCA1_SPLIT_CTRLECLR  _SFR_MEM8(0x0A44)
-#define TCA1_SPLIT_CTRLESET  _SFR_MEM8(0x0A45)
-#define TCA1_SPLIT_INTCTRL  _SFR_MEM8(0x0A4A)
-#define TCA1_SPLIT_INTFLAGS  _SFR_MEM8(0x0A4B)
-#define TCA1_SPLIT_DBGCTRL  _SFR_MEM8(0x0A4E)
-#define TCA1_SPLIT_LCNT  _SFR_MEM8(0x0A60)
-#define TCA1_SPLIT_HCNT  _SFR_MEM8(0x0A61)
-#define TCA1_SPLIT_LPER  _SFR_MEM8(0x0A66)
-#define TCA1_SPLIT_HPER  _SFR_MEM8(0x0A67)
-#define TCA1_SPLIT_LCMP0  _SFR_MEM8(0x0A68)
-#define TCA1_SPLIT_HCMP0  _SFR_MEM8(0x0A69)
-#define TCA1_SPLIT_LCMP1  _SFR_MEM8(0x0A6A)
-#define TCA1_SPLIT_HCMP1  _SFR_MEM8(0x0A6B)
-#define TCA1_SPLIT_LCMP2  _SFR_MEM8(0x0A6C)
-#define TCA1_SPLIT_HCMP2  _SFR_MEM8(0x0A6D)
-
-
-/* TCB (TCB0) - 16-bit Timer Type B */
-#define TCB0_CTRLA  _SFR_MEM8(0x0B00)
-#define TCB0_CTRLB  _SFR_MEM8(0x0B01)
-#define TCB0_EVCTRL  _SFR_MEM8(0x0B04)
-#define TCB0_INTCTRL  _SFR_MEM8(0x0B05)
-#define TCB0_INTFLAGS  _SFR_MEM8(0x0B06)
-#define TCB0_STATUS  _SFR_MEM8(0x0B07)
-#define TCB0_DBGCTRL  _SFR_MEM8(0x0B08)
-#define TCB0_TEMP  _SFR_MEM8(0x0B09)
-#define TCB0_CNT  _SFR_MEM16(0x0B0A)
-#define TCB0_CNTL  _SFR_MEM8(0x0B0A)
-#define TCB0_CNTH  _SFR_MEM8(0x0B0B)
-#define TCB0_CCMP  _SFR_MEM16(0x0B0C)
-#define TCB0_CCMPL  _SFR_MEM8(0x0B0C)
-#define TCB0_CCMPH  _SFR_MEM8(0x0B0D)
-
-
-/* TCB (TCB1) - 16-bit Timer Type B */
-#define TCB1_CTRLA  _SFR_MEM8(0x0B10)
-#define TCB1_CTRLB  _SFR_MEM8(0x0B11)
-#define TCB1_EVCTRL  _SFR_MEM8(0x0B14)
-#define TCB1_INTCTRL  _SFR_MEM8(0x0B15)
-#define TCB1_INTFLAGS  _SFR_MEM8(0x0B16)
-#define TCB1_STATUS  _SFR_MEM8(0x0B17)
-#define TCB1_DBGCTRL  _SFR_MEM8(0x0B18)
-#define TCB1_TEMP  _SFR_MEM8(0x0B19)
-#define TCB1_CNT  _SFR_MEM16(0x0B1A)
-#define TCB1_CNTL  _SFR_MEM8(0x0B1A)
-#define TCB1_CNTH  _SFR_MEM8(0x0B1B)
-#define TCB1_CCMP  _SFR_MEM16(0x0B1C)
-#define TCB1_CCMPL  _SFR_MEM8(0x0B1C)
-#define TCB1_CCMPH  _SFR_MEM8(0x0B1D)
-
-
-/* TCB (TCB2) - 16-bit Timer Type B */
-#define TCB2_CTRLA  _SFR_MEM8(0x0B20)
-#define TCB2_CTRLB  _SFR_MEM8(0x0B21)
-#define TCB2_EVCTRL  _SFR_MEM8(0x0B24)
-#define TCB2_INTCTRL  _SFR_MEM8(0x0B25)
-#define TCB2_INTFLAGS  _SFR_MEM8(0x0B26)
-#define TCB2_STATUS  _SFR_MEM8(0x0B27)
-#define TCB2_DBGCTRL  _SFR_MEM8(0x0B28)
-#define TCB2_TEMP  _SFR_MEM8(0x0B29)
-#define TCB2_CNT  _SFR_MEM16(0x0B2A)
-#define TCB2_CNTL  _SFR_MEM8(0x0B2A)
-#define TCB2_CNTH  _SFR_MEM8(0x0B2B)
-#define TCB2_CCMP  _SFR_MEM16(0x0B2C)
-#define TCB2_CCMPL  _SFR_MEM8(0x0B2C)
-#define TCB2_CCMPH  _SFR_MEM8(0x0B2D)
-
-
-/* TCB (TCB3) - 16-bit Timer Type B */
-#define TCB3_CTRLA  _SFR_MEM8(0x0B30)
-#define TCB3_CTRLB  _SFR_MEM8(0x0B31)
-#define TCB3_EVCTRL  _SFR_MEM8(0x0B34)
-#define TCB3_INTCTRL  _SFR_MEM8(0x0B35)
-#define TCB3_INTFLAGS  _SFR_MEM8(0x0B36)
-#define TCB3_STATUS  _SFR_MEM8(0x0B37)
-#define TCB3_DBGCTRL  _SFR_MEM8(0x0B38)
-#define TCB3_TEMP  _SFR_MEM8(0x0B39)
-#define TCB3_CNT  _SFR_MEM16(0x0B3A)
-#define TCB3_CNTL  _SFR_MEM8(0x0B3A)
-#define TCB3_CNTH  _SFR_MEM8(0x0B3B)
-#define TCB3_CCMP  _SFR_MEM16(0x0B3C)
-#define TCB3_CCMPL  _SFR_MEM8(0x0B3C)
-#define TCB3_CCMPH  _SFR_MEM8(0x0B3D)
-
-
-/* TCB (TCB4) - 16-bit Timer Type B */
-#define TCB4_CTRLA  _SFR_MEM8(0x0B40)
-#define TCB4_CTRLB  _SFR_MEM8(0x0B41)
-#define TCB4_EVCTRL  _SFR_MEM8(0x0B44)
-#define TCB4_INTCTRL  _SFR_MEM8(0x0B45)
-#define TCB4_INTFLAGS  _SFR_MEM8(0x0B46)
-#define TCB4_STATUS  _SFR_MEM8(0x0B47)
-#define TCB4_DBGCTRL  _SFR_MEM8(0x0B48)
-#define TCB4_TEMP  _SFR_MEM8(0x0B49)
-#define TCB4_CNT  _SFR_MEM16(0x0B4A)
-#define TCB4_CNTL  _SFR_MEM8(0x0B4A)
-#define TCB4_CNTH  _SFR_MEM8(0x0B4B)
-#define TCB4_CCMP  _SFR_MEM16(0x0B4C)
-#define TCB4_CCMPL  _SFR_MEM8(0x0B4C)
-#define TCB4_CCMPH  _SFR_MEM8(0x0B4D)
-
-
-/* TCD (TCD0) - Timer Counter D */
-#define TCD0_CTRLA  _SFR_MEM8(0x0B80)
-#define TCD0_CTRLB  _SFR_MEM8(0x0B81)
-#define TCD0_CTRLC  _SFR_MEM8(0x0B82)
-#define TCD0_CTRLD  _SFR_MEM8(0x0B83)
-#define TCD0_CTRLE  _SFR_MEM8(0x0B84)
-#define TCD0_EVCTRLA  _SFR_MEM8(0x0B88)
-#define TCD0_EVCTRLB  _SFR_MEM8(0x0B89)
-#define TCD0_INTCTRL  _SFR_MEM8(0x0B8C)
-#define TCD0_INTFLAGS  _SFR_MEM8(0x0B8D)
-#define TCD0_STATUS  _SFR_MEM8(0x0B8E)
-#define TCD0_INPUTCTRLA  _SFR_MEM8(0x0B90)
-#define TCD0_INPUTCTRLB  _SFR_MEM8(0x0B91)
-#define TCD0_FAULTCTRL  _SFR_MEM8(0x0B92)
-#define TCD0_DLYCTRL  _SFR_MEM8(0x0B94)
-#define TCD0_DLYVAL  _SFR_MEM8(0x0B95)
-#define TCD0_DITCTRL  _SFR_MEM8(0x0B98)
-#define TCD0_DITVAL  _SFR_MEM8(0x0B99)
-#define TCD0_DBGCTRL  _SFR_MEM8(0x0B9E)
-#define TCD0_CAPTUREA  _SFR_MEM16(0x0BA2)
-#define TCD0_CAPTUREAL  _SFR_MEM8(0x0BA2)
-#define TCD0_CAPTUREAH  _SFR_MEM8(0x0BA3)
-#define TCD0_CAPTUREB  _SFR_MEM16(0x0BA4)
-#define TCD0_CAPTUREBL  _SFR_MEM8(0x0BA4)
-#define TCD0_CAPTUREBH  _SFR_MEM8(0x0BA5)
-#define TCD0_CMPASET  _SFR_MEM16(0x0BA8)
-#define TCD0_CMPASETL  _SFR_MEM8(0x0BA8)
-#define TCD0_CMPASETH  _SFR_MEM8(0x0BA9)
-#define TCD0_CMPACLR  _SFR_MEM16(0x0BAA)
-#define TCD0_CMPACLRL  _SFR_MEM8(0x0BAA)
-#define TCD0_CMPACLRH  _SFR_MEM8(0x0BAB)
-#define TCD0_CMPBSET  _SFR_MEM16(0x0BAC)
-#define TCD0_CMPBSETL  _SFR_MEM8(0x0BAC)
-#define TCD0_CMPBSETH  _SFR_MEM8(0x0BAD)
-#define TCD0_CMPBCLR  _SFR_MEM16(0x0BAE)
-#define TCD0_CMPBCLRL  _SFR_MEM8(0x0BAE)
-#define TCD0_CMPBCLRH  _SFR_MEM8(0x0BAF)
-
-
-/* SYSCFG - System Configuration Registers */
-#define SYSCFG_REVID  _SFR_MEM8(0x0F01)
-#define SYSCFG_OCDMCTRL  _SFR_MEM8(0x0F18)
-#define SYSCFG_OCDMSTATUS  _SFR_MEM8(0x0F19)
-
-
-/* NVMCTRL - Non-volatile Memory Controller */
-#define NVMCTRL_CTRLA  _SFR_MEM8(0x1000)
-#define NVMCTRL_CTRLB  _SFR_MEM8(0x1001)
-#define NVMCTRL_STATUS  _SFR_MEM8(0x1002)
-#define NVMCTRL_INTCTRL  _SFR_MEM8(0x1003)
-#define NVMCTRL_INTFLAGS  _SFR_MEM8(0x1004)
-#define NVMCTRL_DATA  _SFR_MEM16(0x1006)
-#define NVMCTRL_DATAL  _SFR_MEM8(0x1006)
-#define NVMCTRL_DATAH  _SFR_MEM8(0x1007)
-#define NVMCTRL_ADDR  _SFR_MEM32(0x1008)
-#define NVMCTRL_ADDR0  _SFR_MEM8(0x1008)
-#define NVMCTRL_ADDR1  _SFR_MEM8(0x1009)
-#define NVMCTRL_ADDR2  _SFR_MEM8(0x100A)
-#define NVMCTRL_ADDR3  _SFR_MEM8(0x100B)
-
-
-/* LOCK - Lockbits */
-#define LOCK_KEY  _SFR_MEM32(0x1040)
-#define LOCK_KEY0  _SFR_MEM8(0x1040)
-#define LOCK_KEY1  _SFR_MEM8(0x1041)
-#define LOCK_KEY2  _SFR_MEM8(0x1042)
-#define LOCK_KEY3  _SFR_MEM8(0x1043)
-
-
-/* FUSE - Fuses */
-#define FUSE_WDTCFG  _SFR_MEM8(0x1050)
-#define FUSE_BODCFG  _SFR_MEM8(0x1051)
-#define FUSE_OSCCFG  _SFR_MEM8(0x1052)
-#define FUSE_SYSCFG0  _SFR_MEM8(0x1055)
-#define FUSE_SYSCFG1  _SFR_MEM8(0x1056)
-#define FUSE_CODESIZE  _SFR_MEM8(0x1057)
-#define FUSE_BOOTSIZE  _SFR_MEM8(0x1058)
-
-
-/* USERROW - User Row */
-#define USERROW_USERROW0  _SFR_MEM8(0x1080)
-#define USERROW_USERROW1  _SFR_MEM8(0x1081)
-#define USERROW_USERROW2  _SFR_MEM8(0x1082)
-#define USERROW_USERROW3  _SFR_MEM8(0x1083)
-#define USERROW_USERROW4  _SFR_MEM8(0x1084)
-#define USERROW_USERROW5  _SFR_MEM8(0x1085)
-#define USERROW_USERROW6  _SFR_MEM8(0x1086)
-#define USERROW_USERROW7  _SFR_MEM8(0x1087)
-#define USERROW_USERROW8  _SFR_MEM8(0x1088)
-#define USERROW_USERROW9  _SFR_MEM8(0x1089)
-#define USERROW_USERROW10  _SFR_MEM8(0x108A)
-#define USERROW_USERROW11  _SFR_MEM8(0x108B)
-#define USERROW_USERROW12  _SFR_MEM8(0x108C)
-#define USERROW_USERROW13  _SFR_MEM8(0x108D)
-#define USERROW_USERROW14  _SFR_MEM8(0x108E)
-#define USERROW_USERROW15  _SFR_MEM8(0x108F)
-#define USERROW_USERROW16  _SFR_MEM8(0x1090)
-#define USERROW_USERROW17  _SFR_MEM8(0x1091)
-#define USERROW_USERROW18  _SFR_MEM8(0x1092)
-#define USERROW_USERROW19  _SFR_MEM8(0x1093)
-#define USERROW_USERROW20  _SFR_MEM8(0x1094)
-#define USERROW_USERROW21  _SFR_MEM8(0x1095)
-#define USERROW_USERROW22  _SFR_MEM8(0x1096)
-#define USERROW_USERROW23  _SFR_MEM8(0x1097)
-#define USERROW_USERROW24  _SFR_MEM8(0x1098)
-#define USERROW_USERROW25  _SFR_MEM8(0x1099)
-#define USERROW_USERROW26  _SFR_MEM8(0x109A)
-#define USERROW_USERROW27  _SFR_MEM8(0x109B)
-#define USERROW_USERROW28  _SFR_MEM8(0x109C)
-#define USERROW_USERROW29  _SFR_MEM8(0x109D)
-#define USERROW_USERROW30  _SFR_MEM8(0x109E)
-#define USERROW_USERROW31  _SFR_MEM8(0x109F)
-
-
-/* SIGROW - Signature row */
-#define SIGROW_DEVICEID0  _SFR_MEM8(0x1100)
-#define SIGROW_DEVICEID1  _SFR_MEM8(0x1101)
-#define SIGROW_DEVICEID2  _SFR_MEM8(0x1102)
-#define SIGROW_TEMPSENSE0  _SFR_MEM16(0x1104)
-#define SIGROW_TEMPSENSE0L  _SFR_MEM8(0x1104)
-#define SIGROW_TEMPSENSE0H  _SFR_MEM8(0x1105)
-#define SIGROW_TEMPSENSE1  _SFR_MEM16(0x1106)
-#define SIGROW_TEMPSENSE1L  _SFR_MEM8(0x1106)
-#define SIGROW_TEMPSENSE1H  _SFR_MEM8(0x1107)
-#define SIGROW_SERNUM0  _SFR_MEM8(0x1110)
-#define SIGROW_SERNUM1  _SFR_MEM8(0x1111)
-#define SIGROW_SERNUM2  _SFR_MEM8(0x1112)
-#define SIGROW_SERNUM3  _SFR_MEM8(0x1113)
-#define SIGROW_SERNUM4  _SFR_MEM8(0x1114)
-#define SIGROW_SERNUM5  _SFR_MEM8(0x1115)
-#define SIGROW_SERNUM6  _SFR_MEM8(0x1116)
-#define SIGROW_SERNUM7  _SFR_MEM8(0x1117)
-#define SIGROW_SERNUM8  _SFR_MEM8(0x1118)
-#define SIGROW_SERNUM9  _SFR_MEM8(0x1119)
-#define SIGROW_SERNUM10  _SFR_MEM8(0x111A)
-#define SIGROW_SERNUM11  _SFR_MEM8(0x111B)
-#define SIGROW_SERNUM12  _SFR_MEM8(0x111C)
-#define SIGROW_SERNUM13  _SFR_MEM8(0x111D)
-#define SIGROW_SERNUM14  _SFR_MEM8(0x111E)
-#define SIGROW_SERNUM15  _SFR_MEM8(0x111F)
-
 
 
 /*================== Bitfield Definitions ================== */
@@ -7173,6 +3226,5965 @@ IO Module Instances. Mapped to memory.
 #define ZCD_STATE_bm  0x10  /* ZCD State bit mask. */
 #define ZCD_STATE_bp  4  /* ZCD State bit position. */
 
+/* C Language Only */
+#if !defined (__ASSEMBLER__)
+/*
+==========================================================================
+IO Module Structures
+==========================================================================
+*/
+
+
+/*
+--------------------------------------------------------------------------
+AC - Analog Comparator
+--------------------------------------------------------------------------
+*/
+
+/* Analog Comparator */
+typedef struct AC_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t MUXCTRL;  /* Mux Control A */
+    register8_t reserved_1[2];
+    register8_t DACREF;  /* DAC Voltage Reference */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t STATUS;  /* Status */
+} AC_t;
+
+/* Hysteresis Mode select bit group values */
+typedef enum AC_HYSMODE_VALUES_enum
+{
+    AC_HYSMODE_NONE_gv             = 0x00,  /* No hysteresis */
+    AC_HYSMODE_SMALL_gv            = 0x01,  /* Small hysteresis */
+    AC_HYSMODE_MEDIUM_gv           = 0x02,  /* Medium hysteresis */
+    AC_HYSMODE_LARGE_gv            = 0x03   /* Large hysteresis */
+} AC_HYSMODE_values_t;
+
+/* Hysteresis Mode select bit group configurations*/
+typedef enum AC_HYSMODE_enum
+{
+    AC_HYSMODE_NONE_gc             = (AC_HYSMODE_NONE_gv << AC_HYSMODE_gp),  /* No hysteresis */
+    AC_HYSMODE_SMALL_gc            = (AC_HYSMODE_SMALL_gv << AC_HYSMODE_gp),  /* Small hysteresis */
+    AC_HYSMODE_MEDIUM_gc           = (AC_HYSMODE_MEDIUM_gv << AC_HYSMODE_gp),  /* Medium hysteresis */
+    AC_HYSMODE_LARGE_gc            = (AC_HYSMODE_LARGE_gv << AC_HYSMODE_gp)   /* Large hysteresis */
+} AC_HYSMODE_t;
+
+/* AC Output Initial Value select bit group values */
+typedef enum AC_INITVAL_VALUES_enum
+{
+    AC_INITVAL_LOW_gv              = 0x00,  /* Output initialized to 0 */
+    AC_INITVAL_HIGH_gv             = 0x01   /* Output initialized to 1 */
+} AC_INITVAL_values_t;
+
+/* AC Output Initial Value select bit group configurations*/
+typedef enum AC_INITVAL_enum
+{
+    AC_INITVAL_LOW_gc              = (AC_INITVAL_LOW_gv << AC_INITVAL_bp),  /* Output initialized to 0 */
+    AC_INITVAL_HIGH_gc             = (AC_INITVAL_HIGH_gv << AC_INITVAL_bp)   /* Output initialized to 1 */
+} AC_INITVAL_t;
+
+/* Interrupt Mode select bit group values */
+typedef enum AC_INTMODE_NORMAL_VALUES_enum
+{
+    AC_INTMODE_NORMAL_BOTHEDGE_gv  = 0x00,  /* Positive and negative inputs crosses */
+    AC_INTMODE_NORMAL_NEGEDGE_gv   = 0x02,  /* Positive input goes below negative input */
+    AC_INTMODE_NORMAL_POSEDGE_gv   = 0x03   /* Positive input goes above negative input */
+} AC_INTMODE_NORMAL_values_t;
+
+/* Interrupt Mode select bit group configurations*/
+typedef enum AC_INTMODE_NORMAL_enum
+{
+    AC_INTMODE_NORMAL_BOTHEDGE_gc  = (AC_INTMODE_NORMAL_BOTHEDGE_gv << AC_INTMODE_NORMAL_gp),  /* Positive and negative inputs crosses */
+    AC_INTMODE_NORMAL_NEGEDGE_gc   = (AC_INTMODE_NORMAL_NEGEDGE_gv << AC_INTMODE_NORMAL_gp),  /* Positive input goes below negative input */
+    AC_INTMODE_NORMAL_POSEDGE_gc   = (AC_INTMODE_NORMAL_POSEDGE_gv << AC_INTMODE_NORMAL_gp)   /* Positive input goes above negative input */
+} AC_INTMODE_NORMAL_t;
+
+/* Interrupt Mode select bit group values */
+typedef enum AC_INTMODE_WINDOW_VALUES_enum
+{
+    AC_INTMODE_WINDOW_ABOVE_gv     = 0x00,  /* Window interrupt when input above both references */
+    AC_INTMODE_WINDOW_INSIDE_gv    = 0x01,  /* Window interrupt when input betweeen references */
+    AC_INTMODE_WINDOW_BELOW_gv     = 0x02,  /* Window interrupt when input below both references */
+    AC_INTMODE_WINDOW_OUTSIDE_gv   = 0x03   /* Window interrupt when input outside reference */
+} AC_INTMODE_WINDOW_values_t;
+
+/* Interrupt Mode select bit group configurations*/
+typedef enum AC_INTMODE_WINDOW_enum
+{
+    AC_INTMODE_WINDOW_ABOVE_gc     = (AC_INTMODE_WINDOW_ABOVE_gv << AC_INTMODE_WINDOW_gp),  /* Window interrupt when input above both references */
+    AC_INTMODE_WINDOW_INSIDE_gc    = (AC_INTMODE_WINDOW_INSIDE_gv << AC_INTMODE_WINDOW_gp),  /* Window interrupt when input betweeen references */
+    AC_INTMODE_WINDOW_BELOW_gc     = (AC_INTMODE_WINDOW_BELOW_gv << AC_INTMODE_WINDOW_gp),  /* Window interrupt when input below both references */
+    AC_INTMODE_WINDOW_OUTSIDE_gc   = (AC_INTMODE_WINDOW_OUTSIDE_gv << AC_INTMODE_WINDOW_gp)   /* Window interrupt when input outside reference */
+} AC_INTMODE_WINDOW_t;
+
+/* Negative Input MUX Selection bit group values */
+typedef enum AC_MUXNEG_VALUES_enum
+{
+    AC_MUXNEG_AINN0_gv             = 0x00,  /* Negative Pin 0 */
+    AC_MUXNEG_AINN1_gv             = 0x01,  /* Negative Pin 1 */
+    AC_MUXNEG_AINN2_gv             = 0x02,  /* Negative Pin 2 */
+    AC_MUXNEG_DACREF_gv            = 0x03   /* DAC Reference */
+} AC_MUXNEG_values_t;
+
+/* Negative Input MUX Selection bit group configurations*/
+typedef enum AC_MUXNEG_enum
+{
+    AC_MUXNEG_AINN0_gc             = (AC_MUXNEG_AINN0_gv << AC_MUXNEG_gp),  /* Negative Pin 0 */
+    AC_MUXNEG_AINN1_gc             = (AC_MUXNEG_AINN1_gv << AC_MUXNEG_gp),  /* Negative Pin 1 */
+    AC_MUXNEG_AINN2_gc             = (AC_MUXNEG_AINN2_gv << AC_MUXNEG_gp),  /* Negative Pin 2 */
+    AC_MUXNEG_DACREF_gc            = (AC_MUXNEG_DACREF_gv << AC_MUXNEG_gp)   /* DAC Reference */
+} AC_MUXNEG_t;
+
+/* Positive Input MUX Selection bit group values */
+typedef enum AC_MUXPOS_VALUES_enum
+{
+    AC_MUXPOS_AINP0_gv             = 0x00,  /* Positive Pin 0 */
+    AC_MUXPOS_AINP1_gv             = 0x01,  /* Positive Pin 1 */
+    AC_MUXPOS_AINP2_gv             = 0x02,  /* Positive Pin 2 */
+    AC_MUXPOS_AINP3_gv             = 0x03   /* Positive Pin 3 */
+} AC_MUXPOS_values_t;
+
+/* Positive Input MUX Selection bit group configurations*/
+typedef enum AC_MUXPOS_enum
+{
+    AC_MUXPOS_AINP0_gc             = (AC_MUXPOS_AINP0_gv << AC_MUXPOS_gp),  /* Positive Pin 0 */
+    AC_MUXPOS_AINP1_gc             = (AC_MUXPOS_AINP1_gv << AC_MUXPOS_gp),  /* Positive Pin 1 */
+    AC_MUXPOS_AINP2_gc             = (AC_MUXPOS_AINP2_gv << AC_MUXPOS_gp),  /* Positive Pin 2 */
+    AC_MUXPOS_AINP3_gc             = (AC_MUXPOS_AINP3_gv << AC_MUXPOS_gp)   /* Positive Pin 3 */
+} AC_MUXPOS_t;
+
+/* Power profile select bit group values */
+typedef enum AC_POWER_VALUES_enum
+{
+    AC_POWER_PROFILE0_gv           = 0x00,  /* Power profile 0, Shortest response time, highest consumption */
+    AC_POWER_PROFILE1_gv           = 0x01,  /* Power profile 1 */
+    AC_POWER_PROFILE2_gv           = 0x02   /* Power profile 2 */
+} AC_POWER_values_t;
+
+/* Power profile select bit group configurations*/
+typedef enum AC_POWER_enum
+{
+    AC_POWER_PROFILE0_gc           = (AC_POWER_PROFILE0_gv << AC_POWER_gp),  /* Power profile 0, Shortest response time, highest consumption */
+    AC_POWER_PROFILE1_gc           = (AC_POWER_PROFILE1_gv << AC_POWER_gp),  /* Power profile 1 */
+    AC_POWER_PROFILE2_gc           = (AC_POWER_PROFILE2_gv << AC_POWER_gp)   /* Power profile 2 */
+} AC_POWER_t;
+
+/* Window selection mode bit group values */
+typedef enum AC_WINSEL_VALUES_enum
+{
+    AC_WINSEL_DISABLED_gv          = 0x00,  /* Window function disabled */
+    AC_WINSEL_UPSEL1_gv            = 0x01,  /* Select ACn+1 as upper limit in window compare */
+    AC_WINSEL_UPSEL2_gv            = 0x02   /* Select ACn+2 as upper limit in window compare */
+} AC_WINSEL_values_t;
+
+/* Window selection mode bit group configurations*/
+typedef enum AC_WINSEL_enum
+{
+    AC_WINSEL_DISABLED_gc          = (AC_WINSEL_DISABLED_gv << AC_WINSEL_gp),  /* Window function disabled */
+    AC_WINSEL_UPSEL1_gc            = (AC_WINSEL_UPSEL1_gv << AC_WINSEL_gp),  /* Select ACn+1 as upper limit in window compare */
+    AC_WINSEL_UPSEL2_gc            = (AC_WINSEL_UPSEL2_gv << AC_WINSEL_gp)   /* Select ACn+2 as upper limit in window compare */
+} AC_WINSEL_t;
+
+/* Analog Comparator Window State select bit group values */
+typedef enum AC_WINSTATE_VALUES_enum
+{
+    AC_WINSTATE_ABOVE_gv           = 0x00,  /* Above window */
+    AC_WINSTATE_INSIDE_gv          = 0x01,  /* Inside window */
+    AC_WINSTATE_BELOW_gv           = 0x02   /* Below window */
+} AC_WINSTATE_values_t;
+
+/* Analog Comparator Window State select bit group configurations*/
+typedef enum AC_WINSTATE_enum
+{
+    AC_WINSTATE_ABOVE_gc           = (AC_WINSTATE_ABOVE_gv << AC_WINSTATE_gp),  /* Above window */
+    AC_WINSTATE_INSIDE_gc          = (AC_WINSTATE_INSIDE_gv << AC_WINSTATE_gp),  /* Inside window */
+    AC_WINSTATE_BELOW_gc           = (AC_WINSTATE_BELOW_gv << AC_WINSTATE_gp)   /* Below window */
+} AC_WINSTATE_t;
+
+/*
+--------------------------------------------------------------------------
+ADC - Analog to Digital Converter
+--------------------------------------------------------------------------
+*/
+
+/* Analog to Digital Converter */
+typedef struct ADC_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t CTRLC;  /* Control C */
+    register8_t CTRLD;  /* Control D */
+    register8_t CTRLE;  /* Control E */
+    register8_t SAMPCTRL;  /* Sample Control */
+    register8_t reserved_1[2];
+    register8_t MUXPOS;  /* Positive mux input */
+    register8_t MUXNEG;  /* Negative mux input */
+    register8_t COMMAND;  /* Command */
+    register8_t EVCTRL;  /* Event Control */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t TEMP;  /* Temporary Data */
+    _WORDREGISTER(RES);  /* ADC Accumulator Result */
+    _WORDREGISTER(WINLT);  /* Window comparator low threshold */
+    _WORDREGISTER(WINHT);  /* Window comparator high threshold */
+    register8_t reserved_2[2];
+} ADC_t;
+
+/* Conversion mode select bit group values */
+typedef enum ADC_CONVMODE_VALUES_enum
+{
+    ADC_CONVMODE_SINGLEENDED_gv    = 0x00,  /* Single-Ended mode */
+    ADC_CONVMODE_DIFF_gv           = 0x01   /* Differential mode */
+} ADC_CONVMODE_values_t;
+
+/* Conversion mode select bit group configurations*/
+typedef enum ADC_CONVMODE_enum
+{
+    ADC_CONVMODE_SINGLEENDED_gc    = (ADC_CONVMODE_SINGLEENDED_gv << ADC_CONVMODE_bp),  /* Single-Ended mode */
+    ADC_CONVMODE_DIFF_gc           = (ADC_CONVMODE_DIFF_gv << ADC_CONVMODE_bp)   /* Differential mode */
+} ADC_CONVMODE_t;
+
+/* Initial Delay Selection bit group values */
+typedef enum ADC_INITDLY_VALUES_enum
+{
+    ADC_INITDLY_DLY0_gv            = 0x00,  /* Delay 0 CLK_ADC cycles */
+    ADC_INITDLY_DLY16_gv           = 0x01,  /* Delay 16 CLK_ADC cycles */
+    ADC_INITDLY_DLY32_gv           = 0x02,  /* Delay 32 CLK_ADC cycles */
+    ADC_INITDLY_DLY64_gv           = 0x03,  /* Delay 64 CLK_ADC cycles */
+    ADC_INITDLY_DLY128_gv          = 0x04,  /* Delay 128 CLK_ADC cycles */
+    ADC_INITDLY_DLY256_gv          = 0x05   /* Delay 256 CLK_ADC cycles */
+} ADC_INITDLY_values_t;
+
+/* Initial Delay Selection bit group configurations*/
+typedef enum ADC_INITDLY_enum
+{
+    ADC_INITDLY_DLY0_gc            = (ADC_INITDLY_DLY0_gv << ADC_INITDLY_gp),  /* Delay 0 CLK_ADC cycles */
+    ADC_INITDLY_DLY16_gc           = (ADC_INITDLY_DLY16_gv << ADC_INITDLY_gp),  /* Delay 16 CLK_ADC cycles */
+    ADC_INITDLY_DLY32_gc           = (ADC_INITDLY_DLY32_gv << ADC_INITDLY_gp),  /* Delay 32 CLK_ADC cycles */
+    ADC_INITDLY_DLY64_gc           = (ADC_INITDLY_DLY64_gv << ADC_INITDLY_gp),  /* Delay 64 CLK_ADC cycles */
+    ADC_INITDLY_DLY128_gc          = (ADC_INITDLY_DLY128_gv << ADC_INITDLY_gp),  /* Delay 128 CLK_ADC cycles */
+    ADC_INITDLY_DLY256_gc          = (ADC_INITDLY_DLY256_gv << ADC_INITDLY_gp)   /* Delay 256 CLK_ADC cycles */
+} ADC_INITDLY_t;
+
+/* Analog Channel Selection Bits bit group values */
+typedef enum ADC_MUXNEG_VALUES_enum
+{
+    ADC_MUXNEG_AIN0_gv             = 0x00,  /* ADC input pin 0 */
+    ADC_MUXNEG_AIN1_gv             = 0x01,  /* ADC input pin 1 */
+    ADC_MUXNEG_AIN2_gv             = 0x02,  /* ADC input pin 2 */
+    ADC_MUXNEG_AIN3_gv             = 0x03,  /* ADC input pin 3 */
+    ADC_MUXNEG_AIN4_gv             = 0x04,  /* ADC input pin 4 */
+    ADC_MUXNEG_AIN5_gv             = 0x05,  /* ADC input pin 5 */
+    ADC_MUXNEG_AIN6_gv             = 0x06,  /* ADC input pin 6 */
+    ADC_MUXNEG_AIN7_gv             = 0x07,  /* ADC input pin 7 */
+    ADC_MUXNEG_AIN8_gv             = 0x08,  /* ADC input pin 8 */
+    ADC_MUXNEG_AIN9_gv             = 0x09,  /* ADC input pin 9 */
+    ADC_MUXNEG_AIN10_gv            = 0x0A,  /* ADC input pin 10 */
+    ADC_MUXNEG_AIN11_gv            = 0x0B,  /* ADC input pin 11 */
+    ADC_MUXNEG_GND_gv              = 0x40,  /* Ground */
+    ADC_MUXNEG_DAC0_gv             = 0x48   /* DAC0 */
+} ADC_MUXNEG_values_t;
+
+/* Analog Channel Selection Bits bit group configurations*/
+typedef enum ADC_MUXNEG_enum
+{
+    ADC_MUXNEG_AIN0_gc             = (ADC_MUXNEG_AIN0_gv << ADC_MUXNEG_gp),  /* ADC input pin 0 */
+    ADC_MUXNEG_AIN1_gc             = (ADC_MUXNEG_AIN1_gv << ADC_MUXNEG_gp),  /* ADC input pin 1 */
+    ADC_MUXNEG_AIN2_gc             = (ADC_MUXNEG_AIN2_gv << ADC_MUXNEG_gp),  /* ADC input pin 2 */
+    ADC_MUXNEG_AIN3_gc             = (ADC_MUXNEG_AIN3_gv << ADC_MUXNEG_gp),  /* ADC input pin 3 */
+    ADC_MUXNEG_AIN4_gc             = (ADC_MUXNEG_AIN4_gv << ADC_MUXNEG_gp),  /* ADC input pin 4 */
+    ADC_MUXNEG_AIN5_gc             = (ADC_MUXNEG_AIN5_gv << ADC_MUXNEG_gp),  /* ADC input pin 5 */
+    ADC_MUXNEG_AIN6_gc             = (ADC_MUXNEG_AIN6_gv << ADC_MUXNEG_gp),  /* ADC input pin 6 */
+    ADC_MUXNEG_AIN7_gc             = (ADC_MUXNEG_AIN7_gv << ADC_MUXNEG_gp),  /* ADC input pin 7 */
+    ADC_MUXNEG_AIN8_gc             = (ADC_MUXNEG_AIN8_gv << ADC_MUXNEG_gp),  /* ADC input pin 8 */
+    ADC_MUXNEG_AIN9_gc             = (ADC_MUXNEG_AIN9_gv << ADC_MUXNEG_gp),  /* ADC input pin 9 */
+    ADC_MUXNEG_AIN10_gc            = (ADC_MUXNEG_AIN10_gv << ADC_MUXNEG_gp),  /* ADC input pin 10 */
+    ADC_MUXNEG_AIN11_gc            = (ADC_MUXNEG_AIN11_gv << ADC_MUXNEG_gp),  /* ADC input pin 11 */
+    ADC_MUXNEG_GND_gc              = (ADC_MUXNEG_GND_gv << ADC_MUXNEG_gp),  /* Ground */
+    ADC_MUXNEG_DAC0_gc             = (ADC_MUXNEG_DAC0_gv << ADC_MUXNEG_gp)   /* DAC0 */
+} ADC_MUXNEG_t;
+
+/* Analog Channel Selection Bits bit group values */
+typedef enum ADC_MUXPOS_VALUES_enum
+{
+    ADC_MUXPOS_AIN0_gv             = 0x00,  /* ADC input pin 0 */
+    ADC_MUXPOS_AIN1_gv             = 0x01,  /* ADC input pin 1 */
+    ADC_MUXPOS_AIN2_gv             = 0x02,  /* ADC input pin 2 */
+    ADC_MUXPOS_AIN3_gv             = 0x03,  /* ADC input pin 3 */
+    ADC_MUXPOS_AIN4_gv             = 0x04,  /* ADC input pin 4 */
+    ADC_MUXPOS_AIN5_gv             = 0x05,  /* ADC input pin 5 */
+    ADC_MUXPOS_AIN6_gv             = 0x06,  /* ADC input pin 6 */
+    ADC_MUXPOS_AIN7_gv             = 0x07,  /* ADC input pin 7 */
+    ADC_MUXPOS_AIN8_gv             = 0x08,  /* ADC input pin 8 */
+    ADC_MUXPOS_AIN9_gv             = 0x09,  /* ADC input pin 9 */
+    ADC_MUXPOS_AIN10_gv            = 0x0A,  /* ADC input pin 10 */
+    ADC_MUXPOS_AIN11_gv            = 0x0B,  /* ADC input pin 11 */
+    ADC_MUXPOS_AIN16_gv            = 0x10,  /* ADC input pin 16 */
+    ADC_MUXPOS_AIN17_gv            = 0x11,  /* ADC input pin 17 */
+    ADC_MUXPOS_AIN18_gv            = 0x12,  /* ADC input pin 18 */
+    ADC_MUXPOS_AIN19_gv            = 0x13,  /* ADC input pin 19 */
+    ADC_MUXPOS_AIN20_gv            = 0x14,  /* ADC input pin 20 */
+    ADC_MUXPOS_AIN21_gv            = 0x15,  /* ADC input pin 21 */
+    ADC_MUXPOS_GND_gv              = 0x40,  /* Ground */
+    ADC_MUXPOS_TEMPSENSE_gv        = 0x42,  /* Temperature sensor */
+    ADC_MUXPOS_DAC0_gv             = 0x48   /* DAC0 */
+} ADC_MUXPOS_values_t;
+
+/* Analog Channel Selection Bits bit group configurations*/
+typedef enum ADC_MUXPOS_enum
+{
+    ADC_MUXPOS_AIN0_gc             = (ADC_MUXPOS_AIN0_gv << ADC_MUXPOS_gp),  /* ADC input pin 0 */
+    ADC_MUXPOS_AIN1_gc             = (ADC_MUXPOS_AIN1_gv << ADC_MUXPOS_gp),  /* ADC input pin 1 */
+    ADC_MUXPOS_AIN2_gc             = (ADC_MUXPOS_AIN2_gv << ADC_MUXPOS_gp),  /* ADC input pin 2 */
+    ADC_MUXPOS_AIN3_gc             = (ADC_MUXPOS_AIN3_gv << ADC_MUXPOS_gp),  /* ADC input pin 3 */
+    ADC_MUXPOS_AIN4_gc             = (ADC_MUXPOS_AIN4_gv << ADC_MUXPOS_gp),  /* ADC input pin 4 */
+    ADC_MUXPOS_AIN5_gc             = (ADC_MUXPOS_AIN5_gv << ADC_MUXPOS_gp),  /* ADC input pin 5 */
+    ADC_MUXPOS_AIN6_gc             = (ADC_MUXPOS_AIN6_gv << ADC_MUXPOS_gp),  /* ADC input pin 6 */
+    ADC_MUXPOS_AIN7_gc             = (ADC_MUXPOS_AIN7_gv << ADC_MUXPOS_gp),  /* ADC input pin 7 */
+    ADC_MUXPOS_AIN8_gc             = (ADC_MUXPOS_AIN8_gv << ADC_MUXPOS_gp),  /* ADC input pin 8 */
+    ADC_MUXPOS_AIN9_gc             = (ADC_MUXPOS_AIN9_gv << ADC_MUXPOS_gp),  /* ADC input pin 9 */
+    ADC_MUXPOS_AIN10_gc            = (ADC_MUXPOS_AIN10_gv << ADC_MUXPOS_gp),  /* ADC input pin 10 */
+    ADC_MUXPOS_AIN11_gc            = (ADC_MUXPOS_AIN11_gv << ADC_MUXPOS_gp),  /* ADC input pin 11 */
+    ADC_MUXPOS_AIN16_gc            = (ADC_MUXPOS_AIN16_gv << ADC_MUXPOS_gp),  /* ADC input pin 16 */
+    ADC_MUXPOS_AIN17_gc            = (ADC_MUXPOS_AIN17_gv << ADC_MUXPOS_gp),  /* ADC input pin 17 */
+    ADC_MUXPOS_AIN18_gc            = (ADC_MUXPOS_AIN18_gv << ADC_MUXPOS_gp),  /* ADC input pin 18 */
+    ADC_MUXPOS_AIN19_gc            = (ADC_MUXPOS_AIN19_gv << ADC_MUXPOS_gp),  /* ADC input pin 19 */
+    ADC_MUXPOS_AIN20_gc            = (ADC_MUXPOS_AIN20_gv << ADC_MUXPOS_gp),  /* ADC input pin 20 */
+    ADC_MUXPOS_AIN21_gc            = (ADC_MUXPOS_AIN21_gv << ADC_MUXPOS_gp),  /* ADC input pin 21 */
+    ADC_MUXPOS_GND_gc              = (ADC_MUXPOS_GND_gv << ADC_MUXPOS_gp),  /* Ground */
+    ADC_MUXPOS_TEMPSENSE_gc        = (ADC_MUXPOS_TEMPSENSE_gv << ADC_MUXPOS_gp),  /* Temperature sensor */
+    ADC_MUXPOS_DAC0_gc             = (ADC_MUXPOS_DAC0_gv << ADC_MUXPOS_gp)   /* DAC0 */
+} ADC_MUXPOS_t;
+
+/* Clock Pre-scaler select bit group values */
+typedef enum ADC_PRESC_VALUES_enum
+{
+    ADC_PRESC_DIV2_gv              = 0x00,  /* CLK_PER divided by 2 */
+    ADC_PRESC_DIV4_gv              = 0x01,  /* CLK_PER divided by 4 */
+    ADC_PRESC_DIV8_gv              = 0x02,  /* CLK_PER divided by 8 */
+    ADC_PRESC_DIV12_gv             = 0x03,  /* CLK_PER divided by 12 */
+    ADC_PRESC_DIV16_gv             = 0x04,  /* CLK_PER divided by 16 */
+    ADC_PRESC_DIV20_gv             = 0x05,  /* CLK_PER divided by 20 */
+    ADC_PRESC_DIV24_gv             = 0x06,  /* CLK_PER divided by 24 */
+    ADC_PRESC_DIV28_gv             = 0x07,  /* CLK_PER divided by 28 */
+    ADC_PRESC_DIV32_gv             = 0x08,  /* CLK_PER divided by 32 */
+    ADC_PRESC_DIV48_gv             = 0x09,  /* CLK_PER divided by 48 */
+    ADC_PRESC_DIV64_gv             = 0x0A,  /* CLK_PER divided by 64 */
+    ADC_PRESC_DIV96_gv             = 0x0B,  /* CLK_PER divided by 96 */
+    ADC_PRESC_DIV128_gv            = 0x0C,  /* CLK_PER divided by 128 */
+    ADC_PRESC_DIV256_gv            = 0x0D   /* CLK_PER divided by 256 */
+} ADC_PRESC_values_t;
+
+/* Clock Pre-scaler select bit group configurations*/
+typedef enum ADC_PRESC_enum
+{
+    ADC_PRESC_DIV2_gc              = (ADC_PRESC_DIV2_gv << ADC_PRESC_gp),  /* CLK_PER divided by 2 */
+    ADC_PRESC_DIV4_gc              = (ADC_PRESC_DIV4_gv << ADC_PRESC_gp),  /* CLK_PER divided by 4 */
+    ADC_PRESC_DIV8_gc              = (ADC_PRESC_DIV8_gv << ADC_PRESC_gp),  /* CLK_PER divided by 8 */
+    ADC_PRESC_DIV12_gc             = (ADC_PRESC_DIV12_gv << ADC_PRESC_gp),  /* CLK_PER divided by 12 */
+    ADC_PRESC_DIV16_gc             = (ADC_PRESC_DIV16_gv << ADC_PRESC_gp),  /* CLK_PER divided by 16 */
+    ADC_PRESC_DIV20_gc             = (ADC_PRESC_DIV20_gv << ADC_PRESC_gp),  /* CLK_PER divided by 20 */
+    ADC_PRESC_DIV24_gc             = (ADC_PRESC_DIV24_gv << ADC_PRESC_gp),  /* CLK_PER divided by 24 */
+    ADC_PRESC_DIV28_gc             = (ADC_PRESC_DIV28_gv << ADC_PRESC_gp),  /* CLK_PER divided by 28 */
+    ADC_PRESC_DIV32_gc             = (ADC_PRESC_DIV32_gv << ADC_PRESC_gp),  /* CLK_PER divided by 32 */
+    ADC_PRESC_DIV48_gc             = (ADC_PRESC_DIV48_gv << ADC_PRESC_gp),  /* CLK_PER divided by 48 */
+    ADC_PRESC_DIV64_gc             = (ADC_PRESC_DIV64_gv << ADC_PRESC_gp),  /* CLK_PER divided by 64 */
+    ADC_PRESC_DIV96_gc             = (ADC_PRESC_DIV96_gv << ADC_PRESC_gp),  /* CLK_PER divided by 96 */
+    ADC_PRESC_DIV128_gc            = (ADC_PRESC_DIV128_gv << ADC_PRESC_gp),  /* CLK_PER divided by 128 */
+    ADC_PRESC_DIV256_gc            = (ADC_PRESC_DIV256_gv << ADC_PRESC_gp)   /* CLK_PER divided by 256 */
+} ADC_PRESC_t;
+
+/* Resolution selection bit group values */
+typedef enum ADC_RESSEL_VALUES_enum
+{
+    ADC_RESSEL_12BIT_gv            = 0x00,  /* 12-bit mode */
+    ADC_RESSEL_10BIT_gv            = 0x01   /* 10-bit mode */
+} ADC_RESSEL_values_t;
+
+/* Resolution selection bit group configurations*/
+typedef enum ADC_RESSEL_enum
+{
+    ADC_RESSEL_12BIT_gc            = (ADC_RESSEL_12BIT_gv << ADC_RESSEL_gp),  /* 12-bit mode */
+    ADC_RESSEL_10BIT_gc            = (ADC_RESSEL_10BIT_gv << ADC_RESSEL_gp)   /* 10-bit mode */
+} ADC_RESSEL_t;
+
+/* Sampling Delay Selection bit group values */
+typedef enum ADC_SAMPDLY_VALUES_enum
+{
+    ADC_SAMPDLY_DLY0_gv            = 0x00,  /* Delay 0 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY1_gv            = 0x01,  /* Delay 1 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY2_gv            = 0x02,  /* Delay 2 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY3_gv            = 0x03,  /* Delay 3 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY4_gv            = 0x04,  /* Delay 4 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY5_gv            = 0x05,  /* Delay 5 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY6_gv            = 0x06,  /* Delay 6 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY7_gv            = 0x07,  /* Delay 7 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY8_gv            = 0x08,  /* Delay 8 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY9_gv            = 0x09,  /* Delay 9 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY10_gv           = 0x0A,  /* Delay 10 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY11_gv           = 0x0B,  /* Delay 11 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY12_gv           = 0x0C,  /* Delay 12 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY13_gv           = 0x0D,  /* Delay 13 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY14_gv           = 0x0E,  /* Delay 14 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY15_gv           = 0x0F   /* Delay 15 CLK_ADC cycles */
+} ADC_SAMPDLY_values_t;
+
+/* Sampling Delay Selection bit group configurations*/
+typedef enum ADC_SAMPDLY_enum
+{
+    ADC_SAMPDLY_DLY0_gc            = (ADC_SAMPDLY_DLY0_gv << ADC_SAMPDLY_gp),  /* Delay 0 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY1_gc            = (ADC_SAMPDLY_DLY1_gv << ADC_SAMPDLY_gp),  /* Delay 1 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY2_gc            = (ADC_SAMPDLY_DLY2_gv << ADC_SAMPDLY_gp),  /* Delay 2 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY3_gc            = (ADC_SAMPDLY_DLY3_gv << ADC_SAMPDLY_gp),  /* Delay 3 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY4_gc            = (ADC_SAMPDLY_DLY4_gv << ADC_SAMPDLY_gp),  /* Delay 4 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY5_gc            = (ADC_SAMPDLY_DLY5_gv << ADC_SAMPDLY_gp),  /* Delay 5 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY6_gc            = (ADC_SAMPDLY_DLY6_gv << ADC_SAMPDLY_gp),  /* Delay 6 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY7_gc            = (ADC_SAMPDLY_DLY7_gv << ADC_SAMPDLY_gp),  /* Delay 7 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY8_gc            = (ADC_SAMPDLY_DLY8_gv << ADC_SAMPDLY_gp),  /* Delay 8 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY9_gc            = (ADC_SAMPDLY_DLY9_gv << ADC_SAMPDLY_gp),  /* Delay 9 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY10_gc           = (ADC_SAMPDLY_DLY10_gv << ADC_SAMPDLY_gp),  /* Delay 10 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY11_gc           = (ADC_SAMPDLY_DLY11_gv << ADC_SAMPDLY_gp),  /* Delay 11 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY12_gc           = (ADC_SAMPDLY_DLY12_gv << ADC_SAMPDLY_gp),  /* Delay 12 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY13_gc           = (ADC_SAMPDLY_DLY13_gv << ADC_SAMPDLY_gp),  /* Delay 13 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY14_gc           = (ADC_SAMPDLY_DLY14_gv << ADC_SAMPDLY_gp),  /* Delay 14 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY15_gc           = (ADC_SAMPDLY_DLY15_gv << ADC_SAMPDLY_gp)   /* Delay 15 CLK_ADC cycles */
+} ADC_SAMPDLY_t;
+
+/* Accumulation Samples select bit group values */
+typedef enum ADC_SAMPNUM_VALUES_enum
+{
+    ADC_SAMPNUM_NONE_gv            = 0x00,  /* No accumulation */
+    ADC_SAMPNUM_ACC2_gv            = 0x01,  /* 2 results accumulated */
+    ADC_SAMPNUM_ACC4_gv            = 0x02,  /* 4 results accumulated */
+    ADC_SAMPNUM_ACC8_gv            = 0x03,  /* 8 results accumulated */
+    ADC_SAMPNUM_ACC16_gv           = 0x04,  /* 16 results accumulated */
+    ADC_SAMPNUM_ACC32_gv           = 0x05,  /* 32 results accumulated */
+    ADC_SAMPNUM_ACC64_gv           = 0x06,  /* 64 results accumulated */
+    ADC_SAMPNUM_ACC128_gv          = 0x07   /* 128 results accumulated */
+} ADC_SAMPNUM_values_t;
+
+/* Accumulation Samples select bit group configurations*/
+typedef enum ADC_SAMPNUM_enum
+{
+    ADC_SAMPNUM_NONE_gc            = (ADC_SAMPNUM_NONE_gv << ADC_SAMPNUM_gp),  /* No accumulation */
+    ADC_SAMPNUM_ACC2_gc            = (ADC_SAMPNUM_ACC2_gv << ADC_SAMPNUM_gp),  /* 2 results accumulated */
+    ADC_SAMPNUM_ACC4_gc            = (ADC_SAMPNUM_ACC4_gv << ADC_SAMPNUM_gp),  /* 4 results accumulated */
+    ADC_SAMPNUM_ACC8_gc            = (ADC_SAMPNUM_ACC8_gv << ADC_SAMPNUM_gp),  /* 8 results accumulated */
+    ADC_SAMPNUM_ACC16_gc           = (ADC_SAMPNUM_ACC16_gv << ADC_SAMPNUM_gp),  /* 16 results accumulated */
+    ADC_SAMPNUM_ACC32_gc           = (ADC_SAMPNUM_ACC32_gv << ADC_SAMPNUM_gp),  /* 32 results accumulated */
+    ADC_SAMPNUM_ACC64_gc           = (ADC_SAMPNUM_ACC64_gv << ADC_SAMPNUM_gp),  /* 64 results accumulated */
+    ADC_SAMPNUM_ACC128_gc          = (ADC_SAMPNUM_ACC128_gv << ADC_SAMPNUM_gp)   /* 128 results accumulated */
+} ADC_SAMPNUM_t;
+
+/* Window Comparator Mode select bit group values */
+typedef enum ADC_WINCM_VALUES_enum
+{
+    ADC_WINCM_NONE_gv              = 0x00,  /* No Window Comparison */
+    ADC_WINCM_BELOW_gv             = 0x01,  /* Below Window */
+    ADC_WINCM_ABOVE_gv             = 0x02,  /* Above Window */
+    ADC_WINCM_INSIDE_gv            = 0x03,  /* Inside Window */
+    ADC_WINCM_OUTSIDE_gv           = 0x04   /* Outside Window */
+} ADC_WINCM_values_t;
+
+/* Window Comparator Mode select bit group configurations*/
+typedef enum ADC_WINCM_enum
+{
+    ADC_WINCM_NONE_gc              = (ADC_WINCM_NONE_gv << ADC_WINCM_gp),  /* No Window Comparison */
+    ADC_WINCM_BELOW_gc             = (ADC_WINCM_BELOW_gv << ADC_WINCM_gp),  /* Below Window */
+    ADC_WINCM_ABOVE_gc             = (ADC_WINCM_ABOVE_gv << ADC_WINCM_gp),  /* Above Window */
+    ADC_WINCM_INSIDE_gc            = (ADC_WINCM_INSIDE_gv << ADC_WINCM_gp),  /* Inside Window */
+    ADC_WINCM_OUTSIDE_gc           = (ADC_WINCM_OUTSIDE_gv << ADC_WINCM_gp)   /* Outside Window */
+} ADC_WINCM_t;
+
+/*
+--------------------------------------------------------------------------
+BOD - Bod interface
+--------------------------------------------------------------------------
+*/
+
+/* Bod interface */
+typedef struct BOD_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t reserved_1[6];
+    register8_t VLMCTRLA;  /* Voltage level monitor Control */
+    register8_t INTCTRL;  /* Voltage level monitor interrupt Control */
+    register8_t INTFLAGS;  /* Voltage level monitor interrupt Flags */
+    register8_t STATUS;  /* Voltage level monitor status */
+    register8_t reserved_2[4];
+} BOD_t;
+
+/* Operation in active mode select bit group values */
+typedef enum BOD_ACTIVE_VALUES_enum
+{
+    BOD_ACTIVE_DIS_gv              = 0x00,  /* Disabled */
+    BOD_ACTIVE_ENABLED_gv          = 0x01,  /* Enabled */
+    BOD_ACTIVE_SAMPLED_gv          = 0x02,  /* Sampled */
+    BOD_ACTIVE_ENWAKE_gv           = 0x03   /* Enabled with wake-up halted until BOD is ready */
+} BOD_ACTIVE_values_t;
+
+/* Operation in active mode select bit group configurations*/
+typedef enum BOD_ACTIVE_enum
+{
+    BOD_ACTIVE_DIS_gc              = (BOD_ACTIVE_DIS_gv << BOD_ACTIVE_gp),  /* Disabled */
+    BOD_ACTIVE_ENABLED_gc          = (BOD_ACTIVE_ENABLED_gv << BOD_ACTIVE_gp),  /* Enabled */
+    BOD_ACTIVE_SAMPLED_gc          = (BOD_ACTIVE_SAMPLED_gv << BOD_ACTIVE_gp),  /* Sampled */
+    BOD_ACTIVE_ENWAKE_gc           = (BOD_ACTIVE_ENWAKE_gv << BOD_ACTIVE_gp)   /* Enabled with wake-up halted until BOD is ready */
+} BOD_ACTIVE_t;
+
+/* Bod level select bit group values */
+typedef enum BOD_LVL_VALUES_enum
+{
+    BOD_LVL_BODLEVEL0_gv           = 0x00,  /* 1.9 V */
+    BOD_LVL_BODLEVEL1_gv           = 0x01,  /* 2.45 V */
+    BOD_LVL_BODLEVEL2_gv           = 0x02,  /* 2.7 V */
+    BOD_LVL_BODLEVEL3_gv           = 0x03   /* 2.85 V */
+} BOD_LVL_values_t;
+
+/* Bod level select bit group configurations*/
+typedef enum BOD_LVL_enum
+{
+    BOD_LVL_BODLEVEL0_gc           = (BOD_LVL_BODLEVEL0_gv << BOD_LVL_gp),  /* 1.9 V */
+    BOD_LVL_BODLEVEL1_gc           = (BOD_LVL_BODLEVEL1_gv << BOD_LVL_gp),  /* 2.45 V */
+    BOD_LVL_BODLEVEL2_gc           = (BOD_LVL_BODLEVEL2_gv << BOD_LVL_gp),  /* 2.7 V */
+    BOD_LVL_BODLEVEL3_gc           = (BOD_LVL_BODLEVEL3_gv << BOD_LVL_gp)   /* 2.85 V */
+} BOD_LVL_t;
+
+/* Sample frequency select bit group values */
+typedef enum BOD_SAMPFREQ_VALUES_enum
+{
+    BOD_SAMPFREQ_128HZ_gv          = 0x00,  /* 128Hz sampling frequency */
+    BOD_SAMPFREQ_32HZ_gv           = 0x01   /* 32Hz sampling frequency */
+} BOD_SAMPFREQ_values_t;
+
+/* Sample frequency select bit group configurations*/
+typedef enum BOD_SAMPFREQ_enum
+{
+    BOD_SAMPFREQ_128HZ_gc          = (BOD_SAMPFREQ_128HZ_gv << BOD_SAMPFREQ_bp),  /* 128Hz sampling frequency */
+    BOD_SAMPFREQ_32HZ_gc           = (BOD_SAMPFREQ_32HZ_gv << BOD_SAMPFREQ_bp)   /* 32Hz sampling frequency */
+} BOD_SAMPFREQ_t;
+
+/* Operation in sleep mode select bit group values */
+typedef enum BOD_SLEEP_VALUES_enum
+{
+    BOD_SLEEP_DIS_gv               = 0x00,  /* Disabled */
+    BOD_SLEEP_ENABLED_gv           = 0x01,  /* Enabled */
+    BOD_SLEEP_SAMPLED_gv           = 0x02   /* Sampled */
+} BOD_SLEEP_values_t;
+
+/* Operation in sleep mode select bit group configurations*/
+typedef enum BOD_SLEEP_enum
+{
+    BOD_SLEEP_DIS_gc               = (BOD_SLEEP_DIS_gv << BOD_SLEEP_gp),  /* Disabled */
+    BOD_SLEEP_ENABLED_gc           = (BOD_SLEEP_ENABLED_gv << BOD_SLEEP_gp),  /* Enabled */
+    BOD_SLEEP_SAMPLED_gc           = (BOD_SLEEP_SAMPLED_gv << BOD_SLEEP_gp)   /* Sampled */
+} BOD_SLEEP_t;
+
+/* Configuration select bit group values */
+typedef enum BOD_VLMCFG_VALUES_enum
+{
+    BOD_VLMCFG_FALLING_gv          = 0x00,  /* VDD falls below VLM threshold */
+    BOD_VLMCFG_RISING_gv           = 0x01,  /* VDD rises above VLM threshold */
+    BOD_VLMCFG_BOTH_gv             = 0x02   /* VDD crosses VLM threshold */
+} BOD_VLMCFG_values_t;
+
+/* Configuration select bit group configurations*/
+typedef enum BOD_VLMCFG_enum
+{
+    BOD_VLMCFG_FALLING_gc          = (BOD_VLMCFG_FALLING_gv << BOD_VLMCFG_gp),  /* VDD falls below VLM threshold */
+    BOD_VLMCFG_RISING_gc           = (BOD_VLMCFG_RISING_gv << BOD_VLMCFG_gp),  /* VDD rises above VLM threshold */
+    BOD_VLMCFG_BOTH_gc             = (BOD_VLMCFG_BOTH_gv << BOD_VLMCFG_gp)   /* VDD crosses VLM threshold */
+} BOD_VLMCFG_t;
+
+/* voltage level monitor level select bit group values */
+typedef enum BOD_VLMLVL_VALUES_enum
+{
+    BOD_VLMLVL_OFF_gv              = 0x00,  /* VLM Disabled */
+    BOD_VLMLVL_5ABOVE_gv           = 0x01,  /* VLM threshold 5% above BOD level */
+    BOD_VLMLVL_15ABOVE_gv          = 0x02,  /* VLM threshold 15% above BOD level */
+    BOD_VLMLVL_25ABOVE_gv          = 0x03   /* VLM threshold 25% above BOD level */
+} BOD_VLMLVL_values_t;
+
+/* voltage level monitor level select bit group configurations*/
+typedef enum BOD_VLMLVL_enum
+{
+    BOD_VLMLVL_OFF_gc              = (BOD_VLMLVL_OFF_gv << BOD_VLMLVL_gp),  /* VLM Disabled */
+    BOD_VLMLVL_5ABOVE_gc           = (BOD_VLMLVL_5ABOVE_gv << BOD_VLMLVL_gp),  /* VLM threshold 5% above BOD level */
+    BOD_VLMLVL_15ABOVE_gc          = (BOD_VLMLVL_15ABOVE_gv << BOD_VLMLVL_gp),  /* VLM threshold 15% above BOD level */
+    BOD_VLMLVL_25ABOVE_gc          = (BOD_VLMLVL_25ABOVE_gv << BOD_VLMLVL_gp)   /* VLM threshold 25% above BOD level */
+} BOD_VLMLVL_t;
+
+/* Voltage level monitor status select bit group values */
+typedef enum BOD_VLMS_VALUES_enum
+{
+    BOD_VLMS_ABOVE_gv              = 0x00,  /* The voltage is above the VLM threshold level */
+    BOD_VLMS_BELOW_gv              = 0x01   /* The voltage is below the VLM threshold level */
+} BOD_VLMS_values_t;
+
+/* Voltage level monitor status select bit group configurations*/
+typedef enum BOD_VLMS_enum
+{
+    BOD_VLMS_ABOVE_gc              = (BOD_VLMS_ABOVE_gv << BOD_VLMS_bp),  /* The voltage is above the VLM threshold level */
+    BOD_VLMS_BELOW_gc              = (BOD_VLMS_BELOW_gv << BOD_VLMS_bp)   /* The voltage is below the VLM threshold level */
+} BOD_VLMS_t;
+
+/*
+--------------------------------------------------------------------------
+CCL - Configurable Custom Logic
+--------------------------------------------------------------------------
+*/
+
+/* Configurable Custom Logic */
+typedef struct CCL_struct
+{
+    register8_t CTRLA;  /* Control Register A */
+    register8_t SEQCTRL0;  /* Sequential Control 0 */
+    register8_t SEQCTRL1;  /* Sequential Control 1 */
+    register8_t SEQCTRL2;  /* Sequential Control 2 */
+    register8_t reserved_1[1];
+    register8_t INTCTRL0;  /* Interrupt Control 0 */
+    register8_t INTCTRL1;  /* Interrupt Control 1 */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t LUT0CTRLA;  /* LUT 0 Control A */
+    register8_t LUT0CTRLB;  /* LUT 0 Control B */
+    register8_t LUT0CTRLC;  /* LUT 0 Control C */
+    register8_t TRUTH0;  /* Truth 0 */
+    register8_t LUT1CTRLA;  /* LUT 1 Control A */
+    register8_t LUT1CTRLB;  /* LUT 1 Control B */
+    register8_t LUT1CTRLC;  /* LUT 1 Control C */
+    register8_t TRUTH1;  /* Truth 1 */
+    register8_t LUT2CTRLA;  /* LUT 2 Control A */
+    register8_t LUT2CTRLB;  /* LUT 2 Control B */
+    register8_t LUT2CTRLC;  /* LUT 2 Control C */
+    register8_t TRUTH2;  /* Truth 2 */
+    register8_t LUT3CTRLA;  /* LUT 3 Control A */
+    register8_t LUT3CTRLB;  /* LUT 3 Control B */
+    register8_t LUT3CTRLC;  /* LUT 3 Control C */
+    register8_t TRUTH3;  /* Truth 3 */
+    register8_t LUT4CTRLA;  /* LUT 4 Control A */
+    register8_t LUT4CTRLB;  /* LUT 4 Control B */
+    register8_t LUT4CTRLC;  /* LUT 4 Control C */
+    register8_t TRUTH4;  /* Truth 4 */
+    register8_t LUT5CTRLA;  /* LUT 5 Control A */
+    register8_t LUT5CTRLB;  /* LUT 5 Control B */
+    register8_t LUT5CTRLC;  /* LUT 5 Control C */
+    register8_t TRUTH5;  /* Truth 5 */
+    register8_t reserved_2[32];
+} CCL_t;
+
+/* Clock Source Selection bit group values */
+typedef enum CCL_CLKSRC_VALUES_enum
+{
+    CCL_CLKSRC_CLKPER_gv           = 0x00,  /* Peripheral Clock */
+    CCL_CLKSRC_IN2_gv              = 0x01,  /* Selection by INSEL2 */
+    CCL_CLKSRC_OSCHF_gv            = 0x04,  /* Internal high-frequency oscillator */
+    CCL_CLKSRC_OSC32K_gv           = 0x05,  /* 32.768 kHz oscillator */
+    CCL_CLKSRC_OSC1K_gv            = 0x06   /* 32.768 kHz oscillator divided by 32 */
+} CCL_CLKSRC_values_t;
+
+/* Clock Source Selection bit group configurations*/
+typedef enum CCL_CLKSRC_enum
+{
+    CCL_CLKSRC_CLKPER_gc           = (CCL_CLKSRC_CLKPER_gv << CCL_CLKSRC_gp),  /* Peripheral Clock */
+    CCL_CLKSRC_IN2_gc              = (CCL_CLKSRC_IN2_gv << CCL_CLKSRC_gp),  /* Selection by INSEL2 */
+    CCL_CLKSRC_OSCHF_gc            = (CCL_CLKSRC_OSCHF_gv << CCL_CLKSRC_gp),  /* Internal high-frequency oscillator */
+    CCL_CLKSRC_OSC32K_gc           = (CCL_CLKSRC_OSC32K_gv << CCL_CLKSRC_gp),  /* 32.768 kHz oscillator */
+    CCL_CLKSRC_OSC1K_gc            = (CCL_CLKSRC_OSC1K_gv << CCL_CLKSRC_gp)   /* 32.768 kHz oscillator divided by 32 */
+} CCL_CLKSRC_t;
+
+/* Edge Detection Enable select bit group values */
+typedef enum CCL_EDGEDET_VALUES_enum
+{
+    CCL_EDGEDET_DIS_gv             = 0x00,  /* Edge detector is disabled */
+    CCL_EDGEDET_EN_gv              = 0x01   /* Edge detector is enabled */
+} CCL_EDGEDET_values_t;
+
+/* Edge Detection Enable select bit group configurations*/
+typedef enum CCL_EDGEDET_enum
+{
+    CCL_EDGEDET_DIS_gc             = (CCL_EDGEDET_DIS_gv << CCL_EDGEDET_bp),  /* Edge detector is disabled */
+    CCL_EDGEDET_EN_gc              = (CCL_EDGEDET_EN_gv << CCL_EDGEDET_bp)   /* Edge detector is enabled */
+} CCL_EDGEDET_t;
+
+/* Filter Selection bit group values */
+typedef enum CCL_FILTSEL_VALUES_enum
+{
+    CCL_FILTSEL_DISABLE_gv         = 0x00,  /* Filter disabled */
+    CCL_FILTSEL_SYNCH_gv           = 0x01,  /* Synchronizer enabled */
+    CCL_FILTSEL_FILTER_gv          = 0x02   /* Filter enabled */
+} CCL_FILTSEL_values_t;
+
+/* Filter Selection bit group configurations*/
+typedef enum CCL_FILTSEL_enum
+{
+    CCL_FILTSEL_DISABLE_gc         = (CCL_FILTSEL_DISABLE_gv << CCL_FILTSEL_gp),  /* Filter disabled */
+    CCL_FILTSEL_SYNCH_gc           = (CCL_FILTSEL_SYNCH_gv << CCL_FILTSEL_gp),  /* Synchronizer enabled */
+    CCL_FILTSEL_FILTER_gc          = (CCL_FILTSEL_FILTER_gv << CCL_FILTSEL_gp)   /* Filter enabled */
+} CCL_FILTSEL_t;
+
+/* LUT Input 0 Source Selection bit group values */
+typedef enum CCL_INSEL0_VALUES_enum
+{
+    CCL_INSEL0_MASK_gv             = 0x00,  /* Masked input */
+    CCL_INSEL0_FEEDBACK_gv         = 0x01,  /* Feedback input source */
+    CCL_INSEL0_LINK_gv             = 0x02,  /* Linked LUT input source */
+    CCL_INSEL0_EVENTA_gv           = 0x03,  /* Event input source A */
+    CCL_INSEL0_EVENTB_gv           = 0x04,  /* Event input source B */
+    CCL_INSEL0_IN0_gv              = 0x05,  /* IO pin LUTn-IN0 input source */
+    CCL_INSEL0_AC0_gv              = 0x06,  /* AC0 OUT input source */
+    CCL_INSEL0_ZCD0_gv             = 0x07,  /* ZCD0 OUT input source */
+    CCL_INSEL0_USART0_gv           = 0x08,  /* USART0 TXD input source */
+    CCL_INSEL0_SPI0_gv             = 0x09,  /* SPI0 MOSI input source */
+    CCL_INSEL0_TCA0_gv             = 0x0A,  /* TCA0 WO0 input source */
+    CCL_INSEL0_TCA1_gv             = 0x0B,  /* TCA1 WO0 input source */
+    CCL_INSEL0_TCB0_gv             = 0x0C,  /* TCB0 WO input source */
+    CCL_INSEL0_TCD0_gv             = 0x0D   /* TCD0 WOA input source */
+} CCL_INSEL0_values_t;
+
+/* LUT Input 0 Source Selection bit group configurations*/
+typedef enum CCL_INSEL0_enum
+{
+    CCL_INSEL0_MASK_gc             = (CCL_INSEL0_MASK_gv << CCL_INSEL0_gp),  /* Masked input */
+    CCL_INSEL0_FEEDBACK_gc         = (CCL_INSEL0_FEEDBACK_gv << CCL_INSEL0_gp),  /* Feedback input source */
+    CCL_INSEL0_LINK_gc             = (CCL_INSEL0_LINK_gv << CCL_INSEL0_gp),  /* Linked LUT input source */
+    CCL_INSEL0_EVENTA_gc           = (CCL_INSEL0_EVENTA_gv << CCL_INSEL0_gp),  /* Event input source A */
+    CCL_INSEL0_EVENTB_gc           = (CCL_INSEL0_EVENTB_gv << CCL_INSEL0_gp),  /* Event input source B */
+    CCL_INSEL0_IN0_gc              = (CCL_INSEL0_IN0_gv << CCL_INSEL0_gp),  /* IO pin LUTn-IN0 input source */
+    CCL_INSEL0_AC0_gc              = (CCL_INSEL0_AC0_gv << CCL_INSEL0_gp),  /* AC0 OUT input source */
+    CCL_INSEL0_ZCD0_gc             = (CCL_INSEL0_ZCD0_gv << CCL_INSEL0_gp),  /* ZCD0 OUT input source */
+    CCL_INSEL0_USART0_gc           = (CCL_INSEL0_USART0_gv << CCL_INSEL0_gp),  /* USART0 TXD input source */
+    CCL_INSEL0_SPI0_gc             = (CCL_INSEL0_SPI0_gv << CCL_INSEL0_gp),  /* SPI0 MOSI input source */
+    CCL_INSEL0_TCA0_gc             = (CCL_INSEL0_TCA0_gv << CCL_INSEL0_gp),  /* TCA0 WO0 input source */
+    CCL_INSEL0_TCA1_gc             = (CCL_INSEL0_TCA1_gv << CCL_INSEL0_gp),  /* TCA1 WO0 input source */
+    CCL_INSEL0_TCB0_gc             = (CCL_INSEL0_TCB0_gv << CCL_INSEL0_gp),  /* TCB0 WO input source */
+    CCL_INSEL0_TCD0_gc             = (CCL_INSEL0_TCD0_gv << CCL_INSEL0_gp)   /* TCD0 WOA input source */
+} CCL_INSEL0_t;
+
+/* LUT Input 1 Source Selection bit group values */
+typedef enum CCL_INSEL1_VALUES_enum
+{
+    CCL_INSEL1_MASK_gv             = 0x00,  /* Masked input */
+    CCL_INSEL1_FEEDBACK_gv         = 0x01,  /* Feedback input source */
+    CCL_INSEL1_LINK_gv             = 0x02,  /* Linked LUT input source */
+    CCL_INSEL1_EVENTA_gv           = 0x03,  /* Event input source A */
+    CCL_INSEL1_EVENTB_gv           = 0x04,  /* Event input source B */
+    CCL_INSEL1_IN1_gv              = 0x05,  /* IO pin LUTn-IN1 input source */
+    CCL_INSEL1_AC1_gv              = 0x06,  /* AC1 OUT input source */
+    CCL_INSEL1_ZCD1_gv             = 0x07,  /* ZCD1 OUT input source */
+    CCL_INSEL1_USART1_gv           = 0x08,  /* USART1 TXD input source */
+    CCL_INSEL1_SPI0_gv             = 0x09,  /* SPI0 MOSI input source */
+    CCL_INSEL1_TCA0_gv             = 0x0A,  /* TCA0 WO1 input source */
+    CCL_INSEL1_TCA1_gv             = 0x0B,  /* TCA1 WO1 input source */
+    CCL_INSEL1_TCB1_gv             = 0x0C,  /* TCB1 WO input source */
+    CCL_INSEL1_TCD0_gv             = 0x0D   /* TCD0 WOB input source */
+} CCL_INSEL1_values_t;
+
+/* LUT Input 1 Source Selection bit group configurations*/
+typedef enum CCL_INSEL1_enum
+{
+    CCL_INSEL1_MASK_gc             = (CCL_INSEL1_MASK_gv << CCL_INSEL1_gp),  /* Masked input */
+    CCL_INSEL1_FEEDBACK_gc         = (CCL_INSEL1_FEEDBACK_gv << CCL_INSEL1_gp),  /* Feedback input source */
+    CCL_INSEL1_LINK_gc             = (CCL_INSEL1_LINK_gv << CCL_INSEL1_gp),  /* Linked LUT input source */
+    CCL_INSEL1_EVENTA_gc           = (CCL_INSEL1_EVENTA_gv << CCL_INSEL1_gp),  /* Event input source A */
+    CCL_INSEL1_EVENTB_gc           = (CCL_INSEL1_EVENTB_gv << CCL_INSEL1_gp),  /* Event input source B */
+    CCL_INSEL1_IN1_gc              = (CCL_INSEL1_IN1_gv << CCL_INSEL1_gp),  /* IO pin LUTn-IN1 input source */
+    CCL_INSEL1_AC1_gc              = (CCL_INSEL1_AC1_gv << CCL_INSEL1_gp),  /* AC1 OUT input source */
+    CCL_INSEL1_ZCD1_gc             = (CCL_INSEL1_ZCD1_gv << CCL_INSEL1_gp),  /* ZCD1 OUT input source */
+    CCL_INSEL1_USART1_gc           = (CCL_INSEL1_USART1_gv << CCL_INSEL1_gp),  /* USART1 TXD input source */
+    CCL_INSEL1_SPI0_gc             = (CCL_INSEL1_SPI0_gv << CCL_INSEL1_gp),  /* SPI0 MOSI input source */
+    CCL_INSEL1_TCA0_gc             = (CCL_INSEL1_TCA0_gv << CCL_INSEL1_gp),  /* TCA0 WO1 input source */
+    CCL_INSEL1_TCA1_gc             = (CCL_INSEL1_TCA1_gv << CCL_INSEL1_gp),  /* TCA1 WO1 input source */
+    CCL_INSEL1_TCB1_gc             = (CCL_INSEL1_TCB1_gv << CCL_INSEL1_gp),  /* TCB1 WO input source */
+    CCL_INSEL1_TCD0_gc             = (CCL_INSEL1_TCD0_gv << CCL_INSEL1_gp)   /* TCD0 WOB input source */
+} CCL_INSEL1_t;
+
+/* LUT Input 2 Source Selection bit group values */
+typedef enum CCL_INSEL2_VALUES_enum
+{
+    CCL_INSEL2_MASK_gv             = 0x00,  /* Masked input */
+    CCL_INSEL2_FEEDBACK_gv         = 0x01,  /* Feedback input source */
+    CCL_INSEL2_LINK_gv             = 0x02,  /* Linked LUT input source */
+    CCL_INSEL2_EVENTA_gv           = 0x03,  /* Event input source A */
+    CCL_INSEL2_EVENTB_gv           = 0x04,  /* Event input source B */
+    CCL_INSEL2_IN2_gv              = 0x05,  /* IO pin LUTn-IN2 input source */
+    CCL_INSEL2_AC2_gv              = 0x06,  /* AC2 OUT input source */
+    CCL_INSEL2_USART2_gv           = 0x08,  /* USART2 TXD input source */
+    CCL_INSEL2_SPI0_gv             = 0x09,  /* SPI0 SCK input source */
+    CCL_INSEL2_TCA0_gv             = 0x0A,  /* TCA0 WO2 input source */
+    CCL_INSEL2_TCA1_gv             = 0x0B,  /* TCA1 WO2 input source */
+    CCL_INSEL2_TCB2_gv             = 0x0C,  /* TCB2 WO input source */
+    CCL_INSEL2_TCD0_gv             = 0x0D   /* TCD0 WOC input source */
+} CCL_INSEL2_values_t;
+
+/* LUT Input 2 Source Selection bit group configurations*/
+typedef enum CCL_INSEL2_enum
+{
+    CCL_INSEL2_MASK_gc             = (CCL_INSEL2_MASK_gv << CCL_INSEL2_gp),  /* Masked input */
+    CCL_INSEL2_FEEDBACK_gc         = (CCL_INSEL2_FEEDBACK_gv << CCL_INSEL2_gp),  /* Feedback input source */
+    CCL_INSEL2_LINK_gc             = (CCL_INSEL2_LINK_gv << CCL_INSEL2_gp),  /* Linked LUT input source */
+    CCL_INSEL2_EVENTA_gc           = (CCL_INSEL2_EVENTA_gv << CCL_INSEL2_gp),  /* Event input source A */
+    CCL_INSEL2_EVENTB_gc           = (CCL_INSEL2_EVENTB_gv << CCL_INSEL2_gp),  /* Event input source B */
+    CCL_INSEL2_IN2_gc              = (CCL_INSEL2_IN2_gv << CCL_INSEL2_gp),  /* IO pin LUTn-IN2 input source */
+    CCL_INSEL2_AC2_gc              = (CCL_INSEL2_AC2_gv << CCL_INSEL2_gp),  /* AC2 OUT input source */
+    CCL_INSEL2_USART2_gc           = (CCL_INSEL2_USART2_gv << CCL_INSEL2_gp),  /* USART2 TXD input source */
+    CCL_INSEL2_SPI0_gc             = (CCL_INSEL2_SPI0_gv << CCL_INSEL2_gp),  /* SPI0 SCK input source */
+    CCL_INSEL2_TCA0_gc             = (CCL_INSEL2_TCA0_gv << CCL_INSEL2_gp),  /* TCA0 WO2 input source */
+    CCL_INSEL2_TCA1_gc             = (CCL_INSEL2_TCA1_gv << CCL_INSEL2_gp),  /* TCA1 WO2 input source */
+    CCL_INSEL2_TCB2_gc             = (CCL_INSEL2_TCB2_gv << CCL_INSEL2_gp),  /* TCB2 WO input source */
+    CCL_INSEL2_TCD0_gc             = (CCL_INSEL2_TCD0_gv << CCL_INSEL2_gp)   /* TCD0 WOC input source */
+} CCL_INSEL2_t;
+
+/* Interrupt Mode for LUT0 select bit group values */
+typedef enum CCL_INTMODE0_VALUES_enum
+{
+    CCL_INTMODE0_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE0_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE0_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE0_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE0_values_t;
+
+/* Interrupt Mode for LUT0 select bit group configurations*/
+typedef enum CCL_INTMODE0_enum
+{
+    CCL_INTMODE0_INTDISABLE_gc     = (CCL_INTMODE0_INTDISABLE_gv << CCL_INTMODE0_gp),  /* Interrupt disabled */
+    CCL_INTMODE0_RISING_gc         = (CCL_INTMODE0_RISING_gv << CCL_INTMODE0_gp),  /* Sense rising edge */
+    CCL_INTMODE0_FALLING_gc        = (CCL_INTMODE0_FALLING_gv << CCL_INTMODE0_gp),  /* Sense falling edge */
+    CCL_INTMODE0_BOTH_gc           = (CCL_INTMODE0_BOTH_gv << CCL_INTMODE0_gp)   /* Sense both edges */
+} CCL_INTMODE0_t;
+
+/* Interrupt Mode for LUT1 select bit group values */
+typedef enum CCL_INTMODE1_VALUES_enum
+{
+    CCL_INTMODE1_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE1_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE1_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE1_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE1_values_t;
+
+/* Interrupt Mode for LUT1 select bit group configurations*/
+typedef enum CCL_INTMODE1_enum
+{
+    CCL_INTMODE1_INTDISABLE_gc     = (CCL_INTMODE1_INTDISABLE_gv << CCL_INTMODE1_gp),  /* Interrupt disabled */
+    CCL_INTMODE1_RISING_gc         = (CCL_INTMODE1_RISING_gv << CCL_INTMODE1_gp),  /* Sense rising edge */
+    CCL_INTMODE1_FALLING_gc        = (CCL_INTMODE1_FALLING_gv << CCL_INTMODE1_gp),  /* Sense falling edge */
+    CCL_INTMODE1_BOTH_gc           = (CCL_INTMODE1_BOTH_gv << CCL_INTMODE1_gp)   /* Sense both edges */
+} CCL_INTMODE1_t;
+
+/* Interrupt Mode for LUT2 select bit group values */
+typedef enum CCL_INTMODE2_VALUES_enum
+{
+    CCL_INTMODE2_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE2_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE2_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE2_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE2_values_t;
+
+/* Interrupt Mode for LUT2 select bit group configurations*/
+typedef enum CCL_INTMODE2_enum
+{
+    CCL_INTMODE2_INTDISABLE_gc     = (CCL_INTMODE2_INTDISABLE_gv << CCL_INTMODE2_gp),  /* Interrupt disabled */
+    CCL_INTMODE2_RISING_gc         = (CCL_INTMODE2_RISING_gv << CCL_INTMODE2_gp),  /* Sense rising edge */
+    CCL_INTMODE2_FALLING_gc        = (CCL_INTMODE2_FALLING_gv << CCL_INTMODE2_gp),  /* Sense falling edge */
+    CCL_INTMODE2_BOTH_gc           = (CCL_INTMODE2_BOTH_gv << CCL_INTMODE2_gp)   /* Sense both edges */
+} CCL_INTMODE2_t;
+
+/* Interrupt Mode for LUT3 select bit group values */
+typedef enum CCL_INTMODE3_VALUES_enum
+{
+    CCL_INTMODE3_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE3_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE3_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE3_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE3_values_t;
+
+/* Interrupt Mode for LUT3 select bit group configurations*/
+typedef enum CCL_INTMODE3_enum
+{
+    CCL_INTMODE3_INTDISABLE_gc     = (CCL_INTMODE3_INTDISABLE_gv << CCL_INTMODE3_gp),  /* Interrupt disabled */
+    CCL_INTMODE3_RISING_gc         = (CCL_INTMODE3_RISING_gv << CCL_INTMODE3_gp),  /* Sense rising edge */
+    CCL_INTMODE3_FALLING_gc        = (CCL_INTMODE3_FALLING_gv << CCL_INTMODE3_gp),  /* Sense falling edge */
+    CCL_INTMODE3_BOTH_gc           = (CCL_INTMODE3_BOTH_gv << CCL_INTMODE3_gp)   /* Sense both edges */
+} CCL_INTMODE3_t;
+
+/* Interrupt Mode for LUT4 select bit group values */
+typedef enum CCL_INTMODE4_VALUES_enum
+{
+    CCL_INTMODE4_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE4_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE4_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE4_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE4_values_t;
+
+/* Interrupt Mode for LUT4 select bit group configurations*/
+typedef enum CCL_INTMODE4_enum
+{
+    CCL_INTMODE4_INTDISABLE_gc     = (CCL_INTMODE4_INTDISABLE_gv << CCL_INTMODE4_gp),  /* Interrupt disabled */
+    CCL_INTMODE4_RISING_gc         = (CCL_INTMODE4_RISING_gv << CCL_INTMODE4_gp),  /* Sense rising edge */
+    CCL_INTMODE4_FALLING_gc        = (CCL_INTMODE4_FALLING_gv << CCL_INTMODE4_gp),  /* Sense falling edge */
+    CCL_INTMODE4_BOTH_gc           = (CCL_INTMODE4_BOTH_gv << CCL_INTMODE4_gp)   /* Sense both edges */
+} CCL_INTMODE4_t;
+
+/* Interrupt Mode for LUT5 select bit group values */
+typedef enum CCL_INTMODE5_VALUES_enum
+{
+    CCL_INTMODE5_INTDISABLE_gv     = 0x00,  /* Interrupt disabled */
+    CCL_INTMODE5_RISING_gv         = 0x01,  /* Sense rising edge */
+    CCL_INTMODE5_FALLING_gv        = 0x02,  /* Sense falling edge */
+    CCL_INTMODE5_BOTH_gv           = 0x03   /* Sense both edges */
+} CCL_INTMODE5_values_t;
+
+/* Interrupt Mode for LUT5 select bit group configurations*/
+typedef enum CCL_INTMODE5_enum
+{
+    CCL_INTMODE5_INTDISABLE_gc     = (CCL_INTMODE5_INTDISABLE_gv << CCL_INTMODE5_gp),  /* Interrupt disabled */
+    CCL_INTMODE5_RISING_gc         = (CCL_INTMODE5_RISING_gv << CCL_INTMODE5_gp),  /* Sense rising edge */
+    CCL_INTMODE5_FALLING_gc        = (CCL_INTMODE5_FALLING_gv << CCL_INTMODE5_gp),  /* Sense falling edge */
+    CCL_INTMODE5_BOTH_gc           = (CCL_INTMODE5_BOTH_gv << CCL_INTMODE5_gp)   /* Sense both edges */
+} CCL_INTMODE5_t;
+
+/* Sequential Selection bit group values */
+typedef enum CCL_SEQSEL_VALUES_enum
+{
+    CCL_SEQSEL_DISABLE_gv          = 0x00,  /* Sequential logic disabled */
+    CCL_SEQSEL_DFF_gv              = 0x01,  /* D FlipFlop */
+    CCL_SEQSEL_JK_gv               = 0x02,  /* JK FlipFlop */
+    CCL_SEQSEL_LATCH_gv            = 0x03,  /* D Latch */
+    CCL_SEQSEL_RS_gv               = 0x04   /* RS Latch */
+} CCL_SEQSEL_values_t;
+
+/* Sequential Selection bit group configurations*/
+typedef enum CCL_SEQSEL_enum
+{
+    CCL_SEQSEL_DISABLE_gc          = (CCL_SEQSEL_DISABLE_gv << CCL_SEQSEL_gp),  /* Sequential logic disabled */
+    CCL_SEQSEL_DFF_gc              = (CCL_SEQSEL_DFF_gv << CCL_SEQSEL_gp),  /* D FlipFlop */
+    CCL_SEQSEL_JK_gc               = (CCL_SEQSEL_JK_gv << CCL_SEQSEL_gp),  /* JK FlipFlop */
+    CCL_SEQSEL_LATCH_gc            = (CCL_SEQSEL_LATCH_gv << CCL_SEQSEL_gp),  /* D Latch */
+    CCL_SEQSEL_RS_gc               = (CCL_SEQSEL_RS_gv << CCL_SEQSEL_gp)   /* RS Latch */
+} CCL_SEQSEL_t;
+
+/*
+--------------------------------------------------------------------------
+CLKCTRL - Clock controller
+--------------------------------------------------------------------------
+*/
+
+/* Clock controller */
+typedef struct CLKCTRL_struct
+{
+    register8_t MCLKCTRLA;  /* MCLK Control A */
+    register8_t MCLKCTRLB;  /* MCLK Control B */
+    register8_t MCLKLOCK;  /* MCLK Lock */
+    register8_t MCLKSTATUS;  /* MCLK Status */
+    register8_t reserved_1[4];
+    register8_t OSCHFCTRLA;  /* OSCHF Control A */
+    register8_t OSCHFTUNE;  /* OSCHF Tune */
+    register8_t reserved_2[6];
+    register8_t PLLCTRLA;  /* PLL Control A */
+    register8_t reserved_3[7];
+    register8_t OSC32KCTRLA;  /* OSC32K Control A */
+    register8_t reserved_4[3];
+    register8_t XOSC32KCTRLA;  /* XOSC32K Control A */
+    register8_t reserved_5[3];
+} CLKCTRL_t;
+
+/* Clock select bit group values */
+typedef enum CLKCTRL_CLKSEL_VALUES_enum
+{
+    CLKCTRL_CLKSEL_OSCHF_gv        = 0x00,  /* Internal high-frequency oscillator */
+    CLKCTRL_CLKSEL_OSC32K_gv       = 0x01,  /* Internal 32.768 kHz oscillator */
+    CLKCTRL_CLKSEL_XOSC32K_gv      = 0x02,  /* 32.768 kHz crystal oscillator */
+    CLKCTRL_CLKSEL_EXTCLK_gv       = 0x03   /* External clock */
+} CLKCTRL_CLKSEL_values_t;
+
+/* Clock select bit group configurations*/
+typedef enum CLKCTRL_CLKSEL_enum
+{
+    CLKCTRL_CLKSEL_OSCHF_gc        = (CLKCTRL_CLKSEL_OSCHF_gv << CLKCTRL_CLKSEL_gp),  /* Internal high-frequency oscillator */
+    CLKCTRL_CLKSEL_OSC32K_gc       = (CLKCTRL_CLKSEL_OSC32K_gv << CLKCTRL_CLKSEL_gp),  /* Internal 32.768 kHz oscillator */
+    CLKCTRL_CLKSEL_XOSC32K_gc      = (CLKCTRL_CLKSEL_XOSC32K_gv << CLKCTRL_CLKSEL_gp),  /* 32.768 kHz crystal oscillator */
+    CLKCTRL_CLKSEL_EXTCLK_gc       = (CLKCTRL_CLKSEL_EXTCLK_gv << CLKCTRL_CLKSEL_gp)   /* External clock */
+} CLKCTRL_CLKSEL_t;
+
+/* Crystal startup time select bit group values */
+typedef enum CLKCTRL_CSUT_VALUES_enum
+{
+    CLKCTRL_CSUT_1K_gv             = 0x00,  /* 1k cycles */
+    CLKCTRL_CSUT_16K_gv            = 0x01,  /* 16k cycles */
+    CLKCTRL_CSUT_32K_gv            = 0x02,  /* 32k cycles */
+    CLKCTRL_CSUT_64K_gv            = 0x03   /* 64k cycles */
+} CLKCTRL_CSUT_values_t;
+
+/* Crystal startup time select bit group configurations*/
+typedef enum CLKCTRL_CSUT_enum
+{
+    CLKCTRL_CSUT_1K_gc             = (CLKCTRL_CSUT_1K_gv << CLKCTRL_CSUT_gp),  /* 1k cycles */
+    CLKCTRL_CSUT_16K_gc            = (CLKCTRL_CSUT_16K_gv << CLKCTRL_CSUT_gp),  /* 16k cycles */
+    CLKCTRL_CSUT_32K_gc            = (CLKCTRL_CSUT_32K_gv << CLKCTRL_CSUT_gp),  /* 32k cycles */
+    CLKCTRL_CSUT_64K_gc            = (CLKCTRL_CSUT_64K_gv << CLKCTRL_CSUT_gp)   /* 64k cycles */
+} CLKCTRL_CSUT_t;
+
+/* Frequency select bit group values */
+typedef enum CLKCTRL_FRQSEL_VALUES_enum
+{
+    CLKCTRL_FRQSEL_1M_gv           = 0x00,  /* 1 MHz system clock */
+    CLKCTRL_FRQSEL_2M_gv           = 0x01,  /* 2 MHz system clock */
+    CLKCTRL_FRQSEL_3M_gv           = 0x02,  /* 3 MHz system clock */
+    CLKCTRL_FRQSEL_4M_gv           = 0x03,  /* 4 MHz system clock (default) */
+    CLKCTRL_FRQSEL_8M_gv           = 0x05,  /* 8 MHz system clock */
+    CLKCTRL_FRQSEL_12M_gv          = 0x06,  /* 12 MHz system clock */
+    CLKCTRL_FRQSEL_16M_gv          = 0x07,  /* 16 MHz system clock */
+    CLKCTRL_FRQSEL_20M_gv          = 0x08,  /* 20 MHz system clock */
+    CLKCTRL_FRQSEL_24M_gv          = 0x09   /* 24 MHz system clock */
+} CLKCTRL_FRQSEL_values_t;
+
+/* Frequency select bit group configurations*/
+typedef enum CLKCTRL_FRQSEL_enum
+{
+    CLKCTRL_FRQSEL_1M_gc           = (CLKCTRL_FRQSEL_1M_gv << CLKCTRL_FRQSEL_gp),  /* 1 MHz system clock */
+    CLKCTRL_FRQSEL_2M_gc           = (CLKCTRL_FRQSEL_2M_gv << CLKCTRL_FRQSEL_gp),  /* 2 MHz system clock */
+    CLKCTRL_FRQSEL_3M_gc           = (CLKCTRL_FRQSEL_3M_gv << CLKCTRL_FRQSEL_gp),  /* 3 MHz system clock */
+    CLKCTRL_FRQSEL_4M_gc           = (CLKCTRL_FRQSEL_4M_gv << CLKCTRL_FRQSEL_gp),  /* 4 MHz system clock (default) */
+    CLKCTRL_FRQSEL_8M_gc           = (CLKCTRL_FRQSEL_8M_gv << CLKCTRL_FRQSEL_gp),  /* 8 MHz system clock */
+    CLKCTRL_FRQSEL_12M_gc          = (CLKCTRL_FRQSEL_12M_gv << CLKCTRL_FRQSEL_gp),  /* 12 MHz system clock */
+    CLKCTRL_FRQSEL_16M_gc          = (CLKCTRL_FRQSEL_16M_gv << CLKCTRL_FRQSEL_gp),  /* 16 MHz system clock */
+    CLKCTRL_FRQSEL_20M_gc          = (CLKCTRL_FRQSEL_20M_gv << CLKCTRL_FRQSEL_gp),  /* 20 MHz system clock */
+    CLKCTRL_FRQSEL_24M_gc          = (CLKCTRL_FRQSEL_24M_gv << CLKCTRL_FRQSEL_gp)   /* 24 MHz system clock */
+} CLKCTRL_FRQSEL_t;
+
+/* Multiplication factor select bit group values */
+typedef enum CLKCTRL_MULFAC_VALUES_enum
+{
+    CLKCTRL_MULFAC_DISABLE_gv      = 0x00,  /* PLL is disabled */
+    CLKCTRL_MULFAC_2x_gv           = 0x01,  /* 2 x multiplication factor */
+    CLKCTRL_MULFAC_3x_gv           = 0x02   /* 3 x multiplication factor */
+} CLKCTRL_MULFAC_values_t;
+
+/* Multiplication factor select bit group configurations*/
+typedef enum CLKCTRL_MULFAC_enum
+{
+    CLKCTRL_MULFAC_DISABLE_gc      = (CLKCTRL_MULFAC_DISABLE_gv << CLKCTRL_MULFAC_gp),  /* PLL is disabled */
+    CLKCTRL_MULFAC_2x_gc           = (CLKCTRL_MULFAC_2x_gv << CLKCTRL_MULFAC_gp),  /* 2 x multiplication factor */
+    CLKCTRL_MULFAC_3x_gc           = (CLKCTRL_MULFAC_3x_gv << CLKCTRL_MULFAC_gp)   /* 3 x multiplication factor */
+} CLKCTRL_MULFAC_t;
+
+/* Prescaler division select bit group values */
+typedef enum CLKCTRL_PDIV_VALUES_enum
+{
+    CLKCTRL_PDIV_2X_gv             = 0x00,  /* 2X */
+    CLKCTRL_PDIV_4X_gv             = 0x01,  /* 4X */
+    CLKCTRL_PDIV_8X_gv             = 0x02,  /* 8X */
+    CLKCTRL_PDIV_16X_gv            = 0x03,  /* 16X */
+    CLKCTRL_PDIV_32X_gv            = 0x04,  /* 32X */
+    CLKCTRL_PDIV_64X_gv            = 0x05,  /* 64X */
+    CLKCTRL_PDIV_6X_gv             = 0x08,  /* 6X */
+    CLKCTRL_PDIV_10X_gv            = 0x09,  /* 10X */
+    CLKCTRL_PDIV_12X_gv            = 0x0A,  /* 12X */
+    CLKCTRL_PDIV_24X_gv            = 0x0B,  /* 24X */
+    CLKCTRL_PDIV_48X_gv            = 0x0C   /* 48X */
+} CLKCTRL_PDIV_values_t;
+
+/* Prescaler division select bit group configurations*/
+typedef enum CLKCTRL_PDIV_enum
+{
+    CLKCTRL_PDIV_2X_gc             = (CLKCTRL_PDIV_2X_gv << CLKCTRL_PDIV_gp),  /* 2X */
+    CLKCTRL_PDIV_4X_gc             = (CLKCTRL_PDIV_4X_gv << CLKCTRL_PDIV_gp),  /* 4X */
+    CLKCTRL_PDIV_8X_gc             = (CLKCTRL_PDIV_8X_gv << CLKCTRL_PDIV_gp),  /* 8X */
+    CLKCTRL_PDIV_16X_gc            = (CLKCTRL_PDIV_16X_gv << CLKCTRL_PDIV_gp),  /* 16X */
+    CLKCTRL_PDIV_32X_gc            = (CLKCTRL_PDIV_32X_gv << CLKCTRL_PDIV_gp),  /* 32X */
+    CLKCTRL_PDIV_64X_gc            = (CLKCTRL_PDIV_64X_gv << CLKCTRL_PDIV_gp),  /* 64X */
+    CLKCTRL_PDIV_6X_gc             = (CLKCTRL_PDIV_6X_gv << CLKCTRL_PDIV_gp),  /* 6X */
+    CLKCTRL_PDIV_10X_gc            = (CLKCTRL_PDIV_10X_gv << CLKCTRL_PDIV_gp),  /* 10X */
+    CLKCTRL_PDIV_12X_gc            = (CLKCTRL_PDIV_12X_gv << CLKCTRL_PDIV_gp),  /* 12X */
+    CLKCTRL_PDIV_24X_gc            = (CLKCTRL_PDIV_24X_gv << CLKCTRL_PDIV_gp),  /* 24X */
+    CLKCTRL_PDIV_48X_gc            = (CLKCTRL_PDIV_48X_gv << CLKCTRL_PDIV_gp)   /* 48X */
+} CLKCTRL_PDIV_t;
+
+/*
+--------------------------------------------------------------------------
+CPU - CPU
+--------------------------------------------------------------------------
+*/
+
+#define CORE_VERSION  V4S
+
+/* CCP signature select bit group values */
+typedef enum CCP_VALUES_enum
+{
+    CCP_SPM_gv                     = 0x9D,  /* SPM Instruction Protection */
+    CCP_IOREG_gv                   = 0xD8   /* IO Register Protection */
+} CCP_values_t;
+
+/* CCP signature select bit group configurations*/
+typedef enum CCP_enum
+{
+    CCP_SPM_gc                     = (CCP_SPM_gv << CPU_CCP_gp),  /* SPM Instruction Protection */
+    CCP_IOREG_gc                   = (CCP_IOREG_gv << CPU_CCP_gp)   /* IO Register Protection */
+} CCP_t;
+
+/*
+--------------------------------------------------------------------------
+CPUINT - Interrupt Controller
+--------------------------------------------------------------------------
+*/
+
+/* Interrupt Controller */
+typedef struct CPUINT_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t STATUS;  /* Status */
+    register8_t LVL0PRI;  /* Interrupt Level 0 Priority */
+    register8_t LVL1VEC;  /* Interrupt Level 1 Priority Vector */
+    register8_t reserved_1[12];
+} CPUINT_t;
+
+
+/*
+--------------------------------------------------------------------------
+CRCSCAN - CRCSCAN
+--------------------------------------------------------------------------
+*/
+
+/* CRCSCAN */
+typedef struct CRCSCAN_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t STATUS;  /* Status */
+    register8_t reserved_1[13];
+} CRCSCAN_t;
+
+/* CRC Source select bit group values */
+typedef enum CRCSCAN_SRC_VALUES_enum
+{
+    CRCSCAN_SRC_FLASH_gv           = 0x00,  /* CRC on entire flash */
+    CRCSCAN_SRC_BOOTAPP_gv         = 0x01,  /* CRC on boot and appl section of flash */
+    CRCSCAN_SRC_BOOT_gv            = 0x02   /* CRC on boot section of flash */
+} CRCSCAN_SRC_values_t;
+
+/* CRC Source select bit group configurations*/
+typedef enum CRCSCAN_SRC_enum
+{
+    CRCSCAN_SRC_FLASH_gc           = (CRCSCAN_SRC_FLASH_gv << CRCSCAN_SRC_gp),  /* CRC on entire flash */
+    CRCSCAN_SRC_BOOTAPP_gc         = (CRCSCAN_SRC_BOOTAPP_gv << CRCSCAN_SRC_gp),  /* CRC on boot and appl section of flash */
+    CRCSCAN_SRC_BOOT_gc            = (CRCSCAN_SRC_BOOT_gv << CRCSCAN_SRC_gp)   /* CRC on boot section of flash */
+} CRCSCAN_SRC_t;
+
+/*
+--------------------------------------------------------------------------
+DAC - Digital to Analog Converter
+--------------------------------------------------------------------------
+*/
+
+/* Digital to Analog Converter */
+typedef struct DAC_struct
+{
+    register8_t CTRLA;  /* Control Register A */
+    register8_t reserved_1[1];
+    _WORDREGISTER(DATA);  /* DATA Register */
+} DAC_t;
+
+
+/*
+--------------------------------------------------------------------------
+EVSYS - Event System
+--------------------------------------------------------------------------
+*/
+
+/* Event System */
+typedef struct EVSYS_struct
+{
+    register8_t SWEVENTA;  /* Software Event A */
+    register8_t SWEVENTB;  /* Software Event B */
+    register8_t reserved_1[14];
+    register8_t CHANNEL0;  /* Multiplexer Channel 0 */
+    register8_t CHANNEL1;  /* Multiplexer Channel 1 */
+    register8_t CHANNEL2;  /* Multiplexer Channel 2 */
+    register8_t CHANNEL3;  /* Multiplexer Channel 3 */
+    register8_t CHANNEL4;  /* Multiplexer Channel 4 */
+    register8_t CHANNEL5;  /* Multiplexer Channel 5 */
+    register8_t CHANNEL6;  /* Multiplexer Channel 6 */
+    register8_t CHANNEL7;  /* Multiplexer Channel 7 */
+    register8_t CHANNEL8;  /* Multiplexer Channel 8 */
+    register8_t CHANNEL9;  /* Multiplexer Channel 9 */
+    register8_t reserved_2[6];
+    register8_t USERCCLLUT0A;  /* User 0 - CCL0 Event A */
+    register8_t USERCCLLUT0B;  /* User 1 - CCL0 Event B */
+    register8_t USERCCLLUT1A;  /* User 2 - CCL1 Event A */
+    register8_t USERCCLLUT1B;  /* User 3 - CCL1 Event B */
+    register8_t USERCCLLUT2A;  /* User 4 - CCL2 Event A */
+    register8_t USERCCLLUT2B;  /* User 5 - CCL2 Event B */
+    register8_t USERCCLLUT3A;  /* User 6 - CCL3 Event A */
+    register8_t USERCCLLUT3B;  /* User 7 - CCL3 Event B */
+    register8_t USERCCLLUT4A;  /* User 8 - CCL4 Event A */
+    register8_t USERCCLLUT4B;  /* User 9 - CCL4 Event B */
+    register8_t USERCCLLUT5A;  /* User 10 - CCL5 Event A */
+    register8_t USERCCLLUT5B;  /* User 11 - CCL5 Event B */
+    register8_t USERADC0START;  /* User 12 - ADC0 */
+    register8_t USERPTCSTART;  /* User 13 - PTC */
+    register8_t USEREVSYSEVOUTA;  /* User 14 - EVOUTA */
+    register8_t USEREVSYSEVOUTB;  /* User 15 - EVOUTB */
+    register8_t USEREVSYSEVOUTC;  /* User 16 - EVOUTC */
+    register8_t USEREVSYSEVOUTD;  /* User 17 - EVOUTD */
+    register8_t USEREVSYSEVOUTE;  /* User 18 - EVOUTE */
+    register8_t USEREVSYSEVOUTF;  /* User 19 - EVOUTF */
+    register8_t reserved_3[1];
+    register8_t USERUSART0IRDA;  /* User 21 - USART0 */
+    register8_t USERUSART1IRDA;  /* User 22 - USART1 */
+    register8_t USERUSART2IRDA;  /* User 23 - USART2 */
+    register8_t USERUSART3IRDA;  /* User 24 - USART3 */
+    register8_t USERUSART4IRDA;  /* User 25 - USART4 */
+    register8_t reserved_4[1];
+    register8_t USERTCA0CNTA;  /* User 27 - TCA0 Event A */
+    register8_t USERTCA0CNTB;  /* User 28 - TCA0 Event B */
+    register8_t USERTCA1CNTA;  /* User 29 - TCA1 Event A */
+    register8_t USERTCA1CNTB;  /* User 30 - TCA1 Event B */
+    register8_t USERTCB0CAPT;  /* User 31 - TCB0 Event A */
+    register8_t USERTCB0COUNT;  /* User 32 - TCB0 Event B */
+    register8_t USERTCB1CAPT;  /* User 33 - TCB1 Event A */
+    register8_t USERTCB1COUNT;  /* User 34 - TCB1 Event B */
+    register8_t USERTCB2CAPT;  /* User 35 - TCB2 Event A */
+    register8_t USERTCB2COUNT;  /* User 36 - TCB2 Event B */
+    register8_t USERTCB3CAPT;  /* User 37 - TCB3 Event A */
+    register8_t USERTCB3COUNT;  /* User 38 - TCB3 Event B */
+    register8_t reserved_5[2];
+    register8_t USERTCD0INPUTA;  /* User 41 - TCD0 Event A */
+    register8_t USERTCD0INPUTB;  /* User 42 - TCD0 Event B */
+} EVSYS_t;
+
+/* Channel 0 generator select bit group values */
+typedef enum EVSYS_CHANNEL0_VALUES_enum
+{
+    EVSYS_CHANNEL0_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL0_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL0_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL0_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL0_RTC_PIT_DIV8192_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV4096_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV2048_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV1024_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL0_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL0_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL0_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL0_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL0_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL0_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL0_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL0_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL0_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL0_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL0_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL0_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL0_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL0_PORTA_PIN0_gv   = 0x40,  /* Port A Pin 0 */
+    EVSYS_CHANNEL0_PORTA_PIN1_gv   = 0x41,  /* Port A Pin 1 */
+    EVSYS_CHANNEL0_PORTA_PIN2_gv   = 0x42,  /* Port A Pin 2 */
+    EVSYS_CHANNEL0_PORTA_PIN3_gv   = 0x43,  /* Port A Pin 3 */
+    EVSYS_CHANNEL0_PORTA_PIN4_gv   = 0x44,  /* Port A Pin 4 */
+    EVSYS_CHANNEL0_PORTA_PIN5_gv   = 0x45,  /* Port A Pin 5 */
+    EVSYS_CHANNEL0_PORTA_PIN6_gv   = 0x46,  /* Port A Pin 6 */
+    EVSYS_CHANNEL0_PORTA_PIN7_gv   = 0x47,  /* Port A Pin 7 */
+    EVSYS_CHANNEL0_PORTB_PIN0_gv   = 0x48,  /* Port B Pin 0 */
+    EVSYS_CHANNEL0_PORTB_PIN1_gv   = 0x49,  /* Port B Pin 1 */
+    EVSYS_CHANNEL0_PORTB_PIN2_gv   = 0x4A,  /* Port B Pin 2 */
+    EVSYS_CHANNEL0_PORTB_PIN3_gv   = 0x4B,  /* Port B Pin 3 */
+    EVSYS_CHANNEL0_PORTB_PIN4_gv   = 0x4C,  /* Port B Pin 4 */
+    EVSYS_CHANNEL0_PORTB_PIN5_gv   = 0x4D,  /* Port B Pin 5 */
+    EVSYS_CHANNEL0_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL0_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL0_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL0_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL0_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL0_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL0_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL0_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL0_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL0_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL0_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL0_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL0_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL0_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL0_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL0_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL0_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL0_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL0_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL0_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL0_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL0_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL0_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL0_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL0_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL0_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL0_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL0_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL0_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL0_values_t;
+
+/* Channel 0 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL0_enum
+{
+    EVSYS_CHANNEL0_OFF_gc          = (EVSYS_CHANNEL0_OFF_gv << EVSYS_CHANNEL0_gp),  /* Off */
+    EVSYS_CHANNEL0_UPDI_SYNCH_gc   = (EVSYS_CHANNEL0_UPDI_SYNCH_gv << EVSYS_CHANNEL0_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL0_RTC_OVF_gc      = (EVSYS_CHANNEL0_RTC_OVF_gv << EVSYS_CHANNEL0_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL0_RTC_CMP_gc      = (EVSYS_CHANNEL0_RTC_CMP_gv << EVSYS_CHANNEL0_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL0_RTC_PIT_DIV8192_gc = (EVSYS_CHANNEL0_RTC_PIT_DIV8192_gv << EVSYS_CHANNEL0_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV4096_gc = (EVSYS_CHANNEL0_RTC_PIT_DIV4096_gv << EVSYS_CHANNEL0_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV2048_gc = (EVSYS_CHANNEL0_RTC_PIT_DIV2048_gv << EVSYS_CHANNEL0_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL0_RTC_PIT_DIV1024_gc = (EVSYS_CHANNEL0_RTC_PIT_DIV1024_gv << EVSYS_CHANNEL0_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL0_CCL_LUT0_gc     = (EVSYS_CHANNEL0_CCL_LUT0_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL0_CCL_LUT1_gc     = (EVSYS_CHANNEL0_CCL_LUT1_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL0_CCL_LUT2_gc     = (EVSYS_CHANNEL0_CCL_LUT2_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL0_CCL_LUT3_gc     = (EVSYS_CHANNEL0_CCL_LUT3_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL0_CCL_LUT4_gc     = (EVSYS_CHANNEL0_CCL_LUT4_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL0_CCL_LUT5_gc     = (EVSYS_CHANNEL0_CCL_LUT5_gv << EVSYS_CHANNEL0_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL0_AC0_OUT_gc      = (EVSYS_CHANNEL0_AC0_OUT_gv << EVSYS_CHANNEL0_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL0_AC1_OUT_gc      = (EVSYS_CHANNEL0_AC1_OUT_gv << EVSYS_CHANNEL0_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL0_AC2_OUT_gc      = (EVSYS_CHANNEL0_AC2_OUT_gv << EVSYS_CHANNEL0_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL0_ADC0_RESRDY_gc  = (EVSYS_CHANNEL0_ADC0_RESRDY_gv << EVSYS_CHANNEL0_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL0_PTC_RESRDY_gc   = (EVSYS_CHANNEL0_PTC_RESRDY_gv << EVSYS_CHANNEL0_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL0_ZCD0_gc         = (EVSYS_CHANNEL0_ZCD0_gv << EVSYS_CHANNEL0_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL0_ZCD1_gc         = (EVSYS_CHANNEL0_ZCD1_gv << EVSYS_CHANNEL0_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL0_PORTA_PIN0_gc   = (EVSYS_CHANNEL0_PORTA_PIN0_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 0 */
+    EVSYS_CHANNEL0_PORTA_PIN1_gc   = (EVSYS_CHANNEL0_PORTA_PIN1_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 1 */
+    EVSYS_CHANNEL0_PORTA_PIN2_gc   = (EVSYS_CHANNEL0_PORTA_PIN2_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 2 */
+    EVSYS_CHANNEL0_PORTA_PIN3_gc   = (EVSYS_CHANNEL0_PORTA_PIN3_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 3 */
+    EVSYS_CHANNEL0_PORTA_PIN4_gc   = (EVSYS_CHANNEL0_PORTA_PIN4_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 4 */
+    EVSYS_CHANNEL0_PORTA_PIN5_gc   = (EVSYS_CHANNEL0_PORTA_PIN5_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 5 */
+    EVSYS_CHANNEL0_PORTA_PIN6_gc   = (EVSYS_CHANNEL0_PORTA_PIN6_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 6 */
+    EVSYS_CHANNEL0_PORTA_PIN7_gc   = (EVSYS_CHANNEL0_PORTA_PIN7_gv << EVSYS_CHANNEL0_gp),  /* Port A Pin 7 */
+    EVSYS_CHANNEL0_PORTB_PIN0_gc   = (EVSYS_CHANNEL0_PORTB_PIN0_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 0 */
+    EVSYS_CHANNEL0_PORTB_PIN1_gc   = (EVSYS_CHANNEL0_PORTB_PIN1_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 1 */
+    EVSYS_CHANNEL0_PORTB_PIN2_gc   = (EVSYS_CHANNEL0_PORTB_PIN2_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 2 */
+    EVSYS_CHANNEL0_PORTB_PIN3_gc   = (EVSYS_CHANNEL0_PORTB_PIN3_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 3 */
+    EVSYS_CHANNEL0_PORTB_PIN4_gc   = (EVSYS_CHANNEL0_PORTB_PIN4_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 4 */
+    EVSYS_CHANNEL0_PORTB_PIN5_gc   = (EVSYS_CHANNEL0_PORTB_PIN5_gv << EVSYS_CHANNEL0_gp),  /* Port B Pin 5 */
+    EVSYS_CHANNEL0_USART0_XCK_gc   = (EVSYS_CHANNEL0_USART0_XCK_gv << EVSYS_CHANNEL0_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL0_USART1_XCK_gc   = (EVSYS_CHANNEL0_USART1_XCK_gv << EVSYS_CHANNEL0_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL0_USART2_XCK_gc   = (EVSYS_CHANNEL0_USART2_XCK_gv << EVSYS_CHANNEL0_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL0_USART3_XCK_gc   = (EVSYS_CHANNEL0_USART3_XCK_gv << EVSYS_CHANNEL0_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL0_USART4_XCK_gc   = (EVSYS_CHANNEL0_USART4_XCK_gv << EVSYS_CHANNEL0_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL0_SPI0_SCK_gc     = (EVSYS_CHANNEL0_SPI0_SCK_gv << EVSYS_CHANNEL0_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL0_SPI1_SCK_gc     = (EVSYS_CHANNEL0_SPI1_SCK_gv << EVSYS_CHANNEL0_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL0_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL0_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL0_TCA0_HUNF_gc    = (EVSYS_CHANNEL0_TCA0_HUNF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL0_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL0_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL0_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL0_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL0_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL0_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL0_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL0_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL0_TCA1_HUNF_gc    = (EVSYS_CHANNEL0_TCA1_HUNF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL0_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL0_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL0_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL0_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL0_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL0_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL0_TCB0_CAPT_gc    = (EVSYS_CHANNEL0_TCB0_CAPT_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL0_TCB0_OVF_gc     = (EVSYS_CHANNEL0_TCB0_OVF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL0_TCB1_CAPT_gc    = (EVSYS_CHANNEL0_TCB1_CAPT_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL0_TCB1_OVF_gc     = (EVSYS_CHANNEL0_TCB1_OVF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL0_TCB2_CAPT_gc    = (EVSYS_CHANNEL0_TCB2_CAPT_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL0_TCB2_OVF_gc     = (EVSYS_CHANNEL0_TCB2_OVF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL0_TCB3_CAPT_gc    = (EVSYS_CHANNEL0_TCB3_CAPT_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL0_TCB3_OVF_gc     = (EVSYS_CHANNEL0_TCB3_OVF_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL0_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL0_TCD0_CMPBCLR_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL0_TCD0_CMPASET_gc = (EVSYS_CHANNEL0_TCD0_CMPASET_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL0_TCD0_CMPBSET_gc = (EVSYS_CHANNEL0_TCD0_CMPBSET_gv << EVSYS_CHANNEL0_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL0_TCD0_PROGEV_gc  = (EVSYS_CHANNEL0_TCD0_PROGEV_gv << EVSYS_CHANNEL0_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL0_t;
+
+/* Channel 1 generator select bit group values */
+typedef enum EVSYS_CHANNEL1_VALUES_enum
+{
+    EVSYS_CHANNEL1_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL1_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL1_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL1_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL1_RTC_PIT_DIV512_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV256_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV128_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV64_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL1_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL1_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL1_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL1_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL1_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL1_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL1_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL1_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL1_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL1_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL1_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL1_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL1_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL1_PORTA_PIN0_gv   = 0x40,  /* Port A Pin 0 */
+    EVSYS_CHANNEL1_PORTA_PIN1_gv   = 0x41,  /* Port A Pin 1 */
+    EVSYS_CHANNEL1_PORTA_PIN2_gv   = 0x42,  /* Port A Pin 2 */
+    EVSYS_CHANNEL1_PORTA_PIN3_gv   = 0x43,  /* Port A Pin 3 */
+    EVSYS_CHANNEL1_PORTA_PIN4_gv   = 0x44,  /* Port A Pin 4 */
+    EVSYS_CHANNEL1_PORTA_PIN5_gv   = 0x45,  /* Port A Pin 5 */
+    EVSYS_CHANNEL1_PORTA_PIN6_gv   = 0x46,  /* Port A Pin 6 */
+    EVSYS_CHANNEL1_PORTA_PIN7_gv   = 0x47,  /* Port A Pin 7 */
+    EVSYS_CHANNEL1_PORTB_PIN0_gv   = 0x48,  /* Port B Pin 0 */
+    EVSYS_CHANNEL1_PORTB_PIN1_gv   = 0x49,  /* Port B Pin 1 */
+    EVSYS_CHANNEL1_PORTB_PIN2_gv   = 0x4A,  /* Port B Pin 2 */
+    EVSYS_CHANNEL1_PORTB_PIN3_gv   = 0x4B,  /* Port B Pin 3 */
+    EVSYS_CHANNEL1_PORTB_PIN4_gv   = 0x4C,  /* Port B Pin 4 */
+    EVSYS_CHANNEL1_PORTB_PIN5_gv   = 0x4D,  /* Port B Pin 5 */
+    EVSYS_CHANNEL1_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL1_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL1_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL1_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL1_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL1_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL1_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL1_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL1_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL1_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL1_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL1_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL1_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL1_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL1_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL1_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL1_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL1_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL1_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL1_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL1_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL1_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL1_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL1_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL1_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL1_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL1_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL1_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL1_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL1_values_t;
+
+/* Channel 1 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL1_enum
+{
+    EVSYS_CHANNEL1_OFF_gc          = (EVSYS_CHANNEL1_OFF_gv << EVSYS_CHANNEL1_gp),  /* Off */
+    EVSYS_CHANNEL1_UPDI_SYNCH_gc   = (EVSYS_CHANNEL1_UPDI_SYNCH_gv << EVSYS_CHANNEL1_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL1_RTC_OVF_gc      = (EVSYS_CHANNEL1_RTC_OVF_gv << EVSYS_CHANNEL1_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL1_RTC_CMP_gc      = (EVSYS_CHANNEL1_RTC_CMP_gv << EVSYS_CHANNEL1_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL1_RTC_PIT_DIV512_gc = (EVSYS_CHANNEL1_RTC_PIT_DIV512_gv << EVSYS_CHANNEL1_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV256_gc = (EVSYS_CHANNEL1_RTC_PIT_DIV256_gv << EVSYS_CHANNEL1_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV128_gc = (EVSYS_CHANNEL1_RTC_PIT_DIV128_gv << EVSYS_CHANNEL1_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL1_RTC_PIT_DIV64_gc = (EVSYS_CHANNEL1_RTC_PIT_DIV64_gv << EVSYS_CHANNEL1_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL1_CCL_LUT0_gc     = (EVSYS_CHANNEL1_CCL_LUT0_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL1_CCL_LUT1_gc     = (EVSYS_CHANNEL1_CCL_LUT1_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL1_CCL_LUT2_gc     = (EVSYS_CHANNEL1_CCL_LUT2_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL1_CCL_LUT3_gc     = (EVSYS_CHANNEL1_CCL_LUT3_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL1_CCL_LUT4_gc     = (EVSYS_CHANNEL1_CCL_LUT4_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL1_CCL_LUT5_gc     = (EVSYS_CHANNEL1_CCL_LUT5_gv << EVSYS_CHANNEL1_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL1_AC0_OUT_gc      = (EVSYS_CHANNEL1_AC0_OUT_gv << EVSYS_CHANNEL1_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL1_AC1_OUT_gc      = (EVSYS_CHANNEL1_AC1_OUT_gv << EVSYS_CHANNEL1_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL1_AC2_OUT_gc      = (EVSYS_CHANNEL1_AC2_OUT_gv << EVSYS_CHANNEL1_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL1_ADC0_RESRDY_gc  = (EVSYS_CHANNEL1_ADC0_RESRDY_gv << EVSYS_CHANNEL1_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL1_PTC_RESRDY_gc   = (EVSYS_CHANNEL1_PTC_RESRDY_gv << EVSYS_CHANNEL1_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL1_ZCD0_gc         = (EVSYS_CHANNEL1_ZCD0_gv << EVSYS_CHANNEL1_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL1_ZCD1_gc         = (EVSYS_CHANNEL1_ZCD1_gv << EVSYS_CHANNEL1_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL1_PORTA_PIN0_gc   = (EVSYS_CHANNEL1_PORTA_PIN0_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 0 */
+    EVSYS_CHANNEL1_PORTA_PIN1_gc   = (EVSYS_CHANNEL1_PORTA_PIN1_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 1 */
+    EVSYS_CHANNEL1_PORTA_PIN2_gc   = (EVSYS_CHANNEL1_PORTA_PIN2_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 2 */
+    EVSYS_CHANNEL1_PORTA_PIN3_gc   = (EVSYS_CHANNEL1_PORTA_PIN3_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 3 */
+    EVSYS_CHANNEL1_PORTA_PIN4_gc   = (EVSYS_CHANNEL1_PORTA_PIN4_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 4 */
+    EVSYS_CHANNEL1_PORTA_PIN5_gc   = (EVSYS_CHANNEL1_PORTA_PIN5_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 5 */
+    EVSYS_CHANNEL1_PORTA_PIN6_gc   = (EVSYS_CHANNEL1_PORTA_PIN6_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 6 */
+    EVSYS_CHANNEL1_PORTA_PIN7_gc   = (EVSYS_CHANNEL1_PORTA_PIN7_gv << EVSYS_CHANNEL1_gp),  /* Port A Pin 7 */
+    EVSYS_CHANNEL1_PORTB_PIN0_gc   = (EVSYS_CHANNEL1_PORTB_PIN0_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 0 */
+    EVSYS_CHANNEL1_PORTB_PIN1_gc   = (EVSYS_CHANNEL1_PORTB_PIN1_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 1 */
+    EVSYS_CHANNEL1_PORTB_PIN2_gc   = (EVSYS_CHANNEL1_PORTB_PIN2_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 2 */
+    EVSYS_CHANNEL1_PORTB_PIN3_gc   = (EVSYS_CHANNEL1_PORTB_PIN3_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 3 */
+    EVSYS_CHANNEL1_PORTB_PIN4_gc   = (EVSYS_CHANNEL1_PORTB_PIN4_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 4 */
+    EVSYS_CHANNEL1_PORTB_PIN5_gc   = (EVSYS_CHANNEL1_PORTB_PIN5_gv << EVSYS_CHANNEL1_gp),  /* Port B Pin 5 */
+    EVSYS_CHANNEL1_USART0_XCK_gc   = (EVSYS_CHANNEL1_USART0_XCK_gv << EVSYS_CHANNEL1_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL1_USART1_XCK_gc   = (EVSYS_CHANNEL1_USART1_XCK_gv << EVSYS_CHANNEL1_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL1_USART2_XCK_gc   = (EVSYS_CHANNEL1_USART2_XCK_gv << EVSYS_CHANNEL1_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL1_USART3_XCK_gc   = (EVSYS_CHANNEL1_USART3_XCK_gv << EVSYS_CHANNEL1_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL1_USART4_XCK_gc   = (EVSYS_CHANNEL1_USART4_XCK_gv << EVSYS_CHANNEL1_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL1_SPI0_SCK_gc     = (EVSYS_CHANNEL1_SPI0_SCK_gv << EVSYS_CHANNEL1_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL1_SPI1_SCK_gc     = (EVSYS_CHANNEL1_SPI1_SCK_gv << EVSYS_CHANNEL1_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL1_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL1_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL1_TCA0_HUNF_gc    = (EVSYS_CHANNEL1_TCA0_HUNF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL1_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL1_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL1_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL1_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL1_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL1_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL1_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL1_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL1_TCA1_HUNF_gc    = (EVSYS_CHANNEL1_TCA1_HUNF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL1_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL1_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL1_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL1_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL1_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL1_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL1_TCB0_CAPT_gc    = (EVSYS_CHANNEL1_TCB0_CAPT_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL1_TCB0_OVF_gc     = (EVSYS_CHANNEL1_TCB0_OVF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL1_TCB1_CAPT_gc    = (EVSYS_CHANNEL1_TCB1_CAPT_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL1_TCB1_OVF_gc     = (EVSYS_CHANNEL1_TCB1_OVF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL1_TCB2_CAPT_gc    = (EVSYS_CHANNEL1_TCB2_CAPT_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL1_TCB2_OVF_gc     = (EVSYS_CHANNEL1_TCB2_OVF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL1_TCB3_CAPT_gc    = (EVSYS_CHANNEL1_TCB3_CAPT_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL1_TCB3_OVF_gc     = (EVSYS_CHANNEL1_TCB3_OVF_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL1_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL1_TCD0_CMPBCLR_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL1_TCD0_CMPASET_gc = (EVSYS_CHANNEL1_TCD0_CMPASET_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL1_TCD0_CMPBSET_gc = (EVSYS_CHANNEL1_TCD0_CMPBSET_gv << EVSYS_CHANNEL1_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL1_TCD0_PROGEV_gc  = (EVSYS_CHANNEL1_TCD0_PROGEV_gv << EVSYS_CHANNEL1_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL1_t;
+
+/* Channel 2 generator select bit group values */
+typedef enum EVSYS_CHANNEL2_VALUES_enum
+{
+    EVSYS_CHANNEL2_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL2_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL2_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL2_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL2_RTC_PIT_DIV8192_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV4096_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV2048_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV1024_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL2_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL2_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL2_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL2_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL2_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL2_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL2_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL2_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL2_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL2_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL2_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL2_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL2_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL2_PORTC_PIN0_gv   = 0x40,  /* Port C Pin 0 */
+    EVSYS_CHANNEL2_PORTC_PIN1_gv   = 0x41,  /* Port C Pin 1 */
+    EVSYS_CHANNEL2_PORTC_PIN2_gv   = 0x42,  /* Port C Pin 2 */
+    EVSYS_CHANNEL2_PORTC_PIN3_gv   = 0x43,  /* Port C Pin 3 */
+    EVSYS_CHANNEL2_PORTC_PIN4_gv   = 0x44,  /* Port C Pin 4 */
+    EVSYS_CHANNEL2_PORTC_PIN5_gv   = 0x45,  /* Port C Pin 5 */
+    EVSYS_CHANNEL2_PORTC_PIN6_gv   = 0x46,  /* Port C Pin 6 */
+    EVSYS_CHANNEL2_PORTC_PIN7_gv   = 0x47,  /* Port C Pin 7 */
+    EVSYS_CHANNEL2_PORTD_PIN0_gv   = 0x48,  /* Port D Pin 0 */
+    EVSYS_CHANNEL2_PORTD_PIN1_gv   = 0x49,  /* Port D Pin 1 */
+    EVSYS_CHANNEL2_PORTD_PIN2_gv   = 0x4A,  /* Port D Pin 2 */
+    EVSYS_CHANNEL2_PORTD_PIN3_gv   = 0x4B,  /* Port D Pin 3 */
+    EVSYS_CHANNEL2_PORTD_PIN4_gv   = 0x4C,  /* Port D Pin 4 */
+    EVSYS_CHANNEL2_PORTD_PIN5_gv   = 0x4D,  /* Port D Pin 5 */
+    EVSYS_CHANNEL2_PORTD_PIN6_gv   = 0x4E,  /* Port D Pin 6 */
+    EVSYS_CHANNEL2_PORTD_PIN7_gv   = 0x4F,  /* Port D Pin 7 */
+    EVSYS_CHANNEL2_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL2_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL2_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL2_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL2_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL2_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL2_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL2_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL2_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL2_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL2_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL2_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL2_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL2_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL2_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL2_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL2_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL2_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL2_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL2_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL2_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL2_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL2_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL2_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL2_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL2_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL2_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL2_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL2_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL2_values_t;
+
+/* Channel 2 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL2_enum
+{
+    EVSYS_CHANNEL2_OFF_gc          = (EVSYS_CHANNEL2_OFF_gv << EVSYS_CHANNEL2_gp),  /* Off */
+    EVSYS_CHANNEL2_UPDI_SYNCH_gc   = (EVSYS_CHANNEL2_UPDI_SYNCH_gv << EVSYS_CHANNEL2_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL2_RTC_OVF_gc      = (EVSYS_CHANNEL2_RTC_OVF_gv << EVSYS_CHANNEL2_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL2_RTC_CMP_gc      = (EVSYS_CHANNEL2_RTC_CMP_gv << EVSYS_CHANNEL2_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL2_RTC_PIT_DIV8192_gc = (EVSYS_CHANNEL2_RTC_PIT_DIV8192_gv << EVSYS_CHANNEL2_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV4096_gc = (EVSYS_CHANNEL2_RTC_PIT_DIV4096_gv << EVSYS_CHANNEL2_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV2048_gc = (EVSYS_CHANNEL2_RTC_PIT_DIV2048_gv << EVSYS_CHANNEL2_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL2_RTC_PIT_DIV1024_gc = (EVSYS_CHANNEL2_RTC_PIT_DIV1024_gv << EVSYS_CHANNEL2_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL2_CCL_LUT0_gc     = (EVSYS_CHANNEL2_CCL_LUT0_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL2_CCL_LUT1_gc     = (EVSYS_CHANNEL2_CCL_LUT1_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL2_CCL_LUT2_gc     = (EVSYS_CHANNEL2_CCL_LUT2_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL2_CCL_LUT3_gc     = (EVSYS_CHANNEL2_CCL_LUT3_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL2_CCL_LUT4_gc     = (EVSYS_CHANNEL2_CCL_LUT4_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL2_CCL_LUT5_gc     = (EVSYS_CHANNEL2_CCL_LUT5_gv << EVSYS_CHANNEL2_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL2_AC0_OUT_gc      = (EVSYS_CHANNEL2_AC0_OUT_gv << EVSYS_CHANNEL2_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL2_AC1_OUT_gc      = (EVSYS_CHANNEL2_AC1_OUT_gv << EVSYS_CHANNEL2_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL2_AC2_OUT_gc      = (EVSYS_CHANNEL2_AC2_OUT_gv << EVSYS_CHANNEL2_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL2_ADC0_RESRDY_gc  = (EVSYS_CHANNEL2_ADC0_RESRDY_gv << EVSYS_CHANNEL2_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL2_PTC_RESRDY_gc   = (EVSYS_CHANNEL2_PTC_RESRDY_gv << EVSYS_CHANNEL2_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL2_ZCD0_gc         = (EVSYS_CHANNEL2_ZCD0_gv << EVSYS_CHANNEL2_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL2_ZCD1_gc         = (EVSYS_CHANNEL2_ZCD1_gv << EVSYS_CHANNEL2_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL2_PORTC_PIN0_gc   = (EVSYS_CHANNEL2_PORTC_PIN0_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 0 */
+    EVSYS_CHANNEL2_PORTC_PIN1_gc   = (EVSYS_CHANNEL2_PORTC_PIN1_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 1 */
+    EVSYS_CHANNEL2_PORTC_PIN2_gc   = (EVSYS_CHANNEL2_PORTC_PIN2_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 2 */
+    EVSYS_CHANNEL2_PORTC_PIN3_gc   = (EVSYS_CHANNEL2_PORTC_PIN3_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 3 */
+    EVSYS_CHANNEL2_PORTC_PIN4_gc   = (EVSYS_CHANNEL2_PORTC_PIN4_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 4 */
+    EVSYS_CHANNEL2_PORTC_PIN5_gc   = (EVSYS_CHANNEL2_PORTC_PIN5_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 5 */
+    EVSYS_CHANNEL2_PORTC_PIN6_gc   = (EVSYS_CHANNEL2_PORTC_PIN6_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 6 */
+    EVSYS_CHANNEL2_PORTC_PIN7_gc   = (EVSYS_CHANNEL2_PORTC_PIN7_gv << EVSYS_CHANNEL2_gp),  /* Port C Pin 7 */
+    EVSYS_CHANNEL2_PORTD_PIN0_gc   = (EVSYS_CHANNEL2_PORTD_PIN0_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 0 */
+    EVSYS_CHANNEL2_PORTD_PIN1_gc   = (EVSYS_CHANNEL2_PORTD_PIN1_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 1 */
+    EVSYS_CHANNEL2_PORTD_PIN2_gc   = (EVSYS_CHANNEL2_PORTD_PIN2_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 2 */
+    EVSYS_CHANNEL2_PORTD_PIN3_gc   = (EVSYS_CHANNEL2_PORTD_PIN3_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 3 */
+    EVSYS_CHANNEL2_PORTD_PIN4_gc   = (EVSYS_CHANNEL2_PORTD_PIN4_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 4 */
+    EVSYS_CHANNEL2_PORTD_PIN5_gc   = (EVSYS_CHANNEL2_PORTD_PIN5_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 5 */
+    EVSYS_CHANNEL2_PORTD_PIN6_gc   = (EVSYS_CHANNEL2_PORTD_PIN6_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 6 */
+    EVSYS_CHANNEL2_PORTD_PIN7_gc   = (EVSYS_CHANNEL2_PORTD_PIN7_gv << EVSYS_CHANNEL2_gp),  /* Port D Pin 7 */
+    EVSYS_CHANNEL2_USART0_XCK_gc   = (EVSYS_CHANNEL2_USART0_XCK_gv << EVSYS_CHANNEL2_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL2_USART1_XCK_gc   = (EVSYS_CHANNEL2_USART1_XCK_gv << EVSYS_CHANNEL2_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL2_USART2_XCK_gc   = (EVSYS_CHANNEL2_USART2_XCK_gv << EVSYS_CHANNEL2_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL2_USART3_XCK_gc   = (EVSYS_CHANNEL2_USART3_XCK_gv << EVSYS_CHANNEL2_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL2_USART4_XCK_gc   = (EVSYS_CHANNEL2_USART4_XCK_gv << EVSYS_CHANNEL2_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL2_SPI0_SCK_gc     = (EVSYS_CHANNEL2_SPI0_SCK_gv << EVSYS_CHANNEL2_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL2_SPI1_SCK_gc     = (EVSYS_CHANNEL2_SPI1_SCK_gv << EVSYS_CHANNEL2_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL2_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL2_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL2_TCA0_HUNF_gc    = (EVSYS_CHANNEL2_TCA0_HUNF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL2_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL2_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL2_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL2_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL2_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL2_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL2_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL2_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL2_TCA1_HUNF_gc    = (EVSYS_CHANNEL2_TCA1_HUNF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL2_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL2_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL2_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL2_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL2_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL2_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL2_TCB0_CAPT_gc    = (EVSYS_CHANNEL2_TCB0_CAPT_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL2_TCB0_OVF_gc     = (EVSYS_CHANNEL2_TCB0_OVF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL2_TCB1_CAPT_gc    = (EVSYS_CHANNEL2_TCB1_CAPT_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL2_TCB1_OVF_gc     = (EVSYS_CHANNEL2_TCB1_OVF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL2_TCB2_CAPT_gc    = (EVSYS_CHANNEL2_TCB2_CAPT_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL2_TCB2_OVF_gc     = (EVSYS_CHANNEL2_TCB2_OVF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL2_TCB3_CAPT_gc    = (EVSYS_CHANNEL2_TCB3_CAPT_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL2_TCB3_OVF_gc     = (EVSYS_CHANNEL2_TCB3_OVF_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL2_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL2_TCD0_CMPBCLR_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL2_TCD0_CMPASET_gc = (EVSYS_CHANNEL2_TCD0_CMPASET_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL2_TCD0_CMPBSET_gc = (EVSYS_CHANNEL2_TCD0_CMPBSET_gv << EVSYS_CHANNEL2_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL2_TCD0_PROGEV_gc  = (EVSYS_CHANNEL2_TCD0_PROGEV_gv << EVSYS_CHANNEL2_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL2_t;
+
+/* Channel 3 generator select bit group values */
+typedef enum EVSYS_CHANNEL3_VALUES_enum
+{
+    EVSYS_CHANNEL3_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL3_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL3_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL3_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL3_RTC_PIT_DIV512_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV256_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV128_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV64_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL3_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL3_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL3_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL3_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL3_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL3_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL3_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL3_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL3_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL3_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL3_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL3_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL3_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL3_PORTC_PIN0_gv   = 0x40,  /* Port C Pin 0 */
+    EVSYS_CHANNEL3_PORTC_PIN1_gv   = 0x41,  /* Port C Pin 1 */
+    EVSYS_CHANNEL3_PORTC_PIN2_gv   = 0x42,  /* Port C Pin 2 */
+    EVSYS_CHANNEL3_PORTC_PIN3_gv   = 0x43,  /* Port C Pin 3 */
+    EVSYS_CHANNEL3_PORTC_PIN4_gv   = 0x44,  /* Port C Pin 4 */
+    EVSYS_CHANNEL3_PORTC_PIN5_gv   = 0x45,  /* Port C Pin 5 */
+    EVSYS_CHANNEL3_PORTC_PIN6_gv   = 0x46,  /* Port C Pin 6 */
+    EVSYS_CHANNEL3_PORTC_PIN7_gv   = 0x47,  /* Port C Pin 7 */
+    EVSYS_CHANNEL3_PORTD_PIN0_gv   = 0x48,  /* Port D Pin 0 */
+    EVSYS_CHANNEL3_PORTD_PIN1_gv   = 0x49,  /* Port D Pin 1 */
+    EVSYS_CHANNEL3_PORTD_PIN2_gv   = 0x4A,  /* Port D Pin 2 */
+    EVSYS_CHANNEL3_PORTD_PIN3_gv   = 0x4B,  /* Port D Pin 3 */
+    EVSYS_CHANNEL3_PORTD_PIN4_gv   = 0x4C,  /* Port D Pin 4 */
+    EVSYS_CHANNEL3_PORTD_PIN5_gv   = 0x4D,  /* Port D Pin 5 */
+    EVSYS_CHANNEL3_PORTD_PIN6_gv   = 0x4E,  /* Port D Pin 6 */
+    EVSYS_CHANNEL3_PORTD_PIN7_gv   = 0x4F,  /* Port D Pin 7 */
+    EVSYS_CHANNEL3_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL3_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL3_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL3_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL3_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL3_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL3_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL3_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL3_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL3_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL3_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL3_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL3_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL3_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL3_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL3_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL3_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL3_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL3_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL3_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL3_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL3_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL3_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL3_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL3_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL3_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL3_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL3_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL3_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL3_values_t;
+
+/* Channel 3 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL3_enum
+{
+    EVSYS_CHANNEL3_OFF_gc          = (EVSYS_CHANNEL3_OFF_gv << EVSYS_CHANNEL3_gp),  /* Off */
+    EVSYS_CHANNEL3_UPDI_SYNCH_gc   = (EVSYS_CHANNEL3_UPDI_SYNCH_gv << EVSYS_CHANNEL3_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL3_RTC_OVF_gc      = (EVSYS_CHANNEL3_RTC_OVF_gv << EVSYS_CHANNEL3_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL3_RTC_CMP_gc      = (EVSYS_CHANNEL3_RTC_CMP_gv << EVSYS_CHANNEL3_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL3_RTC_PIT_DIV512_gc = (EVSYS_CHANNEL3_RTC_PIT_DIV512_gv << EVSYS_CHANNEL3_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV256_gc = (EVSYS_CHANNEL3_RTC_PIT_DIV256_gv << EVSYS_CHANNEL3_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV128_gc = (EVSYS_CHANNEL3_RTC_PIT_DIV128_gv << EVSYS_CHANNEL3_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL3_RTC_PIT_DIV64_gc = (EVSYS_CHANNEL3_RTC_PIT_DIV64_gv << EVSYS_CHANNEL3_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL3_CCL_LUT0_gc     = (EVSYS_CHANNEL3_CCL_LUT0_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL3_CCL_LUT1_gc     = (EVSYS_CHANNEL3_CCL_LUT1_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL3_CCL_LUT2_gc     = (EVSYS_CHANNEL3_CCL_LUT2_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL3_CCL_LUT3_gc     = (EVSYS_CHANNEL3_CCL_LUT3_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL3_CCL_LUT4_gc     = (EVSYS_CHANNEL3_CCL_LUT4_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL3_CCL_LUT5_gc     = (EVSYS_CHANNEL3_CCL_LUT5_gv << EVSYS_CHANNEL3_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL3_AC0_OUT_gc      = (EVSYS_CHANNEL3_AC0_OUT_gv << EVSYS_CHANNEL3_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL3_AC1_OUT_gc      = (EVSYS_CHANNEL3_AC1_OUT_gv << EVSYS_CHANNEL3_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL3_AC2_OUT_gc      = (EVSYS_CHANNEL3_AC2_OUT_gv << EVSYS_CHANNEL3_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL3_ADC0_RESRDY_gc  = (EVSYS_CHANNEL3_ADC0_RESRDY_gv << EVSYS_CHANNEL3_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL3_PTC_RESRDY_gc   = (EVSYS_CHANNEL3_PTC_RESRDY_gv << EVSYS_CHANNEL3_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL3_ZCD0_gc         = (EVSYS_CHANNEL3_ZCD0_gv << EVSYS_CHANNEL3_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL3_ZCD1_gc         = (EVSYS_CHANNEL3_ZCD1_gv << EVSYS_CHANNEL3_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL3_PORTC_PIN0_gc   = (EVSYS_CHANNEL3_PORTC_PIN0_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 0 */
+    EVSYS_CHANNEL3_PORTC_PIN1_gc   = (EVSYS_CHANNEL3_PORTC_PIN1_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 1 */
+    EVSYS_CHANNEL3_PORTC_PIN2_gc   = (EVSYS_CHANNEL3_PORTC_PIN2_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 2 */
+    EVSYS_CHANNEL3_PORTC_PIN3_gc   = (EVSYS_CHANNEL3_PORTC_PIN3_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 3 */
+    EVSYS_CHANNEL3_PORTC_PIN4_gc   = (EVSYS_CHANNEL3_PORTC_PIN4_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 4 */
+    EVSYS_CHANNEL3_PORTC_PIN5_gc   = (EVSYS_CHANNEL3_PORTC_PIN5_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 5 */
+    EVSYS_CHANNEL3_PORTC_PIN6_gc   = (EVSYS_CHANNEL3_PORTC_PIN6_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 6 */
+    EVSYS_CHANNEL3_PORTC_PIN7_gc   = (EVSYS_CHANNEL3_PORTC_PIN7_gv << EVSYS_CHANNEL3_gp),  /* Port C Pin 7 */
+    EVSYS_CHANNEL3_PORTD_PIN0_gc   = (EVSYS_CHANNEL3_PORTD_PIN0_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 0 */
+    EVSYS_CHANNEL3_PORTD_PIN1_gc   = (EVSYS_CHANNEL3_PORTD_PIN1_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 1 */
+    EVSYS_CHANNEL3_PORTD_PIN2_gc   = (EVSYS_CHANNEL3_PORTD_PIN2_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 2 */
+    EVSYS_CHANNEL3_PORTD_PIN3_gc   = (EVSYS_CHANNEL3_PORTD_PIN3_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 3 */
+    EVSYS_CHANNEL3_PORTD_PIN4_gc   = (EVSYS_CHANNEL3_PORTD_PIN4_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 4 */
+    EVSYS_CHANNEL3_PORTD_PIN5_gc   = (EVSYS_CHANNEL3_PORTD_PIN5_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 5 */
+    EVSYS_CHANNEL3_PORTD_PIN6_gc   = (EVSYS_CHANNEL3_PORTD_PIN6_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 6 */
+    EVSYS_CHANNEL3_PORTD_PIN7_gc   = (EVSYS_CHANNEL3_PORTD_PIN7_gv << EVSYS_CHANNEL3_gp),  /* Port D Pin 7 */
+    EVSYS_CHANNEL3_USART0_XCK_gc   = (EVSYS_CHANNEL3_USART0_XCK_gv << EVSYS_CHANNEL3_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL3_USART1_XCK_gc   = (EVSYS_CHANNEL3_USART1_XCK_gv << EVSYS_CHANNEL3_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL3_USART2_XCK_gc   = (EVSYS_CHANNEL3_USART2_XCK_gv << EVSYS_CHANNEL3_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL3_USART3_XCK_gc   = (EVSYS_CHANNEL3_USART3_XCK_gv << EVSYS_CHANNEL3_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL3_USART4_XCK_gc   = (EVSYS_CHANNEL3_USART4_XCK_gv << EVSYS_CHANNEL3_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL3_SPI0_SCK_gc     = (EVSYS_CHANNEL3_SPI0_SCK_gv << EVSYS_CHANNEL3_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL3_SPI1_SCK_gc     = (EVSYS_CHANNEL3_SPI1_SCK_gv << EVSYS_CHANNEL3_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL3_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL3_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL3_TCA0_HUNF_gc    = (EVSYS_CHANNEL3_TCA0_HUNF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL3_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL3_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL3_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL3_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL3_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL3_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL3_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL3_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL3_TCA1_HUNF_gc    = (EVSYS_CHANNEL3_TCA1_HUNF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL3_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL3_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL3_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL3_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL3_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL3_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL3_TCB0_CAPT_gc    = (EVSYS_CHANNEL3_TCB0_CAPT_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL3_TCB0_OVF_gc     = (EVSYS_CHANNEL3_TCB0_OVF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL3_TCB1_CAPT_gc    = (EVSYS_CHANNEL3_TCB1_CAPT_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL3_TCB1_OVF_gc     = (EVSYS_CHANNEL3_TCB1_OVF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL3_TCB2_CAPT_gc    = (EVSYS_CHANNEL3_TCB2_CAPT_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL3_TCB2_OVF_gc     = (EVSYS_CHANNEL3_TCB2_OVF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL3_TCB3_CAPT_gc    = (EVSYS_CHANNEL3_TCB3_CAPT_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL3_TCB3_OVF_gc     = (EVSYS_CHANNEL3_TCB3_OVF_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL3_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL3_TCD0_CMPBCLR_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL3_TCD0_CMPASET_gc = (EVSYS_CHANNEL3_TCD0_CMPASET_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL3_TCD0_CMPBSET_gc = (EVSYS_CHANNEL3_TCD0_CMPBSET_gv << EVSYS_CHANNEL3_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL3_TCD0_PROGEV_gc  = (EVSYS_CHANNEL3_TCD0_PROGEV_gv << EVSYS_CHANNEL3_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL3_t;
+
+/* Channel 4 generator select bit group values */
+typedef enum EVSYS_CHANNEL4_VALUES_enum
+{
+    EVSYS_CHANNEL4_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL4_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL4_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL4_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL4_RTC_PIT_DIV8192_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV4096_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV2048_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV1024_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL4_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL4_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL4_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL4_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL4_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL4_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL4_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL4_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL4_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL4_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL4_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL4_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL4_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL4_PORTE_PIN0_gv   = 0x40,  /* Port E Pin 0 */
+    EVSYS_CHANNEL4_PORTE_PIN1_gv   = 0x41,  /* Port E Pin 1 */
+    EVSYS_CHANNEL4_PORTE_PIN2_gv   = 0x42,  /* Port E Pin 2 */
+    EVSYS_CHANNEL4_PORTE_PIN3_gv   = 0x43,  /* Port E Pin 3 */
+    EVSYS_CHANNEL4_PORTF_PIN0_gv   = 0x48,  /* Port F Pin 0 */
+    EVSYS_CHANNEL4_PORTF_PIN1_gv   = 0x49,  /* Port F Pin 1 */
+    EVSYS_CHANNEL4_PORTF_PIN2_gv   = 0x4A,  /* Port F Pin 2 */
+    EVSYS_CHANNEL4_PORTF_PIN3_gv   = 0x4B,  /* Port F Pin 3 */
+    EVSYS_CHANNEL4_PORTF_PIN4_gv   = 0x4C,  /* Port F Pin 4 */
+    EVSYS_CHANNEL4_PORTF_PIN5_gv   = 0x4D,  /* Port F Pin 5 */
+    EVSYS_CHANNEL4_PORTF_PIN6_gv   = 0x4E,  /* Port F Pin 6 */
+    EVSYS_CHANNEL4_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL4_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL4_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL4_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL4_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL4_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL4_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL4_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL4_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL4_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL4_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL4_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL4_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL4_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL4_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL4_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL4_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL4_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL4_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL4_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL4_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL4_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL4_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL4_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL4_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL4_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL4_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL4_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL4_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL4_values_t;
+
+/* Channel 4 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL4_enum
+{
+    EVSYS_CHANNEL4_OFF_gc          = (EVSYS_CHANNEL4_OFF_gv << EVSYS_CHANNEL4_gp),  /* Off */
+    EVSYS_CHANNEL4_UPDI_SYNCH_gc   = (EVSYS_CHANNEL4_UPDI_SYNCH_gv << EVSYS_CHANNEL4_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL4_RTC_OVF_gc      = (EVSYS_CHANNEL4_RTC_OVF_gv << EVSYS_CHANNEL4_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL4_RTC_CMP_gc      = (EVSYS_CHANNEL4_RTC_CMP_gv << EVSYS_CHANNEL4_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL4_RTC_PIT_DIV8192_gc = (EVSYS_CHANNEL4_RTC_PIT_DIV8192_gv << EVSYS_CHANNEL4_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV4096_gc = (EVSYS_CHANNEL4_RTC_PIT_DIV4096_gv << EVSYS_CHANNEL4_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV2048_gc = (EVSYS_CHANNEL4_RTC_PIT_DIV2048_gv << EVSYS_CHANNEL4_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL4_RTC_PIT_DIV1024_gc = (EVSYS_CHANNEL4_RTC_PIT_DIV1024_gv << EVSYS_CHANNEL4_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL4_CCL_LUT0_gc     = (EVSYS_CHANNEL4_CCL_LUT0_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL4_CCL_LUT1_gc     = (EVSYS_CHANNEL4_CCL_LUT1_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL4_CCL_LUT2_gc     = (EVSYS_CHANNEL4_CCL_LUT2_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL4_CCL_LUT3_gc     = (EVSYS_CHANNEL4_CCL_LUT3_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL4_CCL_LUT4_gc     = (EVSYS_CHANNEL4_CCL_LUT4_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL4_CCL_LUT5_gc     = (EVSYS_CHANNEL4_CCL_LUT5_gv << EVSYS_CHANNEL4_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL4_AC0_OUT_gc      = (EVSYS_CHANNEL4_AC0_OUT_gv << EVSYS_CHANNEL4_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL4_AC1_OUT_gc      = (EVSYS_CHANNEL4_AC1_OUT_gv << EVSYS_CHANNEL4_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL4_AC2_OUT_gc      = (EVSYS_CHANNEL4_AC2_OUT_gv << EVSYS_CHANNEL4_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL4_ADC0_RESRDY_gc  = (EVSYS_CHANNEL4_ADC0_RESRDY_gv << EVSYS_CHANNEL4_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL4_PTC_RESRDY_gc   = (EVSYS_CHANNEL4_PTC_RESRDY_gv << EVSYS_CHANNEL4_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL4_ZCD0_gc         = (EVSYS_CHANNEL4_ZCD0_gv << EVSYS_CHANNEL4_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL4_ZCD1_gc         = (EVSYS_CHANNEL4_ZCD1_gv << EVSYS_CHANNEL4_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL4_PORTE_PIN0_gc   = (EVSYS_CHANNEL4_PORTE_PIN0_gv << EVSYS_CHANNEL4_gp),  /* Port E Pin 0 */
+    EVSYS_CHANNEL4_PORTE_PIN1_gc   = (EVSYS_CHANNEL4_PORTE_PIN1_gv << EVSYS_CHANNEL4_gp),  /* Port E Pin 1 */
+    EVSYS_CHANNEL4_PORTE_PIN2_gc   = (EVSYS_CHANNEL4_PORTE_PIN2_gv << EVSYS_CHANNEL4_gp),  /* Port E Pin 2 */
+    EVSYS_CHANNEL4_PORTE_PIN3_gc   = (EVSYS_CHANNEL4_PORTE_PIN3_gv << EVSYS_CHANNEL4_gp),  /* Port E Pin 3 */
+    EVSYS_CHANNEL4_PORTF_PIN0_gc   = (EVSYS_CHANNEL4_PORTF_PIN0_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 0 */
+    EVSYS_CHANNEL4_PORTF_PIN1_gc   = (EVSYS_CHANNEL4_PORTF_PIN1_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 1 */
+    EVSYS_CHANNEL4_PORTF_PIN2_gc   = (EVSYS_CHANNEL4_PORTF_PIN2_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 2 */
+    EVSYS_CHANNEL4_PORTF_PIN3_gc   = (EVSYS_CHANNEL4_PORTF_PIN3_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 3 */
+    EVSYS_CHANNEL4_PORTF_PIN4_gc   = (EVSYS_CHANNEL4_PORTF_PIN4_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 4 */
+    EVSYS_CHANNEL4_PORTF_PIN5_gc   = (EVSYS_CHANNEL4_PORTF_PIN5_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 5 */
+    EVSYS_CHANNEL4_PORTF_PIN6_gc   = (EVSYS_CHANNEL4_PORTF_PIN6_gv << EVSYS_CHANNEL4_gp),  /* Port F Pin 6 */
+    EVSYS_CHANNEL4_USART0_XCK_gc   = (EVSYS_CHANNEL4_USART0_XCK_gv << EVSYS_CHANNEL4_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL4_USART1_XCK_gc   = (EVSYS_CHANNEL4_USART1_XCK_gv << EVSYS_CHANNEL4_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL4_USART2_XCK_gc   = (EVSYS_CHANNEL4_USART2_XCK_gv << EVSYS_CHANNEL4_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL4_USART3_XCK_gc   = (EVSYS_CHANNEL4_USART3_XCK_gv << EVSYS_CHANNEL4_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL4_USART4_XCK_gc   = (EVSYS_CHANNEL4_USART4_XCK_gv << EVSYS_CHANNEL4_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL4_SPI0_SCK_gc     = (EVSYS_CHANNEL4_SPI0_SCK_gv << EVSYS_CHANNEL4_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL4_SPI1_SCK_gc     = (EVSYS_CHANNEL4_SPI1_SCK_gv << EVSYS_CHANNEL4_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL4_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL4_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL4_TCA0_HUNF_gc    = (EVSYS_CHANNEL4_TCA0_HUNF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL4_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL4_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL4_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL4_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL4_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL4_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL4_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL4_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL4_TCA1_HUNF_gc    = (EVSYS_CHANNEL4_TCA1_HUNF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL4_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL4_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL4_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL4_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL4_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL4_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL4_TCB0_CAPT_gc    = (EVSYS_CHANNEL4_TCB0_CAPT_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL4_TCB0_OVF_gc     = (EVSYS_CHANNEL4_TCB0_OVF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL4_TCB1_CAPT_gc    = (EVSYS_CHANNEL4_TCB1_CAPT_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL4_TCB1_OVF_gc     = (EVSYS_CHANNEL4_TCB1_OVF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL4_TCB2_CAPT_gc    = (EVSYS_CHANNEL4_TCB2_CAPT_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL4_TCB2_OVF_gc     = (EVSYS_CHANNEL4_TCB2_OVF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL4_TCB3_CAPT_gc    = (EVSYS_CHANNEL4_TCB3_CAPT_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL4_TCB3_OVF_gc     = (EVSYS_CHANNEL4_TCB3_OVF_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL4_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL4_TCD0_CMPBCLR_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL4_TCD0_CMPASET_gc = (EVSYS_CHANNEL4_TCD0_CMPASET_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL4_TCD0_CMPBSET_gc = (EVSYS_CHANNEL4_TCD0_CMPBSET_gv << EVSYS_CHANNEL4_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL4_TCD0_PROGEV_gc  = (EVSYS_CHANNEL4_TCD0_PROGEV_gv << EVSYS_CHANNEL4_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL4_t;
+
+/* Channel 5 generator select bit group values */
+typedef enum EVSYS_CHANNEL5_VALUES_enum
+{
+    EVSYS_CHANNEL5_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL5_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL5_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL5_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL5_RTC_PIT_DIV512_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV256_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV128_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV64_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL5_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL5_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL5_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL5_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL5_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL5_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL5_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL5_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL5_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL5_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL5_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL5_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL5_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL5_PORTE_PIN0_gv   = 0x40,  /* Port E Pin 0 */
+    EVSYS_CHANNEL5_PORTE_PIN1_gv   = 0x41,  /* Port E Pin 1 */
+    EVSYS_CHANNEL5_PORTE_PIN2_gv   = 0x42,  /* Port E Pin 2 */
+    EVSYS_CHANNEL5_PORTE_PIN3_gv   = 0x43,  /* Port E Pin 3 */
+    EVSYS_CHANNEL5_PORTF_PIN0_gv   = 0x48,  /* Port F Pin 0 */
+    EVSYS_CHANNEL5_PORTF_PIN1_gv   = 0x49,  /* Port F Pin 1 */
+    EVSYS_CHANNEL5_PORTF_PIN2_gv   = 0x4A,  /* Port F Pin 2 */
+    EVSYS_CHANNEL5_PORTF_PIN3_gv   = 0x4B,  /* Port F Pin 3 */
+    EVSYS_CHANNEL5_PORTF_PIN4_gv   = 0x4C,  /* Port F Pin 4 */
+    EVSYS_CHANNEL5_PORTF_PIN5_gv   = 0x4D,  /* Port F Pin 5 */
+    EVSYS_CHANNEL5_PORTF_PIN6_gv   = 0x4E,  /* Port F Pin 6 */
+    EVSYS_CHANNEL5_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL5_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL5_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL5_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL5_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL5_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL5_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL5_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL5_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL5_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL5_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL5_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL5_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL5_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL5_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL5_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL5_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL5_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL5_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL5_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL5_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL5_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL5_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL5_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL5_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL5_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL5_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL5_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL5_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL5_values_t;
+
+/* Channel 5 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL5_enum
+{
+    EVSYS_CHANNEL5_OFF_gc          = (EVSYS_CHANNEL5_OFF_gv << EVSYS_CHANNEL5_gp),  /* Off */
+    EVSYS_CHANNEL5_UPDI_SYNCH_gc   = (EVSYS_CHANNEL5_UPDI_SYNCH_gv << EVSYS_CHANNEL5_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL5_RTC_OVF_gc      = (EVSYS_CHANNEL5_RTC_OVF_gv << EVSYS_CHANNEL5_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL5_RTC_CMP_gc      = (EVSYS_CHANNEL5_RTC_CMP_gv << EVSYS_CHANNEL5_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL5_RTC_PIT_DIV512_gc = (EVSYS_CHANNEL5_RTC_PIT_DIV512_gv << EVSYS_CHANNEL5_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV256_gc = (EVSYS_CHANNEL5_RTC_PIT_DIV256_gv << EVSYS_CHANNEL5_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV128_gc = (EVSYS_CHANNEL5_RTC_PIT_DIV128_gv << EVSYS_CHANNEL5_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL5_RTC_PIT_DIV64_gc = (EVSYS_CHANNEL5_RTC_PIT_DIV64_gv << EVSYS_CHANNEL5_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL5_CCL_LUT0_gc     = (EVSYS_CHANNEL5_CCL_LUT0_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL5_CCL_LUT1_gc     = (EVSYS_CHANNEL5_CCL_LUT1_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL5_CCL_LUT2_gc     = (EVSYS_CHANNEL5_CCL_LUT2_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL5_CCL_LUT3_gc     = (EVSYS_CHANNEL5_CCL_LUT3_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL5_CCL_LUT4_gc     = (EVSYS_CHANNEL5_CCL_LUT4_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL5_CCL_LUT5_gc     = (EVSYS_CHANNEL5_CCL_LUT5_gv << EVSYS_CHANNEL5_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL5_AC0_OUT_gc      = (EVSYS_CHANNEL5_AC0_OUT_gv << EVSYS_CHANNEL5_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL5_AC1_OUT_gc      = (EVSYS_CHANNEL5_AC1_OUT_gv << EVSYS_CHANNEL5_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL5_AC2_OUT_gc      = (EVSYS_CHANNEL5_AC2_OUT_gv << EVSYS_CHANNEL5_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL5_ADC0_RESRDY_gc  = (EVSYS_CHANNEL5_ADC0_RESRDY_gv << EVSYS_CHANNEL5_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL5_PTC_RESRDY_gc   = (EVSYS_CHANNEL5_PTC_RESRDY_gv << EVSYS_CHANNEL5_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL5_ZCD0_gc         = (EVSYS_CHANNEL5_ZCD0_gv << EVSYS_CHANNEL5_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL5_ZCD1_gc         = (EVSYS_CHANNEL5_ZCD1_gv << EVSYS_CHANNEL5_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL5_PORTE_PIN0_gc   = (EVSYS_CHANNEL5_PORTE_PIN0_gv << EVSYS_CHANNEL5_gp),  /* Port E Pin 0 */
+    EVSYS_CHANNEL5_PORTE_PIN1_gc   = (EVSYS_CHANNEL5_PORTE_PIN1_gv << EVSYS_CHANNEL5_gp),  /* Port E Pin 1 */
+    EVSYS_CHANNEL5_PORTE_PIN2_gc   = (EVSYS_CHANNEL5_PORTE_PIN2_gv << EVSYS_CHANNEL5_gp),  /* Port E Pin 2 */
+    EVSYS_CHANNEL5_PORTE_PIN3_gc   = (EVSYS_CHANNEL5_PORTE_PIN3_gv << EVSYS_CHANNEL5_gp),  /* Port E Pin 3 */
+    EVSYS_CHANNEL5_PORTF_PIN0_gc   = (EVSYS_CHANNEL5_PORTF_PIN0_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 0 */
+    EVSYS_CHANNEL5_PORTF_PIN1_gc   = (EVSYS_CHANNEL5_PORTF_PIN1_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 1 */
+    EVSYS_CHANNEL5_PORTF_PIN2_gc   = (EVSYS_CHANNEL5_PORTF_PIN2_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 2 */
+    EVSYS_CHANNEL5_PORTF_PIN3_gc   = (EVSYS_CHANNEL5_PORTF_PIN3_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 3 */
+    EVSYS_CHANNEL5_PORTF_PIN4_gc   = (EVSYS_CHANNEL5_PORTF_PIN4_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 4 */
+    EVSYS_CHANNEL5_PORTF_PIN5_gc   = (EVSYS_CHANNEL5_PORTF_PIN5_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 5 */
+    EVSYS_CHANNEL5_PORTF_PIN6_gc   = (EVSYS_CHANNEL5_PORTF_PIN6_gv << EVSYS_CHANNEL5_gp),  /* Port F Pin 6 */
+    EVSYS_CHANNEL5_USART0_XCK_gc   = (EVSYS_CHANNEL5_USART0_XCK_gv << EVSYS_CHANNEL5_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL5_USART1_XCK_gc   = (EVSYS_CHANNEL5_USART1_XCK_gv << EVSYS_CHANNEL5_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL5_USART2_XCK_gc   = (EVSYS_CHANNEL5_USART2_XCK_gv << EVSYS_CHANNEL5_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL5_USART3_XCK_gc   = (EVSYS_CHANNEL5_USART3_XCK_gv << EVSYS_CHANNEL5_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL5_USART4_XCK_gc   = (EVSYS_CHANNEL5_USART4_XCK_gv << EVSYS_CHANNEL5_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL5_SPI0_SCK_gc     = (EVSYS_CHANNEL5_SPI0_SCK_gv << EVSYS_CHANNEL5_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL5_SPI1_SCK_gc     = (EVSYS_CHANNEL5_SPI1_SCK_gv << EVSYS_CHANNEL5_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL5_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL5_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL5_TCA0_HUNF_gc    = (EVSYS_CHANNEL5_TCA0_HUNF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL5_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL5_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL5_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL5_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL5_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL5_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL5_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL5_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL5_TCA1_HUNF_gc    = (EVSYS_CHANNEL5_TCA1_HUNF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL5_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL5_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL5_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL5_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL5_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL5_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL5_TCB0_CAPT_gc    = (EVSYS_CHANNEL5_TCB0_CAPT_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL5_TCB0_OVF_gc     = (EVSYS_CHANNEL5_TCB0_OVF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL5_TCB1_CAPT_gc    = (EVSYS_CHANNEL5_TCB1_CAPT_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL5_TCB1_OVF_gc     = (EVSYS_CHANNEL5_TCB1_OVF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL5_TCB2_CAPT_gc    = (EVSYS_CHANNEL5_TCB2_CAPT_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL5_TCB2_OVF_gc     = (EVSYS_CHANNEL5_TCB2_OVF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL5_TCB3_CAPT_gc    = (EVSYS_CHANNEL5_TCB3_CAPT_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL5_TCB3_OVF_gc     = (EVSYS_CHANNEL5_TCB3_OVF_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL5_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL5_TCD0_CMPBCLR_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL5_TCD0_CMPASET_gc = (EVSYS_CHANNEL5_TCD0_CMPASET_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL5_TCD0_CMPBSET_gc = (EVSYS_CHANNEL5_TCD0_CMPBSET_gv << EVSYS_CHANNEL5_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL5_TCD0_PROGEV_gc  = (EVSYS_CHANNEL5_TCD0_PROGEV_gv << EVSYS_CHANNEL5_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL5_t;
+
+/* Channel 6 generator select bit group values */
+typedef enum EVSYS_CHANNEL6_VALUES_enum
+{
+    EVSYS_CHANNEL6_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL6_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL6_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL6_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL6_RTC_PIT_DIV8192_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV4096_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV2048_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV1024_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL6_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL6_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL6_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL6_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL6_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL6_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL6_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL6_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL6_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL6_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL6_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL6_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL6_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL6_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL6_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL6_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL6_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL6_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL6_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL6_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL6_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL6_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL6_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL6_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL6_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL6_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL6_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL6_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL6_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL6_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL6_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL6_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL6_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL6_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL6_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL6_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL6_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL6_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL6_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL6_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL6_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL6_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL6_values_t;
+
+/* Channel 6 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL6_enum
+{
+    EVSYS_CHANNEL6_OFF_gc          = (EVSYS_CHANNEL6_OFF_gv << EVSYS_CHANNEL6_gp),  /* Off */
+    EVSYS_CHANNEL6_UPDI_SYNCH_gc   = (EVSYS_CHANNEL6_UPDI_SYNCH_gv << EVSYS_CHANNEL6_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL6_RTC_OVF_gc      = (EVSYS_CHANNEL6_RTC_OVF_gv << EVSYS_CHANNEL6_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL6_RTC_CMP_gc      = (EVSYS_CHANNEL6_RTC_CMP_gv << EVSYS_CHANNEL6_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL6_RTC_PIT_DIV8192_gc = (EVSYS_CHANNEL6_RTC_PIT_DIV8192_gv << EVSYS_CHANNEL6_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV4096_gc = (EVSYS_CHANNEL6_RTC_PIT_DIV4096_gv << EVSYS_CHANNEL6_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV2048_gc = (EVSYS_CHANNEL6_RTC_PIT_DIV2048_gv << EVSYS_CHANNEL6_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL6_RTC_PIT_DIV1024_gc = (EVSYS_CHANNEL6_RTC_PIT_DIV1024_gv << EVSYS_CHANNEL6_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL6_CCL_LUT0_gc     = (EVSYS_CHANNEL6_CCL_LUT0_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL6_CCL_LUT1_gc     = (EVSYS_CHANNEL6_CCL_LUT1_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL6_CCL_LUT2_gc     = (EVSYS_CHANNEL6_CCL_LUT2_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL6_CCL_LUT3_gc     = (EVSYS_CHANNEL6_CCL_LUT3_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL6_CCL_LUT4_gc     = (EVSYS_CHANNEL6_CCL_LUT4_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL6_CCL_LUT5_gc     = (EVSYS_CHANNEL6_CCL_LUT5_gv << EVSYS_CHANNEL6_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL6_AC0_OUT_gc      = (EVSYS_CHANNEL6_AC0_OUT_gv << EVSYS_CHANNEL6_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL6_AC1_OUT_gc      = (EVSYS_CHANNEL6_AC1_OUT_gv << EVSYS_CHANNEL6_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL6_AC2_OUT_gc      = (EVSYS_CHANNEL6_AC2_OUT_gv << EVSYS_CHANNEL6_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL6_ADC0_RESRDY_gc  = (EVSYS_CHANNEL6_ADC0_RESRDY_gv << EVSYS_CHANNEL6_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL6_PTC_RESRDY_gc   = (EVSYS_CHANNEL6_PTC_RESRDY_gv << EVSYS_CHANNEL6_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL6_ZCD0_gc         = (EVSYS_CHANNEL6_ZCD0_gv << EVSYS_CHANNEL6_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL6_ZCD1_gc         = (EVSYS_CHANNEL6_ZCD1_gv << EVSYS_CHANNEL6_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL6_USART0_XCK_gc   = (EVSYS_CHANNEL6_USART0_XCK_gv << EVSYS_CHANNEL6_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL6_USART1_XCK_gc   = (EVSYS_CHANNEL6_USART1_XCK_gv << EVSYS_CHANNEL6_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL6_USART2_XCK_gc   = (EVSYS_CHANNEL6_USART2_XCK_gv << EVSYS_CHANNEL6_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL6_USART3_XCK_gc   = (EVSYS_CHANNEL6_USART3_XCK_gv << EVSYS_CHANNEL6_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL6_USART4_XCK_gc   = (EVSYS_CHANNEL6_USART4_XCK_gv << EVSYS_CHANNEL6_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL6_SPI0_SCK_gc     = (EVSYS_CHANNEL6_SPI0_SCK_gv << EVSYS_CHANNEL6_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL6_SPI1_SCK_gc     = (EVSYS_CHANNEL6_SPI1_SCK_gv << EVSYS_CHANNEL6_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL6_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL6_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL6_TCA0_HUNF_gc    = (EVSYS_CHANNEL6_TCA0_HUNF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL6_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL6_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL6_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL6_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL6_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL6_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL6_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL6_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL6_TCA1_HUNF_gc    = (EVSYS_CHANNEL6_TCA1_HUNF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL6_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL6_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL6_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL6_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL6_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL6_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL6_TCB0_CAPT_gc    = (EVSYS_CHANNEL6_TCB0_CAPT_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL6_TCB0_OVF_gc     = (EVSYS_CHANNEL6_TCB0_OVF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL6_TCB1_CAPT_gc    = (EVSYS_CHANNEL6_TCB1_CAPT_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL6_TCB1_OVF_gc     = (EVSYS_CHANNEL6_TCB1_OVF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL6_TCB2_CAPT_gc    = (EVSYS_CHANNEL6_TCB2_CAPT_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL6_TCB2_OVF_gc     = (EVSYS_CHANNEL6_TCB2_OVF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL6_TCB3_CAPT_gc    = (EVSYS_CHANNEL6_TCB3_CAPT_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL6_TCB3_OVF_gc     = (EVSYS_CHANNEL6_TCB3_OVF_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL6_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL6_TCD0_CMPBCLR_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL6_TCD0_CMPASET_gc = (EVSYS_CHANNEL6_TCD0_CMPASET_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL6_TCD0_CMPBSET_gc = (EVSYS_CHANNEL6_TCD0_CMPBSET_gv << EVSYS_CHANNEL6_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL6_TCD0_PROGEV_gc  = (EVSYS_CHANNEL6_TCD0_PROGEV_gv << EVSYS_CHANNEL6_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL6_t;
+
+/* Channel 7 generator select bit group values */
+typedef enum EVSYS_CHANNEL7_VALUES_enum
+{
+    EVSYS_CHANNEL7_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL7_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL7_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL7_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL7_RTC_PIT_DIV512_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV256_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV128_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV64_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL7_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL7_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL7_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL7_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL7_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL7_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL7_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL7_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL7_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL7_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL7_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL7_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL7_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL7_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL7_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL7_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL7_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL7_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL7_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL7_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL7_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL7_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL7_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL7_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL7_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL7_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL7_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL7_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL7_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL7_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL7_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL7_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL7_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL7_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL7_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL7_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL7_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL7_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL7_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL7_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL7_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL7_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL7_values_t;
+
+/* Channel 7 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL7_enum
+{
+    EVSYS_CHANNEL7_OFF_gc          = (EVSYS_CHANNEL7_OFF_gv << EVSYS_CHANNEL7_gp),  /* Off */
+    EVSYS_CHANNEL7_UPDI_SYNCH_gc   = (EVSYS_CHANNEL7_UPDI_SYNCH_gv << EVSYS_CHANNEL7_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL7_RTC_OVF_gc      = (EVSYS_CHANNEL7_RTC_OVF_gv << EVSYS_CHANNEL7_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL7_RTC_CMP_gc      = (EVSYS_CHANNEL7_RTC_CMP_gv << EVSYS_CHANNEL7_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL7_RTC_PIT_DIV512_gc = (EVSYS_CHANNEL7_RTC_PIT_DIV512_gv << EVSYS_CHANNEL7_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV256_gc = (EVSYS_CHANNEL7_RTC_PIT_DIV256_gv << EVSYS_CHANNEL7_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV128_gc = (EVSYS_CHANNEL7_RTC_PIT_DIV128_gv << EVSYS_CHANNEL7_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL7_RTC_PIT_DIV64_gc = (EVSYS_CHANNEL7_RTC_PIT_DIV64_gv << EVSYS_CHANNEL7_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL7_CCL_LUT0_gc     = (EVSYS_CHANNEL7_CCL_LUT0_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL7_CCL_LUT1_gc     = (EVSYS_CHANNEL7_CCL_LUT1_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL7_CCL_LUT2_gc     = (EVSYS_CHANNEL7_CCL_LUT2_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL7_CCL_LUT3_gc     = (EVSYS_CHANNEL7_CCL_LUT3_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL7_CCL_LUT4_gc     = (EVSYS_CHANNEL7_CCL_LUT4_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL7_CCL_LUT5_gc     = (EVSYS_CHANNEL7_CCL_LUT5_gv << EVSYS_CHANNEL7_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL7_AC0_OUT_gc      = (EVSYS_CHANNEL7_AC0_OUT_gv << EVSYS_CHANNEL7_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL7_AC1_OUT_gc      = (EVSYS_CHANNEL7_AC1_OUT_gv << EVSYS_CHANNEL7_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL7_AC2_OUT_gc      = (EVSYS_CHANNEL7_AC2_OUT_gv << EVSYS_CHANNEL7_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL7_ADC0_RESRDY_gc  = (EVSYS_CHANNEL7_ADC0_RESRDY_gv << EVSYS_CHANNEL7_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL7_PTC_RESRDY_gc   = (EVSYS_CHANNEL7_PTC_RESRDY_gv << EVSYS_CHANNEL7_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL7_ZCD0_gc         = (EVSYS_CHANNEL7_ZCD0_gv << EVSYS_CHANNEL7_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL7_ZCD1_gc         = (EVSYS_CHANNEL7_ZCD1_gv << EVSYS_CHANNEL7_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL7_USART0_XCK_gc   = (EVSYS_CHANNEL7_USART0_XCK_gv << EVSYS_CHANNEL7_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL7_USART1_XCK_gc   = (EVSYS_CHANNEL7_USART1_XCK_gv << EVSYS_CHANNEL7_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL7_USART2_XCK_gc   = (EVSYS_CHANNEL7_USART2_XCK_gv << EVSYS_CHANNEL7_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL7_USART3_XCK_gc   = (EVSYS_CHANNEL7_USART3_XCK_gv << EVSYS_CHANNEL7_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL7_USART4_XCK_gc   = (EVSYS_CHANNEL7_USART4_XCK_gv << EVSYS_CHANNEL7_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL7_SPI0_SCK_gc     = (EVSYS_CHANNEL7_SPI0_SCK_gv << EVSYS_CHANNEL7_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL7_SPI1_SCK_gc     = (EVSYS_CHANNEL7_SPI1_SCK_gv << EVSYS_CHANNEL7_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL7_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL7_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL7_TCA0_HUNF_gc    = (EVSYS_CHANNEL7_TCA0_HUNF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL7_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL7_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL7_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL7_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL7_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL7_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL7_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL7_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL7_TCA1_HUNF_gc    = (EVSYS_CHANNEL7_TCA1_HUNF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL7_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL7_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL7_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL7_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL7_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL7_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL7_TCB0_CAPT_gc    = (EVSYS_CHANNEL7_TCB0_CAPT_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL7_TCB0_OVF_gc     = (EVSYS_CHANNEL7_TCB0_OVF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL7_TCB1_CAPT_gc    = (EVSYS_CHANNEL7_TCB1_CAPT_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL7_TCB1_OVF_gc     = (EVSYS_CHANNEL7_TCB1_OVF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL7_TCB2_CAPT_gc    = (EVSYS_CHANNEL7_TCB2_CAPT_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL7_TCB2_OVF_gc     = (EVSYS_CHANNEL7_TCB2_OVF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL7_TCB3_CAPT_gc    = (EVSYS_CHANNEL7_TCB3_CAPT_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL7_TCB3_OVF_gc     = (EVSYS_CHANNEL7_TCB3_OVF_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL7_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL7_TCD0_CMPBCLR_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL7_TCD0_CMPASET_gc = (EVSYS_CHANNEL7_TCD0_CMPASET_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL7_TCD0_CMPBSET_gc = (EVSYS_CHANNEL7_TCD0_CMPBSET_gv << EVSYS_CHANNEL7_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL7_TCD0_PROGEV_gc  = (EVSYS_CHANNEL7_TCD0_PROGEV_gv << EVSYS_CHANNEL7_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL7_t;
+
+/* Channel 8 generator select bit group values */
+typedef enum EVSYS_CHANNEL8_VALUES_enum
+{
+    EVSYS_CHANNEL8_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL8_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL8_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL8_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL8_RTC_PIT_DIV8192_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV4096_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV2048_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV1024_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL8_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL8_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL8_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL8_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL8_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL8_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL8_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL8_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL8_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL8_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL8_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL8_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL8_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL8_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL8_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL8_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL8_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL8_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL8_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL8_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL8_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL8_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL8_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL8_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL8_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL8_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL8_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL8_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL8_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL8_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL8_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL8_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL8_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL8_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL8_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL8_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL8_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL8_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL8_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL8_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL8_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL8_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL8_values_t;
+
+/* Channel 8 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL8_enum
+{
+    EVSYS_CHANNEL8_OFF_gc          = (EVSYS_CHANNEL8_OFF_gv << EVSYS_CHANNEL8_gp),  /* Off */
+    EVSYS_CHANNEL8_UPDI_SYNCH_gc   = (EVSYS_CHANNEL8_UPDI_SYNCH_gv << EVSYS_CHANNEL8_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL8_RTC_OVF_gc      = (EVSYS_CHANNEL8_RTC_OVF_gv << EVSYS_CHANNEL8_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL8_RTC_CMP_gc      = (EVSYS_CHANNEL8_RTC_CMP_gv << EVSYS_CHANNEL8_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL8_RTC_PIT_DIV8192_gc = (EVSYS_CHANNEL8_RTC_PIT_DIV8192_gv << EVSYS_CHANNEL8_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV4096_gc = (EVSYS_CHANNEL8_RTC_PIT_DIV4096_gv << EVSYS_CHANNEL8_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV2048_gc = (EVSYS_CHANNEL8_RTC_PIT_DIV2048_gv << EVSYS_CHANNEL8_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL8_RTC_PIT_DIV1024_gc = (EVSYS_CHANNEL8_RTC_PIT_DIV1024_gv << EVSYS_CHANNEL8_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL8_CCL_LUT0_gc     = (EVSYS_CHANNEL8_CCL_LUT0_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL8_CCL_LUT1_gc     = (EVSYS_CHANNEL8_CCL_LUT1_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL8_CCL_LUT2_gc     = (EVSYS_CHANNEL8_CCL_LUT2_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL8_CCL_LUT3_gc     = (EVSYS_CHANNEL8_CCL_LUT3_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL8_CCL_LUT4_gc     = (EVSYS_CHANNEL8_CCL_LUT4_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL8_CCL_LUT5_gc     = (EVSYS_CHANNEL8_CCL_LUT5_gv << EVSYS_CHANNEL8_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL8_AC0_OUT_gc      = (EVSYS_CHANNEL8_AC0_OUT_gv << EVSYS_CHANNEL8_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL8_AC1_OUT_gc      = (EVSYS_CHANNEL8_AC1_OUT_gv << EVSYS_CHANNEL8_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL8_AC2_OUT_gc      = (EVSYS_CHANNEL8_AC2_OUT_gv << EVSYS_CHANNEL8_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL8_ADC0_RESRDY_gc  = (EVSYS_CHANNEL8_ADC0_RESRDY_gv << EVSYS_CHANNEL8_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL8_PTC_RESRDY_gc   = (EVSYS_CHANNEL8_PTC_RESRDY_gv << EVSYS_CHANNEL8_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL8_ZCD0_gc         = (EVSYS_CHANNEL8_ZCD0_gv << EVSYS_CHANNEL8_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL8_ZCD1_gc         = (EVSYS_CHANNEL8_ZCD1_gv << EVSYS_CHANNEL8_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL8_USART0_XCK_gc   = (EVSYS_CHANNEL8_USART0_XCK_gv << EVSYS_CHANNEL8_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL8_USART1_XCK_gc   = (EVSYS_CHANNEL8_USART1_XCK_gv << EVSYS_CHANNEL8_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL8_USART2_XCK_gc   = (EVSYS_CHANNEL8_USART2_XCK_gv << EVSYS_CHANNEL8_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL8_USART3_XCK_gc   = (EVSYS_CHANNEL8_USART3_XCK_gv << EVSYS_CHANNEL8_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL8_USART4_XCK_gc   = (EVSYS_CHANNEL8_USART4_XCK_gv << EVSYS_CHANNEL8_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL8_SPI0_SCK_gc     = (EVSYS_CHANNEL8_SPI0_SCK_gv << EVSYS_CHANNEL8_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL8_SPI1_SCK_gc     = (EVSYS_CHANNEL8_SPI1_SCK_gv << EVSYS_CHANNEL8_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL8_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL8_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL8_TCA0_HUNF_gc    = (EVSYS_CHANNEL8_TCA0_HUNF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL8_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL8_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL8_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL8_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL8_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL8_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL8_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL8_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL8_TCA1_HUNF_gc    = (EVSYS_CHANNEL8_TCA1_HUNF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL8_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL8_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL8_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL8_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL8_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL8_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL8_TCB0_CAPT_gc    = (EVSYS_CHANNEL8_TCB0_CAPT_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL8_TCB0_OVF_gc     = (EVSYS_CHANNEL8_TCB0_OVF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL8_TCB1_CAPT_gc    = (EVSYS_CHANNEL8_TCB1_CAPT_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL8_TCB1_OVF_gc     = (EVSYS_CHANNEL8_TCB1_OVF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL8_TCB2_CAPT_gc    = (EVSYS_CHANNEL8_TCB2_CAPT_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL8_TCB2_OVF_gc     = (EVSYS_CHANNEL8_TCB2_OVF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL8_TCB3_CAPT_gc    = (EVSYS_CHANNEL8_TCB3_CAPT_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL8_TCB3_OVF_gc     = (EVSYS_CHANNEL8_TCB3_OVF_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL8_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL8_TCD0_CMPBCLR_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL8_TCD0_CMPASET_gc = (EVSYS_CHANNEL8_TCD0_CMPASET_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL8_TCD0_CMPBSET_gc = (EVSYS_CHANNEL8_TCD0_CMPBSET_gv << EVSYS_CHANNEL8_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL8_TCD0_PROGEV_gc  = (EVSYS_CHANNEL8_TCD0_PROGEV_gv << EVSYS_CHANNEL8_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL8_t;
+
+/* Channel 9 generator select bit group values */
+typedef enum EVSYS_CHANNEL9_VALUES_enum
+{
+    EVSYS_CHANNEL9_OFF_gv          = 0x00,  /* Off */
+    EVSYS_CHANNEL9_UPDI_SYNCH_gv   = 0x01,  /* UPDI SYNCH character */
+    EVSYS_CHANNEL9_RTC_OVF_gv      = 0x06,  /* Real Time Counter overflow */
+    EVSYS_CHANNEL9_RTC_CMP_gv      = 0x07,  /* Real Time Counter compare */
+    EVSYS_CHANNEL9_RTC_PIT_DIV512_gv = 0x08,  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV256_gv = 0x09,  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV128_gv = 0x0A,  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV64_gv = 0x0B,  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL9_CCL_LUT0_gv     = 0x10,  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL9_CCL_LUT1_gv     = 0x11,  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL9_CCL_LUT2_gv     = 0x12,  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL9_CCL_LUT3_gv     = 0x13,  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL9_CCL_LUT4_gv     = 0x14,  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL9_CCL_LUT5_gv     = 0x15,  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL9_AC0_OUT_gv      = 0x20,  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL9_AC1_OUT_gv      = 0x21,  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL9_AC2_OUT_gv      = 0x22,  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL9_ADC0_RESRDY_gv  = 0x24,  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL9_PTC_RESRDY_gv   = 0x28,  /* PTC Result Ready */
+    EVSYS_CHANNEL9_ZCD0_gv         = 0x30,  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL9_ZCD1_gv         = 0x31,  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL9_USART0_XCK_gv   = 0x60,  /* USART 0 XCK */
+    EVSYS_CHANNEL9_USART1_XCK_gv   = 0x61,  /* USART 1 XCK */
+    EVSYS_CHANNEL9_USART2_XCK_gv   = 0x62,  /* USART 2 XCK */
+    EVSYS_CHANNEL9_USART3_XCK_gv   = 0x63,  /* USART 3 XCK */
+    EVSYS_CHANNEL9_USART4_XCK_gv   = 0x64,  /* USART 4 XCK */
+    EVSYS_CHANNEL9_SPI0_SCK_gv     = 0x68,  /* SPI 0 SCK */
+    EVSYS_CHANNEL9_SPI1_SCK_gv     = 0x69,  /* SPI 1 SCK */
+    EVSYS_CHANNEL9_TCA0_OVF_LUNF_gv = 0x80,  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL9_TCA0_HUNF_gv    = 0x81,  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL9_TCA0_CMP0_LCMP0_gv = 0x84,  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL9_TCA0_CMP1_LCMP1_gv = 0x85,  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL9_TCA0_CMP2_LCMP2_gv = 0x86,  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL9_TCA1_OVF_LUNF_gv = 0x88,  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL9_TCA1_HUNF_gv    = 0x89,  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL9_TCA1_CMP0_LCMP0_gv = 0x8C,  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL9_TCA1_CMP1_LCMP1_gv = 0x8D,  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL9_TCA1_CMP2_LCMP2_gv = 0x8E,  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL9_TCB0_CAPT_gv    = 0xA0,  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL9_TCB0_OVF_gv     = 0xA1,  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL9_TCB1_CAPT_gv    = 0xA2,  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL9_TCB1_OVF_gv     = 0xA3,  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL9_TCB2_CAPT_gv    = 0xA4,  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL9_TCB2_OVF_gv     = 0xA5,  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL9_TCB3_CAPT_gv    = 0xA6,  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL9_TCB3_OVF_gv     = 0xA7,  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL9_TCD0_CMPBCLR_gv = 0xB0,  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL9_TCD0_CMPASET_gv = 0xB1,  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL9_TCD0_CMPBSET_gv = 0xB2,  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL9_TCD0_PROGEV_gv  = 0xB3   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL9_values_t;
+
+/* Channel 9 generator select bit group configurations*/
+typedef enum EVSYS_CHANNEL9_enum
+{
+    EVSYS_CHANNEL9_OFF_gc          = (EVSYS_CHANNEL9_OFF_gv << EVSYS_CHANNEL9_gp),  /* Off */
+    EVSYS_CHANNEL9_UPDI_SYNCH_gc   = (EVSYS_CHANNEL9_UPDI_SYNCH_gv << EVSYS_CHANNEL9_gp),  /* UPDI SYNCH character */
+    EVSYS_CHANNEL9_RTC_OVF_gc      = (EVSYS_CHANNEL9_RTC_OVF_gv << EVSYS_CHANNEL9_gp),  /* Real Time Counter overflow */
+    EVSYS_CHANNEL9_RTC_CMP_gc      = (EVSYS_CHANNEL9_RTC_CMP_gv << EVSYS_CHANNEL9_gp),  /* Real Time Counter compare */
+    EVSYS_CHANNEL9_RTC_PIT_DIV512_gc = (EVSYS_CHANNEL9_RTC_PIT_DIV512_gv << EVSYS_CHANNEL9_gp),  /* Periodic Interrupt Timer output 0 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV256_gc = (EVSYS_CHANNEL9_RTC_PIT_DIV256_gv << EVSYS_CHANNEL9_gp),  /* Periodic Interrupt Timer output 1 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV128_gc = (EVSYS_CHANNEL9_RTC_PIT_DIV128_gv << EVSYS_CHANNEL9_gp),  /* Periodic Interrupt Timer output 2 */
+    EVSYS_CHANNEL9_RTC_PIT_DIV64_gc = (EVSYS_CHANNEL9_RTC_PIT_DIV64_gv << EVSYS_CHANNEL9_gp),  /* Periodic Interrupt Timer output 3 */
+    EVSYS_CHANNEL9_CCL_LUT0_gc     = (EVSYS_CHANNEL9_CCL_LUT0_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT0 */
+    EVSYS_CHANNEL9_CCL_LUT1_gc     = (EVSYS_CHANNEL9_CCL_LUT1_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT1 */
+    EVSYS_CHANNEL9_CCL_LUT2_gc     = (EVSYS_CHANNEL9_CCL_LUT2_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT2 */
+    EVSYS_CHANNEL9_CCL_LUT3_gc     = (EVSYS_CHANNEL9_CCL_LUT3_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT3 */
+    EVSYS_CHANNEL9_CCL_LUT4_gc     = (EVSYS_CHANNEL9_CCL_LUT4_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT4 */
+    EVSYS_CHANNEL9_CCL_LUT5_gc     = (EVSYS_CHANNEL9_CCL_LUT5_gv << EVSYS_CHANNEL9_gp),  /* Configurable Custom Logic LUT5 */
+    EVSYS_CHANNEL9_AC0_OUT_gc      = (EVSYS_CHANNEL9_AC0_OUT_gv << EVSYS_CHANNEL9_gp),  /* Analog Comparator 0 out */
+    EVSYS_CHANNEL9_AC1_OUT_gc      = (EVSYS_CHANNEL9_AC1_OUT_gv << EVSYS_CHANNEL9_gp),  /* Analog Comparator 1 out */
+    EVSYS_CHANNEL9_AC2_OUT_gc      = (EVSYS_CHANNEL9_AC2_OUT_gv << EVSYS_CHANNEL9_gp),  /* Analog Comparator 2 out */
+    EVSYS_CHANNEL9_ADC0_RESRDY_gc  = (EVSYS_CHANNEL9_ADC0_RESRDY_gv << EVSYS_CHANNEL9_gp),  /* ADC 0 Result Ready */
+    EVSYS_CHANNEL9_PTC_RESRDY_gc   = (EVSYS_CHANNEL9_PTC_RESRDY_gv << EVSYS_CHANNEL9_gp),  /* PTC Result Ready */
+    EVSYS_CHANNEL9_ZCD0_gc         = (EVSYS_CHANNEL9_ZCD0_gv << EVSYS_CHANNEL9_gp),  /* Zero Cross Detect 0 out */
+    EVSYS_CHANNEL9_ZCD1_gc         = (EVSYS_CHANNEL9_ZCD1_gv << EVSYS_CHANNEL9_gp),  /* Zero Cross Detect 1 out */
+    EVSYS_CHANNEL9_USART0_XCK_gc   = (EVSYS_CHANNEL9_USART0_XCK_gv << EVSYS_CHANNEL9_gp),  /* USART 0 XCK */
+    EVSYS_CHANNEL9_USART1_XCK_gc   = (EVSYS_CHANNEL9_USART1_XCK_gv << EVSYS_CHANNEL9_gp),  /* USART 1 XCK */
+    EVSYS_CHANNEL9_USART2_XCK_gc   = (EVSYS_CHANNEL9_USART2_XCK_gv << EVSYS_CHANNEL9_gp),  /* USART 2 XCK */
+    EVSYS_CHANNEL9_USART3_XCK_gc   = (EVSYS_CHANNEL9_USART3_XCK_gv << EVSYS_CHANNEL9_gp),  /* USART 3 XCK */
+    EVSYS_CHANNEL9_USART4_XCK_gc   = (EVSYS_CHANNEL9_USART4_XCK_gv << EVSYS_CHANNEL9_gp),  /* USART 4 XCK */
+    EVSYS_CHANNEL9_SPI0_SCK_gc     = (EVSYS_CHANNEL9_SPI0_SCK_gv << EVSYS_CHANNEL9_gp),  /* SPI 0 SCK */
+    EVSYS_CHANNEL9_SPI1_SCK_gc     = (EVSYS_CHANNEL9_SPI1_SCK_gv << EVSYS_CHANNEL9_gp),  /* SPI 1 SCK */
+    EVSYS_CHANNEL9_TCA0_OVF_LUNF_gc = (EVSYS_CHANNEL9_TCA0_OVF_LUNF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A0 overflow / low byte timer underflow */
+    EVSYS_CHANNEL9_TCA0_HUNF_gc    = (EVSYS_CHANNEL9_TCA0_HUNF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A0 high byte timer underflow */
+    EVSYS_CHANNEL9_TCA0_CMP0_LCMP0_gc = (EVSYS_CHANNEL9_TCA0_CMP0_LCMP0_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A0 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL9_TCA0_CMP1_LCMP1_gc = (EVSYS_CHANNEL9_TCA0_CMP1_LCMP1_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A0 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL9_TCA0_CMP2_LCMP2_gc = (EVSYS_CHANNEL9_TCA0_CMP2_LCMP2_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A0 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL9_TCA1_OVF_LUNF_gc = (EVSYS_CHANNEL9_TCA1_OVF_LUNF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A1 overflow / low byte timer underflow */
+    EVSYS_CHANNEL9_TCA1_HUNF_gc    = (EVSYS_CHANNEL9_TCA1_HUNF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A1 high byte timer underflow */
+    EVSYS_CHANNEL9_TCA1_CMP0_LCMP0_gc = (EVSYS_CHANNEL9_TCA1_CMP0_LCMP0_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A1 compare 0 / low byte timer compare 0 */
+    EVSYS_CHANNEL9_TCA1_CMP1_LCMP1_gc = (EVSYS_CHANNEL9_TCA1_CMP1_LCMP1_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A1 compare 1 / low byte timer compare 1 */
+    EVSYS_CHANNEL9_TCA1_CMP2_LCMP2_gc = (EVSYS_CHANNEL9_TCA1_CMP2_LCMP2_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter A1 compare 2 / low byte timer compare 2 */
+    EVSYS_CHANNEL9_TCB0_CAPT_gc    = (EVSYS_CHANNEL9_TCB0_CAPT_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B0 capture */
+    EVSYS_CHANNEL9_TCB0_OVF_gc     = (EVSYS_CHANNEL9_TCB0_OVF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B0 overflow */
+    EVSYS_CHANNEL9_TCB1_CAPT_gc    = (EVSYS_CHANNEL9_TCB1_CAPT_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B1 capture */
+    EVSYS_CHANNEL9_TCB1_OVF_gc     = (EVSYS_CHANNEL9_TCB1_OVF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B1 overflow */
+    EVSYS_CHANNEL9_TCB2_CAPT_gc    = (EVSYS_CHANNEL9_TCB2_CAPT_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B2 capture */
+    EVSYS_CHANNEL9_TCB2_OVF_gc     = (EVSYS_CHANNEL9_TCB2_OVF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B2 overflow */
+    EVSYS_CHANNEL9_TCB3_CAPT_gc    = (EVSYS_CHANNEL9_TCB3_CAPT_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B3 capture */
+    EVSYS_CHANNEL9_TCB3_OVF_gc     = (EVSYS_CHANNEL9_TCB3_OVF_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter B3 overflow */
+    EVSYS_CHANNEL9_TCD0_CMPBCLR_gc = (EVSYS_CHANNEL9_TCD0_CMPBCLR_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter D0 event 0 */
+    EVSYS_CHANNEL9_TCD0_CMPASET_gc = (EVSYS_CHANNEL9_TCD0_CMPASET_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter D0 event 1 */
+    EVSYS_CHANNEL9_TCD0_CMPBSET_gc = (EVSYS_CHANNEL9_TCD0_CMPBSET_gv << EVSYS_CHANNEL9_gp),  /* Timer/Counter D0 event 2 */
+    EVSYS_CHANNEL9_TCD0_PROGEV_gc  = (EVSYS_CHANNEL9_TCD0_PROGEV_gv << EVSYS_CHANNEL9_gp)   /* Timer/Counter D0 event 3 */
+} EVSYS_CHANNEL9_t;
+
+/* Software event on channel select bit group values */
+typedef enum EVSYS_SWEVENTA_VALUES_enum
+{
+    EVSYS_SWEVENTA_CH0_gv          = 0x01,  /* Software event on channel 0 */
+    EVSYS_SWEVENTA_CH1_gv          = 0x02,  /* Software event on channel 1 */
+    EVSYS_SWEVENTA_CH2_gv          = 0x04,  /* Software event on channel 2 */
+    EVSYS_SWEVENTA_CH3_gv          = 0x08,  /* Software event on channel 3 */
+    EVSYS_SWEVENTA_CH4_gv          = 0x10,  /* Software event on channel 4 */
+    EVSYS_SWEVENTA_CH5_gv          = 0x20,  /* Software event on channel 5 */
+    EVSYS_SWEVENTA_CH6_gv          = 0x40,  /* Software event on channel 6 */
+    EVSYS_SWEVENTA_CH7_gv          = 0x80   /* Software event on channel 7 */
+} EVSYS_SWEVENTA_values_t;
+
+/* Software event on channel select bit group configurations*/
+typedef enum EVSYS_SWEVENTA_enum
+{
+    EVSYS_SWEVENTA_CH0_gc          = (EVSYS_SWEVENTA_CH0_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 0 */
+    EVSYS_SWEVENTA_CH1_gc          = (EVSYS_SWEVENTA_CH1_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 1 */
+    EVSYS_SWEVENTA_CH2_gc          = (EVSYS_SWEVENTA_CH2_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 2 */
+    EVSYS_SWEVENTA_CH3_gc          = (EVSYS_SWEVENTA_CH3_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 3 */
+    EVSYS_SWEVENTA_CH4_gc          = (EVSYS_SWEVENTA_CH4_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 4 */
+    EVSYS_SWEVENTA_CH5_gc          = (EVSYS_SWEVENTA_CH5_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 5 */
+    EVSYS_SWEVENTA_CH6_gc          = (EVSYS_SWEVENTA_CH6_gv << EVSYS_SWEVENTA_gp),  /* Software event on channel 6 */
+    EVSYS_SWEVENTA_CH7_gc          = (EVSYS_SWEVENTA_CH7_gv << EVSYS_SWEVENTA_gp)   /* Software event on channel 7 */
+} EVSYS_SWEVENTA_t;
+
+/* Software event on channel select bit group values */
+typedef enum EVSYS_SWEVENTB_VALUES_enum
+{
+    EVSYS_SWEVENTB_CH8_gv          = 0x01,  /* Software event on channel 8 */
+    EVSYS_SWEVENTB_CH9_gv          = 0x02   /* Software event on channel 9 */
+} EVSYS_SWEVENTB_values_t;
+
+/* Software event on channel select bit group configurations*/
+typedef enum EVSYS_SWEVENTB_enum
+{
+    EVSYS_SWEVENTB_CH8_gc          = (EVSYS_SWEVENTB_CH8_gv << EVSYS_SWEVENTB_gp),  /* Software event on channel 8 */
+    EVSYS_SWEVENTB_CH9_gc          = (EVSYS_SWEVENTB_CH9_gv << EVSYS_SWEVENTB_gp)   /* Software event on channel 9 */
+} EVSYS_SWEVENTB_t;
+
+/* User channel select bit group values */
+typedef enum EVSYS_USER_VALUES_enum
+{
+    EVSYS_USER_OFF_gv              = 0x00,  /* Off, No Eventsys Channel connected */
+    EVSYS_USER_CHANNEL0_gv         = 0x01,  /* Connect user to event channel 0 */
+    EVSYS_USER_CHANNEL1_gv         = 0x02,  /* Connect user to event channel 1 */
+    EVSYS_USER_CHANNEL2_gv         = 0x03,  /* Connect user to event channel 2 */
+    EVSYS_USER_CHANNEL3_gv         = 0x04,  /* Connect user to event channel 3 */
+    EVSYS_USER_CHANNEL4_gv         = 0x05,  /* Connect user to event channel 4 */
+    EVSYS_USER_CHANNEL5_gv         = 0x06,  /* Connect user to event channel 5 */
+    EVSYS_USER_CHANNEL6_gv         = 0x07,  /* Connect user to event channel 6 */
+    EVSYS_USER_CHANNEL7_gv         = 0x08,  /* Connect user to event channel 7 */
+    EVSYS_USER_CHANNEL8_gv         = 0x09,  /* Connect user to event channel 8 */
+    EVSYS_USER_CHANNEL9_gv         = 0x0A   /* Connect user to event channel 9 */
+} EVSYS_USER_values_t;
+
+/* User channel select bit group configurations*/
+typedef enum EVSYS_USER_enum
+{
+    EVSYS_USER_OFF_gc              = (EVSYS_USER_OFF_gv << EVSYS_USER_gp),  /* Off, No Eventsys Channel connected */
+    EVSYS_USER_CHANNEL0_gc         = (EVSYS_USER_CHANNEL0_gv << EVSYS_USER_gp),  /* Connect user to event channel 0 */
+    EVSYS_USER_CHANNEL1_gc         = (EVSYS_USER_CHANNEL1_gv << EVSYS_USER_gp),  /* Connect user to event channel 1 */
+    EVSYS_USER_CHANNEL2_gc         = (EVSYS_USER_CHANNEL2_gv << EVSYS_USER_gp),  /* Connect user to event channel 2 */
+    EVSYS_USER_CHANNEL3_gc         = (EVSYS_USER_CHANNEL3_gv << EVSYS_USER_gp),  /* Connect user to event channel 3 */
+    EVSYS_USER_CHANNEL4_gc         = (EVSYS_USER_CHANNEL4_gv << EVSYS_USER_gp),  /* Connect user to event channel 4 */
+    EVSYS_USER_CHANNEL5_gc         = (EVSYS_USER_CHANNEL5_gv << EVSYS_USER_gp),  /* Connect user to event channel 5 */
+    EVSYS_USER_CHANNEL6_gc         = (EVSYS_USER_CHANNEL6_gv << EVSYS_USER_gp),  /* Connect user to event channel 6 */
+    EVSYS_USER_CHANNEL7_gc         = (EVSYS_USER_CHANNEL7_gv << EVSYS_USER_gp),  /* Connect user to event channel 7 */
+    EVSYS_USER_CHANNEL8_gc         = (EVSYS_USER_CHANNEL8_gv << EVSYS_USER_gp),  /* Connect user to event channel 8 */
+    EVSYS_USER_CHANNEL9_gc         = (EVSYS_USER_CHANNEL9_gv << EVSYS_USER_gp)   /* Connect user to event channel 9 */
+} EVSYS_USER_t;
+
+/*
+--------------------------------------------------------------------------
+FUSE - Fuses
+--------------------------------------------------------------------------
+*/
+
+/* Fuses */
+typedef struct FUSE_struct
+{
+    register8_t WDTCFG;  /* Watchdog Configuration */
+    register8_t BODCFG;  /* BOD Configuration */
+    register8_t OSCCFG;  /* Oscillator Configuration */
+    register8_t reserved_1[2];
+    register8_t SYSCFG0;  /* System Configuration 0 */
+    register8_t SYSCFG1;  /* System Configuration 1 */
+    register8_t CODESIZE;  /* Code Section Size */
+    register8_t BOOTSIZE;  /* Boot Section Size */
+} FUSE_t;
+
+/* avr-libc typedef for avr/fuse.h */
+typedef FUSE_t NVM_FUSES_t;
+
+/* BOD Operation in Active Mode select bit group values */
+typedef enum ACTIVE_VALUES_enum
+{
+    ACTIVE_DISABLE_gv              = 0x00,  /* BOD disabled */
+    ACTIVE_ENABLE_gv               = 0x01,  /* BOD enabled in continuous mode */
+    ACTIVE_SAMPLE_gv               = 0x02,  /* BOD enabled in sampled mode */
+    ACTIVE_ENABLEWAIT_gv           = 0x03   /* BOD enabled in continuous mode. Execution is halted at wake-up until BOD is running. */
+} ACTIVE_values_t;
+
+/* BOD Operation in Active Mode select bit group configurations*/
+typedef enum ACTIVE_enum
+{
+    ACTIVE_DISABLE_gc              = (ACTIVE_DISABLE_gv << FUSE_ACTIVE_gp),  /* BOD disabled */
+    ACTIVE_ENABLE_gc               = (ACTIVE_ENABLE_gv << FUSE_ACTIVE_gp),  /* BOD enabled in continuous mode */
+    ACTIVE_SAMPLE_gc               = (ACTIVE_SAMPLE_gv << FUSE_ACTIVE_gp),  /* BOD enabled in sampled mode */
+    ACTIVE_ENABLEWAIT_gc           = (ACTIVE_ENABLEWAIT_gv << FUSE_ACTIVE_gp)   /* BOD enabled in continuous mode. Execution is halted at wake-up until BOD is running. */
+} ACTIVE_t;
+
+/* Frequency Select bit group values */
+typedef enum CLKSEL_VALUES_enum
+{
+    CLKSEL_OSCHF_gv                = 0x00,  /* 1-32MHz internal oscillator */
+    CLKSEL_OSC32K_gv               = 0x01   /* 32.768kHz internal oscillator */
+} CLKSEL_values_t;
+
+/* Frequency Select bit group configurations*/
+typedef enum CLKSEL_enum
+{
+    CLKSEL_OSCHF_gc                = (CLKSEL_OSCHF_gv << FUSE_CLKSEL_gp),  /* 1-32MHz internal oscillator */
+    CLKSEL_OSC32K_gc               = (CLKSEL_OSC32K_gv << FUSE_CLKSEL_gp)   /* 32.768kHz internal oscillator */
+} CLKSEL_t;
+
+/* CRC Select bit group values */
+typedef enum CRCSEL_VALUES_enum
+{
+    CRCSEL_CRC16_gv                = 0x00,  /* Enable CRC16 */
+    CRCSEL_CRC32_gv                = 0x01   /* Enable CRC32 */
+} CRCSEL_values_t;
+
+/* CRC Select bit group configurations*/
+typedef enum CRCSEL_enum
+{
+    CRCSEL_CRC16_gc                = (CRCSEL_CRC16_gv << FUSE_CRCSEL_bp),  /* Enable CRC16 */
+    CRCSEL_CRC32_gc                = (CRCSEL_CRC32_gv << FUSE_CRCSEL_bp)   /* Enable CRC32 */
+} CRCSEL_t;
+
+/* CRC Source select bit group values */
+typedef enum CRCSRC_VALUES_enum
+{
+    CRCSRC_FLASH_gv                = 0x00,  /* CRC of full Flash (boot, application code and application data) */
+    CRCSRC_BOOT_gv                 = 0x01,  /* CRC of boot section */
+    CRCSRC_BOOTAPP_gv              = 0x02,  /* CRC of application code and boot sections */
+    CRCSRC_NOCRC_gv                = 0x03   /* No CRC */
+} CRCSRC_values_t;
+
+/* CRC Source select bit group configurations*/
+typedef enum CRCSRC_enum
+{
+    CRCSRC_FLASH_gc                = (CRCSRC_FLASH_gv << FUSE_CRCSRC_gp),  /* CRC of full Flash (boot, application code and application data) */
+    CRCSRC_BOOT_gc                 = (CRCSRC_BOOT_gv << FUSE_CRCSRC_gp),  /* CRC of boot section */
+    CRCSRC_BOOTAPP_gc              = (CRCSRC_BOOTAPP_gv << FUSE_CRCSRC_gp),  /* CRC of application code and boot sections */
+    CRCSRC_NOCRC_gc                = (CRCSRC_NOCRC_gv << FUSE_CRCSRC_gp)   /* No CRC */
+} CRCSRC_t;
+
+/* BOD Level select bit group values */
+typedef enum LVL_VALUES_enum
+{
+    LVL_BODLEVEL0_gv               = 0x00,  /* 1.9V */
+    LVL_BODLEVEL1_gv               = 0x01,  /* 2.45V */
+    LVL_BODLEVEL2_gv               = 0x02,  /* 2.7V */
+    LVL_BODLEVEL3_gv               = 0x03   /* 2.85V */
+} LVL_values_t;
+
+/* BOD Level select bit group configurations*/
+typedef enum LVL_enum
+{
+    LVL_BODLEVEL0_gc               = (LVL_BODLEVEL0_gv << FUSE_LVL_gp),  /* 1.9V */
+    LVL_BODLEVEL1_gc               = (LVL_BODLEVEL1_gv << FUSE_LVL_gp),  /* 2.45V */
+    LVL_BODLEVEL2_gc               = (LVL_BODLEVEL2_gv << FUSE_LVL_gp),  /* 2.7V */
+    LVL_BODLEVEL3_gc               = (LVL_BODLEVEL3_gv << FUSE_LVL_gp)   /* 2.85V */
+} LVL_t;
+
+/* Watchdog Timeout Period select bit group values */
+typedef enum PERIOD_VALUES_enum
+{
+    PERIOD_OFF_gv                  = 0x00,  /* Watch-Dog timer Off */
+    PERIOD_8CLK_gv                 = 0x01,  /* 8 cycles (8ms) */
+    PERIOD_16CLK_gv                = 0x02,  /* 16 cycles (16ms) */
+    PERIOD_32CLK_gv                = 0x03,  /* 32 cycles (32ms) */
+    PERIOD_64CLK_gv                = 0x04,  /* 64 cycles (64ms) */
+    PERIOD_128CLK_gv               = 0x05,  /* 128 cycles (0.128s) */
+    PERIOD_256CLK_gv               = 0x06,  /* 256 cycles (0.256s) */
+    PERIOD_512CLK_gv               = 0x07,  /* 512 cycles (0.512s) */
+    PERIOD_1KCLK_gv                = 0x08,  /* 1K cycles (1.0s) */
+    PERIOD_2KCLK_gv                = 0x09,  /* 2K cycles (2.0s) */
+    PERIOD_4KCLK_gv                = 0x0A,  /* 4K cycles (4.0s) */
+    PERIOD_8KCLK_gv                = 0x0B   /* 8K cycles (8.0s) */
+} PERIOD_values_t;
+
+/* Watchdog Timeout Period select bit group configurations*/
+typedef enum PERIOD_enum
+{
+    PERIOD_OFF_gc                  = (PERIOD_OFF_gv << FUSE_PERIOD_gp),  /* Watch-Dog timer Off */
+    PERIOD_8CLK_gc                 = (PERIOD_8CLK_gv << FUSE_PERIOD_gp),  /* 8 cycles (8ms) */
+    PERIOD_16CLK_gc                = (PERIOD_16CLK_gv << FUSE_PERIOD_gp),  /* 16 cycles (16ms) */
+    PERIOD_32CLK_gc                = (PERIOD_32CLK_gv << FUSE_PERIOD_gp),  /* 32 cycles (32ms) */
+    PERIOD_64CLK_gc                = (PERIOD_64CLK_gv << FUSE_PERIOD_gp),  /* 64 cycles (64ms) */
+    PERIOD_128CLK_gc               = (PERIOD_128CLK_gv << FUSE_PERIOD_gp),  /* 128 cycles (0.128s) */
+    PERIOD_256CLK_gc               = (PERIOD_256CLK_gv << FUSE_PERIOD_gp),  /* 256 cycles (0.256s) */
+    PERIOD_512CLK_gc               = (PERIOD_512CLK_gv << FUSE_PERIOD_gp),  /* 512 cycles (0.512s) */
+    PERIOD_1KCLK_gc                = (PERIOD_1KCLK_gv << FUSE_PERIOD_gp),  /* 1K cycles (1.0s) */
+    PERIOD_2KCLK_gc                = (PERIOD_2KCLK_gv << FUSE_PERIOD_gp),  /* 2K cycles (2.0s) */
+    PERIOD_4KCLK_gc                = (PERIOD_4KCLK_gv << FUSE_PERIOD_gp),  /* 4K cycles (4.0s) */
+    PERIOD_8KCLK_gc                = (PERIOD_8KCLK_gv << FUSE_PERIOD_gp)   /* 8K cycles (8.0s) */
+} PERIOD_t;
+
+/* Reset Pin Configuration select bit group values */
+typedef enum RSTPINCFG_VALUES_enum
+{
+    RSTPINCFG_GPIO_gv              = 0x00,  /* GPIO mode */
+    RSTPINCFG_RST_gv               = 0x02   /* Reset mode */
+} RSTPINCFG_values_t;
+
+/* Reset Pin Configuration select bit group configurations*/
+typedef enum RSTPINCFG_enum
+{
+    RSTPINCFG_GPIO_gc              = (RSTPINCFG_GPIO_gv << FUSE_RSTPINCFG_gp),  /* GPIO mode */
+    RSTPINCFG_RST_gc               = (RSTPINCFG_RST_gv << FUSE_RSTPINCFG_gp)   /* Reset mode */
+} RSTPINCFG_t;
+
+/* BOD Sample Frequency select bit group values */
+typedef enum SAMPFREQ_VALUES_enum
+{
+    SAMPFREQ_128Hz_gv              = 0x00,  /* Sample frequency is 128 Hz */
+    SAMPFREQ_32Hz_gv               = 0x01   /* Sample frequency is 32 Hz */
+} SAMPFREQ_values_t;
+
+/* BOD Sample Frequency select bit group configurations*/
+typedef enum SAMPFREQ_enum
+{
+    SAMPFREQ_128Hz_gc              = (SAMPFREQ_128Hz_gv << FUSE_SAMPFREQ_bp),  /* Sample frequency is 128 Hz */
+    SAMPFREQ_32Hz_gc               = (SAMPFREQ_32Hz_gv << FUSE_SAMPFREQ_bp)   /* Sample frequency is 32 Hz */
+} SAMPFREQ_t;
+
+/* BOD Operation in Sleep Mode select bit group values */
+typedef enum SLEEP_VALUES_enum
+{
+    SLEEP_DISABLE_gv               = 0x00,  /* BOD disabled */
+    SLEEP_ENABLE_gv                = 0x01,  /* BOD enabled in continuous mode */
+    SLEEP_SAMPLE_gv                = 0x02   /* BOD enabled in sampled mode */
+} SLEEP_values_t;
+
+/* BOD Operation in Sleep Mode select bit group configurations*/
+typedef enum SLEEP_enum
+{
+    SLEEP_DISABLE_gc               = (SLEEP_DISABLE_gv << FUSE_SLEEP_gp),  /* BOD disabled */
+    SLEEP_ENABLE_gc                = (SLEEP_ENABLE_gv << FUSE_SLEEP_gp),  /* BOD enabled in continuous mode */
+    SLEEP_SAMPLE_gc                = (SLEEP_SAMPLE_gv << FUSE_SLEEP_gp)   /* BOD enabled in sampled mode */
+} SLEEP_t;
+
+/* Startup Time select bit group values */
+typedef enum SUT_VALUES_enum
+{
+    SUT_0MS_gv                     = 0x00,  /* 0 ms */
+    SUT_1MS_gv                     = 0x01,  /* 1 ms */
+    SUT_2MS_gv                     = 0x02,  /* 2 ms */
+    SUT_4MS_gv                     = 0x03,  /* 4 ms */
+    SUT_8MS_gv                     = 0x04,  /* 8 ms */
+    SUT_16MS_gv                    = 0x05,  /* 16 ms */
+    SUT_32MS_gv                    = 0x06,  /* 32 ms */
+    SUT_64MS_gv                    = 0x07   /* 64 ms */
+} SUT_values_t;
+
+/* Startup Time select bit group configurations*/
+typedef enum SUT_enum
+{
+    SUT_0MS_gc                     = (SUT_0MS_gv << FUSE_SUT_gp),  /* 0 ms */
+    SUT_1MS_gc                     = (SUT_1MS_gv << FUSE_SUT_gp),  /* 1 ms */
+    SUT_2MS_gc                     = (SUT_2MS_gv << FUSE_SUT_gp),  /* 2 ms */
+    SUT_4MS_gc                     = (SUT_4MS_gv << FUSE_SUT_gp),  /* 4 ms */
+    SUT_8MS_gc                     = (SUT_8MS_gv << FUSE_SUT_gp),  /* 8 ms */
+    SUT_16MS_gc                    = (SUT_16MS_gv << FUSE_SUT_gp),  /* 16 ms */
+    SUT_32MS_gc                    = (SUT_32MS_gv << FUSE_SUT_gp),  /* 32 ms */
+    SUT_64MS_gc                    = (SUT_64MS_gv << FUSE_SUT_gp)   /* 64 ms */
+} SUT_t;
+
+/* Watchdog Window Timeout Period select bit group values */
+typedef enum WINDOW_VALUES_enum
+{
+    WINDOW_OFF_gv                  = 0x00,  /* Window mode off */
+    WINDOW_8CLK_gv                 = 0x01,  /* 8 cycles (8ms) */
+    WINDOW_16CLK_gv                = 0x02,  /* 16 cycles (16ms) */
+    WINDOW_32CLK_gv                = 0x03,  /* 32 cycles (32ms) */
+    WINDOW_64CLK_gv                = 0x04,  /* 64 cycles (64ms) */
+    WINDOW_128CLK_gv               = 0x05,  /* 128 cycles (0.128s) */
+    WINDOW_256CLK_gv               = 0x06,  /* 256 cycles (0.256s) */
+    WINDOW_512CLK_gv               = 0x07,  /* 512 cycles (0.512s) */
+    WINDOW_1KCLK_gv                = 0x08,  /* 1K cycles (1.0s) */
+    WINDOW_2KCLK_gv                = 0x09,  /* 2K cycles (2.0s) */
+    WINDOW_4KCLK_gv                = 0x0A,  /* 4K cycles (4.0s) */
+    WINDOW_8KCLK_gv                = 0x0B   /* 8K cycles (8.0s) */
+} WINDOW_values_t;
+
+/* Watchdog Window Timeout Period select bit group configurations*/
+typedef enum WINDOW_enum
+{
+    WINDOW_OFF_gc                  = (WINDOW_OFF_gv << FUSE_WINDOW_gp),  /* Window mode off */
+    WINDOW_8CLK_gc                 = (WINDOW_8CLK_gv << FUSE_WINDOW_gp),  /* 8 cycles (8ms) */
+    WINDOW_16CLK_gc                = (WINDOW_16CLK_gv << FUSE_WINDOW_gp),  /* 16 cycles (16ms) */
+    WINDOW_32CLK_gc                = (WINDOW_32CLK_gv << FUSE_WINDOW_gp),  /* 32 cycles (32ms) */
+    WINDOW_64CLK_gc                = (WINDOW_64CLK_gv << FUSE_WINDOW_gp),  /* 64 cycles (64ms) */
+    WINDOW_128CLK_gc               = (WINDOW_128CLK_gv << FUSE_WINDOW_gp),  /* 128 cycles (0.128s) */
+    WINDOW_256CLK_gc               = (WINDOW_256CLK_gv << FUSE_WINDOW_gp),  /* 256 cycles (0.256s) */
+    WINDOW_512CLK_gc               = (WINDOW_512CLK_gv << FUSE_WINDOW_gp),  /* 512 cycles (0.512s) */
+    WINDOW_1KCLK_gc                = (WINDOW_1KCLK_gv << FUSE_WINDOW_gp),  /* 1K cycles (1.0s) */
+    WINDOW_2KCLK_gc                = (WINDOW_2KCLK_gv << FUSE_WINDOW_gp),  /* 2K cycles (2.0s) */
+    WINDOW_4KCLK_gc                = (WINDOW_4KCLK_gv << FUSE_WINDOW_gp),  /* 4K cycles (4.0s) */
+    WINDOW_8KCLK_gc                = (WINDOW_8KCLK_gv << FUSE_WINDOW_gp)   /* 8K cycles (8.0s) */
+} WINDOW_t;
+
+/*
+--------------------------------------------------------------------------
+GPR - General Purpose Registers
+--------------------------------------------------------------------------
+*/
+
+/* General Purpose Registers */
+typedef struct GPR_struct
+{
+    register8_t GPR0;  /* General Purpose Register 0 */
+    register8_t GPR1;  /* General Purpose Register 1 */
+    register8_t GPR2;  /* General Purpose Register 2 */
+    register8_t GPR3;  /* General Purpose Register 3 */
+} GPR_t;
+
+
+/*
+--------------------------------------------------------------------------
+LOCK - Lockbits
+--------------------------------------------------------------------------
+*/
+
+/* Lockbits */
+typedef struct LOCK_struct
+{
+    _DWORDREGISTER(KEY);  /* Lock Key Bits */
+} LOCK_t;
+
+/* Lock Key select bit group values */
+typedef enum LOCK_KEY_VALUES_enum
+{
+    LOCK_KEY_NOLOCK_gv             = 0x5CC5C55C,  /* No locks */
+    LOCK_KEY_RWLOCK_gv             = 0xA33A3AA3   /* Read and write lock */
+} LOCK_KEY_values_t;
+
+/* Lock Key select bit group configurations*/
+typedef enum LOCK_KEY_enum
+{
+    LOCK_KEY_NOLOCK_gc             = (LOCK_KEY_NOLOCK_gv << LOCK_KEY_gp),  /* No locks */
+    LOCK_KEY_RWLOCK_gc             = (LOCK_KEY_RWLOCK_gv << LOCK_KEY_gp)   /* Read and write lock */
+} LOCK_KEY_t;
+
+/*
+--------------------------------------------------------------------------
+NVMCTRL - Non-volatile Memory Controller
+--------------------------------------------------------------------------
+*/
+
+/* Non-volatile Memory Controller */
+typedef struct NVMCTRL_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t STATUS;  /* Status */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t reserved_1[1];
+    _WORDREGISTER(DATA);  /* Data */
+    _DWORDREGISTER(ADDR);  /* Address */
+    register8_t reserved_2[4];
+} NVMCTRL_t;
+
+/* Command select bit group values */
+typedef enum NVMCTRL_CMD_VALUES_enum
+{
+    NVMCTRL_CMD_NONE_gv            = 0x00,  /* No Command */
+    NVMCTRL_CMD_NOOP_gv            = 0x01,  /* No Operation */
+    NVMCTRL_CMD_FLWR_gv            = 0x02,  /* Flash Write */
+    NVMCTRL_CMD_FLPER_gv           = 0x08,  /* Flash Page Erase */
+    NVMCTRL_CMD_FLMPER2_gv         = 0x09,  /* Flash Multi-Page Erase 2 pages */
+    NVMCTRL_CMD_FLMPER4_gv         = 0x0A,  /* Flash Multi-Page Erase 4 pages */
+    NVMCTRL_CMD_FLMPER8_gv         = 0x0B,  /* Flash Multi-Page Erase 8 pages */
+    NVMCTRL_CMD_FLMPER16_gv        = 0x0C,  /* Flash Multi-Page Erase 16 pages */
+    NVMCTRL_CMD_FLMPER32_gv        = 0x0D,  /* Flash Multi-Page Erase 32 pages */
+    NVMCTRL_CMD_EEWR_gv            = 0x12,  /* EEPROM Write */
+    NVMCTRL_CMD_EEERWR_gv          = 0x13,  /* EEPROM Erase and Write */
+    NVMCTRL_CMD_EEBER_gv           = 0x18,  /* EEPROM Byte Erase */
+    NVMCTRL_CMD_EEMBER2_gv         = 0x19,  /* EEPROM Multi-Byte Erase 2 bytes */
+    NVMCTRL_CMD_EEMBER4_gv         = 0x1A,  /* EEPROM Multi-Byte Erase 4 bytes */
+    NVMCTRL_CMD_EEMBER8_gv         = 0x1B,  /* EEPROM Multi-Byte Erase 8 bytes */
+    NVMCTRL_CMD_EEMBER16_gv        = 0x1C,  /* EEPROM Multi-Byte Erase 16 bytes */
+    NVMCTRL_CMD_EEMBER32_gv        = 0x1D,  /* EEPROM Multi-Byte Erase 32 bytes */
+    NVMCTRL_CMD_CHER_gv            = 0x20,  /* Chip Erase Command */
+    NVMCTRL_CMD_EECHER_gv          = 0x30   /* EEPROM Erase Command */
+} NVMCTRL_CMD_values_t;
+
+/* Command select bit group configurations*/
+typedef enum NVMCTRL_CMD_enum
+{
+    NVMCTRL_CMD_NONE_gc            = (NVMCTRL_CMD_NONE_gv << NVMCTRL_CMD_gp),  /* No Command */
+    NVMCTRL_CMD_NOOP_gc            = (NVMCTRL_CMD_NOOP_gv << NVMCTRL_CMD_gp),  /* No Operation */
+    NVMCTRL_CMD_FLWR_gc            = (NVMCTRL_CMD_FLWR_gv << NVMCTRL_CMD_gp),  /* Flash Write */
+    NVMCTRL_CMD_FLPER_gc           = (NVMCTRL_CMD_FLPER_gv << NVMCTRL_CMD_gp),  /* Flash Page Erase */
+    NVMCTRL_CMD_FLMPER2_gc         = (NVMCTRL_CMD_FLMPER2_gv << NVMCTRL_CMD_gp),  /* Flash Multi-Page Erase 2 pages */
+    NVMCTRL_CMD_FLMPER4_gc         = (NVMCTRL_CMD_FLMPER4_gv << NVMCTRL_CMD_gp),  /* Flash Multi-Page Erase 4 pages */
+    NVMCTRL_CMD_FLMPER8_gc         = (NVMCTRL_CMD_FLMPER8_gv << NVMCTRL_CMD_gp),  /* Flash Multi-Page Erase 8 pages */
+    NVMCTRL_CMD_FLMPER16_gc        = (NVMCTRL_CMD_FLMPER16_gv << NVMCTRL_CMD_gp),  /* Flash Multi-Page Erase 16 pages */
+    NVMCTRL_CMD_FLMPER32_gc        = (NVMCTRL_CMD_FLMPER32_gv << NVMCTRL_CMD_gp),  /* Flash Multi-Page Erase 32 pages */
+    NVMCTRL_CMD_EEWR_gc            = (NVMCTRL_CMD_EEWR_gv << NVMCTRL_CMD_gp),  /* EEPROM Write */
+    NVMCTRL_CMD_EEERWR_gc          = (NVMCTRL_CMD_EEERWR_gv << NVMCTRL_CMD_gp),  /* EEPROM Erase and Write */
+    NVMCTRL_CMD_EEBER_gc           = (NVMCTRL_CMD_EEBER_gv << NVMCTRL_CMD_gp),  /* EEPROM Byte Erase */
+    NVMCTRL_CMD_EEMBER2_gc         = (NVMCTRL_CMD_EEMBER2_gv << NVMCTRL_CMD_gp),  /* EEPROM Multi-Byte Erase 2 bytes */
+    NVMCTRL_CMD_EEMBER4_gc         = (NVMCTRL_CMD_EEMBER4_gv << NVMCTRL_CMD_gp),  /* EEPROM Multi-Byte Erase 4 bytes */
+    NVMCTRL_CMD_EEMBER8_gc         = (NVMCTRL_CMD_EEMBER8_gv << NVMCTRL_CMD_gp),  /* EEPROM Multi-Byte Erase 8 bytes */
+    NVMCTRL_CMD_EEMBER16_gc        = (NVMCTRL_CMD_EEMBER16_gv << NVMCTRL_CMD_gp),  /* EEPROM Multi-Byte Erase 16 bytes */
+    NVMCTRL_CMD_EEMBER32_gc        = (NVMCTRL_CMD_EEMBER32_gv << NVMCTRL_CMD_gp),  /* EEPROM Multi-Byte Erase 32 bytes */
+    NVMCTRL_CMD_CHER_gc            = (NVMCTRL_CMD_CHER_gv << NVMCTRL_CMD_gp),  /* Chip Erase Command */
+    NVMCTRL_CMD_EECHER_gc          = (NVMCTRL_CMD_EECHER_gv << NVMCTRL_CMD_gp)   /* EEPROM Erase Command */
+} NVMCTRL_CMD_t;
+
+/* Write error select bit group values */
+typedef enum NVMCTRL_ERROR_VALUES_enum
+{
+    NVMCTRL_ERROR_NOERROR_gv       = 0x00,  /* No Error */
+    NVMCTRL_ERROR_ILLEGALCMD_gv    = 0x01,  /* Write command not selected */
+    NVMCTRL_ERROR_ILLEGALSADDR_gv  = 0x02,  /* Write to section not allowed */
+    NVMCTRL_ERROR_DOUBLESELECT_gv  = 0x03,  /* Selecting new write command while write command already seleted */
+    NVMCTRL_ERROR_ONGOINGPROG_gv   = 0x04   /* Starting a new programming operation before previous is completed */
+} NVMCTRL_ERROR_values_t;
+
+/* Write error select bit group configurations*/
+typedef enum NVMCTRL_ERROR_enum
+{
+    NVMCTRL_ERROR_NOERROR_gc       = (NVMCTRL_ERROR_NOERROR_gv << NVMCTRL_ERROR_gp),  /* No Error */
+    NVMCTRL_ERROR_ILLEGALCMD_gc    = (NVMCTRL_ERROR_ILLEGALCMD_gv << NVMCTRL_ERROR_gp),  /* Write command not selected */
+    NVMCTRL_ERROR_ILLEGALSADDR_gc  = (NVMCTRL_ERROR_ILLEGALSADDR_gv << NVMCTRL_ERROR_gp),  /* Write to section not allowed */
+    NVMCTRL_ERROR_DOUBLESELECT_gc  = (NVMCTRL_ERROR_DOUBLESELECT_gv << NVMCTRL_ERROR_gp),  /* Selecting new write command while write command already seleted */
+    NVMCTRL_ERROR_ONGOINGPROG_gc   = (NVMCTRL_ERROR_ONGOINGPROG_gv << NVMCTRL_ERROR_gp)   /* Starting a new programming operation before previous is completed */
+} NVMCTRL_ERROR_t;
+
+/* Flash Mapping in Data space select bit group values */
+typedef enum NVMCTRL_FLMAP_VALUES_enum
+{
+    NVMCTRL_FLMAP_SECTION0_gv      = 0x00,  /* Flash section 0 */
+    NVMCTRL_FLMAP_SECTION1_gv      = 0x01,  /* Flash section 1 */
+    NVMCTRL_FLMAP_SECTION2_gv      = 0x02,  /* Flash section 2 */
+    NVMCTRL_FLMAP_SECTION3_gv      = 0x03   /* Flash section 3 */
+} NVMCTRL_FLMAP_values_t;
+
+/* Flash Mapping in Data space select bit group configurations*/
+typedef enum NVMCTRL_FLMAP_enum
+{
+    NVMCTRL_FLMAP_SECTION0_gc      = (NVMCTRL_FLMAP_SECTION0_gv << NVMCTRL_FLMAP_gp),  /* Flash section 0 */
+    NVMCTRL_FLMAP_SECTION1_gc      = (NVMCTRL_FLMAP_SECTION1_gv << NVMCTRL_FLMAP_gp),  /* Flash section 1 */
+    NVMCTRL_FLMAP_SECTION2_gc      = (NVMCTRL_FLMAP_SECTION2_gv << NVMCTRL_FLMAP_gp),  /* Flash section 2 */
+    NVMCTRL_FLMAP_SECTION3_gc      = (NVMCTRL_FLMAP_SECTION3_gv << NVMCTRL_FLMAP_gp)   /* Flash section 3 */
+} NVMCTRL_FLMAP_t;
+
+/*
+--------------------------------------------------------------------------
+PORT - I/O Ports
+--------------------------------------------------------------------------
+*/
+
+/* I/O Ports */
+typedef struct PORT_struct
+{
+    register8_t DIR;  /* Data Direction */
+    register8_t DIRSET;  /* Data Direction Set */
+    register8_t DIRCLR;  /* Data Direction Clear */
+    register8_t DIRTGL;  /* Data Direction Toggle */
+    register8_t OUT;  /* Output Value */
+    register8_t OUTSET;  /* Output Value Set */
+    register8_t OUTCLR;  /* Output Value Clear */
+    register8_t OUTTGL;  /* Output Value Toggle */
+    register8_t IN;  /* Input Value */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t PORTCTRL;  /* Port Control */
+    register8_t PINCONFIG;  /* Pin Control Config */
+    register8_t PINCTRLUPD;  /* Pin Control Update */
+    register8_t PINCTRLSET;  /* Pin Control Set */
+    register8_t PINCTRLCLR;  /* Pin Control Clear */
+    register8_t reserved_1[1];
+    register8_t PIN0CTRL;  /* Pin 0 Control */
+    register8_t PIN1CTRL;  /* Pin 1 Control */
+    register8_t PIN2CTRL;  /* Pin 2 Control */
+    register8_t PIN3CTRL;  /* Pin 3 Control */
+    register8_t PIN4CTRL;  /* Pin 4 Control */
+    register8_t PIN5CTRL;  /* Pin 5 Control */
+    register8_t PIN6CTRL;  /* Pin 6 Control */
+    register8_t PIN7CTRL;  /* Pin 7 Control */
+    register8_t reserved_2[8];
+} PORT_t;
+
+/* Input/Sense Configuration select bit group values */
+typedef enum PORT_ISC_VALUES_enum
+{
+    PORT_ISC_INTDISABLE_gv         = 0x00,  /* Interrupt disabled but input buffer enabled */
+    PORT_ISC_BOTHEDGES_gv          = 0x01,  /* Sense Both Edges */
+    PORT_ISC_RISING_gv             = 0x02,  /* Sense Rising Edge */
+    PORT_ISC_FALLING_gv            = 0x03,  /* Sense Falling Edge */
+    PORT_ISC_INPUT_DISABLE_gv      = 0x04,  /* Digital Input Buffer disabled */
+    PORT_ISC_LEVEL_gv              = 0x05   /* Sense low Level */
+} PORT_ISC_values_t;
+
+/* Input/Sense Configuration select bit group configurations*/
+typedef enum PORT_ISC_enum
+{
+    PORT_ISC_INTDISABLE_gc         = (PORT_ISC_INTDISABLE_gv << PORT_ISC_gp),  /* Interrupt disabled but input buffer enabled */
+    PORT_ISC_BOTHEDGES_gc          = (PORT_ISC_BOTHEDGES_gv << PORT_ISC_gp),  /* Sense Both Edges */
+    PORT_ISC_RISING_gc             = (PORT_ISC_RISING_gv << PORT_ISC_gp),  /* Sense Rising Edge */
+    PORT_ISC_FALLING_gc            = (PORT_ISC_FALLING_gv << PORT_ISC_gp),  /* Sense Falling Edge */
+    PORT_ISC_INPUT_DISABLE_gc      = (PORT_ISC_INPUT_DISABLE_gv << PORT_ISC_gp),  /* Digital Input Buffer disabled */
+    PORT_ISC_LEVEL_gc              = (PORT_ISC_LEVEL_gv << PORT_ISC_gp)   /* Sense low Level */
+} PORT_ISC_t;
+
+/*
+--------------------------------------------------------------------------
+PORTMUX - Port Multiplexer
+--------------------------------------------------------------------------
+*/
+
+/* Port Multiplexer */
+typedef struct PORTMUX_struct
+{
+    register8_t EVSYSROUTEA;  /* EVSYS route A */
+    register8_t CCLROUTEA;  /* CCL route A */
+    register8_t USARTROUTEA;  /* USART route A */
+    register8_t USARTROUTEB;  /* USART route B */
+    register8_t SPIROUTEA;  /* SPI route A */
+    register8_t TWIROUTEA;  /* TWI route A */
+    register8_t TCAROUTEA;  /* TCA route A */
+    register8_t TCBROUTEA;  /* TCB route A */
+    register8_t TCDROUTEA;  /* TCD route A */
+    register8_t ACROUTEA;  /* AC route A */
+    register8_t ZCDROUTEA;  /* ZCD route A */
+    register8_t reserved_1[5];
+} PORTMUX_t;
+
+/* Analog Comparator 0 Output select bit group values */
+typedef enum PORTMUX_AC0_VALUES_enum
+{
+    PORTMUX_AC0_DEFAULT_gv         = 0x00,  /* OUT: PA7 */
+    PORTMUX_AC0_ALT1_gv            = 0x01   /* OUT: PC6 */
+} PORTMUX_AC0_values_t;
+
+/* Analog Comparator 0 Output select bit group configurations*/
+typedef enum PORTMUX_AC0_enum
+{
+    PORTMUX_AC0_DEFAULT_gc         = (PORTMUX_AC0_DEFAULT_gv << PORTMUX_AC0_bp),  /* OUT: PA7 */
+    PORTMUX_AC0_ALT1_gc            = (PORTMUX_AC0_ALT1_gv << PORTMUX_AC0_bp)   /* OUT: PC6 */
+} PORTMUX_AC0_t;
+
+/* Analog Comparator 1 Output select bit group values */
+typedef enum PORTMUX_AC1_VALUES_enum
+{
+    PORTMUX_AC1_DEFAULT_gv         = 0x00,  /* OUT: PA7 */
+    PORTMUX_AC1_ALT1_gv            = 0x01   /* OUT: PC6 */
+} PORTMUX_AC1_values_t;
+
+/* Analog Comparator 1 Output select bit group configurations*/
+typedef enum PORTMUX_AC1_enum
+{
+    PORTMUX_AC1_DEFAULT_gc         = (PORTMUX_AC1_DEFAULT_gv << PORTMUX_AC1_bp),  /* OUT: PA7 */
+    PORTMUX_AC1_ALT1_gc            = (PORTMUX_AC1_ALT1_gv << PORTMUX_AC1_bp)   /* OUT: PC6 */
+} PORTMUX_AC1_t;
+
+/* Analog Comparator 2 Output select bit group values */
+typedef enum PORTMUX_AC2_VALUES_enum
+{
+    PORTMUX_AC2_DEFAULT_gv         = 0x00,  /* OUT: PA7 */
+    PORTMUX_AC2_ALT1_gv            = 0x01   /* OUT: PC6 */
+} PORTMUX_AC2_values_t;
+
+/* Analog Comparator 2 Output select bit group configurations*/
+typedef enum PORTMUX_AC2_enum
+{
+    PORTMUX_AC2_DEFAULT_gc         = (PORTMUX_AC2_DEFAULT_gv << PORTMUX_AC2_bp),  /* OUT: PA7 */
+    PORTMUX_AC2_ALT1_gc            = (PORTMUX_AC2_ALT1_gv << PORTMUX_AC2_bp)   /* OUT: PC6 */
+} PORTMUX_AC2_t;
+
+/* Event Output A select bit group values */
+typedef enum PORTMUX_EVOUTA_VALUES_enum
+{
+    PORTMUX_EVOUTA_DEFAULT_gv      = 0x00,  /* EVOUT: PA2 */
+    PORTMUX_EVOUTA_ALT1_gv         = 0x01   /* EVOUT: PA7 */
+} PORTMUX_EVOUTA_values_t;
+
+/* Event Output A select bit group configurations*/
+typedef enum PORTMUX_EVOUTA_enum
+{
+    PORTMUX_EVOUTA_DEFAULT_gc      = (PORTMUX_EVOUTA_DEFAULT_gv << PORTMUX_EVOUTA_bp),  /* EVOUT: PA2 */
+    PORTMUX_EVOUTA_ALT1_gc         = (PORTMUX_EVOUTA_ALT1_gv << PORTMUX_EVOUTA_bp)   /* EVOUT: PA7 */
+} PORTMUX_EVOUTA_t;
+
+/* Event Output B select bit group values */
+typedef enum PORTMUX_EVOUTB_VALUES_enum
+{
+    PORTMUX_EVOUTB_DEFAULT_gv      = 0x00   /* EVOUT: PB2 */
+} PORTMUX_EVOUTB_values_t;
+
+/* Event Output B select bit group configurations*/
+typedef enum PORTMUX_EVOUTB_enum
+{
+    PORTMUX_EVOUTB_DEFAULT_gc      = (PORTMUX_EVOUTB_DEFAULT_gv << PORTMUX_EVOUTB_bp)   /* EVOUT: PB2 */
+} PORTMUX_EVOUTB_t;
+
+/* Event Output C select bit group values */
+typedef enum PORTMUX_EVOUTC_VALUES_enum
+{
+    PORTMUX_EVOUTC_DEFAULT_gv      = 0x00,  /* EVOUT: PC2 */
+    PORTMUX_EVOUTC_ALT1_gv         = 0x01   /* EVOUT: PC7 */
+} PORTMUX_EVOUTC_values_t;
+
+/* Event Output C select bit group configurations*/
+typedef enum PORTMUX_EVOUTC_enum
+{
+    PORTMUX_EVOUTC_DEFAULT_gc      = (PORTMUX_EVOUTC_DEFAULT_gv << PORTMUX_EVOUTC_bp),  /* EVOUT: PC2 */
+    PORTMUX_EVOUTC_ALT1_gc         = (PORTMUX_EVOUTC_ALT1_gv << PORTMUX_EVOUTC_bp)   /* EVOUT: PC7 */
+} PORTMUX_EVOUTC_t;
+
+/* Event Output D select bit group values */
+typedef enum PORTMUX_EVOUTD_VALUES_enum
+{
+    PORTMUX_EVOUTD_DEFAULT_gv      = 0x00,  /* EVOUT: PD2 */
+    PORTMUX_EVOUTD_ALT1_gv         = 0x01   /* EVOUT: PD7 */
+} PORTMUX_EVOUTD_values_t;
+
+/* Event Output D select bit group configurations*/
+typedef enum PORTMUX_EVOUTD_enum
+{
+    PORTMUX_EVOUTD_DEFAULT_gc      = (PORTMUX_EVOUTD_DEFAULT_gv << PORTMUX_EVOUTD_bp),  /* EVOUT: PD2 */
+    PORTMUX_EVOUTD_ALT1_gc         = (PORTMUX_EVOUTD_ALT1_gv << PORTMUX_EVOUTD_bp)   /* EVOUT: PD7 */
+} PORTMUX_EVOUTD_t;
+
+/* Event Output E select bit group values */
+typedef enum PORTMUX_EVOUTE_VALUES_enum
+{
+    PORTMUX_EVOUTE_DEFAULT_gv      = 0x00   /* EVOUT: PE2 */
+} PORTMUX_EVOUTE_values_t;
+
+/* Event Output E select bit group configurations*/
+typedef enum PORTMUX_EVOUTE_enum
+{
+    PORTMUX_EVOUTE_DEFAULT_gc      = (PORTMUX_EVOUTE_DEFAULT_gv << PORTMUX_EVOUTE_bp)   /* EVOUT: PE2 */
+} PORTMUX_EVOUTE_t;
+
+/* Event Output F select bit group values */
+typedef enum PORTMUX_EVOUTF_VALUES_enum
+{
+    PORTMUX_EVOUTF_DEFAULT_gv      = 0x00   /* EVOUT: PF2 */
+} PORTMUX_EVOUTF_values_t;
+
+/* Event Output F select bit group configurations*/
+typedef enum PORTMUX_EVOUTF_enum
+{
+    PORTMUX_EVOUTF_DEFAULT_gc      = (PORTMUX_EVOUTF_DEFAULT_gv << PORTMUX_EVOUTF_bp)   /* EVOUT: PF2 */
+} PORTMUX_EVOUTF_t;
+
+/* CCL Look-Up Table 0 Signals select bit group values */
+typedef enum PORTMUX_LUT0_VALUES_enum
+{
+    PORTMUX_LUT0_DEFAULT_gv        = 0x00,  /* In: PA0, PA1, PA2 Out: PA3 */
+    PORTMUX_LUT0_ALT1_gv           = 0x01   /* In: PA0, PA1, PA2 Out: PA6 */
+} PORTMUX_LUT0_values_t;
+
+/* CCL Look-Up Table 0 Signals select bit group configurations*/
+typedef enum PORTMUX_LUT0_enum
+{
+    PORTMUX_LUT0_DEFAULT_gc        = (PORTMUX_LUT0_DEFAULT_gv << PORTMUX_LUT0_bp),  /* In: PA0, PA1, PA2 Out: PA3 */
+    PORTMUX_LUT0_ALT1_gc           = (PORTMUX_LUT0_ALT1_gv << PORTMUX_LUT0_bp)   /* In: PA0, PA1, PA2 Out: PA6 */
+} PORTMUX_LUT0_t;
+
+/* CCL Look-Up Table 1 Signals select bit group values */
+typedef enum PORTMUX_LUT1_VALUES_enum
+{
+    PORTMUX_LUT1_DEFAULT_gv        = 0x00,  /* In: PC0, PC1, PC2 Out: PC3 */
+    PORTMUX_LUT1_ALT1_gv           = 0x01   /* In: PC0, PC1, PC2 Out: PC6 */
+} PORTMUX_LUT1_values_t;
+
+/* CCL Look-Up Table 1 Signals select bit group configurations*/
+typedef enum PORTMUX_LUT1_enum
+{
+    PORTMUX_LUT1_DEFAULT_gc        = (PORTMUX_LUT1_DEFAULT_gv << PORTMUX_LUT1_bp),  /* In: PC0, PC1, PC2 Out: PC3 */
+    PORTMUX_LUT1_ALT1_gc           = (PORTMUX_LUT1_ALT1_gv << PORTMUX_LUT1_bp)   /* In: PC0, PC1, PC2 Out: PC6 */
+} PORTMUX_LUT1_t;
+
+/* CCL Look-Up Table 2 Signals select bit group values */
+typedef enum PORTMUX_LUT2_VALUES_enum
+{
+    PORTMUX_LUT2_DEFAULT_gv        = 0x00,  /* In: PD0, PD1, PD2 Out: PD3 */
+    PORTMUX_LUT2_ALT1_gv           = 0x01   /* In: PD0, PD1, PD2 Out: PD6 */
+} PORTMUX_LUT2_values_t;
+
+/* CCL Look-Up Table 2 Signals select bit group configurations*/
+typedef enum PORTMUX_LUT2_enum
+{
+    PORTMUX_LUT2_DEFAULT_gc        = (PORTMUX_LUT2_DEFAULT_gv << PORTMUX_LUT2_bp),  /* In: PD0, PD1, PD2 Out: PD3 */
+    PORTMUX_LUT2_ALT1_gc           = (PORTMUX_LUT2_ALT1_gv << PORTMUX_LUT2_bp)   /* In: PD0, PD1, PD2 Out: PD6 */
+} PORTMUX_LUT2_t;
+
+/* CCL Look-Up Table 3 Signals select bit group values */
+typedef enum PORTMUX_LUT3_VALUES_enum
+{
+    PORTMUX_LUT3_DEFAULT_gv        = 0x00   /* In: PF0, PF1, PF2 Out: PF3 */
+} PORTMUX_LUT3_values_t;
+
+/* CCL Look-Up Table 3 Signals select bit group configurations*/
+typedef enum PORTMUX_LUT3_enum
+{
+    PORTMUX_LUT3_DEFAULT_gc        = (PORTMUX_LUT3_DEFAULT_gv << PORTMUX_LUT3_bp)   /* In: PF0, PF1, PF2 Out: PF3 */
+} PORTMUX_LUT3_t;
+
+/* CCL Look-Up Table 4 Signals select bit group values */
+typedef enum PORTMUX_LUT4_VALUES_enum
+{
+    PORTMUX_LUT4_DEFAULT_gv        = 0x00,  /* In: PB0, PB1, PB2 Out: PB3 */
+    PORTMUX_LUT4_ALT1_gv           = 0x01   /* In: PB0, PB1, PB2 Out: - */
+} PORTMUX_LUT4_values_t;
+
+/* CCL Look-Up Table 4 Signals select bit group configurations*/
+typedef enum PORTMUX_LUT4_enum
+{
+    PORTMUX_LUT4_DEFAULT_gc        = (PORTMUX_LUT4_DEFAULT_gv << PORTMUX_LUT4_bp),  /* In: PB0, PB1, PB2 Out: PB3 */
+    PORTMUX_LUT4_ALT1_gc           = (PORTMUX_LUT4_ALT1_gv << PORTMUX_LUT4_bp)   /* In: PB0, PB1, PB2 Out: - */
+} PORTMUX_LUT4_t;
+
+/* SPI0 Signals select bit group values */
+typedef enum PORTMUX_SPI0_VALUES_enum
+{
+    PORTMUX_SPI0_DEFAULT_gv        = 0x00,  /* MOSI: PA4, MISO: PA5, SCK: PA6, SS: PA7 */
+    PORTMUX_SPI0_ALT1_gv           = 0x01,  /* MOSI: PE0, MISO: PE1, SCK: PE2, SS: PE3 */
+    PORTMUX_SPI0_NONE_gv           = 0x03   /* Not connected to any pins */
+} PORTMUX_SPI0_values_t;
+
+/* SPI0 Signals select bit group configurations*/
+typedef enum PORTMUX_SPI0_enum
+{
+    PORTMUX_SPI0_DEFAULT_gc        = (PORTMUX_SPI0_DEFAULT_gv << PORTMUX_SPI0_gp),  /* MOSI: PA4, MISO: PA5, SCK: PA6, SS: PA7 */
+    PORTMUX_SPI0_ALT1_gc           = (PORTMUX_SPI0_ALT1_gv << PORTMUX_SPI0_gp),  /* MOSI: PE0, MISO: PE1, SCK: PE2, SS: PE3 */
+    PORTMUX_SPI0_NONE_gc           = (PORTMUX_SPI0_NONE_gv << PORTMUX_SPI0_gp)   /* Not connected to any pins */
+} PORTMUX_SPI0_t;
+
+/* SPI1 Signals select bit group values */
+typedef enum PORTMUX_SPI1_VALUES_enum
+{
+    PORTMUX_SPI1_DEFAULT_gv        = 0x00,  /* MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3 */
+    PORTMUX_SPI1_ALT1_gv           = 0x01,  /* MOSI: PC4, MISO: PC5, SCK: PC6, SS: PC7 */
+    PORTMUX_SPI1_ALT2_gv           = 0x02,  /* MOSI: PB4, MISO: PB5, SCK: -, SS: - */
+    PORTMUX_SPI1_NONE_gv           = 0x03   /* Not connected to any pins */
+} PORTMUX_SPI1_values_t;
+
+/* SPI1 Signals select bit group configurations*/
+typedef enum PORTMUX_SPI1_enum
+{
+    PORTMUX_SPI1_DEFAULT_gc        = (PORTMUX_SPI1_DEFAULT_gv << PORTMUX_SPI1_gp),  /* MOSI: PC0, MISO: PC1, SCK: PC2, SS: PC3 */
+    PORTMUX_SPI1_ALT1_gc           = (PORTMUX_SPI1_ALT1_gv << PORTMUX_SPI1_gp),  /* MOSI: PC4, MISO: PC5, SCK: PC6, SS: PC7 */
+    PORTMUX_SPI1_ALT2_gc           = (PORTMUX_SPI1_ALT2_gv << PORTMUX_SPI1_gp),  /* MOSI: PB4, MISO: PB5, SCK: -, SS: - */
+    PORTMUX_SPI1_NONE_gc           = (PORTMUX_SPI1_NONE_gv << PORTMUX_SPI1_gp)   /* Not connected to any pins */
+} PORTMUX_SPI1_t;
+
+/* TCA0 Signals select bit group values */
+typedef enum PORTMUX_TCA0_VALUES_enum
+{
+    PORTMUX_TCA0_PORTA_gv          = 0x00,  /* WOn: PA0, PA1, PA2, PA3, PA4, PA5 */
+    PORTMUX_TCA0_PORTB_gv          = 0x01,  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
+    PORTMUX_TCA0_PORTC_gv          = 0x02,  /* WOn: PC0, PC1, PC2, PC3, PC4, PC5 */
+    PORTMUX_TCA0_PORTD_gv          = 0x03,  /* WOn: PD0, PD1, PD2, PD3, PD4, PD5 */
+    PORTMUX_TCA0_PORTE_gv          = 0x04,  /* WOn: PE0, PE1, PE2, PE3, -, - */
+    PORTMUX_TCA0_PORTF_gv          = 0x05   /* WOn: PF0, PF1, PF2, PF3, PF4, PF5 */
+} PORTMUX_TCA0_values_t;
+
+/* TCA0 Signals select bit group configurations*/
+typedef enum PORTMUX_TCA0_enum
+{
+    PORTMUX_TCA0_PORTA_gc          = (PORTMUX_TCA0_PORTA_gv << PORTMUX_TCA0_gp),  /* WOn: PA0, PA1, PA2, PA3, PA4, PA5 */
+    PORTMUX_TCA0_PORTB_gc          = (PORTMUX_TCA0_PORTB_gv << PORTMUX_TCA0_gp),  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
+    PORTMUX_TCA0_PORTC_gc          = (PORTMUX_TCA0_PORTC_gv << PORTMUX_TCA0_gp),  /* WOn: PC0, PC1, PC2, PC3, PC4, PC5 */
+    PORTMUX_TCA0_PORTD_gc          = (PORTMUX_TCA0_PORTD_gv << PORTMUX_TCA0_gp),  /* WOn: PD0, PD1, PD2, PD3, PD4, PD5 */
+    PORTMUX_TCA0_PORTE_gc          = (PORTMUX_TCA0_PORTE_gv << PORTMUX_TCA0_gp),  /* WOn: PE0, PE1, PE2, PE3, -, - */
+    PORTMUX_TCA0_PORTF_gc          = (PORTMUX_TCA0_PORTF_gv << PORTMUX_TCA0_gp)   /* WOn: PF0, PF1, PF2, PF3, PF4, PF5 */
+} PORTMUX_TCA0_t;
+
+/* TCA1 Signals select bit group values */
+typedef enum PORTMUX_TCA1_VALUES_enum
+{
+    PORTMUX_TCA1_PORTB_gv          = 0x00,  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
+    PORTMUX_TCA1_PORTC_gv          = 0x01   /* WOn: PC4, PC5, PC6, -, -, - */
+} PORTMUX_TCA1_values_t;
+
+/* TCA1 Signals select bit group configurations*/
+typedef enum PORTMUX_TCA1_enum
+{
+    PORTMUX_TCA1_PORTB_gc          = (PORTMUX_TCA1_PORTB_gv << PORTMUX_TCA1_gp),  /* WOn: PB0, PB1, PB2, PB3, PB4, PB5 */
+    PORTMUX_TCA1_PORTC_gc          = (PORTMUX_TCA1_PORTC_gv << PORTMUX_TCA1_gp)   /* WOn: PC4, PC5, PC6, -, -, - */
+} PORTMUX_TCA1_t;
+
+/* TCB0 Output select bit group values */
+typedef enum PORTMUX_TCB0_VALUES_enum
+{
+    PORTMUX_TCB0_DEFAULT_gv        = 0x00,  /* WO: PA2 */
+    PORTMUX_TCB0_ALT1_gv           = 0x01   /* WO: PF4 */
+} PORTMUX_TCB0_values_t;
+
+/* TCB0 Output select bit group configurations*/
+typedef enum PORTMUX_TCB0_enum
+{
+    PORTMUX_TCB0_DEFAULT_gc        = (PORTMUX_TCB0_DEFAULT_gv << PORTMUX_TCB0_bp),  /* WO: PA2 */
+    PORTMUX_TCB0_ALT1_gc           = (PORTMUX_TCB0_ALT1_gv << PORTMUX_TCB0_bp)   /* WO: PF4 */
+} PORTMUX_TCB0_t;
+
+/* TCB1 Output select bit group values */
+typedef enum PORTMUX_TCB1_VALUES_enum
+{
+    PORTMUX_TCB1_DEFAULT_gv        = 0x00,  /* WO: PA3 */
+    PORTMUX_TCB1_ALT1_gv           = 0x01   /* WO: PF5 */
+} PORTMUX_TCB1_values_t;
+
+/* TCB1 Output select bit group configurations*/
+typedef enum PORTMUX_TCB1_enum
+{
+    PORTMUX_TCB1_DEFAULT_gc        = (PORTMUX_TCB1_DEFAULT_gv << PORTMUX_TCB1_bp),  /* WO: PA3 */
+    PORTMUX_TCB1_ALT1_gc           = (PORTMUX_TCB1_ALT1_gv << PORTMUX_TCB1_bp)   /* WO: PF5 */
+} PORTMUX_TCB1_t;
+
+/* TCB2 Output select bit group values */
+typedef enum PORTMUX_TCB2_VALUES_enum
+{
+    PORTMUX_TCB2_DEFAULT_gv        = 0x00,  /* WO: PC0 */
+    PORTMUX_TCB2_ALT1_gv           = 0x01   /* WO: PB4 */
+} PORTMUX_TCB2_values_t;
+
+/* TCB2 Output select bit group configurations*/
+typedef enum PORTMUX_TCB2_enum
+{
+    PORTMUX_TCB2_DEFAULT_gc        = (PORTMUX_TCB2_DEFAULT_gv << PORTMUX_TCB2_bp),  /* WO: PC0 */
+    PORTMUX_TCB2_ALT1_gc           = (PORTMUX_TCB2_ALT1_gv << PORTMUX_TCB2_bp)   /* WO: PB4 */
+} PORTMUX_TCB2_t;
+
+/* TCB3 Output select bit group values */
+typedef enum PORTMUX_TCB3_VALUES_enum
+{
+    PORTMUX_TCB3_DEFAULT_gv        = 0x00,  /* WO: PB5 */
+    PORTMUX_TCB3_ALT1_gv           = 0x01   /* WO: PC1 */
+} PORTMUX_TCB3_values_t;
+
+/* TCB3 Output select bit group configurations*/
+typedef enum PORTMUX_TCB3_enum
+{
+    PORTMUX_TCB3_DEFAULT_gc        = (PORTMUX_TCB3_DEFAULT_gv << PORTMUX_TCB3_bp),  /* WO: PB5 */
+    PORTMUX_TCB3_ALT1_gc           = (PORTMUX_TCB3_ALT1_gv << PORTMUX_TCB3_bp)   /* WO: PC1 */
+} PORTMUX_TCB3_t;
+
+/* TCD0 Signals select bit group values */
+typedef enum PORTMUX_TCD0_VALUES_enum
+{
+    PORTMUX_TCD0_DEFAULT_gv        = 0x00,  /* WOx: PA4, PA5, PA6, PA7 */
+    PORTMUX_TCD0_ALT1_gv           = 0x01,  /* WOx: PB4, PB5, -, - */
+    PORTMUX_TCD0_ALT2_gv           = 0x02   /* WOx: PF0, PF1, PF2, PF3 */
+} PORTMUX_TCD0_values_t;
+
+/* TCD0 Signals select bit group configurations*/
+typedef enum PORTMUX_TCD0_enum
+{
+    PORTMUX_TCD0_DEFAULT_gc        = (PORTMUX_TCD0_DEFAULT_gv << PORTMUX_TCD0_gp),  /* WOx: PA4, PA5, PA6, PA7 */
+    PORTMUX_TCD0_ALT1_gc           = (PORTMUX_TCD0_ALT1_gv << PORTMUX_TCD0_gp),  /* WOx: PB4, PB5, -, - */
+    PORTMUX_TCD0_ALT2_gc           = (PORTMUX_TCD0_ALT2_gv << PORTMUX_TCD0_gp)   /* WOx: PF0, PF1, PF2, PF3 */
+} PORTMUX_TCD0_t;
+
+/* TWI0 Signals select bit group values */
+typedef enum PORTMUX_TWI0_VALUES_enum
+{
+    PORTMUX_TWI0_DEFAULT_gv        = 0x00,  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC2, SCL: PC3. */
+    PORTMUX_TWI0_ALT1_gv           = 0x01,  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC6, SCL: PC7. */
+    PORTMUX_TWI0_ALT2_gv           = 0x02   /* SDA: PC2, SCL: PC3. Dual mode: SDA: PC6, SCL: PC7. */
+} PORTMUX_TWI0_values_t;
+
+/* TWI0 Signals select bit group configurations*/
+typedef enum PORTMUX_TWI0_enum
+{
+    PORTMUX_TWI0_DEFAULT_gc        = (PORTMUX_TWI0_DEFAULT_gv << PORTMUX_TWI0_gp),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC2, SCL: PC3. */
+    PORTMUX_TWI0_ALT1_gc           = (PORTMUX_TWI0_ALT1_gv << PORTMUX_TWI0_gp),  /* SDA: PA2, SCL: PA3. Dual mode: SDA: PC6, SCL: PC7. */
+    PORTMUX_TWI0_ALT2_gc           = (PORTMUX_TWI0_ALT2_gv << PORTMUX_TWI0_gp)   /* SDA: PC2, SCL: PC3. Dual mode: SDA: PC6, SCL: PC7. */
+} PORTMUX_TWI0_t;
+
+/* TWI1 Signals select bit group values */
+typedef enum PORTMUX_TWI1_VALUES_enum
+{
+    PORTMUX_TWI1_DEFAULT_gv        = 0x00,  /* SDA: PF2, SCL: PF3. Dual mode: SDA: PB2, SCL: PB3. */
+    PORTMUX_TWI1_ALT1_gv           = 0x01,  /* SDA: PF2, SCL: PF3. Dual mode: SDA: -, SCL: -. */
+    PORTMUX_TWI1_ALT2_gv           = 0x02   /* SDA: PB2, SCL: PB3. Dual mode: SDA: -, SCL: -. */
+} PORTMUX_TWI1_values_t;
+
+/* TWI1 Signals select bit group configurations*/
+typedef enum PORTMUX_TWI1_enum
+{
+    PORTMUX_TWI1_DEFAULT_gc        = (PORTMUX_TWI1_DEFAULT_gv << PORTMUX_TWI1_gp),  /* SDA: PF2, SCL: PF3. Dual mode: SDA: PB2, SCL: PB3. */
+    PORTMUX_TWI1_ALT1_gc           = (PORTMUX_TWI1_ALT1_gv << PORTMUX_TWI1_gp),  /* SDA: PF2, SCL: PF3. Dual mode: SDA: -, SCL: -. */
+    PORTMUX_TWI1_ALT2_gc           = (PORTMUX_TWI1_ALT2_gv << PORTMUX_TWI1_gp)   /* SDA: PB2, SCL: PB3. Dual mode: SDA: -, SCL: -. */
+} PORTMUX_TWI1_t;
+
+/* USART0 Signals select bit group values */
+typedef enum PORTMUX_USART0_VALUES_enum
+{
+    PORTMUX_USART0_DEFAULT_gv      = 0x00,  /* TxD: PA0, RxD: PA1, XCK: PA2, XDIR: PA3 */
+    PORTMUX_USART0_ALT1_gv         = 0x01,  /* TxD: PA4, RxD: PA5, XCK: PA6, XDIR: PA7 */
+    PORTMUX_USART0_NONE_gv         = 0x03   /* Not connected to any pins */
+} PORTMUX_USART0_values_t;
+
+/* USART0 Signals select bit group configurations*/
+typedef enum PORTMUX_USART0_enum
+{
+    PORTMUX_USART0_DEFAULT_gc      = (PORTMUX_USART0_DEFAULT_gv << PORTMUX_USART0_gp),  /* TxD: PA0, RxD: PA1, XCK: PA2, XDIR: PA3 */
+    PORTMUX_USART0_ALT1_gc         = (PORTMUX_USART0_ALT1_gv << PORTMUX_USART0_gp),  /* TxD: PA4, RxD: PA5, XCK: PA6, XDIR: PA7 */
+    PORTMUX_USART0_NONE_gc         = (PORTMUX_USART0_NONE_gv << PORTMUX_USART0_gp)   /* Not connected to any pins */
+} PORTMUX_USART0_t;
+
+/* USART1 Signals select bit group values */
+typedef enum PORTMUX_USART1_VALUES_enum
+{
+    PORTMUX_USART1_DEFAULT_gv      = 0x00,  /* TxD: PC0, RxD: PC1, XCK: PC2, XDIR: PC3 */
+    PORTMUX_USART1_ALT1_gv         = 0x01,  /* TxD: PC4, RxD: PC5, XCK: PC6, XDIR: PC7 */
+    PORTMUX_USART1_NONE_gv         = 0x03   /* Not connected to any pins */
+} PORTMUX_USART1_values_t;
+
+/* USART1 Signals select bit group configurations*/
+typedef enum PORTMUX_USART1_enum
+{
+    PORTMUX_USART1_DEFAULT_gc      = (PORTMUX_USART1_DEFAULT_gv << PORTMUX_USART1_gp),  /* TxD: PC0, RxD: PC1, XCK: PC2, XDIR: PC3 */
+    PORTMUX_USART1_ALT1_gc         = (PORTMUX_USART1_ALT1_gv << PORTMUX_USART1_gp),  /* TxD: PC4, RxD: PC5, XCK: PC6, XDIR: PC7 */
+    PORTMUX_USART1_NONE_gc         = (PORTMUX_USART1_NONE_gv << PORTMUX_USART1_gp)   /* Not connected to any pins */
+} PORTMUX_USART1_t;
+
+/* USART2 Signals select bit group values */
+typedef enum PORTMUX_USART2_VALUES_enum
+{
+    PORTMUX_USART2_DEFAULT_gv      = 0x00,  /* TxD: PF0, RxD: PF1, XCK: PF2, XDIR: PF3 */
+    PORTMUX_USART2_ALT1_gv         = 0x01,  /* TxD: PF4, RxD: PF5, XCK: -, XDIR: - */
+    PORTMUX_USART2_NONE_gv         = 0x03   /* Not connected to any pins */
+} PORTMUX_USART2_values_t;
+
+/* USART2 Signals select bit group configurations*/
+typedef enum PORTMUX_USART2_enum
+{
+    PORTMUX_USART2_DEFAULT_gc      = (PORTMUX_USART2_DEFAULT_gv << PORTMUX_USART2_gp),  /* TxD: PF0, RxD: PF1, XCK: PF2, XDIR: PF3 */
+    PORTMUX_USART2_ALT1_gc         = (PORTMUX_USART2_ALT1_gv << PORTMUX_USART2_gp),  /* TxD: PF4, RxD: PF5, XCK: -, XDIR: - */
+    PORTMUX_USART2_NONE_gc         = (PORTMUX_USART2_NONE_gv << PORTMUX_USART2_gp)   /* Not connected to any pins */
+} PORTMUX_USART2_t;
+
+/* USART3  Signals select bit group values */
+typedef enum PORTMUX_USART3_VALUES_enum
+{
+    PORTMUX_USART3_DEFAULT_gv      = 0x00,  /* TxD: PB0, RxD: PB1, XCK: PB2, XDIR: PB3 */
+    PORTMUX_USART3_ALT1_gv         = 0x01,  /* TxD: PB4, RxD: PB5, XCK: -, XDIR: - */
+    PORTMUX_USART3_NONE_gv         = 0x03   /* Not connected to any pins */
+} PORTMUX_USART3_values_t;
+
+/* USART3  Signals select bit group configurations*/
+typedef enum PORTMUX_USART3_enum
+{
+    PORTMUX_USART3_DEFAULT_gc      = (PORTMUX_USART3_DEFAULT_gv << PORTMUX_USART3_gp),  /* TxD: PB0, RxD: PB1, XCK: PB2, XDIR: PB3 */
+    PORTMUX_USART3_ALT1_gc         = (PORTMUX_USART3_ALT1_gv << PORTMUX_USART3_gp),  /* TxD: PB4, RxD: PB5, XCK: -, XDIR: - */
+    PORTMUX_USART3_NONE_gc         = (PORTMUX_USART3_NONE_gv << PORTMUX_USART3_gp)   /* Not connected to any pins */
+} PORTMUX_USART3_t;
+
+/* USART4 Signals select bit group values */
+typedef enum PORTMUX_USART4_VALUES_enum
+{
+    PORTMUX_USART4_DEFAULT_gv      = 0x00,  /* TxD: PE0, RxD: PE1, XCK: PE2, XDIR: PE3 */
+    PORTMUX_USART4_NONE_gv         = 0x03   /* Not connected to any pins */
+} PORTMUX_USART4_values_t;
+
+/* USART4 Signals select bit group configurations*/
+typedef enum PORTMUX_USART4_enum
+{
+    PORTMUX_USART4_DEFAULT_gc      = (PORTMUX_USART4_DEFAULT_gv << PORTMUX_USART4_gp),  /* TxD: PE0, RxD: PE1, XCK: PE2, XDIR: PE3 */
+    PORTMUX_USART4_NONE_gc         = (PORTMUX_USART4_NONE_gv << PORTMUX_USART4_gp)   /* Not connected to any pins */
+} PORTMUX_USART4_t;
+
+/* Zero Cross Detector 0 Output select bit group values */
+typedef enum PORTMUX_ZCD0_VALUES_enum
+{
+    PORTMUX_ZCD0_DEFAULT_gv        = 0x00,  /* OUT: PA7 */
+    PORTMUX_ZCD0_ALT1_gv           = 0x01   /* OUT: PC7 */
+} PORTMUX_ZCD0_values_t;
+
+/* Zero Cross Detector 0 Output select bit group configurations*/
+typedef enum PORTMUX_ZCD0_enum
+{
+    PORTMUX_ZCD0_DEFAULT_gc        = (PORTMUX_ZCD0_DEFAULT_gv << PORTMUX_ZCD0_bp),  /* OUT: PA7 */
+    PORTMUX_ZCD0_ALT1_gc           = (PORTMUX_ZCD0_ALT1_gv << PORTMUX_ZCD0_bp)   /* OUT: PC7 */
+} PORTMUX_ZCD0_t;
+
+/* Zero Cross Detector 1 Output select bit group values */
+typedef enum PORTMUX_ZCD1_VALUES_enum
+{
+    PORTMUX_ZCD1_DEFAULT_gv        = 0x00,  /* OUT: PA7 */
+    PORTMUX_ZCD1_ALT1_gv           = 0x01   /* OUT: PC7 */
+} PORTMUX_ZCD1_values_t;
+
+/* Zero Cross Detector 1 Output select bit group configurations*/
+typedef enum PORTMUX_ZCD1_enum
+{
+    PORTMUX_ZCD1_DEFAULT_gc        = (PORTMUX_ZCD1_DEFAULT_gv << PORTMUX_ZCD1_bp),  /* OUT: PA7 */
+    PORTMUX_ZCD1_ALT1_gc           = (PORTMUX_ZCD1_ALT1_gv << PORTMUX_ZCD1_bp)   /* OUT: PC7 */
+} PORTMUX_ZCD1_t;
+
+
+/*
+--------------------------------------------------------------------------
+RSTCTRL - Reset controller
+--------------------------------------------------------------------------
+*/
+
+/* Reset controller */
+typedef struct RSTCTRL_struct
+{
+    register8_t RSTFR;  /* Reset Flags */
+    register8_t SWRR;  /* Software Reset */
+    register8_t reserved_1[2];
+} RSTCTRL_t;
+
+
+/*
+--------------------------------------------------------------------------
+RTC - Real-Time Counter
+--------------------------------------------------------------------------
+*/
+
+/* Real-Time Counter */
+typedef struct RTC_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t STATUS;  /* Status */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t TEMP;  /* Temporary */
+    register8_t DBGCTRL;  /* Debug control */
+    register8_t CALIB;  /* Calibration */
+    register8_t CLKSEL;  /* Clock Select */
+    _WORDREGISTER(CNT);  /* Counter */
+    _WORDREGISTER(PER);  /* Period */
+    _WORDREGISTER(CMP);  /* Compare */
+    register8_t reserved_1[2];
+    register8_t PITCTRLA;  /* PIT Control A */
+    register8_t PITSTATUS;  /* PIT Status */
+    register8_t PITINTCTRL;  /* PIT Interrupt Control */
+    register8_t PITINTFLAGS;  /* PIT Interrupt Flags */
+    register8_t reserved_2[1];
+    register8_t PITDBGCTRL;  /* PIT Debug control */
+    register8_t reserved_3[10];
+} RTC_t;
+
+/* Clock Select bit group values */
+typedef enum RTC_CLKSEL_VALUES_enum
+{
+    RTC_CLKSEL_OSC32K_gv           = 0x00,  /* 32.768 kHz from OSC32K */
+    RTC_CLKSEL_OSC1K_gv            = 0x01,  /* 1.024 kHz from OSC32K */
+    RTC_CLKSEL_XOSC32K_gv          = 0x02,  /* 32.768 kHz from XOSC32K */
+    RTC_CLKSEL_EXTCLK_gv           = 0x03   /* External Clock */
+} RTC_CLKSEL_values_t;
+
+/* Clock Select bit group configurations*/
+typedef enum RTC_CLKSEL_enum
+{
+    RTC_CLKSEL_OSC32K_gc           = (RTC_CLKSEL_OSC32K_gv << RTC_CLKSEL_gp),  /* 32.768 kHz from OSC32K */
+    RTC_CLKSEL_OSC1K_gc            = (RTC_CLKSEL_OSC1K_gv << RTC_CLKSEL_gp),  /* 1.024 kHz from OSC32K */
+    RTC_CLKSEL_XOSC32K_gc          = (RTC_CLKSEL_XOSC32K_gv << RTC_CLKSEL_gp),  /* 32.768 kHz from XOSC32K */
+    RTC_CLKSEL_EXTCLK_gc           = (RTC_CLKSEL_EXTCLK_gv << RTC_CLKSEL_gp)   /* External Clock */
+} RTC_CLKSEL_t;
+
+/* Period select bit group values */
+typedef enum RTC_PERIOD_VALUES_enum
+{
+    RTC_PERIOD_OFF_gv              = 0x00,  /* Off */
+    RTC_PERIOD_CYC4_gv             = 0x01,  /* RTC Clock Cycles 4 */
+    RTC_PERIOD_CYC8_gv             = 0x02,  /* RTC Clock Cycles 8 */
+    RTC_PERIOD_CYC16_gv            = 0x03,  /* RTC Clock Cycles 16 */
+    RTC_PERIOD_CYC32_gv            = 0x04,  /* RTC Clock Cycles 32 */
+    RTC_PERIOD_CYC64_gv            = 0x05,  /* RTC Clock Cycles 64 */
+    RTC_PERIOD_CYC128_gv           = 0x06,  /* RTC Clock Cycles 128 */
+    RTC_PERIOD_CYC256_gv           = 0x07,  /* RTC Clock Cycles 256 */
+    RTC_PERIOD_CYC512_gv           = 0x08,  /* RTC Clock Cycles 512 */
+    RTC_PERIOD_CYC1024_gv          = 0x09,  /* RTC Clock Cycles 1024 */
+    RTC_PERIOD_CYC2048_gv          = 0x0A,  /* RTC Clock Cycles 2048 */
+    RTC_PERIOD_CYC4096_gv          = 0x0B,  /* RTC Clock Cycles 4096 */
+    RTC_PERIOD_CYC8192_gv          = 0x0C,  /* RTC Clock Cycles 8192 */
+    RTC_PERIOD_CYC16384_gv         = 0x0D,  /* RTC Clock Cycles 16384 */
+    RTC_PERIOD_CYC32768_gv         = 0x0E   /* RTC Clock Cycles 32768 */
+} RTC_PERIOD_values_t;
+
+/* Period select bit group configurations*/
+typedef enum RTC_PERIOD_enum
+{
+    RTC_PERIOD_OFF_gc              = (RTC_PERIOD_OFF_gv << RTC_PERIOD_gp),  /* Off */
+    RTC_PERIOD_CYC4_gc             = (RTC_PERIOD_CYC4_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 4 */
+    RTC_PERIOD_CYC8_gc             = (RTC_PERIOD_CYC8_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 8 */
+    RTC_PERIOD_CYC16_gc            = (RTC_PERIOD_CYC16_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 16 */
+    RTC_PERIOD_CYC32_gc            = (RTC_PERIOD_CYC32_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 32 */
+    RTC_PERIOD_CYC64_gc            = (RTC_PERIOD_CYC64_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 64 */
+    RTC_PERIOD_CYC128_gc           = (RTC_PERIOD_CYC128_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 128 */
+    RTC_PERIOD_CYC256_gc           = (RTC_PERIOD_CYC256_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 256 */
+    RTC_PERIOD_CYC512_gc           = (RTC_PERIOD_CYC512_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 512 */
+    RTC_PERIOD_CYC1024_gc          = (RTC_PERIOD_CYC1024_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 1024 */
+    RTC_PERIOD_CYC2048_gc          = (RTC_PERIOD_CYC2048_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 2048 */
+    RTC_PERIOD_CYC4096_gc          = (RTC_PERIOD_CYC4096_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 4096 */
+    RTC_PERIOD_CYC8192_gc          = (RTC_PERIOD_CYC8192_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 8192 */
+    RTC_PERIOD_CYC16384_gc         = (RTC_PERIOD_CYC16384_gv << RTC_PERIOD_gp),  /* RTC Clock Cycles 16384 */
+    RTC_PERIOD_CYC32768_gc         = (RTC_PERIOD_CYC32768_gv << RTC_PERIOD_gp)   /* RTC Clock Cycles 32768 */
+} RTC_PERIOD_t;
+
+/* Prescaling Factor select bit group values */
+typedef enum RTC_PRESCALER_VALUES_enum
+{
+    RTC_PRESCALER_DIV1_gv          = 0x00,  /* RTC Clock / 1 */
+    RTC_PRESCALER_DIV2_gv          = 0x01,  /* RTC Clock / 2 */
+    RTC_PRESCALER_DIV4_gv          = 0x02,  /* RTC Clock / 4 */
+    RTC_PRESCALER_DIV8_gv          = 0x03,  /* RTC Clock / 8 */
+    RTC_PRESCALER_DIV16_gv         = 0x04,  /* RTC Clock / 16 */
+    RTC_PRESCALER_DIV32_gv         = 0x05,  /* RTC Clock / 32 */
+    RTC_PRESCALER_DIV64_gv         = 0x06,  /* RTC Clock / 64 */
+    RTC_PRESCALER_DIV128_gv        = 0x07,  /* RTC Clock / 128 */
+    RTC_PRESCALER_DIV256_gv        = 0x08,  /* RTC Clock / 256 */
+    RTC_PRESCALER_DIV512_gv        = 0x09,  /* RTC Clock / 512 */
+    RTC_PRESCALER_DIV1024_gv       = 0x0A,  /* RTC Clock / 1024 */
+    RTC_PRESCALER_DIV2048_gv       = 0x0B,  /* RTC Clock / 2048 */
+    RTC_PRESCALER_DIV4096_gv       = 0x0C,  /* RTC Clock / 4096 */
+    RTC_PRESCALER_DIV8192_gv       = 0x0D,  /* RTC Clock / 8192 */
+    RTC_PRESCALER_DIV16384_gv      = 0x0E,  /* RTC Clock / 16384 */
+    RTC_PRESCALER_DIV32768_gv      = 0x0F   /* RTC Clock / 32768 */
+} RTC_PRESCALER_values_t;
+
+/* Prescaling Factor select bit group configurations*/
+typedef enum RTC_PRESCALER_enum
+{
+    RTC_PRESCALER_DIV1_gc          = (RTC_PRESCALER_DIV1_gv << RTC_PRESCALER_gp),  /* RTC Clock / 1 */
+    RTC_PRESCALER_DIV2_gc          = (RTC_PRESCALER_DIV2_gv << RTC_PRESCALER_gp),  /* RTC Clock / 2 */
+    RTC_PRESCALER_DIV4_gc          = (RTC_PRESCALER_DIV4_gv << RTC_PRESCALER_gp),  /* RTC Clock / 4 */
+    RTC_PRESCALER_DIV8_gc          = (RTC_PRESCALER_DIV8_gv << RTC_PRESCALER_gp),  /* RTC Clock / 8 */
+    RTC_PRESCALER_DIV16_gc         = (RTC_PRESCALER_DIV16_gv << RTC_PRESCALER_gp),  /* RTC Clock / 16 */
+    RTC_PRESCALER_DIV32_gc         = (RTC_PRESCALER_DIV32_gv << RTC_PRESCALER_gp),  /* RTC Clock / 32 */
+    RTC_PRESCALER_DIV64_gc         = (RTC_PRESCALER_DIV64_gv << RTC_PRESCALER_gp),  /* RTC Clock / 64 */
+    RTC_PRESCALER_DIV128_gc        = (RTC_PRESCALER_DIV128_gv << RTC_PRESCALER_gp),  /* RTC Clock / 128 */
+    RTC_PRESCALER_DIV256_gc        = (RTC_PRESCALER_DIV256_gv << RTC_PRESCALER_gp),  /* RTC Clock / 256 */
+    RTC_PRESCALER_DIV512_gc        = (RTC_PRESCALER_DIV512_gv << RTC_PRESCALER_gp),  /* RTC Clock / 512 */
+    RTC_PRESCALER_DIV1024_gc       = (RTC_PRESCALER_DIV1024_gv << RTC_PRESCALER_gp),  /* RTC Clock / 1024 */
+    RTC_PRESCALER_DIV2048_gc       = (RTC_PRESCALER_DIV2048_gv << RTC_PRESCALER_gp),  /* RTC Clock / 2048 */
+    RTC_PRESCALER_DIV4096_gc       = (RTC_PRESCALER_DIV4096_gv << RTC_PRESCALER_gp),  /* RTC Clock / 4096 */
+    RTC_PRESCALER_DIV8192_gc       = (RTC_PRESCALER_DIV8192_gv << RTC_PRESCALER_gp),  /* RTC Clock / 8192 */
+    RTC_PRESCALER_DIV16384_gc      = (RTC_PRESCALER_DIV16384_gv << RTC_PRESCALER_gp),  /* RTC Clock / 16384 */
+    RTC_PRESCALER_DIV32768_gc      = (RTC_PRESCALER_DIV32768_gv << RTC_PRESCALER_gp)   /* RTC Clock / 32768 */
+} RTC_PRESCALER_t;
+
+/*
+--------------------------------------------------------------------------
+SIGROW - Signature row
+--------------------------------------------------------------------------
+*/
+
+/* Signature row */
+typedef struct SIGROW_struct
+{
+    register8_t DEVICEID0;  /* Device ID Byte 0 */
+    register8_t DEVICEID1;  /* Device ID Byte 1 */
+    register8_t DEVICEID2;  /* Device ID Byte 2 */
+    register8_t reserved_1[1];
+    _WORDREGISTER(TEMPSENSE0);  /* Temperature Calibration 0 */
+    _WORDREGISTER(TEMPSENSE1);  /* Temperature Calibration 1 */
+    register8_t reserved_2[8];
+    register8_t SERNUM0;  /* LOTNUM0 */
+    register8_t SERNUM1;  /* LOTNUM1 */
+    register8_t SERNUM2;  /* LOTNUM2 */
+    register8_t SERNUM3;  /* LOTNUM3 */
+    register8_t SERNUM4;  /* LOTNUM4 */
+    register8_t SERNUM5;  /* LOTNUM5 */
+    register8_t SERNUM6;  /* RANDOM */
+    register8_t SERNUM7;  /* SCRIBE */
+    register8_t SERNUM8;  /* XPOS0 */
+    register8_t SERNUM9;  /* XPOS1 */
+    register8_t SERNUM10;  /* YPOS0 */
+    register8_t SERNUM11;  /* YPOS1 */
+    register8_t SERNUM12;  /* RES0 */
+    register8_t SERNUM13;  /* RES1 */
+    register8_t SERNUM14;  /* RES2 */
+    register8_t SERNUM15;  /* RES3 */
+    register8_t reserved_3[32];
+} SIGROW_t;
+
+
+/*
+--------------------------------------------------------------------------
+SLPCTRL - Sleep Controller
+--------------------------------------------------------------------------
+*/
+
+/* Sleep Controller */
+typedef struct SLPCTRL_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t VREGCTRL;  /* Control B */
+} SLPCTRL_t;
+
+/* High Temperature Low Leakage Enable select bit group values */
+typedef enum SLPCTRL_HTLLEN_VALUES_enum
+{
+    SLPCTRL_HTLLEN_OFF_gv          = 0x00,  /* Disabled */
+    SLPCTRL_HTLLEN_ON_gv           = 0x01   /* Enabled */
+} SLPCTRL_HTLLEN_values_t;
+
+/* High Temperature Low Leakage Enable select bit group configurations*/
+typedef enum SLPCTRL_HTLLEN_enum
+{
+    SLPCTRL_HTLLEN_OFF_gc          = (SLPCTRL_HTLLEN_OFF_gv << SLPCTRL_HTLLEN_bp),  /* Disabled */
+    SLPCTRL_HTLLEN_ON_gc           = (SLPCTRL_HTLLEN_ON_gv << SLPCTRL_HTLLEN_bp)   /* Enabled */
+} SLPCTRL_HTLLEN_t;
+
+/* Performance Mode select bit group values */
+typedef enum SLPCTRL_PMODE_VALUES_enum
+{
+    SLPCTRL_PMODE_AUTO_gv          = 0x00,  /*  */
+    SLPCTRL_PMODE_FULL_gv          = 0x01   /*  */
+} SLPCTRL_PMODE_values_t;
+
+/* Performance Mode select bit group configurations*/
+typedef enum SLPCTRL_PMODE_enum
+{
+    SLPCTRL_PMODE_AUTO_gc          = (SLPCTRL_PMODE_AUTO_gv << SLPCTRL_PMODE_gp),  /*  */
+    SLPCTRL_PMODE_FULL_gc          = (SLPCTRL_PMODE_FULL_gv << SLPCTRL_PMODE_gp)   /*  */
+} SLPCTRL_PMODE_t;
+
+/* Sleep mode select bit group values */
+typedef enum SLPCTRL_SMODE_VALUES_enum
+{
+    SLPCTRL_SMODE_IDLE_gv          = 0x00,  /* Idle mode */
+    SLPCTRL_SMODE_STDBY_gv         = 0x01,  /* Standby Mode */
+    SLPCTRL_SMODE_PDOWN_gv         = 0x02   /* Power-down Mode */
+} SLPCTRL_SMODE_values_t;
+
+/* Sleep mode select bit group configurations*/
+typedef enum SLPCTRL_SMODE_enum
+{
+    SLPCTRL_SMODE_IDLE_gc          = (SLPCTRL_SMODE_IDLE_gv << SLPCTRL_SMODE_gp),  /* Idle mode */
+    SLPCTRL_SMODE_STDBY_gc         = (SLPCTRL_SMODE_STDBY_gv << SLPCTRL_SMODE_gp),  /* Standby Mode */
+    SLPCTRL_SMODE_PDOWN_gc         = (SLPCTRL_SMODE_PDOWN_gv << SLPCTRL_SMODE_gp)   /* Power-down Mode */
+} SLPCTRL_SMODE_t;
+
+#define SLEEP_MODE_IDLE (0x00<<1)
+#define SLEEP_MODE_STANDBY (0x01<<1)
+#define SLEEP_MODE_PWR_DOWN (0x02<<1)
+/*
+--------------------------------------------------------------------------
+SPI - Serial Peripheral Interface
+--------------------------------------------------------------------------
+*/
+
+/* Serial Peripheral Interface */
+typedef struct SPI_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t DATA;  /* Data */
+    register8_t reserved_1[11];
+} SPI_t;
+
+/* SPI Mode select bit group values */
+typedef enum SPI_MODE_VALUES_enum
+{
+    SPI_MODE_0_gv                  = 0x00,  /* SPI Mode 0 */
+    SPI_MODE_1_gv                  = 0x01,  /* SPI Mode 1 */
+    SPI_MODE_2_gv                  = 0x02,  /* SPI Mode 2 */
+    SPI_MODE_3_gv                  = 0x03   /* SPI Mode 3 */
+} SPI_MODE_values_t;
+
+/* SPI Mode select bit group configurations*/
+typedef enum SPI_MODE_enum
+{
+    SPI_MODE_0_gc                  = (SPI_MODE_0_gv << SPI_MODE_gp),  /* SPI Mode 0 */
+    SPI_MODE_1_gc                  = (SPI_MODE_1_gv << SPI_MODE_gp),  /* SPI Mode 1 */
+    SPI_MODE_2_gc                  = (SPI_MODE_2_gv << SPI_MODE_gp),  /* SPI Mode 2 */
+    SPI_MODE_3_gc                  = (SPI_MODE_3_gv << SPI_MODE_gp)   /* SPI Mode 3 */
+} SPI_MODE_t;
+
+/* Prescaler select bit group values */
+typedef enum SPI_PRESC_VALUES_enum
+{
+    SPI_PRESC_DIV4_gv              = 0x00,  /* CLK_PER / 4 */
+    SPI_PRESC_DIV16_gv             = 0x01,  /* CLK_PER / 16 */
+    SPI_PRESC_DIV64_gv             = 0x02,  /* CLK_PER / 64 */
+    SPI_PRESC_DIV128_gv            = 0x03   /* CLK_PER / 128 */
+} SPI_PRESC_values_t;
+
+/* Prescaler select bit group configurations*/
+typedef enum SPI_PRESC_enum
+{
+    SPI_PRESC_DIV4_gc              = (SPI_PRESC_DIV4_gv << SPI_PRESC_gp),  /* CLK_PER / 4 */
+    SPI_PRESC_DIV16_gc             = (SPI_PRESC_DIV16_gv << SPI_PRESC_gp),  /* CLK_PER / 16 */
+    SPI_PRESC_DIV64_gc             = (SPI_PRESC_DIV64_gv << SPI_PRESC_gp),  /* CLK_PER / 64 */
+    SPI_PRESC_DIV128_gc            = (SPI_PRESC_DIV128_gv << SPI_PRESC_gp)   /* CLK_PER / 128 */
+} SPI_PRESC_t;
+
+/*
+--------------------------------------------------------------------------
+SYSCFG - System Configuration Registers
+--------------------------------------------------------------------------
+*/
+
+/* System Configuration Registers */
+typedef struct SYSCFG_struct
+{
+    register8_t reserved_1[1];
+    register8_t REVID;  /* Revision ID */
+    register8_t reserved_2[22];
+    register8_t OCDMCTRL;  /* OCD Message Control */
+    register8_t OCDMSTATUS;  /* OCD Message Status */
+    register8_t reserved_3[6];
+} SYSCFG_t;
+
+
+/*
+--------------------------------------------------------------------------
+TCA - 16-bit Timer/Counter Type A
+--------------------------------------------------------------------------
+*/
+
+/* 16-bit Timer/Counter Type A - Single Mode */
+typedef struct TCA_SINGLE_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t CTRLC;  /* Control C */
+    register8_t CTRLD;  /* Control D */
+    register8_t CTRLECLR;  /* Control E Clear */
+    register8_t CTRLESET;  /* Control E Set */
+    register8_t CTRLFCLR;  /* Control F Clear */
+    register8_t CTRLFSET;  /* Control F Set */
+    register8_t reserved_1[1];
+    register8_t EVCTRL;  /* Event Control */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t reserved_2[2];
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t TEMP;  /* Temporary data for 16-bit Access */
+    register8_t reserved_3[16];
+    _WORDREGISTER(CNT);  /* Count */
+    register8_t reserved_4[4];
+    _WORDREGISTER(PER);  /* Period */
+    _WORDREGISTER(CMP0);  /* Compare 0 */
+    _WORDREGISTER(CMP1);  /* Compare 1 */
+    _WORDREGISTER(CMP2);  /* Compare 2 */
+    register8_t reserved_5[8];
+    _WORDREGISTER(PERBUF);  /* Period Buffer */
+    _WORDREGISTER(CMP0BUF);  /* Compare 0 Buffer */
+    _WORDREGISTER(CMP1BUF);  /* Compare 1 Buffer */
+    _WORDREGISTER(CMP2BUF);  /* Compare 2 Buffer */
+    register8_t reserved_6[2];
+} TCA_SINGLE_t;
+
+/* 16-bit Timer/Counter Type A - Split Mode */
+typedef struct TCA_SPLIT_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t CTRLC;  /* Control C */
+    register8_t CTRLD;  /* Control D */
+    register8_t CTRLECLR;  /* Control E Clear */
+    register8_t CTRLESET;  /* Control E Set */
+    register8_t reserved_1[4];
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t reserved_2[2];
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t reserved_3[17];
+    register8_t LCNT;  /* Low Count */
+    register8_t HCNT;  /* High Count */
+    register8_t reserved_4[4];
+    register8_t LPER;  /* Low Period */
+    register8_t HPER;  /* High Period */
+    register8_t LCMP0;  /* Low Compare */
+    register8_t HCMP0;  /* High Compare */
+    register8_t LCMP1;  /* Low Compare */
+    register8_t HCMP1;  /* High Compare */
+    register8_t LCMP2;  /* Low Compare */
+    register8_t HCMP2;  /* High Compare */
+    register8_t reserved_5[18];
+} TCA_SPLIT_t;
+
+/* 16-bit Timer/Counter Type A */
+typedef union TCA_union
+{
+    TCA_SINGLE_t SINGLE;  /* Single Mode */
+    TCA_SPLIT_t SPLIT;  /* Split Mode */
+} TCA_t;
+
+/* Clock Selection bit group values */
+typedef enum TCA_SINGLE_CLKSEL_VALUES_enum
+{
+    TCA_SINGLE_CLKSEL_DIV1_gv      = 0x00,  /* CLK_PER */
+    TCA_SINGLE_CLKSEL_DIV2_gv      = 0x01,  /* CLK_PER / 2 */
+    TCA_SINGLE_CLKSEL_DIV4_gv      = 0x02,  /* CLK_PER / 4 */
+    TCA_SINGLE_CLKSEL_DIV8_gv      = 0x03,  /* CLK_PER / 8 */
+    TCA_SINGLE_CLKSEL_DIV16_gv     = 0x04,  /* CLK_PER / 16 */
+    TCA_SINGLE_CLKSEL_DIV64_gv     = 0x05,  /* CLK_PER / 64 */
+    TCA_SINGLE_CLKSEL_DIV256_gv    = 0x06,  /* CLK_PER / 256 */
+    TCA_SINGLE_CLKSEL_DIV1024_gv   = 0x07   /* CLK_PER / 1024 */
+} TCA_SINGLE_CLKSEL_values_t;
+
+/* Clock Selection bit group configurations*/
+typedef enum TCA_SINGLE_CLKSEL_enum
+{
+    TCA_SINGLE_CLKSEL_DIV1_gc      = (TCA_SINGLE_CLKSEL_DIV1_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER */
+    TCA_SINGLE_CLKSEL_DIV2_gc      = (TCA_SINGLE_CLKSEL_DIV2_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 2 */
+    TCA_SINGLE_CLKSEL_DIV4_gc      = (TCA_SINGLE_CLKSEL_DIV4_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 4 */
+    TCA_SINGLE_CLKSEL_DIV8_gc      = (TCA_SINGLE_CLKSEL_DIV8_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 8 */
+    TCA_SINGLE_CLKSEL_DIV16_gc     = (TCA_SINGLE_CLKSEL_DIV16_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 16 */
+    TCA_SINGLE_CLKSEL_DIV64_gc     = (TCA_SINGLE_CLKSEL_DIV64_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 64 */
+    TCA_SINGLE_CLKSEL_DIV256_gc    = (TCA_SINGLE_CLKSEL_DIV256_gv << TCA_SINGLE_CLKSEL_gp),  /* CLK_PER / 256 */
+    TCA_SINGLE_CLKSEL_DIV1024_gc   = (TCA_SINGLE_CLKSEL_DIV1024_gv << TCA_SINGLE_CLKSEL_gp)   /* CLK_PER / 1024 */
+} TCA_SINGLE_CLKSEL_t;
+
+/* Command select bit group values */
+typedef enum TCA_SINGLE_CMD_VALUES_enum
+{
+    TCA_SINGLE_CMD_NONE_gv         = 0x00,  /* No Command */
+    TCA_SINGLE_CMD_UPDATE_gv       = 0x01,  /* Force Update */
+    TCA_SINGLE_CMD_RESTART_gv      = 0x02,  /* Force Restart */
+    TCA_SINGLE_CMD_RESET_gv        = 0x03   /* Force Hard Reset */
+} TCA_SINGLE_CMD_values_t;
+
+/* Command select bit group configurations*/
+typedef enum TCA_SINGLE_CMD_enum
+{
+    TCA_SINGLE_CMD_NONE_gc         = (TCA_SINGLE_CMD_NONE_gv << TCA_SINGLE_CMD_gp),  /* No Command */
+    TCA_SINGLE_CMD_UPDATE_gc       = (TCA_SINGLE_CMD_UPDATE_gv << TCA_SINGLE_CMD_gp),  /* Force Update */
+    TCA_SINGLE_CMD_RESTART_gc      = (TCA_SINGLE_CMD_RESTART_gv << TCA_SINGLE_CMD_gp),  /* Force Restart */
+    TCA_SINGLE_CMD_RESET_gc        = (TCA_SINGLE_CMD_RESET_gv << TCA_SINGLE_CMD_gp)   /* Force Hard Reset */
+} TCA_SINGLE_CMD_t;
+
+/* Direction select bit group values */
+typedef enum TCA_SINGLE_DIR_VALUES_enum
+{
+    TCA_SINGLE_DIR_UP_gv           = 0x00,  /* Count up */
+    TCA_SINGLE_DIR_DOWN_gv         = 0x01   /* Count down */
+} TCA_SINGLE_DIR_values_t;
+
+/* Direction select bit group configurations*/
+typedef enum TCA_SINGLE_DIR_enum
+{
+    TCA_SINGLE_DIR_UP_gc           = (TCA_SINGLE_DIR_UP_gv << TCA_SINGLE_DIR_bp),  /* Count up */
+    TCA_SINGLE_DIR_DOWN_gc         = (TCA_SINGLE_DIR_DOWN_gv << TCA_SINGLE_DIR_bp)   /* Count down */
+} TCA_SINGLE_DIR_t;
+
+/* Event Action A select bit group values */
+typedef enum TCA_SINGLE_EVACTA_VALUES_enum
+{
+    TCA_SINGLE_EVACTA_CNT_POSEDGE_gv = 0x00,  /* Count on positive edge event */
+    TCA_SINGLE_EVACTA_CNT_ANYEDGE_gv = 0x01,  /* Count on any edge event */
+    TCA_SINGLE_EVACTA_CNT_HIGHLVL_gv = 0x02,  /* Count on prescaled clock while event line is 1. */
+    TCA_SINGLE_EVACTA_UPDOWN_gv    = 0x03   /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
+} TCA_SINGLE_EVACTA_values_t;
+
+/* Event Action A select bit group configurations*/
+typedef enum TCA_SINGLE_EVACTA_enum
+{
+    TCA_SINGLE_EVACTA_CNT_POSEDGE_gc = (TCA_SINGLE_EVACTA_CNT_POSEDGE_gv << TCA_SINGLE_EVACTA_gp),  /* Count on positive edge event */
+    TCA_SINGLE_EVACTA_CNT_ANYEDGE_gc = (TCA_SINGLE_EVACTA_CNT_ANYEDGE_gv << TCA_SINGLE_EVACTA_gp),  /* Count on any edge event */
+    TCA_SINGLE_EVACTA_CNT_HIGHLVL_gc = (TCA_SINGLE_EVACTA_CNT_HIGHLVL_gv << TCA_SINGLE_EVACTA_gp),  /* Count on prescaled clock while event line is 1. */
+    TCA_SINGLE_EVACTA_UPDOWN_gc    = (TCA_SINGLE_EVACTA_UPDOWN_gv << TCA_SINGLE_EVACTA_gp)   /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
+} TCA_SINGLE_EVACTA_t;
+
+/* Event Action B select bit group values */
+typedef enum TCA_SINGLE_EVACTB_VALUES_enum
+{
+    TCA_SINGLE_EVACTB_NONE_gv      = 0x00,  /* No Action */
+    TCA_SINGLE_EVACTB_UPDOWN_gv    = 0x03,  /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
+    TCA_SINGLE_EVACTB_RESTART_POSEDGE_gv = 0x04,  /* Restart counter at positive edge event */
+    TCA_SINGLE_EVACTB_RESTART_ANYEDGE_gv = 0x05,  /* Restart counter on any edge event */
+    TCA_SINGLE_EVACTB_RESTART_HIGHLVL_gv = 0x06   /* Restart counter while event line is 1. */
+} TCA_SINGLE_EVACTB_values_t;
+
+/* Event Action B select bit group configurations*/
+typedef enum TCA_SINGLE_EVACTB_enum
+{
+    TCA_SINGLE_EVACTB_NONE_gc      = (TCA_SINGLE_EVACTB_NONE_gv << TCA_SINGLE_EVACTB_gp),  /* No Action */
+    TCA_SINGLE_EVACTB_UPDOWN_gc    = (TCA_SINGLE_EVACTB_UPDOWN_gv << TCA_SINGLE_EVACTB_gp),  /* Count on prescaled clock. Event controls count direction. Up-count when event line is 0, down-count when event line is 1. */
+    TCA_SINGLE_EVACTB_RESTART_POSEDGE_gc = (TCA_SINGLE_EVACTB_RESTART_POSEDGE_gv << TCA_SINGLE_EVACTB_gp),  /* Restart counter at positive edge event */
+    TCA_SINGLE_EVACTB_RESTART_ANYEDGE_gc = (TCA_SINGLE_EVACTB_RESTART_ANYEDGE_gv << TCA_SINGLE_EVACTB_gp),  /* Restart counter on any edge event */
+    TCA_SINGLE_EVACTB_RESTART_HIGHLVL_gc = (TCA_SINGLE_EVACTB_RESTART_HIGHLVL_gv << TCA_SINGLE_EVACTB_gp)   /* Restart counter while event line is 1. */
+} TCA_SINGLE_EVACTB_t;
+
+/* Waveform generation mode select bit group values */
+typedef enum TCA_SINGLE_WGMODE_VALUES_enum
+{
+    TCA_SINGLE_WGMODE_NORMAL_gv    = 0x00,  /* Normal Mode */
+    TCA_SINGLE_WGMODE_FRQ_gv       = 0x01,  /* Frequency Generation Mode */
+    TCA_SINGLE_WGMODE_SINGLESLOPE_gv = 0x03,  /* Single Slope PWM */
+    TCA_SINGLE_WGMODE_DSTOP_gv     = 0x05,  /* Dual Slope PWM, overflow on TOP */
+    TCA_SINGLE_WGMODE_DSBOTH_gv    = 0x06,  /* Dual Slope PWM, overflow on TOP and BOTTOM */
+    TCA_SINGLE_WGMODE_DSBOTTOM_gv  = 0x07   /* Dual Slope PWM, overflow on BOTTOM */
+} TCA_SINGLE_WGMODE_values_t;
+
+/* Waveform generation mode select bit group configurations*/
+typedef enum TCA_SINGLE_WGMODE_enum
+{
+    TCA_SINGLE_WGMODE_NORMAL_gc    = (TCA_SINGLE_WGMODE_NORMAL_gv << TCA_SINGLE_WGMODE_gp),  /* Normal Mode */
+    TCA_SINGLE_WGMODE_FRQ_gc       = (TCA_SINGLE_WGMODE_FRQ_gv << TCA_SINGLE_WGMODE_gp),  /* Frequency Generation Mode */
+    TCA_SINGLE_WGMODE_SINGLESLOPE_gc = (TCA_SINGLE_WGMODE_SINGLESLOPE_gv << TCA_SINGLE_WGMODE_gp),  /* Single Slope PWM */
+    TCA_SINGLE_WGMODE_DSTOP_gc     = (TCA_SINGLE_WGMODE_DSTOP_gv << TCA_SINGLE_WGMODE_gp),  /* Dual Slope PWM, overflow on TOP */
+    TCA_SINGLE_WGMODE_DSBOTH_gc    = (TCA_SINGLE_WGMODE_DSBOTH_gv << TCA_SINGLE_WGMODE_gp),  /* Dual Slope PWM, overflow on TOP and BOTTOM */
+    TCA_SINGLE_WGMODE_DSBOTTOM_gc  = (TCA_SINGLE_WGMODE_DSBOTTOM_gv << TCA_SINGLE_WGMODE_gp)   /* Dual Slope PWM, overflow on BOTTOM */
+} TCA_SINGLE_WGMODE_t;
+
+/* Clock Selection bit group values */
+typedef enum TCA_SPLIT_CLKSEL_VALUES_enum
+{
+    TCA_SPLIT_CLKSEL_DIV1_gv       = 0x00,  /* CLK_PER */
+    TCA_SPLIT_CLKSEL_DIV2_gv       = 0x01,  /* CLK_PER / 2 */
+    TCA_SPLIT_CLKSEL_DIV4_gv       = 0x02,  /* CLK_PER / 4 */
+    TCA_SPLIT_CLKSEL_DIV8_gv       = 0x03,  /* CLK_PER / 8 */
+    TCA_SPLIT_CLKSEL_DIV16_gv      = 0x04,  /* CLK_PER / 16 */
+    TCA_SPLIT_CLKSEL_DIV64_gv      = 0x05,  /* CLK_PER / 64 */
+    TCA_SPLIT_CLKSEL_DIV256_gv     = 0x06,  /* CLK_PER / 256 */
+    TCA_SPLIT_CLKSEL_DIV1024_gv    = 0x07   /* CLK_PER / 1024 */
+} TCA_SPLIT_CLKSEL_values_t;
+
+/* Clock Selection bit group configurations*/
+typedef enum TCA_SPLIT_CLKSEL_enum
+{
+    TCA_SPLIT_CLKSEL_DIV1_gc       = (TCA_SPLIT_CLKSEL_DIV1_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER */
+    TCA_SPLIT_CLKSEL_DIV2_gc       = (TCA_SPLIT_CLKSEL_DIV2_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 2 */
+    TCA_SPLIT_CLKSEL_DIV4_gc       = (TCA_SPLIT_CLKSEL_DIV4_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 4 */
+    TCA_SPLIT_CLKSEL_DIV8_gc       = (TCA_SPLIT_CLKSEL_DIV8_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 8 */
+    TCA_SPLIT_CLKSEL_DIV16_gc      = (TCA_SPLIT_CLKSEL_DIV16_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 16 */
+    TCA_SPLIT_CLKSEL_DIV64_gc      = (TCA_SPLIT_CLKSEL_DIV64_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 64 */
+    TCA_SPLIT_CLKSEL_DIV256_gc     = (TCA_SPLIT_CLKSEL_DIV256_gv << TCA_SPLIT_CLKSEL_gp),  /* CLK_PER / 256 */
+    TCA_SPLIT_CLKSEL_DIV1024_gc    = (TCA_SPLIT_CLKSEL_DIV1024_gv << TCA_SPLIT_CLKSEL_gp)   /* CLK_PER / 1024 */
+} TCA_SPLIT_CLKSEL_t;
+
+/* Command select bit group values */
+typedef enum TCA_SPLIT_CMD_VALUES_enum
+{
+    TCA_SPLIT_CMD_NONE_gv          = 0x00,  /* No Command */
+    TCA_SPLIT_CMD_RESTART_gv       = 0x02,  /* Force Restart */
+    TCA_SPLIT_CMD_RESET_gv         = 0x03   /* Force Hard Reset */
+} TCA_SPLIT_CMD_values_t;
+
+/* Command select bit group configurations*/
+typedef enum TCA_SPLIT_CMD_enum
+{
+    TCA_SPLIT_CMD_NONE_gc          = (TCA_SPLIT_CMD_NONE_gv << TCA_SPLIT_CMD_gp),  /* No Command */
+    TCA_SPLIT_CMD_RESTART_gc       = (TCA_SPLIT_CMD_RESTART_gv << TCA_SPLIT_CMD_gp),  /* Force Restart */
+    TCA_SPLIT_CMD_RESET_gc         = (TCA_SPLIT_CMD_RESET_gv << TCA_SPLIT_CMD_gp)   /* Force Hard Reset */
+} TCA_SPLIT_CMD_t;
+
+/* Command Enable select bit group values */
+typedef enum TCA_SPLIT_CMDEN_VALUES_enum
+{
+    TCA_SPLIT_CMDEN_NONE_gv        = 0x00,  /* None */
+    TCA_SPLIT_CMDEN_BOTH_gv        = 0x03   /* Both low byte and high byte counter */
+} TCA_SPLIT_CMDEN_values_t;
+
+/* Command Enable select bit group configurations*/
+typedef enum TCA_SPLIT_CMDEN_enum
+{
+    TCA_SPLIT_CMDEN_NONE_gc        = (TCA_SPLIT_CMDEN_NONE_gv << TCA_SPLIT_CMDEN_gp),  /* None */
+    TCA_SPLIT_CMDEN_BOTH_gc        = (TCA_SPLIT_CMDEN_BOTH_gv << TCA_SPLIT_CMDEN_gp)   /* Both low byte and high byte counter */
+} TCA_SPLIT_CMDEN_t;
+
+/*
+--------------------------------------------------------------------------
+TCB - 16-bit Timer Type B
+--------------------------------------------------------------------------
+*/
+
+/* 16-bit Timer Type B */
+typedef struct TCB_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control Register B */
+    register8_t reserved_1[2];
+    register8_t EVCTRL;  /* Event Control */
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t STATUS;  /* Status */
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t TEMP;  /* Temporary Value */
+    _WORDREGISTER(CNT);  /* Count */
+    _WORDREGISTER(CCMP);  /* Compare or Capture */
+    register8_t reserved_2[2];
+} TCB_t;
+
+/* Clock Select bit group values */
+typedef enum TCB_CLKSEL_VALUES_enum
+{
+    TCB_CLKSEL_DIV1_gv             = 0x00,  /* CLK_PER */
+    TCB_CLKSEL_DIV2_gv             = 0x01,  /* CLK_PER/2 */
+    TCB_CLKSEL_TCA0_gv             = 0x02,  /* Use CLK_TCA from TCA0 */
+    TCB_CLKSEL_TCA1_gv             = 0x03,  /* Use CLK_TCA from TCA1 */
+    TCB_CLKSEL_EVENT_gv            = 0x07   /* Count on event edge */
+} TCB_CLKSEL_values_t;
+
+/* Clock Select bit group configurations*/
+typedef enum TCB_CLKSEL_enum
+{
+    TCB_CLKSEL_DIV1_gc             = (TCB_CLKSEL_DIV1_gv << TCB_CLKSEL_gp),  /* CLK_PER */
+    TCB_CLKSEL_DIV2_gc             = (TCB_CLKSEL_DIV2_gv << TCB_CLKSEL_gp),  /* CLK_PER/2 */
+    TCB_CLKSEL_TCA0_gc             = (TCB_CLKSEL_TCA0_gv << TCB_CLKSEL_gp),  /* Use CLK_TCA from TCA0 */
+    TCB_CLKSEL_TCA1_gc             = (TCB_CLKSEL_TCA1_gv << TCB_CLKSEL_gp),  /* Use CLK_TCA from TCA1 */
+    TCB_CLKSEL_EVENT_gc            = (TCB_CLKSEL_EVENT_gv << TCB_CLKSEL_gp)   /* Count on event edge */
+} TCB_CLKSEL_t;
+
+/* Timer Mode select bit group values */
+typedef enum TCB_CNTMODE_VALUES_enum
+{
+    TCB_CNTMODE_INT_gv             = 0x00,  /* Periodic Interrupt */
+    TCB_CNTMODE_TIMEOUT_gv         = 0x01,  /* Periodic Timeout */
+    TCB_CNTMODE_CAPT_gv            = 0x02,  /* Input Capture Event */
+    TCB_CNTMODE_FRQ_gv             = 0x03,  /* Input Capture Frequency measurement */
+    TCB_CNTMODE_PW_gv              = 0x04,  /* Input Capture Pulse-Width measurement */
+    TCB_CNTMODE_FRQPW_gv           = 0x05,  /* Input Capture Frequency and Pulse-Width measurement */
+    TCB_CNTMODE_SINGLE_gv          = 0x06,  /* Single Shot */
+    TCB_CNTMODE_PWM8_gv            = 0x07   /* 8-bit PWM */
+} TCB_CNTMODE_values_t;
+
+/* Timer Mode select bit group configurations*/
+typedef enum TCB_CNTMODE_enum
+{
+    TCB_CNTMODE_INT_gc             = (TCB_CNTMODE_INT_gv << TCB_CNTMODE_gp),  /* Periodic Interrupt */
+    TCB_CNTMODE_TIMEOUT_gc         = (TCB_CNTMODE_TIMEOUT_gv << TCB_CNTMODE_gp),  /* Periodic Timeout */
+    TCB_CNTMODE_CAPT_gc            = (TCB_CNTMODE_CAPT_gv << TCB_CNTMODE_gp),  /* Input Capture Event */
+    TCB_CNTMODE_FRQ_gc             = (TCB_CNTMODE_FRQ_gv << TCB_CNTMODE_gp),  /* Input Capture Frequency measurement */
+    TCB_CNTMODE_PW_gc              = (TCB_CNTMODE_PW_gv << TCB_CNTMODE_gp),  /* Input Capture Pulse-Width measurement */
+    TCB_CNTMODE_FRQPW_gc           = (TCB_CNTMODE_FRQPW_gv << TCB_CNTMODE_gp),  /* Input Capture Frequency and Pulse-Width measurement */
+    TCB_CNTMODE_SINGLE_gc          = (TCB_CNTMODE_SINGLE_gv << TCB_CNTMODE_gp),  /* Single Shot */
+    TCB_CNTMODE_PWM8_gc            = (TCB_CNTMODE_PWM8_gv << TCB_CNTMODE_gp)   /* 8-bit PWM */
+} TCB_CNTMODE_t;
+
+/*
+--------------------------------------------------------------------------
+TCD - Timer Counter D
+--------------------------------------------------------------------------
+*/
+
+/* Timer Counter D */
+typedef struct TCD_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t CTRLC;  /* Control C */
+    register8_t CTRLD;  /* Control D */
+    register8_t CTRLE;  /* Control E */
+    register8_t reserved_1[3];
+    register8_t EVCTRLA;  /* EVCTRLA */
+    register8_t EVCTRLB;  /* EVCTRLB */
+    register8_t reserved_2[2];
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+    register8_t STATUS;  /* Status */
+    register8_t reserved_3[1];
+    register8_t INPUTCTRLA;  /* Input Control A */
+    register8_t INPUTCTRLB;  /* Input Control B */
+    register8_t FAULTCTRL;  /* Fault Control */
+    register8_t reserved_4[1];
+    register8_t DLYCTRL;  /* Delay Control */
+    register8_t DLYVAL;  /* Delay value */
+    register8_t reserved_5[2];
+    register8_t DITCTRL;  /* Dither Control A */
+    register8_t DITVAL;  /* Dither value */
+    register8_t reserved_6[4];
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t reserved_7[3];
+    _WORDREGISTER(CAPTUREA);  /* Capture A */
+    _WORDREGISTER(CAPTUREB);  /* Capture B */
+    register8_t reserved_8[2];
+    _WORDREGISTER(CMPASET);  /* Compare A Set */
+    _WORDREGISTER(CMPACLR);  /* Compare A Clear */
+    _WORDREGISTER(CMPBSET);  /* Compare B Set */
+    _WORDREGISTER(CMPBCLR);  /* Compare B Clear */
+    register8_t reserved_9[16];
+} TCD_t;
+
+/* Event action select bit group values */
+typedef enum TCD_ACTION_VALUES_enum
+{
+    TCD_ACTION_FAULT_gv            = 0x00,  /* Event trigger a fault */
+    TCD_ACTION_CAPTURE_gv          = 0x01   /* Event trigger a fault and capture */
+} TCD_ACTION_values_t;
+
+/* Event action select bit group configurations*/
+typedef enum TCD_ACTION_enum
+{
+    TCD_ACTION_FAULT_gc            = (TCD_ACTION_FAULT_gv << TCD_ACTION_bp),  /* Event trigger a fault */
+    TCD_ACTION_CAPTURE_gc          = (TCD_ACTION_CAPTURE_gv << TCD_ACTION_bp)   /* Event trigger a fault and capture */
+} TCD_ACTION_t;
+
+/* Event config select bit group values */
+typedef enum TCD_CFG_VALUES_enum
+{
+    TCD_CFG_NEITHER_gv             = 0x00,  /* Neither Filter nor Asynchronous Event is enabled */
+    TCD_CFG_FILTER_gv              = 0x01,  /* Input Capture Noise Cancellation Filter enabled */
+    TCD_CFG_ASYNC_gv               = 0x02   /* Asynchronous Event output qualification enabled */
+} TCD_CFG_values_t;
+
+/* Event config select bit group configurations*/
+typedef enum TCD_CFG_enum
+{
+    TCD_CFG_NEITHER_gc             = (TCD_CFG_NEITHER_gv << TCD_CFG_gp),  /* Neither Filter nor Asynchronous Event is enabled */
+    TCD_CFG_FILTER_gc              = (TCD_CFG_FILTER_gv << TCD_CFG_gp),  /* Input Capture Noise Cancellation Filter enabled */
+    TCD_CFG_ASYNC_gc               = (TCD_CFG_ASYNC_gv << TCD_CFG_gp)   /* Asynchronous Event output qualification enabled */
+} TCD_CFG_t;
+
+/* Clock select bit group values */
+typedef enum TCD_CLKSEL_VALUES_enum
+{
+    TCD_CLKSEL_OSCHF_gv            = 0x00,  /* Internal High-Frequency Oscillator */
+    TCD_CLKSEL_PLL_gv              = 0x01,  /* PLL */
+    TCD_CLKSEL_EXTCLK_gv           = 0x02,  /* External Clock */
+    TCD_CLKSEL_CLKPER_gv           = 0x03   /* Peripheral Clock */
+} TCD_CLKSEL_values_t;
+
+/* Clock select bit group configurations*/
+typedef enum TCD_CLKSEL_enum
+{
+    TCD_CLKSEL_OSCHF_gc            = (TCD_CLKSEL_OSCHF_gv << TCD_CLKSEL_gp),  /* Internal High-Frequency Oscillator */
+    TCD_CLKSEL_PLL_gc              = (TCD_CLKSEL_PLL_gv << TCD_CLKSEL_gp),  /* PLL */
+    TCD_CLKSEL_EXTCLK_gc           = (TCD_CLKSEL_EXTCLK_gv << TCD_CLKSEL_gp),  /* External Clock */
+    TCD_CLKSEL_CLKPER_gc           = (TCD_CLKSEL_CLKPER_gv << TCD_CLKSEL_gp)   /* Peripheral Clock */
+} TCD_CLKSEL_t;
+
+/* Compare C output select bit group values */
+typedef enum TCD_CMPCSEL_VALUES_enum
+{
+    TCD_CMPCSEL_PWMA_gv            = 0x00,  /* PWM A output */
+    TCD_CMPCSEL_PWMB_gv            = 0x01   /* PWM B output */
+} TCD_CMPCSEL_values_t;
+
+/* Compare C output select bit group configurations*/
+typedef enum TCD_CMPCSEL_enum
+{
+    TCD_CMPCSEL_PWMA_gc            = (TCD_CMPCSEL_PWMA_gv << TCD_CMPCSEL_bp),  /* PWM A output */
+    TCD_CMPCSEL_PWMB_gc            = (TCD_CMPCSEL_PWMB_gv << TCD_CMPCSEL_bp)   /* PWM B output */
+} TCD_CMPCSEL_t;
+
+/* Compare D output select bit group values */
+typedef enum TCD_CMPDSEL_VALUES_enum
+{
+    TCD_CMPDSEL_PWMA_gv            = 0x00,  /* PWM A output */
+    TCD_CMPDSEL_PWMB_gv            = 0x01   /* PWM B output */
+} TCD_CMPDSEL_values_t;
+
+/* Compare D output select bit group configurations*/
+typedef enum TCD_CMPDSEL_enum
+{
+    TCD_CMPDSEL_PWMA_gc            = (TCD_CMPDSEL_PWMA_gv << TCD_CMPDSEL_bp),  /* PWM A output */
+    TCD_CMPDSEL_PWMB_gc            = (TCD_CMPDSEL_PWMB_gv << TCD_CMPDSEL_bp)   /* PWM B output */
+} TCD_CMPDSEL_t;
+
+/* Counter prescaler select bit group values */
+typedef enum TCD_CNTPRES_VALUES_enum
+{
+    TCD_CNTPRES_DIV1_gv            = 0x00,  /* Sync clock divided by 1 */
+    TCD_CNTPRES_DIV4_gv            = 0x01,  /* Sync clock divided by 4 */
+    TCD_CNTPRES_DIV32_gv           = 0x02   /* Sync clock divided by 32 */
+} TCD_CNTPRES_values_t;
+
+/* Counter prescaler select bit group configurations*/
+typedef enum TCD_CNTPRES_enum
+{
+    TCD_CNTPRES_DIV1_gc            = (TCD_CNTPRES_DIV1_gv << TCD_CNTPRES_gp),  /* Sync clock divided by 1 */
+    TCD_CNTPRES_DIV4_gc            = (TCD_CNTPRES_DIV4_gv << TCD_CNTPRES_gp),  /* Sync clock divided by 4 */
+    TCD_CNTPRES_DIV32_gc           = (TCD_CNTPRES_DIV32_gv << TCD_CNTPRES_gp)   /* Sync clock divided by 32 */
+} TCD_CNTPRES_t;
+
+/* Dither select bit group values */
+typedef enum TCD_DITHERSEL_VALUES_enum
+{
+    TCD_DITHERSEL_ONTIMEB_gv       = 0x00,  /* On-time ramp B */
+    TCD_DITHERSEL_ONTIMEAB_gv      = 0x01,  /* On-time ramp A and B */
+    TCD_DITHERSEL_DEADTIMEB_gv     = 0x02,  /* Dead-time rampB */
+    TCD_DITHERSEL_DEADTIMEAB_gv    = 0x03   /* Dead-time ramp A and B */
+} TCD_DITHERSEL_values_t;
+
+/* Dither select bit group configurations*/
+typedef enum TCD_DITHERSEL_enum
+{
+    TCD_DITHERSEL_ONTIMEB_gc       = (TCD_DITHERSEL_ONTIMEB_gv << TCD_DITHERSEL_gp),  /* On-time ramp B */
+    TCD_DITHERSEL_ONTIMEAB_gc      = (TCD_DITHERSEL_ONTIMEAB_gv << TCD_DITHERSEL_gp),  /* On-time ramp A and B */
+    TCD_DITHERSEL_DEADTIMEB_gc     = (TCD_DITHERSEL_DEADTIMEB_gv << TCD_DITHERSEL_gp),  /* Dead-time rampB */
+    TCD_DITHERSEL_DEADTIMEAB_gc    = (TCD_DITHERSEL_DEADTIMEAB_gv << TCD_DITHERSEL_gp)   /* Dead-time ramp A and B */
+} TCD_DITHERSEL_t;
+
+/* Delay prescaler select bit group values */
+typedef enum TCD_DLYPRESC_VALUES_enum
+{
+    TCD_DLYPRESC_DIV1_gv           = 0x00,  /* No prescaling */
+    TCD_DLYPRESC_DIV2_gv           = 0x01,  /* Prescale with 2 */
+    TCD_DLYPRESC_DIV4_gv           = 0x02,  /* Prescale with 4 */
+    TCD_DLYPRESC_DIV8_gv           = 0x03   /* Prescale with 8 */
+} TCD_DLYPRESC_values_t;
+
+/* Delay prescaler select bit group configurations*/
+typedef enum TCD_DLYPRESC_enum
+{
+    TCD_DLYPRESC_DIV1_gc           = (TCD_DLYPRESC_DIV1_gv << TCD_DLYPRESC_gp),  /* No prescaling */
+    TCD_DLYPRESC_DIV2_gc           = (TCD_DLYPRESC_DIV2_gv << TCD_DLYPRESC_gp),  /* Prescale with 2 */
+    TCD_DLYPRESC_DIV4_gc           = (TCD_DLYPRESC_DIV4_gv << TCD_DLYPRESC_gp),  /* Prescale with 4 */
+    TCD_DLYPRESC_DIV8_gc           = (TCD_DLYPRESC_DIV8_gv << TCD_DLYPRESC_gp)   /* Prescale with 8 */
+} TCD_DLYPRESC_t;
+
+/* Delay select bit group values */
+typedef enum TCD_DLYSEL_VALUES_enum
+{
+    TCD_DLYSEL_OFF_gv              = 0x00,  /* No delay */
+    TCD_DLYSEL_INBLANK_gv          = 0x01,  /* Input blanking enabled */
+    TCD_DLYSEL_EVENT_gv            = 0x02   /* Event delay enabled */
+} TCD_DLYSEL_values_t;
+
+/* Delay select bit group configurations*/
+typedef enum TCD_DLYSEL_enum
+{
+    TCD_DLYSEL_OFF_gc              = (TCD_DLYSEL_OFF_gv << TCD_DLYSEL_gp),  /* No delay */
+    TCD_DLYSEL_INBLANK_gc          = (TCD_DLYSEL_INBLANK_gv << TCD_DLYSEL_gp),  /* Input blanking enabled */
+    TCD_DLYSEL_EVENT_gc            = (TCD_DLYSEL_EVENT_gv << TCD_DLYSEL_gp)   /* Event delay enabled */
+} TCD_DLYSEL_t;
+
+/* Delay trigger select bit group values */
+typedef enum TCD_DLYTRIG_VALUES_enum
+{
+    TCD_DLYTRIG_CMPASET_gv         = 0x00,  /* Compare A set */
+    TCD_DLYTRIG_CMPACLR_gv         = 0x01,  /* Compare A clear */
+    TCD_DLYTRIG_CMPBSET_gv         = 0x02,  /* Compare B set */
+    TCD_DLYTRIG_CMPBCLR_gv         = 0x03   /* Compare B clear */
+} TCD_DLYTRIG_values_t;
+
+/* Delay trigger select bit group configurations*/
+typedef enum TCD_DLYTRIG_enum
+{
+    TCD_DLYTRIG_CMPASET_gc         = (TCD_DLYTRIG_CMPASET_gv << TCD_DLYTRIG_gp),  /* Compare A set */
+    TCD_DLYTRIG_CMPACLR_gc         = (TCD_DLYTRIG_CMPACLR_gv << TCD_DLYTRIG_gp),  /* Compare A clear */
+    TCD_DLYTRIG_CMPBSET_gc         = (TCD_DLYTRIG_CMPBSET_gv << TCD_DLYTRIG_gp),  /* Compare B set */
+    TCD_DLYTRIG_CMPBCLR_gc         = (TCD_DLYTRIG_CMPBCLR_gv << TCD_DLYTRIG_gp)   /* Compare B clear */
+} TCD_DLYTRIG_t;
+
+/* Edge select bit group values */
+typedef enum TCD_EDGE_VALUES_enum
+{
+    TCD_EDGE_FALL_LOW_gv           = 0x00,  /* The falling edge or low level of event generates retrigger or fault action */
+    TCD_EDGE_RISE_HIGH_gv          = 0x01   /* The rising edge or high level of event generates retrigger or fault action */
+} TCD_EDGE_values_t;
+
+/* Edge select bit group configurations*/
+typedef enum TCD_EDGE_enum
+{
+    TCD_EDGE_FALL_LOW_gc           = (TCD_EDGE_FALL_LOW_gv << TCD_EDGE_bp),  /* The falling edge or low level of event generates retrigger or fault action */
+    TCD_EDGE_RISE_HIGH_gc          = (TCD_EDGE_RISE_HIGH_gv << TCD_EDGE_bp)   /* The rising edge or high level of event generates retrigger or fault action */
+} TCD_EDGE_t;
+
+/* Input mode select bit group values */
+typedef enum TCD_INPUTMODE_VALUES_enum
+{
+    TCD_INPUTMODE_NONE_gv          = 0x00,  /* Input has no actions */
+    TCD_INPUTMODE_JMPWAIT_gv       = 0x01,  /* Stop output, jump to opposite compare cycle and wait */
+    TCD_INPUTMODE_EXECWAIT_gv      = 0x02,  /* Stop output, execute opposite compare cycle and wait */
+    TCD_INPUTMODE_EXECFAULT_gv     = 0x03,  /* stop output, execute opposite compare cycle while fault active */
+    TCD_INPUTMODE_FREQ_gv          = 0x04,  /* Stop all outputs, maintain frequency */
+    TCD_INPUTMODE_EXECDT_gv        = 0x05,  /* Stop all outputs, execute dead time while fault active */
+    TCD_INPUTMODE_WAIT_gv          = 0x06,  /* Stop all outputs, jump to next compare cycle and wait */
+    TCD_INPUTMODE_WAITSW_gv        = 0x07,  /* Stop all outputs, wait for software action */
+    TCD_INPUTMODE_EDGETRIG_gv      = 0x08,  /* Stop output on edge, jump to next compare cycle */
+    TCD_INPUTMODE_EDGETRIGFREQ_gv  = 0x09,  /* Stop output on edge, maintain frequency */
+    TCD_INPUTMODE_LVLTRIGFREQ_gv   = 0x0A   /* Stop output at level, maintain frequency */
+} TCD_INPUTMODE_values_t;
+
+/* Input mode select bit group configurations*/
+typedef enum TCD_INPUTMODE_enum
+{
+    TCD_INPUTMODE_NONE_gc          = (TCD_INPUTMODE_NONE_gv << TCD_INPUTMODE_gp),  /* Input has no actions */
+    TCD_INPUTMODE_JMPWAIT_gc       = (TCD_INPUTMODE_JMPWAIT_gv << TCD_INPUTMODE_gp),  /* Stop output, jump to opposite compare cycle and wait */
+    TCD_INPUTMODE_EXECWAIT_gc      = (TCD_INPUTMODE_EXECWAIT_gv << TCD_INPUTMODE_gp),  /* Stop output, execute opposite compare cycle and wait */
+    TCD_INPUTMODE_EXECFAULT_gc     = (TCD_INPUTMODE_EXECFAULT_gv << TCD_INPUTMODE_gp),  /* stop output, execute opposite compare cycle while fault active */
+    TCD_INPUTMODE_FREQ_gc          = (TCD_INPUTMODE_FREQ_gv << TCD_INPUTMODE_gp),  /* Stop all outputs, maintain frequency */
+    TCD_INPUTMODE_EXECDT_gc        = (TCD_INPUTMODE_EXECDT_gv << TCD_INPUTMODE_gp),  /* Stop all outputs, execute dead time while fault active */
+    TCD_INPUTMODE_WAIT_gc          = (TCD_INPUTMODE_WAIT_gv << TCD_INPUTMODE_gp),  /* Stop all outputs, jump to next compare cycle and wait */
+    TCD_INPUTMODE_WAITSW_gc        = (TCD_INPUTMODE_WAITSW_gv << TCD_INPUTMODE_gp),  /* Stop all outputs, wait for software action */
+    TCD_INPUTMODE_EDGETRIG_gc      = (TCD_INPUTMODE_EDGETRIG_gv << TCD_INPUTMODE_gp),  /* Stop output on edge, jump to next compare cycle */
+    TCD_INPUTMODE_EDGETRIGFREQ_gc  = (TCD_INPUTMODE_EDGETRIGFREQ_gv << TCD_INPUTMODE_gp),  /* Stop output on edge, maintain frequency */
+    TCD_INPUTMODE_LVLTRIGFREQ_gc   = (TCD_INPUTMODE_LVLTRIGFREQ_gv << TCD_INPUTMODE_gp)   /* Stop output at level, maintain frequency */
+} TCD_INPUTMODE_t;
+
+/* Synchronization prescaler select bit group values */
+typedef enum TCD_SYNCPRES_VALUES_enum
+{
+    TCD_SYNCPRES_DIV1_gv           = 0x00,  /* Selected clock source divided by 1 */
+    TCD_SYNCPRES_DIV2_gv           = 0x01,  /* Selected clock source divided by 2 */
+    TCD_SYNCPRES_DIV4_gv           = 0x02,  /* Selected clock source divided by 4 */
+    TCD_SYNCPRES_DIV8_gv           = 0x03   /* Selected clock source divided by 8 */
+} TCD_SYNCPRES_values_t;
+
+/* Synchronization prescaler select bit group configurations*/
+typedef enum TCD_SYNCPRES_enum
+{
+    TCD_SYNCPRES_DIV1_gc           = (TCD_SYNCPRES_DIV1_gv << TCD_SYNCPRES_gp),  /* Selected clock source divided by 1 */
+    TCD_SYNCPRES_DIV2_gc           = (TCD_SYNCPRES_DIV2_gv << TCD_SYNCPRES_gp),  /* Selected clock source divided by 2 */
+    TCD_SYNCPRES_DIV4_gc           = (TCD_SYNCPRES_DIV4_gv << TCD_SYNCPRES_gp),  /* Selected clock source divided by 4 */
+    TCD_SYNCPRES_DIV8_gc           = (TCD_SYNCPRES_DIV8_gv << TCD_SYNCPRES_gp)   /* Selected clock source divided by 8 */
+} TCD_SYNCPRES_t;
+
+/* Waveform generation mode select bit group values */
+typedef enum TCD_WGMODE_VALUES_enum
+{
+    TCD_WGMODE_ONERAMP_gv          = 0x00,  /* One ramp mode */
+    TCD_WGMODE_TWORAMP_gv          = 0x01,  /* Two ramp mode */
+    TCD_WGMODE_FOURRAMP_gv         = 0x02,  /* Four ramp mode */
+    TCD_WGMODE_DS_gv               = 0x03   /* Dual slope mode */
+} TCD_WGMODE_values_t;
+
+/* Waveform generation mode select bit group configurations*/
+typedef enum TCD_WGMODE_enum
+{
+    TCD_WGMODE_ONERAMP_gc          = (TCD_WGMODE_ONERAMP_gv << TCD_WGMODE_gp),  /* One ramp mode */
+    TCD_WGMODE_TWORAMP_gc          = (TCD_WGMODE_TWORAMP_gv << TCD_WGMODE_gp),  /* Two ramp mode */
+    TCD_WGMODE_FOURRAMP_gc         = (TCD_WGMODE_FOURRAMP_gv << TCD_WGMODE_gp),  /* Four ramp mode */
+    TCD_WGMODE_DS_gc               = (TCD_WGMODE_DS_gv << TCD_WGMODE_gp)   /* Dual slope mode */
+} TCD_WGMODE_t;
+
+/*
+--------------------------------------------------------------------------
+TWI - Two-Wire Interface
+--------------------------------------------------------------------------
+*/
+
+/* Two-Wire Interface */
+typedef struct TWI_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t DUALCTRL;  /* Dual Control */
+    register8_t DBGCTRL;  /* Debug Control Register */
+    register8_t MCTRLA;  /* Host Control A */
+    register8_t MCTRLB;  /* Host Control B */
+    register8_t MSTATUS;  /* Host Status */
+    register8_t MBAUD;  /* Host Baud Rate Control */
+    register8_t MADDR;  /* Host Address */
+    register8_t MDATA;  /* Host Data */
+    register8_t SCTRLA;  /* Client Control A */
+    register8_t SCTRLB;  /* Client Control B */
+    register8_t SSTATUS;  /* Client Status */
+    register8_t SADDR;  /* Client Address */
+    register8_t SDATA;  /* Client Data */
+    register8_t SADDRMASK;  /* Client Address Mask */
+    register8_t reserved_1[1];
+} TWI_t;
+
+/* Acknowledge Action select bit group values */
+typedef enum TWI_ACKACT_VALUES_enum
+{
+    TWI_ACKACT_ACK_gv              = 0x00,  /* Send ACK */
+    TWI_ACKACT_NACK_gv             = 0x01   /* Send NACK */
+} TWI_ACKACT_values_t;
+
+/* Acknowledge Action select bit group configurations*/
+typedef enum TWI_ACKACT_enum
+{
+    TWI_ACKACT_ACK_gc              = (TWI_ACKACT_ACK_gv << TWI_ACKACT_bp),  /* Send ACK */
+    TWI_ACKACT_NACK_gc             = (TWI_ACKACT_NACK_gv << TWI_ACKACT_bp)   /* Send NACK */
+} TWI_ACKACT_t;
+
+/* Client Address or Stop select bit group values */
+typedef enum TWI_AP_VALUES_enum
+{
+    TWI_AP_STOP_gv                 = 0x00,  /* Stop condition generated APIF */
+    TWI_AP_ADR_gv                  = 0x01   /* Address detection generated APIF */
+} TWI_AP_values_t;
+
+/* Client Address or Stop select bit group configurations*/
+typedef enum TWI_AP_enum
+{
+    TWI_AP_STOP_gc                 = (TWI_AP_STOP_gv << TWI_AP_bp),  /* Stop condition generated APIF */
+    TWI_AP_ADR_gc                  = (TWI_AP_ADR_gv << TWI_AP_bp)   /* Address detection generated APIF */
+} TWI_AP_t;
+
+/* Bus State select bit group values */
+typedef enum TWI_BUSSTATE_VALUES_enum
+{
+    TWI_BUSSTATE_UNKNOWN_gv        = 0x00,  /* Unknown Bus State */
+    TWI_BUSSTATE_IDLE_gv           = 0x01,  /* Bus is Idle */
+    TWI_BUSSTATE_OWNER_gv          = 0x02,  /* This Module Controls The Bus */
+    TWI_BUSSTATE_BUSY_gv           = 0x03   /* The Bus is Busy */
+} TWI_BUSSTATE_values_t;
+
+/* Bus State select bit group configurations*/
+typedef enum TWI_BUSSTATE_enum
+{
+    TWI_BUSSTATE_UNKNOWN_gc        = (TWI_BUSSTATE_UNKNOWN_gv << TWI_BUSSTATE_gp),  /* Unknown Bus State */
+    TWI_BUSSTATE_IDLE_gc           = (TWI_BUSSTATE_IDLE_gv << TWI_BUSSTATE_gp),  /* Bus is Idle */
+    TWI_BUSSTATE_OWNER_gc          = (TWI_BUSSTATE_OWNER_gv << TWI_BUSSTATE_gp),  /* This Module Controls The Bus */
+    TWI_BUSSTATE_BUSY_gc           = (TWI_BUSSTATE_BUSY_gv << TWI_BUSSTATE_gp)   /* The Bus is Busy */
+} TWI_BUSSTATE_t;
+
+/* FM Plus Enable select bit group values */
+typedef enum TWI_FMPEN_VALUES_enum
+{
+    TWI_FMPEN_OFF_gv               = 0x00,  /* Operating in Standard-mode or Fast-mode */
+    TWI_FMPEN_ON_gv                = 0x01   /* Operating in Fast-mode Plus */
+} TWI_FMPEN_values_t;
+
+/* FM Plus Enable select bit group configurations*/
+typedef enum TWI_FMPEN_enum
+{
+    TWI_FMPEN_OFF_gc               = (TWI_FMPEN_OFF_gv << TWI_FMPEN_bp),  /* Operating in Standard-mode or Fast-mode */
+    TWI_FMPEN_ON_gc                = (TWI_FMPEN_ON_gv << TWI_FMPEN_bp)   /* Operating in Fast-mode Plus */
+} TWI_FMPEN_t;
+
+/* Input Voltage Transition Level select bit group values */
+typedef enum TWI_INPUTLVL_VALUES_enum
+{
+    TWI_INPUTLVL_I2C_gv            = 0x00,  /* I2C input voltage transition level */
+    TWI_INPUTLVL_SMBUS_gv          = 0x01   /* SMBus 3.0 input voltage transition level */
+} TWI_INPUTLVL_values_t;
+
+/* Input Voltage Transition Level select bit group configurations*/
+typedef enum TWI_INPUTLVL_enum
+{
+    TWI_INPUTLVL_I2C_gc            = (TWI_INPUTLVL_I2C_gv << TWI_INPUTLVL_bp),  /* I2C input voltage transition level */
+    TWI_INPUTLVL_SMBUS_gc          = (TWI_INPUTLVL_SMBUS_gv << TWI_INPUTLVL_bp)   /* SMBus 3.0 input voltage transition level */
+} TWI_INPUTLVL_t;
+
+/* Command select bit group values */
+typedef enum TWI_MCMD_VALUES_enum
+{
+    TWI_MCMD_NOACT_gv              = 0x00,  /* No Action */
+    TWI_MCMD_REPSTART_gv           = 0x01,  /* Issue Repeated Start Condition */
+    TWI_MCMD_RECVTRANS_gv          = 0x02,  /* Receive or Transmit Data, depending on DIR */
+    TWI_MCMD_STOP_gv               = 0x03   /* Issue Stop Condition */
+} TWI_MCMD_values_t;
+
+/* Command select bit group configurations*/
+typedef enum TWI_MCMD_enum
+{
+    TWI_MCMD_NOACT_gc              = (TWI_MCMD_NOACT_gv << TWI_MCMD_gp),  /* No Action */
+    TWI_MCMD_REPSTART_gc           = (TWI_MCMD_REPSTART_gv << TWI_MCMD_gp),  /* Issue Repeated Start Condition */
+    TWI_MCMD_RECVTRANS_gc          = (TWI_MCMD_RECVTRANS_gv << TWI_MCMD_gp),  /* Receive or Transmit Data, depending on DIR */
+    TWI_MCMD_STOP_gc               = (TWI_MCMD_STOP_gv << TWI_MCMD_gp)   /* Issue Stop Condition */
+} TWI_MCMD_t;
+
+/* Command select bit group values */
+typedef enum TWI_SCMD_VALUES_enum
+{
+    TWI_SCMD_NOACT_gv              = 0x00,  /* No Action */
+    TWI_SCMD_COMPTRANS_gv          = 0x02,  /* Used To Complete a Transaction */
+    TWI_SCMD_RESPONSE_gv           = 0x03   /* Used in Response to Address/Data Interrupt */
+} TWI_SCMD_values_t;
+
+/* Command select bit group configurations*/
+typedef enum TWI_SCMD_enum
+{
+    TWI_SCMD_NOACT_gc              = (TWI_SCMD_NOACT_gv << TWI_SCMD_gp),  /* No Action */
+    TWI_SCMD_COMPTRANS_gc          = (TWI_SCMD_COMPTRANS_gv << TWI_SCMD_gp),  /* Used To Complete a Transaction */
+    TWI_SCMD_RESPONSE_gc           = (TWI_SCMD_RESPONSE_gv << TWI_SCMD_gp)   /* Used in Response to Address/Data Interrupt */
+} TWI_SCMD_t;
+
+/* SDA Hold Time select bit group values */
+typedef enum TWI_SDAHOLD_VALUES_enum
+{
+    TWI_SDAHOLD_OFF_gv             = 0x00,  /* SDA hold time off */
+    TWI_SDAHOLD_50NS_gv            = 0x01,  /* Typical 50ns hold time */
+    TWI_SDAHOLD_300NS_gv           = 0x02,  /* Typical 300ns hold time */
+    TWI_SDAHOLD_500NS_gv           = 0x03   /* Typical 500ns hold time */
+} TWI_SDAHOLD_values_t;
+
+/* SDA Hold Time select bit group configurations*/
+typedef enum TWI_SDAHOLD_enum
+{
+    TWI_SDAHOLD_OFF_gc             = (TWI_SDAHOLD_OFF_gv << TWI_SDAHOLD_gp),  /* SDA hold time off */
+    TWI_SDAHOLD_50NS_gc            = (TWI_SDAHOLD_50NS_gv << TWI_SDAHOLD_gp),  /* Typical 50ns hold time */
+    TWI_SDAHOLD_300NS_gc           = (TWI_SDAHOLD_300NS_gv << TWI_SDAHOLD_gp),  /* Typical 300ns hold time */
+    TWI_SDAHOLD_500NS_gc           = (TWI_SDAHOLD_500NS_gv << TWI_SDAHOLD_gp)   /* Typical 500ns hold time */
+} TWI_SDAHOLD_t;
+
+/* SDA Setup Time select bit group values */
+typedef enum TWI_SDASETUP_VALUES_enum
+{
+    TWI_SDASETUP_4CYC_gv           = 0x00,  /* SDA setup time is 4 clock cycles */
+    TWI_SDASETUP_8CYC_gv           = 0x01   /* SDA setup time is 8 clock cycles */
+} TWI_SDASETUP_values_t;
+
+/* SDA Setup Time select bit group configurations*/
+typedef enum TWI_SDASETUP_enum
+{
+    TWI_SDASETUP_4CYC_gc           = (TWI_SDASETUP_4CYC_gv << TWI_SDASETUP_bp),  /* SDA setup time is 4 clock cycles */
+    TWI_SDASETUP_8CYC_gc           = (TWI_SDASETUP_8CYC_gv << TWI_SDASETUP_bp)   /* SDA setup time is 8 clock cycles */
+} TWI_SDASETUP_t;
+
+/* Inactive Bus Timeout select bit group values */
+typedef enum TWI_TIMEOUT_VALUES_enum
+{
+    TWI_TIMEOUT_DISABLED_gv        = 0x00,  /* Bus Timeout Disabled */
+    TWI_TIMEOUT_50US_gv            = 0x01,  /* 50 Microseconds */
+    TWI_TIMEOUT_100US_gv           = 0x02,  /* 100 Microseconds */
+    TWI_TIMEOUT_200US_gv           = 0x03   /* 200 Microseconds */
+} TWI_TIMEOUT_values_t;
+
+/* Inactive Bus Timeout select bit group configurations*/
+typedef enum TWI_TIMEOUT_enum
+{
+    TWI_TIMEOUT_DISABLED_gc        = (TWI_TIMEOUT_DISABLED_gv << TWI_TIMEOUT_gp),  /* Bus Timeout Disabled */
+    TWI_TIMEOUT_50US_gc            = (TWI_TIMEOUT_50US_gv << TWI_TIMEOUT_gp),  /* 50 Microseconds */
+    TWI_TIMEOUT_100US_gc           = (TWI_TIMEOUT_100US_gv << TWI_TIMEOUT_gp),  /* 100 Microseconds */
+    TWI_TIMEOUT_200US_gc           = (TWI_TIMEOUT_200US_gv << TWI_TIMEOUT_gp)   /* 200 Microseconds */
+} TWI_TIMEOUT_t;
+
+/*
+--------------------------------------------------------------------------
+USART - Universal Synchronous and Asynchronous Receiver and Transmitter
+--------------------------------------------------------------------------
+*/
+
+/* Universal Synchronous and Asynchronous Receiver and Transmitter */
+typedef struct USART_struct
+{
+    register8_t RXDATAL;  /* Receive Data Low Byte */
+    register8_t RXDATAH;  /* Receive Data High Byte */
+    register8_t TXDATAL;  /* Transmit Data Low Byte */
+    register8_t TXDATAH;  /* Transmit Data High Byte */
+    register8_t STATUS;  /* Status */
+    register8_t CTRLA;  /* Control A */
+    register8_t CTRLB;  /* Control B */
+    register8_t CTRLC;  /* Control C */
+    _WORDREGISTER(BAUD);  /* Baud Rate */
+    register8_t CTRLD;  /* Control D */
+    register8_t DBGCTRL;  /* Debug Control */
+    register8_t EVCTRL;  /* Event Control */
+    register8_t TXPLCTRL;  /* IRCOM Transmitter Pulse Length Control */
+    register8_t RXPLCTRL;  /* IRCOM Receiver Pulse Length Control */
+    register8_t reserved_1[1];
+} USART_t;
+
+/* Auto Baud Window select bit group values */
+typedef enum USART_ABW_VALUES_enum
+{
+    USART_ABW_WDW0_gv              = 0x00,  /* 18% tolerance */
+    USART_ABW_WDW1_gv              = 0x01,  /* 15% tolerance */
+    USART_ABW_WDW2_gv              = 0x02,  /* 21% tolerance */
+    USART_ABW_WDW3_gv              = 0x03   /* 25% tolerance */
+} USART_ABW_values_t;
+
+/* Auto Baud Window select bit group configurations*/
+typedef enum USART_ABW_enum
+{
+    USART_ABW_WDW0_gc              = (USART_ABW_WDW0_gv << USART_ABW_gp),  /* 18% tolerance */
+    USART_ABW_WDW1_gc              = (USART_ABW_WDW1_gv << USART_ABW_gp),  /* 15% tolerance */
+    USART_ABW_WDW2_gc              = (USART_ABW_WDW2_gv << USART_ABW_gp),  /* 21% tolerance */
+    USART_ABW_WDW3_gc              = (USART_ABW_WDW3_gv << USART_ABW_gp)   /* 25% tolerance */
+} USART_ABW_t;
+
+/* Character Size select bit group values */
+typedef enum USART_CHSIZE_VALUES_enum
+{
+    USART_CHSIZE_5BIT_gv           = 0x00,  /* Character size: 5 bit */
+    USART_CHSIZE_6BIT_gv           = 0x01,  /* Character size: 6 bit */
+    USART_CHSIZE_7BIT_gv           = 0x02,  /* Character size: 7 bit */
+    USART_CHSIZE_8BIT_gv           = 0x03,  /* Character size: 8 bit */
+    USART_CHSIZE_9BITL_gv          = 0x06,  /* Character size: 9 bit read low byte first */
+    USART_CHSIZE_9BITH_gv          = 0x07   /* Character size: 9 bit read high byte first */
+} USART_CHSIZE_values_t;
+
+/* Character Size select bit group configurations*/
+typedef enum USART_CHSIZE_enum
+{
+    USART_CHSIZE_5BIT_gc           = (USART_CHSIZE_5BIT_gv << USART_CHSIZE_gp),  /* Character size: 5 bit */
+    USART_CHSIZE_6BIT_gc           = (USART_CHSIZE_6BIT_gv << USART_CHSIZE_gp),  /* Character size: 6 bit */
+    USART_CHSIZE_7BIT_gc           = (USART_CHSIZE_7BIT_gv << USART_CHSIZE_gp),  /* Character size: 7 bit */
+    USART_CHSIZE_8BIT_gc           = (USART_CHSIZE_8BIT_gv << USART_CHSIZE_gp),  /* Character size: 8 bit */
+    USART_CHSIZE_9BITL_gc          = (USART_CHSIZE_9BITL_gv << USART_CHSIZE_gp),  /* Character size: 9 bit read low byte first */
+    USART_CHSIZE_9BITH_gc          = (USART_CHSIZE_9BITH_gv << USART_CHSIZE_gp)   /* Character size: 9 bit read high byte first */
+} USART_CHSIZE_t;
+
+/* Communication Mode select bit group values */
+typedef enum USART_CMODE_VALUES_enum
+{
+    USART_CMODE_ASYNCHRONOUS_gv    = 0x00,  /* Asynchronous Mode */
+    USART_CMODE_SYNCHRONOUS_gv     = 0x01,  /* Synchronous Mode */
+    USART_CMODE_IRCOM_gv           = 0x02,  /* Infrared Communication */
+    USART_CMODE_MSPI_gv            = 0x03   /* SPI Host Mode */
+} USART_CMODE_values_t;
+
+/* Communication Mode select bit group configurations*/
+typedef enum USART_CMODE_enum
+{
+    USART_CMODE_ASYNCHRONOUS_gc    = (USART_CMODE_ASYNCHRONOUS_gv << USART_CMODE_gp),  /* Asynchronous Mode */
+    USART_CMODE_SYNCHRONOUS_gc     = (USART_CMODE_SYNCHRONOUS_gv << USART_CMODE_gp),  /* Synchronous Mode */
+    USART_CMODE_IRCOM_gc           = (USART_CMODE_IRCOM_gv << USART_CMODE_gp),  /* Infrared Communication */
+    USART_CMODE_MSPI_gc            = (USART_CMODE_MSPI_gv << USART_CMODE_gp)   /* SPI Host Mode */
+} USART_CMODE_t;
+
+/* Parity Mode select bit group values */
+typedef enum USART_PMODE_VALUES_enum
+{
+    USART_PMODE_DISABLED_gv        = 0x00,  /* No Parity */
+    USART_PMODE_EVEN_gv            = 0x02,  /* Even Parity */
+    USART_PMODE_ODD_gv             = 0x03   /* Odd Parity */
+} USART_PMODE_values_t;
+
+/* Parity Mode select bit group configurations*/
+typedef enum USART_PMODE_enum
+{
+    USART_PMODE_DISABLED_gc        = (USART_PMODE_DISABLED_gv << USART_PMODE_gp),  /* No Parity */
+    USART_PMODE_EVEN_gc            = (USART_PMODE_EVEN_gv << USART_PMODE_gp),  /* Even Parity */
+    USART_PMODE_ODD_gc             = (USART_PMODE_ODD_gv << USART_PMODE_gp)   /* Odd Parity */
+} USART_PMODE_t;
+
+/* RS485 Mode internal transmitter select bit group values */
+typedef enum USART_RS485_VALUES_enum
+{
+    USART_RS485_DISABLE_gv         = 0x00,  /* RS485 Mode disabled */
+    USART_RS485_ENABLE_gv          = 0x01   /* RS485 Mode enabled */
+} USART_RS485_values_t;
+
+/* RS485 Mode internal transmitter select bit group configurations*/
+typedef enum USART_RS485_enum
+{
+    USART_RS485_DISABLE_gc         = (USART_RS485_DISABLE_gv << USART_RS485_bp),  /* RS485 Mode disabled */
+    USART_RS485_ENABLE_gc          = (USART_RS485_ENABLE_gv << USART_RS485_bp)   /* RS485 Mode enabled */
+} USART_RS485_t;
+
+/* Receiver Mode select bit group values */
+typedef enum USART_RXMODE_VALUES_enum
+{
+    USART_RXMODE_NORMAL_gv         = 0x00,  /* Normal mode */
+    USART_RXMODE_CLK2X_gv          = 0x01,  /* CLK2x mode */
+    USART_RXMODE_GENAUTO_gv        = 0x02,  /* Generic autobaud mode */
+    USART_RXMODE_LINAUTO_gv        = 0x03   /* LIN constrained autobaud mode */
+} USART_RXMODE_values_t;
+
+/* Receiver Mode select bit group configurations*/
+typedef enum USART_RXMODE_enum
+{
+    USART_RXMODE_NORMAL_gc         = (USART_RXMODE_NORMAL_gv << USART_RXMODE_gp),  /* Normal mode */
+    USART_RXMODE_CLK2X_gc          = (USART_RXMODE_CLK2X_gv << USART_RXMODE_gp),  /* CLK2x mode */
+    USART_RXMODE_GENAUTO_gc        = (USART_RXMODE_GENAUTO_gv << USART_RXMODE_gp),  /* Generic autobaud mode */
+    USART_RXMODE_LINAUTO_gc        = (USART_RXMODE_LINAUTO_gv << USART_RXMODE_gp)   /* LIN constrained autobaud mode */
+} USART_RXMODE_t;
+
+/* Stop Bit Mode select bit group values */
+typedef enum USART_SBMODE_VALUES_enum
+{
+    USART_SBMODE_1BIT_gv           = 0x00,  /* 1 stop bit */
+    USART_SBMODE_2BIT_gv           = 0x01   /* 2 stop bits */
+} USART_SBMODE_values_t;
+
+/* Stop Bit Mode select bit group configurations*/
+typedef enum USART_SBMODE_enum
+{
+    USART_SBMODE_1BIT_gc           = (USART_SBMODE_1BIT_gv << USART_SBMODE_bp),  /* 1 stop bit */
+    USART_SBMODE_2BIT_gc           = (USART_SBMODE_2BIT_gv << USART_SBMODE_bp)   /* 2 stop bits */
+} USART_SBMODE_t;
+
+/*
+--------------------------------------------------------------------------
+USERROW - User Row
+--------------------------------------------------------------------------
+*/
+
+/* User Row */
+typedef struct USERROW_struct
+{
+    register8_t USERROW[32];  /* User Row */
+} USERROW_t;
+
+
+/*
+--------------------------------------------------------------------------
+VPORT - Virtual Ports
+--------------------------------------------------------------------------
+*/
+
+/* Virtual Ports */
+typedef struct VPORT_struct
+{
+    register8_t DIR;  /* Data Direction */
+    register8_t OUT;  /* Output Value */
+    register8_t IN;  /* Input Value */
+    register8_t INTFLAGS;  /* Interrupt Flags */
+} VPORT_t;
+
+
+/*
+--------------------------------------------------------------------------
+VREF - Voltage reference
+--------------------------------------------------------------------------
+*/
+
+/* Voltage reference */
+typedef struct VREF_struct
+{
+    register8_t ADC0REF;  /* ADC0 Reference */
+    register8_t reserved_1[1];
+    register8_t DAC0REF;  /* DAC0 Reference */
+    register8_t reserved_2[1];
+    register8_t ACREF;  /* AC Reference */
+} VREF_t;
+
+/* Reference select bit group values */
+typedef enum VREF_REFSEL_VALUES_enum
+{
+    VREF_REFSEL_1V024_gv           = 0x00,  /* Internal 1.024V reference */
+    VREF_REFSEL_2V048_gv           = 0x01,  /* Internal 2.048V reference */
+    VREF_REFSEL_4V096_gv           = 0x02,  /* Internal 4.096V reference */
+    VREF_REFSEL_2V500_gv           = 0x03,  /* Internal 2.500V reference */
+    VREF_REFSEL_VDD_gv             = 0x05,  /* VDD as reference */
+    VREF_REFSEL_VREFA_gv           = 0x06   /* External reference on VREFA pin */
+} VREF_REFSEL_values_t;
+
+/* Reference select bit group configurations*/
+typedef enum VREF_REFSEL_enum
+{
+    VREF_REFSEL_1V024_gc           = (VREF_REFSEL_1V024_gv << VREF_REFSEL_gp),  /* Internal 1.024V reference */
+    VREF_REFSEL_2V048_gc           = (VREF_REFSEL_2V048_gv << VREF_REFSEL_gp),  /* Internal 2.048V reference */
+    VREF_REFSEL_4V096_gc           = (VREF_REFSEL_4V096_gv << VREF_REFSEL_gp),  /* Internal 4.096V reference */
+    VREF_REFSEL_2V500_gc           = (VREF_REFSEL_2V500_gv << VREF_REFSEL_gp),  /* Internal 2.500V reference */
+    VREF_REFSEL_VDD_gc             = (VREF_REFSEL_VDD_gv << VREF_REFSEL_gp),  /* VDD as reference */
+    VREF_REFSEL_VREFA_gc           = (VREF_REFSEL_VREFA_gv << VREF_REFSEL_gp)   /* External reference on VREFA pin */
+} VREF_REFSEL_t;
+
+/*
+--------------------------------------------------------------------------
+WDT - Watch-Dog Timer
+--------------------------------------------------------------------------
+*/
+
+/* Watch-Dog Timer */
+typedef struct WDT_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t STATUS;  /* Status */
+    register8_t reserved_1[14];
+} WDT_t;
+
+/* Period select bit group values */
+typedef enum WDT_PERIOD_VALUES_enum
+{
+    WDT_PERIOD_OFF_gv              = 0x00,  /* Off */
+    WDT_PERIOD_8CLK_gv             = 0x01,  /* 8 cycles (8ms) */
+    WDT_PERIOD_16CLK_gv            = 0x02,  /* 16 cycles (16ms) */
+    WDT_PERIOD_32CLK_gv            = 0x03,  /* 32 cycles (32ms) */
+    WDT_PERIOD_64CLK_gv            = 0x04,  /* 64 cycles (64ms) */
+    WDT_PERIOD_128CLK_gv           = 0x05,  /* 128 cycles (0.128s) */
+    WDT_PERIOD_256CLK_gv           = 0x06,  /* 256 cycles (0.256s) */
+    WDT_PERIOD_512CLK_gv           = 0x07,  /* 512 cycles (0.512s) */
+    WDT_PERIOD_1KCLK_gv            = 0x08,  /* 1K cycles (1.0s) */
+    WDT_PERIOD_2KCLK_gv            = 0x09,  /* 2K cycles (2.0s) */
+    WDT_PERIOD_4KCLK_gv            = 0x0A,  /* 4K cycles (4.1s) */
+    WDT_PERIOD_8KCLK_gv            = 0x0B   /* 8K cycles (8.2s) */
+} WDT_PERIOD_values_t;
+
+/* Period select bit group configurations*/
+typedef enum WDT_PERIOD_enum
+{
+    WDT_PERIOD_OFF_gc              = (WDT_PERIOD_OFF_gv << WDT_PERIOD_gp),  /* Off */
+    WDT_PERIOD_8CLK_gc             = (WDT_PERIOD_8CLK_gv << WDT_PERIOD_gp),  /* 8 cycles (8ms) */
+    WDT_PERIOD_16CLK_gc            = (WDT_PERIOD_16CLK_gv << WDT_PERIOD_gp),  /* 16 cycles (16ms) */
+    WDT_PERIOD_32CLK_gc            = (WDT_PERIOD_32CLK_gv << WDT_PERIOD_gp),  /* 32 cycles (32ms) */
+    WDT_PERIOD_64CLK_gc            = (WDT_PERIOD_64CLK_gv << WDT_PERIOD_gp),  /* 64 cycles (64ms) */
+    WDT_PERIOD_128CLK_gc           = (WDT_PERIOD_128CLK_gv << WDT_PERIOD_gp),  /* 128 cycles (0.128s) */
+    WDT_PERIOD_256CLK_gc           = (WDT_PERIOD_256CLK_gv << WDT_PERIOD_gp),  /* 256 cycles (0.256s) */
+    WDT_PERIOD_512CLK_gc           = (WDT_PERIOD_512CLK_gv << WDT_PERIOD_gp),  /* 512 cycles (0.512s) */
+    WDT_PERIOD_1KCLK_gc            = (WDT_PERIOD_1KCLK_gv << WDT_PERIOD_gp),  /* 1K cycles (1.0s) */
+    WDT_PERIOD_2KCLK_gc            = (WDT_PERIOD_2KCLK_gv << WDT_PERIOD_gp),  /* 2K cycles (2.0s) */
+    WDT_PERIOD_4KCLK_gc            = (WDT_PERIOD_4KCLK_gv << WDT_PERIOD_gp),  /* 4K cycles (4.1s) */
+    WDT_PERIOD_8KCLK_gc            = (WDT_PERIOD_8KCLK_gv << WDT_PERIOD_gp)   /* 8K cycles (8.2s) */
+} WDT_PERIOD_t;
+
+/* Window select bit group values */
+typedef enum WDT_WINDOW_VALUES_enum
+{
+    WDT_WINDOW_OFF_gv              = 0x00,  /* Off */
+    WDT_WINDOW_8CLK_gv             = 0x01,  /* 8 cycles (8ms) */
+    WDT_WINDOW_16CLK_gv            = 0x02,  /* 16 cycles (16ms) */
+    WDT_WINDOW_32CLK_gv            = 0x03,  /* 32 cycles (32ms) */
+    WDT_WINDOW_64CLK_gv            = 0x04,  /* 64 cycles (64ms) */
+    WDT_WINDOW_128CLK_gv           = 0x05,  /* 128 cycles (0.128s) */
+    WDT_WINDOW_256CLK_gv           = 0x06,  /* 256 cycles (0.256s) */
+    WDT_WINDOW_512CLK_gv           = 0x07,  /* 512 cycles (0.512s) */
+    WDT_WINDOW_1KCLK_gv            = 0x08,  /* 1K cycles (1.0s) */
+    WDT_WINDOW_2KCLK_gv            = 0x09,  /* 2K cycles (2.0s) */
+    WDT_WINDOW_4KCLK_gv            = 0x0A,  /* 4K cycles (4.1s) */
+    WDT_WINDOW_8KCLK_gv            = 0x0B   /* 8K cycles (8.2s) */
+} WDT_WINDOW_values_t;
+
+/* Window select bit group configurations*/
+typedef enum WDT_WINDOW_enum
+{
+    WDT_WINDOW_OFF_gc              = (WDT_WINDOW_OFF_gv << WDT_WINDOW_gp),  /* Off */
+    WDT_WINDOW_8CLK_gc             = (WDT_WINDOW_8CLK_gv << WDT_WINDOW_gp),  /* 8 cycles (8ms) */
+    WDT_WINDOW_16CLK_gc            = (WDT_WINDOW_16CLK_gv << WDT_WINDOW_gp),  /* 16 cycles (16ms) */
+    WDT_WINDOW_32CLK_gc            = (WDT_WINDOW_32CLK_gv << WDT_WINDOW_gp),  /* 32 cycles (32ms) */
+    WDT_WINDOW_64CLK_gc            = (WDT_WINDOW_64CLK_gv << WDT_WINDOW_gp),  /* 64 cycles (64ms) */
+    WDT_WINDOW_128CLK_gc           = (WDT_WINDOW_128CLK_gv << WDT_WINDOW_gp),  /* 128 cycles (0.128s) */
+    WDT_WINDOW_256CLK_gc           = (WDT_WINDOW_256CLK_gv << WDT_WINDOW_gp),  /* 256 cycles (0.256s) */
+    WDT_WINDOW_512CLK_gc           = (WDT_WINDOW_512CLK_gv << WDT_WINDOW_gp),  /* 512 cycles (0.512s) */
+    WDT_WINDOW_1KCLK_gc            = (WDT_WINDOW_1KCLK_gv << WDT_WINDOW_gp),  /* 1K cycles (1.0s) */
+    WDT_WINDOW_2KCLK_gc            = (WDT_WINDOW_2KCLK_gv << WDT_WINDOW_gp),  /* 2K cycles (2.0s) */
+    WDT_WINDOW_4KCLK_gc            = (WDT_WINDOW_4KCLK_gv << WDT_WINDOW_gp),  /* 4K cycles (4.1s) */
+    WDT_WINDOW_8KCLK_gc            = (WDT_WINDOW_8KCLK_gv << WDT_WINDOW_gp)   /* 8K cycles (8.2s) */
+} WDT_WINDOW_t;
+
+/*
+--------------------------------------------------------------------------
+ZCD - Zero Cross Detect
+--------------------------------------------------------------------------
+*/
+
+/* Zero Cross Detect */
+typedef struct ZCD_struct
+{
+    register8_t CTRLA;  /* Control A */
+    register8_t reserved_1[1];
+    register8_t INTCTRL;  /* Interrupt Control */
+    register8_t STATUS;  /* Status */
+    register8_t reserved_2[4];
+} ZCD_t;
+
+/* Interrupt Mode select bit group values */
+typedef enum ZCD_INTMODE_VALUES_enum
+{
+    ZCD_INTMODE_NONE_gv            = 0x00,  /* No interrupt */
+    ZCD_INTMODE_RISING_gv          = 0x01,  /* Interrupt on rising input signal */
+    ZCD_INTMODE_FALLING_gv         = 0x02,  /* Interrupt on falling input signal */
+    ZCD_INTMODE_BOTH_gv            = 0x03   /* Interrupt on both rising and falling input signal */
+} ZCD_INTMODE_values_t;
+
+/* Interrupt Mode select bit group configurations*/
+typedef enum ZCD_INTMODE_enum
+{
+    ZCD_INTMODE_NONE_gc            = (ZCD_INTMODE_NONE_gv << ZCD_INTMODE_gp),  /* No interrupt */
+    ZCD_INTMODE_RISING_gc          = (ZCD_INTMODE_RISING_gv << ZCD_INTMODE_gp),  /* Interrupt on rising input signal */
+    ZCD_INTMODE_FALLING_gc         = (ZCD_INTMODE_FALLING_gv << ZCD_INTMODE_gp),  /* Interrupt on falling input signal */
+    ZCD_INTMODE_BOTH_gc            = (ZCD_INTMODE_BOTH_gv << ZCD_INTMODE_gp)   /* Interrupt on both rising and falling input signal */
+} ZCD_INTMODE_t;
+
+/* ZCD State select bit group values */
+typedef enum ZCD_STATE_VALUES_enum
+{
+    ZCD_STATE_LOW_gv               = 0x00,  /* Output is 0 */
+    ZCD_STATE_HIGH_gv              = 0x01   /* Output is 1 */
+} ZCD_STATE_values_t;
+
+/* ZCD State select bit group configurations*/
+typedef enum ZCD_STATE_enum
+{
+    ZCD_STATE_LOW_gc               = (ZCD_STATE_LOW_gv << ZCD_STATE_bp),  /* Output is 0 */
+    ZCD_STATE_HIGH_gc              = (ZCD_STATE_HIGH_gv << ZCD_STATE_bp)   /* Output is 1 */
+} ZCD_STATE_t;
+/*
+==========================================================================
+IO Module Instances. Mapped to memory.
+==========================================================================
+*/
+
+#define VPORTA              (*(VPORT_t *) 0x0000) /* Virtual Ports */
+#define VPORTB              (*(VPORT_t *) 0x0004) /* Virtual Ports */
+#define VPORTC              (*(VPORT_t *) 0x0008) /* Virtual Ports */
+#define VPORTD              (*(VPORT_t *) 0x000C) /* Virtual Ports */
+#define VPORTE              (*(VPORT_t *) 0x0010) /* Virtual Ports */
+#define VPORTF              (*(VPORT_t *) 0x0014) /* Virtual Ports */
+#define GPR                   (*(GPR_t *) 0x001C) /* General Purpose Registers */
+#define RSTCTRL           (*(RSTCTRL_t *) 0x0040) /* Reset controller */
+#define SLPCTRL           (*(SLPCTRL_t *) 0x0050) /* Sleep Controller */
+#define CLKCTRL           (*(CLKCTRL_t *) 0x0060) /* Clock controller */
+#define BOD                   (*(BOD_t *) 0x0080) /* Bod interface */
+#define VREF                 (*(VREF_t *) 0x00A0) /* Voltage reference */
+#define WDT                   (*(WDT_t *) 0x0100) /* Watch-Dog Timer */
+#define CPUINT             (*(CPUINT_t *) 0x0110) /* Interrupt Controller */
+#define CRCSCAN           (*(CRCSCAN_t *) 0x0120) /* CRCSCAN */
+#define RTC                   (*(RTC_t *) 0x0140) /* Real-Time Counter */
+#define CCL                   (*(CCL_t *) 0x01C0) /* Configurable Custom Logic */
+#define EVSYS               (*(EVSYS_t *) 0x0200) /* Event System */
+#define PORTA                (*(PORT_t *) 0x0400) /* I/O Ports */
+#define PORTB                (*(PORT_t *) 0x0420) /* I/O Ports */
+#define PORTC                (*(PORT_t *) 0x0440) /* I/O Ports */
+#define PORTD                (*(PORT_t *) 0x0460) /* I/O Ports */
+#define PORTE                (*(PORT_t *) 0x0480) /* I/O Ports */
+#define PORTF                (*(PORT_t *) 0x04A0) /* I/O Ports */
+#define PORTMUX           (*(PORTMUX_t *) 0x05E0) /* Port Multiplexer */
+#define ADC0                  (*(ADC_t *) 0x0600) /* Analog to Digital Converter */
+#define AC0                    (*(AC_t *) 0x0680) /* Analog Comparator */
+#define AC1                    (*(AC_t *) 0x0688) /* Analog Comparator */
+#define AC2                    (*(AC_t *) 0x0690) /* Analog Comparator */
+#define DAC0                  (*(DAC_t *) 0x06A0) /* Digital to Analog Converter */
+#define ZCD0                  (*(ZCD_t *) 0x06C0) /* Zero Cross Detect */
+#define ZCD1                  (*(ZCD_t *) 0x06C8) /* Zero Cross Detect */
+#define USART0              (*(USART_t *) 0x0800) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART1              (*(USART_t *) 0x0820) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART2              (*(USART_t *) 0x0840) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART3              (*(USART_t *) 0x0860) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART4              (*(USART_t *) 0x0880) /* Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define TWI0                  (*(TWI_t *) 0x0900) /* Two-Wire Interface */
+#define TWI1                  (*(TWI_t *) 0x0920) /* Two-Wire Interface */
+#define SPI0                  (*(SPI_t *) 0x0940) /* Serial Peripheral Interface */
+#define SPI1                  (*(SPI_t *) 0x0960) /* Serial Peripheral Interface */
+#define TCA0                  (*(TCA_t *) 0x0A00) /* 16-bit Timer/Counter Type A */
+#define TCA1                  (*(TCA_t *) 0x0A40) /* 16-bit Timer/Counter Type A */
+#define TCB0                  (*(TCB_t *) 0x0B00) /* 16-bit Timer Type B */
+#define TCB1                  (*(TCB_t *) 0x0B10) /* 16-bit Timer Type B */
+#define TCB2                  (*(TCB_t *) 0x0B20) /* 16-bit Timer Type B */
+#define TCB3                  (*(TCB_t *) 0x0B30) /* 16-bit Timer Type B */
+#define TCB4                  (*(TCB_t *) 0x0B40) /* 16-bit Timer Type B */
+#define TCD0                  (*(TCD_t *) 0x0B80) /* Timer Counter D */
+#define SYSCFG             (*(SYSCFG_t *) 0x0F00) /* System Configuration Registers */
+#define NVMCTRL           (*(NVMCTRL_t *) 0x1000) /* Non-volatile Memory Controller */
+#define LOCK                 (*(LOCK_t *) 0x1040) /* Lockbits */
+#define FUSE                 (*(FUSE_t *) 0x1050) /* Fuses */
+#define USERROW           (*(USERROW_t *) 0x1080) /* User Row */
+#define SIGROW             (*(SIGROW_t *) 0x1100) /* Signature row */
+
+#endif /* !defined (__ASSEMBLER__) */
+
+
+/* ========== Flattened fully qualified IO register names ========== */
+
+
+/* VPORT (VPORTA) - Virtual Ports */
+#define VPORTA_DIR  _SFR_MEM8(0x0000)
+#define VPORTA_OUT  _SFR_MEM8(0x0001)
+#define VPORTA_IN  _SFR_MEM8(0x0002)
+#define VPORTA_INTFLAGS  _SFR_MEM8(0x0003)
+
+
+/* VPORT (VPORTB) - Virtual Ports */
+#define VPORTB_DIR  _SFR_MEM8(0x0004)
+#define VPORTB_OUT  _SFR_MEM8(0x0005)
+#define VPORTB_IN  _SFR_MEM8(0x0006)
+#define VPORTB_INTFLAGS  _SFR_MEM8(0x0007)
+
+
+/* VPORT (VPORTC) - Virtual Ports */
+#define VPORTC_DIR  _SFR_MEM8(0x0008)
+#define VPORTC_OUT  _SFR_MEM8(0x0009)
+#define VPORTC_IN  _SFR_MEM8(0x000A)
+#define VPORTC_INTFLAGS  _SFR_MEM8(0x000B)
+
+
+/* VPORT (VPORTD) - Virtual Ports */
+#define VPORTD_DIR  _SFR_MEM8(0x000C)
+#define VPORTD_OUT  _SFR_MEM8(0x000D)
+#define VPORTD_IN  _SFR_MEM8(0x000E)
+#define VPORTD_INTFLAGS  _SFR_MEM8(0x000F)
+
+
+/* VPORT (VPORTE) - Virtual Ports */
+#define VPORTE_DIR  _SFR_MEM8(0x0010)
+#define VPORTE_OUT  _SFR_MEM8(0x0011)
+#define VPORTE_IN  _SFR_MEM8(0x0012)
+#define VPORTE_INTFLAGS  _SFR_MEM8(0x0013)
+
+
+/* VPORT (VPORTF) - Virtual Ports */
+#define VPORTF_DIR  _SFR_MEM8(0x0014)
+#define VPORTF_OUT  _SFR_MEM8(0x0015)
+#define VPORTF_IN  _SFR_MEM8(0x0016)
+#define VPORTF_INTFLAGS  _SFR_MEM8(0x0017)
+
+
+/* GPR - General Purpose Registers */
+#define GPR_GPR0  _SFR_MEM8(0x001C)
+#define GPR_GPR1  _SFR_MEM8(0x001D)
+#define GPR_GPR2  _SFR_MEM8(0x001E)
+#define GPR_GPR3  _SFR_MEM8(0x001F)
+
+
+/* CPU - CPU */
+#define CPU_CCP  _SFR_MEM8(0x0034)
+#define CPU_SP  _SFR_MEM16(0x003D)
+#define CPU_SPL  _SFR_MEM8(0x003D)
+#define CPU_SPH  _SFR_MEM8(0x003E)
+#define CPU_SREG  _SFR_MEM8(0x003F)
+
+
+/* RSTCTRL - Reset controller */
+#define RSTCTRL_RSTFR  _SFR_MEM8(0x0040)
+#define RSTCTRL_SWRR  _SFR_MEM8(0x0041)
+
+
+/* SLPCTRL - Sleep Controller */
+#define SLPCTRL_CTRLA  _SFR_MEM8(0x0050)
+#define SLPCTRL_VREGCTRL  _SFR_MEM8(0x0051)
+
+
+/* CLKCTRL - Clock controller */
+#define CLKCTRL_MCLKCTRLA  _SFR_MEM8(0x0060)
+#define CLKCTRL_MCLKCTRLB  _SFR_MEM8(0x0061)
+#define CLKCTRL_MCLKLOCK  _SFR_MEM8(0x0062)
+#define CLKCTRL_MCLKSTATUS  _SFR_MEM8(0x0063)
+#define CLKCTRL_OSCHFCTRLA  _SFR_MEM8(0x0068)
+#define CLKCTRL_OSCHFTUNE  _SFR_MEM8(0x0069)
+#define CLKCTRL_PLLCTRLA  _SFR_MEM8(0x0070)
+#define CLKCTRL_OSC32KCTRLA  _SFR_MEM8(0x0078)
+#define CLKCTRL_XOSC32KCTRLA  _SFR_MEM8(0x007C)
+
+
+/* BOD - Bod interface */
+#define BOD_CTRLA  _SFR_MEM8(0x0080)
+#define BOD_CTRLB  _SFR_MEM8(0x0081)
+#define BOD_VLMCTRLA  _SFR_MEM8(0x0088)
+#define BOD_INTCTRL  _SFR_MEM8(0x0089)
+#define BOD_INTFLAGS  _SFR_MEM8(0x008A)
+#define BOD_STATUS  _SFR_MEM8(0x008B)
+
+
+/* VREF - Voltage reference */
+#define VREF_ADC0REF  _SFR_MEM8(0x00A0)
+#define VREF_DAC0REF  _SFR_MEM8(0x00A2)
+#define VREF_ACREF  _SFR_MEM8(0x00A4)
+
+
+/* WDT - Watch-Dog Timer */
+#define WDT_CTRLA  _SFR_MEM8(0x0100)
+#define WDT_STATUS  _SFR_MEM8(0x0101)
+
+
+/* CPUINT - Interrupt Controller */
+#define CPUINT_CTRLA  _SFR_MEM8(0x0110)
+#define CPUINT_STATUS  _SFR_MEM8(0x0111)
+#define CPUINT_LVL0PRI  _SFR_MEM8(0x0112)
+#define CPUINT_LVL1VEC  _SFR_MEM8(0x0113)
+
+
+/* CRCSCAN - CRCSCAN */
+#define CRCSCAN_CTRLA  _SFR_MEM8(0x0120)
+#define CRCSCAN_CTRLB  _SFR_MEM8(0x0121)
+#define CRCSCAN_STATUS  _SFR_MEM8(0x0122)
+
+
+/* RTC - Real-Time Counter */
+#define RTC_CTRLA  _SFR_MEM8(0x0140)
+#define RTC_STATUS  _SFR_MEM8(0x0141)
+#define RTC_INTCTRL  _SFR_MEM8(0x0142)
+#define RTC_INTFLAGS  _SFR_MEM8(0x0143)
+#define RTC_TEMP  _SFR_MEM8(0x0144)
+#define RTC_DBGCTRL  _SFR_MEM8(0x0145)
+#define RTC_CALIB  _SFR_MEM8(0x0146)
+#define RTC_CLKSEL  _SFR_MEM8(0x0147)
+#define RTC_CNT  _SFR_MEM16(0x0148)
+#define RTC_CNTL  _SFR_MEM8(0x0148)
+#define RTC_CNTH  _SFR_MEM8(0x0149)
+#define RTC_PER  _SFR_MEM16(0x014A)
+#define RTC_PERL  _SFR_MEM8(0x014A)
+#define RTC_PERH  _SFR_MEM8(0x014B)
+#define RTC_CMP  _SFR_MEM16(0x014C)
+#define RTC_CMPL  _SFR_MEM8(0x014C)
+#define RTC_CMPH  _SFR_MEM8(0x014D)
+#define RTC_PITCTRLA  _SFR_MEM8(0x0150)
+#define RTC_PITSTATUS  _SFR_MEM8(0x0151)
+#define RTC_PITINTCTRL  _SFR_MEM8(0x0152)
+#define RTC_PITINTFLAGS  _SFR_MEM8(0x0153)
+#define RTC_PITDBGCTRL  _SFR_MEM8(0x0155)
+
+
+/* CCL - Configurable Custom Logic */
+#define CCL_CTRLA  _SFR_MEM8(0x01C0)
+#define CCL_SEQCTRL0  _SFR_MEM8(0x01C1)
+#define CCL_SEQCTRL1  _SFR_MEM8(0x01C2)
+#define CCL_SEQCTRL2  _SFR_MEM8(0x01C3)
+#define CCL_INTCTRL0  _SFR_MEM8(0x01C5)
+#define CCL_INTCTRL1  _SFR_MEM8(0x01C6)
+#define CCL_INTFLAGS  _SFR_MEM8(0x01C7)
+#define CCL_LUT0CTRLA  _SFR_MEM8(0x01C8)
+#define CCL_LUT0CTRLB  _SFR_MEM8(0x01C9)
+#define CCL_LUT0CTRLC  _SFR_MEM8(0x01CA)
+#define CCL_TRUTH0  _SFR_MEM8(0x01CB)
+#define CCL_LUT1CTRLA  _SFR_MEM8(0x01CC)
+#define CCL_LUT1CTRLB  _SFR_MEM8(0x01CD)
+#define CCL_LUT1CTRLC  _SFR_MEM8(0x01CE)
+#define CCL_TRUTH1  _SFR_MEM8(0x01CF)
+#define CCL_LUT2CTRLA  _SFR_MEM8(0x01D0)
+#define CCL_LUT2CTRLB  _SFR_MEM8(0x01D1)
+#define CCL_LUT2CTRLC  _SFR_MEM8(0x01D2)
+#define CCL_TRUTH2  _SFR_MEM8(0x01D3)
+#define CCL_LUT3CTRLA  _SFR_MEM8(0x01D4)
+#define CCL_LUT3CTRLB  _SFR_MEM8(0x01D5)
+#define CCL_LUT3CTRLC  _SFR_MEM8(0x01D6)
+#define CCL_TRUTH3  _SFR_MEM8(0x01D7)
+#define CCL_LUT4CTRLA  _SFR_MEM8(0x01D8)
+#define CCL_LUT4CTRLB  _SFR_MEM8(0x01D9)
+#define CCL_LUT4CTRLC  _SFR_MEM8(0x01DA)
+#define CCL_TRUTH4  _SFR_MEM8(0x01DB)
+#define CCL_LUT5CTRLA  _SFR_MEM8(0x01DC)
+#define CCL_LUT5CTRLB  _SFR_MEM8(0x01DD)
+#define CCL_LUT5CTRLC  _SFR_MEM8(0x01DE)
+#define CCL_TRUTH5  _SFR_MEM8(0x01DF)
+
+
+/* EVSYS - Event System */
+#define EVSYS_SWEVENTA  _SFR_MEM8(0x0200)
+#define EVSYS_SWEVENTB  _SFR_MEM8(0x0201)
+#define EVSYS_CHANNEL0  _SFR_MEM8(0x0210)
+#define EVSYS_CHANNEL1  _SFR_MEM8(0x0211)
+#define EVSYS_CHANNEL2  _SFR_MEM8(0x0212)
+#define EVSYS_CHANNEL3  _SFR_MEM8(0x0213)
+#define EVSYS_CHANNEL4  _SFR_MEM8(0x0214)
+#define EVSYS_CHANNEL5  _SFR_MEM8(0x0215)
+#define EVSYS_CHANNEL6  _SFR_MEM8(0x0216)
+#define EVSYS_CHANNEL7  _SFR_MEM8(0x0217)
+#define EVSYS_CHANNEL8  _SFR_MEM8(0x0218)
+#define EVSYS_CHANNEL9  _SFR_MEM8(0x0219)
+#define EVSYS_USERCCLLUT0A  _SFR_MEM8(0x0220)
+#define EVSYS_USERCCLLUT0B  _SFR_MEM8(0x0221)
+#define EVSYS_USERCCLLUT1A  _SFR_MEM8(0x0222)
+#define EVSYS_USERCCLLUT1B  _SFR_MEM8(0x0223)
+#define EVSYS_USERCCLLUT2A  _SFR_MEM8(0x0224)
+#define EVSYS_USERCCLLUT2B  _SFR_MEM8(0x0225)
+#define EVSYS_USERCCLLUT3A  _SFR_MEM8(0x0226)
+#define EVSYS_USERCCLLUT3B  _SFR_MEM8(0x0227)
+#define EVSYS_USERCCLLUT4A  _SFR_MEM8(0x0228)
+#define EVSYS_USERCCLLUT4B  _SFR_MEM8(0x0229)
+#define EVSYS_USERCCLLUT5A  _SFR_MEM8(0x022A)
+#define EVSYS_USERCCLLUT5B  _SFR_MEM8(0x022B)
+#define EVSYS_USERADC0START  _SFR_MEM8(0x022C)
+#define EVSYS_USERPTCSTART  _SFR_MEM8(0x022D)
+#define EVSYS_USEREVSYSEVOUTA  _SFR_MEM8(0x022E)
+#define EVSYS_USEREVSYSEVOUTB  _SFR_MEM8(0x022F)
+#define EVSYS_USEREVSYSEVOUTC  _SFR_MEM8(0x0230)
+#define EVSYS_USEREVSYSEVOUTD  _SFR_MEM8(0x0231)
+#define EVSYS_USEREVSYSEVOUTE  _SFR_MEM8(0x0232)
+#define EVSYS_USEREVSYSEVOUTF  _SFR_MEM8(0x0233)
+#define EVSYS_USERUSART0IRDA  _SFR_MEM8(0x0235)
+#define EVSYS_USERUSART1IRDA  _SFR_MEM8(0x0236)
+#define EVSYS_USERUSART2IRDA  _SFR_MEM8(0x0237)
+#define EVSYS_USERUSART3IRDA  _SFR_MEM8(0x0238)
+#define EVSYS_USERUSART4IRDA  _SFR_MEM8(0x0239)
+#define EVSYS_USERTCA0CNTA  _SFR_MEM8(0x023B)
+#define EVSYS_USERTCA0CNTB  _SFR_MEM8(0x023C)
+#define EVSYS_USERTCA1CNTA  _SFR_MEM8(0x023D)
+#define EVSYS_USERTCA1CNTB  _SFR_MEM8(0x023E)
+#define EVSYS_USERTCB0CAPT  _SFR_MEM8(0x023F)
+#define EVSYS_USERTCB0COUNT  _SFR_MEM8(0x0240)
+#define EVSYS_USERTCB1CAPT  _SFR_MEM8(0x0241)
+#define EVSYS_USERTCB1COUNT  _SFR_MEM8(0x0242)
+#define EVSYS_USERTCB2CAPT  _SFR_MEM8(0x0243)
+#define EVSYS_USERTCB2COUNT  _SFR_MEM8(0x0244)
+#define EVSYS_USERTCB3CAPT  _SFR_MEM8(0x0245)
+#define EVSYS_USERTCB3COUNT  _SFR_MEM8(0x0246)
+#define EVSYS_USERTCD0INPUTA  _SFR_MEM8(0x0249)
+#define EVSYS_USERTCD0INPUTB  _SFR_MEM8(0x024A)
+
+
+/* PORT (PORTA) - I/O Ports */
+#define PORTA_DIR  _SFR_MEM8(0x0400)
+#define PORTA_DIRSET  _SFR_MEM8(0x0401)
+#define PORTA_DIRCLR  _SFR_MEM8(0x0402)
+#define PORTA_DIRTGL  _SFR_MEM8(0x0403)
+#define PORTA_OUT  _SFR_MEM8(0x0404)
+#define PORTA_OUTSET  _SFR_MEM8(0x0405)
+#define PORTA_OUTCLR  _SFR_MEM8(0x0406)
+#define PORTA_OUTTGL  _SFR_MEM8(0x0407)
+#define PORTA_IN  _SFR_MEM8(0x0408)
+#define PORTA_INTFLAGS  _SFR_MEM8(0x0409)
+#define PORTA_PORTCTRL  _SFR_MEM8(0x040A)
+#define PORTA_PINCONFIG  _SFR_MEM8(0x040B)
+#define PORTA_PINCTRLUPD  _SFR_MEM8(0x040C)
+#define PORTA_PINCTRLSET  _SFR_MEM8(0x040D)
+#define PORTA_PINCTRLCLR  _SFR_MEM8(0x040E)
+#define PORTA_PIN0CTRL  _SFR_MEM8(0x0410)
+#define PORTA_PIN1CTRL  _SFR_MEM8(0x0411)
+#define PORTA_PIN2CTRL  _SFR_MEM8(0x0412)
+#define PORTA_PIN3CTRL  _SFR_MEM8(0x0413)
+#define PORTA_PIN4CTRL  _SFR_MEM8(0x0414)
+#define PORTA_PIN5CTRL  _SFR_MEM8(0x0415)
+#define PORTA_PIN6CTRL  _SFR_MEM8(0x0416)
+#define PORTA_PIN7CTRL  _SFR_MEM8(0x0417)
+
+
+/* PORT (PORTB) - I/O Ports */
+#define PORTB_DIR  _SFR_MEM8(0x0420)
+#define PORTB_DIRSET  _SFR_MEM8(0x0421)
+#define PORTB_DIRCLR  _SFR_MEM8(0x0422)
+#define PORTB_DIRTGL  _SFR_MEM8(0x0423)
+#define PORTB_OUT  _SFR_MEM8(0x0424)
+#define PORTB_OUTSET  _SFR_MEM8(0x0425)
+#define PORTB_OUTCLR  _SFR_MEM8(0x0426)
+#define PORTB_OUTTGL  _SFR_MEM8(0x0427)
+#define PORTB_IN  _SFR_MEM8(0x0428)
+#define PORTB_INTFLAGS  _SFR_MEM8(0x0429)
+#define PORTB_PORTCTRL  _SFR_MEM8(0x042A)
+#define PORTB_PINCONFIG  _SFR_MEM8(0x042B)
+#define PORTB_PINCTRLUPD  _SFR_MEM8(0x042C)
+#define PORTB_PINCTRLSET  _SFR_MEM8(0x042D)
+#define PORTB_PINCTRLCLR  _SFR_MEM8(0x042E)
+#define PORTB_PIN0CTRL  _SFR_MEM8(0x0430)
+#define PORTB_PIN1CTRL  _SFR_MEM8(0x0431)
+#define PORTB_PIN2CTRL  _SFR_MEM8(0x0432)
+#define PORTB_PIN3CTRL  _SFR_MEM8(0x0433)
+#define PORTB_PIN4CTRL  _SFR_MEM8(0x0434)
+#define PORTB_PIN5CTRL  _SFR_MEM8(0x0435)
+#define PORTB_PIN6CTRL  _SFR_MEM8(0x0436)
+#define PORTB_PIN7CTRL  _SFR_MEM8(0x0437)
+
+
+/* PORT (PORTC) - I/O Ports */
+#define PORTC_DIR  _SFR_MEM8(0x0440)
+#define PORTC_DIRSET  _SFR_MEM8(0x0441)
+#define PORTC_DIRCLR  _SFR_MEM8(0x0442)
+#define PORTC_DIRTGL  _SFR_MEM8(0x0443)
+#define PORTC_OUT  _SFR_MEM8(0x0444)
+#define PORTC_OUTSET  _SFR_MEM8(0x0445)
+#define PORTC_OUTCLR  _SFR_MEM8(0x0446)
+#define PORTC_OUTTGL  _SFR_MEM8(0x0447)
+#define PORTC_IN  _SFR_MEM8(0x0448)
+#define PORTC_INTFLAGS  _SFR_MEM8(0x0449)
+#define PORTC_PORTCTRL  _SFR_MEM8(0x044A)
+#define PORTC_PINCONFIG  _SFR_MEM8(0x044B)
+#define PORTC_PINCTRLUPD  _SFR_MEM8(0x044C)
+#define PORTC_PINCTRLSET  _SFR_MEM8(0x044D)
+#define PORTC_PINCTRLCLR  _SFR_MEM8(0x044E)
+#define PORTC_PIN0CTRL  _SFR_MEM8(0x0450)
+#define PORTC_PIN1CTRL  _SFR_MEM8(0x0451)
+#define PORTC_PIN2CTRL  _SFR_MEM8(0x0452)
+#define PORTC_PIN3CTRL  _SFR_MEM8(0x0453)
+#define PORTC_PIN4CTRL  _SFR_MEM8(0x0454)
+#define PORTC_PIN5CTRL  _SFR_MEM8(0x0455)
+#define PORTC_PIN6CTRL  _SFR_MEM8(0x0456)
+#define PORTC_PIN7CTRL  _SFR_MEM8(0x0457)
+
+
+/* PORT (PORTD) - I/O Ports */
+#define PORTD_DIR  _SFR_MEM8(0x0460)
+#define PORTD_DIRSET  _SFR_MEM8(0x0461)
+#define PORTD_DIRCLR  _SFR_MEM8(0x0462)
+#define PORTD_DIRTGL  _SFR_MEM8(0x0463)
+#define PORTD_OUT  _SFR_MEM8(0x0464)
+#define PORTD_OUTSET  _SFR_MEM8(0x0465)
+#define PORTD_OUTCLR  _SFR_MEM8(0x0466)
+#define PORTD_OUTTGL  _SFR_MEM8(0x0467)
+#define PORTD_IN  _SFR_MEM8(0x0468)
+#define PORTD_INTFLAGS  _SFR_MEM8(0x0469)
+#define PORTD_PORTCTRL  _SFR_MEM8(0x046A)
+#define PORTD_PINCONFIG  _SFR_MEM8(0x046B)
+#define PORTD_PINCTRLUPD  _SFR_MEM8(0x046C)
+#define PORTD_PINCTRLSET  _SFR_MEM8(0x046D)
+#define PORTD_PINCTRLCLR  _SFR_MEM8(0x046E)
+#define PORTD_PIN0CTRL  _SFR_MEM8(0x0470)
+#define PORTD_PIN1CTRL  _SFR_MEM8(0x0471)
+#define PORTD_PIN2CTRL  _SFR_MEM8(0x0472)
+#define PORTD_PIN3CTRL  _SFR_MEM8(0x0473)
+#define PORTD_PIN4CTRL  _SFR_MEM8(0x0474)
+#define PORTD_PIN5CTRL  _SFR_MEM8(0x0475)
+#define PORTD_PIN6CTRL  _SFR_MEM8(0x0476)
+#define PORTD_PIN7CTRL  _SFR_MEM8(0x0477)
+
+
+/* PORT (PORTE) - I/O Ports */
+#define PORTE_DIR  _SFR_MEM8(0x0480)
+#define PORTE_DIRSET  _SFR_MEM8(0x0481)
+#define PORTE_DIRCLR  _SFR_MEM8(0x0482)
+#define PORTE_DIRTGL  _SFR_MEM8(0x0483)
+#define PORTE_OUT  _SFR_MEM8(0x0484)
+#define PORTE_OUTSET  _SFR_MEM8(0x0485)
+#define PORTE_OUTCLR  _SFR_MEM8(0x0486)
+#define PORTE_OUTTGL  _SFR_MEM8(0x0487)
+#define PORTE_IN  _SFR_MEM8(0x0488)
+#define PORTE_INTFLAGS  _SFR_MEM8(0x0489)
+#define PORTE_PORTCTRL  _SFR_MEM8(0x048A)
+#define PORTE_PINCONFIG  _SFR_MEM8(0x048B)
+#define PORTE_PINCTRLUPD  _SFR_MEM8(0x048C)
+#define PORTE_PINCTRLSET  _SFR_MEM8(0x048D)
+#define PORTE_PINCTRLCLR  _SFR_MEM8(0x048E)
+#define PORTE_PIN0CTRL  _SFR_MEM8(0x0490)
+#define PORTE_PIN1CTRL  _SFR_MEM8(0x0491)
+#define PORTE_PIN2CTRL  _SFR_MEM8(0x0492)
+#define PORTE_PIN3CTRL  _SFR_MEM8(0x0493)
+#define PORTE_PIN4CTRL  _SFR_MEM8(0x0494)
+#define PORTE_PIN5CTRL  _SFR_MEM8(0x0495)
+#define PORTE_PIN6CTRL  _SFR_MEM8(0x0496)
+#define PORTE_PIN7CTRL  _SFR_MEM8(0x0497)
+
+
+/* PORT (PORTF) - I/O Ports */
+#define PORTF_DIR  _SFR_MEM8(0x04A0)
+#define PORTF_DIRSET  _SFR_MEM8(0x04A1)
+#define PORTF_DIRCLR  _SFR_MEM8(0x04A2)
+#define PORTF_DIRTGL  _SFR_MEM8(0x04A3)
+#define PORTF_OUT  _SFR_MEM8(0x04A4)
+#define PORTF_OUTSET  _SFR_MEM8(0x04A5)
+#define PORTF_OUTCLR  _SFR_MEM8(0x04A6)
+#define PORTF_OUTTGL  _SFR_MEM8(0x04A7)
+#define PORTF_IN  _SFR_MEM8(0x04A8)
+#define PORTF_INTFLAGS  _SFR_MEM8(0x04A9)
+#define PORTF_PORTCTRL  _SFR_MEM8(0x04AA)
+#define PORTF_PINCONFIG  _SFR_MEM8(0x04AB)
+#define PORTF_PINCTRLUPD  _SFR_MEM8(0x04AC)
+#define PORTF_PINCTRLSET  _SFR_MEM8(0x04AD)
+#define PORTF_PINCTRLCLR  _SFR_MEM8(0x04AE)
+#define PORTF_PIN0CTRL  _SFR_MEM8(0x04B0)
+#define PORTF_PIN1CTRL  _SFR_MEM8(0x04B1)
+#define PORTF_PIN2CTRL  _SFR_MEM8(0x04B2)
+#define PORTF_PIN3CTRL  _SFR_MEM8(0x04B3)
+#define PORTF_PIN4CTRL  _SFR_MEM8(0x04B4)
+#define PORTF_PIN5CTRL  _SFR_MEM8(0x04B5)
+#define PORTF_PIN6CTRL  _SFR_MEM8(0x04B6)
+#define PORTF_PIN7CTRL  _SFR_MEM8(0x04B7)
+
+
+/* PORTMUX - Port Multiplexer */
+#define PORTMUX_EVSYSROUTEA  _SFR_MEM8(0x05E0)
+#define PORTMUX_CCLROUTEA  _SFR_MEM8(0x05E1)
+#define PORTMUX_USARTROUTEA  _SFR_MEM8(0x05E2)
+#define PORTMUX_USARTROUTEB  _SFR_MEM8(0x05E3)
+#define PORTMUX_SPIROUTEA  _SFR_MEM8(0x05E4)
+#define PORTMUX_TWIROUTEA  _SFR_MEM8(0x05E5)
+#define PORTMUX_TCAROUTEA  _SFR_MEM8(0x05E6)
+#define PORTMUX_TCBROUTEA  _SFR_MEM8(0x05E7)
+#define PORTMUX_TCDROUTEA  _SFR_MEM8(0x05E8)
+#define PORTMUX_ACROUTEA  _SFR_MEM8(0x05E9)
+#define PORTMUX_ZCDROUTEA  _SFR_MEM8(0x05EA)
+
+
+/* ADC (ADC0) - Analog to Digital Converter */
+#define ADC0_CTRLA  _SFR_MEM8(0x0600)
+#define ADC0_CTRLB  _SFR_MEM8(0x0601)
+#define ADC0_CTRLC  _SFR_MEM8(0x0602)
+#define ADC0_CTRLD  _SFR_MEM8(0x0603)
+#define ADC0_CTRLE  _SFR_MEM8(0x0604)
+#define ADC0_SAMPCTRL  _SFR_MEM8(0x0605)
+#define ADC0_MUXPOS  _SFR_MEM8(0x0608)
+#define ADC0_MUXNEG  _SFR_MEM8(0x0609)
+#define ADC0_COMMAND  _SFR_MEM8(0x060A)
+#define ADC0_EVCTRL  _SFR_MEM8(0x060B)
+#define ADC0_INTCTRL  _SFR_MEM8(0x060C)
+#define ADC0_INTFLAGS  _SFR_MEM8(0x060D)
+#define ADC0_DBGCTRL  _SFR_MEM8(0x060E)
+#define ADC0_TEMP  _SFR_MEM8(0x060F)
+#define ADC0_RES  _SFR_MEM16(0x0610)
+#define ADC0_RESL  _SFR_MEM8(0x0610)
+#define ADC0_RESH  _SFR_MEM8(0x0611)
+#define ADC0_WINLT  _SFR_MEM16(0x0612)
+#define ADC0_WINLTL  _SFR_MEM8(0x0612)
+#define ADC0_WINLTH  _SFR_MEM8(0x0613)
+#define ADC0_WINHT  _SFR_MEM16(0x0614)
+#define ADC0_WINHTL  _SFR_MEM8(0x0614)
+#define ADC0_WINHTH  _SFR_MEM8(0x0615)
+
+
+/* AC (AC0) - Analog Comparator */
+#define AC0_CTRLA  _SFR_MEM8(0x0680)
+#define AC0_CTRLB  _SFR_MEM8(0x0681)
+#define AC0_MUXCTRL  _SFR_MEM8(0x0682)
+#define AC0_DACREF  _SFR_MEM8(0x0685)
+#define AC0_INTCTRL  _SFR_MEM8(0x0686)
+#define AC0_STATUS  _SFR_MEM8(0x0687)
+
+
+/* AC (AC1) - Analog Comparator */
+#define AC1_CTRLA  _SFR_MEM8(0x0688)
+#define AC1_CTRLB  _SFR_MEM8(0x0689)
+#define AC1_MUXCTRL  _SFR_MEM8(0x068A)
+#define AC1_DACREF  _SFR_MEM8(0x068D)
+#define AC1_INTCTRL  _SFR_MEM8(0x068E)
+#define AC1_STATUS  _SFR_MEM8(0x068F)
+
+
+/* AC (AC2) - Analog Comparator */
+#define AC2_CTRLA  _SFR_MEM8(0x0690)
+#define AC2_CTRLB  _SFR_MEM8(0x0691)
+#define AC2_MUXCTRL  _SFR_MEM8(0x0692)
+#define AC2_DACREF  _SFR_MEM8(0x0695)
+#define AC2_INTCTRL  _SFR_MEM8(0x0696)
+#define AC2_STATUS  _SFR_MEM8(0x0697)
+
+
+/* DAC (DAC0) - Digital to Analog Converter */
+#define DAC0_CTRLA  _SFR_MEM8(0x06A0)
+#define DAC0_DATA  _SFR_MEM16(0x06A2)
+#define DAC0_DATAL  _SFR_MEM8(0x06A2)
+#define DAC0_DATAH  _SFR_MEM8(0x06A3)
+
+
+/* ZCD (ZCD0) - Zero Cross Detect */
+#define ZCD0_CTRLA  _SFR_MEM8(0x06C0)
+#define ZCD0_INTCTRL  _SFR_MEM8(0x06C2)
+#define ZCD0_STATUS  _SFR_MEM8(0x06C3)
+
+
+/* ZCD (ZCD1) - Zero Cross Detect */
+#define ZCD1_CTRLA  _SFR_MEM8(0x06C8)
+#define ZCD1_INTCTRL  _SFR_MEM8(0x06CA)
+#define ZCD1_STATUS  _SFR_MEM8(0x06CB)
+
+
+/* USART (USART0) - Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART0_RXDATAL  _SFR_MEM8(0x0800)
+#define USART0_RXDATAH  _SFR_MEM8(0x0801)
+#define USART0_TXDATAL  _SFR_MEM8(0x0802)
+#define USART0_TXDATAH  _SFR_MEM8(0x0803)
+#define USART0_STATUS  _SFR_MEM8(0x0804)
+#define USART0_CTRLA  _SFR_MEM8(0x0805)
+#define USART0_CTRLB  _SFR_MEM8(0x0806)
+#define USART0_CTRLC  _SFR_MEM8(0x0807)
+#define USART0_BAUD  _SFR_MEM16(0x0808)
+#define USART0_BAUDL  _SFR_MEM8(0x0808)
+#define USART0_BAUDH  _SFR_MEM8(0x0809)
+#define USART0_CTRLD  _SFR_MEM8(0x080A)
+#define USART0_DBGCTRL  _SFR_MEM8(0x080B)
+#define USART0_EVCTRL  _SFR_MEM8(0x080C)
+#define USART0_TXPLCTRL  _SFR_MEM8(0x080D)
+#define USART0_RXPLCTRL  _SFR_MEM8(0x080E)
+
+
+/* USART (USART1) - Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART1_RXDATAL  _SFR_MEM8(0x0820)
+#define USART1_RXDATAH  _SFR_MEM8(0x0821)
+#define USART1_TXDATAL  _SFR_MEM8(0x0822)
+#define USART1_TXDATAH  _SFR_MEM8(0x0823)
+#define USART1_STATUS  _SFR_MEM8(0x0824)
+#define USART1_CTRLA  _SFR_MEM8(0x0825)
+#define USART1_CTRLB  _SFR_MEM8(0x0826)
+#define USART1_CTRLC  _SFR_MEM8(0x0827)
+#define USART1_BAUD  _SFR_MEM16(0x0828)
+#define USART1_BAUDL  _SFR_MEM8(0x0828)
+#define USART1_BAUDH  _SFR_MEM8(0x0829)
+#define USART1_CTRLD  _SFR_MEM8(0x082A)
+#define USART1_DBGCTRL  _SFR_MEM8(0x082B)
+#define USART1_EVCTRL  _SFR_MEM8(0x082C)
+#define USART1_TXPLCTRL  _SFR_MEM8(0x082D)
+#define USART1_RXPLCTRL  _SFR_MEM8(0x082E)
+
+
+/* USART (USART2) - Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART2_RXDATAL  _SFR_MEM8(0x0840)
+#define USART2_RXDATAH  _SFR_MEM8(0x0841)
+#define USART2_TXDATAL  _SFR_MEM8(0x0842)
+#define USART2_TXDATAH  _SFR_MEM8(0x0843)
+#define USART2_STATUS  _SFR_MEM8(0x0844)
+#define USART2_CTRLA  _SFR_MEM8(0x0845)
+#define USART2_CTRLB  _SFR_MEM8(0x0846)
+#define USART2_CTRLC  _SFR_MEM8(0x0847)
+#define USART2_BAUD  _SFR_MEM16(0x0848)
+#define USART2_BAUDL  _SFR_MEM8(0x0848)
+#define USART2_BAUDH  _SFR_MEM8(0x0849)
+#define USART2_CTRLD  _SFR_MEM8(0x084A)
+#define USART2_DBGCTRL  _SFR_MEM8(0x084B)
+#define USART2_EVCTRL  _SFR_MEM8(0x084C)
+#define USART2_TXPLCTRL  _SFR_MEM8(0x084D)
+#define USART2_RXPLCTRL  _SFR_MEM8(0x084E)
+
+
+/* USART (USART3) - Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART3_RXDATAL  _SFR_MEM8(0x0860)
+#define USART3_RXDATAH  _SFR_MEM8(0x0861)
+#define USART3_TXDATAL  _SFR_MEM8(0x0862)
+#define USART3_TXDATAH  _SFR_MEM8(0x0863)
+#define USART3_STATUS  _SFR_MEM8(0x0864)
+#define USART3_CTRLA  _SFR_MEM8(0x0865)
+#define USART3_CTRLB  _SFR_MEM8(0x0866)
+#define USART3_CTRLC  _SFR_MEM8(0x0867)
+#define USART3_BAUD  _SFR_MEM16(0x0868)
+#define USART3_BAUDL  _SFR_MEM8(0x0868)
+#define USART3_BAUDH  _SFR_MEM8(0x0869)
+#define USART3_CTRLD  _SFR_MEM8(0x086A)
+#define USART3_DBGCTRL  _SFR_MEM8(0x086B)
+#define USART3_EVCTRL  _SFR_MEM8(0x086C)
+#define USART3_TXPLCTRL  _SFR_MEM8(0x086D)
+#define USART3_RXPLCTRL  _SFR_MEM8(0x086E)
+
+
+/* USART (USART4) - Universal Synchronous and Asynchronous Receiver and Transmitter */
+#define USART4_RXDATAL  _SFR_MEM8(0x0880)
+#define USART4_RXDATAH  _SFR_MEM8(0x0881)
+#define USART4_TXDATAL  _SFR_MEM8(0x0882)
+#define USART4_TXDATAH  _SFR_MEM8(0x0883)
+#define USART4_STATUS  _SFR_MEM8(0x0884)
+#define USART4_CTRLA  _SFR_MEM8(0x0885)
+#define USART4_CTRLB  _SFR_MEM8(0x0886)
+#define USART4_CTRLC  _SFR_MEM8(0x0887)
+#define USART4_BAUD  _SFR_MEM16(0x0888)
+#define USART4_BAUDL  _SFR_MEM8(0x0888)
+#define USART4_BAUDH  _SFR_MEM8(0x0889)
+#define USART4_CTRLD  _SFR_MEM8(0x088A)
+#define USART4_DBGCTRL  _SFR_MEM8(0x088B)
+#define USART4_EVCTRL  _SFR_MEM8(0x088C)
+#define USART4_TXPLCTRL  _SFR_MEM8(0x088D)
+#define USART4_RXPLCTRL  _SFR_MEM8(0x088E)
+
+
+/* TWI (TWI0) - Two-Wire Interface */
+#define TWI0_CTRLA  _SFR_MEM8(0x0900)
+#define TWI0_DUALCTRL  _SFR_MEM8(0x0901)
+#define TWI0_DBGCTRL  _SFR_MEM8(0x0902)
+#define TWI0_MCTRLA  _SFR_MEM8(0x0903)
+#define TWI0_MCTRLB  _SFR_MEM8(0x0904)
+#define TWI0_MSTATUS  _SFR_MEM8(0x0905)
+#define TWI0_MBAUD  _SFR_MEM8(0x0906)
+#define TWI0_MADDR  _SFR_MEM8(0x0907)
+#define TWI0_MDATA  _SFR_MEM8(0x0908)
+#define TWI0_SCTRLA  _SFR_MEM8(0x0909)
+#define TWI0_SCTRLB  _SFR_MEM8(0x090A)
+#define TWI0_SSTATUS  _SFR_MEM8(0x090B)
+#define TWI0_SADDR  _SFR_MEM8(0x090C)
+#define TWI0_SDATA  _SFR_MEM8(0x090D)
+#define TWI0_SADDRMASK  _SFR_MEM8(0x090E)
+
+
+/* TWI (TWI1) - Two-Wire Interface */
+#define TWI1_CTRLA  _SFR_MEM8(0x0920)
+#define TWI1_DUALCTRL  _SFR_MEM8(0x0921)
+#define TWI1_DBGCTRL  _SFR_MEM8(0x0922)
+#define TWI1_MCTRLA  _SFR_MEM8(0x0923)
+#define TWI1_MCTRLB  _SFR_MEM8(0x0924)
+#define TWI1_MSTATUS  _SFR_MEM8(0x0925)
+#define TWI1_MBAUD  _SFR_MEM8(0x0926)
+#define TWI1_MADDR  _SFR_MEM8(0x0927)
+#define TWI1_MDATA  _SFR_MEM8(0x0928)
+#define TWI1_SCTRLA  _SFR_MEM8(0x0929)
+#define TWI1_SCTRLB  _SFR_MEM8(0x092A)
+#define TWI1_SSTATUS  _SFR_MEM8(0x092B)
+#define TWI1_SADDR  _SFR_MEM8(0x092C)
+#define TWI1_SDATA  _SFR_MEM8(0x092D)
+#define TWI1_SADDRMASK  _SFR_MEM8(0x092E)
+
+
+/* SPI (SPI0) - Serial Peripheral Interface */
+#define SPI0_CTRLA  _SFR_MEM8(0x0940)
+#define SPI0_CTRLB  _SFR_MEM8(0x0941)
+#define SPI0_INTCTRL  _SFR_MEM8(0x0942)
+#define SPI0_INTFLAGS  _SFR_MEM8(0x0943)
+#define SPI0_DATA  _SFR_MEM8(0x0944)
+
+
+/* SPI (SPI1) - Serial Peripheral Interface */
+#define SPI1_CTRLA  _SFR_MEM8(0x0960)
+#define SPI1_CTRLB  _SFR_MEM8(0x0961)
+#define SPI1_INTCTRL  _SFR_MEM8(0x0962)
+#define SPI1_INTFLAGS  _SFR_MEM8(0x0963)
+#define SPI1_DATA  _SFR_MEM8(0x0964)
+
+
+/* TCA (TCA0) - 16-bit Timer/Counter Type A - Single Mode */
+#define TCA0_SINGLE_CTRLA  _SFR_MEM8(0x0A00)
+#define TCA0_SINGLE_CTRLB  _SFR_MEM8(0x0A01)
+#define TCA0_SINGLE_CTRLC  _SFR_MEM8(0x0A02)
+#define TCA0_SINGLE_CTRLD  _SFR_MEM8(0x0A03)
+#define TCA0_SINGLE_CTRLECLR  _SFR_MEM8(0x0A04)
+#define TCA0_SINGLE_CTRLESET  _SFR_MEM8(0x0A05)
+#define TCA0_SINGLE_CTRLFCLR  _SFR_MEM8(0x0A06)
+#define TCA0_SINGLE_CTRLFSET  _SFR_MEM8(0x0A07)
+#define TCA0_SINGLE_EVCTRL  _SFR_MEM8(0x0A09)
+#define TCA0_SINGLE_INTCTRL  _SFR_MEM8(0x0A0A)
+#define TCA0_SINGLE_INTFLAGS  _SFR_MEM8(0x0A0B)
+#define TCA0_SINGLE_DBGCTRL  _SFR_MEM8(0x0A0E)
+#define TCA0_SINGLE_TEMP  _SFR_MEM8(0x0A0F)
+#define TCA0_SINGLE_CNT  _SFR_MEM16(0x0A20)
+#define TCA0_SINGLE_CNTL  _SFR_MEM8(0x0A20)
+#define TCA0_SINGLE_CNTH  _SFR_MEM8(0x0A21)
+#define TCA0_SINGLE_PER  _SFR_MEM16(0x0A26)
+#define TCA0_SINGLE_PERL  _SFR_MEM8(0x0A26)
+#define TCA0_SINGLE_PERH  _SFR_MEM8(0x0A27)
+#define TCA0_SINGLE_CMP0  _SFR_MEM16(0x0A28)
+#define TCA0_SINGLE_CMP0L  _SFR_MEM8(0x0A28)
+#define TCA0_SINGLE_CMP0H  _SFR_MEM8(0x0A29)
+#define TCA0_SINGLE_CMP1  _SFR_MEM16(0x0A2A)
+#define TCA0_SINGLE_CMP1L  _SFR_MEM8(0x0A2A)
+#define TCA0_SINGLE_CMP1H  _SFR_MEM8(0x0A2B)
+#define TCA0_SINGLE_CMP2  _SFR_MEM16(0x0A2C)
+#define TCA0_SINGLE_CMP2L  _SFR_MEM8(0x0A2C)
+#define TCA0_SINGLE_CMP2H  _SFR_MEM8(0x0A2D)
+#define TCA0_SINGLE_PERBUF  _SFR_MEM16(0x0A36)
+#define TCA0_SINGLE_PERBUFL  _SFR_MEM8(0x0A36)
+#define TCA0_SINGLE_PERBUFH  _SFR_MEM8(0x0A37)
+#define TCA0_SINGLE_CMP0BUF  _SFR_MEM16(0x0A38)
+#define TCA0_SINGLE_CMP0BUFL  _SFR_MEM8(0x0A38)
+#define TCA0_SINGLE_CMP0BUFH  _SFR_MEM8(0x0A39)
+#define TCA0_SINGLE_CMP1BUF  _SFR_MEM16(0x0A3A)
+#define TCA0_SINGLE_CMP1BUFL  _SFR_MEM8(0x0A3A)
+#define TCA0_SINGLE_CMP1BUFH  _SFR_MEM8(0x0A3B)
+#define TCA0_SINGLE_CMP2BUF  _SFR_MEM16(0x0A3C)
+#define TCA0_SINGLE_CMP2BUFL  _SFR_MEM8(0x0A3C)
+#define TCA0_SINGLE_CMP2BUFH  _SFR_MEM8(0x0A3D)
+
+
+/* TCA (TCA0) - 16-bit Timer/Counter Type A - Split Mode */
+#define TCA0_SPLIT_CTRLA  _SFR_MEM8(0x0A00)
+#define TCA0_SPLIT_CTRLB  _SFR_MEM8(0x0A01)
+#define TCA0_SPLIT_CTRLC  _SFR_MEM8(0x0A02)
+#define TCA0_SPLIT_CTRLD  _SFR_MEM8(0x0A03)
+#define TCA0_SPLIT_CTRLECLR  _SFR_MEM8(0x0A04)
+#define TCA0_SPLIT_CTRLESET  _SFR_MEM8(0x0A05)
+#define TCA0_SPLIT_INTCTRL  _SFR_MEM8(0x0A0A)
+#define TCA0_SPLIT_INTFLAGS  _SFR_MEM8(0x0A0B)
+#define TCA0_SPLIT_DBGCTRL  _SFR_MEM8(0x0A0E)
+#define TCA0_SPLIT_LCNT  _SFR_MEM8(0x0A20)
+#define TCA0_SPLIT_HCNT  _SFR_MEM8(0x0A21)
+#define TCA0_SPLIT_LPER  _SFR_MEM8(0x0A26)
+#define TCA0_SPLIT_HPER  _SFR_MEM8(0x0A27)
+#define TCA0_SPLIT_LCMP0  _SFR_MEM8(0x0A28)
+#define TCA0_SPLIT_HCMP0  _SFR_MEM8(0x0A29)
+#define TCA0_SPLIT_LCMP1  _SFR_MEM8(0x0A2A)
+#define TCA0_SPLIT_HCMP1  _SFR_MEM8(0x0A2B)
+#define TCA0_SPLIT_LCMP2  _SFR_MEM8(0x0A2C)
+#define TCA0_SPLIT_HCMP2  _SFR_MEM8(0x0A2D)
+
+
+/* TCA (TCA1) - 16-bit Timer/Counter Type A - Single Mode */
+#define TCA1_SINGLE_CTRLA  _SFR_MEM8(0x0A40)
+#define TCA1_SINGLE_CTRLB  _SFR_MEM8(0x0A41)
+#define TCA1_SINGLE_CTRLC  _SFR_MEM8(0x0A42)
+#define TCA1_SINGLE_CTRLD  _SFR_MEM8(0x0A43)
+#define TCA1_SINGLE_CTRLECLR  _SFR_MEM8(0x0A44)
+#define TCA1_SINGLE_CTRLESET  _SFR_MEM8(0x0A45)
+#define TCA1_SINGLE_CTRLFCLR  _SFR_MEM8(0x0A46)
+#define TCA1_SINGLE_CTRLFSET  _SFR_MEM8(0x0A47)
+#define TCA1_SINGLE_EVCTRL  _SFR_MEM8(0x0A49)
+#define TCA1_SINGLE_INTCTRL  _SFR_MEM8(0x0A4A)
+#define TCA1_SINGLE_INTFLAGS  _SFR_MEM8(0x0A4B)
+#define TCA1_SINGLE_DBGCTRL  _SFR_MEM8(0x0A4E)
+#define TCA1_SINGLE_TEMP  _SFR_MEM8(0x0A4F)
+#define TCA1_SINGLE_CNT  _SFR_MEM16(0x0A60)
+#define TCA1_SINGLE_CNTL  _SFR_MEM8(0x0A60)
+#define TCA1_SINGLE_CNTH  _SFR_MEM8(0x0A61)
+#define TCA1_SINGLE_PER  _SFR_MEM16(0x0A66)
+#define TCA1_SINGLE_PERL  _SFR_MEM8(0x0A66)
+#define TCA1_SINGLE_PERH  _SFR_MEM8(0x0A67)
+#define TCA1_SINGLE_CMP0  _SFR_MEM16(0x0A68)
+#define TCA1_SINGLE_CMP0L  _SFR_MEM8(0x0A68)
+#define TCA1_SINGLE_CMP0H  _SFR_MEM8(0x0A69)
+#define TCA1_SINGLE_CMP1  _SFR_MEM16(0x0A6A)
+#define TCA1_SINGLE_CMP1L  _SFR_MEM8(0x0A6A)
+#define TCA1_SINGLE_CMP1H  _SFR_MEM8(0x0A6B)
+#define TCA1_SINGLE_CMP2  _SFR_MEM16(0x0A6C)
+#define TCA1_SINGLE_CMP2L  _SFR_MEM8(0x0A6C)
+#define TCA1_SINGLE_CMP2H  _SFR_MEM8(0x0A6D)
+#define TCA1_SINGLE_PERBUF  _SFR_MEM16(0x0A76)
+#define TCA1_SINGLE_PERBUFL  _SFR_MEM8(0x0A76)
+#define TCA1_SINGLE_PERBUFH  _SFR_MEM8(0x0A77)
+#define TCA1_SINGLE_CMP0BUF  _SFR_MEM16(0x0A78)
+#define TCA1_SINGLE_CMP0BUFL  _SFR_MEM8(0x0A78)
+#define TCA1_SINGLE_CMP0BUFH  _SFR_MEM8(0x0A79)
+#define TCA1_SINGLE_CMP1BUF  _SFR_MEM16(0x0A7A)
+#define TCA1_SINGLE_CMP1BUFL  _SFR_MEM8(0x0A7A)
+#define TCA1_SINGLE_CMP1BUFH  _SFR_MEM8(0x0A7B)
+#define TCA1_SINGLE_CMP2BUF  _SFR_MEM16(0x0A7C)
+#define TCA1_SINGLE_CMP2BUFL  _SFR_MEM8(0x0A7C)
+#define TCA1_SINGLE_CMP2BUFH  _SFR_MEM8(0x0A7D)
+
+
+/* TCA (TCA1) - 16-bit Timer/Counter Type A - Split Mode */
+#define TCA1_SPLIT_CTRLA  _SFR_MEM8(0x0A40)
+#define TCA1_SPLIT_CTRLB  _SFR_MEM8(0x0A41)
+#define TCA1_SPLIT_CTRLC  _SFR_MEM8(0x0A42)
+#define TCA1_SPLIT_CTRLD  _SFR_MEM8(0x0A43)
+#define TCA1_SPLIT_CTRLECLR  _SFR_MEM8(0x0A44)
+#define TCA1_SPLIT_CTRLESET  _SFR_MEM8(0x0A45)
+#define TCA1_SPLIT_INTCTRL  _SFR_MEM8(0x0A4A)
+#define TCA1_SPLIT_INTFLAGS  _SFR_MEM8(0x0A4B)
+#define TCA1_SPLIT_DBGCTRL  _SFR_MEM8(0x0A4E)
+#define TCA1_SPLIT_LCNT  _SFR_MEM8(0x0A60)
+#define TCA1_SPLIT_HCNT  _SFR_MEM8(0x0A61)
+#define TCA1_SPLIT_LPER  _SFR_MEM8(0x0A66)
+#define TCA1_SPLIT_HPER  _SFR_MEM8(0x0A67)
+#define TCA1_SPLIT_LCMP0  _SFR_MEM8(0x0A68)
+#define TCA1_SPLIT_HCMP0  _SFR_MEM8(0x0A69)
+#define TCA1_SPLIT_LCMP1  _SFR_MEM8(0x0A6A)
+#define TCA1_SPLIT_HCMP1  _SFR_MEM8(0x0A6B)
+#define TCA1_SPLIT_LCMP2  _SFR_MEM8(0x0A6C)
+#define TCA1_SPLIT_HCMP2  _SFR_MEM8(0x0A6D)
+
+
+/* TCB (TCB0) - 16-bit Timer Type B */
+#define TCB0_CTRLA  _SFR_MEM8(0x0B00)
+#define TCB0_CTRLB  _SFR_MEM8(0x0B01)
+#define TCB0_EVCTRL  _SFR_MEM8(0x0B04)
+#define TCB0_INTCTRL  _SFR_MEM8(0x0B05)
+#define TCB0_INTFLAGS  _SFR_MEM8(0x0B06)
+#define TCB0_STATUS  _SFR_MEM8(0x0B07)
+#define TCB0_DBGCTRL  _SFR_MEM8(0x0B08)
+#define TCB0_TEMP  _SFR_MEM8(0x0B09)
+#define TCB0_CNT  _SFR_MEM16(0x0B0A)
+#define TCB0_CNTL  _SFR_MEM8(0x0B0A)
+#define TCB0_CNTH  _SFR_MEM8(0x0B0B)
+#define TCB0_CCMP  _SFR_MEM16(0x0B0C)
+#define TCB0_CCMPL  _SFR_MEM8(0x0B0C)
+#define TCB0_CCMPH  _SFR_MEM8(0x0B0D)
+
+
+/* TCB (TCB1) - 16-bit Timer Type B */
+#define TCB1_CTRLA  _SFR_MEM8(0x0B10)
+#define TCB1_CTRLB  _SFR_MEM8(0x0B11)
+#define TCB1_EVCTRL  _SFR_MEM8(0x0B14)
+#define TCB1_INTCTRL  _SFR_MEM8(0x0B15)
+#define TCB1_INTFLAGS  _SFR_MEM8(0x0B16)
+#define TCB1_STATUS  _SFR_MEM8(0x0B17)
+#define TCB1_DBGCTRL  _SFR_MEM8(0x0B18)
+#define TCB1_TEMP  _SFR_MEM8(0x0B19)
+#define TCB1_CNT  _SFR_MEM16(0x0B1A)
+#define TCB1_CNTL  _SFR_MEM8(0x0B1A)
+#define TCB1_CNTH  _SFR_MEM8(0x0B1B)
+#define TCB1_CCMP  _SFR_MEM16(0x0B1C)
+#define TCB1_CCMPL  _SFR_MEM8(0x0B1C)
+#define TCB1_CCMPH  _SFR_MEM8(0x0B1D)
+
+
+/* TCB (TCB2) - 16-bit Timer Type B */
+#define TCB2_CTRLA  _SFR_MEM8(0x0B20)
+#define TCB2_CTRLB  _SFR_MEM8(0x0B21)
+#define TCB2_EVCTRL  _SFR_MEM8(0x0B24)
+#define TCB2_INTCTRL  _SFR_MEM8(0x0B25)
+#define TCB2_INTFLAGS  _SFR_MEM8(0x0B26)
+#define TCB2_STATUS  _SFR_MEM8(0x0B27)
+#define TCB2_DBGCTRL  _SFR_MEM8(0x0B28)
+#define TCB2_TEMP  _SFR_MEM8(0x0B29)
+#define TCB2_CNT  _SFR_MEM16(0x0B2A)
+#define TCB2_CNTL  _SFR_MEM8(0x0B2A)
+#define TCB2_CNTH  _SFR_MEM8(0x0B2B)
+#define TCB2_CCMP  _SFR_MEM16(0x0B2C)
+#define TCB2_CCMPL  _SFR_MEM8(0x0B2C)
+#define TCB2_CCMPH  _SFR_MEM8(0x0B2D)
+
+
+/* TCB (TCB3) - 16-bit Timer Type B */
+#define TCB3_CTRLA  _SFR_MEM8(0x0B30)
+#define TCB3_CTRLB  _SFR_MEM8(0x0B31)
+#define TCB3_EVCTRL  _SFR_MEM8(0x0B34)
+#define TCB3_INTCTRL  _SFR_MEM8(0x0B35)
+#define TCB3_INTFLAGS  _SFR_MEM8(0x0B36)
+#define TCB3_STATUS  _SFR_MEM8(0x0B37)
+#define TCB3_DBGCTRL  _SFR_MEM8(0x0B38)
+#define TCB3_TEMP  _SFR_MEM8(0x0B39)
+#define TCB3_CNT  _SFR_MEM16(0x0B3A)
+#define TCB3_CNTL  _SFR_MEM8(0x0B3A)
+#define TCB3_CNTH  _SFR_MEM8(0x0B3B)
+#define TCB3_CCMP  _SFR_MEM16(0x0B3C)
+#define TCB3_CCMPL  _SFR_MEM8(0x0B3C)
+#define TCB3_CCMPH  _SFR_MEM8(0x0B3D)
+
+
+/* TCB (TCB4) - 16-bit Timer Type B */
+#define TCB4_CTRLA  _SFR_MEM8(0x0B40)
+#define TCB4_CTRLB  _SFR_MEM8(0x0B41)
+#define TCB4_EVCTRL  _SFR_MEM8(0x0B44)
+#define TCB4_INTCTRL  _SFR_MEM8(0x0B45)
+#define TCB4_INTFLAGS  _SFR_MEM8(0x0B46)
+#define TCB4_STATUS  _SFR_MEM8(0x0B47)
+#define TCB4_DBGCTRL  _SFR_MEM8(0x0B48)
+#define TCB4_TEMP  _SFR_MEM8(0x0B49)
+#define TCB4_CNT  _SFR_MEM16(0x0B4A)
+#define TCB4_CNTL  _SFR_MEM8(0x0B4A)
+#define TCB4_CNTH  _SFR_MEM8(0x0B4B)
+#define TCB4_CCMP  _SFR_MEM16(0x0B4C)
+#define TCB4_CCMPL  _SFR_MEM8(0x0B4C)
+#define TCB4_CCMPH  _SFR_MEM8(0x0B4D)
+
+
+/* TCD (TCD0) - Timer Counter D */
+#define TCD0_CTRLA  _SFR_MEM8(0x0B80)
+#define TCD0_CTRLB  _SFR_MEM8(0x0B81)
+#define TCD0_CTRLC  _SFR_MEM8(0x0B82)
+#define TCD0_CTRLD  _SFR_MEM8(0x0B83)
+#define TCD0_CTRLE  _SFR_MEM8(0x0B84)
+#define TCD0_EVCTRLA  _SFR_MEM8(0x0B88)
+#define TCD0_EVCTRLB  _SFR_MEM8(0x0B89)
+#define TCD0_INTCTRL  _SFR_MEM8(0x0B8C)
+#define TCD0_INTFLAGS  _SFR_MEM8(0x0B8D)
+#define TCD0_STATUS  _SFR_MEM8(0x0B8E)
+#define TCD0_INPUTCTRLA  _SFR_MEM8(0x0B90)
+#define TCD0_INPUTCTRLB  _SFR_MEM8(0x0B91)
+#define TCD0_FAULTCTRL  _SFR_MEM8(0x0B92)
+#define TCD0_DLYCTRL  _SFR_MEM8(0x0B94)
+#define TCD0_DLYVAL  _SFR_MEM8(0x0B95)
+#define TCD0_DITCTRL  _SFR_MEM8(0x0B98)
+#define TCD0_DITVAL  _SFR_MEM8(0x0B99)
+#define TCD0_DBGCTRL  _SFR_MEM8(0x0B9E)
+#define TCD0_CAPTUREA  _SFR_MEM16(0x0BA2)
+#define TCD0_CAPTUREAL  _SFR_MEM8(0x0BA2)
+#define TCD0_CAPTUREAH  _SFR_MEM8(0x0BA3)
+#define TCD0_CAPTUREB  _SFR_MEM16(0x0BA4)
+#define TCD0_CAPTUREBL  _SFR_MEM8(0x0BA4)
+#define TCD0_CAPTUREBH  _SFR_MEM8(0x0BA5)
+#define TCD0_CMPASET  _SFR_MEM16(0x0BA8)
+#define TCD0_CMPASETL  _SFR_MEM8(0x0BA8)
+#define TCD0_CMPASETH  _SFR_MEM8(0x0BA9)
+#define TCD0_CMPACLR  _SFR_MEM16(0x0BAA)
+#define TCD0_CMPACLRL  _SFR_MEM8(0x0BAA)
+#define TCD0_CMPACLRH  _SFR_MEM8(0x0BAB)
+#define TCD0_CMPBSET  _SFR_MEM16(0x0BAC)
+#define TCD0_CMPBSETL  _SFR_MEM8(0x0BAC)
+#define TCD0_CMPBSETH  _SFR_MEM8(0x0BAD)
+#define TCD0_CMPBCLR  _SFR_MEM16(0x0BAE)
+#define TCD0_CMPBCLRL  _SFR_MEM8(0x0BAE)
+#define TCD0_CMPBCLRH  _SFR_MEM8(0x0BAF)
+
+
+/* SYSCFG - System Configuration Registers */
+#define SYSCFG_REVID  _SFR_MEM8(0x0F01)
+#define SYSCFG_OCDMCTRL  _SFR_MEM8(0x0F18)
+#define SYSCFG_OCDMSTATUS  _SFR_MEM8(0x0F19)
+
+
+/* NVMCTRL - Non-volatile Memory Controller */
+#define NVMCTRL_CTRLA  _SFR_MEM8(0x1000)
+#define NVMCTRL_CTRLB  _SFR_MEM8(0x1001)
+#define NVMCTRL_STATUS  _SFR_MEM8(0x1002)
+#define NVMCTRL_INTCTRL  _SFR_MEM8(0x1003)
+#define NVMCTRL_INTFLAGS  _SFR_MEM8(0x1004)
+#define NVMCTRL_DATA  _SFR_MEM16(0x1006)
+#define NVMCTRL_DATAL  _SFR_MEM8(0x1006)
+#define NVMCTRL_DATAH  _SFR_MEM8(0x1007)
+#define NVMCTRL_ADDR  _SFR_MEM32(0x1008)
+#define NVMCTRL_ADDR0  _SFR_MEM8(0x1008)
+#define NVMCTRL_ADDR1  _SFR_MEM8(0x1009)
+#define NVMCTRL_ADDR2  _SFR_MEM8(0x100A)
+#define NVMCTRL_ADDR3  _SFR_MEM8(0x100B)
+
+
+/* LOCK - Lockbits */
+#define LOCK_KEY  _SFR_MEM32(0x1040)
+#define LOCK_KEY0  _SFR_MEM8(0x1040)
+#define LOCK_KEY1  _SFR_MEM8(0x1041)
+#define LOCK_KEY2  _SFR_MEM8(0x1042)
+#define LOCK_KEY3  _SFR_MEM8(0x1043)
+
+
+/* FUSE - Fuses */
+#define FUSE_WDTCFG  _SFR_MEM8(0x1050)
+#define FUSE_BODCFG  _SFR_MEM8(0x1051)
+#define FUSE_OSCCFG  _SFR_MEM8(0x1052)
+#define FUSE_SYSCFG0  _SFR_MEM8(0x1055)
+#define FUSE_SYSCFG1  _SFR_MEM8(0x1056)
+#define FUSE_CODESIZE  _SFR_MEM8(0x1057)
+#define FUSE_BOOTSIZE  _SFR_MEM8(0x1058)
+
+
+/* USERROW - User Row */
+#define USERROW_USERROW  _SFR_MEM8(0x1080)
+
+
+/* SIGROW - Signature row */
+#define SIGROW_DEVICEID0  _SFR_MEM8(0x1100)
+#define SIGROW_DEVICEID1  _SFR_MEM8(0x1101)
+#define SIGROW_DEVICEID2  _SFR_MEM8(0x1102)
+#define SIGROW_TEMPSENSE0  _SFR_MEM16(0x1104)
+#define SIGROW_TEMPSENSE0L  _SFR_MEM8(0x1104)
+#define SIGROW_TEMPSENSE0H  _SFR_MEM8(0x1105)
+#define SIGROW_TEMPSENSE1  _SFR_MEM16(0x1106)
+#define SIGROW_TEMPSENSE1L  _SFR_MEM8(0x1106)
+#define SIGROW_TEMPSENSE1H  _SFR_MEM8(0x1107)
+#define SIGROW_SERNUM0  _SFR_MEM8(0x1110)
+#define SIGROW_SERNUM1  _SFR_MEM8(0x1111)
+#define SIGROW_SERNUM2  _SFR_MEM8(0x1112)
+#define SIGROW_SERNUM3  _SFR_MEM8(0x1113)
+#define SIGROW_SERNUM4  _SFR_MEM8(0x1114)
+#define SIGROW_SERNUM5  _SFR_MEM8(0x1115)
+#define SIGROW_SERNUM6  _SFR_MEM8(0x1116)
+#define SIGROW_SERNUM7  _SFR_MEM8(0x1117)
+#define SIGROW_SERNUM8  _SFR_MEM8(0x1118)
+#define SIGROW_SERNUM9  _SFR_MEM8(0x1119)
+#define SIGROW_SERNUM10  _SFR_MEM8(0x111A)
+#define SIGROW_SERNUM11  _SFR_MEM8(0x111B)
+#define SIGROW_SERNUM12  _SFR_MEM8(0x111C)
+#define SIGROW_SERNUM13  _SFR_MEM8(0x111D)
+#define SIGROW_SERNUM14  _SFR_MEM8(0x111E)
+#define SIGROW_SERNUM15  _SFR_MEM8(0x111F)
+
+
+
 
 /* ========== Generic Port Pins ========== */
 #define PIN0_bm 0x01
@@ -7607,6 +9619,7 @@ IO Module Instances. Mapped to memory.
 #define LOCKBITS_DEFAULT  (0x5CC5C55C)
 
 /* ========== Signature ========== */
+
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x95
 #define SIGNATURE_2 0x32
