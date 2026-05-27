@@ -1,5 +1,5 @@
-// https://simul.iro.umontreal.ca/testu01/tu01.html
-// https://www.iro.umontreal.ca/~simardr/testu01/guideshorttestu01.pdf
+// https://www.iro.umontreal.ca/~simul/testu01/tu01.html
+// https://www.iro.umontreal.ca/~simul/testu01/guideshorttestu01.pdf
 
 #include <stdio.h>
 #include <stdint.h>
