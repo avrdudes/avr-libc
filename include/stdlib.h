@@ -528,7 +528,7 @@ extern long double atofl(const char *__nptr);
      a value of 1.
 
      rand() achieves a score of 100% in the \c bbattery_SmallCrush tests from
-     the <a href="https://simul.iro.umontreal.ca/testu01/tu01.html">TestU01</a>
+     the <a href="https://www.iro.umontreal.ca/~simul/testu01/tu01.html">TestU01</a>
      suite.
 
      For the resource consumptions, see the \ref bench_libc "libc benchmarks".
