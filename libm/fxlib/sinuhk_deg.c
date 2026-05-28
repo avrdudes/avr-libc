@@ -61,7 +61,7 @@ static const int16_t sin_tab[91] PROGMEM =
   (__extension__({                              \
       int16_t result;                           \
       __asm ("lpm %A0, Z+"   "\n\t"             \
-             "lpm %B0, Z+"                      \
+             "lpm %B0, Z+ ; [[len=2]]"          \
              : "=r" (result), "+z" (addr));     \
       result;                                   \
     }))
@@ -80,7 +80,7 @@ fmac16_8 (int16_t c, int16_t a, uint8_t b)
          "rol    r0"                "\n\t"      // round
          "adc    %A[c], R1"         "\n\t"
          "clr    __zero_reg__"      "\n\t"
-         "adc    %B[c], __zero_reg__"
+         "adc    %B[c], __zero_reg__ ; [[len=8]]"
          : [c] "+r" (c)
          : [a] "a" (a), [b] "a" (b));
     return c;

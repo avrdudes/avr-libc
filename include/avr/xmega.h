@@ -82,7 +82,7 @@
 
 #define _PROTECTED_WRITE(reg, value)			\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
-			"out %i2, %3"			\
+			"out %i2, %3 ; [[len=2]]"	\
 			:				\
 			: "n" (& CCP),			\
 			  "d" ((uint8_t) 0xd8),		\
@@ -93,7 +93,7 @@
 
 #define _PROTECTED_WRITE(reg, value)			\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
-			"sts %2, %3"			\
+			"sts %2, %3 ; [[len=3]]"	\
 			:				\
 			: "n" (& CCP),			\
 			  "d" ((uint8_t) CCP_IOREG_gc),	\
@@ -105,7 +105,7 @@
 
 #define _PROTECTED_WRITE_SPM(reg, value)		\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
-			"out %i2, %3"			\
+			"out %i2, %3 ; [[len=2]]"	\
 			:				\
 			: "n" (& CCP),			\
 			  "d" ((uint8_t) CCP_SPM_gc),	\
@@ -116,7 +116,7 @@
 
 #define _PROTECTED_WRITE_SPM(reg, value)		\
   __asm__ __volatile__ ("out %i0, %1" "\n\t"		\
-			"sts %2, %3"			\
+			"sts %2, %3 ; [[len=3]]"	\
 			:				\
 			: "n" (& CCP),			\
 			  "d" ((uint8_t) CCP_SPM_gc),	\

@@ -56,7 +56,11 @@
    is guaranteed to be not optimized away by the compiler, so it can
    always become a breakpoint in the debugger.
 */
+#ifdef __DOXYGEN__
 #define _NOP() __asm__ __volatile__("nop")
+#else
+#define _NOP() __asm__ __volatile__("nop ; [[len=1]]")
+#endif
 
 
 /**
@@ -97,7 +101,7 @@ void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
 #ifdef __AVR_TINY__
   if (__builtin_constant_p (__addr))
     __asm__ __volatile__ ("out %i0, %1" "\n\t"
-			  "out %i2, %3"
+			  "out %i2, %3 ; [[len=2]]"
 			  :
 			  : "n" (& CCP),
 			    "d" ((uint8_t) 0xd8),
@@ -105,7 +109,7 @@ void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
 			    "r" ((uint8_t) __value));
   else
     __asm__ __volatile__ ("out %i0, %1" "\n\t"
-			  "st %a2, %3"
+			  "st %a2, %3 ; [[len=2]]"
 			  :
 			  : "n" (& CCP),
 			    "d" ((uint8_t) 0xd8),
@@ -114,7 +118,7 @@ void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
 #elif defined(__AVR_XMEGA__)
   if (__builtin_constant_p (__addr))
     __asm__ __volatile__ ("out %i0, %1" "\n\t"
-			  "sts %2, %3"
+			  "sts %2, %3 ; [[len=3]]"
 			  :
 			  : "n" (& CCP),
 			    "d" ((uint8_t) CCP_IOREG_gc),
@@ -122,7 +126,7 @@ void ccp_write_io (volatile void *__ioaddr, uint8_t __value)
 			    "r" ((uint8_t) __value));
   else
     __asm__ __volatile__ ("out %i0, %1" "\n\t"
-			  "st %a2, %3"
+			  "st %a2, %3 ; [[len=2]]"
 			  :
 			  : "n" (& CCP),
 			    "d" ((uint8_t) CCP_IOREG_gc),
@@ -146,11 +150,11 @@ void ccp_write_spm (volatile void *__ioaddr, uint8_t __value)
   const uintptr_t __addr = (uintptr_t) __ioaddr;
 
   if (__builtin_constant_p (__addr))
-    __asm__ __volatile__ ("out %i0, %1" "\n\t"
+    __asm__ __volatile__ ("out %i0, %1" " ; [[len=1]]\n\t"
 #ifdef __AVR_TINY__
-			  "out %i2, %3"
+			  "out %i2, %3 ; [[len=1]]"
 #else
-			  "sts %2, %3"
+			  "sts %2, %3 ; [[len=sts]]"
 #endif
 			  :
 			  : "n" (& CCP),
@@ -159,7 +163,7 @@ void ccp_write_spm (volatile void *__ioaddr, uint8_t __value)
 			    "r" ((uint8_t) __value));
   else
     __asm__ __volatile__ ("out %i0, %1" "\n\t"
-			  "st %a2, %3"
+			  "st %a2, %3 ; [[len=2]]"
 			  :
 			  : "n" (& CCP),
 			    "d" ((uint8_t) CCP_SPM_gc),

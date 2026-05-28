@@ -132,12 +132,12 @@ long long llabs (long long __i)
         __asm (
 #ifdef __AVR_ERRATA_SKIP_JMP_CALL__
             "tst %r0+7"       "\n\t"
-            "brpl 1f"         "\n\t"
-            "%~call __negdi2" "\n"
+            "brpl 1f"         " ; [[len=2]]\n\t"
+            "%~call __negdi2" " ; [[len=%~call]]\n"
             "1:"
 #else
-            "sbrc %r0+7,7"    "\n\t"
-            "%~call __negdi2"
+            "sbrc %r0+7,7"    " ; [[len=1]]\n\t"
+            "%~call __negdi2" " ; [[len=%~call]]"
 #endif
             : "+r" (__r18));
         return __r18;

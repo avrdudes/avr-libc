@@ -94,7 +94,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 uint16_t _get_ram_unused (void)
 {
   register uint16_t __r24 __asm("r24");
-  __asm ("%~call _get_ram_unused"
+  __asm ("%~call _get_ram_unused ; [[len=%~call]]"
          : "=r" (__r24) :: "r30", "r31");
   return __r24;
 }

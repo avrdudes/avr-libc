@@ -62,7 +62,7 @@ uint8_t parity_even_bit (uint8_t __val)
          "subi %0, -6"           "\n\t"
          /* parity is in [0,3] */
          "sbrc %0, 3"            "\n\t"
-         "inc  %0"
+         "inc  %0 ; [[len=8]]"
          /* parity is in [0] */
          : "+d" (__val));
 

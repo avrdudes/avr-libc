@@ -1244,7 +1244,7 @@ const __flash char * strchr_F(const __flash char *__hay, int __val)
 {
   register const __flash char *__r24 __asm("24") = __hay;
   register int __r22 __asm("22") = __val;
-  __asm ("%~call strchr_P"
+  __asm ("%~call strchr_P ; [[len=%~call]]"
          : "+r" (__r24) : "r" (__r22) : "0", "30", "31");
   return __r24;
 }
@@ -1272,7 +1272,8 @@ void* memcpy_F(void *__x, const __flash void *__z, size_t __s)
 {
   register size_t __r20 __asm("20") = __s;
   void *__ret = __x;
-  __asm volatile ("%~call __memcpy_P" : "+x" (__x), "+z" (__z), "+r" (__r20)
+  __asm volatile ("%~call __memcpy_P ; [[len=%~call]]"
+                  : "+x" (__x), "+z" (__z), "+r" (__r20)
                   :: "0", "memory");
   return __ret;
 }
@@ -1283,7 +1284,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int strcmp_F (const char *__x, const __flash char *__z)
 {
   register int __ret __asm("24");
-  __asm ("%~call __strcmp_P"
+  __asm ("%~call __strcmp_P ; [[len=%~call]]"
          : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
 }
@@ -1295,7 +1296,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* strcpy_F (char *__x, const __flash char *__z)
 {
   char *__ret = __x;
-  __asm volatile ("%~call __strcpy_P"
+  __asm volatile ("%~call __strcpy_P ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
 }
@@ -1305,7 +1306,7 @@ extern char* stpcpy_F (char *__x, const __flash char *__z) __asm("stpcpy_P");
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* stpcpy_F (char *__x, const __flash char *__z)
 {
-  __asm volatile ("%~call __strcpy_P"
+  __asm volatile ("%~call __strcpy_P ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __x - 1;
 }
@@ -1323,7 +1324,7 @@ size_t strlen_F (const __flash char *__s)
   {
     register const __flash char *__r24 __asm("24") = __s;
     register size_t __res __asm("24");
-    __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
+    __asm ("%~call strlen_P ; [[len=%~call]]" : "=r" (__res) : "r" (__r24)
            : "0", "30", "31");
     return __res;
   }
