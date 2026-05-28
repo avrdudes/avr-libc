@@ -41,7 +41,7 @@ int main ()	{ return 0; }
 
 int main ()
 {
-    /* To activiate this bug, it is needed 0xXXFF address of terminated
+    /* To activate this bug, it is needed 0xXXFF address of terminated
        zero byte.	*/
 # if	RAMEND >= 511
     char s[260];

@@ -62,7 +62,7 @@
        representation cannot handle that.  (It is possible though
        to compensate for coefficients > 1 and for intermediate values
        not in [0, 1), but the implementation below doesn't do that.)
-    4. Post-process P in order to descrease E.  E can be improved since
+    4. Post-process P in order to decrease E.  E can be improved since
        coefficients and calculations suffer from discretization, and
        hence P isn't a true MiniMax for the used fixed-point type.
 */

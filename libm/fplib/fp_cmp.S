@@ -87,7 +87,7 @@ ENTRY	__fp_cmp
 	or	rB0, rB3
 	brne	2f		; evaluate sign(B)
 	ret
-  ; view argument signes
+  ; view argument signs
 1:	eor	r0, rBE		; C is not changed
 	brne	2f		; signs are different
 	sbci	rBE, 1		; rBE[0] = (A < B && A > 0) ? 0 : 1

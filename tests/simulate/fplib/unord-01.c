@@ -121,7 +121,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xff000000 }, { 0x7f000000 }, 0	},
     { { 0xff7fffff }, { 0x7f7fffff }, 0	},
     
-    /* slitely diffirent values	*/
+    /* slitely different values	*/
     { { 0x00000003 }, { 0x00000001 }, 0	},
     { { 0x00000300 }, { 0x00000100 }, 0	},
     { { 0x00030000 }, { 0x00010000 }, 0	},

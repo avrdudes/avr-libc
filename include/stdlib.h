@@ -81,7 +81,7 @@ typedef struct
     long rem;                   /**< The Remainder. */
 } ldiv_t;
 
-/** Comparision function type for qsort() and bsearch(),
+/** Comparison function type for qsort() and bsearch(),
     just for convenience. */
 typedef int (*__compar_fn_t)(const void *, const void *);
 

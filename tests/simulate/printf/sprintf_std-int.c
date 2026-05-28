@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 /* Test of sprintf(), a set of decimal numbers.
-   Is sutable for all variants: MIN, STD and FLT. */
+   Is suitable for all variants: MIN, STD and FLT. */
 
 #ifndef __AVR__
 # define PRINTFLN(line, fmt, ...)	\

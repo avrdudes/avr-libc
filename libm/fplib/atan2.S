@@ -125,7 +125,7 @@ ENTRY_FLOAT atan2f atan2 atan2l
 	XCALL	_U(__divsf3_pse)
 	XCALL	_U(__fp_round)
 	XCALL	_U(atanf)
-  ; restore disp and analize
+  ; restore disp and analyze
 	pop	rB3		; hhi8()
 	tst	rB3
 	breq	9f

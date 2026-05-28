@@ -56,7 +56,7 @@ PROGMEM const struct {		/* Table of test cases:  x / y = z	*/
     { { .fl = 2 }, { .fl = 0x0.800000p2 }, { .fl = 0x0.800000p1 } },
     { { .fl = 2 }, { .fl = 0x0.800001p2 }, { .fl = 0x0.fffffep0 } },
 
-    /* The remander is exactly 0.5: rounding direction is smart.	*/
+    /* The remainder is exactly 0.5: rounding direction is smart.	*/
     { { 0x007ffffe }, { .fl = 2 }, { 0x003fffff } },
     { { 0x007fffff }, { .fl = 2 }, { 0x00400000 } },
     { { 0x00800000 }, { .fl = 2 }, { 0x00400000 } },

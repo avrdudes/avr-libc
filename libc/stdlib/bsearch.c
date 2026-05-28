@@ -40,7 +40,7 @@ static char sccsid[] = "@(#)bsearch.c	8.1 (Berkeley) 6/4/93";
    work in half by moving either left or right. If N is odd, moving left simply
    involves halving N: e.g., when N is 5 we look at item 2, so we change N
    to 2 so that we will look at items 0 & 1.  If N is even, the same applies.
-   - If N is odd, moving right again involes halving N, this time moving the
+   - If N is odd, moving right again involves halving N, this time moving the
      base up one item past p: e.g., when N is 5 we change base to item 3 and
      make N 2 so that we will look at items 3 and 4.
    - If N is even, however, we have to shrink it by one before halving: e.g.,

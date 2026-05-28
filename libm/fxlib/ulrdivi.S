@@ -51,7 +51,7 @@ ENTRY ulrdivi
 	clr r_den5
 	X_movw r_den6, r_den4
 	; Prepare second arg for __udivdi3.
-	; The hight bytes in r_arg1HH:r_arg1L are already set,
+	; The high bytes in r_arg1HH:r_arg1L are already set,
 	; so just clear the low bytes.
 	clr r_arg2L
 	clr r_arg2H

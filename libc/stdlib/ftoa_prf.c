@@ -135,7 +135,7 @@ ftoa_prf (float val, char *s, uint8_t width, uint8_t prec, uint8_t flags)
         }
     }
 
-    ndigs += exp;               /* exp is resticted approx. -40 .. +40  */
+    ndigs += exp;               /* exp is restricted approx. -40 .. +40  */
     sign = buf[1];
     if ((vtype & FTOA_CARRY) && sign == '1')
         ndigs -= 1;

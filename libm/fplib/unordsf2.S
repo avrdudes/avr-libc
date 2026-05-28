@@ -30,7 +30,7 @@
    This function returns a nonzero value if either argument is NaN,
    otherwise 0.
 
-   As this function is not used often, speed is brocken to reduce size.
+   As this function is not used often, speed is broken to reduce size.
  */
 
 #include "fp32def.h"

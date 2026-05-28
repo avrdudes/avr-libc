@@ -337,7 +337,7 @@ whereas <tt>asm("%%":)</tt> only inserts one.
 </tr>
 <tr>
   <td><tt>\%\%</tt>
-  <td>A \c \% charater (percent)
+  <td>A \c \% character (percent)
 </tr>
 <tr>
   <td><tt>%~</tt>

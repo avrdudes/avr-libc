@@ -206,6 +206,7 @@ def canonicalize_comment (txt):
              # Typos
              ("Couner", "Counter"),
              ("Comapre", "Compare"),
+             ("tranceiver", "transceiver"),
              )
     for (a,b) in repls:
         txt = txt.replace (a, b)
@@ -314,6 +315,7 @@ class Isr (object):
             return True
         return self.text in ("Keep for backward compatibility",
                              "For compatability only",
+                             "For compatibility only",
                              "alias")
 
     def __str__(self):

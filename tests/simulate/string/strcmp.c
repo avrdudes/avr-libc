@@ -69,7 +69,7 @@ int main ()
     CHECK ("\001", "", 1);
     CHECK ("\377", "", 255);
 
-    /* Agrs are equal.	*/
+    /* Args are equal.	*/
     CHECK ("\001", "\001", 0);
     CHECK ("1234\377", "1234\377", 0);
     CHECK ("ABC", "ABC", 0);

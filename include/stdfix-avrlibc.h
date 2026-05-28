@@ -780,7 +780,7 @@ ulrdivi (unsigned long int num, unsigned long int denom);
 
 /* AVR-LibC extensions for mathematical functions on fixed-point numbers. */
 
-/* Fixed-point square roots using integer arithmetics.
+/* Fixed-point square roots using integer arithmetic.
  * See "Fast Integer Square Root" by Ross M. Fosler, Microchip DS91040 (2000).
  */
 

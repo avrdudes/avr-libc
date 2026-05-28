@@ -73,7 +73,7 @@ int main ()
     CHECK ("a", "[", 'a' - '[');
     CHECK ("[", "a", '[' - 'a');
 
-    /* Agrs are equal.	*/
+    /* Args are equal.	*/
     CHECK ("\001", "\001", 0);
     CHECK ("1234\377", "1234\377", 0);
     CHECK ("ABC", "abc", 0);

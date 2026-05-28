@@ -71,7 +71,7 @@ int main ()
     CHECK ("a", "[", 10, 'a' - '[');
     CHECK ("[", "a", 10, '[' - 'a');
 
-    /* Agrs are equal.	*/
+    /* Args are equal.	*/
     CHECK ("\001", "\001", 10, 0);
     CHECK ("1234\377", "1234\377", 10, 0);
     CHECK ("ABC", "abc", 10, 0);

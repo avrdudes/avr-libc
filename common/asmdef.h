@@ -446,7 +446,7 @@ _U(\lname):
    the Z (r31:r30) register.  It can be any register except for:
    r0, r1 (__zero_reg__ - assumed to always contain 0), r30, r31.
 
-   LPM_R0_ZPLUS_FINI is used atfer all reads to restore RAMPZ
+   LPM_R0_ZPLUS_FINI is used after all reads to restore RAMPZ
    in the case a restoration is required.  */
 
 .macro	LPM_R0_ZPLUS_INIT hhi

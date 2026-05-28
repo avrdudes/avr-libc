@@ -74,7 +74,7 @@
 #        define NVMCTRL_CMD_PAGEERASEWRITE_gc (0x13<<0)
 #      else
          /* To support a new device, define NVMCTRL CMD_PAGEERASEWRITE_gc
-          * with the value of "Erase and Write EEPROM Page" comand code
+          * with the value of "Erase and Write EEPROM Page" command code
           * for - Persistent Memory Controller (NVMCTRL).  */
 #        error "Not supported devices"
 #      endif
