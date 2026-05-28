@@ -266,7 +266,7 @@ char * strchr(const char *__hay, int __val)
 {
   register char *__r24 __asm("24");
   register int __r22 __asm("22") = __val;
-  __asm ("%~call strchr"
+  __asm ("%~call strchr ; [[len=%~call]]"
          : "=r" (__r24) : "0" (__hay), "r" (__r22) : "30", "31");
   return __r24;
 }
@@ -665,7 +665,8 @@ size_t strlen(const char *__s)
     {
       register const char *__r24 __asm("24") = __s;
       register size_t __res __asm("24");
-      __asm ("%~call %x2" : "=r" (__res) : "r" (__r24), "i" (strlen)
+      __asm ("%~call %x2 ; [[len=%~call]]"
+             : "=r" (__res) : "r" (__r24), "i" (strlen)
              : "30", "31", "memory");
       return __res;
     }
@@ -676,7 +677,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* strcpy(char *__x, const char *__z)
 {
   char *__ret = __x;
-  __asm volatile ("%~call __strcpy"
+  __asm volatile ("%~call __strcpy ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
 }
@@ -684,7 +685,7 @@ char* strcpy(char *__x, const char *__z)
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* stpcpy(char *__x, const char *__z)
 {
-  __asm volatile ("%~call __strcpy"
+  __asm volatile ("%~call __strcpy ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "memory");
   return __x - 1;
 }
@@ -694,7 +695,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int strcmp(const char *__x, const char *__z)
 {
   register int __ret __asm("24");
-  __asm ("%~call __strcmp"
+  __asm ("%~call __strcmp ; [[len=%~call]]"
          : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
 }

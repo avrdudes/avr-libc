@@ -288,9 +288,9 @@ extern void sleep_cpu (void);
 
 #else
 
-#define sleep_cpu()                              \
-do {                                             \
-  __asm__ __volatile__ ( "sleep" ::: "memory" ); \
+#define sleep_cpu()                                             \
+  do {                                                          \
+  __asm__ __volatile__ ( "sleep ; [[len=1]]" ::: "memory" );    \
 } while(0)
 
 #endif
@@ -352,7 +352,7 @@ do { \
                        "ori %[tempreg], %[bods_bodse]" "\n\t" \
                        "out %[mcucr], %[tempreg]" "\n\t" \
                        "andi %[tempreg], %[not_bodse]" "\n\t" \
-                       "out %[mcucr], %[tempreg]" \
+                       "out %[mcucr], %[tempreg] ; [[len=5]]" \
                        : [tempreg] "=&d" (tempreg) \
                        : [mcucr] "I" _SFR_IO_ADDR(BOD_CONTROL_REG), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \

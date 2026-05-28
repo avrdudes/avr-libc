@@ -71,7 +71,11 @@
     consider using the macros from <util/atomic.h>, rather than
     implementing them manually with cli() and sei().
 */
+#ifdef __DOXYGEN__
 # define sei()  __asm__ __volatile__ ("sei" ::: "memory")
+#else
+# define sei()  __asm__ __volatile__ ("sei ; [[len=1]]" ::: "memory")
+#endif
 
 /** \def cli()
     \ingroup avr_interrupts
@@ -85,7 +89,11 @@
     consider using the macros from <util/atomic.h>, rather than
     implementing them manually with cli() and sei().
 */
+#ifdef __DOXYGEN__
 # define cli()  __asm__ __volatile__ ("cli" ::: "memory")
+#else
+# define cli()  __asm__ __volatile__ ("cli ; [[len=1]]" ::: "memory")
+#endif
 
 
 /** \name Macros for writing interrupt handler functions */

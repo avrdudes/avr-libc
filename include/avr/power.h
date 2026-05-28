@@ -1444,7 +1444,7 @@ void clock_prescale_set(clock_div_t __x)
         "cli"                     "\n\t"
         "sts %1, %0"              "\n\t"
         "sts %1, %2"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "out __SREG__, __tmp_reg__ ; [[len=5]]"
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
@@ -1486,7 +1486,7 @@ void clock_prescale_set(clock_div_t __x)
         "cli"                     "\n\t"
         "sts %1, %0"              "\n\t"
         "sts %1, %2"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "out __SREG__, __tmp_reg__ ; [[len=5]]"
         : /* no outputs */
         : "d" (__tmp),
           "M" (_SFR_MEM_ADDR(CLKPR)),
@@ -1521,7 +1521,7 @@ void system_clock_prescale_set(clock_div_t __x)
         "cli"                     "\n\t"
         "out %1, %0"              "\n\t"
         "out %1, %2"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "out __SREG__, __tmp_reg__ ; [[len=5]]"
         : /* no outputs */
         : "d" (__tmp),
           "I" (_SFR_IO_ADDR(CLKPR)),
@@ -1556,7 +1556,7 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
         "cbr %[temp],%[not_CLTPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clkpr],%[temp]"      "\n\t"
-        "out __SREG__,__tmp_reg__"
+        "out __SREG__,__tmp_reg__ ; [[len=8]]"
         : [temp] "=d" (__t)
         : [clkpr] "I" (_SFR_IO_ADDR(CLKPR)),
           [enable] "r" ((uint8_t) _BV(CLKPCE)),
@@ -1595,7 +1595,7 @@ void system_clock_prescale_set(clock_div_t __x)
         "cbr %[temp],%[not_CLKPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clpr],%[temp]"       "\n\t"
-        "out __SREG__,__tmp_reg__"
+        "out __SREG__,__tmp_reg__ ; [[len=8]]"
         : [temp] "=d" (__t)
         : [clpr] "I" (_SFR_IO_ADDR(CLKPR)),
           [enable] "r" ((uint8_t) (1 << CLPCE)),
@@ -1631,7 +1631,7 @@ void timer_clock_prescale_set(timer_clock_div_t __x)
         "cbr %[temp],%[not_CLTPS]"  "\n\t"
         "or %[temp], %[set_value]"  "\n\t"
         "out %[clpr],%[temp]"       "\n\t"
-        "out __SREG__,__tmp_reg__"
+        "out __SREG__,__tmp_reg__ ; [[len=8]]"
         : [temp] "=d" (__t)
         : [clpr] "I" (_SFR_IO_ADDR(CLKPR)),
           [enable] "r" ((uint8_t) (1 << CLPCE)),
@@ -1686,7 +1686,7 @@ void clock_prescale_set(clock_div_t __x)
         "cli"                     "\n\t"
         "out %1, %0"              "\n\t"
         "out %1, %2"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "out __SREG__, __tmp_reg__ ; [[len=5]]"
         : /* no outputs */
         : "d" ((uint8_t) (1 << CLKPCE)),
           "I" (_SFR_IO_ADDR(CLKPR)),
@@ -1719,10 +1719,10 @@ void clock_prescale_set (clock_div_t __x)
 {
 	__asm__ __volatile__ (
         "in __tmp_reg__,__SREG__" "\n\t"
-        "cli"                     "\n\t"
-        "sts %2, %3"              "\n\t"
-        "sts %1, %0"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "cli"                     " ; [[len=2]]\n\t"
+        "sts %2, %3"              " ; [[len=sts]]\n\t"
+        "sts %1, %0"              " ; [[len=sts]]\n\t"
+        "out __SREG__, __tmp_reg__ ; [[len=1]]"
         : /* no outputs */
         : "r" ((uint8_t) __x),
           "n" (_SFR_MEM_ADDR(CLKPR)),
@@ -1797,7 +1797,7 @@ void clock_prescale_set(clock_div_t __x)
             "nop" "\n\t"
             "nop" "\n\t"
             "nop" "\n\t"
-            "L_%=: " "out __SREG__, __tmp_reg__"
+            "L_%=: " "out __SREG__, __tmp_reg__ ; [[len=26]]"
             : "=d" (__tmp)
             : "d" ((uint8_t) __x),
               "I" (_SFR_IO_ADDR(XDIV))
@@ -1850,7 +1850,7 @@ void clock_prescale_set(clock_div_t __x)
         "cli"                     "\n\t"
         "out %1, %0"              "\n\t"
         "out %2, %3"              "\n\t"
-        "out __SREG__, __tmp_reg__"
+        "out __SREG__, __tmp_reg__ ; [[len=5]]"
         : /* no outputs */
         : "d" ((uint8_t) 0xD8),
           "I" (_SFR_IO_ADDR(CCP)),

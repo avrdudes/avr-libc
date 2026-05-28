@@ -85,7 +85,7 @@ _delay_loop_1(uint8_t __count)
 {
 	__asm__ volatile (
 		"1: dec %0" "\n\t"
-		"brne 1b"
+		"brne 1b ; [[len=2]]"
 		: "=r" (__count)
 		: "0" (__count)
 	);
@@ -114,13 +114,13 @@ _delay_loop_2(uint16_t __count)
 	__asm__ volatile (
 		"1: subi %A0,1" "\n\t"
 		"   sbci %B0,0" "\n\t"
-		"brne 1b"
+		"brne 1b ; [[len=3]]"
 		: "+d" (__count)
 	);
 #else
 	__asm__ volatile (
 		"1: sbiw %0,1" "\n\t"
-		"brne 1b"
+		"brne 1b ; [[len=2]]"
 		: "+w" (__count)
 	);
 #endif /* AVR_TINY */

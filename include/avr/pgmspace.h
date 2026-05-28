@@ -934,7 +934,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
         "ldi    %A0, lo8(%1)"           "\n\t"        \
         "ldi    %B0, hi8(%1)"           "\n\t"        \
         "ldi    %C0, hh8(%1)"           "\n\t"        \
-        "clr    %D0"                                  \
+        "clr    %D0 ; [[len=4]]"                      \
         :   "=d" (__tmp)                              \
         :   "i"  (&(var))                             \
     );                                                \
@@ -956,7 +956,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
         "ldi    %A0, lo8(0x4000+(%1))"  "\n\t"        \
         "ldi    %B0, hi8(0x4000+(%1))"  "\n\t"        \
         "ldi    %C0, hh8(0x4000+(%1))"  "\n\t"        \
-        "clr    %D0"                                  \
+        "clr    %D0 ; [[len=4]]"                      \
         :   "=d" (__tmp)                              \
         :   "i"  (&(var))                             \
     );                                                \
@@ -1080,7 +1080,7 @@ const char * strchr_P(const char *__hay, int __val)
 {
   register const char *__r24 __asm("24") = __hay;
   register int __r22 __asm("22") = __val;
-  __asm ("%~call strchr_P"
+  __asm ("%~call strchr_P ; [[len=%~call]]"
          : "+r" (__r24) : "r" (__r22) : "30", "31");
   return __r24;
 }
@@ -1676,7 +1676,8 @@ void* memcpy_P(void *__x, const void *__z, size_t __s)
 {
   register size_t __r20 __asm("20") = __s;
   void *__ret = __x;
-  __asm volatile ("%~call __memcpy_P" : "+x" (__x), "+z" (__z), "+r" (__r20)
+  __asm volatile ("%~call __memcpy_P ; [[len=%~call]]"
+                  : "+x" (__x), "+z" (__z), "+r" (__r20)
                   :: "0", "memory");
   return __ret;
 }
@@ -1693,7 +1694,8 @@ size_t strlen_P(const char *__s)
     {
       register const char *__r24 __asm("24") = __s;
       register size_t __res __asm("24");
-      __asm ("%~call strlen_P" : "=r" (__res) : "r" (__r24)
+      __asm ("%~call strlen_P ; [[len=%~call]]"
+             : "=r" (__res) : "r" (__r24)
              : "0", "30", "31");
       return __res;
     }
@@ -1704,7 +1706,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* strcpy_P(char *__x, const char *__z)
 {
   char *__ret = __x;
-  __asm volatile ("%~call __strcpy_P"
+  __asm volatile ("%~call __strcpy_P ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __ret;
 }
@@ -1712,7 +1714,7 @@ char* strcpy_P(char *__x, const char *__z)
 extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 char* stpcpy_P(char *__x, const char *__z)
 {
-  __asm volatile ("%~call __strcpy_P"
+  __asm volatile ("%~call __strcpy_P ; [[len=%~call]]"
                   : "+x" (__x), "+z" (__z) :: "0", "memory");
   return __x - 1;
 }
@@ -1722,7 +1724,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int strcmp_P(const char *__x, const char *__z)
 {
   register int __ret __asm("24");
-  __asm ("%~call __strcmp_P"
+  __asm ("%~call __strcmp_P ; [[len=%~call]]"
          : "=r" (__ret), "+x" (__x), "+z" (__z) :: "memory");
   return __ret;
 }

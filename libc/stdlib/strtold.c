@@ -136,7 +136,7 @@ static __ATTR_ALWAYS_INLINE__ int
 mulhi10 (int i)
 {
     register int r24 __asm("24") = i;
-    __asm ("%~call __mulhi_const_10"
+    __asm ("%~call __mulhi_const_10 ; [[len=%~call]]"
            : "+r" (r24) :: "22", "23");
     return r24;
 }

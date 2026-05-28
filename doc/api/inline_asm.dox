@@ -275,6 +275,17 @@ The number of lines is one plus the number of line breaks in
 \c code-string.  These may be physical line breaks from \c \\n characters
 and logical line breaks from \c \$ characters.
 
+An asm construct with an empty code template has a size of zero.
+
+avr-gcc v17 allows to specify the size of an asm by means of
+<tt>[[len=<em>words</em>]]</tt> annotations in (comments in) the assembly
+template.  When a note is not recognized, then all notes in the respective
+assembly template are ignored and the default length is used.
+When all notes are valid, then the size of the asm is the sum over all
+<tt>[[len=<em>words</em>]]</tt> notes.  For more details, see
+<a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html"
+       >The size of an asm</a> in the GCC online documentation.
+
 
 \section inline_asm_special_sequences Special Sequences
 
