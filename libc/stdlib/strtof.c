@@ -76,7 +76,7 @@ static __ATTR_ALWAYS_INLINE__ int
 mulhi10 (int i)
 {
     register int r24 __asm("24") = i;
-    __asm ("%~call __mulhi_const_10"
+    __asm ("%~call __mulhi_const_10 ; [[len=%~call]]"
            : "+r" (r24) :: "22", "23");
     return r24;
 }
@@ -85,7 +85,7 @@ static __ATTR_ALWAYS_INLINE__ uint32_t
 mulsi10 (uint32_t i)
 {
     register uint32_t r22 __asm("22") = i;
-    __asm ("%~call __mulsi_const_10"
+    __asm ("%~call __mulsi_const_10 ; [[len=%~call]]"
            : "+r" (r22) :: "20", "21", "27"
 #ifndef __AVR_HAVE_MUL__
            , "26"

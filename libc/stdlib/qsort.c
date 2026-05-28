@@ -42,7 +42,7 @@ static __ATTR_ALWAYS_INLINE__ void
 swapfunc(char *a, char *b, int n)
 {
     register int n_bytes __asm ("r24") = n;
-    __asm volatile ("%~call __qsort_swapfunc"
+    __asm volatile ("%~call __qsort_swapfunc ; [[len=%~call]]"
                     : "+x" (a), "+z" (b), "+r" (n_bytes)
                     :
                     : "r23", "memory");

@@ -202,7 +202,7 @@
         "movw r0, %3"     "\n\t"                 \
         "out  %0, %1"     "\n\t"                 \
         "spm"             "\n\t"                 \
-        "clr  __zero_reg__"                      \
+        "clr  __zero_reg__ ; [[len=4]]"          \
         :                                        \
         : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
@@ -212,9 +212,9 @@
     else                                         \
       __asm__ __volatile__ (                     \
         "movw r0, %3"      "\n\t"                \
-        "sts  %0, %1"      "\n\t"                \
+        "sts  %0, %1"      " ; [[len=sts]]\n\t"  \
         "spm"              "\n\t"                \
-        "clr  __zero_reg__"                      \
+        "clr  __zero_reg__ ; [[len=3]]"          \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
@@ -228,11 +228,11 @@
     __asm__ __volatile__                         \
     (                                            \
         "movw r0, %3"     "\n\t"                 \
-        "sts  %0, %1"     "\n\t"                 \
+        "sts  %0, %1"     " ; [[len=sts]]\n\t"   \
         "spm"             "\n\t"                 \
         ".word 0xffff"    "\n\t"                 \
         "nop"             "\n\t"                 \
-        "clr  __zero_reg__"                      \
+        "clr  __zero_reg__ ; [[len=5]]"          \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_FILL)),     \
@@ -249,9 +249,9 @@
         "movw r0, %4"      "\n\t"                \
         "movw r30, %A3"    "\n\t"                \
         "out  %1, %C3"     "\n\t"                \
-        "sts  %0, %2"      "\n\t"                \
+        "sts  %0, %2"      " ; [[len=sts]]\n\t"  \
         "spm"              "\n\t"                \
-        "clr __zero_reg__"                       \
+        "clr __zero_reg__ ; [[len=5]]"           \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -267,15 +267,15 @@
     if (_SFR_IO_REG_P(__SPM_REG))                \
       __asm__ __volatile__ (                     \
         "out %0, %1"       "\n\t"                \
-        "spm"                                    \
+        "spm ; [[len=2]]"                        \
         :                                        \
         : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
           "z" ((uint16_t)(address)));            \
     else                                         \
       __asm__ __volatile__ (                     \
-        "sts %0, %1"       "\n\t"                \
-        "spm"                                    \
+        "sts %0, %1"       " ; [[len=sts]]\n\t"  \
+        "spm ; [[len=1]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
@@ -286,10 +286,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1"      "\n\t"                 \
+        "sts %0, %1"      " ; [[len=sts]]\n\t"   \
         "spm"             "\n\t"                 \
         ".word 0xffff"    "\n\t"                 \
-        "nop"                                    \
+        "nop ; [[len=3]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_ERASE)),    \
@@ -303,8 +303,8 @@
     (                                            \
         "movw r30, %A3"     "\n\t"               \
         "out  %1, %C3"      "\n\t"               \
-        "sts  %0, %2"       "\n\t"               \
-        "spm"                                    \
+        "sts  %0, %2"       " ; [[len=sts]]\n\t" \
+        "spm ; [[len=3]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -319,15 +319,15 @@
     if (_SFR_IO_REG_P(__SPM_REG))                \
       __asm__ __volatile__ (                     \
         "out %0, %1"       "\n\t"                \
-        "spm"                                    \
+        "spm ; [[len=2]]"                        \
         :                                        \
         : "i" (_SFR_IO_ADDR(__SPM_REG)),         \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
           "z" ((uint16_t)(address)));            \
     else                                         \
       __asm__ __volatile__ (                     \
-        "sts %0, %1"       "\n\t"                \
-        "spm"                                    \
+        "sts %0, %1"       " ; [[len=sts]]\n\t"  \
+        "spm ; [[len=1]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
@@ -338,10 +338,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1"     "\n\t"                  \
+        "sts %0, %1"     " ; [[len=sts]]\n\t"    \
         "spm"            "\n\t"                  \
         ".word 0xffff"   "\n\t"                  \
-        "nop"                                    \
+        "nop ; [[len=3]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_PAGE_WRITE)),    \
@@ -355,8 +355,8 @@
     (                                            \
         "movw r30, %A3"    "\n\t"                \
         "out  %1, %C3"     "\n\t"                \
-        "sts  %0, %2"      "\n\t"                \
-        "spm"                                    \
+        "sts  %0, %2"      " ; [[len=sts]]\n\t"  \
+        "spm ; [[len=3]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "i" (_SFR_IO_ADDR(RAMPZ)),             \
@@ -370,8 +370,8 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1"   "\n\t"                    \
-        "spm"                                    \
+        "sts %0, %1"   " ; [[len=sts]]\n\t"      \
+        "spm ; [[len=1]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_RWW_ENABLE))     \
@@ -382,10 +382,10 @@
 (__extension__({                                 \
     __asm__ __volatile__                         \
     (                                            \
-        "sts %0, %1"     "\n\t"                  \
+        "sts %0, %1"     " ; [[len=sts]]\n\t"    \
         "spm"            "\n\t"                  \
         ".word 0xffff"   "\n\t"                  \
-        "nop"                                    \
+        "nop ; [[len=3]]"                        \
         :                                        \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),        \
           "r" ((uint8_t)(__BOOT_RWW_ENABLE))     \
@@ -417,8 +417,8 @@
         "ldi r30, 1"     "\n\t"                            \
         "ldi r31, 0"     "\n\t"                            \
         "mov r0, %2"     "\n\t"                            \
-        "sts %0, %1"     "\n\t"                            \
-        "spm"                                              \
+        "sts %0, %1"     " ; [[len=sts]]\n\t"              \
+        "spm ; [[len=4]]"                                  \
         :                                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)(__BOOT_LOCK_BITS_SET)),           \
@@ -435,10 +435,10 @@
         "ldi r30, 1"    "\n\t"                             \
         "ldi r31, 0"    "\n\t"                             \
         "mov r0, %2"    "\n\t"                             \
-        "sts %0, %1"    "\n\t"                             \
+        "sts %0, %1"    " ; [[len=sts]]\n\t"               \
         "spm"           "\n\t"                             \
         ".word 0xffff"  "\n\t"                             \
-        "nop"                                              \
+        "nop ; [[len=6]]"                                  \
         :                                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)(__BOOT_LOCK_BITS_SET)),           \
@@ -505,8 +505,8 @@
     uint8_t __result;                                      \
     __asm__ __volatile__                                   \
     (                                                      \
-        "sts %1, %2\n\t"                                   \
-        "lpm %0, Z\n\t"                                    \
+        "sts %1, %2 ; [[len=sts]]\n\t"                     \
+        "lpm %0, Z ; [[len=1]]"                            \
         : "=r" (__result)                                  \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),                  \
           "r" ((uint8_t)(__BOOT_LOCK_BITS_SET)),           \
@@ -539,8 +539,8 @@
       uint8_t __result;                         \
       __asm__ __volatile__                      \
       (                                         \
-        "sts %1, %2"   "\n\t"                   \
-        "lpm %0, Z"                             \
+        "sts %1, %2 ; [[len=sts]]\n\t"          \
+        "lpm %0, Z ; [[len=1]]"                 \
         : "=r" (__result)                       \
         : "i" (_SFR_MEM_ADDR(__SPM_REG)),       \
           "r" ((uint8_t)(__BOOT_SIGROW_READ)),  \

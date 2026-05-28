@@ -74,7 +74,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isalnum(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isalnum" : "+r" (__r24));
+  __asm ("%~call isalnum ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -91,7 +91,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isalpha(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isalpha" : "+r" (__r24));
+  __asm ("%~call isalpha ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -108,7 +108,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isascii(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isascii" : "+r" (__r24));
+  __asm ("%~call isascii ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -124,7 +124,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isblank(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isblank" : "+r" (__r24));
+  __asm ("%~call isblank ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -140,7 +140,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int iscntrl(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call iscntrl" : "+r" (__r24));
+  __asm ("%~call iscntrl ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -156,7 +156,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isdigit(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isdigit" : "+r" (__r24));
+  __asm ("%~call isdigit ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -172,7 +172,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isgraph(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isgraph" : "+r" (__r24));
+  __asm ("%~call isgraph ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -188,7 +188,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int islower(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call islower" : "+r" (__r24));
+  __asm ("%~call islower ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -204,7 +204,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isprint(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isprint" : "+r" (__r24));
+  __asm ("%~call isprint ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -221,7 +221,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int ispunct(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call ispunct" : "+r" (__r24));
+  __asm ("%~call ispunct ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -239,7 +239,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isspace(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isspace" : "+r" (__r24));
+  __asm ("%~call isspace ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -255,7 +255,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isupper(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isupper" : "+r" (__r24));
+  __asm ("%~call isupper ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -272,7 +272,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int isxdigit(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call isxdigit" : "+r" (__r24));
+  __asm ("%~call isxdigit ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -303,7 +303,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int toascii(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call toascii" : "+r" (__r24));
+  __asm ("%~call toascii ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -319,7 +319,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int tolower(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call tolower" : "+r" (__r24));
+  __asm ("%~call tolower ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif
@@ -335,7 +335,7 @@ extern __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__
 int toupper(int __c)
 {
   register int __r24 __asm("r24") = __c;
-  __asm ("%~call toupper" : "+r" (__r24));
+  __asm ("%~call toupper ; [[len=%~call]]" : "+r" (__r24));
   return __r24;
 }
 #endif

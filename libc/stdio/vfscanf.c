@@ -136,7 +136,7 @@ typedef uint8_t width_t;
 	    "sbrc	%2,%3"	"\n\t"		\
 	    "lpm	%0,Z+"	"\n\t"		\
 	    "sbrs	%2,%3"	"\n\t"		\
-	    "ld	%0,Z+"				\
+	    "ld	%0,Z+	; [[len=4]]"		\
 	    : "=&r" (__c),			\
 	      "+z" (pnt)			\
 	    : "r" (flag),			\
@@ -153,7 +153,7 @@ typedef uint8_t width_t;
 	    "sbrs	%2,%3"	"\n\t"		\
 	    "ld		r0,Z"   "\n\t"		\
 	    "adiw	r30,1"	"\n\t"		\
-	    "mov	%0,r0"			\
+	    "mov	%0,r0	; [[len=5]]"	\
 	    : "=r" (__c),			\
 	      "+z" (pnt)			\
 	    : "r" (flag),			\
@@ -186,7 +186,7 @@ static void putval (void *addr, long val, uint8_t flags)
 	    "std     Z+3, %D1			\n\t"
 	    "std     Z+2, %C1			\n"
     "2:      std     Z+1, %B1			\n"
-    "1:      std     Z+0, %A1"
+    "1:      std     Z+0, %A1	; [[len=8]]"
 	    :
 	    : "z"(addr), "r"(val), [flags]"r"(flags),
 	      [bit_char] "M"(_FFS(FL_CHAR) - 1),
@@ -214,12 +214,12 @@ mulacc (unsigned long val, uint8_t flags, uint8_t c)
 	asm (
 # if  defined(__AVR_HAVE_MOVW__) && __AVR_HAVE_MOVW__
 	    "movw    r26, %A0"		"\n\t"
-	    "movw    r30, %C0"		"\n"
+	    "movw    r30, %C0"		" ; [[len=2]]\n"
 # else
 	    "mov     r26, %A0"		"\n\t"
 	    "mov     r27, %B0"		"\n\t"
 	    "mov     r30, %C0"		"\n\t"
-	    "mov     r31, %D0"		"\n"
+	    "mov     r31, %D0"		"; [[len=4]]\n"
 # endif
     "1:      lsl     r26"		"\n\t"
 	    "rol     r27"		"\n\t"
@@ -230,7 +230,7 @@ mulacc (unsigned long val, uint8_t flags, uint8_t c)
 	    "add     %A0, r26"		"\n\t"
 	    "adc     %B0, r27"		"\n\t"
 	    "adc     %C0, r30"		"\n\t"
-	    "adc     %D0, r31"
+	    "adc     %D0, r31 ; [[len=10]]"
 	    : "+r" (val)
 	    :
 	    : "r26", "r27", "r30", "r31");
