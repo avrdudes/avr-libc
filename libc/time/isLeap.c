@@ -43,7 +43,7 @@ is_leap_year(int year)
     if (year & 3)
         return 0;
 
-    /* If theres a remainder after division by 100, year is not divisible
+    /* If there's a remainder after division by 100, year is not divisible
        by 100 or 400 */
     d = div(year, 100);
     if (d.rem)

@@ -104,7 +104,7 @@ typedef uint8_t width_t;
 #define FL_CHAR	    0x08	/* 'char' type modifier		*/
 #define FL_OCT	    0x10	/* octal number			*/
 #define FL_DEC	    0x20	/* decimal number		*/
-#define FL_HEX	    0x40	/* hexidecimal number		*/
+#define FL_HEX	    0x40	/* hexadecimal number		*/
 #define FL_MINUS    0x80	/* minus flag (field or value)	*/
 
 #ifndef	__AVR_HAVE_LPMX__
@@ -283,7 +283,7 @@ conv_int (FILE *stream, width_t width, void *addr, uint8_t flags)
 	}
     }
 
-/* This fact is used below to parse hexidecimal digit.	*/
+/* This fact is used below to parse hexadecimal digit.	*/
 #if	('A' - '0') != (('a' - '0') & ~('A' ^ 'a'))
 # error
 #endif

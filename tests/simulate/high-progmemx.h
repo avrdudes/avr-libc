@@ -4,7 +4,7 @@
   Will force .progmemx to a high address.
 
   This will fail with (very) old versions of Binutils, namely
-  when the ld script doesn' have a .hightext section and ld
+  when the ld script doesn't have a .hightext section and ld
   places the orphan in such a way that it overlaps .data.
 */
 

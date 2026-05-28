@@ -177,7 +177,7 @@ int main ()
 	x    = pgm_read_dword (& t[i].x);
 	z.lo = pgm_read_dword (& t[i].z);
 #ifdef	__AVR__
-	/* Force library's convertion function usage. This is needed for
+	/* Force library's conversion function usage. This is needed for
 	   GCC before 4.2	*/
 	extern float __floatunsisf (unsigned long);
 	v.fl = __floatunsisf (x);

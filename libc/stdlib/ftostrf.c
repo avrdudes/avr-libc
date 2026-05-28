@@ -42,7 +42,7 @@
    AVR-LibC manual:
 	nothing about this
 
-   So, for compatibilty 'width' is signed value to left/right adjust.
+   So, for compatibility 'width' is signed value to left/right adjust.
  */
 
 ATTRIBUTE_CLIB_SECTION

@@ -51,7 +51,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     unsigned char z;		/* result	*/
 } t[] = {
 
-    /* 0.0 and Inf, all signes	*/
+    /* 0.0 and Inf, all signs	*/
     { { 0x00000000 }, { 0x7f800000 }, 0	},
     { { 0x80000000 }, { 0x7f800000 }, 0	},
     { { 0x00000000 }, { 0xff800000 }, 0	},
@@ -97,7 +97,7 @@ PROGMEM const struct {		/* Table of test cases.	*/
     { { 0xff800000 }, { 0x00800000 }, 0	},
     { { 0xff800000 }, { 0x7f7fffff }, 0	},
 
-    /* Inf and Inf, all signes	*/
+    /* Inf and Inf, all signs	*/
     { { 0x7f800000 }, { 0x7f800000 }, 0	},
     { { 0xff800000 }, { 0xff800000 }, 0	},
     { { 0xff800000 }, { 0x7f800000 }, 0	},

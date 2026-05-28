@@ -19,7 +19,7 @@ srcdir=${srcdir:-.}
 mcus="${MCUS:-$(cat $builddir/supported-mcus.txt)}"
 
 if [ -z "$mcus" ]; then
-    echo "error: no MCUs spefifies"
+    echo "error: no MCUs specified"
     echo "$builddir/supported-mcus.txt: not found, set builddir"
     exit 1
 fi
@@ -80,7 +80,7 @@ for mcu in $mcus; do
 	       > loc.txt
     cat loc.txt
 
-    # Proceding with shell is too tedious.  Hand over to Python.
+    # Proceeding with shell is too tedious.  Hand over to Python.
     $(dirname $0)/signats.py sig.txt loc.txt ${cmd_file}
 done
 

@@ -97,7 +97,7 @@ int main ()
 	ASSERT (v.i[0] == 0 && v.i[1] == 1 && v.i[2] == 027);
     }
 
-    /* Hexidecimal.	*/
+    /* Hexadecimal.	*/
     for (c = 255; c; c--) {
 	if (isxdigit (c))
 	    continue;

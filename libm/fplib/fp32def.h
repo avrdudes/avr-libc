@@ -1,4 +1,4 @@
-/* Interprocedure convensions. In separate file: for math library
+/* Interprocedure conventions. In separate file: for math library
    developers.	*/
 #ifndef	_FP32DEF_H
 #define	_FP32DEF_H

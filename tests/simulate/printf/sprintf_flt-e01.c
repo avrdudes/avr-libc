@@ -39,7 +39,7 @@ PROGMEM static const struct sprf_s {
     char pattern[21];
 } t[] = {
 
-/* Flags separatly.	*/
+/* Flags separately.	*/
     { "%e",	1.234567,	"1.234567e+00"	},
     { "%E",	1.234567,	"1.234567E+00"	},
     { "% e",	1.234567,	" 1.234567e+00"	},

@@ -140,7 +140,7 @@ realloc(void *ptr, size_t len)
 	}
 	/*
 	 * If we are the topmost chunk in memory, and there was no
-	 * large enough chunk on the freelist that could be re-used
+	 * large enough chunk on the freelist that could be reused
 	 * (by a call to malloc() below), quickly extend the
 	 * allocation area if possible, without need to copy the old
 	 * data.

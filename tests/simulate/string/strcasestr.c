@@ -113,7 +113,7 @@ int main ()
     CHECK ("012", "12", 1);
     CHECK ("01200", "12", 1);
     
-    /* partially mathing	*/
+    /* partially matching	*/
     CHECK ("a_ab_abc_abcd_abcde", "abcdef", -1);
     CHECK ("a_ab_abc_abcd_abcde_abcdef", "abcdef", 20);
     CHECK ("aababcabcdabcde", "abcdef", -1);

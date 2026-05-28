@@ -86,7 +86,7 @@ int main ()
     CHECK ("012", "12", 1);
     CHECK ("01200", "12", 1);
     
-    /* partially mathing	*/
+    /* partially matching	*/
     CHECK ("a_ab_abc_abcd_abcde", "abcdef", -1);
     CHECK ("a_ab_abc_abcd_abcde_abcdef", "abcdef", 20);
     CHECK ("aababcabcdabcde", "abcdef", -1);
@@ -99,7 +99,7 @@ int main ()
     /* A first match is returned.	*/
     CHECK ("_foo_foo", "foo", 1);
     
-    /* Case is importent.	*/
+    /* Case is important.	*/
     CHECK ("A", "a", -1);
 
     return 0;

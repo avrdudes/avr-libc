@@ -41,7 +41,7 @@ T rsub1 (T x)
 T sinpi2ur (T x)
 {
   // sinpi2(x) - x has 2 zeros instead of just one.  Factor them out and
-  // mulitply them back in below.  Just like MiniMax for sinpi2 this
+  // multiply them back in below.  Just like MiniMax for sinpi2 this
   // costs 5 MULs, but the zeros are taming the errors at both ends.
   T a0 = 0.5706834793;
   T a1 = 0.5741653442;
