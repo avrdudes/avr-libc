@@ -209,6 +209,8 @@ The Anatomy of a GCC asm Statement</h1>
 The Size of an asm</h1>
 <p>The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
 <p>The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.</p>
+<p>An asm construct with an empty code template has a size of zero.</p>
+<p>avr-gcc v17 allows to specify the size of an asm by means of <code>[[len=<em>words</em>]]</code> annotations in (comments in) the assembly template. When a note is not recognized, then all notes in the respective assembly template are ignored and the default length is used. When all notes are valid, then the size of the asm is the sum over all <code>[[len=<em>words</em>]]</code> notes. For more details, see <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html">The size of an asm</a> in the GCC online documentation.</p>
 <h1><a class="anchor" id="inline_asm_special_sequences"></a>
 Special Sequences</h1>
 <p>There are special sequences that can be used in the assembly template.</p>
@@ -234,7 +236,7 @@ Special Sequences</h1>
 <tr>
 <td><code>\\</code> </td><td>A <code>\</code> character (backslash)  </td></tr>
 <tr>
-<td><code>%%</code> </td><td>A <code>%</code> charater (percent)  </td></tr>
+<td><code>%%</code> </td><td>A <code>%</code> character (percent)  </td></tr>
 <tr>
 <td><code>%~</code> </td><td><code>"r"</code> or <code>""</code>, used to construct <code>call</code> or <code>rcall</code> by means of <code>"%~call"</code>, depending on the architecture  </td></tr>
 <tr>
@@ -842,7 +844,7 @@ Using Matching Constraints "=0"..."=9" with Output Operands</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 22:17:05 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 28 2026 17:42:16 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

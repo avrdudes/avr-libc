@@ -238,7 +238,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="stringliteral">&quot;lsr __tmp_reg__&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="stringliteral">&quot;ror %1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="stringliteral">&quot;eor %B0,__tmp_reg__&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="stringliteral">&quot;eor %A0,%1&quot;</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="stringliteral">&quot;eor %A0,%1 ; [[len=23]]&quot;</span></div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        : <span class="stringliteral">&quot;=r&quot;</span> (__ret), <span class="stringliteral">&quot;=d&quot;</span> (__tmp)</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        : <span class="stringliteral">&quot;r&quot;</span> (__data), <span class="stringliteral">&quot;0&quot;</span> (__crc)</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        : <span class="stringliteral">&quot;r0&quot;</span></div>
@@ -300,7 +300,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="stringliteral">&quot;rol    %B0&quot;</span>             <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="stringliteral">&quot;eor    %B0,%1&quot;</span>          <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="stringliteral">&quot;eor    %A0,%2&quot;</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="stringliteral">&quot;eor    %A0,%2 ; [[len=14]]&quot;</span></div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        : <span class="stringliteral">&quot;=d&quot;</span> (__ret), <span class="stringliteral">&quot;=r&quot;</span> (__tmp1), <span class="stringliteral">&quot;=r&quot;</span> (__tmp2)</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        : <span class="stringliteral">&quot;r&quot;</span> (__data), <span class="stringliteral">&quot;0&quot;</span> (__crc)</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    );</div>
@@ -364,7 +364,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="stringliteral">&quot;lsl    %A0&quot;</span>             <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="stringliteral">&quot;lsl    %A0&quot;</span>             <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="stringliteral">&quot;lsl    %A0&quot;</span>             <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="stringliteral">&quot;eor    %A0,__tmp_reg__&quot;</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="stringliteral">&quot;eor    %A0,__tmp_reg__ ; [[len=17]]&quot;</span></div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        : <span class="stringliteral">&quot;=d&quot;</span> (__ret)</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        : <span class="stringliteral">&quot;r&quot;</span> (__data), <span class="stringliteral">&quot;0&quot;</span> (__crc)</div>
@@ -413,7 +413,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="stringliteral">&quot;brcc   2f&quot;</span>        <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="stringliteral">&quot;eor    %0, %2&quot;</span>    <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        <span class="stringliteral">&quot;2: dec %1&quot;</span>        <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="stringliteral">&quot;brne   1b&quot;</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="stringliteral">&quot;brne   1b ; [[len=8]]&quot;</span></div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        : <span class="stringliteral">&quot;=r&quot;</span> (__crc), <span class="stringliteral">&quot;=d&quot;</span> (__i), <span class="stringliteral">&quot;=d&quot;</span> (__pattern)</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        : <span class="stringliteral">&quot;0&quot;</span> (__crc), <span class="stringliteral">&quot;r&quot;</span> (__data));</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">return</span> __crc;</div>
@@ -476,7 +476,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        <span class="stringliteral">&quot;brcc   2f&quot;</span>       <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="stringliteral">&quot;eor    %0, %2&quot;</span>   <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        <span class="stringliteral">&quot;2: dec    %1&quot;</span>    <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="stringliteral">&quot;brne   1b&quot;</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="stringliteral">&quot;brne   1b ; [[len=8]]&quot;</span></div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        : <span class="stringliteral">&quot;=r&quot;</span> (__crc), <span class="stringliteral">&quot;=d&quot;</span> (__i), <span class="stringliteral">&quot;=d&quot;</span> (__pattern)</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        : <span class="stringliteral">&quot;0&quot;</span> (__crc), <span class="stringliteral">&quot;r&quot;</span> (__data));</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keywordflow">return</span> __crc;</div>
@@ -495,7 +495,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 22:17:04 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 28 2026 17:42:15 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

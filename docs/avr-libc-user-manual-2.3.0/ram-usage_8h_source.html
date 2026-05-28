@@ -199,7 +199,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> <a class="code hl_function" href="group__util__ram__usage.html#ga9913f782c88128a7e05f61d09c046965">_get_ram_unused</a> (<span class="keywordtype">void</span>)</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">register</span> <a class="code hl_typedef" href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> __r24 __asm(<span class="stringliteral">&quot;r24&quot;</span>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  __asm (<span class="stringliteral">&quot;%~call _get_ram_unused&quot;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  __asm (<span class="stringliteral">&quot;%~call _get_ram_unused ; [[len=%~call]]&quot;</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>         : <span class="stringliteral">&quot;=r&quot;</span> (__r24) :: <span class="stringliteral">&quot;r30&quot;</span>, <span class="stringliteral">&quot;r31&quot;</span>);</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordflow">return</span> __r24;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
@@ -259,7 +259,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 22:17:04 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 28 2026 17:42:15 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

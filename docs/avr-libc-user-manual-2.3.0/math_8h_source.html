@@ -650,7 +650,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        <span class="stringliteral">&quot;mov    %0, %C1&quot;</span>     <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        <span class="stringliteral">&quot;lsl    %0&quot;</span>          <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>        <span class="stringliteral">&quot;mov    %0, %D1&quot;</span>     <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        <span class="stringliteral">&quot;rol    %0&quot;</span></div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        <span class="stringliteral">&quot;rol    %0 ; [[len=4]]&quot;</span></div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        : <span class="stringliteral">&quot;=&amp;r&quot;</span> (__exp)</div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        : <span class="stringliteral">&quot;r&quot;</span> (__x) );</div>
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordflow">return</span> __exp != 0xff;</div>
@@ -689,7 +689,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>{</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    __asm__ (</div>
 <div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>        <span class="stringliteral">&quot;bst    %D2, 7&quot;</span>  <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        <span class="stringliteral">&quot;bld    %D0, 7&quot;</span></div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        <span class="stringliteral">&quot;bld    %D0, 7 ; [[len=2]]&quot;</span></div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        : <span class="stringliteral">&quot;=r&quot;</span> (__x)</div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>        : <span class="stringliteral">&quot;0&quot;</span> (__x), <span class="stringliteral">&quot;r&quot;</span> (__y));</div>
 <div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    <span class="keywordflow">return</span> __x;</div>
@@ -701,7 +701,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>{</div>
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>    __asm__ (</div>
 <div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>        <span class="stringliteral">&quot;bst    %r1+%2-1, 7&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>        <span class="stringliteral">&quot;bld    %r0+%2-1, 7&quot;</span></div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>        <span class="stringliteral">&quot;bld    %r0+%2-1, 7 ; [[len=2]]&quot;</span></div>
 <div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>        : <span class="stringliteral">&quot;+r&quot;</span> (__x)</div>
 <div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>        : <span class="stringliteral">&quot;r&quot;</span> (__y), <span class="stringliteral">&quot;n&quot;</span> (__SIZEOF_DOUBLE__));</div>
 <div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>    <span class="keywordflow">return</span> __x;</div>
@@ -714,7 +714,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>{</div>
 <div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    __asm__ (</div>
 <div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        <span class="stringliteral">&quot;bst    %r1+%2-1, 7&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>        <span class="stringliteral">&quot;bld    %r0+%2-1, 7&quot;</span></div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>        <span class="stringliteral">&quot;bld    %r0+%2-1, 7 ; [[len=2]]&quot;</span></div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>        : <span class="stringliteral">&quot;+r&quot;</span> (__x)</div>
 <div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        : <span class="stringliteral">&quot;r&quot;</span> (__y), <span class="stringliteral">&quot;n&quot;</span> (__SIZEOF_LONG_DOUBLE__));</div>
 <div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>    <span class="keywordflow">return</span> __x;</div>
@@ -1052,7 +1052,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 22:17:04 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 28 2026 17:42:15 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
