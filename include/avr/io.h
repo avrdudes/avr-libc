@@ -57,7 +57,7 @@
     so even identical functions sometimes get different names on
     different devices.
 
-    Also included are the specific names useable for interrupt
+    Also included are the specific names usable for interrupt
     service routines as documented
     \ref avr_mcu_signames "here".
 

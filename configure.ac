@@ -161,7 +161,7 @@ AS_VERSION_COMPARE([`${CC} -dumpversion`], [5.0.0],
     [AC_SUBST(GCC_MAJOR, [$gcc_major1])],
     [AC_SUBST(GCC_MAJOR, [$gcc_major1])])
 
-dnl Parts of the documentaton like in doc/api require Python, e.g. math2dox.
+dnl Parts of the documentation like in doc/api require Python, e.g. math2dox.
 dnl We cannot use devtools' configure since that one runs at bootstrap time,
 dnl whereas here we need Python at build time.
 AM_PATH_PYTHON([2.6],

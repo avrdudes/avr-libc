@@ -8,7 +8,7 @@ to malloc/free to reduce the heap when the topmost chunk had been
 freed.  Several testscripts assumed the final freelist would
 consist of a single large entry which is no longer the case now.)
 
-The following test only fail with old verions of the compiler, so old
+The following test only fail with old versions of the compiler, so old
 that the current AVR-LibC no more supports them (older than GCC v4.8).
 
 Simulate: math/isinf-01.c atmega128 ... *** simulate failed: 22

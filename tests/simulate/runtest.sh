@@ -28,7 +28,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# Script for testing AVR-LibC fuctions, mainly, by simulating. An installed
+# Script for testing AVR-LibC functions, mainly, by simulating. An installed
 # simulavr is needed. The simulavr-0.1.2.1 is suitable, only the correction
 # of divide_by_zero error is needed. The script is tuned to run after 'make'
 # without any options, at this place.
@@ -76,7 +76,7 @@ Options:
   -k          Keep simulator core file upon simulation error
   -t          Add pass at host computer
   -T          Pass at host only
-  -s          Stop at any error, temparary files will save
+  -s          Stop at any error, temporary files will save
   -h          Print this help
   -v          Verbose mode; echo shell commands being executed
 If FILE is not specified, the full test list is used.

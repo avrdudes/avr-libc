@@ -82,7 +82,7 @@ int main ()
 	    x_exit (i+1);
 #ifdef  __AVR__
 	{
-	    /* Forse to use fplib's function.	*/
+	    /* Force to use fplib's function.	*/
 	    extern float __negsf2 (float);
 	    v.fl = __negsf2 (x.fl);
 	    if (v.lo != z.lo)

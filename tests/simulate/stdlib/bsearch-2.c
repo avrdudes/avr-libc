@@ -78,7 +78,7 @@ int main ()
 		exit (__LINE__);
 	}
 	
-	/* All existance keys.	*/
+	/* All existence keys.	*/
 	for (i= 0; (size_t)i < nmemb; i++) {
 	    key = arr[i];
 	    cmp_calls = 0;

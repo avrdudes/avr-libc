@@ -121,7 +121,7 @@ int main ()
 	"%i %i %i%*s %i",
 	v.i, v.i + 1, v.i + 2, v.i + 3);
 
-    /* Hexidecimal.	*/
+    /* Hexadecimal.	*/
     CHECK (
 	5,
 	!memcmp_P (v.i, PVEC(0x1234,0x5678,0x9ABC,0xDEF0,0), 5 * sizeof(int)),

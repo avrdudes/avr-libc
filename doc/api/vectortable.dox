@@ -2,7 +2,7 @@
    $ ./gen-vectortable-dox.sh
    DO NOT EDIT, or your changes WILL BE LOST! */
 
-/* Copyright (c) 2025 Joerg Wunsch
+/* Copyright (c) 2026 Joerg Wunsch
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -2357,7 +2357,7 @@ Go down to the \ref avr_mcu_signames "MCU &rarr; Vector Names" table.<br>
   </tr>
   <tr>
     <td>TRX24_AWAKE_vect</td>
-    <td>TRx24 AWAKE tranceiver is reaching state TRx_OFF</td>
+    <td>TRx24 AWAKE transceiver is reaching state TRx_OFF</td>
     <td>ATmega64RFR2, ATmega644RFR2, ATmega128RFA1, ATmega128RFR2, ATmega1284RFR2, ATmega256RFR2, ATmega2564RFR2</td>
   </tr>
   <tr>

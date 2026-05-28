@@ -66,7 +66,7 @@ ENTRY_FLOAT fmaxf fmax fmaxl
 	cpc	rA1, rB1
 	cpc	rA2, rB2
 	cpc	rA3, rB3	; C is set, if A < B
-  ; analize
+  ; analyze
 	ror	rBE		; V = C ^ sign
 	brvc	.L_retA
 .L_retB:

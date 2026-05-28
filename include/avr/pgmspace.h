@@ -1002,7 +1002,7 @@ extern const void * memchr_P(const void *, int __val, size_t __len) __ATTR_CONST
     \brief Compare memory areas
 
     The memcmp_P() function compares the first \p len bytes of the memory
-    areas \p s1 and flash \p s2. The comparision is performed using unsigned
+    areas \p s1 and flash \p s2. The comparison is performed using unsigned
     char operations. \p s2 is located in the lower 64 KiB of program memory.
 
     \returns The memcmp_P() function returns an integer less than, equal
@@ -1645,7 +1645,7 @@ extern size_t strlcpy_PF(char *dst, uint_farptr_t src, size_t siz);
     \brief Compare memory areas
 
     The memcmp_PF() function compares the first \p len bytes of the memory
-    areas \p s1 and flash \p s2. The comparision is performed using unsigned
+    areas \p s1 and flash \p s2. The comparison is performed using unsigned
     char operations. It is an equivalent of memcmp_P() function, except
     that it is capable working on all FLASH including the extended area
     above 64kB.

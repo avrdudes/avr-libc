@@ -34,7 +34,7 @@
      The __fixunssfsi() function converts A to the integer value. No
      rounding, the fractional is lost. The compiler calls this function
      to perform a cast operation from float to unsigned long.
-     No saturation. Negative input is permissable (like GCC/x86). Besides
+     No saturation. Negative input is permissible (like GCC/x86). Besides
      a normal 32-bits value __fixunssfsi() returns the extra error flag
      in a call-scratched register. This is used when a caller is the
      __fixsfsi() function.
