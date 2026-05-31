@@ -81,7 +81,7 @@
 	"sbrc	%2,%3	\n\t"			\
 	"lpm	%0,Z+	\n\t"			\
 	"sbrs	%2,%3	\n\t"			\
-	"ld	%0,Z+	; [[len=4]]"		\
+	"ld	%0,Z+	; [[len=nl]]"		\
 	: "=&r" (__c),				\
 	  "+z" (pnt)				\
 	: "r" (flag),				\
@@ -97,7 +97,7 @@
 	"sbrs	%2,%3	\n\t"			\
 	"ld	r0,Z	\n\t"			\
 	"adiw	r30,1	\n\t"			\
-	"mov	%0,r0	; [[len=5]]"		\
+	"mov	%0,r0	; [[len=nl]]"		\
 	: "=r" (__c),				\
 	  "+z" (pnt)				\
 	: "r" (flag),				\

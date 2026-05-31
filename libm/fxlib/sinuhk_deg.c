@@ -61,7 +61,7 @@ static const int16_t sin_tab[91] PROGMEM =
   (__extension__({                              \
       int16_t result;                           \
       __asm ("lpm %A0, Z+"   "\n\t"             \
-             "lpm %B0, Z+ ; [[len=2]]"          \
+             "lpm %B0, Z+ ; [[len=nl]]"         \
              : "=r" (result), "+z" (addr));     \
       result;                                   \
     }))
