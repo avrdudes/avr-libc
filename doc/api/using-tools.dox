@@ -56,6 +56,12 @@ options of the respective release series:
 <td><a href="https://gcc.gnu.org/onlinedocs/#current">Current</a>
     (work in progress)
 <tr>
+<td><a href="https://gcc.gnu.org/gcc-17/changes.html#avr">GCC v17</a>
+<td><a href="https://gcc.gnu.org/gcc-17">GCC v17</a>
+<tr>
+<td><a href="https://gcc.gnu.org/gcc-16/changes.html#avr">GCC v16</a>
+<td><a href="https://gcc.gnu.org/gcc-16">GCC v16</a>
+<tr>
 <td><a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>
 <td><a href="https://gcc.gnu.org/gcc-15">GCC v15</a>
 <tr>
@@ -119,10 +125,8 @@ Apart from the documentation of
   and how indirect calls are realized on such devices.
 
 See also:
-- <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html"
-     >AVR variable attributes</a>
-- <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html"
-     >AVR function attributes</a>
+- <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html"
+     >AVR-specific attributes</a>
 - <a href="https://gcc.gnu.org/onlinedocs/gcc/Named-Address-Spaces.html#AVR-Named-Address-Spaces-1"
      >AVR named address-spaces</a>
 - <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html"
