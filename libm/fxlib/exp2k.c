@@ -46,7 +46,7 @@ accum exp2k (accum x)
   __asm ("lsl %A[f]"       "\n\t"
          "rol %B[f]"       "\n\t"
          "mov %[i],%C[f]"  "\n\t"
-         "rol %[i] ; [[len=4]]"
+         "rol %[i] ; [[len=nl]]"
          : [f] "=r" (fbit), [i] "=r" (ibit)
          : "0" (x));
 

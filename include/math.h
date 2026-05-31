@@ -545,7 +545,7 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ int isfinitef (float __x)
         "mov    %0, %C1"     "\n\t"
         "lsl    %0"          "\n\t"
         "mov    %0, %D1"     "\n\t"
-        "rol    %0 ; [[len=4]]"
+        "rol    %0 ; [[len=nl]]"
         : "=&r" (__exp)
         : "r" (__x) );
     return __exp != 0xff;
@@ -584,7 +584,7 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ float copysignf (float __x, float _
 {
     __asm__ (
         "bst    %D2, 7"  "\n\t"
-        "bld    %D0, 7 ; [[len=2]]"
+        "bld    %D0, 7 ; [[len=nl]]"
         : "=r" (__x)
         : "0" (__x), "r" (__y));
     return __x;
@@ -596,7 +596,7 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ double copysign (double __x, double
 {
     __asm__ (
         "bst    %r1+%2-1, 7" "\n\t"
-        "bld    %r0+%2-1, 7 ; [[len=2]]"
+        "bld    %r0+%2-1, 7 ; [[len=nl]]"
         : "+r" (__x)
         : "r" (__y), "n" (__SIZEOF_DOUBLE__));
     return __x;
@@ -609,7 +609,7 @@ __ATTR_CONST__ static __ATTR_ALWAYS_INLINE__ long double copysignl (long double 
 {
     __asm__ (
         "bst	%r1+%2-1, 7" "\n\t"
-        "bld	%r0+%2-1, 7 ; [[len=2]]"
+        "bld	%r0+%2-1, 7 ; [[len=nl]]"
         : "+r" (__x)
         : "r" (__y), "n" (__SIZEOF_LONG_DOUBLE__));
     return __x;

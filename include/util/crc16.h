@@ -133,7 +133,7 @@ _crc16_update(uint16_t __crc, uint8_t __data)
 		"lsr __tmp_reg__" "\n\t"
 		"ror %1" "\n\t"
 		"eor %B0,__tmp_reg__" "\n\t"
-		"eor %A0,%1 ; [[len=23]]"
+		"eor %A0,%1 ; [[len=nl]]"
 		: "=r" (__ret), "=d" (__tmp)
 		: "r" (__data), "0" (__crc)
 		: "r0"
@@ -195,7 +195,7 @@ _crc_xmodem_update (uint16_t __crc, uint8_t __data)
         "rol    %B0"             "\n\t"
 
         "eor    %B0,%1"          "\n\t"
-        "eor    %A0,%2 ; [[len=14]]"
+        "eor    %A0,%2 ; [[len=nl]]"
         : "=d" (__ret), "=r" (__tmp1), "=r" (__tmp2)
         : "r" (__data), "0" (__crc)
     );
@@ -259,7 +259,7 @@ _crc_ccitt_update (uint16_t __crc, uint8_t __data)
         "lsl    %A0"             "\n\t"
         "lsl    %A0"             "\n\t"
         "lsl    %A0"             "\n\t"
-        "eor    %A0,__tmp_reg__ ; [[len=17]]"
+        "eor    %A0,__tmp_reg__ ; [[len=nl]]"
 
         : "=d" (__ret)
         : "r" (__data), "0" (__crc)
@@ -308,7 +308,7 @@ _crc_ibutton_update (uint8_t __crc, uint8_t __data)
 		"brcc	2f"        "\n\t"
 		"eor	%0, %2"    "\n"
 		"2:	dec	%1"        "\n\t"
-		"brne	1b ; [[len=8]]"
+		"brne	1b ; [[len=nl]]"
 		: "=r" (__crc), "=d" (__i), "=d" (__pattern)
 		: "0" (__crc), "r" (__data));
 	return __crc;
@@ -371,7 +371,7 @@ _crc8_ccitt_update(uint8_t __crc, uint8_t __data)
         "brcc   2f"       "\n\t"
         "eor    %0, %2"   "\n"
         "2:	dec    %1"    "\n\t"
-        "brne   1b ; [[len=8]]"
+        "brne   1b ; [[len=nl]]"
         : "=r" (__crc), "=d" (__i), "=d" (__pattern)
         : "0" (__crc), "r" (__data));
     return __crc;
