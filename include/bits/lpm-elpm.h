@@ -59,25 +59,25 @@
 
 #elif defined(__AVR_HAVE_LPMX__)
 #define __LPM__1(res, addr)                             \
-  __asm __LPM_VOLATILE ("lpm %0,%a1 ; [[len=1]]"        \
+  __asm __LPM_VOLATILE ("lpm %0,%a1 ; [[len=nl]]"       \
                         : "=r" (res) : "z" (addr))
 
 #define __LPM__2(res, addr)                               \
   __asm __LPM_VOLATILE ("lpm %A0,%a1+"            "\n\t"  \
-                        "lpm %B0,%a1+ ; [[len=2]]"        \
+                        "lpm %B0,%a1+ ; [[len=nl]]"       \
                         : "=r" (res), "+z" (addr))
 
 #define __LPM__3(res, addr)                               \
   __asm __LPM_VOLATILE ("lpm %A0,%a1+"            "\n\t"  \
                         "lpm %B0,%a1+"            "\n\t"  \
-                        "lpm %C0,%a1+ ; [[len=3]]"        \
+                        "lpm %C0,%a1+ ; [[len=nl]]"       \
                         : "=r" (res), "+z" (addr))
 
 #define __LPM__4(res, addr)                               \
   __asm __LPM_VOLATILE ("lpm %A0,%a1+"            "\n\t"  \
                         "lpm %B0,%a1+"            "\n\t"  \
                         "lpm %C0,%a1+"            "\n\t"  \
-                        "lpm %D0,%a1+ ; [[len=4]]"        \
+                        "lpm %D0,%a1+ ; [[len=nl]]"       \
                         : "=r" (res), "+z" (addr))
 
 #define __LPM__8(res, addr)                               \
@@ -88,29 +88,29 @@
                         "lpm %r0+4,%a1+"          "\n\t"  \
                         "lpm %r0+5,%a1+"          "\n\t"  \
                         "lpm %r0+6,%a1+"          "\n\t"  \
-                        "lpm %r0+7,%a1+ ; [[len=8]]"      \
+                        "lpm %r0+7,%a1+ ; [[len=nl]]"     \
                         : "=r" (res), "+z" (addr))
 #else /* Has no LPMx and no Reduced Tiny => Has LPM.  */
 #define __LPM__1(res, addr)                                     \
-  __asm __LPM_VOLATILE ("lpm $ mov %A0,r0 ; [[len=2]]"          \
+  __asm __LPM_VOLATILE ("lpm $ mov %A0,r0 ; [[len=nl]]"         \
                         : "=r" (res) : "z" (addr) : "r0")
 
 #define __LPM__2(res, addr)                                     \
   __asm __LPM_VOLATILE ("lpm $ mov %A0,r0 $ adiw %1,1"  "\n\t"  \
-                        "lpm $ mov %B0,r0 ; [[len=5]]"          \
+                        "lpm $ mov %B0,r0 ; [[len=nl]]"         \
                         : "=r" (res), "+z" (addr) :: "r0")
 
 #define __LPM__3(res, addr)                                     \
   __asm __LPM_VOLATILE ("lpm $ mov %A0,r0 $ adiw %1,1"  "\n\t"  \
                         "lpm $ mov %B0,r0 $ adiw %1,1"  "\n\t"  \
-                        "lpm $ mov %C0,r0 ; [[len=8]]"          \
+                        "lpm $ mov %C0,r0 ; [[len=nl]]"         \
                         : "=r" (res), "+z" (addr) :: "r0")
 
 #define __LPM__4(res, addr)                                     \
   __asm __LPM_VOLATILE ("lpm $ mov %A0,r0 $ adiw %1,1"  "\n\t"  \
                         "lpm $ mov %B0,r0 $ adiw %1,1"  "\n\t"  \
                         "lpm $ mov %C0,r0 $ adiw %1,1"  "\n\t"  \
-                        "lpm $ mov %D0,r0 ; [[len=11]]"         \
+                        "lpm $ mov %D0,r0 ; [[len=nl]]"         \
                         : "=r" (res), "+z" (addr) :: "r0")
 
 #define __LPM__8(res, addr)                                       \
@@ -121,7 +121,7 @@
                         "lpm $ mov %r0+4,r0 $ adiw %1,1"  "\n\t"  \
                         "lpm $ mov %r0+5,r0 $ adiw %1,1"  "\n\t"  \
                         "lpm $ mov %r0+6,r0 $ adiw %1,1"  "\n\t"  \
-                        "lpm $ mov %r0+7,r0 ; [[len=23]]"         \
+                        "lpm $ mov %r0+7,r0 ; [[len=nl]]"         \
                         : "=r" (res), "+z" (addr) :: "r0")
 #endif /* LPM cases */
 
@@ -130,7 +130,7 @@
 
 #ifdef __AVR_HAVE_RAMPD__
 /* For devices with EBI, reset RAMPZ to zero after.  */
-#define __pgm_clr_RAMPZ_ "\n\t" "out  __RAMPZ__,__zero_reg__ ; [[len=1]]"
+#define __pgm_clr_RAMPZ_ "\n\t" "out  __RAMPZ__,__zero_reg__"
 #else
 /* Devices without EBI: no need to reset RAMPZ.  */
 #define __pgm_clr_RAMPZ_ /* empty */
@@ -139,7 +139,7 @@
 #define __ELPM__1(res, addr, T)                         \
   __asm __ELPM_VOLATILE ("movw r30,%1"         "\n\t"   \
                          "out  __RAMPZ__,%C1"  "\n\t"   \
-                         "elpm %A0,Z ; [[len=3]]"       \
+                         "elpm %A0,Z ; [[len=nl]]"      \
                          __pgm_clr_RAMPZ_               \
                          : "=r" (res)                   \
                          : "r" (addr)                   \
@@ -149,7 +149,7 @@
   __asm __ELPM_VOLATILE ("movw r30,%1"         "\n\t"   \
                          "out  __RAMPZ__,%C1"  "\n\t"   \
                          "elpm %A0,Z+"         "\n\t"   \
-                         "elpm %B0,Z+ ; [[len=4]]"      \
+                         "elpm %B0,Z+ ; [[len=nl]]"     \
                          __pgm_clr_RAMPZ_               \
                          : "=r" (res)                   \
                          : "r" (addr)                   \
@@ -160,7 +160,7 @@
                          "out  __RAMPZ__,%C1"  "\n\t"   \
                          "elpm %A0,Z+"         "\n\t"   \
                          "elpm %B0,Z+"         "\n\t"   \
-                         "elpm %C0,Z+ ; [[len=5]]"      \
+                         "elpm %C0,Z+ ; [[len=nl]]"     \
                          __pgm_clr_RAMPZ_               \
                          : "=r" (res)                   \
                          : "r" (addr)                   \
@@ -172,7 +172,7 @@
                          "elpm %A0,Z+"         "\n\t"   \
                          "elpm %B0,Z+"         "\n\t"   \
                          "elpm %C0,Z+"         "\n\t"   \
-                         "elpm %D0,Z+ ; [[len=6]]"      \
+                         "elpm %D0,Z+ ; [[len=nl]]"     \
                          __pgm_clr_RAMPZ_               \
                          : "=r" (res)                   \
                          : "r" (addr)                   \
@@ -188,7 +188,7 @@
                          "elpm %r0+4,Z+"       "\n\t"   \
                          "elpm %r0+5,Z+"       "\n\t"   \
                          "elpm %r0+6,Z+"       "\n\t"   \
-                         "elpm %r0+7,Z+ ; [[len=10]]"   \
+                         "elpm %r0+7,Z+ ; [[len=nl]]"   \
                          __pgm_clr_RAMPZ_               \
                          : "=r" (res)                   \
                          : "r" (addr)                   \
@@ -207,7 +207,7 @@
 #define __ELPM__1(res, addr, T)                                         \
   __asm __ELPM_VOLATILE ("mov r30,%A1"    "\n\t"                        \
                          "mov r31,%B1"    "\n\t"                        \
-                         "out __RAMPZ__,%C1 $ elpm $ mov %A0,r0 ; [[len=5]]" \
+                         "out __RAMPZ__,%C1 $ elpm $ mov %A0,r0 ; [[len=nl]]" \
                          : "=r" (res)                                   \
                          : "r" (addr)                                   \
                          : "r30", "r31", "r0")
@@ -218,7 +218,7 @@
    "mov r31,%B1"    "\n\t"                                              \
    "mov %B0,%C1"    "\n\t"                                              \
    "out __RAMPZ__,%B0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %B0,r1\n\t"\
-   "out __RAMPZ__,%B0 $ elpm $ mov %B0,r0 ; [[len=11]]"                 \
+   "out __RAMPZ__,%B0 $ elpm $ mov %B0,r0 ; [[len=nl]]"                 \
    : "=r" (res)                                                         \
    : "r" (addr)                                                         \
    : "r30", "r31", "r0")
@@ -230,7 +230,7 @@
    "mov %C0,%C1"    "\n\t"                                              \
    "out __RAMPZ__,%C0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %C0,r1\n\t"\
    "out __RAMPZ__,%C0 $ elpm $ mov %B0,r0 $ adiw r30,1 $ adc %C0,r1\n\t"\
-   "out __RAMPZ__,%C0 $ elpm $ mov %C0,r0 ; [[len=16]]"                 \
+   "out __RAMPZ__,%C0 $ elpm $ mov %C0,r0 ; [[len=nl]]"                 \
    : "=r" (res)                                                         \
    : "r" (addr)                                                         \
    : "r30", "r31", "r0")
@@ -243,7 +243,7 @@
    "out __RAMPZ__,%D0 $ elpm $ mov %A0,r0 $ adiw r30,1 $ adc %D0,r1\n\t"\
    "out __RAMPZ__,%D0 $ elpm $ mov %B0,r0 $ adiw r30,1 $ adc %D0,r1\n\t"\
    "out __RAMPZ__,%D0 $ elpm $ mov %C0,r0 $ adiw r30,1 $ adc %D0,r1\n\t"\
-   "out __RAMPZ__,%D0 $ elpm $ mov %D0,r0 ; [[len=21]]"                 \
+   "out __RAMPZ__,%D0 $ elpm $ mov %D0,r0 ; [[len=nl]]"                 \
    : "=r" (res)                                                         \
    : "r" (addr)                                                         \
    : "r30", "r31", "r0")
@@ -260,7 +260,7 @@
    "out __RAMPZ__,%r0+7 $ elpm $ mov %r0+4,0 $ adiw 30,1 $ adc %r0+7,1\n\t"\
    "out __RAMPZ__,%r0+7 $ elpm $ mov %r0+5,0 $ adiw 30,1 $ adc %r0+7,1\n\t"\
    "out __RAMPZ__,%r0+7 $ elpm $ mov %r0+6,0 $ adiw 30,1 $ adc %r0+7,1\n\t"\
-   "out __RAMPZ__,%r0+7 $ elpm $ mov %r0+7,0 ; [[len=41]]"              \
+   "out __RAMPZ__,%r0+7 $ elpm $ mov %r0+7,0 ; [[len=nl]]"              \
    : "=r" (res)                                                         \
    : "r" (addr)                                                         \
    : "r30", "r31", "r0")

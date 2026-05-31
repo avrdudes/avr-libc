@@ -352,7 +352,7 @@ do { \
                        "ori %[tempreg], %[bods_bodse]" "\n\t" \
                        "out %[mcucr], %[tempreg]" "\n\t" \
                        "andi %[tempreg], %[not_bodse]" "\n\t" \
-                       "out %[mcucr], %[tempreg] ; [[len=5]]" \
+                       "out %[mcucr], %[tempreg] ; [[len=nl]]" \
                        : [tempreg] "=&d" (tempreg) \
                        : [mcucr] "I" _SFR_IO_ADDR(BOD_CONTROL_REG), \
                          [bods_bodse] "i" (_BV(BODS) | _BV(BODSE)), \

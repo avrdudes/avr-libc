@@ -934,7 +934,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
         "ldi    %A0, lo8(%1)"           "\n\t"        \
         "ldi    %B0, hi8(%1)"           "\n\t"        \
         "ldi    %C0, hh8(%1)"           "\n\t"        \
-        "clr    %D0 ; [[len=4]]"                      \
+        "clr    %D0 ; [[len=nl]]"                     \
         :   "=d" (__tmp)                              \
         :   "i"  (&(var))                             \
     );                                                \
@@ -956,7 +956,7 @@ typedef uint64_t  prog_uint64_t __attribute__((__progmem__,__deprecated__("prog_
         "ldi    %A0, lo8(0x4000+(%1))"  "\n\t"        \
         "ldi    %B0, hi8(0x4000+(%1))"  "\n\t"        \
         "ldi    %C0, hh8(0x4000+(%1))"  "\n\t"        \
-        "clr    %D0 ; [[len=4]]"                      \
+        "clr    %D0 ; [[len=nl]]"                     \
         :   "=d" (__tmp)                              \
         :   "i"  (&(var))                             \
     );                                                \
