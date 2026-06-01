@@ -190,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>{</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    __asm__ <span class="keyword">volatile</span> (</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="stringliteral">&quot;1: dec %0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="stringliteral">&quot;brne 1b&quot;</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="stringliteral">&quot;brne 1b ; [[len=2]]&quot;</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        : <span class="stringliteral">&quot;=r&quot;</span> (__count)</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        : <span class="stringliteral">&quot;0&quot;</span> (__count)</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    );</div>
@@ -219,13 +219,13 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    __asm__ <span class="keyword">volatile</span> (</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="stringliteral">&quot;1: subi %A0,1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="stringliteral">&quot;   sbci %B0,0&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="stringliteral">&quot;brne 1b&quot;</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="stringliteral">&quot;brne 1b ; [[len=3]]&quot;</span></div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        : <span class="stringliteral">&quot;+d&quot;</span> (__count)</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    );</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    __asm__ <span class="keyword">volatile</span> (</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="stringliteral">&quot;1: sbiw %0,1&quot;</span> <span class="stringliteral">&quot;\n\t&quot;</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="stringliteral">&quot;brne 1b&quot;</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="stringliteral">&quot;brne 1b ; [[len=2]]&quot;</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        : <span class="stringliteral">&quot;+w&quot;</span> (__count)</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    );</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif </span><span class="comment">/* AVR_TINY */</span><span class="preprocessor"></span></div>
@@ -241,7 +241,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 28 2025 13:38:37 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 1 2026 12:03:27 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

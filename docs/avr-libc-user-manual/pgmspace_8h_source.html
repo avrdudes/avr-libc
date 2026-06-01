@@ -1039,7 +1039,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span><span class="preprocessor">        &quot;ldi    %A0, lo8(%1)&quot;</span>           &quot;\n\t&quot;        \</div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>        &quot;ldi    %B0, hi8(%1)&quot;           &quot;\n\t&quot;        \</div>
 <div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>        &quot;ldi    %C0, hh8(%1)&quot;           &quot;\n\t&quot;        \</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>        &quot;clr    %D0&quot;                                  \</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>        &quot;clr    %D0 ; [[len=4]]&quot;                      \</div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>        :   &quot;=d&quot; (__tmp)                              \</div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>        :   &quot;i&quot;  (&amp;(var))                             \</div>
 <div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    );                                                \</div>
@@ -1061,7 +1061,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span><span class="preprocessor">        &quot;ldi    %A0, lo8(0x4000+(%1))&quot;</span>  &quot;\n\t&quot;        \</div>
 <div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>        &quot;ldi    %B0, hi8(0x4000+(%1))&quot;  &quot;\n\t&quot;        \</div>
 <div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>        &quot;ldi    %C0, hh8(0x4000+(%1))&quot;  &quot;\n\t&quot;        \</div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>        &quot;clr    %D0&quot;                                  \</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>        &quot;clr    %D0 ; [[len=4]]&quot;                      \</div>
 <div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>        :   &quot;=d&quot; (__tmp)                              \</div>
 <div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>        :   &quot;i&quot;  (&amp;(var))                             \</div>
 <div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>    );                                                \</div>
@@ -1107,7 +1107,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span><span class="comment">    \brief Compare memory areas</span></div>
 <div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span><span class="comment"></span> </div>
 <div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span><span class="comment">    The memcmp_P() function compares the first \p len bytes of the memory</span></div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span><span class="comment">    areas \p s1 and flash \p s2. The comparision is performed using unsigned</span></div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span><span class="comment">    areas \p s1 and flash \p s2. The comparison is performed using unsigned</span></div>
 <div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span><span class="comment">    char operations. \p s2 is located in the lower 64 KiB of program memory.</span></div>
 <div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span><span class="comment"></span> </div>
 <div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span><span class="comment">    \returns The memcmp_P() function returns an integer less than, equal</span></div>
@@ -1185,7 +1185,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l01080" name="l01080"></a><span class="lineno"> 1080</span>{</div>
 <div class="line"><a id="l01081" name="l01081"></a><span class="lineno"> 1081</span>  <span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *__r24 __asm(<span class="stringliteral">&quot;24&quot;</span>) = __hay;</div>
 <div class="line"><a id="l01082" name="l01082"></a><span class="lineno"> 1082</span>  <span class="keyword">register</span> <span class="keywordtype">int</span> __r22 __asm(<span class="stringliteral">&quot;22&quot;</span>) = __val;</div>
-<div class="line"><a id="l01083" name="l01083"></a><span class="lineno"> 1083</span>  __asm (<span class="stringliteral">&quot;%~call strchr_P&quot;</span></div>
+<div class="line"><a id="l01083" name="l01083"></a><span class="lineno"> 1083</span>  __asm (<span class="stringliteral">&quot;%~call strchr_P ; [[len=%~call]]&quot;</span></div>
 <div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span>         : <span class="stringliteral">&quot;+r&quot;</span> (__r24) : <span class="stringliteral">&quot;r&quot;</span> (__r22) : <span class="stringliteral">&quot;30&quot;</span>, <span class="stringliteral">&quot;31&quot;</span>);</div>
 <div class="line"><a id="l01085" name="l01085"></a><span class="lineno"> 1085</span>  <span class="keywordflow">return</span> __r24;</div>
 <div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span>}</div>
@@ -1750,7 +1750,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l01645" name="l01645"></a><span class="lineno"> 1645</span><span class="comment">    \brief Compare memory areas</span></div>
 <div class="line"><a id="l01646" name="l01646"></a><span class="lineno"> 1646</span><span class="comment"></span> </div>
 <div class="line"><a id="l01647" name="l01647"></a><span class="lineno"> 1647</span><span class="comment">    The memcmp_PF() function compares the first \p len bytes of the memory</span></div>
-<div class="line"><a id="l01648" name="l01648"></a><span class="lineno"> 1648</span><span class="comment">    areas \p s1 and flash \p s2. The comparision is performed using unsigned</span></div>
+<div class="line"><a id="l01648" name="l01648"></a><span class="lineno"> 1648</span><span class="comment">    areas \p s1 and flash \p s2. The comparison is performed using unsigned</span></div>
 <div class="line"><a id="l01649" name="l01649"></a><span class="lineno"> 1649</span><span class="comment">    char operations. It is an equivalent of memcmp_P() function, except</span></div>
 <div class="line"><a id="l01650" name="l01650"></a><span class="lineno"> 1650</span><span class="comment">    that it is capable working on all FLASH including the extended area</span></div>
 <div class="line"><a id="l01651" name="l01651"></a><span class="lineno"> 1651</span><span class="comment">    above 64kB.</span></div>
@@ -1781,238 +1781,240 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <div class="line"><a id="l01676" name="l01676"></a><span class="lineno"> 1676</span>{</div>
 <div class="line"><a id="l01677" name="l01677"></a><span class="lineno"> 1677</span>  <span class="keyword">register</span> <span class="keywordtype">size_t</span> __r20 __asm(<span class="stringliteral">&quot;20&quot;</span>) = __s;</div>
 <div class="line"><a id="l01678" name="l01678"></a><span class="lineno"> 1678</span>  <span class="keywordtype">void</span> *__ret = __x;</div>
-<div class="line"><a id="l01679" name="l01679"></a><span class="lineno"> 1679</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __memcpy_P&quot;</span> : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z), <span class="stringliteral">&quot;+r&quot;</span> (__r20)</div>
-<div class="line"><a id="l01680" name="l01680"></a><span class="lineno"> 1680</span>                  :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l01681" name="l01681"></a><span class="lineno"> 1681</span>  <span class="keywordflow">return</span> __ret;</div>
-<div class="line"><a id="l01682" name="l01682"></a><span class="lineno"> 1682</span>}</div>
-<div class="line"><a id="l01683" name="l01683"></a><span class="lineno"> 1683</span> </div>
-<div class="line"><a id="l01684" name="l01684"></a><span class="lineno"> 1684</span><span class="comment">/* strlen_P is common so we model its GPR footprint.  */</span></div>
-<div class="line"><a id="l01685" name="l01685"></a><span class="lineno"> 1685</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
-<div class="line"><a id="l01686" name="l01686"></a><span class="lineno"> 1686</span><span class="keywordtype">size_t</span> <a class="code hl_function" href="group__avr__pgmspace.html#gae2fb71ebed915074ec815d9d8f876c52">strlen_P</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__s)</div>
-<div class="line"><a id="l01687" name="l01687"></a><span class="lineno"> 1687</span>{</div>
-<div class="line"><a id="l01688" name="l01688"></a><span class="lineno"> 1688</span>  <span class="keywordflow">if</span> (__builtin_constant_p (__builtin_strlen (__s)))</div>
-<div class="line"><a id="l01689" name="l01689"></a><span class="lineno"> 1689</span>    {</div>
-<div class="line"><a id="l01690" name="l01690"></a><span class="lineno"> 1690</span>      <span class="keywordflow">return</span> __builtin_strlen (__s);</div>
-<div class="line"><a id="l01691" name="l01691"></a><span class="lineno"> 1691</span>    }</div>
-<div class="line"><a id="l01692" name="l01692"></a><span class="lineno"> 1692</span>  <span class="keywordflow">else</span></div>
-<div class="line"><a id="l01693" name="l01693"></a><span class="lineno"> 1693</span>    {</div>
-<div class="line"><a id="l01694" name="l01694"></a><span class="lineno"> 1694</span>      <span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *__r24 __asm(<span class="stringliteral">&quot;24&quot;</span>) = __s;</div>
-<div class="line"><a id="l01695" name="l01695"></a><span class="lineno"> 1695</span>      <span class="keyword">register</span> <span class="keywordtype">size_t</span> __res __asm(<span class="stringliteral">&quot;24&quot;</span>);</div>
-<div class="line"><a id="l01696" name="l01696"></a><span class="lineno"> 1696</span>      __asm (<span class="stringliteral">&quot;%~call strlen_P&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span> (__res) : <span class="stringliteral">&quot;r&quot;</span> (__r24)</div>
-<div class="line"><a id="l01697" name="l01697"></a><span class="lineno"> 1697</span>             : <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;30&quot;</span>, <span class="stringliteral">&quot;31&quot;</span>);</div>
-<div class="line"><a id="l01698" name="l01698"></a><span class="lineno"> 1698</span>      <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01699" name="l01699"></a><span class="lineno"> 1699</span>    }</div>
-<div class="line"><a id="l01700" name="l01700"></a><span class="lineno"> 1700</span>}</div>
-<div class="line"><a id="l01701" name="l01701"></a><span class="lineno"> 1701</span> </div>
-<div class="line"><a id="l01702" name="l01702"></a><span class="lineno"> 1702</span><span class="comment">/* strcpy_P is common so we model its GPR footprint.  */</span></div>
-<div class="line"><a id="l01703" name="l01703"></a><span class="lineno"> 1703</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
-<div class="line"><a id="l01704" name="l01704"></a><span class="lineno"> 1704</span><span class="keywordtype">char</span>* <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a>(<span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
-<div class="line"><a id="l01705" name="l01705"></a><span class="lineno"> 1705</span>{</div>
-<div class="line"><a id="l01706" name="l01706"></a><span class="lineno"> 1706</span>  <span class="keywordtype">char</span> *__ret = __x;</div>
-<div class="line"><a id="l01707" name="l01707"></a><span class="lineno"> 1707</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __strcpy_P&quot;</span></div>
-<div class="line"><a id="l01708" name="l01708"></a><span class="lineno"> 1708</span>                  : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l01709" name="l01709"></a><span class="lineno"> 1709</span>  <span class="keywordflow">return</span> __ret;</div>
-<div class="line"><a id="l01710" name="l01710"></a><span class="lineno"> 1710</span>}</div>
-<div class="line"><a id="l01711" name="l01711"></a><span class="lineno"> 1711</span> </div>
-<div class="line"><a id="l01712" name="l01712"></a><span class="lineno"> 1712</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
-<div class="line"><a id="l01713" name="l01713"></a><span class="lineno"> 1713</span><span class="keywordtype">char</span>* <a class="code hl_function" href="group__avr__pgmspace.html#ga8fefa3aa202b692f4f11810865ce63c8">stpcpy_P</a>(<span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
-<div class="line"><a id="l01714" name="l01714"></a><span class="lineno"> 1714</span>{</div>
-<div class="line"><a id="l01715" name="l01715"></a><span class="lineno"> 1715</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __strcpy_P&quot;</span></div>
-<div class="line"><a id="l01716" name="l01716"></a><span class="lineno"> 1716</span>                  : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l01717" name="l01717"></a><span class="lineno"> 1717</span>  <span class="keywordflow">return</span> __x - 1;</div>
-<div class="line"><a id="l01718" name="l01718"></a><span class="lineno"> 1718</span>}</div>
-<div class="line"><a id="l01719" name="l01719"></a><span class="lineno"> 1719</span> </div>
-<div class="line"><a id="l01720" name="l01720"></a><span class="lineno"> 1720</span><span class="comment">/* strcmp_P is common so we model its GPR footprint.  */</span></div>
-<div class="line"><a id="l01721" name="l01721"></a><span class="lineno"> 1721</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
-<div class="line"><a id="l01722" name="l01722"></a><span class="lineno"> 1722</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__avr__pgmspace.html#ga1992debc7afba2e8ed9849e70875fb83">strcmp_P</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
-<div class="line"><a id="l01723" name="l01723"></a><span class="lineno"> 1723</span>{</div>
-<div class="line"><a id="l01724" name="l01724"></a><span class="lineno"> 1724</span>  <span class="keyword">register</span> <span class="keywordtype">int</span> __ret __asm(<span class="stringliteral">&quot;24&quot;</span>);</div>
-<div class="line"><a id="l01725" name="l01725"></a><span class="lineno"> 1725</span>  __asm (<span class="stringliteral">&quot;%~call __strcmp_P&quot;</span></div>
-<div class="line"><a id="l01726" name="l01726"></a><span class="lineno"> 1726</span>         : <span class="stringliteral">&quot;=r&quot;</span> (__ret), <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;memory&quot;</span>);</div>
-<div class="line"><a id="l01727" name="l01727"></a><span class="lineno"> 1727</span>  <span class="keywordflow">return</span> __ret;</div>
-<div class="line"><a id="l01728" name="l01728"></a><span class="lineno"> 1728</span>}</div>
-<div class="line"><a id="l01729" name="l01729"></a><span class="lineno"> 1729</span> </div>
-<div class="line"><a id="l01730" name="l01730"></a><span class="lineno"> 1730</span><span class="preprocessor">#endif </span><span class="comment">/* AVR_TINY */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01679" name="l01679"></a><span class="lineno"> 1679</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __memcpy_P ; [[len=%~call]]&quot;</span></div>
+<div class="line"><a id="l01680" name="l01680"></a><span class="lineno"> 1680</span>                  : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z), <span class="stringliteral">&quot;+r&quot;</span> (__r20)</div>
+<div class="line"><a id="l01681" name="l01681"></a><span class="lineno"> 1681</span>                  :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
+<div class="line"><a id="l01682" name="l01682"></a><span class="lineno"> 1682</span>  <span class="keywordflow">return</span> __ret;</div>
+<div class="line"><a id="l01683" name="l01683"></a><span class="lineno"> 1683</span>}</div>
+<div class="line"><a id="l01684" name="l01684"></a><span class="lineno"> 1684</span> </div>
+<div class="line"><a id="l01685" name="l01685"></a><span class="lineno"> 1685</span><span class="comment">/* strlen_P is common so we model its GPR footprint.  */</span></div>
+<div class="line"><a id="l01686" name="l01686"></a><span class="lineno"> 1686</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
+<div class="line"><a id="l01687" name="l01687"></a><span class="lineno"> 1687</span><span class="keywordtype">size_t</span> <a class="code hl_function" href="group__avr__pgmspace.html#gae2fb71ebed915074ec815d9d8f876c52">strlen_P</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__s)</div>
+<div class="line"><a id="l01688" name="l01688"></a><span class="lineno"> 1688</span>{</div>
+<div class="line"><a id="l01689" name="l01689"></a><span class="lineno"> 1689</span>  <span class="keywordflow">if</span> (__builtin_constant_p (__builtin_strlen (__s)))</div>
+<div class="line"><a id="l01690" name="l01690"></a><span class="lineno"> 1690</span>    {</div>
+<div class="line"><a id="l01691" name="l01691"></a><span class="lineno"> 1691</span>      <span class="keywordflow">return</span> __builtin_strlen (__s);</div>
+<div class="line"><a id="l01692" name="l01692"></a><span class="lineno"> 1692</span>    }</div>
+<div class="line"><a id="l01693" name="l01693"></a><span class="lineno"> 1693</span>  <span class="keywordflow">else</span></div>
+<div class="line"><a id="l01694" name="l01694"></a><span class="lineno"> 1694</span>    {</div>
+<div class="line"><a id="l01695" name="l01695"></a><span class="lineno"> 1695</span>      <span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *__r24 __asm(<span class="stringliteral">&quot;24&quot;</span>) = __s;</div>
+<div class="line"><a id="l01696" name="l01696"></a><span class="lineno"> 1696</span>      <span class="keyword">register</span> <span class="keywordtype">size_t</span> __res __asm(<span class="stringliteral">&quot;24&quot;</span>);</div>
+<div class="line"><a id="l01697" name="l01697"></a><span class="lineno"> 1697</span>      __asm (<span class="stringliteral">&quot;%~call strlen_P ; [[len=%~call]]&quot;</span></div>
+<div class="line"><a id="l01698" name="l01698"></a><span class="lineno"> 1698</span>             : <span class="stringliteral">&quot;=r&quot;</span> (__res) : <span class="stringliteral">&quot;r&quot;</span> (__r24)</div>
+<div class="line"><a id="l01699" name="l01699"></a><span class="lineno"> 1699</span>             : <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;30&quot;</span>, <span class="stringliteral">&quot;31&quot;</span>);</div>
+<div class="line"><a id="l01700" name="l01700"></a><span class="lineno"> 1700</span>      <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01701" name="l01701"></a><span class="lineno"> 1701</span>    }</div>
+<div class="line"><a id="l01702" name="l01702"></a><span class="lineno"> 1702</span>}</div>
+<div class="line"><a id="l01703" name="l01703"></a><span class="lineno"> 1703</span> </div>
+<div class="line"><a id="l01704" name="l01704"></a><span class="lineno"> 1704</span><span class="comment">/* strcpy_P is common so we model its GPR footprint.  */</span></div>
+<div class="line"><a id="l01705" name="l01705"></a><span class="lineno"> 1705</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
+<div class="line"><a id="l01706" name="l01706"></a><span class="lineno"> 1706</span><span class="keywordtype">char</span>* <a class="code hl_function" href="group__avr__pgmspace.html#ga5749897c91c479d02054fc02128de482">strcpy_P</a>(<span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
+<div class="line"><a id="l01707" name="l01707"></a><span class="lineno"> 1707</span>{</div>
+<div class="line"><a id="l01708" name="l01708"></a><span class="lineno"> 1708</span>  <span class="keywordtype">char</span> *__ret = __x;</div>
+<div class="line"><a id="l01709" name="l01709"></a><span class="lineno"> 1709</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __strcpy_P ; [[len=%~call]]&quot;</span></div>
+<div class="line"><a id="l01710" name="l01710"></a><span class="lineno"> 1710</span>                  : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
+<div class="line"><a id="l01711" name="l01711"></a><span class="lineno"> 1711</span>  <span class="keywordflow">return</span> __ret;</div>
+<div class="line"><a id="l01712" name="l01712"></a><span class="lineno"> 1712</span>}</div>
+<div class="line"><a id="l01713" name="l01713"></a><span class="lineno"> 1713</span> </div>
+<div class="line"><a id="l01714" name="l01714"></a><span class="lineno"> 1714</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
+<div class="line"><a id="l01715" name="l01715"></a><span class="lineno"> 1715</span><span class="keywordtype">char</span>* <a class="code hl_function" href="group__avr__pgmspace.html#ga8fefa3aa202b692f4f11810865ce63c8">stpcpy_P</a>(<span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
+<div class="line"><a id="l01716" name="l01716"></a><span class="lineno"> 1716</span>{</div>
+<div class="line"><a id="l01717" name="l01717"></a><span class="lineno"> 1717</span>  __asm <span class="keyword">volatile</span> (<span class="stringliteral">&quot;%~call __strcpy_P ; [[len=%~call]]&quot;</span></div>
+<div class="line"><a id="l01718" name="l01718"></a><span class="lineno"> 1718</span>                  : <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;memory&quot;</span>);</div>
+<div class="line"><a id="l01719" name="l01719"></a><span class="lineno"> 1719</span>  <span class="keywordflow">return</span> __x - 1;</div>
+<div class="line"><a id="l01720" name="l01720"></a><span class="lineno"> 1720</span>}</div>
+<div class="line"><a id="l01721" name="l01721"></a><span class="lineno"> 1721</span> </div>
+<div class="line"><a id="l01722" name="l01722"></a><span class="lineno"> 1722</span><span class="comment">/* strcmp_P is common so we model its GPR footprint.  */</span></div>
+<div class="line"><a id="l01723" name="l01723"></a><span class="lineno"> 1723</span><span class="keyword">extern</span> __ATTR_ALWAYS_INLINE__ __ATTR_GNU_INLINE__</div>
+<div class="line"><a id="l01724" name="l01724"></a><span class="lineno"> 1724</span><span class="keywordtype">int</span> <a class="code hl_function" href="group__avr__pgmspace.html#ga1992debc7afba2e8ed9849e70875fb83">strcmp_P</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__x, <span class="keyword">const</span> <span class="keywordtype">char</span> *__z)</div>
+<div class="line"><a id="l01725" name="l01725"></a><span class="lineno"> 1725</span>{</div>
+<div class="line"><a id="l01726" name="l01726"></a><span class="lineno"> 1726</span>  <span class="keyword">register</span> <span class="keywordtype">int</span> __ret __asm(<span class="stringliteral">&quot;24&quot;</span>);</div>
+<div class="line"><a id="l01727" name="l01727"></a><span class="lineno"> 1727</span>  __asm (<span class="stringliteral">&quot;%~call __strcmp_P ; [[len=%~call]]&quot;</span></div>
+<div class="line"><a id="l01728" name="l01728"></a><span class="lineno"> 1728</span>         : <span class="stringliteral">&quot;=r&quot;</span> (__ret), <span class="stringliteral">&quot;+x&quot;</span> (__x), <span class="stringliteral">&quot;+z&quot;</span> (__z) :: <span class="stringliteral">&quot;memory&quot;</span>);</div>
+<div class="line"><a id="l01729" name="l01729"></a><span class="lineno"> 1729</span>  <span class="keywordflow">return</span> __ret;</div>
+<div class="line"><a id="l01730" name="l01730"></a><span class="lineno"> 1730</span>}</div>
 <div class="line"><a id="l01731" name="l01731"></a><span class="lineno"> 1731</span> </div>
-<div class="line"><a id="l01732" name="l01732"></a><span class="lineno"> 1732</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01732" name="l01732"></a><span class="lineno"> 1732</span><span class="preprocessor">#endif </span><span class="comment">/* AVR_TINY */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l01733" name="l01733"></a><span class="lineno"> 1733</span> </div>
-<div class="line"><a id="l01734" name="l01734"></a><span class="lineno"> 1734</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l01735" name="l01735"></a><span class="lineno"> 1735</span>} <span class="comment">// extern &quot;C&quot;</span></div>
-<div class="line"><a id="l01736" name="l01736"></a><span class="lineno"> 1736</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l01737" name="l01737"></a><span class="lineno"> 1737</span> </div>
-<div class="line"><a id="l01738" name="l01738"></a><span class="lineno"> 1738</span><span class="preprocessor">#if defined(__cplusplus) &amp;&amp; defined(__pgm_read_template__)</span></div>
+<div class="line"><a id="l01734" name="l01734"></a><span class="lineno"> 1734</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01735" name="l01735"></a><span class="lineno"> 1735</span> </div>
+<div class="line"><a id="l01736" name="l01736"></a><span class="lineno"> 1736</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l01737" name="l01737"></a><span class="lineno"> 1737</span>} <span class="comment">// extern &quot;C&quot;</span></div>
+<div class="line"><a id="l01738" name="l01738"></a><span class="lineno"> 1738</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l01739" name="l01739"></a><span class="lineno"> 1739</span> </div>
-<div class="line"><a id="l01740" name="l01740"></a><span class="lineno"> 1740</span><span class="comment">/* Caveat: When this file is found via -isystem &lt;path&gt;, then some older</span></div>
-<div class="line"><a id="l01741" name="l01741"></a><span class="lineno"> 1741</span><span class="comment">   avr-g++ versions come up with</span></div>
-<div class="line"><a id="l01742" name="l01742"></a><span class="lineno"> 1742</span><span class="comment"></span> </div>
-<div class="line"><a id="l01743" name="l01743"></a><span class="lineno"> 1743</span><span class="comment">       error: template with C linkage</span></div>
+<div class="line"><a id="l01740" name="l01740"></a><span class="lineno"> 1740</span><span class="preprocessor">#if defined(__cplusplus) &amp;&amp; defined(__pgm_read_template__)</span></div>
+<div class="line"><a id="l01741" name="l01741"></a><span class="lineno"> 1741</span> </div>
+<div class="line"><a id="l01742" name="l01742"></a><span class="lineno"> 1742</span><span class="comment">/* Caveat: When this file is found via -isystem &lt;path&gt;, then some older</span></div>
+<div class="line"><a id="l01743" name="l01743"></a><span class="lineno"> 1743</span><span class="comment">   avr-g++ versions come up with</span></div>
 <div class="line"><a id="l01744" name="l01744"></a><span class="lineno"> 1744</span><span class="comment"></span> </div>
-<div class="line"><a id="l01745" name="l01745"></a><span class="lineno"> 1745</span><span class="comment">   because the target description did not define NO_IMPLICIT_EXTERN_C.  */</span></div>
-<div class="line"><a id="l01746" name="l01746"></a><span class="lineno"> 1746</span> </div>
-<div class="line"><a id="l01747" name="l01747"></a><span class="lineno"> 1747</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T, <span class="keywordtype">size_t</span>&gt;</div>
-<div class="line"><a id="l01748" name="l01748"></a><span class="lineno"> 1748</span><span class="keyword">struct </span>__pgm_read_impl</div>
-<div class="line"><a id="l01749" name="l01749"></a><span class="lineno"> 1749</span>{</div>
-<div class="line"><a id="l01750" name="l01750"></a><span class="lineno"> 1750</span>  <span class="comment">// A default implementation for T&#39;s with a size not in { 1, 2, 3, 4, 8 }.</span></div>
-<div class="line"><a id="l01751" name="l01751"></a><span class="lineno"> 1751</span>  <span class="comment">// While this works, the performance is absolute scrap because GCC does</span></div>
-<div class="line"><a id="l01752" name="l01752"></a><span class="lineno"> 1752</span>  <span class="comment">// not handle objects well that don&#39;t fit in a register (i.e. avr-gcc</span></div>
-<div class="line"><a id="l01753" name="l01753"></a><span class="lineno"> 1753</span>  <span class="comment">// has no respective machine_mode).</span></div>
-<div class="line"><a id="l01754" name="l01754"></a><span class="lineno"> 1754</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01755" name="l01755"></a><span class="lineno"> 1755</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01756" name="l01756"></a><span class="lineno"> 1756</span>    __T __res;</div>
-<div class="line"><a id="l01757" name="l01757"></a><span class="lineno"> 1757</span>    <a class="code hl_function" href="group__avr__pgmspace.html#gad92fa2ebe26e65fa424051047d21a0eb">memcpy_P</a> (&amp;__res, __addr, <span class="keyword">sizeof</span>(__T));</div>
-<div class="line"><a id="l01758" name="l01758"></a><span class="lineno"> 1758</span>    <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01759" name="l01759"></a><span class="lineno"> 1759</span>  }</div>
-<div class="line"><a id="l01760" name="l01760"></a><span class="lineno"> 1760</span>};</div>
-<div class="line"><a id="l01761" name="l01761"></a><span class="lineno"> 1761</span> </div>
-<div class="line"><a id="l01762" name="l01762"></a><span class="lineno"> 1762</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01763" name="l01763"></a><span class="lineno"> 1763</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 1&gt;</div>
-<div class="line"><a id="l01764" name="l01764"></a><span class="lineno"> 1764</span>{</div>
-<div class="line"><a id="l01765" name="l01765"></a><span class="lineno"> 1765</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01766" name="l01766"></a><span class="lineno"> 1766</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01767" name="l01767"></a><span class="lineno"> 1767</span>    __T __res; __LPM__1 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01768" name="l01768"></a><span class="lineno"> 1768</span>  }</div>
-<div class="line"><a id="l01769" name="l01769"></a><span class="lineno"> 1769</span>};</div>
-<div class="line"><a id="l01770" name="l01770"></a><span class="lineno"> 1770</span> </div>
-<div class="line"><a id="l01771" name="l01771"></a><span class="lineno"> 1771</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01772" name="l01772"></a><span class="lineno"> 1772</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 2&gt;</div>
-<div class="line"><a id="l01773" name="l01773"></a><span class="lineno"> 1773</span>{</div>
-<div class="line"><a id="l01774" name="l01774"></a><span class="lineno"> 1774</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01775" name="l01775"></a><span class="lineno"> 1775</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01776" name="l01776"></a><span class="lineno"> 1776</span>    __T __res; __LPM__2 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01777" name="l01777"></a><span class="lineno"> 1777</span>  }</div>
-<div class="line"><a id="l01778" name="l01778"></a><span class="lineno"> 1778</span>};</div>
-<div class="line"><a id="l01779" name="l01779"></a><span class="lineno"> 1779</span> </div>
-<div class="line"><a id="l01780" name="l01780"></a><span class="lineno"> 1780</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01781" name="l01781"></a><span class="lineno"> 1781</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 3&gt;</div>
-<div class="line"><a id="l01782" name="l01782"></a><span class="lineno"> 1782</span>{</div>
-<div class="line"><a id="l01783" name="l01783"></a><span class="lineno"> 1783</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01784" name="l01784"></a><span class="lineno"> 1784</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01785" name="l01785"></a><span class="lineno"> 1785</span>    __T __res; __LPM__3 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01786" name="l01786"></a><span class="lineno"> 1786</span>  }</div>
-<div class="line"><a id="l01787" name="l01787"></a><span class="lineno"> 1787</span>};</div>
-<div class="line"><a id="l01788" name="l01788"></a><span class="lineno"> 1788</span> </div>
-<div class="line"><a id="l01789" name="l01789"></a><span class="lineno"> 1789</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01790" name="l01790"></a><span class="lineno"> 1790</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 4&gt;</div>
-<div class="line"><a id="l01791" name="l01791"></a><span class="lineno"> 1791</span>{</div>
-<div class="line"><a id="l01792" name="l01792"></a><span class="lineno"> 1792</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01793" name="l01793"></a><span class="lineno"> 1793</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01794" name="l01794"></a><span class="lineno"> 1794</span>    __T __res; __LPM__4 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01795" name="l01795"></a><span class="lineno"> 1795</span>  }</div>
-<div class="line"><a id="l01796" name="l01796"></a><span class="lineno"> 1796</span>};</div>
-<div class="line"><a id="l01797" name="l01797"></a><span class="lineno"> 1797</span> </div>
-<div class="line"><a id="l01798" name="l01798"></a><span class="lineno"> 1798</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01799" name="l01799"></a><span class="lineno"> 1799</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 8&gt;</div>
-<div class="line"><a id="l01800" name="l01800"></a><span class="lineno"> 1800</span>{</div>
-<div class="line"><a id="l01801" name="l01801"></a><span class="lineno"> 1801</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01802" name="l01802"></a><span class="lineno"> 1802</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01803" name="l01803"></a><span class="lineno"> 1803</span>    __T __res; __LPM__8 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01804" name="l01804"></a><span class="lineno"> 1804</span>  }</div>
-<div class="line"><a id="l01805" name="l01805"></a><span class="lineno"> 1805</span>};</div>
-<div class="line"><a id="l01806" name="l01806"></a><span class="lineno"> 1806</span> </div>
-<div class="line"><a id="l01807" name="l01807"></a><span class="lineno"> 1807</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01808" name="l01808"></a><span class="lineno"> 1808</span>__T pgm_read (<span class="keyword">const</span> __T *__addr)</div>
-<div class="line"><a id="l01809" name="l01809"></a><span class="lineno"> 1809</span>{</div>
-<div class="line"><a id="l01810" name="l01810"></a><span class="lineno"> 1810</span>  <span class="keywordflow">return</span> __pgm_read_impl&lt;__T, sizeof(__T)&gt;() (__addr);</div>
-<div class="line"><a id="l01811" name="l01811"></a><span class="lineno"> 1811</span>}</div>
-<div class="line"><a id="l01812" name="l01812"></a><span class="lineno"> 1812</span><span class="comment"></span> </div>
-<div class="line"><a id="l01813" name="l01813"></a><span class="lineno"> 1813</span><span class="comment">//////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l01745" name="l01745"></a><span class="lineno"> 1745</span><span class="comment">       error: template with C linkage</span></div>
+<div class="line"><a id="l01746" name="l01746"></a><span class="lineno"> 1746</span><span class="comment"></span> </div>
+<div class="line"><a id="l01747" name="l01747"></a><span class="lineno"> 1747</span><span class="comment">   because the target description did not define NO_IMPLICIT_EXTERN_C.  */</span></div>
+<div class="line"><a id="l01748" name="l01748"></a><span class="lineno"> 1748</span> </div>
+<div class="line"><a id="l01749" name="l01749"></a><span class="lineno"> 1749</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T, <span class="keywordtype">size_t</span>&gt;</div>
+<div class="line"><a id="l01750" name="l01750"></a><span class="lineno"> 1750</span><span class="keyword">struct </span>__pgm_read_impl</div>
+<div class="line"><a id="l01751" name="l01751"></a><span class="lineno"> 1751</span>{</div>
+<div class="line"><a id="l01752" name="l01752"></a><span class="lineno"> 1752</span>  <span class="comment">// A default implementation for T&#39;s with a size not in { 1, 2, 3, 4, 8 }.</span></div>
+<div class="line"><a id="l01753" name="l01753"></a><span class="lineno"> 1753</span>  <span class="comment">// While this works, the performance is absolute scrap because GCC does</span></div>
+<div class="line"><a id="l01754" name="l01754"></a><span class="lineno"> 1754</span>  <span class="comment">// not handle objects well that don&#39;t fit in a register (i.e. avr-gcc</span></div>
+<div class="line"><a id="l01755" name="l01755"></a><span class="lineno"> 1755</span>  <span class="comment">// has no respective machine_mode).</span></div>
+<div class="line"><a id="l01756" name="l01756"></a><span class="lineno"> 1756</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01757" name="l01757"></a><span class="lineno"> 1757</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01758" name="l01758"></a><span class="lineno"> 1758</span>    __T __res;</div>
+<div class="line"><a id="l01759" name="l01759"></a><span class="lineno"> 1759</span>    <a class="code hl_function" href="group__avr__pgmspace.html#gad92fa2ebe26e65fa424051047d21a0eb">memcpy_P</a> (&amp;__res, __addr, <span class="keyword">sizeof</span>(__T));</div>
+<div class="line"><a id="l01760" name="l01760"></a><span class="lineno"> 1760</span>    <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01761" name="l01761"></a><span class="lineno"> 1761</span>  }</div>
+<div class="line"><a id="l01762" name="l01762"></a><span class="lineno"> 1762</span>};</div>
+<div class="line"><a id="l01763" name="l01763"></a><span class="lineno"> 1763</span> </div>
+<div class="line"><a id="l01764" name="l01764"></a><span class="lineno"> 1764</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01765" name="l01765"></a><span class="lineno"> 1765</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 1&gt;</div>
+<div class="line"><a id="l01766" name="l01766"></a><span class="lineno"> 1766</span>{</div>
+<div class="line"><a id="l01767" name="l01767"></a><span class="lineno"> 1767</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01768" name="l01768"></a><span class="lineno"> 1768</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01769" name="l01769"></a><span class="lineno"> 1769</span>    __T __res; __LPM__1 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01770" name="l01770"></a><span class="lineno"> 1770</span>  }</div>
+<div class="line"><a id="l01771" name="l01771"></a><span class="lineno"> 1771</span>};</div>
+<div class="line"><a id="l01772" name="l01772"></a><span class="lineno"> 1772</span> </div>
+<div class="line"><a id="l01773" name="l01773"></a><span class="lineno"> 1773</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01774" name="l01774"></a><span class="lineno"> 1774</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 2&gt;</div>
+<div class="line"><a id="l01775" name="l01775"></a><span class="lineno"> 1775</span>{</div>
+<div class="line"><a id="l01776" name="l01776"></a><span class="lineno"> 1776</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01777" name="l01777"></a><span class="lineno"> 1777</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01778" name="l01778"></a><span class="lineno"> 1778</span>    __T __res; __LPM__2 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01779" name="l01779"></a><span class="lineno"> 1779</span>  }</div>
+<div class="line"><a id="l01780" name="l01780"></a><span class="lineno"> 1780</span>};</div>
+<div class="line"><a id="l01781" name="l01781"></a><span class="lineno"> 1781</span> </div>
+<div class="line"><a id="l01782" name="l01782"></a><span class="lineno"> 1782</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01783" name="l01783"></a><span class="lineno"> 1783</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 3&gt;</div>
+<div class="line"><a id="l01784" name="l01784"></a><span class="lineno"> 1784</span>{</div>
+<div class="line"><a id="l01785" name="l01785"></a><span class="lineno"> 1785</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01786" name="l01786"></a><span class="lineno"> 1786</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01787" name="l01787"></a><span class="lineno"> 1787</span>    __T __res; __LPM__3 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01788" name="l01788"></a><span class="lineno"> 1788</span>  }</div>
+<div class="line"><a id="l01789" name="l01789"></a><span class="lineno"> 1789</span>};</div>
+<div class="line"><a id="l01790" name="l01790"></a><span class="lineno"> 1790</span> </div>
+<div class="line"><a id="l01791" name="l01791"></a><span class="lineno"> 1791</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01792" name="l01792"></a><span class="lineno"> 1792</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 4&gt;</div>
+<div class="line"><a id="l01793" name="l01793"></a><span class="lineno"> 1793</span>{</div>
+<div class="line"><a id="l01794" name="l01794"></a><span class="lineno"> 1794</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01795" name="l01795"></a><span class="lineno"> 1795</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01796" name="l01796"></a><span class="lineno"> 1796</span>    __T __res; __LPM__4 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01797" name="l01797"></a><span class="lineno"> 1797</span>  }</div>
+<div class="line"><a id="l01798" name="l01798"></a><span class="lineno"> 1798</span>};</div>
+<div class="line"><a id="l01799" name="l01799"></a><span class="lineno"> 1799</span> </div>
+<div class="line"><a id="l01800" name="l01800"></a><span class="lineno"> 1800</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01801" name="l01801"></a><span class="lineno"> 1801</span><span class="keyword">struct </span>__pgm_read_impl&lt;__T, 8&gt;</div>
+<div class="line"><a id="l01802" name="l01802"></a><span class="lineno"> 1802</span>{</div>
+<div class="line"><a id="l01803" name="l01803"></a><span class="lineno"> 1803</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01804" name="l01804"></a><span class="lineno"> 1804</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01805" name="l01805"></a><span class="lineno"> 1805</span>    __T __res; __LPM__8 (__res, __addr); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01806" name="l01806"></a><span class="lineno"> 1806</span>  }</div>
+<div class="line"><a id="l01807" name="l01807"></a><span class="lineno"> 1807</span>};</div>
+<div class="line"><a id="l01808" name="l01808"></a><span class="lineno"> 1808</span> </div>
+<div class="line"><a id="l01809" name="l01809"></a><span class="lineno"> 1809</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01810" name="l01810"></a><span class="lineno"> 1810</span>__T pgm_read (<span class="keyword">const</span> __T *__addr)</div>
+<div class="line"><a id="l01811" name="l01811"></a><span class="lineno"> 1811</span>{</div>
+<div class="line"><a id="l01812" name="l01812"></a><span class="lineno"> 1812</span>  <span class="keywordflow">return</span> __pgm_read_impl&lt;__T, sizeof(__T)&gt;() (__addr);</div>
+<div class="line"><a id="l01813" name="l01813"></a><span class="lineno"> 1813</span>}</div>
 <div class="line"><a id="l01814" name="l01814"></a><span class="lineno"> 1814</span><span class="comment"></span> </div>
-<div class="line"><a id="l01815" name="l01815"></a><span class="lineno"> 1815</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T, <span class="keywordtype">size_t</span>&gt;</div>
-<div class="line"><a id="l01816" name="l01816"></a><span class="lineno"> 1816</span><span class="keyword">struct </span>__pgm_read_far_impl</div>
-<div class="line"><a id="l01817" name="l01817"></a><span class="lineno"> 1817</span>{</div>
-<div class="line"><a id="l01818" name="l01818"></a><span class="lineno"> 1818</span>  <span class="comment">// A default implementation for T&#39;s with a size not in { 1, 2, 3, 4, 8 }.</span></div>
-<div class="line"><a id="l01819" name="l01819"></a><span class="lineno"> 1819</span>  <span class="comment">// While this works, the performance is absolute scrap because GCC does</span></div>
-<div class="line"><a id="l01820" name="l01820"></a><span class="lineno"> 1820</span>  <span class="comment">// not handle objects well that don&#39;t fit in a register (i.e. avr-gcc</span></div>
-<div class="line"><a id="l01821" name="l01821"></a><span class="lineno"> 1821</span>  <span class="comment">// has no respective machine_mode).</span></div>
-<div class="line"><a id="l01822" name="l01822"></a><span class="lineno"> 1822</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01823" name="l01823"></a><span class="lineno"> 1823</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01824" name="l01824"></a><span class="lineno"> 1824</span>    __T __res;</div>
-<div class="line"><a id="l01825" name="l01825"></a><span class="lineno"> 1825</span>    <a class="code hl_function" href="group__avr__pgmspace.html#ga13cc6cd0692aeccaac2789350a16412b">memcpy_PF</a> (&amp;__res, __addr, <span class="keyword">sizeof</span>(__T));</div>
-<div class="line"><a id="l01826" name="l01826"></a><span class="lineno"> 1826</span>    <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01827" name="l01827"></a><span class="lineno"> 1827</span>  }</div>
-<div class="line"><a id="l01828" name="l01828"></a><span class="lineno"> 1828</span>};</div>
-<div class="line"><a id="l01829" name="l01829"></a><span class="lineno"> 1829</span> </div>
-<div class="line"><a id="l01830" name="l01830"></a><span class="lineno"> 1830</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01831" name="l01831"></a><span class="lineno"> 1831</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 1&gt;</div>
-<div class="line"><a id="l01832" name="l01832"></a><span class="lineno"> 1832</span>{</div>
-<div class="line"><a id="l01833" name="l01833"></a><span class="lineno"> 1833</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01834" name="l01834"></a><span class="lineno"> 1834</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01835" name="l01835"></a><span class="lineno"> 1835</span>    __T __res; __ELPM__1 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01836" name="l01836"></a><span class="lineno"> 1836</span>  }</div>
-<div class="line"><a id="l01837" name="l01837"></a><span class="lineno"> 1837</span>};</div>
-<div class="line"><a id="l01838" name="l01838"></a><span class="lineno"> 1838</span> </div>
-<div class="line"><a id="l01839" name="l01839"></a><span class="lineno"> 1839</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01840" name="l01840"></a><span class="lineno"> 1840</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 2&gt;</div>
-<div class="line"><a id="l01841" name="l01841"></a><span class="lineno"> 1841</span>{</div>
-<div class="line"><a id="l01842" name="l01842"></a><span class="lineno"> 1842</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01843" name="l01843"></a><span class="lineno"> 1843</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01844" name="l01844"></a><span class="lineno"> 1844</span>    __T __res; __ELPM__2 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01845" name="l01845"></a><span class="lineno"> 1845</span>  }</div>
-<div class="line"><a id="l01846" name="l01846"></a><span class="lineno"> 1846</span>};</div>
-<div class="line"><a id="l01847" name="l01847"></a><span class="lineno"> 1847</span> </div>
-<div class="line"><a id="l01848" name="l01848"></a><span class="lineno"> 1848</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01849" name="l01849"></a><span class="lineno"> 1849</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 3&gt;</div>
-<div class="line"><a id="l01850" name="l01850"></a><span class="lineno"> 1850</span>{</div>
-<div class="line"><a id="l01851" name="l01851"></a><span class="lineno"> 1851</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01852" name="l01852"></a><span class="lineno"> 1852</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01853" name="l01853"></a><span class="lineno"> 1853</span>    __T __res; __ELPM__3 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01854" name="l01854"></a><span class="lineno"> 1854</span>  }</div>
-<div class="line"><a id="l01855" name="l01855"></a><span class="lineno"> 1855</span>};</div>
-<div class="line"><a id="l01856" name="l01856"></a><span class="lineno"> 1856</span> </div>
-<div class="line"><a id="l01857" name="l01857"></a><span class="lineno"> 1857</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01858" name="l01858"></a><span class="lineno"> 1858</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 4&gt;</div>
-<div class="line"><a id="l01859" name="l01859"></a><span class="lineno"> 1859</span>{</div>
-<div class="line"><a id="l01860" name="l01860"></a><span class="lineno"> 1860</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01861" name="l01861"></a><span class="lineno"> 1861</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01862" name="l01862"></a><span class="lineno"> 1862</span>    __T __res; __ELPM__4 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01863" name="l01863"></a><span class="lineno"> 1863</span>  }</div>
-<div class="line"><a id="l01864" name="l01864"></a><span class="lineno"> 1864</span>};</div>
-<div class="line"><a id="l01865" name="l01865"></a><span class="lineno"> 1865</span> </div>
-<div class="line"><a id="l01866" name="l01866"></a><span class="lineno"> 1866</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01867" name="l01867"></a><span class="lineno"> 1867</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 8&gt;</div>
-<div class="line"><a id="l01868" name="l01868"></a><span class="lineno"> 1868</span>{</div>
-<div class="line"><a id="l01869" name="l01869"></a><span class="lineno"> 1869</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
-<div class="line"><a id="l01870" name="l01870"></a><span class="lineno"> 1870</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l01871" name="l01871"></a><span class="lineno"> 1871</span>    __T __res; __ELPM__8 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
-<div class="line"><a id="l01872" name="l01872"></a><span class="lineno"> 1872</span>  }</div>
-<div class="line"><a id="l01873" name="l01873"></a><span class="lineno"> 1873</span>};</div>
-<div class="line"><a id="l01874" name="l01874"></a><span class="lineno"> 1874</span> </div>
-<div class="line"><a id="l01875" name="l01875"></a><span class="lineno"> 1875</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
-<div class="line"><a id="l01876" name="l01876"></a><span class="lineno"> 1876</span>__T pgm_read_far (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)</div>
-<div class="line"><a id="l01877" name="l01877"></a><span class="lineno"> 1877</span>{</div>
-<div class="line"><a id="l01878" name="l01878"></a><span class="lineno"> 1878</span>  <span class="keywordflow">return</span> __pgm_read_far_impl&lt;__T, sizeof(__T)&gt;() (__addr);</div>
-<div class="line"><a id="l01879" name="l01879"></a><span class="lineno"> 1879</span>}</div>
-<div class="line"><a id="l01880" name="l01880"></a><span class="lineno"> 1880</span> </div>
-<div class="line"><a id="l01881" name="l01881"></a><span class="lineno"> 1881</span><span class="preprocessor">#endif </span><span class="comment">/* C++ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01815" name="l01815"></a><span class="lineno"> 1815</span><span class="comment">//////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l01816" name="l01816"></a><span class="lineno"> 1816</span><span class="comment"></span> </div>
+<div class="line"><a id="l01817" name="l01817"></a><span class="lineno"> 1817</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T, <span class="keywordtype">size_t</span>&gt;</div>
+<div class="line"><a id="l01818" name="l01818"></a><span class="lineno"> 1818</span><span class="keyword">struct </span>__pgm_read_far_impl</div>
+<div class="line"><a id="l01819" name="l01819"></a><span class="lineno"> 1819</span>{</div>
+<div class="line"><a id="l01820" name="l01820"></a><span class="lineno"> 1820</span>  <span class="comment">// A default implementation for T&#39;s with a size not in { 1, 2, 3, 4, 8 }.</span></div>
+<div class="line"><a id="l01821" name="l01821"></a><span class="lineno"> 1821</span>  <span class="comment">// While this works, the performance is absolute scrap because GCC does</span></div>
+<div class="line"><a id="l01822" name="l01822"></a><span class="lineno"> 1822</span>  <span class="comment">// not handle objects well that don&#39;t fit in a register (i.e. avr-gcc</span></div>
+<div class="line"><a id="l01823" name="l01823"></a><span class="lineno"> 1823</span>  <span class="comment">// has no respective machine_mode).</span></div>
+<div class="line"><a id="l01824" name="l01824"></a><span class="lineno"> 1824</span>  __T operator() (<span class="keyword">const</span> __T *__addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01825" name="l01825"></a><span class="lineno"> 1825</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01826" name="l01826"></a><span class="lineno"> 1826</span>    __T __res;</div>
+<div class="line"><a id="l01827" name="l01827"></a><span class="lineno"> 1827</span>    <a class="code hl_function" href="group__avr__pgmspace.html#ga13cc6cd0692aeccaac2789350a16412b">memcpy_PF</a> (&amp;__res, __addr, <span class="keyword">sizeof</span>(__T));</div>
+<div class="line"><a id="l01828" name="l01828"></a><span class="lineno"> 1828</span>    <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01829" name="l01829"></a><span class="lineno"> 1829</span>  }</div>
+<div class="line"><a id="l01830" name="l01830"></a><span class="lineno"> 1830</span>};</div>
+<div class="line"><a id="l01831" name="l01831"></a><span class="lineno"> 1831</span> </div>
+<div class="line"><a id="l01832" name="l01832"></a><span class="lineno"> 1832</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01833" name="l01833"></a><span class="lineno"> 1833</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 1&gt;</div>
+<div class="line"><a id="l01834" name="l01834"></a><span class="lineno"> 1834</span>{</div>
+<div class="line"><a id="l01835" name="l01835"></a><span class="lineno"> 1835</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01836" name="l01836"></a><span class="lineno"> 1836</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01837" name="l01837"></a><span class="lineno"> 1837</span>    __T __res; __ELPM__1 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01838" name="l01838"></a><span class="lineno"> 1838</span>  }</div>
+<div class="line"><a id="l01839" name="l01839"></a><span class="lineno"> 1839</span>};</div>
+<div class="line"><a id="l01840" name="l01840"></a><span class="lineno"> 1840</span> </div>
+<div class="line"><a id="l01841" name="l01841"></a><span class="lineno"> 1841</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01842" name="l01842"></a><span class="lineno"> 1842</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 2&gt;</div>
+<div class="line"><a id="l01843" name="l01843"></a><span class="lineno"> 1843</span>{</div>
+<div class="line"><a id="l01844" name="l01844"></a><span class="lineno"> 1844</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01845" name="l01845"></a><span class="lineno"> 1845</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01846" name="l01846"></a><span class="lineno"> 1846</span>    __T __res; __ELPM__2 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01847" name="l01847"></a><span class="lineno"> 1847</span>  }</div>
+<div class="line"><a id="l01848" name="l01848"></a><span class="lineno"> 1848</span>};</div>
+<div class="line"><a id="l01849" name="l01849"></a><span class="lineno"> 1849</span> </div>
+<div class="line"><a id="l01850" name="l01850"></a><span class="lineno"> 1850</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01851" name="l01851"></a><span class="lineno"> 1851</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 3&gt;</div>
+<div class="line"><a id="l01852" name="l01852"></a><span class="lineno"> 1852</span>{</div>
+<div class="line"><a id="l01853" name="l01853"></a><span class="lineno"> 1853</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01854" name="l01854"></a><span class="lineno"> 1854</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01855" name="l01855"></a><span class="lineno"> 1855</span>    __T __res; __ELPM__3 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01856" name="l01856"></a><span class="lineno"> 1856</span>  }</div>
+<div class="line"><a id="l01857" name="l01857"></a><span class="lineno"> 1857</span>};</div>
+<div class="line"><a id="l01858" name="l01858"></a><span class="lineno"> 1858</span> </div>
+<div class="line"><a id="l01859" name="l01859"></a><span class="lineno"> 1859</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01860" name="l01860"></a><span class="lineno"> 1860</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 4&gt;</div>
+<div class="line"><a id="l01861" name="l01861"></a><span class="lineno"> 1861</span>{</div>
+<div class="line"><a id="l01862" name="l01862"></a><span class="lineno"> 1862</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01863" name="l01863"></a><span class="lineno"> 1863</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01864" name="l01864"></a><span class="lineno"> 1864</span>    __T __res; __ELPM__4 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01865" name="l01865"></a><span class="lineno"> 1865</span>  }</div>
+<div class="line"><a id="l01866" name="l01866"></a><span class="lineno"> 1866</span>};</div>
+<div class="line"><a id="l01867" name="l01867"></a><span class="lineno"> 1867</span> </div>
+<div class="line"><a id="l01868" name="l01868"></a><span class="lineno"> 1868</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01869" name="l01869"></a><span class="lineno"> 1869</span><span class="keyword">struct </span>__pgm_read_far_impl&lt;__T, 8&gt;</div>
+<div class="line"><a id="l01870" name="l01870"></a><span class="lineno"> 1870</span>{</div>
+<div class="line"><a id="l01871" name="l01871"></a><span class="lineno"> 1871</span>  __T operator() (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01872" name="l01872"></a><span class="lineno"> 1872</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l01873" name="l01873"></a><span class="lineno"> 1873</span>    __T __res; __ELPM__8 (__res, __addr, __T); <span class="keywordflow">return</span> __res;</div>
+<div class="line"><a id="l01874" name="l01874"></a><span class="lineno"> 1874</span>  }</div>
+<div class="line"><a id="l01875" name="l01875"></a><span class="lineno"> 1875</span>};</div>
+<div class="line"><a id="l01876" name="l01876"></a><span class="lineno"> 1876</span> </div>
+<div class="line"><a id="l01877" name="l01877"></a><span class="lineno"> 1877</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> __T&gt;</div>
+<div class="line"><a id="l01878" name="l01878"></a><span class="lineno"> 1878</span>__T pgm_read_far (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> __addr)</div>
+<div class="line"><a id="l01879" name="l01879"></a><span class="lineno"> 1879</span>{</div>
+<div class="line"><a id="l01880" name="l01880"></a><span class="lineno"> 1880</span>  <span class="keywordflow">return</span> __pgm_read_far_impl&lt;__T, sizeof(__T)&gt;() (__addr);</div>
+<div class="line"><a id="l01881" name="l01881"></a><span class="lineno"> 1881</span>}</div>
 <div class="line"><a id="l01882" name="l01882"></a><span class="lineno"> 1882</span> </div>
-<div class="line"><a id="l01883" name="l01883"></a><span class="lineno"> 1883</span><span class="preprocessor">#ifdef __DOXYGEN__</span></div>
-<div class="line"><a id="l01884" name="l01884"></a><span class="lineno"> 1884</span><span class="comment"></span> </div>
-<div class="line"><a id="l01885" name="l01885"></a><span class="lineno"> 1885</span><span class="comment">/** \name Templates */</span></div>
+<div class="line"><a id="l01883" name="l01883"></a><span class="lineno"> 1883</span><span class="preprocessor">#endif </span><span class="comment">/* C++ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01884" name="l01884"></a><span class="lineno"> 1884</span> </div>
+<div class="line"><a id="l01885" name="l01885"></a><span class="lineno"> 1885</span><span class="preprocessor">#ifdef __DOXYGEN__</span></div>
 <div class="line"><a id="l01886" name="l01886"></a><span class="lineno"> 1886</span><span class="comment"></span> </div>
-<div class="line"><a id="l01887" name="l01887"></a><span class="lineno"> 1887</span><span class="comment">/** \ingroup avr_pgmspace</span></div>
-<div class="line"><a id="l01888" name="l01888"></a><span class="lineno"> 1888</span><span class="comment">    \fn T pgm_read&lt;T&gt; (const T *addr)</span></div>
-<div class="line"><a id="l01889" name="l01889"></a><span class="lineno"> 1889</span><span class="comment"></span> </div>
-<div class="line"><a id="l01890" name="l01890"></a><span class="lineno"> 1890</span><span class="comment">    Read an object of type \c T from program memory address \p addr and</span></div>
-<div class="line"><a id="l01891" name="l01891"></a><span class="lineno"> 1891</span><span class="comment">    return it.</span></div>
-<div class="line"><a id="l01892" name="l01892"></a><span class="lineno"> 1892</span><span class="comment">    This template is only available when macro \c __pgm_read_template__</span></div>
-<div class="line"><a id="l01893" name="l01893"></a><span class="lineno"> 1893</span><span class="comment">    is defined.</span></div>
-<div class="line"><a id="l01894" name="l01894"></a><span class="lineno"> 1894</span><span class="comment">    \since AVR-LibC v2.2  */</span></div>
-<div class="line"><a id="l01895" name="l01895"></a><span class="lineno"> 1895</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l01896" name="l01896"></a><span class="lineno"><a class="line" href="group__avr__pgmspace.html#ga4b5aef1b070b61c565d3576482c20c6f"> 1896</a></span>T <a class="code hl_function" href="group__avr__pgmspace.html#ga4b5aef1b070b61c565d3576482c20c6f">pgm_read&lt;T&gt;</a> (<span class="keyword">const</span> T *addr);</div>
-<div class="line"><a id="l01897" name="l01897"></a><span class="lineno"> 1897</span><span class="comment"></span> </div>
-<div class="line"><a id="l01898" name="l01898"></a><span class="lineno"> 1898</span><span class="comment">/** \ingroup avr_pgmspace</span></div>
-<div class="line"><a id="l01899" name="l01899"></a><span class="lineno"> 1899</span><span class="comment">    \fn T pgm_read_far&lt;T&gt; (uint_farptr_t addr)</span></div>
-<div class="line"><a id="l01900" name="l01900"></a><span class="lineno"> 1900</span><span class="comment"></span> </div>
-<div class="line"><a id="l01901" name="l01901"></a><span class="lineno"> 1901</span><span class="comment">    Read an object of type \c T from program memory address \p addr and</span></div>
-<div class="line"><a id="l01902" name="l01902"></a><span class="lineno"> 1902</span><span class="comment">    return it.</span></div>
-<div class="line"><a id="l01903" name="l01903"></a><span class="lineno"> 1903</span><span class="comment">    This template is only available when macro \c __pgm_read_template__</span></div>
-<div class="line"><a id="l01904" name="l01904"></a><span class="lineno"> 1904</span><span class="comment">    is defined.</span></div>
-<div class="line"><a id="l01905" name="l01905"></a><span class="lineno"> 1905</span><span class="comment">    \since AVR-LibC v2.2  */</span></div>
-<div class="line"><a id="l01906" name="l01906"></a><span class="lineno"> 1906</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l01907" name="l01907"></a><span class="lineno"><a class="line" href="group__avr__pgmspace.html#ga9533143f6be341f476071a8523470a44"> 1907</a></span>T <a class="code hl_function" href="group__avr__pgmspace.html#ga9533143f6be341f476071a8523470a44">pgm_read_far&lt;T&gt;</a> (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr);</div>
-<div class="line"><a id="l01908" name="l01908"></a><span class="lineno"> 1908</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l01909" name="l01909"></a><span class="lineno"> 1909</span> </div>
-<div class="line"><a id="l01910" name="l01910"></a><span class="lineno"> 1910</span><span class="preprocessor">#endif </span><span class="comment">/* __PGMSPACE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01887" name="l01887"></a><span class="lineno"> 1887</span><span class="comment">/** \name Templates */</span></div>
+<div class="line"><a id="l01888" name="l01888"></a><span class="lineno"> 1888</span><span class="comment"></span> </div>
+<div class="line"><a id="l01889" name="l01889"></a><span class="lineno"> 1889</span><span class="comment">/** \ingroup avr_pgmspace</span></div>
+<div class="line"><a id="l01890" name="l01890"></a><span class="lineno"> 1890</span><span class="comment">    \fn T pgm_read&lt;T&gt; (const T *addr)</span></div>
+<div class="line"><a id="l01891" name="l01891"></a><span class="lineno"> 1891</span><span class="comment"></span> </div>
+<div class="line"><a id="l01892" name="l01892"></a><span class="lineno"> 1892</span><span class="comment">    Read an object of type \c T from program memory address \p addr and</span></div>
+<div class="line"><a id="l01893" name="l01893"></a><span class="lineno"> 1893</span><span class="comment">    return it.</span></div>
+<div class="line"><a id="l01894" name="l01894"></a><span class="lineno"> 1894</span><span class="comment">    This template is only available when macro \c __pgm_read_template__</span></div>
+<div class="line"><a id="l01895" name="l01895"></a><span class="lineno"> 1895</span><span class="comment">    is defined.</span></div>
+<div class="line"><a id="l01896" name="l01896"></a><span class="lineno"> 1896</span><span class="comment">    \since AVR-LibC v2.2  */</span></div>
+<div class="line"><a id="l01897" name="l01897"></a><span class="lineno"> 1897</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l01898" name="l01898"></a><span class="lineno"><a class="line" href="group__avr__pgmspace.html#ga4b5aef1b070b61c565d3576482c20c6f"> 1898</a></span>T <a class="code hl_function" href="group__avr__pgmspace.html#ga4b5aef1b070b61c565d3576482c20c6f">pgm_read&lt;T&gt;</a> (<span class="keyword">const</span> T *addr);</div>
+<div class="line"><a id="l01899" name="l01899"></a><span class="lineno"> 1899</span><span class="comment"></span> </div>
+<div class="line"><a id="l01900" name="l01900"></a><span class="lineno"> 1900</span><span class="comment">/** \ingroup avr_pgmspace</span></div>
+<div class="line"><a id="l01901" name="l01901"></a><span class="lineno"> 1901</span><span class="comment">    \fn T pgm_read_far&lt;T&gt; (uint_farptr_t addr)</span></div>
+<div class="line"><a id="l01902" name="l01902"></a><span class="lineno"> 1902</span><span class="comment"></span> </div>
+<div class="line"><a id="l01903" name="l01903"></a><span class="lineno"> 1903</span><span class="comment">    Read an object of type \c T from program memory address \p addr and</span></div>
+<div class="line"><a id="l01904" name="l01904"></a><span class="lineno"> 1904</span><span class="comment">    return it.</span></div>
+<div class="line"><a id="l01905" name="l01905"></a><span class="lineno"> 1905</span><span class="comment">    This template is only available when macro \c __pgm_read_template__</span></div>
+<div class="line"><a id="l01906" name="l01906"></a><span class="lineno"> 1906</span><span class="comment">    is defined.</span></div>
+<div class="line"><a id="l01907" name="l01907"></a><span class="lineno"> 1907</span><span class="comment">    \since AVR-LibC v2.2  */</span></div>
+<div class="line"><a id="l01908" name="l01908"></a><span class="lineno"> 1908</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l01909" name="l01909"></a><span class="lineno"><a class="line" href="group__avr__pgmspace.html#ga9533143f6be341f476071a8523470a44"> 1909</a></span>T <a class="code hl_function" href="group__avr__pgmspace.html#ga9533143f6be341f476071a8523470a44">pgm_read_far&lt;T&gt;</a> (<a class="code hl_typedef" href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a> addr);</div>
+<div class="line"><a id="l01910" name="l01910"></a><span class="lineno"> 1910</span><span class="preprocessor">#endif </span><span class="comment">/* DOXYGEN */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l01911" name="l01911"></a><span class="lineno"> 1911</span> </div>
+<div class="line"><a id="l01912" name="l01912"></a><span class="lineno"> 1912</span><span class="preprocessor">#endif </span><span class="comment">/* __PGMSPACE_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="agroup__avr__inttypes_html_ga72b6692e3f3123903c1a0d9a960c59b1"><div class="ttname"><a href="group__avr__inttypes.html#ga72b6692e3f3123903c1a0d9a960c59b1">uint_farptr_t</a></div><div class="ttdeci">uint32_t uint_farptr_t</div><div class="ttdef"><b>Definition:</b> inttypes.h:83</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga0786ca7dc919f41f4586689aa77b04ef"><div class="ttname"><a href="group__avr__pgmspace.html#ga0786ca7dc919f41f4586689aa77b04ef">strstr_PF</a></div><div class="ttdeci">char * strstr_PF(const char *s1, uint_farptr_t s2)</div><div class="ttdoc">Locate a substring.</div></div>
 <div class="ttc" id="agroup__avr__pgmspace_html_ga0840ee688cde7d1555133f567618e895"><div class="ttname"><a href="group__avr__pgmspace.html#ga0840ee688cde7d1555133f567618e895">pgm_read_signed_int</a></div><div class="ttdeci">static signed int pgm_read_signed_int(const signed int *addr)</div></div>
@@ -2133,7 +2135,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 28 2025 13:38:37 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 1 2026 12:03:27 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

@@ -203,7 +203,7 @@ Why doesn't my program recognize a variable updated in an interrupt routine?</h1
 <div class="line">    {</div>
 <div class="line">        ...</div>
 <div class="line">    }</div>
-<div class="ttc" id="agroup__avr__interrupts_html_gad28590624d422cdf30d626e0a506255f"><div class="ttname"><a href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></div><div class="ttdeci">#define ISR(vector, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:118</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_gad28590624d422cdf30d626e0a506255f"><div class="ttname"><a href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></div><div class="ttdeci">#define ISR(vector, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:126</div></div>
 <div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 </div><!-- fragment --><p>the compiler will typically access <code>flag</code> only once, and optimize further accesses completely away, since its code path analysis shows that nothing inside the loop could change the value of <code>flag</code> anyway. To tell the compiler that this variable could be changed outside the scope of its code path analysis (e. g. from within an interrupt routine), the variable needs to be qualified as volatile:</p>
 <div class="fragment"><div class="line"><span class="keyword">volatile</span> <a class="code hl_typedef" href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> flag;</div>
@@ -499,7 +499,7 @@ Why do some 16-bit timer registers sometimes get trashed?</h1>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> val;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:88</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga68c330e94fe121eba993e5a5973c3162"><div class="ttname"><a href="group__avr__interrupts.html#ga68c330e94fe121eba993e5a5973c3162">cli</a></div><div class="ttdeci">#define cli()</div><div class="ttdef"><b>Definition:</b> interrupt.h:93</div></div>
 <div class="ttc" id="agroup__avr__stdint_html_ga1f1825b69244eb3ad2c7165ddc99c956"><div class="ttname"><a href="group__avr__stdint.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a></div><div class="ttdeci">unsigned int uint16_t</div><div class="ttdef"><b>Definition:</b> stdint.h:96</div></div>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_varinit"></a>
@@ -763,7 +763,7 @@ How to use a Compact Vector Table?</h1>
 <div class="line">{</div>
 <div class="line">    <span class="comment">/* Code for Prio0 IRQs */</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__interrupts_html_ga48ae9a7647627e76a69f814510566d6c"><div class="ttname"><a href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a></div><div class="ttdeci">#define ISR_N(vector_num, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:177</div></div>
+<div class="ttc" id="agroup__avr__interrupts_html_ga48ae9a7647627e76a69f814510566d6c"><div class="ttname"><a href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a></div><div class="ttdeci">#define ISR_N(vector_num, attributes)</div><div class="ttdef"><b>Definition:</b> interrupt.h:185</div></div>
 <div class="ttc" id="ainterrupt_8h_html"><div class="ttname"><a href="interrupt_8h.html">interrupt.h</a></div></div>
 </div><!-- fragment --><p>When you are using an older compiler but at least AVR-LibC v2.3, you can link with <code>-nostartfiles <em>path</em>/crt<em>mcu</em>-cvt.o</code> where:</p><ul>
 <li><code><em>mcu</em></code> is the name of the device like <code>attiny202</code> for ATtiny202.</li>
@@ -801,7 +801,7 @@ How to use a local (static, namespace) function as ISR?</h1>
 <div class="line">        <span class="comment">// Code</span></div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><p><a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> was added in AVR-LibC v2.3. It uses the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"><code>signal(N)</code></a> function attribute added in <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>.</p>
+</div><!-- fragment --><p><a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a> was added in AVR-LibC v2.3. It uses the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html#index-signal_002c-AVR"><code>signal(N)</code></a> function attribute added in <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_fuselow"></a>
 Why have "programmed" fuses the bit value 0?</h1>
@@ -1267,7 +1267,7 @@ What are the versions of the tools in my toolchain?</h1>
 <td>AVR-LibC </td><td><code>echo "#include &lt;avr/version.h&gt;" | avr-gcc -xc - -E -dM | grep AVR_LIBC_VERSION_STRING</code> </td></tr>
 </table>
 <p>Linker<sup>1</sup> is the linker as called directly (<code>avr-ld</code>) whereas Linker<sup>2</sup> is the linker as called though the compiler driver <code>avr-gcc</code>. The latter is the usual way to invoke the linker. When these two versions are not the same, then the resulting toolchain may have inconsistencies.</p>
-<p>When you have more than one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
+<p>When you have more then one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
 <p>Also notice that software may come with vendor specific patches, so that the tool behaves differently than the stock version.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_toolchain_sources"></a>
@@ -1322,7 +1322,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 28 2025 13:38:38 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 1 2026 12:03:27 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

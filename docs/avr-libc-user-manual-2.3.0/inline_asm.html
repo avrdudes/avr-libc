@@ -207,10 +207,10 @@ The Anatomy of a GCC asm Statement</h1>
 <p>Before we start with the first examples, we list all the bells and whistles that can be used to compose an inline assembly statement: <a class="el" href="inline_asm.html#special_sequences">special sequences</a>, <a class="el" href="inline_asm.html#constraints">constraints</a>, <a class="el" href="inline_asm.html#constraint_modifiers">constraint modifiers</a>, <a class="el" href="inline_asm.html#print_modifiers">print modifiers</a> <a class="el" href="inline_asm.html#operand_modifiers">operand modifiers</a> and the <a class="el" href="inline_asm.html#inline_asm_size">size of an asm</a>.</p>
 <h1><a class="anchor" id="inline_asm_size"></a>
 The Size of an asm</h1>
-<p>The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. The length is needed when (conditional) jumps cross the asm statement in order to compute (upper bounds for) jump offsets of PC-relative jumps.</p>
+<p>The code size of an asm statement is the number of lines multiplied by 4&#160;bytes, the maximal possible AVR instruction length. An empty code template has a size of zero.</p>
+<p>The length is needed to compute (upper bounds for) jump offsets of PC-relative jump when they cross the asm statement.</p>
 <p>The number of lines is one plus the number of line breaks in <code>code-string</code>. These may be physical line breaks from <code>\n</code> characters and logical line breaks from <code>$</code> characters.</p>
-<p>An asm construct with an empty code template has a size of zero.</p>
-<p>avr-gcc v17 allows to specify the size of an asm by means of <code>[[len=<em>words</em>]]</code> annotations in (comments in) the assembly template. When a note is not recognized, then all notes in the respective assembly template are ignored and the default length is used. When all notes are valid, then the size of the asm is the sum over all <code>[[len=<em>words</em>]]</code> notes. For more details, see <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html">The size of an asm</a> in the GCC online documentation.</p>
+<p>AVR GCC v17 allows to specify the <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html">size of an asm</a> by means of <code>[[len=<em>words</em>]]</code> annotations placed in comments in the code template. When a note is not recognized, then all notes in the respective assembly template are ignored and the default length is used. When all notes are valid, then the size of the asm in units of 16-bit words is the sum over all <code>[[len=<em>words</em>]]</code> notes.</p>
 <h1><a class="anchor" id="inline_asm_special_sequences"></a>
 Special Sequences</h1>
 <p>There are special sequences that can be used in the assembly template.</p>
@@ -249,6 +249,8 @@ Special Sequences</h1>
 <td><code>; text</code> </td><td>A single-line assembly comment that extends to the end of the physical line  </td></tr>
 <tr>
 <td><code>/* text */</code> </td><td>A multi-line C comment  </td></tr>
+<tr>
+<td><code>[[len=<em>words</em>]]</code> </td><td>In a comment, the <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html">size</a> of (parts of) the asm in units of 16-bit words. Since AVR GCC v17  </td></tr>
 </table>
 <ul>
 <li>Moreover, the following I/O addresses are defined provided the device supports the respective SFR: <code>__SP_L__</code>, <code>__SP_H__</code>, <code>__CCP__</code>, <code>__RAMPX__</code>, <code>__RAMPY__</code>, <code>__RAMPZ__</code>, <code>__RAMPD__</code>.</li>
@@ -287,6 +289,8 @@ Constraints</h1>
 <tr>
 <td><code>z</code> </td><td>Z pointer registers</td><td>R30, R31 </td></tr>
 <tr>
+<td><code>{<em>reg</em>}</code> </td><td><a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">Specifies</a> the registers starting at <code><em>reg</em></code>, like <code>{r20}</code> for R20... Since GCC v16 </td><td><code><em>reg</em></code>...  </td></tr>
+<tr>
 <th>Constraint </th><th>Constant </th><th>Range  </th></tr>
 <tr>
 <td><code>I</code> </td><td>6-bit unsigned integer constant</td><td>0 to 63 </td></tr>
@@ -311,7 +315,6 @@ Constraints</h1>
 <tr>
 <td><code>0</code> ... <code>9</code> </td><td>Matches the respective operand number</td><td></td></tr>
 </table>
-<p>GCC v16 also supports <a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html">hard-register constraints</a>. They allow to specify a register in a constraint. For example, <code>"{r20}"</code> specifies register(s) starting at R20.</p>
 <p><a class="anchor" id="constraint_modifiers"></a></p><ul>
 <li>Constraints without a modifier specify input operands.</li>
 <li>Constraints with a modifier specify output operands.</li>
@@ -844,7 +847,7 @@ Using Matching Constraints "=0"..."=9" with Output Operands</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 28 2026 17:42:16 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 1 2026 12:03:28 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
