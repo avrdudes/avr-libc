@@ -267,25 +267,23 @@ whistles that can be used to compose an inline assembly statement:
 
 The code size of an asm statement is the number of lines multiplied by
 4&nbsp;bytes, the maximal possible AVR instruction length.
-The length is needed when (conditional) jumps cross the
-asm statement in order to compute (upper bounds for) jump offsets
-of PC-relative jumps.
+An empty code template has a size of zero.
+
+The length is needed to compute (upper bounds for) jump offsets
+of PC-relative jump when they cross the asm statement.
 
 The number of lines is one plus the number of line breaks in
 \c code-string.  These may be physical line breaks from \c \\n characters
 and logical line breaks from \c \$ characters.
 
-An asm construct with an empty code template has a size of zero.
-
-avr-gcc v17 allows to specify the size of an asm by means of
-<tt>[[len=<em>words</em>]]</tt> annotations in (comments in) the assembly
-template.  When a note is not recognized, then all notes in the respective
-assembly template are ignored and the default length is used.
-When all notes are valid, then the size of the asm is the sum over all
-<tt>[[len=<em>words</em>]]</tt> notes.  For more details, see
+AVR GCC v17 allows to specify the
 <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html"
-       >The size of an asm</a> in the GCC online documentation.
-
+   >size of an asm</a> by means of <tt>[[len=<em>words</em>]]</tt>
+annotations placed in comments in the code template.
+When a note is not recognized, then all notes in the respective
+assembly template are ignored and the default length is used.
+When all notes are valid, then the size of the asm in units of 16-bit words
+is the sum over all <tt>[[len=<em>words</em>]]</tt> notes.
 
 \section inline_asm_special_sequences Special Sequences
 
@@ -367,6 +365,12 @@ whereas <tt>asm("%%":)</tt> only inserts one.
   <td><tt>/* text *<!-- -->/</tt>
   <td>A multi-line C comment
 </tr>
+<tr>
+  <td><tt>[[len=<em>words</em>]]</tt>
+  <td>In a comment, the
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/Size-of-an-asm.html">size</a>
+    of (parts of) the asm in units of 16-bit words.  Since AVR GCC v17
+</tr>
 </table>
 
 - Moreover, the following I/O addresses are defined provided the device
@@ -423,6 +427,12 @@ can be found in the
   <tr><td>\c x</td><td>X pointer registers</td><td>R26, R27</td></tr>
   <tr><td>\c y</td><td>Y pointer registers</td><td>R28, R29</td></tr>
   <tr><td>\c z</td><td>Z pointer registers</td><td>R30, R31</td></tr>
+  <tr><td><tt>{<em>reg</em>}</tt></td>
+    <td><a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html"
+	   >Specifies</a> the registers starting at <tt><em>reg</em></tt>,
+      like <tt>{r20}</tt> for R20... Since GCC v16</td>
+    <td><tt><em>reg</em></tt>...</td>
+  </tr>
   <tr>
     <th>Constraint
     <th>Constant
@@ -445,12 +455,6 @@ can be found in the
   <tr><td>\c X</td><td>Any valid operand</td><td></td></tr>
   <tr><td>\c 0 ... \c 9</td><td>Matches the respective operand number</td><td></td></tr>
 </table>
-
-GCC v16 also supports
-<a href="https://gcc.gnu.org/onlinedocs/gcc/Hard-Register-Constraints.html"
-   >hard-register constraints</a>.
-They allow to specify a register in a constraint.
-For example, <tt>"{r20}"</tt> specifies register(s) starting at R20.
 
 \anchor constraint_modifiers
 - Constraints without a modifier specify input operands.
