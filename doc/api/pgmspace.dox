@@ -61,7 +61,7 @@ GCC has a special keyword, \c __attribute__ that is used to attach
 different attributes to things such as function declarations, variables, and
 types. This keyword is followed by an attribute specification in double
 parentheses. In AVR GCC, there is a special attribute called
-<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html#index-progmem-variable-attribute_002c-AVR"
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html#index-progmem_002c-AVR"
    ><tt>progmem</tt></a>.
 This attribute is used on data definitions, and tells the compiler to place
 the data in the Program Memory (Flash).
@@ -253,7 +253,7 @@ i.e. without <tt>-mrodata-in-ram</tt>.
 -# \anchor foot_progmem_rtiny The code does actually work for Reduced Tiny
 devices because the compiler is implementing attribute \c progmem in a
 different way for the reduced core (AVRrc). See the
-<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Variable-Attributes.html#index-progmem-variable-attribute_002c-AVR"
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html#index-progmem_002c-AVR"
    >GCC documentation on <tt>progmem</tt></a>.
 
 
