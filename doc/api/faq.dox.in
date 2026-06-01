@@ -1498,7 +1498,7 @@ namespace
 \endcode
 
 #ISR_N was added in AVR-LibC v2.3.  It uses the
-<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"
+<a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html#index-signal_002c-AVR"
    ><tt>signal(N)</tt></a> function attribute added in
 <a href="https://gcc.gnu.org/gcc-15/changes.html#avr">GCC v15</a>.
 
@@ -2535,7 +2535,7 @@ They influence how pars of the library behave.
   <td> \ref faq_cvt "CVT" convenience
 <tr>
   <td> Compiler supports attribute
-    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Function-Attributes.html#index-signal_0028num_0029-function-attribute_002c-AVR"
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Attributes.html#index-signal_002c-AVR"
        ><tt>signal(n)</tt></a>
   <td> @HAS_SIGNAL_N_yesno@
   <td> \c <avr/interrupt.h>, #ISR_N,
