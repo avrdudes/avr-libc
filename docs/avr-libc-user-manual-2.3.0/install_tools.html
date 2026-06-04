@@ -140,7 +140,7 @@ Required AVR Tools</h1>
  Source Downloads: <a href="https://sourceware.org/pub/binutils/releases">https://sourceware.org/pub/binutils/releases</a> <br  />
  FTP: anonymous@ftp.gnu.org/gnu/binutils <br  />
  Git: git://sourceware.org/git/binutils-gdb.git <br  />
- GitHub Mirror: <a href="https://github.com/bminor/binutils-gdb">https://github.com/bminor/binutils-gdb</a> <br  />
+ Git Web: <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=tree">https://sourceware.org/git/?p=binutils-gdb.git;a=tree</a> <br  />
  <a class="el" href="install_tools.html#install_avr_binutils">Installation</a> </p>
 <p class="enddd"></p>
 </dd>
@@ -160,7 +160,8 @@ Required AVR Tools</h1>
  Git: https://github.com/avrdudes/avr-libc.git <br  />
  GitHub: <a href="https://github.com/avrdudes/avr-libc">https://github.com/avrdudes/avr-libc</a> <br  />
  Old Project Home: <a href="http://savannah.gnu.org/projects/avr-libc">http://savannah.gnu.org/projects/avr-libc</a> <br  />
- Old Source Downloads (&le; v2.1): <a href="https://download-mirror.savannah.gnu.org/releases/avr-libc">https://download-mirror.savannah.gnu.org/releases/avr-libc</a> <a class="el" href="install_tools.html#install_avr_libc">Installation</a>  </dd>
+ Old Source Downloads (&le; v2.1): <a href="https://download-mirror.savannah.gnu.org/releases/avr-libc">https://download-mirror.savannah.gnu.org/releases/avr-libc</a> <br  />
+ <a class="el" href="install_tools.html#install_avr_libc">Installation</a>  </dd>
 </dl>
 <h1><a class="anchor" id="optional_tools"></a>
 Optional AVR Tools</h1>
@@ -280,7 +281,7 @@ $ ../../source/gcc-&lt;version&gt;/configure --prefix=$PREFIX --target=avr --ena
     --with-gnu-as --with-gnu-ld --with-dwarf2
 $ make
 $ make install # or make install-strip
-</pre><p>The GCC binaries may consume quite some disc space. In most cases, you don't need the debug information in the compiler proper, and installing with </p><pre class="fragment">$ make install-strip
+</pre><p>There are also <a href="https://gcc.gnu.org/install/configure.html#avr">AVR-specific configure options</a>. The GCC binaries may consume quite some disc space. In most cases, you don't need the debug information in the compiler proper, and installing with </p><pre class="fragment">$ make install-strip
 </pre><p> can save you some space.</p>
 <h2><a class="anchor" id="install_avr_libc"></a>
 AVR-LibC</h2>
@@ -423,7 +424,7 @@ Tools Required for Building the Toolchain for Windows</h2>
 <ul>
 <li>Version 1.9.6</li>
 <li><a href="https://www.doxygen.nl">https://www.doxygen.nl</a></li>
-<li>Download version 1.9.6 and install.</li>
+<li>Download <a href="https://github.com/doxygen/doxygen/releases/tag/Release_1_9_6">version 1.9.6</a> and install.</li>
 </ul>
 </li>
 </ul>
@@ -710,7 +711,7 @@ Using Git</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 1 2026 12:03:27 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 4 2026 12:53:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

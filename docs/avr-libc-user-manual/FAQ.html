@@ -263,7 +263,7 @@ How do I use a #define'd constant in an asm statement?</h1>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>For C programs, rather use the standard C bit operators instead, so the above would be expressed as <code>PORTB |= (1 &lt;&lt; 7)</code>. The optimizer will take care to transform this into a single SBI instruction, assuming the operands allow for this.</dd></dl>
 <p>There are situation though where the address of a special function register (SFR) is required in inline assembly. When the register can be accessed by <code>LDS</code> and <code>STS</code>, one can use the RAM address of the SFR:</p>
 <div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;sts %0, __zero_reg__&quot;</span> :: <span class="stringliteral">&quot;n&quot;</span> (&amp; PORTB) : <span class="stringliteral">&quot;memory&quot;</span>);</div>
-</div><!-- fragment --><p>When the I/O address of the register is required, one way is to use <code>_SFR_IO_ADDR</code> to get the I/O address like in the example above. A different approach is to use inline asm <a class="el" href="inline_asm.html#inline_asm_print_modifiers">print modifier</a> <code>%i</code> supported since avr-gcc v4.7:</p>
+</div><!-- fragment --><p>When the I/O address of the register is required, one way is to use <code>_SFR_IO_ADDR</code> to get the I/O address like in the example above. A different approach is to use inline asm <a class="el" href="inline_asm.html#inline_asm_print_modifiers">print modifier</a> <code>%i</code> supported since AVR GCC v4.7:</p>
 <div class="fragment"><div class="line"><span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot;out %i0, __zero_reg__&quot;</span> :: <span class="stringliteral">&quot;n&quot;</span> (&amp; PORTB) : <span class="stringliteral">&quot;memory&quot;</span>);</div>
 </div><!-- fragment --><p>The <code>%i0</code> will print the address of <code>PORTB</code> as an I/O address.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
@@ -696,7 +696,7 @@ How to detect RAM memory and variable overlap problems?</h1>
 <p>You can simply run <code>avr-nm</code> on your output (ELF) file. Run it with the <code>-n</code> option, and it will sort the symbols numerically (by default, they are sorted alphabetically).</p>
 <p>Look for the symbol <code>_end</code>, that's the first address in RAM that is not allocated by a variable. (avr-gcc internally adds 0x800000 to all data/bss variable addresses, so please ignore this offset.) Then, the run-time initialization code initializes the stack pointer (by default) to point to the last available address in (internal) SRAM. Thus, the region between <code>_end</code> and the end of SRAM is what is available for stack. (If your application uses malloc(), which e. g. also can happen inside <a class="el" href="group__avr__stdio.html#ga4c04da4953607fa5fa4d3908fecde449">printf()</a>, the heap for dynamic memory is also located there. See <a class="el" href="malloc.html">Memory Areas and Using malloc()</a>.)</p>
 <p>The amount of stack required for your application cannot be determined that easily. For example, if you recursively call a function and forget to break that recursion, the amount of stack required is infinite. :-) You can look at the generated assembler code (<code>avr-gcc ... <a class="el" href="using_tools.html#opt_save_temps">-save-temps</a></code>), there's a comment in each generated assembler file that tells you the frame size for each generated function.</p>
-<p>GCC also supports <code>-fstack-usage</code> that generates an <code>.su</code> text file for each compilation unit:</p>
+<p>GCC also supports <code>-fstack-usage</code> that generates an <code>.su</code> text file for the stack usage of each module:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main (<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
@@ -706,7 +706,7 @@ How to detect RAM memory and variable overlap problems?</h1>
 <div class="line">$ cat main.su</div>
 <div class="line"> </div>
 <div class="line">main.c:3:5:main 2   <span class="keyword">static</span></div>
-</div><!-- fragment --><p>That's the amount of stack required for this function, you have to add up that for all functions where you know that the calls could be nested.</p>
+</div><!-- fragment --><p>That's the amount of stack required for this function, you have to add up that for all functions where you know that the calls could be nested. Notice that with LTO (link-time optimization), there is usually no one-to-one correspondence between modules and translation units.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_tinyavr_c"></a>
 Is it really impossible to program the ATtinyXX in C?</h1>
@@ -1322,7 +1322,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 1 2026 12:03:27 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 4 2026 12:53:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
