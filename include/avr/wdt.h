@@ -172,7 +172,7 @@ void wdt_disable (void)
         : [ccp_reg]        "n" (& CCP),
           [ioreg_cen_mask] "r" ((uint8_t)CCP_IOREG_gc),
           [wdt_reg]        "n" (& WDT_CTRLA),
-          [timeout_mask]   "I" (WDT_PERIOD_gm)
+          [timeout_mask]   "n" (WDT_PERIOD_gm)
         : "memory");
 }
 

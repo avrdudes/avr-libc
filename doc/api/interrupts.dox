@@ -151,8 +151,7 @@ ISR (PCINT0_vect)
 }
 
 ISR (PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
-
-\note There is no body to the aliased ISR.
+// Note: There is no body to the aliased ISR.
 
 // Alternative using ISR_N
 
