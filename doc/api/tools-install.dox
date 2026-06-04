@@ -69,7 +69,7 @@ systems, and another section for Windows.
   Source Downloads: https://sourceware.org/pub/binutils/releases <br>
   FTP: anonymous\@ftp.gnu.org/gnu/binutils <br>
   Git: git://sourceware.org/git/binutils-gdb.git <br>
-  GitHub Mirror: https://github.com/bminor/binutils-gdb <br>
+  Git Web: https://sourceware.org/git/?p=binutils-gdb.git;a=tree <br>
   \ref install_avr_binutils "Installation"
 </dd>
 
@@ -91,7 +91,7 @@ systems, and another section for Windows.
   Git: %https://github.com/avrdudes/avr-libc.git <br>
   GitHub: https://github.com/avrdudes/avr-libc <br>
   Old Project Home: http://savannah.gnu.org/projects/avr-libc <br>
-  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc
+  Old Source Downloads (&le; v2.1): https://download-mirror.savannah.gnu.org/releases/avr-libc <br>
   \ref install_avr_libc "Installation"
 </dd>
 </dl>
@@ -354,6 +354,9 @@ $ make
 $ make install # or make install-strip
 \endverbatim
 
+There are also
+<a href="https://gcc.gnu.org/install/configure.html#avr">AVR-specific
+configure options</a>.
 The GCC binaries may consume quite some disc space.  In most cases, you
 don't need the debug information in the compiler proper, and installing with
 \verbatim
@@ -651,7 +654,9 @@ Doxygen is required to build AVR-LibC documentation.
 - <b>Install Doxygen</b><br>
     - Version 1.9.6
     - <https://www.doxygen.nl>
-    - Download version 1.9.6 and install.
+    - Download
+      <a href="https://github.com/doxygen/doxygen/releases/tag/Release_1_9_6"
+	 >version 1.9.6</a> and install.
 
 fig2dev is required to build graphics in the AVR-LibC documentation.
 - <b>Install fig2dev</b><br>
