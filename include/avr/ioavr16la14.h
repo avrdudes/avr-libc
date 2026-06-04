@@ -1828,6 +1828,30 @@ typedef volatile uint32_t register32_t;
 #define RTC_EVGEN1SEL_3_bp  7  /* Event Generation 1 Select bit 3 position. */
 
 
+/* SIGROW - Signature row */
+/* SIGROW.OSCHF20TUNE  bit masks and bit positions */
+#define SIGROW_OSCHFTUNE_gm  0xFF  /* Oscillator Tuning group mask. */
+#define SIGROW_OSCHFTUNE_gp  0  /* Oscillator Tuning group position. */
+#define SIGROW_OSCHFTUNE_0_bm  (1<<0)  /* Oscillator Tuning bit 0 mask. */
+#define SIGROW_OSCHFTUNE_0_bp  0  /* Oscillator Tuning bit 0 position. */
+#define SIGROW_OSCHFTUNE_1_bm  (1<<1)  /* Oscillator Tuning bit 1 mask. */
+#define SIGROW_OSCHFTUNE_1_bp  1  /* Oscillator Tuning bit 1 position. */
+#define SIGROW_OSCHFTUNE_2_bm  (1<<2)  /* Oscillator Tuning bit 2 mask. */
+#define SIGROW_OSCHFTUNE_2_bp  2  /* Oscillator Tuning bit 2 position. */
+#define SIGROW_OSCHFTUNE_3_bm  (1<<3)  /* Oscillator Tuning bit 3 mask. */
+#define SIGROW_OSCHFTUNE_3_bp  3  /* Oscillator Tuning bit 3 position. */
+#define SIGROW_OSCHFTUNE_4_bm  (1<<4)  /* Oscillator Tuning bit 4 mask. */
+#define SIGROW_OSCHFTUNE_4_bp  4  /* Oscillator Tuning bit 4 position. */
+#define SIGROW_OSCHFTUNE_5_bm  (1<<5)  /* Oscillator Tuning bit 5 mask. */
+#define SIGROW_OSCHFTUNE_5_bp  5  /* Oscillator Tuning bit 5 position. */
+#define SIGROW_OSCHFTUNE_6_bm  (1<<6)  /* Oscillator Tuning bit 6 mask. */
+#define SIGROW_OSCHFTUNE_6_bp  6  /* Oscillator Tuning bit 6 position. */
+#define SIGROW_OSCHFTUNE_7_bm  (1<<7)  /* Oscillator Tuning bit 7 mask. */
+#define SIGROW_OSCHFTUNE_7_bp  7  /* Oscillator Tuning bit 7 position. */
+
+/* SIGROW.OSCHF16TUNE  bit masks and bit positions */
+/* SIGROW_OSCHFTUNE  is already defined. */
+
 
 /* SLPCTRL - Sleep Controller */
 /* SLPCTRL.CTRLA  bit masks and bit positions */
@@ -4753,7 +4777,10 @@ typedef struct SIGROW_struct
     register8_t reserved_1[1];
     _WORDREGISTER(TEMPSENSE0);  /* Temperature Calibration 0 */
     _WORDREGISTER(TEMPSENSE1);  /* Temperature Calibration 1 */
-    register8_t reserved_2[8];
+    register8_t reserved_2[4];
+    register8_t OSCHF20TUNE;  /* OSCHF 20MHz Tune */
+    register8_t OSCHF16TUNE;  /* OSCHF 16MHz Tune */
+    register8_t reserved_3[2];
     register8_t SERNUM0;  /* Serial Number Byte 0 */
     register8_t SERNUM1;  /* Serial Number Byte 1 */
     register8_t SERNUM2;  /* Serial Number Byte 2 */
@@ -4770,7 +4797,7 @@ typedef struct SIGROW_struct
     register8_t SERNUM13;  /* Serial Number Byte 13 */
     register8_t SERNUM14;  /* Serial Number Byte 14 */
     register8_t SERNUM15;  /* Serial Number Byte 15 */
-    register8_t reserved_3[96];
+    register8_t reserved_4[96];
 } SIGROW_t;
 
 
@@ -5646,8 +5673,8 @@ typedef enum USART_PROTCONV_VALUES_enum
 {
     USART_PROTCONV_NONE_gv         = 0x00,  /* Protocol conversion disabled. Normal data */
     USART_PROTCONV_FIXED_gv        = 0x01,  /* Single char for both '0' and '1'. Frame error set if values don't match */
-    USART_PROTCONV_MASKED_gv       = 0x02,  /* CHARMASK works as a mask */
-    USART_PROTCONV_DUAL_gv         = 0x03   /* CHARMASK defines second value for '1' */
+    USART_PROTCONV_MASKED_gv       = 0x02,  /* AUXDATA2 works as a mask */
+    USART_PROTCONV_DUAL_gv         = 0x03   /* AUXDATA2 defines second value for '1' */
 } USART_PROTCONV_values_t;
 
 /* Protocol Converter select bit group configurations*/
@@ -5655,8 +5682,8 @@ typedef enum USART_PROTCONV_enum
 {
     USART_PROTCONV_NONE_gc         = (USART_PROTCONV_NONE_gv << USART_PROTCONV_gp),  /* Protocol conversion disabled. Normal data */
     USART_PROTCONV_FIXED_gc        = (USART_PROTCONV_FIXED_gv << USART_PROTCONV_gp),  /* Single char for both '0' and '1'. Frame error set if values don't match */
-    USART_PROTCONV_MASKED_gc       = (USART_PROTCONV_MASKED_gv << USART_PROTCONV_gp),  /* CHARMASK works as a mask */
-    USART_PROTCONV_DUAL_gc         = (USART_PROTCONV_DUAL_gv << USART_PROTCONV_gp)   /* CHARMASK defines second value for '1' */
+    USART_PROTCONV_MASKED_gc       = (USART_PROTCONV_MASKED_gv << USART_PROTCONV_gp),  /* AUXDATA2 works as a mask */
+    USART_PROTCONV_DUAL_gc         = (USART_PROTCONV_DUAL_gv << USART_PROTCONV_gp)   /* AUXDATA2 defines second value for '1' */
 } USART_PROTCONV_t;
 
 /* Sample Rate select bit group values */
@@ -6406,6 +6433,8 @@ IO Module Instances. Mapped to memory.
 #define SIGROW_TEMPSENSE1  _SFR_MEM16(0x1086)
 #define SIGROW_TEMPSENSE1L  _SFR_MEM8(0x1086)
 #define SIGROW_TEMPSENSE1H  _SFR_MEM8(0x1087)
+#define SIGROW_OSCHF20TUNE  _SFR_MEM8(0x108C)
+#define SIGROW_OSCHF16TUNE  _SFR_MEM8(0x108D)
 #define SIGROW_SERNUM0  _SFR_MEM8(0x1090)
 #define SIGROW_SERNUM1  _SFR_MEM8(0x1091)
 #define SIGROW_SERNUM2  _SFR_MEM8(0x1092)
