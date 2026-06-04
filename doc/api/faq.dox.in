@@ -305,7 +305,7 @@ asm volatile ("sts %0, __zero_reg__" :: "n" (& PORTB) : "memory");
 When the I/O address of the register is required, one way is to use
 \c _SFR_IO_ADDR to get the I/O address like in the example above.
 A different approach is to use inline asm \ref inline_asm_print_modifiers
-"print modifier" <tt>\%i</tt> supported since avr-gcc v4.7:
+"print modifier" <tt>\%i</tt> supported since AVR GCC v4.7:
 
 \code
 asm volatile ("out %i0, __zero_reg__" :: "n" (& PORTB) : "memory");
@@ -1263,7 +1263,7 @@ generated assembler file that tells you the frame
 size for each generated function.
 
 GCC also supports \c -fstack-usage that generates an \c \.su text
-file for each compilation unit:
+file for the stack usage of each module:
 
 \code
 int main (void)
@@ -1279,6 +1279,8 @@ main.c:3:5:main	2	static
 
 That's the amount of stack required for this function, you have to add
 up that for all functions where you know that the calls could be nested.
+Notice that with LTO (link-time optimization), there is usually no
+one-to-one correspondence between modules and translation units.
 
 <small>Back to \ref faq_index.</small>
 
