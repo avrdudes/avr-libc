@@ -1,8 +1,21 @@
-# Changes since AVR-LibC v2.3.1
+# Changes since AVR-LibC v2.3.2
 
 ## General
 
 ## ABI and API Changes
+
+## Improvements and Additions
+
+## Issues closed
+
+## Pull Requests
+
+## Other Changes
+
+
+# Changes in AVR-LibC v2.3.2
+
+This is a followup on v2.3.1 with updated I/O headers and documentation fixes.
 
 ## Improvements and Additions
 
@@ -12,11 +25,7 @@
   - AVR-Lx to: AVR-Lx_DFP.1.3.46.atpack
   - AVR-Sx to: AVR-Sx_DFP.1.2.26.atpack
 
-## Issues closed
-
-## Pull Requests
-
-## Other Changes
+- Fixed typos, errors and broken web links in the documentation.
 
 
 # Changes in AVR-LibC v2.3.1
