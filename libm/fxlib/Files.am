@@ -15,6 +15,9 @@ fxlib_a_asm_sources = \
 	atank.S \
 	atanuk.S \
 	atanur.S \
+	fractsfdx.S fractsfudx.S fractdxsf.S \
+	fractdasf.S fracttasf.S fractdqsf.S \
+	fractudasf.S fractutasf.S fractudqsf.S \
 	horner-ur.S \
 	lrdivi.S \
 	rdivi.S \
