@@ -421,7 +421,7 @@ $ echo '#include <avr/io.h>' | avr-gcc -xc - -mmcu=atmega8 -E -dM | grep _VECTOR
   by the standard.</b>  For example, applying the function \c strlen() to a
   literal string will normally cause the compiler to immediately
   replace that call by the actual length of the string, while with
-  \c -ffreestanding, it will always call strlen() at run-time.
+  \c -ffreestanding, it will always call strlen() at run time.
 </dd>
 </dl>
 

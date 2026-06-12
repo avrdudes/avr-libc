@@ -111,9 +111,9 @@ the linker to point just beyond \c \.bss, and \c __heap_end is set to 0
 which makes malloc() assume the heap is below the stack.
 
 If the heap is going to be moved to external RAM, \c __malloc_heap_end
-\e must be adjusted accordingly.  This can either be done at run-time,
+\e must be adjusted accordingly.  This can either be done at run time,
 by writing directly to this variable, or it can be done automatically at
-link-time, by adjusting the value of the symbol \c __heap_end.
+link time, by adjusting the value of the symbol \c __heap_end.
 
 \anchor malloc_extram
 The following example shows a linker command to relocate the entire \c \.data
