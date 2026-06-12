@@ -442,7 +442,7 @@ can be found in the
   <tr><td>\c J</td><td>6-bit negative integer constant</td><td>&minus;63 to 0</td></tr>
   <tr><td>\c M</td><td>8-bit unsigned integer constant</td><td>0 to 255</td></tr>
   <tr><td>\c n</td><td>Integer constant</td><td></td></tr>
-  <tr><td>\c i</td><td>Immediate value known at link-time, like the
+  <tr><td>\c i</td><td>Immediate value known at link time, like the
     address of a variable in static storage</td><td></td></tr>
   <tr><td>\c F</td><td>floating-point constant</td><td></td></tr>
   <tr><td>\c Ynn</td><td>Fixed-point or integer constant</td><td></td></tr>
@@ -529,7 +529,7 @@ Examples:
 </dd>
 <dt><tt>"I" (var)</tt></dt>
 <dd>
-  In most cases, this is an error because \c var is not known at compile-time.
+  In most cases, this is an error because \c var is not known at compile time.
   Only when <tt>__builtin_constant_p(var)</tt> is true and \c var is in the
   range 0...63, then \c var is accepted by the compiler.
 </dd>
@@ -551,7 +551,7 @@ compiler may select any register. This will fail if the compiler chooses
 uses for special purposes.) That's why the correct constraint in that case is
 <tt>"d"</tt>. On the other hand, if you use the constraint <tt>"M"</tt>, the
 compiler will make sure that you don't pass anything else but an 8-bit
-unsigned integer value known at compile-time.
+unsigned integer value known at compile time.
 
 The following table shows all AVR assembler mnemonics which require
 operands, and the related constraints.
@@ -862,12 +862,12 @@ name in named operands like in <tt>"%a[address]"</tt>.
 </tr>
 </table>
 
-When the argument of a modifier is not computable at assembler-time,
+When the argument of a modifier is not computable at assemble time,
 then the assembler has to encode the expression in an abstract form using
 <a href="https://sourceware.org/git/?p=binutils-gdb.git;a=blob;f=include/elf/avr.h"
    >RELOCs</a>.
 The consequence is that only a very limited number of argument expressions is
-supported when they are not computable at assembler-time.
+supported when they are not computable at assemble time.
 
 \section inline_asm_examples Examples
 
@@ -1026,12 +1026,12 @@ Macro \c _SFR_IO_ADDR is provided by <code>avr/sfr_defs.h</code> which is
 included by <code>avr/io.h</code>.
 
 When the address is not an I/O address, then \c LDS or \c LD must be used,
-depending on whether the address is known at link-time or only at run-time.
+depending on whether the address is known at link time or only at run time.
 For example, the following macro provides the functionality to clear an SFR.
 The code discriminates between the possibilities that
-- The SFR address is known at compile-time and is an I/O address.
-- The SFR address is known at compile-time but is not in the I/O range.
-- The SFR address is not known at compile-time.
+- The SFR address is known at compile time and is an I/O address.
+- The SFR address is known at compile time but is not in the I/O range.
+- The SFR address is not known at compile time.
 
 <!-- "none" because Doxygen messes up syntax hilit -->
 \code{none}
@@ -1084,7 +1084,7 @@ clear_3_regs:
 
 \anchor builtin_constant_p_in_inline_functions
 As \c __builtin_constant_p is used to infer whether the address of
-the SFR is known at compile-time, extra care must be taken when the
+the SFR is known at compile time, extra care must be taken when the
 functionality is implemented as an inline function:
 \code
 static inline __attribute__((__always_inline__))
@@ -1166,12 +1166,12 @@ bytes of the involved 16-bit entities:
 
 - For the 16-bit value \c data in static storage, <code>%[addr]+1</code>
 is used to access the high byte. The resulting expression <code>data+1</code>
-is computable at link-time and evaluated by the linker.
+is computable at link time and evaluated by the linker.
 
 - In the compilation variant for Reduced Tiny, the bytes of the 16-bit
 subtrahend \c &minus;1 are accessed with
 the \ref operand_modifiers "operand modifiers" \c lo8 and \c hi8 that are
-evaluated by the assembler because \c &minus;1 is known at assembler-time.
+evaluated by the assembler because \c &minus;1 is known at assemble time.
 
 \c data is located in static storage, hence its address is known to the linker
 and fits \ref constraints "constraint" \c "i".

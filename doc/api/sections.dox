@@ -126,7 +126,7 @@ of output sections from the various input section that go into it.
 <tr>
   <td>\c w
   <td>
-    The section contains data that can be <b>w</b>ritten at run-time.
+    The section contains data that can be <b>w</b>ritten at run time.
     Sections that only contain read-only entities don't have the \c w flag set
 </tr>
 <tr>

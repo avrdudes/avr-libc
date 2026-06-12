@@ -69,7 +69,7 @@
     famous "Hello, world!" program, are actually fairly complex
     which causes their inclusion to eat up a fair amount of code space.
     Also, they are not fast due to the nature of interpreting the
-    format string at run-time.  Whenever possible, resorting to the
+    format string at run time.  Whenever possible, resorting to the
     (sometimes non-standard) predetermined conversion facilities that are
     offered by AVR-LibC will usually cost much less in terms of speed
     and code size.

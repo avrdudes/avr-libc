@@ -178,7 +178,7 @@ else
     r25 = LPM(pc)
   \endverbatim
   The drawbacks are obvious: Such code is expensive, because it has to
-  discriminate at run-time whether \c pc points to RAM or to flash.
+  discriminate at run time whether \c pc points to RAM or to flash.
   Plus, there must be some means to tell which kind of pointer
   \c pc actually is.  For example, the high bit of the address could be used
   to encode the information.
@@ -221,9 +221,9 @@ const int i2 = vi;
 \endcode
 the variable \c i2 is read-only for the C++ program,
 but \c i2 must not be put into <tt>.rodata</tt> because it cannot be
-initialized at load-time.  Due to its initializer that is not computable at
-load-time, \c i2 has to be put into RAM and will be initialized (written to)
-at run-time by the startup code. \c avr-g++ will diagnose when an attempt is
+initialized at load time.  Due to its initializer that is not computable at
+load time, \c i2 has to be put into RAM and will be initialized (written to)
+at run time by the startup code. \c avr-g++ will diagnose when an attempt is
 made to put \c i2 in #PROGMEM.
 
 -# \anchor foor_ram_addrspace More precisely, these variables have to be
