@@ -30,22 +30,26 @@
 
 #ifdef __DA_FBIT__
 
-#define EX0     r20
-#define EX1     r21
+#if (__TA_FBIT__ & __DA_FBIT__ & __DQ_FBIT__) % 2 != 1
+#error
+#endif
+
+;; Subtract FBIT from the float exponent right away.
+;; In the case of 0.0f we will get a subnormal that maps to 0.
+
+#define exp_lo(N)  hlo8 ((N) << 23)
+#define exp_hi(N)  hhi8 ((N) << 23)
 
 ENTRY __fractsfdq
-    ldi     EX0, __DQ_FBIT__
-    rjmp 1f
+    subi    r25, exp_hi (__TA_FBIT__ - __DQ_FBIT__)
 
 ENTRY __fractsfta
-    ldi     EX0, __TA_FBIT__
-    rjmp 1f
+    subi    r25, exp_hi (__DA_FBIT__ - __TA_FBIT__)
 
 ENTRY __fractsfda
-    ldi     EX0, __DA_FBIT__
+    subi    r24, exp_lo (-__DA_FBIT__)
+    sbci    r25, exp_hi (-__DA_FBIT__)
 
-1:  clr     EX1
-    XCALL   _U(ldexpf)
     XJMP    _U(__fixsfdi)
 ENDFUNC
 
