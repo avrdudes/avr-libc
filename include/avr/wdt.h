@@ -141,20 +141,23 @@
         uint8_t __temp;                                                 \
         __asm__ __volatile__ (                                          \
             "wdr"                                   "\n\t"              \
+            "1:lds %[tmp], %[wdt_status_reg]"       "\n\t"              \
+            "sbrc %[tmp], %[wdt_syncbusy_bit]"      "\n\t"              \
+            "rjmp 1b"                               "\n\t"              \
             "out %i[ccp_reg], %[ioreg_cen_mask]"    "\n\t"              \
             "lds %[tmp], %[wdt_reg]"                "\n\t"              \
             "sbr %[tmp], %[wdt_enable_timeout]"     "\n\t"              \
             "sts %[wdt_reg], %[tmp]"                "\n\t"              \
-            "1:lds %[tmp], %[wdt_status_reg]"       "\n\t"              \
+            "2:lds %[tmp], %[wdt_status_reg]"       "\n\t"              \
             "sbrc %[tmp], %[wdt_syncbusy_bit]"      "\n\t"              \
-            "rjmp 1b"                                                   \
+            "rjmp 2b"                                                   \
             : [tmp]                 "=d" (__temp)                       \
             : [ccp_reg]             "n"  (& CCP),                       \
               [ioreg_cen_mask]      "r"  ((uint8_t)CCP_IOREG_gc),       \
               [wdt_reg]             "n"  (& WDT_CTRLA),                 \
               [wdt_enable_timeout]  "M"  (timeout),                     \
               [wdt_status_reg]      "n"  (& WDT_STATUS),                \
-              [wdt_syncbusy_bit]    "I"  (WDT_SYNCBUSY_bm)              \
+              [wdt_syncbusy_bit]    "I"  (WDT_SYNCBUSY_bp)              \
             : "memory");                                                \
     } while(0)
 
@@ -164,6 +167,9 @@ void wdt_disable (void)
     uint8_t __temp;
     __asm__ __volatile__ (
         "wdr"                                "\n\t"
+        "1:lds %[tmp], %[wdt_status_reg]"    "\n\t"
+        "sbrc %[tmp], %[wdt_syncbusy_bit]"   "\n\t"
+        "rjmp 1b"                            "\n\t"
         "out %i[ccp_reg], %[ioreg_cen_mask]" "\n\t"
         "lds %[tmp], %[wdt_reg]"             "\n\t"
         "cbr %[tmp], %[timeout_mask]"        "\n\t"
@@ -172,7 +178,9 @@ void wdt_disable (void)
         : [ccp_reg]        "n" (& CCP),
           [ioreg_cen_mask] "r" ((uint8_t)CCP_IOREG_gc),
           [wdt_reg]        "n" (& WDT_CTRLA),
-          [timeout_mask]   "n" (WDT_PERIOD_gm)
+          [timeout_mask]   "n" (WDT_PERIOD_gm),
+          [wdt_status_reg] "n" (& WDT_STATUS),
+          [wdt_syncbusy_bit] "I" (WDT_SYNCBUSY_bp)
         : "memory");
 }
 
