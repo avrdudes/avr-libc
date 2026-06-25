@@ -10,11 +10,19 @@
 
 ## Issues closed
 
+  - Fixed wdt_enable / wdt_disable on devices that have WDT_SYNCBUSY_bp.
+    The code wrongly used WDT_SYNCBUSY_bm for the bit position in SBRC.
+    On some devices, the protected write of the WDT configuration fell
+    out of the CCP window.  Prior to writing the WDT config, make sure
+    that WDT_SYNCBUSY_bp is clear ([#1065][1065], [#1068][1068]).
+
 ## Pull Requests
 
 ## Other Changes
 
+[1065]: https://github.com/avrdudes/avr-libc/issues/1065
 [1066]: https://github.com/avrdudes/avr-libc/issues/1066
+[1068]: https://github.com/avrdudes/avr-libc/issues/1068
 
 
 # Changes in AVR-LibC v2.3.2
