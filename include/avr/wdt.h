@@ -637,4 +637,38 @@ void wdt_disable (void)
 
 #endif  /* defined(__DOXYGEN__) || defined(WDP3) */
 
+#if defined(WDT_CTRLA) && !defined(RAMPD)
+/* Modern AVR Watchdog Timer (WDT.CTRLA): On these parts, wdt_enable()
+   writes the argument directly into the PERIOD bit field, so the WDTO_*
+   constants must equal the WDT.CTRLA PERIOD group codes - not the
+   classic WDTCSR WDP indices defined above (those land in the wrong
+   PERIOD slots, giving ~1/4 of the requested time, and WDTO_15MS even
+   selects PERIOD=OFF).  Redefine them to the group codes here.
+   The new-WDT hardware also supports 4 s and 8 s (PERIOD 0xA / 0xB),
+   so define those on this branch too.  15 ms has no exact match and uses
+   the nearest period of 16 CLK (~15.6 ms).  */
+#undef  WDTO_8MS
+#define WDTO_8MS    WDT_PERIOD_8CLK_gc
+#undef  WDTO_15MS
+#define WDTO_15MS   WDT_PERIOD_16CLK_gc
+#undef  WDTO_30MS
+#define WDTO_30MS   WDT_PERIOD_32CLK_gc
+#undef  WDTO_60MS
+#define WDTO_60MS   WDT_PERIOD_64CLK_gc
+#undef  WDTO_120MS
+#define WDTO_120MS  WDT_PERIOD_128CLK_gc
+#undef  WDTO_250MS
+#define WDTO_250MS  WDT_PERIOD_256CLK_gc
+#undef  WDTO_500MS
+#define WDTO_500MS  WDT_PERIOD_512CLK_gc
+#undef  WDTO_1S
+#define WDTO_1S     WDT_PERIOD_1KCLK_gc
+#undef  WDTO_2S
+#define WDTO_2S     WDT_PERIOD_2KCLK_gc
+#undef  WDTO_4S
+#define WDTO_4S     WDT_PERIOD_4KCLK_gc
+#undef  WDTO_8S
+#define WDTO_8S     WDT_PERIOD_8KCLK_gc
+#endif /* defined(WDT_CTRLA) && !defined(RAMPD) */
+
 #endif /* _AVR_WDT_H_ */

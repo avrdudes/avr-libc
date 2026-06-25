@@ -18,11 +18,17 @@
 
 ## Pull Requests
 
+  - On modern Xmega devices, `<avr/wdt.h>` now defines the following
+    constants that can be passed to wdt_enable: `WDTO_8MS`, `WDTO_15MS`,
+    `WDTO_30MS`, `WDTO_60MS`, `WDTO_120MS`, `WDTO_250MS`, `WDTO_500MS`,
+    `WDTO_1S`, `WDTO_2S`, `WDTO_4S`, `WDTO_8S` ([#1069][1069]).
+
 ## Other Changes
 
 [1065]: https://github.com/avrdudes/avr-libc/issues/1065
 [1066]: https://github.com/avrdudes/avr-libc/issues/1066
 [1068]: https://github.com/avrdudes/avr-libc/issues/1068
+[1069]: https://github.com/avrdudes/avr-libc/issues/1069
 
 
 # Changes in AVR-LibC v2.3.2
