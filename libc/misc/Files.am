@@ -52,6 +52,8 @@ eeprom_asm_sources = \
 dev_c_sources =
 
 dev_asm_sources = \
+	deviceinfo.S \
+	iosyms.S \
 	init_sp.S \
 	init_cvt.S \
 	init_ram_color.S \

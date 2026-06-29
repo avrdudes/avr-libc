@@ -8,6 +8,8 @@
 
   - Add `float` <-> 64-bit fixed point conversions ([#1066][1066]).
 
+  - Make `.note.gnu.avr.deviceinfo` work with `-nostartfiles` ([#1070][1070]).
+
 ## Issues closed
 
   - Fixed wdt_enable / wdt_disable on devices that have WDT_SYNCBUSY_bp.
@@ -29,6 +31,7 @@
 [1066]: https://github.com/avrdudes/avr-libc/issues/1066
 [1068]: https://github.com/avrdudes/avr-libc/issues/1068
 [1069]: https://github.com/avrdudes/avr-libc/issues/1069
+[1070]: https://github.com/avrdudes/avr-libc/issues/1070
 
 
 # Changes in AVR-LibC v2.3.2
