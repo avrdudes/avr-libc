@@ -2,20 +2,19 @@
 
 # Recognized variables:
 #
-# CC=[avr-gcc]		Used to compile bench.c.
-# JOBS=[1]              Number of parallel Jobs for make.
+# CC=[avr-gcc]		Used to compile muldiv.c.
 # TIMES=[1]             Multiplicator for N_VALS from the input files.
 # builddir=             Use AVR-LibC from builddir instead of CC's.
 #
-# ./gen-fxbench.sh A B ... will read files $BASE-A.txt $BASE-B.txt etc.
+# ./gen-fxmuldiv.sh A B ... will read files $BASE-A.txt $BASE-B.txt etc.
 # and user their input to generate the output file.
 
 out=out.dox
-elf=x.elf
+elf=y.elf
 
 CC=${CC-avr-gcc}
 TIMES=${TIMES-1}
-BASE=${BASE-fxlib}
+BASE=${BASE-mudi}
 
 AVRTEST_HOME=$(dirname $(which avrtest))
 avrtest="${AVRTEST_HOME}/avrtest -q -log"
@@ -64,25 +63,19 @@ getval ()
 fun_line ()
 {
     echo "== Line: $*"
-    fun=$1
-    suff=$2
-    rett=$3
-    lo="$4"
-    hi="$5"
-    suf2=""
-    [[ "$suff" =~ .*_.* ]] && suf2=_$(cut -d_ -f2 <<< "$suff")
-    [[ "$suff" =~ .*_.* ]] && suff=$(cut -d_ -f1 <<< "$suff")
-    signed=1 && [[ "$suff" =~ u.* ]] && signed=0
-    def="-DFunc=$1 -DSuffix=$suff -DTIMES=$TIMES -DSIGNED=$signed -DRET=$rett -DSuf2=$suf2"
+    suff=$1
+    qform=$2
+    typ=$(echo $3 | sed -e 's:-: :g')
+    def="-DFX=$suff -DMUL=$MUL -DDIV=$DIV -DTIMES=$TIMES"
 
-    echo "Func: $fun$suff $lo ... $hi def=$def"
+    echo "muldiv: $suff def=$def"
 
-    copt="-mmcu=$MCU -Os -std=gnu99 -Wall -Werror"
+    copt="-mmcu=$MCU -Os -std=gnu99 -Wall -Werror -mrelax"
 
     # Get cyc_avr, cyc_max, d_max.
     aopt="-I$AVRTEST_HOME"
     exit_o="$AVRTEST_HOME/exit-$MCU.o"
-    $CC bench.c -fmax-errors=1 -o $elf $copt $def $aopt $exit_o $CRT $LIBS \
+    $CC muldiv.c -fmax-errors=1 -o $elf $copt $def $aopt $exit_o $CRT $LIBS \
 	|| exit 1
     avr-objdump -d $elf > x.lst
     aout=$($avrtest $elf -args $lo $hi)
@@ -93,23 +86,23 @@ fun_line ()
     getval d_max "$aout"
 
     # Get size
-    sym="$fun$suff$suf2"
-    [ $sym = sqrthr  ] && sym="__$sym"
-    [ $sym = sqrtuhr ] && sym="__$sym"
     sopt="-nostartfiles"
-    lopt="-Wl,-u,$sym -Wl,--defsym,main=0"
+    lopt="-Wl,--defsym,main=0"
 
-    echo "" | $CC -xc - -xnone -o $elf $copt $sopt $d1 $lopt $LIBS \
+    $CC muldiv.c -DSIZE_ONLY -o y.elf $aopt $def $copt $sopt $d1 $lopt $LIBS \
 	|| exit 3
-    avr-objdump -d $elf > y.lst
-    size=$(avr-size $elf | grep $elf | awk '{ print $1 }')
+    avr-objdump -d y.elf > y.lst
+    size=$(avr-size y.elf | grep y.elf | awk '{ print $1 }')
     echo "size: $size; cyc: ($cyc_avr) $cyc_max; d_max: $d_max"
 
-    echo -n "  <tr><td>\\c #$fun$suff$suf2 <td align='right'>$size" >> $out
-    echo -n " <td>$lo <td>$hi" >> $out
+    echo -n "  <tr><td align='right'><code>$typ</code>" >> $out
+    echo -n " <td align='right'>$qform"     >> $out
+    echo -n " <td align='right'>\\c $suff"  >> $out
+    echo -n " <td align='right'>$size"    >> $out
     echo -n " <td align='right'>$cyc_avr" >> $out
     echo -n " <td align='right'>$cyc_max" >> $out
-    echo    " <td>$d_max" >> $out
+    # Add 0.5 to the ULP value.
+    echo    " <td>${d_max}.5" >> $out
 }
 
 do_func_txt ()
@@ -140,7 +133,7 @@ do_func_txt ()
 b="${builddir+builddir=$builddir }"
 c="" && [ $CC != avr-gcc ] && c="CC=$CC "
 t="" && [ $TIMES != 1 ] && t="TIMES=$TIMES "
-B="" && [ $BASE != fxlib ] && B="BASE=$BASE "
+B="" && [ $BASE != mudi ] && B="BASE=$BASE "
 
 cat <<EOF > $out
 /* Auto-generated file.  DO NOT EDIT, OR YOUR CHANGES WILL BE LOST!

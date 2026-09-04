@@ -1,0 +1,16 @@
+1 </table>
+1
+!MCU=attiny85
+!MUL=1
+!DIV=0
+1 &nbsp;
+1<table>
+1<caption>Fixed-Point Multiplication for ATmega85 (avr25, no MUL)</caption>
+1  <tr>
+1  <th>Type
+1  <th>Layout
+1  <th>Suffix
+1  <th>Size
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>Err<sub>max</sub>

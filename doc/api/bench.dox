@@ -32,6 +32,7 @@
 - \ref bench_libm "Benchmarks for IEEE single floating-point functions" from \ref avr_math "<math.h>"
 - \ref bench_libf7 "Benchmarks for IEEE double floating-point functions" from \ref avr_math "<math.h>"
 - \ref bench_fxlib "Benchmarks for fixed-point functions" from \ref avr_stdfix "<stdfix.h>"
+- \ref bench_fxmuldiv "Benchmarks for fixed-point multiplication and division"
 
 The results below can only give a rough estimate of the resources
 necessary for using certain library functions. There is a number

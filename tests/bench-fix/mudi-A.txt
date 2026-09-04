@@ -1,0 +1,28 @@
+!MCU=atmega128
+1\page benchmarks
+1
+1\section bench_fxmuldiv Fixed-Point Multiplication and Division
+1
+1The following tables contain benchmark values for non-saturating
+1\ref avr_stdfix "fixed-point" multiplication and division.
+1
+1- The values for absolute error Err<sub>max</sub>, and the Worst
+1  Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.
+1- The absolute error is specified in ULPs (Units in the Least Place).
+1- The benchmark values for division don't depend on the availability
+1  of \c MUL.
+1- The benchmark values depend slightly on the availability of \c MOVW,
+1  the PC size, argument preparation and optimization options.
+1
+!MUL=1
+!DIV=0
+1<table>
+1<caption>Fixed-Point Multiplication for ATmega128 (avr51, with MUL)</caption>
+1  <tr>
+1  <th>Type
+1  <th>Layout
+1  <th>Suffix
+1  <th>Size
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>Err<sub>max</sub>
