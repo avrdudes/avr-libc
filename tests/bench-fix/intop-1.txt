@@ -1,0 +1,27 @@
+!MUL=1
+!EXT=0
+!DIV=0
+1<table>
+1<caption>Multiply for $Mcu</caption>
+1  <tr>
+1  <th>Type
+1  <th>Size
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+uint8_t uint8_t uint8_t    \c-uint8_t
+uint16_t uint16_t uint16_t \c-uint16_t
+uint24_t uint24_t uint24_t \c-uint24_t
+uint32_t uint32_t uint32_t \c-uint32_t
+uint64_t uint64_t uint64_t \c-uint64_t
+#
+!EXT=1
+1<tr><td colspan='4'>
+uint8_t uint8_t   uint16_t \c-uint8_t-&rarr;-\c-uint16_t
+uint16_t uint16_t uint32_t \c-uint16_t-&rarr;-\c-uint32_t
+uint32_t uint32_t uint64_t \c-uint32_t-&rarr;-\c-uint64_t
+1<tr><td colspan='4'>
+int8_t int8_t   int16_t \c-int8_t-&rarr;-\c-int16_t
+int16_t int16_t int32_t \c-int16_t-&rarr;-\c-int32_t
+int32_t int32_t int64_t \c-int32_t-&rarr;-\c-int64_t
+1</table>
+1

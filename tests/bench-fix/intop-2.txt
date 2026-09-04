@@ -1,0 +1,24 @@
+!MUL=0
+!EXT=0
+!DIV=1
+1&nbsp;
+1<table>
+1<caption>Division for $Mcu</caption>
+1  <tr>
+1  <th>Type
+1  <th>Size
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+uint8_t uint8_t uint8_t    \c-uint8_t
+uint16_t uint16_t uint16_t \c-uint16_t
+uint24_t uint24_t uint24_t \c-uint24_t
+uint32_t uint32_t uint32_t \c-uint32_t
+uint64_t uint64_t uint64_t \c-uint64_t
+
+1<tr><td colspan='4'>
+int8_t int8_t int8_t    \c-int8_t
+int16_t int16_t int16_t \c-int16_t
+int24_t int24_t int24_t \c-int24_t
+int32_t int32_t int32_t \c-int32_t
+int64_t int64_t int64_t \c-int64_t
+1</table>

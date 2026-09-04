@@ -1,0 +1,2 @@
+!MCU=atmega128
+!Mcu="ATmega128"
