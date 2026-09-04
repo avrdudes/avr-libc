@@ -9,18 +9,24 @@
 #define NI __attribute((noipa))
 #define AI static __inline__ __attribute((always_inline))
 
+#ifdef SIZE_ONLY
+#define NAK __attribute__((naked))
+#else
+#define NAK // empty
+#endif
+
 #define avrtest_mulfx GLUE2 (avrtest_mul, FX)
 #define avrtest_divfx GLUE2 (avrtest_div, FX)
 
 #if MUL
-NI fx_t do_mul (fx_t a, fx_t b)
+NAK NI fx_t do_mul (fx_t a, fx_t b)
 {
   return a * b;
 }
 #endif // MUL
 
 #if DIV
-NI fx_t do_div (fx_t a, fx_t b)
+NAK NI fx_t do_div (fx_t a, fx_t b)
 {
   return a / b;
 }

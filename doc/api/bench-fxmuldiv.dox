@@ -29,22 +29,25 @@ The following tables contain benchmark values for non-saturating
   <th>Cycles<sub>avr</sub>
   <th>Cycles<sub>max</sub>
   <th>Err<sub>max</sub>
-  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>46 <td align='right'>33 <td align='right'>34 <td>0.5
-  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>160 <td align='right'>109 <td align='right'>110 <td>0.5
-  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>520 <td align='right'>1108 <td align='right'>1118 <td>0.5
-  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>516 <td align='right'>1106 <td align='right'>1116 <td>0.5
-  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>76 <td align='right'>51 <td align='right'>54 <td>1.5
-  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>202 <td align='right'>132 <td align='right'>133 <td>1.5
-  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>654 <td align='right'>1173 <td align='right'>1197 <td>1.5
-  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>650 <td align='right'>1171 <td align='right'>1195 <td>1.5
-  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>8 <td align='right'>4 <td align='right'>4 <td>1.5
-  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>42 <td align='right'>31 <td align='right'>32 <td>0.5
-  <tr><td align='right'><code>unsigned long fract</code> <td align='right'>0.32 <td align='right'>\c ulr <td align='right'>124 <td align='right'>175 <td align='right'>175 <td>1.5
-  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>508 <td align='right'>1102 <td align='right'>1112 <td>0.5
-  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>16 <td align='right'>8 <td align='right'>8 <td>1.5
-  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>80 <td align='right'>50 <td align='right'>53 <td>1.5
-  <tr><td align='right'><code>long fract</code> <td align='right'>&plusmn;.31 <td align='right'>\c lr <td align='right'>204 <td align='right'>216 <td align='right'>225 <td>2.5
-  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>642 <td align='right'>1167 <td align='right'>1191 <td>1.5
+  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>48 <td align='right'>33 <td align='right'>34 <td>0.5
+  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>142 <td align='right'>109 <td align='right'>110 <td>0.5
+  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>486 <td align='right'>1108 <td align='right'>1118 <td>0.5
+  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>482 <td align='right'>1106 <td align='right'>1116 <td>0.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>78 <td align='right'>51 <td align='right'>54 <td>1.5
+  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>184 <td align='right'>132 <td align='right'>133 <td>1.5
+  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>620 <td align='right'>1173 <td align='right'>1197 <td>1.5
+  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>616 <td align='right'>1171 <td align='right'>1195 <td>1.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>6 <td align='right'>4 <td align='right'>4 <td>1.5
+  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>44 <td align='right'>31 <td align='right'>32 <td>0.5
+  <tr><td align='right'><code>unsigned long fract</code> <td align='right'>0.32 <td align='right'>\c ulr <td align='right'>126 <td align='right'>175 <td align='right'>175 <td>1.5
+  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>474 <td align='right'>1102 <td align='right'>1112 <td>0.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>14 <td align='right'>8 <td align='right'>8 <td>1.5
+  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>82 <td align='right'>50 <td align='right'>53 <td>1.5
+  <tr><td align='right'><code>long fract</code> <td align='right'>&plusmn;.31 <td align='right'>\c lr <td align='right'>206 <td align='right'>216 <td align='right'>225 <td>2.5
+  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>608 <td align='right'>1167 <td align='right'>1191 <td>1.5
  </table>
 
  &nbsp;
@@ -58,22 +61,25 @@ The following tables contain benchmark values for non-saturating
   <th>Cycles<sub>avr</sub>
   <th>Cycles<sub>max</sub>
   <th>Err<sub>max</sub>
-  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>70 <td align='right'>173 <td align='right'>253 <td>0.5
-  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>106 <td align='right'>298 <td align='right'>435 <td>1.5
-  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>548 <td align='right'>6612 <td align='right'>6914 <td>0.5
-  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>544 <td align='right'>6695 <td align='right'>6992 <td>0.5
-  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>92 <td align='right'>212 <td align='right'>270 <td>1.5
-  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>160 <td align='right'>391 <td align='right'>496 <td>1.5
-  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>682 <td align='right'>6669 <td align='right'>7009 <td>1.5
-  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>678 <td align='right'>6753 <td align='right'>7007 <td>1.5
-  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>50 <td align='right'>105 <td align='right'>117 <td>1.5
-  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>66 <td align='right'>229 <td align='right'>256 <td>0.5
+  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>72 <td align='right'>173 <td align='right'>253 <td>0.5
+  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>108 <td align='right'>298 <td align='right'>435 <td>1.5
+  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>514 <td align='right'>6612 <td align='right'>6914 <td>0.5
+  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>510 <td align='right'>6695 <td align='right'>6992 <td>0.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>94 <td align='right'>212 <td align='right'>270 <td>1.5
+  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>162 <td align='right'>391 <td align='right'>496 <td>1.5
+  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>648 <td align='right'>6669 <td align='right'>7009 <td>1.5
+  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>644 <td align='right'>6753 <td align='right'>7007 <td>1.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>48 <td align='right'>105 <td align='right'>117 <td>1.5
+  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>68 <td align='right'>229 <td align='right'>256 <td>0.5
   <tr><td align='right'><code>unsigned long fract</code> <td align='right'>0.32 <td align='right'>\c ulr <td align='right'>262 <td align='right'>1589 <td align='right'>1670 <td>1.5
-  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>536 <td align='right'>6769 <td align='right'>7017 <td>0.5
-  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>72 <td align='right'>90 <td align='right'>105 <td>1.5
-  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>96 <td align='right'>239 <td align='right'>267 <td>1.5
-  <tr><td align='right'><code>long fract</code> <td align='right'>&plusmn;.31 <td align='right'>\c lr <td align='right'>340 <td align='right'>1628 <td align='right'>1712 <td>2.5
-  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>670 <td align='right'>6826 <td align='right'>7067 <td>1.5
+  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>502 <td align='right'>6769 <td align='right'>7017 <td>0.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>70 <td align='right'>90 <td align='right'>105 <td>1.5
+  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>98 <td align='right'>239 <td align='right'>267 <td>1.5
+  <tr><td align='right'><code>long fract</code> <td align='right'>&plusmn;.31 <td align='right'>\c lr <td align='right'>342 <td align='right'>1628 <td align='right'>1712 <td>2.5
+  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>636 <td align='right'>6826 <td align='right'>7067 <td>1.5
  </table>
 
  &nbsp;
@@ -87,21 +93,24 @@ The following tables contain benchmark values for non-saturating
   <th>Cycles<sub>avr</sub>
   <th>Cycles<sub>max</sub>
   <th>Err<sub>max</sub>
-  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>54 <td align='right'>222 <td align='right'>233 <td>1.5
-  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>70 <td align='right'>640 <td align='right'>681 <td>1.5
-  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>188 <td align='right'>2436 <td align='right'>2630 <td>1.5
-  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>188 <td align='right'>3008 <td align='right'>3242 <td>1.5
-  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>110 <td align='right'>248 <td align='right'>257 <td>1.5
-  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>158 <td align='right'>684 <td align='right'>722 <td>1.5
-  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>396 <td align='right'>2544 <td align='right'>2684 <td>1.5
-  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>396 <td align='right'>3136 <td align='right'>3287 <td>1.5
-  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>40 <td align='right'>85 <td align='right'>89 <td>1.5
-  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>42 <td align='right'>211 <td align='right'>230 <td>1.5
-  <tr><td align='right'><code>unsigned long fract</code> <td align='right'>0.32 <td align='right'>\c ulr <td align='right'>318 <td align='right'>2526 <td align='right'>2626 <td>0.5
-  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>188 <td align='right'>3526 <td align='right'>3774 <td>0.5
-  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>52 <td align='right'>101 <td align='right'>101 <td>1.5
-  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>100 <td align='right'>246 <td align='right'>256 <td>1.5
+  <tr><td align='right'><code>unsigned short accum</code> <td align='right'>8.8 <td align='right'>\c uhk <td align='right'>56 <td align='right'>222 <td align='right'>233 <td>1.5
+  <tr><td align='right'><code>unsigned accum</code> <td align='right'>16.16 <td align='right'>\c uk <td align='right'>72 <td align='right'>640 <td align='right'>681 <td>1.5
+  <tr><td align='right'><code>unsigned long accum</code> <td align='right'>32.32 <td align='right'>\c ulk <td align='right'>154 <td align='right'>2436 <td align='right'>2630 <td>1.5
+  <tr><td align='right'><code>unsigned long long accum</code> <td align='right'>16.48 <td align='right'>\c ullk <td align='right'>154 <td align='right'>3008 <td align='right'>3242 <td>1.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short accum</code> <td align='right'>&plusmn;8.7 <td align='right'>\c hk <td align='right'>112 <td align='right'>248 <td align='right'>257 <td>1.5
+  <tr><td align='right'><code>accum</code> <td align='right'>&plusmn;16.15 <td align='right'>\c k <td align='right'>160 <td align='right'>684 <td align='right'>722 <td>1.5
+  <tr><td align='right'><code>long accum</code> <td align='right'>&plusmn;32.31 <td align='right'>\c lk <td align='right'>362 <td align='right'>2544 <td align='right'>2684 <td>1.5
+  <tr><td align='right'><code>long long accum</code> <td align='right'>&plusmn;16.47 <td align='right'>\c llk <td align='right'>362 <td align='right'>3136 <td align='right'>3287 <td>1.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>unsigned short fract</code> <td align='right'>0.8 <td align='right'>\c uhr <td align='right'>42 <td align='right'>85 <td align='right'>89 <td>1.5
+  <tr><td align='right'><code>unsigned fract</code> <td align='right'>0.16 <td align='right'>\c ur <td align='right'>44 <td align='right'>211 <td align='right'>230 <td>1.5
+  <tr><td align='right'><code>unsigned long fract</code> <td align='right'>0.32 <td align='right'>\c ulr <td align='right'>320 <td align='right'>2526 <td align='right'>2626 <td>0.5
+  <tr><td align='right'><code>unsigned long long fract</code> <td align='right'>0.64 <td align='right'>\c ullr <td align='right'>154 <td align='right'>3526 <td align='right'>3774 <td>0.5
+<tr><td colspan='7'>
+  <tr><td align='right'><code>short fract</code> <td align='right'>&plusmn;.7 <td align='right'>\c hr <td align='right'>54 <td align='right'>101 <td align='right'>101 <td>1.5
+  <tr><td align='right'><code>fract</code> <td align='right'>&plusmn;.15 <td align='right'>\c r <td align='right'>102 <td align='right'>246 <td align='right'>256 <td>1.5
   <tr><td align='right'><code>long fract</code> <td align='right'>&plusmn;.31 <td align='right'>\c lr <td align='right'>490 <td align='right'>2627 <td align='right'>2735 <td>0.5
-  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>396 <td align='right'>3722 <td align='right'>3879 <td>0.5
+  <tr><td align='right'><code>long long fract</code> <td align='right'>&plusmn;.63 <td align='right'>\c llr <td align='right'>362 <td align='right'>3722 <td align='right'>3879 <td>0.5
  </table>
 */

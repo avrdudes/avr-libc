@@ -2,15 +2,20 @@ uhk 8.8     unsigned-short-accum
 uk  16.16   unsigned-accum
 ulk 32.32   unsigned-long-accum
 ullk 16.48  unsigned-long-long-accum
+#
+1<tr><td colspan='7'>
 hk   &plusmn;8.7    short-accum
 k    &plusmn;16.15  accum
 lk   &plusmn;32.31  long-accum
 llk  &plusmn;16.47  long-long-accum
-
+#
+1<tr><td colspan='7'>
 uhr  0.8  unsigned-short-fract
 ur   0.16 unsigned-fract
 ulr  0.32 unsigned-long-fract
 ullr 0.64 unsigned-long-long-fract
+#
+1<tr><td colspan='7'>
 hr   &plusmn;.7  short-fract
 r    &plusmn;.15 fract
 lr   &plusmn;.31 long-fract
