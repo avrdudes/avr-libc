@@ -1,3 +1,11 @@
+1  <tr>
+1  <th>Type
+1  <th>Layout
+1  <th>Suffix
+1  <th>Size
+1  <th>Cycles<sub>avr</sub>
+1  <th>Cycles<sub>max</sub>
+1  <th>Err<sub>max</sub>
 uhk 8.8     unsigned-short-accum
 uk  16.16   unsigned-accum
 ulk 32.32   unsigned-long-accum
@@ -20,3 +28,4 @@ hr   &plusmn;.7  short-fract
 r    &plusmn;.15 fract
 lr   &plusmn;.31 long-fract
 llr  &plusmn;.63 long-long-fract
+1</table>
