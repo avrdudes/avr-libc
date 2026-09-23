@@ -167,7 +167,6 @@ Add new news to NEWS.md.
   - memory: Allow the use of stdint types [#918]
   - doc: Note attiny9 being supported documentation [#915]
   - Fix __BOOT_SIGROW_READ for some ATtiny [#914]
-  - .githud [#908]
   - Extend _delay_loop_2 so it works with AVR_TINY. [#902]
   - Fix inline asm constraints of wdt_enable, wdt_disable. [#901]
   - Use autotools to determine Python command to run mlib-gen.py. [#896]
