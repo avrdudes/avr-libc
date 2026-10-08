@@ -32,6 +32,8 @@
 #include "sectionname.h"
 #include "alias.h"
 
+#define FORGET(x) __asm ("" : "+r" (x))
+
 ATTRIBUTE_CLIB_SECTION
 int
 ftoa_prf (float val, char *s, uint8_t width, uint8_t prec, uint8_t flags)
@@ -82,6 +84,8 @@ ftoa_prf (float val, char *s, uint8_t width, uint8_t prec, uint8_t flags)
         return DTOA_NONFINITE;
     }
 
+    FORGET (flags);
+
     if (vtype & FTOA_INF)
     {
         ndigs = sign ? 4 : 3;
@@ -112,6 +116,8 @@ ftoa_prf (float val, char *s, uint8_t width, uint8_t prec, uint8_t flags)
         *s = '\0';
         return DTOA_NONFINITE;
     }
+
+    FORGET (flags);
 
     int n = (sign ? 1 : 0) + (exp > 0 ? exp + 1 : 1) + (prec ? prec + 1 : 0);
     width = width > n ? width - n : 0;

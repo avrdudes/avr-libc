@@ -87,5 +87,8 @@ vfscanf_name_min.o: vfscanf.c
 vfscanf_name_flt.o: vfscanf.c
 	$(COMPILE) -DVFSCANF_NAME=vfscanf_flt $(PRINTF_FLT_CFLAGS) -DSCANF_LEVEL=SCANF_FLT -c -o $@ $<
 
+################################
+
+vfprintf_min.o vfprintf_std.o vfprintf_flt.o vfprintf_name_min.o vfprintf_name_flt.o: AVRLIB_CFLAGS += @FNO_TREE_LOOP_OPTIMIZE@ @FNO_MOVE_LOOP_INVARIANTS@
 
 # vim: set ft=make:

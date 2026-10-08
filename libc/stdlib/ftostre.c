@@ -28,10 +28,13 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include <avr/pgmspace.h>
 #include "ftoa_engine.h"
 #include "sectionname.h"
 #include "alias.h"
+
+#define FORGET(x) __asm ("" : "+r" (x))
 
 ATTRIBUTE_CLIB_SECTION
 char *
@@ -47,12 +50,15 @@ ftostre (float val, char *sbeg, uint8_t prec, uint8_t flags)
     s = d = sbeg;
     uint8_t vtype = (uint8_t) *s++;
 
-    if ((vtype & FTOA_MINUS) && !(vtype & FTOA_NAN))	/* like 'Glibc'	*/
-	*d++ = '-';
+    char sign = 0;
+    if ((vtype & (FTOA_MINUS | FTOA_NAN)) == FTOA_MINUS)  // like Glibc
+        sign = '-';
     else if (flags & DTOSTR_PLUS_SIGN)
-	*d++ = '+';
+        sign = '+';
     else if (flags & DTOSTR_ALWAYS_SIGN)
-	*d++ = ' ';
+        sign = ' ';
+    if (sign)
+	*d++ = sign;
 
     if (vtype & FTOA_NAN)
     {
@@ -65,6 +71,8 @@ ftostre (float val, char *sbeg, uint8_t prec, uint8_t flags)
 	return sbeg;
     }
 
+    FORGET (flags);
+
     if (vtype & FTOA_INF)
     {
 	/* "INF" or "inf" */
@@ -75,6 +83,8 @@ ftostre (float val, char *sbeg, uint8_t prec, uint8_t flags)
 	d[3] = '\0';
 	return sbeg;
     }
+
+    FORGET (flags);
 
     /* mantissa	*/
     if ( (*d++ = *s++) != '1')
