@@ -162,7 +162,7 @@ Section Flags</h3>
 <tr>
 <td><code>a</code> </td><td>The section will be <b>a</b>llocated, i.e. it occupies space on the target hardware  </td></tr>
 <tr>
-<td><code>w</code> </td><td>The section contains data that can be <b>w</b>ritten at run-time. Sections that only contain read-only entities don't have the <code>w</code> flag set  </td></tr>
+<td><code>w</code> </td><td>The section contains data that can be <b>w</b>ritten at run time. Sections that only contain read-only entities don't have the <code>w</code> flag set  </td></tr>
 <tr>
 <td><code>x</code> </td><td>The section contains e<b>x</b>ecutable code, though the section may also contain non-executable objects  </td></tr>
 <tr>
@@ -252,7 +252,7 @@ Address<sup>1</sup> </th><th>Flags </th><th>Purpose  </th></tr>
 <ol type="1">
 <li>The <a class="el" href="mem_sections.html#sec_vma">VMA</a>s for regions other than <code>text</code> are offset in order to linearize the non-linear memory address space of the AVR Harvard architecture. The target code only ever uses the lower 16 bits of the VMA to access objects in non-<code>text</code> regions.</li>
 <li>The addresses for regions <code>text</code>, <code>data</code> <code>and</code> rodata are actually defined as symbols like <code>__TEXT_REGION_ORIGIN__</code>, so that they can be adjusted by means of, say <code>-Wl,--defsym,__DATA_REGION_ORIGIN__=0x800060</code>. Same applies for the lengths of all the regions, which is <code>__<em>NAME</em>_REGION_LENGTH__</code> for region <em>name</em>.</li>
-<li>The <code>rodata</code> region is only present in the <code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code> emulations, which is the case for Binutils since v2.42 for the AVR64 and AVR128 devices without <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a>.</li>
+<li>The <code>rodata</code> region is only present in the <code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code> emulations, which is the case for Binutils since 2.42 for the AVR64 and AVR128 devices without <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"><code>-mrodata-in-ram</code></a>.</li>
 </ol>
 <h1><a class="anchor" id="sec_ld_script"></a>
 Output Sections of the Default Linker Script</h1>
@@ -300,19 +300,23 @@ The .text Output Section</h2>
 <p>The <code>.text</code> output section contains the input sections described below. Input sections that are not used by the tools are omitted. A <b><code>*</code></b> wildcard stands for any sequence of characters, including empty ones, that are valid in a section name.</p>
 <dl>
 <dt><a class="anchor" id="sec_dot_vectors"></a><code>.vectors</code> </dt>
-<dd><p class="startdd">The <code>.vectors</code> sections contains the interrupt vector table which consists of jumps to <a class="el" href="assembler.html#dot_weak">weak</a>ly defined labels: To <code>__init</code> for the first entry at index&#160;0, and to <code>__vector_<em>N</em></code> for the entry at index <code><em>N</em></code>&#160;&ge;&#160;1. The default value for <code>__vector_<em>N</em></code> is <code>__bad_interrupt</code>, which jumps to weakly defined <code>__vector_default</code>, which jumps to <code>__vectors</code>, which is the start of the <code>.vectors</code> section.</p>
-<p class="enddd">Implementing an interrupt service routine (ISR) is performed with the help of the <code><a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></code> macro in C/C++ code.  </p>
+<dd><p class="startdd">The <code>.vectors</code> sections contains the interrupt vector table which consists of jumps to <a class="el" href="assembler.html#dot_weak">weak</a>ly defined labels: To <code>__init</code> for the first entry at index&#160;0, and to <code>__vector_<em>N</em></code> for the entry at index <code><em>N</em></code>&#160;&ge;&#160;1. The default value for <code>__vector_<em>N</em></code> is <code>__bad_interrupt</code>, which jumps to weakly defined <code>__vector_default</code> (<a class="el" href="group__avr__interrupts.html#ga1f6459a85cda682b2163a20af03ac744">BADISR_vect</a>), which jumps to <code>__vectors</code>, which is the start of the <code>.vectors</code> section.</p>
+<p class="enddd">Implementing an interrupt service routine (ISR) is performed with the help of the <code><a class="el" href="group__avr__interrupts.html#gad28590624d422cdf30d626e0a506255f">ISR</a></code> or <code><a class="el" href="group__avr__interrupts.html#ga48ae9a7647627e76a69f814510566d6c">ISR_N</a></code> macro in C/C++ code.  </p>
 </dd>
+<dt><code>SORT(.vectortext*)</code> </dt>
+<dd>For code that should be placed immediately after the interrupt vector table. Since Binutils <a href="https://sourceware.org/PR34686">2.48</a>.  </dd>
 <dt><a class="anchor" id="sec_dot_progmem"></a><code>.progmem.data</code> </dt>
 <dd></dd>
 <dt><code>.progmem.data.*</code> </dt>
 <dd></dd>
 <dt><code>.progmem.gcc.*</code> </dt>
-<dd><p class="startdd">This section is used for read-only data declared with attribute <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, and for data in address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>.</p>
-<p class="enddd">The compiler assumes that the <code>.progmem.data</code> sections are located in the lower 64 KiB of program memory. When it does not fit in the lower 64 KiB block, then the program reads garbage except address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> or <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> is used. In that case however, data can be located in the <a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx.data</a> section which does not require to be located in the lower program memory.  </p>
+<dd><p class="startdd">Used for read-only data declared with attribute <a class="el" href="group__avr__pgmspace.html#ga75acaba9e781937468d0911423bc0c35">PROGMEM</a>, and for data in address-space <a class="el" href="group__avr__flash.html#ga9640f3080a04903165ca21f35da81a38">__flash</a>. Since Binutils <a href="https://sourceware.org/PR32968">2.45</a> the linker script asserts that these sections actually fit in the lower 64 KiB block.</p>
+<p class="enddd">For read-only data that may reside at a higher flash location above 64 KiB, address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> or <a class="el" href="group__avr__pgmspace.html#gae59d3b5091405672ec394d3903ee60c5">PROGMEM_FAR</a> together with the <a class="el" href="group__avr__pgmspace.html">pgm_read_*_far</a> macros can be used. See section <a class="el" href="mem_sections.html#sec_dot_progmemx">.progmemx.data</a> below.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_trampolines"></a>.trampolines </dt>
 <dd>Linker stubs for indirect jumps and calls on devices with more than 128 KiB of program memory. This section must be located in the same 128 KiB block like the interrupt vector table. For some background on linker stubs, see the GCC documentation on <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind">EIND</a>.  </dd>
+<dt><code>.lowtext*</code> </dt>
+<dd>For code that should reside in the lower 128 KiB of the program memory.  </dd>
 <dt><a class="anchor" id="sec_text_text"></a><code>.text</code> </dt>
 <dd></dd>
 <dt><code>.text.*</code> </dt>
@@ -418,7 +422,7 @@ The .text Output Section</h2>
 <div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
 <div class="ttc" id="apgmspace_8h_html"><div class="ttname"><a href="pgmspace_8h.html">pgmspace.h</a></div></div>
 </div><!-- fragment --><p> For data in address-space <a class="el" href="group__avr__flash.html#ga23fa8e089930723df0ce4bbdbf8d02bc">__flashx</a> there are support functions in <a class="el" href="group__avr__flash.html">&lt;avr/flash.h&gt;</a>.</p>
-<p class="enddd">The <code>.progmemx.*</code> input section pattern was added in Binutils v2.30. In older versions, there was a catch all <code>.progmem*</code> pattern for all data in program space, which will cause problems when progmem data pushes the <code>.trampolines</code> out of the lower 128 KiB segment.  </p>
+<p class="enddd">The <code>.progmemx.*</code> input section pattern was added in Binutils <a href="https://sourceware.org/PR21849">2.30</a>. In older versions, there was a catch all <code>.progmem*</code> pattern for all data in program space, which caused problems when progmem data pushed <code>.trampolines</code> out of the lower 128 KiB segment.  </p>
 </dd>
 <dt><a class="anchor" id="sec_dot_jumptables"></a><code>.jumptables*</code> </dt>
 <dd>Used to place jump tables in some cases.  </dd>
@@ -497,7 +501,7 @@ The .note.gnu.avr.deviceinfo Section</h2>
 <div class="ttc" id="agroup__avr__string_html_ga219836f542ce53545052bed5353820ca"><div class="ttname"><a href="group__avr__string.html#ga219836f542ce53545052bed5353820ca">strlen</a></div><div class="ttdeci">size_t strlen(const char *)</div><div class="ttdoc">Calculate the length of a string.</div></div>
 </div><!-- fragment --><p>The contents of this section can be displayed with</p>
 <ul>
-<li><code>avr-objdump -P avr-deviceinfo <em>file</em></code>, which is supported since Binutils v2.43.</li>
+<li><code>avr-objdump -P avr-deviceinfo <em>file</em></code>, which is supported since Binutils 2.43.</li>
 <li><code>avr-readelf -n <em>file</em></code>, which displays all notes.</li>
 </ul>
 <h1><a class="anchor" id="sec_symbols"></a>
@@ -507,7 +511,7 @@ Symbols in the Default Linker Script</h1>
 <dl>
 <dt><code>__<em>name</em>_REGION_ORIGIN__</code> </dt>
 <dd><p class="startdd">Describes the physical properties of memory region <code><em>name</em></code>, where <code><em>name</em></code> is one of <code>TEXT</code> or <code>DATA</code>. The address is a VMA and offset as explained above. <br  />
- The linker script only supplies a default for the symbol values when they have not been defined by other means, like for example in the startup code or by <code><a class="el" href="using_tools.html#opt_defsym">--defsym</a></code>. For example, to let the code start at address <code>0x100</code>, one can link with </p><pre class="fragment">avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100</pre><p class="enddd">Notice that <code>__DATA_REGION_ORIGIN__</code> was only introduced since Binutils <a href="https://sourceware.org/PR29741">v2.40</a>. Prior to that, a core specific default value was used for the beginning of the data region, and thus defining this symbol had no effect.  </p>
+ The linker script only supplies a default for the symbol values when they have not been defined by other means, like for example in the startup code or by <code><a class="el" href="using_tools.html#opt_defsym">--defsym</a></code>. For example, to let the code start at address <code>0x100</code>, one can link with </p><pre class="fragment">avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100</pre><p class="enddd">Notice that <code>__DATA_REGION_ORIGIN__</code> was only introduced since Binutils <a href="https://sourceware.org/PR29741">2.40</a>. Prior to that, a core specific default value was used for the beginning of the data region, and thus defining this symbol had no effect.  </p>
 </dd>
 <dt><code>__<em>name</em>_REGION_LENGTH__</code> </dt>
 <dd>Describes the physical properties of memory region <code><em>name</em></code>, where <code><em>name</em></code> is one of: <code>TEXT</code>, <code>DATA</code>, <code>EEPROM</code>, <code>LOCK</code>, <code>FUSE</code>, <code>SIGNATURE</code> or <code>USER_SIGNATURE</code>. <br  />
@@ -518,15 +522,15 @@ Symbols in the Default Linker Script</h1>
 <dt><code>__data_start</code> </dt>
 <dd></dd>
 <dt><code>__data_end</code> </dt>
-<dd>Start and (one past the) end <a class="el" href="mem_sections.html#sec_vma">VMA</a> address of the <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code> section in RAM.  </dd>
+<dd>Start and (one past the) end <a class="el" href="mem_sections.html#sec_vma">VMA</a> of the <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code> section in RAM.  </dd>
 <dt><code>__data_load_start</code> </dt>
 <dd></dd>
 <dt><code>__data_load_end</code> </dt>
-<dd>Start and (one past the) end <a class="el" href="mem_sections.html#sec_lma">LMA</a> address of the <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code> section initializers located in program memory. Used together with the VMA addresses above by the <a class="el" href="mem_sections.html#sec_dot_init">startup code</a> to copy data initializers from program memory to RAM.  </dd>
+<dd>Start and (one past the) end <a class="el" href="mem_sections.html#sec_lma">LMA</a> of the <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code> section initializers located in program memory. Used together with the VMA above by the <a class="el" href="mem_sections.html#sec_dot_init">startup code</a> to copy data initializers from program memory to RAM.  </dd>
 <dt><code>__bss_start</code> </dt>
 <dd></dd>
 <dt><code>__bss_end</code> </dt>
-<dd>Start and (one past the) end VMA address of the <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code> section. The startup code clears this part of the RAM.  </dd>
+<dd>Start and (one past the) end VMA of the <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code> section. The startup code clears this part of the RAM.  </dd>
 <dt><code>__rodata_start</code> </dt>
 <dd></dd>
 <dt><code>__rodata_end</code> </dt>
@@ -534,7 +538,7 @@ Symbols in the Default Linker Script</h1>
 <dt><code>__rodata_load_start</code> </dt>
 <dd></dd>
 <dt><code>__rodata_load_end</code> </dt>
-<dd>Start and (one past the) end VMA resp. LMA address of the <code>.rodata</code> output section. These symbols are only defined when <code>.rodata</code> is not output to the <code>text</code> region, which is the case for emulations <code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code>.  </dd>
+<dd>Start and (one past the) end VMA resp. LMA of the <code>.rodata</code> output section. These symbols are only defined when <code>.rodata</code> is not output to the <code>text</code> region, which is the case for emulations <code>avrxmega2_flmap</code> and <code>avrxmega4_flmap</code>.  </dd>
 <dt><a class="anchor" id="__heap_start"></a><code>__heap_start</code> </dt>
 <dd>One past the last object located in static storage. Immediately follows the <code><a class="el" href="mem_sections.html#sec_dot_noinit">.noinit</a></code> section (which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_bss">.bss</a></code>, which immediately follows <code><a class="el" href="mem_sections.html#sec_dot_data">.data</a></code>). Used by <a class="el" href="malloc.html#malloc_tunables">malloc() tunables</a> to determine the start of the heap. On devices that have it, the startup code sets <code>SPLIM</code> to the value of <code>__heap_start-1</code>.  </dd>
 <dt><code>_etext</code> </dt>
@@ -567,7 +571,7 @@ In C/C++ Code</h2>
 <div class="ttc" id="aio_8h_html"><div class="ttname"><a href="io_8h.html">io.h</a></div></div>
 </div><!-- fragment --><ul>
 <li>The <code>used</code> attribute tells the compiler that the function is used although it is never called.</li>
-<li>The <code>unused</code> attribute tells the compiler that it is fine that the function is unused, and silences respective diagnostics about the seemingly unused functions.</li>
+<li>The <code>unused</code> attribute tells the compiler that it is fine that the function is unused, and silences respective diagnostics about the seemingly unused function.</li>
 <li>The <code>naked</code> attribute is required because the code is located in an init section. The function <em>must not have a <code>RET</code> statement</em> because the function is never called. According to the GCC documentation, the only code supported in naked functions is inline assembly, but the code above is simple enough so that GCC can deal with it.</li>
 </ul>
 <h2><a class="anchor" id="asm_sections"></a>
@@ -606,7 +610,7 @@ In Assembly Code</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:19 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

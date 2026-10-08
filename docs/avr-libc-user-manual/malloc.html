@@ -119,7 +119,7 @@ Internal vs. external RAM</h1>
 Tunables for malloc()</h1>
 <p>There are a number of variables that can be tuned to adapt the behavior of <a class="el" href="group__avr__stdlib.html#a_malloc">malloc()</a> to the expected requirements and constraints of the application. Any changes to these tunables should be made before the very first call to malloc(). Note that some library functions might also use dynamic memory (notably those from the <a class="el" href="group__avr__stdio.html">&lt;stdio.h&gt;: Standard IO facilities</a>), so make sure the changes will be done early enough in the startup sequence.</p>
 <p>The variables <code><a class="el" href="group__avr__stdlib.html#ga9310042b3956282440c091d20cb98c5f">__malloc_heap_start</a></code> and <code><a class="el" href="group__avr__stdlib.html#ga4d7b1bf0f75d529cc75229a266132115">__malloc_heap_end</a></code> can be used to restrict the malloc() function to a certain memory region. These variables are statically initialized to point to <code>__heap_start</code> and <code>__heap_end</code>, respectively, where <code>__heap_start</code> is filled in by the linker to point just beyond <code>.bss</code>, and <code>__heap_end</code> is set to 0 which makes malloc() assume the heap is below the stack.</p>
-<p>If the heap is going to be moved to external RAM, <code>__malloc_heap_end</code> <em>must</em> be adjusted accordingly. This can either be done at run-time, by writing directly to this variable, or it can be done automatically at link-time, by adjusting the value of the symbol <code>__heap_end</code>.</p>
+<p>If the heap is going to be moved to external RAM, <code>__malloc_heap_end</code> <em>must</em> be adjusted accordingly. This can either be done at run time, by writing directly to this variable, or it can be done automatically at link time, by adjusting the value of the symbol <code>__heap_end</code>.</p>
 <p><a class="anchor" id="malloc_extram"></a>The following example shows a linker command to relocate the entire <code>.data</code> and <code>.bss</code> segments, and the heap to location 0x1100 in external RAM. The heap will extend up to address 0xffff.</p>
 <div class="fragment"><div class="line">avr-gcc ... -Wl,--section-start,.data=0x801100,--defsym=__heap_end=0x80ffff ...</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>See <a class="el" href="mem_sections.html#harvard_arch">explanation</a> for offset 0x800000. See the chapter about <a class="el" href="using_tools.html#gcc_minusW">using gcc</a> for the <code>-Wl</code> options.</dd>
@@ -157,7 +157,7 @@ Implementation details</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:20 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

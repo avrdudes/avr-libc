@@ -124,7 +124,7 @@ Functions</h2></td></tr>
 <p>This requires that the clock frequency of the device is provided in the <code><a class="el" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8" title="CPU frequency in Hz.">F_CPU</a></code> macro in units of Hertz. The macro must be defined before including the &lt;<a class="el" href="delay_8h.html">util/delay.h</a>&gt; header. It can be defined in the source code like indicated above, or it can be defined on the command line / in a Makefile by means of <code>-D F_CPU=...</code></p>
 <p>The functions in this header file are wrappers around the basic busy-wait functions from <code>&lt;<a class="el" href="delay__basic_8h.html">util/delay_basic.h</a>&gt;</code>, or, when supported by the compiler, then <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Built-in-Functions.html#index-_005f_005fbuiltin_005favr_005fdelay_005fcycles">__builtin_avr_delay_cycles()</a> is used instead.</p>
 <p>In any case, the delay functions provided by this header will not disable interrupts, which means hat the delay time will be longer than specified when interrupts occur while a delay function is running.</p>
-<p>In order for these functions to work as intended, compiler optimizations <em>must</em> be enabled, and the delay time <em>must</em> be an expression that is a known constant at compile-time. If these requirements are not met, the resulting delay will be much longer (and basically unpredictable), and applications that otherwise do not use floating-point calculations will experience severe code bloat by the floating-point library routines linked into the application. The idea is that compile-time constant expressions will be eliminated by compiler optimization so floating-point expressions can be used to calculate the number of delay cycles needed based on the CPU frequency passed by the macro F_CPU.</p>
+<p>In order for these functions to work as intended, compiler optimizations <em>must</em> be enabled, and the delay time <em>must</em> be an expression that is a known constant at compile time. If these requirements are not met, the resulting delay will be much longer (and basically unpredictable), and applications that otherwise do not use floating-point calculations will experience severe code bloat by the floating-point library routines linked into the application. The idea is that compile-time constant expressions will be eliminated by compiler optimization so floating-point expressions can be used to calculate the number of delay cycles needed based on the CPU frequency passed by the macro F_CPU.</p>
 <p>The functions available allow the specification of microsecond, and millisecond delays directly, using the application-supplied macro F_CPU as the CPU clock frequency in Hertz. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ga43bafb28b29491ec7f871319b5a3b2f8" name="ga43bafb28b29491ec7f871319b5a3b2f8"></a>
@@ -218,7 +218,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:21 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

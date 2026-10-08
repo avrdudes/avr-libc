@@ -400,7 +400,7 @@ Functions</h2></td></tr>
 <p><b>Notes:</b></p>
 <ul>
 <li>Math functions do not raise exceptions and do not change the <code>errno</code> variable. Therefore the majority of them are declared with <code>const</code> attribute, for better optimization by GCC.</li>
-<li>64-bit floating-point arithmetic is only available in <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a> and up. The size of the <code>double</code> and <code>long</code> <code>double</code> type can be selected at compile-time with options like <code>-mdouble=64</code> and <code>-mlong-double=32</code>. Whether such options are available, and their default values, depend on how the compiler has been configured.</li>
+<li>64-bit floating-point arithmetic is only available in <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a> and up. The size of the <code>double</code> and <code>long</code> <code>double</code> type can be selected at compile time with options like <code>-mdouble=64</code> and <code>-mlong-double=32</code>. Whether such options are available, and their default values, depend on how the compiler has been <a href="https://gcc.gnu.org/install/configure.html#avr">configured</a>.</li>
 <li>The implementation of 64-bit floating-point arithmetic has some shortcomings and limitations, see the <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a> for details.</li>
 </ul>
 <p>See also some benchmarks for <a class="el" href="benchmarks.html#bench_libm">IEEE single</a> and <a class="el" href="benchmarks.html#bench_libf7">IEEE double</a>. </p>
@@ -3539,7 +3539,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:20 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

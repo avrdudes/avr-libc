@@ -271,7 +271,7 @@ How do I use a #define'd constant in an asm statement?</h1>
 Why does the PC randomly jump around when single-stepping through my program in avr-gdb?</h1>
 <p>When compiling a program with both optimization (<code>-O</code>) and debug information (<code>-g</code>) which is fortunately possible in <code>avr-gcc</code>, the code watched in the debugger is optimized code. It is guaranteed that the code runs with the exact same optimizations as it would run without the <code>-g</code> switch.</p>
 <p>Since the compiler is free to reorder code execution as long as the semantics do not change, code is often rearranged in order to make it possible to use a single branch instruction for conditional operations. Branch instructions can only cover a short range for the target PC (-63 through +64 words from the current PC). If a branch instruction cannot be used directly, the compiler needs to work around it by combining a skip instruction together with a relative jump (<code>rjmp</code>) instruction, which will need one additional word of ROM.</p>
-<p>Another side effect of optimization is that variable usage is restricted to the area of code where it is actually used. So if a variable was placed in a register at the beginning of some function, this same register can be re-used later on if the compiler notices that the first variable is no longer used inside that function, even though the variable is still in lexical scope. When trying to examine the variable in <code>avr-gdb</code>, the displayed result will then look garbled.</p>
+<p>Another side effect of optimization is that variable usage is restricted to the area of code where it is actually used. So if a variable was placed in a register at the beginning of some function, this same register can be reused later on if the compiler notices that the first variable is no longer used inside that function, even though the variable is still in lexical scope. When trying to examine the variable in <code>avr-gdb</code>, the displayed result will then look garbled.</p>
 <p>So in order to avoid these side effects, optimization can be turned off while debugging, or at least optimization level <code>-Og</code> can be used which was introduced to improve good debugging experience while it still provides a reasonable amount of optimization.</p>
 <p>However, some of these optimizations might also have the side effect of uncovering bugs that would otherwise not be obvious, so it must be noted that turning off optimization can easily change the bug pattern. In most cases, you are better off leaving optimizations enabled while debugging.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
@@ -286,7 +286,7 @@ How do I trace an assembler file in avr-gdb?</h1>
 <p>Example:</p>
 <pre class="fragment">$ EXTRA_OPTS="-Wall -mmcu=atmega128 -x assembler-with-cpp"
 $ avr-gcc -Wa,--gstabs ${EXTRA_OPTS} -c -o foo.o foo.S
-</pre><p>Also note that the debugger might get confused when entering a piece of code that has a non-local label before, since it then takes this label as the name of a new function that appears to have been entered. Thus, the best practice to avoid this confusion is to only use non-local labels when declaring a new function, and restrict anything else to local labels. Local labels consist just of a number only. References to these labels consist of the number, followed by the letter <b>b</b> for a backward reference, or <b>f</b> for a forward reference. These local labels may be re-used within the source file, references will pick the closest label with the same number and given direction.</p>
+</pre><p>Also note that the debugger might get confused when entering a piece of code that has a non-local label before, since it then takes this label as the name of a new function that appears to have been entered. Thus, the best practice to avoid this confusion is to only use non-local labels when declaring a new function, and restrict anything else to local labels. Local labels consist just of a number only. References to these labels consist of the number, followed by the letter <b>b</b> for a backward reference, or <b>f</b> for a forward reference. These local labels may be reused within the source file, references will pick the closest label with the same number and given direction.</p>
 <p>Example:</p>
 <pre class="fragment">myfunc:
     push    r16
@@ -379,7 +379,7 @@ What registers are used by the compiler?</h1>
 <p class="enddd"></p>
 </dd>
 <dt>Call-used registers (r18-r27, r30-r31) </dt>
-<dd><p class="startdd">May be allocated by gcc for local data. You <em>may</em> use them freely in assembly subroutines. Calling C subroutines can clobber any of them - the caller is responsible for saving and restoring.</p>
+<dd><p class="startdd">May be allocated by gcc for local data. You <em>may</em> use them freely in assembly subroutines. Calling C subroutines can clobber any of them &ndash; the caller is responsible for saving and restoring.</p>
 <p class="interdd">For the Reduced Core architecture (ATtiny10 and relatives), r20-r27 and r30-31 are call-clobbered. </p>
 <p class="enddd"></p>
 </dd>
@@ -399,7 +399,7 @@ What registers are used by the compiler?</h1>
 <p class="enddd"></p>
 </dd>
 <dt>Function call conventions </dt>
-<dd><p class="startdd">Arguments - allocated left to right, r25 to r8. All arguments are aligned to start in even-numbered registers (odd-sized arguments, including <code>char</code>, have one free register above them). This allows making better use of the <code>movw</code> instruction on the enhanced core.</p>
+<dd><p class="startdd">Arguments are allocated left to right, r25 to r8. All arguments are aligned to start in even-numbered registers (odd-sized arguments, including <code>char</code>, have one free register above them). This allows making better use of the <code>movw</code> instruction on the enhanced core.</p>
 <p class="interdd">If too many, those that don't fit are passed on the stack.</p>
 <p class="interdd">On AVRrc, r25 to r20 are used to pass values.</p>
 <ul>
@@ -447,7 +447,7 @@ Which -O flag to use?</h1>
 <tr>
 <td>-Os -mcall-prologues </td><td>6474 </td><td>972 &mu;s </td><td>20.1 ms  </td></tr>
 </table>
-<p>(The difference between 955 &mu;s and 972 &mu;s was just a single timer-tick, so take this with a grain of salt.)</p>
+<p>(The difference between 955 &mu;s and 972 &mu;s was just a single timer tick, so take this with a grain of salt.)</p>
 <p>So generally, it seems <code>-Os -mcall-prologues</code> is the most universal "best" optimization level. Only applications that need to get the last few percent of speed benefit from using <code>-O3</code>.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_reloc_code"></a>
@@ -616,7 +616,7 @@ Use __flash</h2>
 </div><!-- fragment --><p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_rom_array"></a>
 How do I put an array of strings completely in ROM?</h1>
-<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste RAM storing the constant strings. For the rationale behind storing constant strings in RAM, see the previos section <a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a> and <a class="el" href="pgmspace.html">Data in Program Space</a></p>
+<p>There are times when you may need an array of strings which will never be modified. In this case, you don't want to waste RAM storing the constant strings. For the rationale behind storing constant strings in RAM, see the previous section <a class="el" href="FAQ.html#faq_flashstrings">Why do all my string literals eat up the SRAM?</a> and <a class="el" href="pgmspace.html">Data in Program Space</a></p>
 <h2><a class="anchor" id="faq_rom_array_progmem"></a>
 With PROGMEM</h2>
 <p>The most obvious (and incorrect) thing to do is this:</p>
@@ -834,7 +834,7 @@ How to call an assembly function from C/C++?</h1>
 <div class="line">.type asm_add, @function</div>
 <div class="line">asm_add:</div>
 <div class="line">    add r24, r22</div>
-<div class="line">    adc r24, zero_reg</div>
+<div class="line">    adc r25, zero_reg</div>
 <div class="line">    ret</div>
 <div class="line">.size asm_add, . - asm_add</div>
 </div><!-- fragment --><p>Notice that the assembly function complies to the <a href="https://gcc.gnu.org/wiki/avr-gcc#Calling_Convention">avr-gcc calling convention</a>.</p>
@@ -880,7 +880,7 @@ How can I use a function that doesn't comply to the ABI?</h1>
 <p>There are basically two approaches: Write an interface function in assembly, or write an interface in inline assembly.</p>
 <h2><a class="anchor" id="faq_nonabi_asm"></a>
 Interface in Assembly</h2>
-<p>The iterface function would look something like this, assuming that the AVR device supports the <code>MOVW</code> and <code>CALL</code> instructions:</p>
+<p>The interface function would look something like this, assuming that the AVR device supports the <code>MOVW</code> and <code>CALL</code> instructions:</p>
 <div class="fragment"><div class="line">.global call_f_nonabi</div>
 <div class="line">.type call_f_nonabi,&quot;function&quot;</div>
 <div class="line">call_f_nonabi:</div>
@@ -1055,8 +1055,8 @@ $(OBJDIR)/%.o : %.bin
 <h1><a class="anchor" id="faq_softreset"></a>
 How do I perform a software reset of the AVR?</h1>
 <p>The canonical way to perform a software reset of non-XMega AVR's is to use the watchdog timer. Enable the watchdog timer to the shortest timeout setting, then go into an infinite, do-nothing loop. The watchdog will then reset the processor.</p>
-<p>XMega parts have a specific bit <code>RST_SWRST_bm</code> in the <code>RST.CTRL</code> register, that generates a hardware reset. RST_SWRST_bm is protected by the XMega Configuration Change Protection system.</p>
-<p>The reason why using the watchdog timer or <code>RST_SWRST_bm</code> is preferable over jumping to the reset vector, is that when the watchdog or <code>RST_SWRST_bm</code> resets the AVR, the registers will be reset to their known, default settings. Whereas jumping to the reset vector will leave the registers in their previous state, which is generally not a good idea.</p>
+<p>XMega parts have a specific bit <code>RST_SWRST_bm</code> in the <code>RST.CTRL</code> register that generates a hardware reset. RST_SWRST_bm is protected by the XMega Configuration Change Protection system.</p>
+<p>The reason why using the watchdog timer or <code>RST_SWRST_bm</code> is preferable over jumping to the reset vector is that when the watchdog or <code>RST_SWRST_bm</code> resets the AVR, the registers will be reset to their known, default settings. Whereas jumping to the reset vector will leave the registers in their previous state, which is generally not a good idea.</p>
 <dl>
 <dt>CAUTION! </dt>
 <dd>Older AVRs will have the watchdog timer disabled on a reset. For these older AVRs, doing a soft reset by enabling the watchdog is easy, as the watchdog will then be disabled after the reset. On newer AVRs, once the watchdog is enabled, then it <b>stays enabled, even after a reset</b>! For these newer AVRs a function needs to be added to the <code>.init3</code> section (i.e. during the startup code, before main()) to disable the watchdog early enough so it does not continually reset the AVR.  </dd>
@@ -1071,7 +1071,7 @@ How do I perform a software reset of the AVR?</h1>
 <div class="line">    <span class="keywordflow">for</span>(;;) {}</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:131</div></div>
-<div class="ttc" id="agroup__avr__watchdog_html_gad45893280f49113ffc2e67e1d741f29d"><div class="ttname"><a href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a></div><div class="ttdeci">#define WDTO_15MS</div><div class="ttdef"><b>Definition:</b> wdt.h:552</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_gad45893280f49113ffc2e67e1d741f29d"><div class="ttname"><a href="group__avr__watchdog.html#gad45893280f49113ffc2e67e1d741f29d">WDTO_15MS</a></div><div class="ttdeci">#define WDTO_15MS</div><div class="ttdef"><b>Definition:</b> wdt.h:554</div></div>
 <div class="ttc" id="awdt_8h_html"><div class="ttname"><a href="wdt_8h.html">wdt.h</a></div></div>
 </div><!-- fragment --><p>For newer AVRs (such as the ATmega1281) also add this function to your code to then disable the watchdog after a reset (e.g., after a soft reset):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="wdt_8h.html">avr/wdt.h</a>&gt;</span></div>
@@ -1086,13 +1086,13 @@ How do I perform a software reset of the AVR?</h1>
 <div class="line">    MCUSR = 0;</div>
 <div class="line">    <a class="code hl_function" href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__avr__watchdog_html_ga4bf8d96fb29e5735ae2a560e7b8cfd15"><div class="ttname"><a href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a></div><div class="ttdeci">static void wdt_disable(void)</div><div class="ttdef"><b>Definition:</b> wdt.h:483</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_ga4bf8d96fb29e5735ae2a560e7b8cfd15"><div class="ttname"><a href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a></div><div class="ttdeci">static void wdt_disable(void)</div><div class="ttdef"><b>Definition:</b> wdt.h:485</div></div>
 </div><!-- fragment --><p> The code is placed in section <code><a class="el" href="mem_sections.html#sec_dot_init">.init3</a></code> so that it is executed as part of the normal startup procedure. The <code>naked</code> attribute is required so that the code does not <code>ret</code>urn (Code in init sections is executed as it is located; the code is not called, and code from one init section falls through to the code in the next one). The <code>used</code> attribute makes sure that the compiler does not throw the seemingly unused function away. The <code>unused</code> attributes avoids warnings about unused code.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_reentrant"></a>
 What pitfalls exist when writing reentrant code?</h1>
 <p>Reentrant code means the ability for a piece of code to be called simultaneously from two or more threads. Attention to re-enterability is needed when using a multi-tasking operating system, or when using interrupts since an interrupt is really a temporary thread.</p>
-<p>The code generated natively by gcc is reentrant. But, only some of the libraries in AVR-LibC are explicitly reentrant, and some are known not to be reentrant. In general, any library call that reads and writes global variables (including I/O registers) is not reentrant. This is because more than one thread could read or write the same storage at the same time, unaware that other threads are doing the same, and create inconsistent and/or erroneous results.</p>
+<p>The code generated natively by GCC is reentrant. But only some of the functions in AVR-LibC are explicitly reentrant, and some are known not to be reentrant. In general, any library call that reads and writes global variables (including I/O registers) is not reentrant. This is because more than one thread could read or write the same storage at the same time, unaware that other threads are doing the same, and create inconsistent and/or erroneous results.</p>
 <p>A library call that is known not to be reentrant will work if it is used only within one thread <em>and</em> no other thread makes use of a library call that shares common storage with it.</p>
 <p>Below is a table of library calls with known issues.</p>
 <table class="doxtable">
@@ -1140,9 +1140,9 @@ Note: Scanning from a string, e.g. <a class="el" href="group__avr__stdio.html#ga
 <h1><a class="anchor" id="faq_eeprom_corruption"></a>
 Why are some addresses of the EEPROM corrupted (usually address zero)?</h1>
 <p>The two most common reason for EEPROM corruption is either writing to the EEPROM beyond the datasheet endurance specification, or resetting the AVR while an EEPROM write is in progress.</p>
-<p>EEPROM writes can take up to tens of milliseconds to complete. So that the CPU is not tied up for that long of time, an internal state-machine handles EEPROM write requests. The EEPROM state-machine expects to have all of the EEPROM registers setup, then an EEPROM write request to start the process. Once the EEPROM state-machine has started, changing EEPROM related registers during an EEPROM write is guaranteed to corrupt the EEPROM write process. The datasheet always shows the proper way to tell when a write is in progress, so that the registers are not changed by the user's program. The EEPROM state-machine will <b>always</b> complete the write in progress unless power is removed from the device.</p>
+<p>EEPROM writes can take up to tens of milliseconds to complete. So that the CPU is not tied up for that long of time, an internal state machine handles EEPROM write requests. The EEPROM state machine expects to have all of the EEPROM registers setup, then an EEPROM write request to start the process. Once the EEPROM state machine has started, changing EEPROM related registers during an EEPROM write is guaranteed to corrupt the EEPROM write process. The datasheet always shows the proper way to tell when a write is in progress, so that the registers are not changed by the user's program. The EEPROM state machine will <b>always</b> complete the write in progress unless power is removed from the device.</p>
 <p>As with all EEPROM technology, if power fails during an EEPROM write the state of the byte being written is undefined.</p>
-<p>In older generation AVRs the EEPROM Address Register (EEAR) is initialized to zero on reset, be it from Brown Out Detect, Watchdog or the Reset Pin. If an EEPROM write has just started at the time of the reset, the write will be completed, but now at address zero instead of the requested address. If the reset occurs later in the write process both the requested address and address zero may be corrupted.</p>
+<p>In older generation AVRs the EEPROM Address Register (EEAR) is initialized to zero on reset, be it from Brown Out Detect, Watchdog or the Reset Pin. If an EEPROM write has just started at the time of the reset, the write will be completed, but now at address zero instead of the requested address. If the reset occurs later in the write process, both the requested address and address zero may be corrupted.</p>
 <p>To distinguish which AVRs may exhibit the corrupt of address zero while a write is in process during a reset, look at the "initial
 value" section for the EEPROM Address Register. If EEAR shows the initial value as 0x00 or 0x0000, then address zero and possibly the one being written will be corrupted. Newer parts show the initial value as "undefined", these will not corrupt address zero during a reset (unless it was address zero that was being written).</p>
 <p>EEPROMs have limited write endurance. The datasheet specifies the number of EEPROM writes that are guaranteed to function across the full temperature specification of the AVR, for a given byte. A read should always be performed before a write, to see if the value in the EEPROM actually needs to be written, so not to cause unnecessary EEPROM wear.</p>
@@ -1151,18 +1151,17 @@ value" section for the EEPROM Address Register. If EEAR shows the initial value 
 <h1><a class="anchor" id="faq_wrong_baud_rate"></a>
 Why is my baud rate wrong?</h1>
 <p>Some AVR datasheets give the following formula for calculating baud rates:</p>
-<div class="fragment"><div class="line">(<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (UART_BAUD_RATE * 16L) - 1)</div>
+<div class="fragment"><div class="line"><a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (UART_BAUD_RATE * 16L) - 1</div>
 <div class="ttc" id="agroup__util__delay_html_ga43bafb28b29491ec7f871319b5a3b2f8"><div class="ttname"><a href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></div><div class="ttdeci">#define F_CPU</div><div class="ttdoc">CPU frequency in Hz.</div><div class="ttdef"><b>Definition:</b> delay.h:115</div></div>
 </div><!-- fragment --><p>Unfortunately that formula does not work with all combinations of clock speeds and baud rates due to integer truncation during the division operator.</p>
-<p>When doing integer division it is usually better to round to the nearest integer, rather than to the lowest. To do this add 0.5 (i. e. half the value of the denominator) to the numerator before the division, resulting in the formula:</p>
-<div class="fragment"><div class="line">((<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1)</div>
+<p>When doing integer division, it is usually better to round to the nearest integer rather than to the lowest. To do this, add 0.5 (i. e. half the value of the denominator) to the numerator before the division, resulting in the formula:</p>
+<div class="fragment"><div class="line">(<a class="code hl_define" href="group__util__delay.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1</div>
 </div><!-- fragment --><p>This is also the way it is implemented in <a class="el" href="group__util__setbaud.html">&lt;util/setbaud.h&gt;: Helper macros for baud rate calculations</a>.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_funcptr_gt128kib"></a>
 On a device with more than 128 KiB of flash, how to make function pointers work?</h1>
-<p>Function pointers beyond the "magical" 128 KiB barrier(s) on larger devices are supposed to be resolved through so-called <em>trampolines</em> by the linker, so the actual pointers used in the code can remain 16 bits wide.</p>
-<p>In order for this to work, the option <code>-mrelax</code> must be given on the compiler command-line that is used to link the final ELF file.</p>
-<p>See also the avr-gcc online documentation on the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"><code>EIND</code> special function register</a> and indirect calls.</p>
+<p>Function pointers beyond the "magical" 128 KiB barrier on larger devices are supposed to be resolved through so-called <em>linker stubs</em> / <em>trampolines</em> by the linker, so the actual pointers used in the code can remain 16 bits wide.</p>
+<p>See also the AVR GCC online documentation on the <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"><code>EIND</code> special function register</a> and indirect calls.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_assign_chain"></a>
 Why is assigning ports in a "chain" a bad idea?</h1>
@@ -1171,10 +1170,7 @@ Why is assigning ports in a "chain" a bad idea?</h1>
 </div><!-- fragment --><p>According to the rules of the C language, this causes 0xff to be assigned to <code>DDRD</code>, then <code>DDRD</code> is read back, and the value is assigned to <code>DDRB</code>. The compiler stands no chance to optimize the readback away, as an IO port register is declared "volatile". Thus, chaining that kind of IO port assignments would better be avoided, using explicit assignments instead:</p>
 <div class="fragment"><div class="line">DDRB = 0xff;</div>
 <div class="line">DDRD = 0xff;</div>
-</div><!-- fragment --><p>Even worse ist this, e. g. on an ATmega1281:</p>
-<div class="fragment"><div class="line">DDRA = DDRB = DDRC = DDRD = DDRE = DDRF = DDRG = 0xff;</div>
-</div><!-- fragment --><p>The same happens as outlined above. However, when reading back register <code>DDRG</code>, this register only implements 6 out of the 8 bits, so the two topmost (unimplemented) bits read back as 0! Consequently, all remaining <code>DDR</code><em>x</em> registers get assigned the value 0x3f, which does not match the intention of the developer in any way.</p>
-<h1><a class="anchor" id="faq_headers"></a>
+</div><!-- fragment --><h1><a class="anchor" id="faq_headers"></a>
 Which header files are included in my program?</h1>
 <p>Suppose we have a simple program like </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pgmspace_8h.html">avr/pgmspace.h</a>&gt;</span></div>
 <div class="line"> </div>
@@ -1267,7 +1263,7 @@ What are the versions of the tools in my toolchain?</h1>
 <td>AVR-LibC </td><td><code>echo "#include &lt;avr/version.h&gt;" | avr-gcc -xc - -E -dM | grep AVR_LIBC_VERSION_STRING</code> </td></tr>
 </table>
 <p>Linker<sup>1</sup> is the linker as called directly (<code>avr-ld</code>) whereas Linker<sup>2</sup> is the linker as called though the compiler driver <code>avr-gcc</code>. The latter is the usual way to invoke the linker. When these two versions are not the same, then the resulting toolchain may have inconsistencies.</p>
-<p>When you have more then one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
+<p>When you have more than one toolchain installed, then make sure you are calling the command from the intended toolchain, e.g. by specifying the absolute path to the tool.</p>
 <p>Also notice that software may come with vendor specific patches, so that the tool behaves differently than the stock version.</p>
 <p><small>Back to <a class="el" href="FAQ.html#faq_index">FAQ Index</a>.</small></p>
 <h1><a class="anchor" id="faq_toolchain_sources"></a>
@@ -1322,7 +1318,7 @@ What is all this _BV() stuff about?</h1>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:19 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

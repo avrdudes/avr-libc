@@ -311,7 +311,7 @@ See also the <a class="el" href="FAQ.html#faq_gdboptimize">respective FAQ entry<
 </dd>
 <dt><code>-ffreestanding</code> </dt>
 <dd><p class="startdd">Assume a "freestanding" environment as per the C standard. This turns off automatic builtin functions (though they can still be reached by prepending <code>__builtin_</code> to the actual function name). It also makes the compiler not complain when <code>main()</code> is declared with a <code>void</code> return type. (In most cases, <code>main()</code> won't even return anyway, and hence using a return type of <code>int</code> has no downsides at all).</p>
-<p class="enddd"><b>This option turns off all optimizations normally done by the compiler which assume that functions known by a certain name behave as described by the standard.</b> For example, applying the function <code><a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a></code> to a literal string will normally cause the compiler to immediately replace that call by the actual length of the string, while with <code>-ffreestanding</code>, it will always call <a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a> at run-time.  </p>
+<p class="enddd"><b>This option turns off all optimizations normally done by the compiler which assume that functions known by a certain name behave as described by the standard.</b> For example, applying the function <code><a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a></code> to a literal string will normally cause the compiler to immediately replace that call by the actual length of the string, while with <code>-ffreestanding</code>, it will always call <a class="el" href="group__avr__string.html#ga219836f542ce53545052bed5353820ca" title="Calculate the length of a string.">strlen()</a> at run time.  </p>
 </dd>
 </dl>
 <h1><a class="anchor" id="using_avr_as"></a>
@@ -429,7 +429,7 @@ Passing linker options from the C compiler</h2>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:11 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:19 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

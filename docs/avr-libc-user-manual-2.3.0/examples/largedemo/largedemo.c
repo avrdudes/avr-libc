@@ -227,7 +227,7 @@ ioinit(void)
    * WGM11 bits), with OC1A used as PWM output.  OC1A will be set when
    * up-counting, and cleared when down-counting (COM1A1|COM1A0), this
    * matches the behaviour needed by the STK500's low-active LEDs.
-   * The timer will runn on full MCU clock (1 MHz, CS10 in TCCR1B).
+   * The timer will run on full MCU clock (1 MHz, CS10 in TCCR1B).
    */
   TCCR1A = _BV(WGM10) | _BV(WGM11) | _BV(COM1A1) | _BV(COM1A0);
   TCCR1B = _BV(CS10);

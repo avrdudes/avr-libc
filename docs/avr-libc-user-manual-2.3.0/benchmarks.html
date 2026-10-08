@@ -100,17 +100,19 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><ul>
-<li><a class="el" href="benchmarks.html#bench_libc">Benchmarks for libc functions</a></li>
-<li><a class="el" href="benchmarks.html#bench_libm">Benchmarks for IEEE single floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
-<li><a class="el" href="benchmarks.html#bench_libf7">Benchmarks for IEEE double floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
-<li><a class="el" href="benchmarks.html#bench_fxlib">Benchmarks for fixed-point functions</a> from <a class="el" href="group__avr__stdfix.html">&lt;stdfix.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_libc">Libc functions</a></li>
+<li><a class="el" href="benchmarks.html#bench_libm">IEEE single floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_libf7">IEEE double floating-point functions</a> from <a class="el" href="group__avr__math.html">&lt;math.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_fxlib">Fixed-point functions</a> from <a class="el" href="group__avr__stdfix.html">&lt;stdfix.h&gt;</a></li>
+<li><a class="el" href="benchmarks.html#bench_fxmuldiv">Fixed-point multiplication and division</a></li>
+<li><a class="el" href="benchmarks.html#bench_int">Integer multiplication and division</a></li>
 </ul>
 <p>The results below can only give a rough estimate of the resources necessary for using certain library functions. There is a number of factors which can both increase or reduce the effort required:</p>
 <ul>
 <li>Expenses for preparation of operands and their stack are not considered.</li>
-<li>In the table, the size includes all dependent functions.</li>
+<li>The code sizes include all dependent functions and data for otherwise empty programs, i.e. no startup code, no vector table etc.</li>
 <li>Expenses of time of performance of some functions essentially depend on parameters of a call, for example, <a class="el" href="group__avr__stdlib.html#gafd4bf2faec43342e7ad3d2ab37bac1fe">qsort()</a> is recursive, and <a class="el" href="group__avr__stdio.html#ga6017094d9fd800fa02600d35399f2a2a">sprintf()</a> receives parameters in a stack.</li>
-<li>Different versions of the compiler can give a significant difference in code size and execution time. For example, the <a class="el" href="group__avr__stdlib.html#ga3f07a282f28b2754b0e1d23679fc92c5">dtostre()</a> function, compiled with avr-gcc 3.4.6, requires 930 bytes. After transition to avr-gcc 4.2.3, the size become 1088 bytes.</li>
+<li>Different versions of the compiler can give a difference in code size and execution time.</li>
 </ul>
 <h1><a class="anchor" id="bench_libc"></a>
 A few of libc Functions</h1>
@@ -795,12 +797,248 @@ Fixed-Point Functions from &lt;stdfix.h&gt;</h1>
 <tr>
 <td><code><a class="el" href="group__avr__stdfix.html#ga405c2c665dab63429adb0165848a1fd3">sqrtur</a></code> </td><td align="right">64 </td><td>0 </td><td>1- </td><td align="right">273 </td><td align="right">296 </td><td>1.53e-05 </td></tr>
 </table>
+<h1><a class="anchor" id="bench_fxmuldiv"></a>
+Fixed-Point Multiplication and Division</h1>
+<p>The following tables contain benchmark values for non-saturating <a class="el" href="group__avr__stdfix.html">fixed-point</a> multiplication and division.</p>
+<ul>
+<li>The values for absolute error Err<sub>max</sub>, and the Worst Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.</li>
+<li>The absolute error is specified in ULPs (Units in the Least Place).</li>
+<li>The benchmark values for division don't depend on the availability of <code>MUL</code>.</li>
+<li>The benchmark values depend slightly on the availability of <code>MOVW</code>, the PC size, argument preparation and optimization options.</li>
+</ul>
+<table class="doxtable">
+<caption>Fixed-Point Multiplication for ATmega128 (avr51, with MUL)</caption>
+<tr>
+<th>Type </th><th>Layout </th><th>Suffix </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>Err<sub>max</sub> </th></tr>
+<tr>
+<td align="right"><code>unsigned short accum</code> </td><td align="right">8.8 </td><td align="right"><code>uhk</code> </td><td align="right">48 </td><td align="right">33 </td><td align="right">34 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned accum</code> </td><td align="right">16.16 </td><td align="right"><code>uk</code> </td><td align="right">142 </td><td align="right">109 </td><td align="right">110 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long accum</code> </td><td align="right">32.32 </td><td align="right"><code>ulk</code> </td><td align="right">486 </td><td align="right">1108 </td><td align="right">1118 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long accum</code> </td><td align="right">16.48 </td><td align="right"><code>ullk</code> </td><td align="right">482 </td><td align="right">1106 </td><td align="right">1116 </td><td>0.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short accum</code> </td><td align="right">&plusmn;8.7 </td><td align="right"><code>hk</code> </td><td align="right">78 </td><td align="right">51 </td><td align="right">54 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>accum</code> </td><td align="right">&plusmn;16.15 </td><td align="right"><code>k</code> </td><td align="right">184 </td><td align="right">132 </td><td align="right">133 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long accum</code> </td><td align="right">&plusmn;32.31 </td><td align="right"><code>lk</code> </td><td align="right">620 </td><td align="right">1173 </td><td align="right">1197 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long long accum</code> </td><td align="right">&plusmn;16.47 </td><td align="right"><code>llk</code> </td><td align="right">616 </td><td align="right">1171 </td><td align="right">1195 </td><td>1.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>unsigned short fract</code> </td><td align="right">0.8 </td><td align="right"><code>uhr</code> </td><td align="right">6 </td><td align="right">4 </td><td align="right">4 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned fract</code> </td><td align="right">0.16 </td><td align="right"><code>ur</code> </td><td align="right">44 </td><td align="right">31 </td><td align="right">32 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long fract</code> </td><td align="right">0.32 </td><td align="right"><code>ulr</code> </td><td align="right">126 </td><td align="right">175 </td><td align="right">175 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long fract</code> </td><td align="right">0.64 </td><td align="right"><code>ullr</code> </td><td align="right">474 </td><td align="right">1102 </td><td align="right">1112 </td><td>0.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short fract</code> </td><td align="right">&plusmn;.7 </td><td align="right"><code>hr</code> </td><td align="right">14 </td><td align="right">8 </td><td align="right">8 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>fract</code> </td><td align="right">&plusmn;.15 </td><td align="right"><code>r</code> </td><td align="right">82 </td><td align="right">50 </td><td align="right">53 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long fract</code> </td><td align="right">&plusmn;.31 </td><td align="right"><code>lr</code> </td><td align="right">206 </td><td align="right">216 </td><td align="right">225 </td><td>2.5 </td></tr>
+<tr>
+<td align="right"><code>long long fract</code> </td><td align="right">&plusmn;.63 </td><td align="right"><code>llr</code> </td><td align="right">608 </td><td align="right">1167 </td><td align="right">1191 </td><td>1.5 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>Fixed-Point Multiplication for ATmega85 (avr25, no MUL)</caption>
+<tr>
+<th>Type </th><th>Layout </th><th>Suffix </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>Err<sub>max</sub> </th></tr>
+<tr>
+<td align="right"><code>unsigned short accum</code> </td><td align="right">8.8 </td><td align="right"><code>uhk</code> </td><td align="right">72 </td><td align="right">173 </td><td align="right">253 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned accum</code> </td><td align="right">16.16 </td><td align="right"><code>uk</code> </td><td align="right">108 </td><td align="right">298 </td><td align="right">435 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long accum</code> </td><td align="right">32.32 </td><td align="right"><code>ulk</code> </td><td align="right">514 </td><td align="right">6612 </td><td align="right">6914 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long accum</code> </td><td align="right">16.48 </td><td align="right"><code>ullk</code> </td><td align="right">510 </td><td align="right">6695 </td><td align="right">6992 </td><td>0.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short accum</code> </td><td align="right">&plusmn;8.7 </td><td align="right"><code>hk</code> </td><td align="right">94 </td><td align="right">212 </td><td align="right">270 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>accum</code> </td><td align="right">&plusmn;16.15 </td><td align="right"><code>k</code> </td><td align="right">162 </td><td align="right">391 </td><td align="right">496 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long accum</code> </td><td align="right">&plusmn;32.31 </td><td align="right"><code>lk</code> </td><td align="right">648 </td><td align="right">6669 </td><td align="right">7009 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long long accum</code> </td><td align="right">&plusmn;16.47 </td><td align="right"><code>llk</code> </td><td align="right">644 </td><td align="right">6753 </td><td align="right">7007 </td><td>1.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>unsigned short fract</code> </td><td align="right">0.8 </td><td align="right"><code>uhr</code> </td><td align="right">48 </td><td align="right">105 </td><td align="right">117 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned fract</code> </td><td align="right">0.16 </td><td align="right"><code>ur</code> </td><td align="right">68 </td><td align="right">229 </td><td align="right">256 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long fract</code> </td><td align="right">0.32 </td><td align="right"><code>ulr</code> </td><td align="right">262 </td><td align="right">1589 </td><td align="right">1670 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long fract</code> </td><td align="right">0.64 </td><td align="right"><code>ullr</code> </td><td align="right">502 </td><td align="right">6769 </td><td align="right">7017 </td><td>0.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short fract</code> </td><td align="right">&plusmn;.7 </td><td align="right"><code>hr</code> </td><td align="right">70 </td><td align="right">90 </td><td align="right">105 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>fract</code> </td><td align="right">&plusmn;.15 </td><td align="right"><code>r</code> </td><td align="right">98 </td><td align="right">239 </td><td align="right">267 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long fract</code> </td><td align="right">&plusmn;.31 </td><td align="right"><code>lr</code> </td><td align="right">342 </td><td align="right">1628 </td><td align="right">1712 </td><td>2.5 </td></tr>
+<tr>
+<td align="right"><code>long long fract</code> </td><td align="right">&plusmn;.63 </td><td align="right"><code>llr</code> </td><td align="right">636 </td><td align="right">6826 </td><td align="right">7067 </td><td>1.5 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>Fixed-Point Division for ATmega128 (avr51)</caption>
+<tr>
+<th>Type </th><th>Layout </th><th>Suffix </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th><th>Err<sub>max</sub> </th></tr>
+<tr>
+<td align="right"><code>unsigned short accum</code> </td><td align="right">8.8 </td><td align="right"><code>uhk</code> </td><td align="right">56 </td><td align="right">222 </td><td align="right">233 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned accum</code> </td><td align="right">16.16 </td><td align="right"><code>uk</code> </td><td align="right">72 </td><td align="right">640 </td><td align="right">681 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long accum</code> </td><td align="right">32.32 </td><td align="right"><code>ulk</code> </td><td align="right">154 </td><td align="right">2436 </td><td align="right">2630 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long accum</code> </td><td align="right">16.48 </td><td align="right"><code>ullk</code> </td><td align="right">154 </td><td align="right">3008 </td><td align="right">3242 </td><td>1.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short accum</code> </td><td align="right">&plusmn;8.7 </td><td align="right"><code>hk</code> </td><td align="right">112 </td><td align="right">248 </td><td align="right">257 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>accum</code> </td><td align="right">&plusmn;16.15 </td><td align="right"><code>k</code> </td><td align="right">160 </td><td align="right">684 </td><td align="right">722 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long accum</code> </td><td align="right">&plusmn;32.31 </td><td align="right"><code>lk</code> </td><td align="right">362 </td><td align="right">2544 </td><td align="right">2684 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long long accum</code> </td><td align="right">&plusmn;16.47 </td><td align="right"><code>llk</code> </td><td align="right">362 </td><td align="right">3136 </td><td align="right">3287 </td><td>1.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>unsigned short fract</code> </td><td align="right">0.8 </td><td align="right"><code>uhr</code> </td><td align="right">42 </td><td align="right">85 </td><td align="right">89 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned fract</code> </td><td align="right">0.16 </td><td align="right"><code>ur</code> </td><td align="right">44 </td><td align="right">211 </td><td align="right">230 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long fract</code> </td><td align="right">0.32 </td><td align="right"><code>ulr</code> </td><td align="right">320 </td><td align="right">2526 </td><td align="right">2626 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>unsigned long long fract</code> </td><td align="right">0.64 </td><td align="right"><code>ullr</code> </td><td align="right">154 </td><td align="right">3526 </td><td align="right">3774 </td><td>0.5 </td></tr>
+<tr>
+<td colspan="7"></td></tr>
+<tr>
+<td align="right"><code>short fract</code> </td><td align="right">&plusmn;.7 </td><td align="right"><code>hr</code> </td><td align="right">54 </td><td align="right">101 </td><td align="right">101 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>fract</code> </td><td align="right">&plusmn;.15 </td><td align="right"><code>r</code> </td><td align="right">102 </td><td align="right">246 </td><td align="right">256 </td><td>1.5 </td></tr>
+<tr>
+<td align="right"><code>long fract</code> </td><td align="right">&plusmn;.31 </td><td align="right"><code>lr</code> </td><td align="right">490 </td><td align="right">2627 </td><td align="right">2735 </td><td>0.5 </td></tr>
+<tr>
+<td align="right"><code>long long fract</code> </td><td align="right">&plusmn;.63 </td><td align="right"><code>llr</code> </td><td align="right">362 </td><td align="right">3722 </td><td align="right">3879 </td><td>0.5 </td></tr>
+</table>
+<h1><a class="anchor" id="bench_int"></a>
+Integer Multiplication and Division</h1>
+<p>The following tables contain benchmark values for integer multiplication and division.</p>
+<ul>
+<li>The values for the Worst Case Execution Times Cycles<sub>max</sub> are only <em>lower bounds</em>.</li>
+<li>The resources needed for non-widening signed multiply and non-widening unsigned multiply are the same.</li>
+<li>The benchmark values for division don't depend on the availability of <code>MUL</code>.</li>
+<li>The benchmark values depend slightly on the availability of <code>MOVW</code>, the PC size, argument preparation and optimization options.</li>
+</ul>
+<table class="doxtable">
+<caption>Multiply for ATmega128 (avr51, has MUL)</caption>
+<tr>
+<th>Type </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th></tr>
+<tr>
+<td align="center"><code>uint8_t</code> </td><td align="right">6 </td><td align="right">4 </td><td align="right">4 </td></tr>
+<tr>
+<td align="center"><code>uint16_t</code> </td><td align="right">16 </td><td align="right">11 </td><td align="right">11 </td></tr>
+<tr>
+<td align="center"><code>uint24_t</code> </td><td align="right">62 </td><td align="right">55 </td><td align="right">55 </td></tr>
+<tr>
+<td align="center"><code>uint32_t</code> </td><td align="right">94 </td><td align="right">84 </td><td align="right">84 </td></tr>
+<tr>
+<td align="center"><code>uint64_t</code> </td><td align="right">192 </td><td align="right">333 </td><td align="right">333 </td></tr>
+<tr>
+<td colspan="4"></td></tr>
+<tr>
+<td align="center"><code>uint8_t</code> &rarr; <code>uint16_t</code> </td><td align="right">6 </td><td align="right">4 </td><td align="right">4 </td></tr>
+<tr>
+<td align="center"><code>uint16_t</code> &rarr; <code>uint32_t</code> </td><td align="right">36 </td><td align="right">22 </td><td align="right">22 </td></tr>
+<tr>
+<td align="center"><code>uint32_t</code> &rarr; <code>uint64_t</code> </td><td align="right">126 </td><td align="right">175 </td><td align="right">175 </td></tr>
+<tr>
+<td colspan="4"></td></tr>
+<tr>
+<td align="center"><code>int8_t</code> &rarr; <code>int16_t</code> </td><td align="right">6 </td><td align="right">4 </td><td align="right">4 </td></tr>
+<tr>
+<td align="center"><code>int16_t</code> &rarr; <code>int32_t</code> </td><td align="right">60 </td><td align="right">37 </td><td align="right">39 </td></tr>
+<tr>
+<td align="center"><code>int32_t</code> &rarr; <code>int64_t</code> </td><td align="right">152 </td><td align="right">188 </td><td align="right">199 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>Multiply for ATtiny85 (avr25, no MUL)</caption>
+<tr>
+<th>Type </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th></tr>
+<tr>
+<td align="center"><code>uint8_t</code> </td><td align="right">20 </td><td align="right">46 </td><td align="right">58 </td></tr>
+<tr>
+<td align="center"><code>uint16_t</code> </td><td align="right">36 </td><td align="right">171 </td><td align="right">188 </td></tr>
+<tr>
+<td align="center"><code>uint24_t</code> </td><td align="right">54 </td><td align="right">348 </td><td align="right">377 </td></tr>
+<tr>
+<td align="center"><code>uint32_t</code> </td><td align="right">64 </td><td align="right">443 </td><td align="right">473 </td></tr>
+<tr>
+<td align="center"><code>uint64_t</code> </td><td align="right">94 </td><td align="right">1630 </td><td align="right">1757 </td></tr>
+<tr>
+<td colspan="4"></td></tr>
+<tr>
+<td align="center"><code>uint8_t</code> &rarr; <code>uint16_t</code> </td><td align="right">40 </td><td align="right">95 </td><td align="right">106 </td></tr>
+<tr>
+<td align="center"><code>uint16_t</code> &rarr; <code>uint32_t</code> </td><td align="right">60 </td><td align="right">220 </td><td align="right">244 </td></tr>
+<tr>
+<td align="center"><code>uint32_t</code> &rarr; <code>uint64_t</code> </td><td align="right">116 </td><td align="right">1548 </td><td align="right">1622 </td></tr>
+<tr>
+<td colspan="4"></td></tr>
+<tr>
+<td align="center"><code>int8_t</code> &rarr; <code>int16_t</code> </td><td align="right">48 </td><td align="right">135 </td><td align="right">194 </td></tr>
+<tr>
+<td align="center"><code>int16_t</code> &rarr; <code>int32_t</code> </td><td align="right">68 </td><td align="right">341 </td><td align="right">472 </td></tr>
+<tr>
+<td align="center"><code>int32_t</code> &rarr; <code>int64_t</code> </td><td align="right">140 </td><td align="right">1700 </td><td align="right">1905 </td></tr>
+</table>
+<p>&#160; </p><table class="doxtable">
+<caption>Division for ATmega128</caption>
+<tr>
+<th>Type </th><th>Size </th><th>Cycles<sub>avr</sub> </th><th>Cycles<sub>max</sub> </th></tr>
+<tr>
+<td align="center"><code>uint8_t</code> </td><td align="right">42 </td><td align="right">68 </td><td align="right">69 </td></tr>
+<tr>
+<td align="center"><code>uint16_t</code> </td><td align="right">60 </td><td align="right">197 </td><td align="right">205 </td></tr>
+<tr>
+<td align="center"><code>uint24_t</code> </td><td align="right">72 </td><td align="right">356 </td><td align="right">367 </td></tr>
+<tr>
+<td align="center"><code>uint32_t</code> </td><td align="right">90 </td><td align="right">575 </td><td align="right">595 </td></tr>
+<tr>
+<td align="center"><code>uint64_t</code> </td><td align="right">206 </td><td align="right">405 </td><td align="right">760 </td></tr>
+<tr>
+<td colspan="4"></td></tr>
+<tr>
+<td align="center"><code>int8_t</code> </td><td align="right">110 </td><td align="right">235 </td><td align="right">246 </td></tr>
+<tr>
+<td align="center"><code>int16_t</code> </td><td align="right">98 </td><td align="right">230 </td><td align="right">241 </td></tr>
+<tr>
+<td align="center"><code>int24_t</code> </td><td align="right">118 </td><td align="right">392 </td><td align="right">409 </td></tr>
+<tr>
+<td align="center"><code>int32_t</code> </td><td align="right">148 </td><td align="right">616 </td><td align="right">641 </td></tr>
+<tr>
+<td align="center"><code>int64_t</code> </td><td align="right">438 </td><td align="right">488 </td><td align="right">877 </td></tr>
+</table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:20 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

@@ -158,7 +158,7 @@ Functions</h2></td></tr>
 <div class="line">    <a class="code hl_function" href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__avr__stdint_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__avr__stdint.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdef"><b>Definition:</b> stdint.h:88</div></div>
-<div class="ttc" id="agroup__avr__watchdog_html_ga4bf8d96fb29e5735ae2a560e7b8cfd15"><div class="ttname"><a href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a></div><div class="ttdeci">static void wdt_disable(void)</div><div class="ttdef"><b>Definition:</b> wdt.h:483</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_ga4bf8d96fb29e5735ae2a560e7b8cfd15"><div class="ttname"><a href="group__avr__watchdog.html#ga4bf8d96fb29e5735ae2a560e7b8cfd15">wdt_disable</a></div><div class="ttdeci">static void wdt_disable(void)</div><div class="ttdef"><b>Definition:</b> wdt.h:485</div></div>
 <div class="ttc" id="astdint_8h_html"><div class="ttname"><a href="stdint_8h.html">stdint.h</a></div></div>
 </div><!-- fragment --><p>Saving the value of MCUSR in <code>mcusr_mirror</code> is only needed if the application later wants to examine the reset source, but in particular, clearing the watchdog reset flag before disabling the watchdog is required, according to the datasheet. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -351,7 +351,7 @@ Functions</h2></td></tr>
 <p>Possible timeout values are: 15 ms, 30 ms, 60 ms, 120 ms, 250 ms, 500 ms, 1 s, 2 s. (Some devices also allow for 4 s and 8 s.) Symbolic constants are formed by the prefix <code>WDTO_</code>, followed by the time.</p>
 <p>Example that would select a watchdog timer expiry of approximately 500 ms: </p><div class="fragment"><div class="line"><a class="code hl_define" href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a>(<a class="code hl_define" href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a>);</div>
 <div class="ttc" id="agroup__avr__watchdog_html_ga9d1aeb2823c79936e980fabba10ac75e"><div class="ttname"><a href="group__avr__watchdog.html#ga9d1aeb2823c79936e980fabba10ac75e">wdt_enable</a></div><div class="ttdeci">#define wdt_enable(timeout)</div><div class="ttdef"><b>Definition:</b> wdt.h:131</div></div>
-<div class="ttc" id="agroup__avr__watchdog_html_gacf89fc5fb6c8aa9efaadb86872cfbcdf"><div class="ttname"><a href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a></div><div class="ttdeci">#define WDTO_500MS</div><div class="ttdef"><b>Definition:</b> wdt.h:572</div></div>
+<div class="ttc" id="agroup__avr__watchdog_html_gacf89fc5fb6c8aa9efaadb86872cfbcdf"><div class="ttname"><a href="group__avr__watchdog.html#gacf89fc5fb6c8aa9efaadb86872cfbcdf">WDTO_500MS</a></div><div class="ttdeci">#define WDTO_500MS</div><div class="ttdef"><b>Definition:</b> wdt.h:574</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -431,7 +431,7 @@ Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:21 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>

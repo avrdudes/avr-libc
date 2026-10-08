@@ -107,6 +107,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <li><a class="el" href="assembler.html#ass_sections">Sections</a></li>
 <li><a class="el" href="assembler.html#ass_symbols">Symbols</a></li>
 <li><a class="el" href="assembler.html#ass_data_and_align">Data and Alignment</a></li>
+<li><a class="el" href="assembler.html#ass_gnu_attribute">Attributes</a></li>
 </ul>
 </li>
 <li><a class="el" href="assembler.html#ass_modifiers">Operand Modifiers</a></li>
@@ -334,6 +335,17 @@ Assembler Directives</h1>
 <tr>
 <td><code>.p2align&#160;<em>expo</em></code> </td><td>Align the following code to 2<sup><em>expo</em></sup> bytes. </td><td></td></tr>
 </table>
+<p><a class="anchor" id="ass_gnu_attribute"></a></p><table class="doxtable">
+<caption>Assembler Directives: ABI Attributes</caption>
+<tr>
+<th>Tag </th><th>Name </th><th>Description </th><th>Since Binutils  </th></tr>
+<tr>
+<td><code>.gnu_attribute 4</code> </td><td>Tag_GNU_AVR_VTABLE_AS </td><td>Named address space of C++ virtual tables </td><td><a href="https://sourceware.org/PR34305">2.48</a>  </td></tr>
+<tr>
+<td><code>.gnu_attribute 8</code> </td><td>Tag_GNU_AVR_BITS_DOUBLE </td><td>Bitsize of <code>double</code> </td><td><a href="https://sourceware.org/PR34557">2.48</a>  </td></tr>
+<tr>
+<td><code>.gnu_attribute 12</code> </td><td>Tag_GNU_AVR_BITS_LONG_DOUBLE </td><td>Bitsize of <code>long double</code> </td><td><a href="https://sourceware.org/PR34557">2.48</a>  </td></tr>
+</table>
 <p>Moreover, there is the <b><code>.macro</code></b> directive, which starts an assembler macro. The GNU assembler implements a powerful macro processor which even supports recursive macro definitions. For an example, see the gas documentation for <a href="https://sourceware.org/binutils/docs/as/Macro.html"><code>.macro</code></a>. A gas <code>.macro</code> can further be combined with C preprocessor directives. For some real-world examples, see the AVR-LibC source <a href="https://github.com/avrdudes/avr-libc/blob/main/common/asmdef.h"><code>asmdef.h</code></a>.</p>
 <h1><a class="anchor" id="ass_modifiers"></a>
 Operand Modifiers</h1>
@@ -421,7 +433,7 @@ Other Routines</h3>
 <!-- HTML footer for doxygen 1.8.7-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 12:53:12 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 8 2026 17:17:20 for AVR-LibC by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.6
 </small></address>
