@@ -148,7 +148,7 @@ McuDevi = $(abs_top_builddir)/avr/devices/$1
 # Filter out elements containing "cvt" from list $1.
 FiltCvt = $(foreach w,$1,$(if $(findstring cvt,$w),,$w))
 
-# The absolut path to crt*.o for mcu $1.
+# The absolute path to crt*.o for mcu $1.
 McuCrto = $(call FiltCvt,$(wildcard $(call McuDevi,$1)/crt*.o))
 
 # The device library for $1 as -l<mcu>, if any.

@@ -811,6 +811,8 @@ INPUT                  = @top_srcdir@/include/alloca.h \
                          @top_builddir@/doc/api/bench-libm.gen.dox \
                          @top_builddir@/doc/api/bench-libf7.gen.dox \
                          @top_srcdir@/doc/api/bench-fxlib.dox \
+                         @top_srcdir@/doc/api/bench-fxmuldiv.dox \
+                         @top_srcdir@/doc/api/bench-int.dox \
                          @top_srcdir@/doc/api/reordering-code.dox \
                          @top_srcdir@/doc/api/acknowledge.dox \
                          @top_srcdir@/doc/api/globals-index.dox \
@@ -1144,7 +1146,7 @@ HTML_STYLESHEET        =
 # defined cascading style sheet that is included after the standard style sheets
 # created by doxygen. Using this option one can overrule certain style aspects.
 # This is preferred over using HTML_STYLESHEET since it does not replace the
-# standard style sheet and is therefor more robust against future updates.
+# standard style sheet and is therefore more robust against future updates.
 # Doxygen will copy the style sheet file to the output directory. For an example
 # see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.

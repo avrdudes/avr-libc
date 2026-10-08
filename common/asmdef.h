@@ -80,6 +80,8 @@
 #define __ASSEMBLER__
 #endif
 
+#include "config.h"
+
 /* Defines such as SPL, SPH, XL, XH,
    SREG, EIND, RAMPZ, ...  */
 #include <avr/common.h>
@@ -91,6 +93,9 @@
    don't nibble on the lower 64K PROGMEM.  */
 #define PGMX_SECTION(x)	.section .progmemx.gcc_##x, "a", "progbits"
 
+/* From Binutils include/elf/avr.h.  */
+#define Tag_GNU_AVR_BITS_DOUBLE 8
+#define Tag_GNU_AVR_BITS_LONG_DOUBLE 12
 
 /* Macros in this header use local symbols with `.L__' prefix. */
 
@@ -215,11 +220,17 @@ ENTRY \fname
 #if (__SIZEOF_DOUBLE__ == __SIZEOF_FLOAT__)
 	.weak	_U(\dname)
 	.type	_U(\dname), "function"
+#ifdef HAVE_LD_GNU_ATTRIBUTE_8
+	.gnu_attribute Tag_GNU_AVR_BITS_DOUBLE,32
+#endif
 _U(\dname):
 #endif /* double = float */
 #if (__SIZEOF_LONG_DOUBLE__ == __SIZEOF_FLOAT__)
 	.weak	_U(\lname)
 	.type	_U(\lname), "function"
+#ifdef HAVE_LD_GNU_ATTRIBUTE_12
+	.gnu_attribute Tag_GNU_AVR_BITS_LONG_DOUBLE,32
+#endif
 _U(\lname):
 #endif /* long double = float */
 .endm

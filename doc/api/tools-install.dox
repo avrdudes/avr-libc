@@ -371,7 +371,7 @@ can save you some space.
 \warning You \b must install
 \ref install_avr_binutils "avr-binutils",
 \ref install_avr_gcc "avr-gcc" and make sure your
-\ref path "path is set" properly before configuring abd building AVR-LibC.
+\ref path "path is set" properly before configuring and building AVR-LibC.
 
 If you have obtained the latest AVR-LibC from \ref using_git "git",
 you will have to run the \c \./bootstrap script before using either of the

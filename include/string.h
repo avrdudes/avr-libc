@@ -76,11 +76,11 @@ extern "C" {
     input value.
 
     This macro is very similar to the function ffs() except that
-    it evaluates its argument at compile-time, so it should only
+    it evaluates its argument at compile time, so it should only
     be applied to compile-time constant expressions where it will
     reduce to a constant itself.
     Application of this macro to expressions that are not constant
-    at compile-time is not recommended, and might result in a huge
+    at compile time is not recommended, and might result in a huge
     amount of code generated.
 
     \returns The _FFS() macro returns the position of the first

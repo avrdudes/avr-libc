@@ -30,7 +30,8 @@
 /* https://en.wikipedia.org/wiki/Xorshift
    The period of xorshift32 is 2^32 - 1.
 
-   Using the TestU01 suite from https://simul.iro.umontreal.ca/testu01/tu01.html
+   Using the TestU01 random number generator test suite from
+      https://www.iro.umontreal.ca/~simul/testu01/tu01.html
    the RNG below achieves a rating of 100% in the bbattery_SmallCrush tests.
    (Which expect a 32-bit resolution, so the upper 17 bits have been filled
    with "good" RNG bits.)  The v2.2.1 implementation of rand() achieved

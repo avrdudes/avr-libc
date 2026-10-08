@@ -1,4 +1,4 @@
-# Changes since AVR-LibC v2.3.0
+# Changes since AVR-LibC v2.3.2
 
 ## General
 
@@ -6,17 +6,74 @@
 
 ## Improvements and Additions
 
+  - Object files are now tagged with `.gnu_attribute` according to the
+    `double` / `long double` ABI in use.  It follows the compiler in
+    that only the object files are tagged where the size of the type
+    actually makes a difference ([#1072][1072]).
+
+  - Add `float` <-> 64-bit fixed point conversions ([#1066][1066]).
+
 ## Issues closed
 
+  - Fixed wdt_enable / wdt_disable on devices that have WDT_SYNCBUSY_bp.
+    The code wrongly used WDT_SYNCBUSY_bm for the bit position in SBRC.
+    On some devices, the protected write of the WDT configuration fell
+    out of the CCP window.  Prior to writing the WDT config, make sure
+    that WDT_SYNCBUSY_bp is clear ([#1065][1065], [#1068][1068]).
+
 ## Pull Requests
+
+  - On modern Xmega devices, `<avr/wdt.h>` now defines the following
+    constants that can be passed to wdt_enable: `WDTO_8MS`, `WDTO_15MS`,
+    `WDTO_30MS`, `WDTO_60MS`, `WDTO_120MS`, `WDTO_250MS`, `WDTO_500MS`,
+    `WDTO_1S`, `WDTO_2S`, `WDTO_4S`, `WDTO_8S` ([#1069][1069]).
+
+## Other Changes
+
+[1065]: https://github.com/avrdudes/avr-libc/issues/1065
+[1066]: https://github.com/avrdudes/avr-libc/issues/1066
+[1068]: https://github.com/avrdudes/avr-libc/issues/1068
+[1069]: https://github.com/avrdudes/avr-libc/issues/1069
+[1072]: https://github.com/avrdudes/avr-libc/issues/1072
+
+
+# Changes in AVR-LibC v2.3.2
+
+This is a followup on v2.3.1 with updated I/O headers and documentation fixes.
+
+## Improvements and Additions
+
+- Updated I/O headers:
+  - AVR-Dx to: AVR-Dx_DFP.2.8.343.atpack
+  - AVR-Ex to: AVR-Ex_DFP.2.12.239.atpack
+  - AVR-Lx to: AVR-Lx_DFP.1.3.46.atpack
+  - AVR-Sx to: AVR-Sx_DFP.1.2.26.atpack
+
+- Fixed typos, errors and broken web links in the documentation.
+
+
+# Changes in AVR-LibC v2.3.1
+
+This is a quick followup on v2.3.0 with regression fixes.
+
+## Regressions fixed
+
+- [#1060][1060] adds a reference to `main` in `crt<mcu>.o`.
+  It fixes an `undefined reference to main` error from the linker when
+  `main` is implemented in an archive, like in Arduino.
+
+- A patch introduced a syntax error [#1061][1061] in `util/setbaud.h`.
+  The patch has been reverted.
+
+[1060]: https://github.com/avrdudes/avr-libc/issues/1060
+[1061]: https://github.com/avrdudes/avr-libc/issues/1061
+
 
 # Changes in AVR-LibC v2.3.0
 
 ## General
 
 ## ABI and API Changes
-
-## Other Changes
 
 - **Parts of the startup code are now optional and have been moved
   from `crt<mcu>.o` to the device support library `lib<mcu>.a`.**\
@@ -281,8 +338,6 @@
 - Fixed `strftime`'s return value ([#1040][1040])
   and  `strftime("%r")` ([#1039][1039]).
 
-- Fixed *"Calculations in util/setbaud.h are incorrect"* [#657][657].
-
 - Saturate the value that `_delay_us` / `_delay_ms` are passing down to
   `__builtin_avr_delay_cycles` in order to avoid UB ([#681][681])
   for large values.
@@ -331,7 +386,6 @@
 [643]: https://github.com/avrdudes/avr-libc/issues/643
 [646]: https://github.com/avrdudes/avr-libc/issues/646
 [654]: https://github.com/avrdudes/avr-libc/issues/654
-[657]: https://github.com/avrdudes/avr-libc/issues/657
 [660]: https://github.com/avrdudes/avr-libc/issues/660
 [661]: https://github.com/avrdudes/avr-libc/issues/661
 [663]: https://github.com/avrdudes/avr-libc/issues/663

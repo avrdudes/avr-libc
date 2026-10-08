@@ -1,0 +1,7 @@
+!MCU=atmega128
+!MUL=0
+!DIV=1
+1
+1&nbsp;
+1<table>
+1<caption>Fixed-Point Division for ATmega128 (avr51)</caption>

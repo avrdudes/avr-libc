@@ -289,6 +289,29 @@ DO_IF_CC_BUILTIN_MACRO([], [__HAVE_SIGNAL_N__],
 AC_MSG_RESULT([$HAS_SIGNAL_N_yesno])
 AC_SUBST(HAS_SIGNAL_N_yesno)
 
+dnl Consumed by asmdef.h ENTRY_FLOAT.
+DO_IF_CC_ASM([whether $CC supports .gnu_attribute 8],dnl
+    [double func (void)
+     {
+       return 0.0;
+     }],dnl
+    [],dnl
+    [['\.gnu_attribute[^,8]*8[^,]*,']],
+    [ AC_DEFINE([HAVE_LD_GNU_ATTRIBUTE_8], 1,
+        [Define if ld supports .gnu_attribute 8 (Tag_GNU_AVR_BITS_DOUBLE).]) ], []
+)
+
+DO_IF_CC_ASM([whether $CC supports .gnu_attribute 12],dnl
+    [long double func (void)
+     {
+       return 0.0;
+     }],dnl
+    [],dnl
+    [['\.gnu_attribute[^,12]*12[^,]*,']],
+    [ AC_DEFINE([HAVE_LD_GNU_ATTRIBUTE_12], 1,
+        [Define if ld supports .gnu_attribute 12 (Tag_GNU_AVR_BITS_LONG_DOUBLE).]) ], []
+)
+
 dnl Does AM_CONDITIONAL(BUILD_FXLIB, ...)
 CHECK_FIXED_POINT
 

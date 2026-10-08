@@ -1,0 +1,18 @@
+1\page benchmarks
+1
+1\section bench_int Integer Multiplication and Division
+1
+1The following tables contain benchmark values for integer multiplication
+1and division.
+1
+1- The values for the Worst Case Execution Times Cycles<sub>max</sub>
+1  are only <em>lower bounds</em>.
+1- The resources needed for non-widening signed multiply and
+1  non-widening unsigned multiply are the same.
+1- The benchmark values for division don't depend on the availability
+1  of \c MUL.
+1- The benchmark values depend slightly on the availability of \c MOVW,
+1  the PC size, argument preparation and optimization options.
+1
+!MCU=atmega128
+!Mcu="ATmega128 (avr51, has MUL)"

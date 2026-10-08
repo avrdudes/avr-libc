@@ -35,6 +35,7 @@
   - \ref ass_sections "Sections"
   - \ref ass_symbols  "Symbols"
   - \ref ass_data_and_align "Data and Alignment"
+  - \ref ass_gnu_attribute "Attributes"
 - \ref ass_modifiers
 - \ref c_runtime
   - \ref c_runtime_default
@@ -509,6 +510,35 @@ Some common directives include:
   <td><tt>.p2align&nbsp;<em>expo</em></tt>
   <td>Align the following code to 2<sup><em>expo</em></sup> bytes.
   <td>
+</tr>
+</table>
+
+\anchor ass_gnu_attribute
+<table>
+<caption>Assembler Directives: ABI Attributes</caption>
+<tr>
+  <th>Tag
+  <th>Name
+  <th>Description
+  <th>Since Binutils
+</tr>
+<tr>
+  <td><tt>.gnu_attribute 4</tt>
+  <td>Tag_GNU_AVR_VTABLE_AS
+  <td>Named address space of C++ virtual tables
+  <td><a href="https://sourceware.org/PR34305">2.48</a>
+</tr>
+<tr>
+  <td><tt>.gnu_attribute 8</tt>
+  <td>Tag_GNU_AVR_BITS_DOUBLE
+  <td>Bitsize of <tt>double</tt>
+  <td><a href="https://sourceware.org/PR34557">2.48</a>
+</tr>
+<tr>
+  <td><tt>.gnu_attribute 12</tt>
+  <td>Tag_GNU_AVR_BITS_LONG_DOUBLE
+  <td>Bitsize of <tt>long double</tt>
+  <td><a href="https://sourceware.org/PR34557">2.48</a>
 </tr>
 </table>
 

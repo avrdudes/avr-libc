@@ -138,42 +138,44 @@
 
 #define wdt_enable(timeout)                                             \
     do {                                                                \
-        uint8_t __temp;                                                 \
         __asm__ __volatile__ (                                          \
             "wdr"                                   "\n\t"              \
+            "1: lds __tmp_reg__, %[wdt_status_reg]" "\n\t"              \
+            "sbrc __tmp_reg__, %[wdt_syncbusy_bit]" "\n\t"              \
+            "rjmp 1b"                               "\n\t"              \
             "out %i[ccp_reg], %[ioreg_cen_mask]"    "\n\t"              \
-            "lds %[tmp], %[wdt_reg]"                "\n\t"              \
-            "sbr %[tmp], %[wdt_enable_timeout]"     "\n\t"              \
-            "sts %[wdt_reg], %[tmp]"                "\n\t"              \
-            "1:lds %[tmp], %[wdt_status_reg]"       "\n\t"              \
-            "sbrc %[tmp], %[wdt_syncbusy_bit]"      "\n\t"              \
-            "rjmp 1b"                                                   \
-            : [tmp]                 "=d" (__temp)                       \
+            "sts %[wdt_reg], %[wdt_enable_timeout]" "\n\t"              \
+            "2: lds __tmp_reg__, %[wdt_status_reg]" "\n\t"              \
+            "sbrc __tmp_reg__, %[wdt_syncbusy_bit]" "\n\t"              \
+            "rjmp 2b"                                                   \
+            : /* no outputs */                                          \
             : [ccp_reg]             "n"  (& CCP),                       \
               [ioreg_cen_mask]      "r"  ((uint8_t)CCP_IOREG_gc),       \
               [wdt_reg]             "n"  (& WDT_CTRLA),                 \
-              [wdt_enable_timeout]  "M"  (timeout),                     \
+              [wdt_enable_timeout]  "r"  ((uint8_t)(timeout)),          \
               [wdt_status_reg]      "n"  (& WDT_STATUS),                \
-              [wdt_syncbusy_bit]    "I"  (WDT_SYNCBUSY_bm)              \
-            : "memory");                                                \
+              [wdt_syncbusy_bit]    "I"  (WDT_SYNCBUSY_bp)              \
+            : "r0", "memory");                                          \
     } while(0)
 
 static __ATTR_ALWAYS_INLINE__
 void wdt_disable (void)
 {
-    uint8_t __temp;
     __asm__ __volatile__ (
-        "wdr"                                "\n\t"
-        "out %i[ccp_reg], %[ioreg_cen_mask]" "\n\t"
-        "lds %[tmp], %[wdt_reg]"             "\n\t"
-        "cbr %[tmp], %[timeout_mask]"        "\n\t"
-        "sts %[wdt_reg], %[tmp]"
-        : [tmp]            "=d" (__temp)
+        "wdr"                                   "\n\t"
+        "1: lds __tmp_reg__, %[wdt_status_reg]" "\n\t"
+        "sbrc __tmp_reg__, %[wdt_syncbusy_bit]" "\n\t"
+        "rjmp 1b"                               "\n\t"
+        "out %i[ccp_reg], %[ioreg_cen_mask]"    "\n\t"
+        "sts %[wdt_reg], %[wdt_off]"
+        : /* no outputs */
         : [ccp_reg]        "n" (& CCP),
           [ioreg_cen_mask] "r" ((uint8_t)CCP_IOREG_gc),
           [wdt_reg]        "n" (& WDT_CTRLA),
-          [timeout_mask]   "n" (WDT_PERIOD_gm)
-        : "memory");
+          [wdt_off]        "r" ((uint8_t)WDT_PERIOD_OFF_gc),
+          [wdt_status_reg] "n" (& WDT_STATUS),
+          [wdt_syncbusy_bit] "I" (WDT_SYNCBUSY_bp)
+        : "r0", "memory");
 }
 
 #else // defined (WDT_CTRLA) && !defined(RAMPD)
@@ -210,7 +212,7 @@ void wdt_disable (void)
                                                   | WDT_ENABLE_bm       \
                                                   | ((timeout + 1) << 2))), \
               [wdt_status_reg]     "n" (& WDT_STATUS),                  \
-              [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bm)                \
+              [wdt_syncbusy_bit]   "I" (WDT_SYNCBUSY_bp)                \
             : "memory");                                                \
     } while(0)
 
@@ -634,5 +636,39 @@ void wdt_disable (void)
 #define WDTO_8S     9
 
 #endif  /* defined(__DOXYGEN__) || defined(WDP3) */
+
+#if defined(WDT_CTRLA) && !defined(RAMPD)
+/* Modern AVR Watchdog Timer (WDT.CTRLA): On these parts, wdt_enable()
+   writes the argument directly into the PERIOD bit field, so the WDTO_*
+   constants must equal the WDT.CTRLA PERIOD group codes - not the
+   classic WDTCSR WDP indices defined above (those land in the wrong
+   PERIOD slots, giving ~1/4 of the requested time, and WDTO_15MS even
+   selects PERIOD=OFF).  Redefine them to the group codes here.
+   The new-WDT hardware also supports 4 s and 8 s (PERIOD 0xA / 0xB),
+   so define those on this branch too.  15 ms has no exact match and uses
+   the nearest period of 16 CLK (~15.6 ms).  */
+#undef  WDTO_8MS
+#define WDTO_8MS    WDT_PERIOD_8CLK_gc
+#undef  WDTO_15MS
+#define WDTO_15MS   WDT_PERIOD_16CLK_gc
+#undef  WDTO_30MS
+#define WDTO_30MS   WDT_PERIOD_32CLK_gc
+#undef  WDTO_60MS
+#define WDTO_60MS   WDT_PERIOD_64CLK_gc
+#undef  WDTO_120MS
+#define WDTO_120MS  WDT_PERIOD_128CLK_gc
+#undef  WDTO_250MS
+#define WDTO_250MS  WDT_PERIOD_256CLK_gc
+#undef  WDTO_500MS
+#define WDTO_500MS  WDT_PERIOD_512CLK_gc
+#undef  WDTO_1S
+#define WDTO_1S     WDT_PERIOD_1KCLK_gc
+#undef  WDTO_2S
+#define WDTO_2S     WDT_PERIOD_2KCLK_gc
+#undef  WDTO_4S
+#define WDTO_4S     WDT_PERIOD_4KCLK_gc
+#undef  WDTO_8S
+#define WDTO_8S     WDT_PERIOD_8KCLK_gc
+#endif /* defined(WDT_CTRLA) && !defined(RAMPD) */
 
 #endif /* _AVR_WDT_H_ */

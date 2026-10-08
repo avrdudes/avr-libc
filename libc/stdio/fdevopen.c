@@ -68,15 +68,17 @@
    and the first one opened with write intent is assigned to both,
    \c stdout and \c stderr.
 
-   fdevopen() uses calloc() (und thus \ref a_malloc "malloc()")
+   fdevopen() uses calloc() --- and thus \ref a_malloc "malloc()" ---
    in order to allocate the storage for the new stream.
+   For an approach without malloc(), see
+   \ref stdio_without_malloc "Running stdio without malloc()".
 
    \note If the macro __STDIO_FDEVOPEN_COMPAT_12 is declared before
    including <stdio.h>, a function prototype for fdevopen() will be
    chosen that is backwards compatible with AVR-LibC version 1.2 and
    before.  This is solely intended for providing a simple migration
    path without the need to immediately change all source code.  Do
-   not use for new code.
+   not use it for new code.
 */
 
 ATTRIBUTE_CLIB_SECTION

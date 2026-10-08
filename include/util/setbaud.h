@@ -191,16 +191,16 @@
 #endif
 
 #ifdef __ASSEMBLER__
-#define UBRR_VALUE ((((F_CPU) - 16 * (BAUD)) * 100 / (16 * (BAUD)) + 50) / 100)
+#define UBRR_VALUE (((F_CPU) + 8 * (BAUD)) / (16 * (BAUD)) -1)
 #else
-#define UBRR_VALUE ((((F_CPU) - 16UL * (BAUD)) * 100UL / (16UL * (BAUD)) + 50UL) / 100UL)
+#define UBRR_VALUE (((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL)
 #endif
 
 #if 100 * (F_CPU) > \
-  (16 * ((UBRR_VALUE) + 1) * (100 + (BAUD_TOL)) * (BAUD))
+  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
 #  define USE_2X 1
 #elif 100 * (F_CPU) < \
-  (16 * ((UBRR_VALUE) + 1) * (100 - (BAUD_TOL)) * (BAUD))
+  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
 #  define USE_2X 1
 #else
 #  define USE_2X 0
@@ -211,18 +211,18 @@
 #undef UBRR_VALUE
 
 #ifdef __ASSEMBLER__
-#define UBRR_VALUE ((((F_CPU) - 8 * (BAUD)) * 100 / (8 * (BAUD)) + 50) / 100)
+#define UBRR_VALUE (((F_CPU) + 4 * (BAUD)) / (8 * (BAUD)) -1)
 #else
-#define UBRR_VALUE ((((F_CPU) - 8UL * (BAUD)) * 100UL / (8UL * (BAUD)) + 50UL) / 100UL)
+#define UBRR_VALUE (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
 #endif
 
 #if 100 * (F_CPU) > \
-  (8 * ((UBRR_VALUE) + 1)) * (100 + (BAUD_TOL)) * (BAUD))
+  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
 #  warning "Baud rate achieved is higher than allowed"
 #endif
 
 #if 100 * (F_CPU) < \
-  (8 * ((UBRR_VALUE) + 1)) * (100 - (BAUD_TOL)) * (BAUD))
+  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
 #  warning "Baud rate achieved is lower than allowed"
 #endif
 

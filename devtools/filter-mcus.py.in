@@ -2,14 +2,20 @@
 
 ## @configure_input@
 
-## Filter MCUs specified in $1 with a filter given as $2.
-## The filter is like "atmega16 atmega8* !atmega8*a" and is evaluated from
-## left to right.  When an MCU matches, then it is added to the set of MCUS.
-## When an MCU matches a !pattern, then it is removed from the set of MCUs.
+"""
+Filter MCUs specified in $1 with a filter given as $2.
+The filter is like "atmega16 atmega8* !atmega8*a" and is evaluated from
+left to right.  When an MCU matches, then it is added to the set of MCUS.
+When an MCU matches a !pattern, then it is removed from the set of MCUs.
+Examples:
+    $ ./filter-mcus.py 'atttiny26 attiny26a' '*a'  # attiny26a
+    $ ./filter-mcus.py '*' 'atmega8*a !atmega88*'  # atmega8a atmega8hva
+    $ ./filter-mcus.py '*' '* !*a*'                # m3000
+"""
 
 from __future__ import print_function
 
-import sys, re
+import sys, re, os
 
 mcus = sys.argv[1].split()
 globs = sys.argv[2].split()
@@ -23,6 +29,21 @@ def to_regex (s):
     r = s .replace("*", ".*") .replace (".", "[a-z0-9]")
     # re.fullmatch is only added in Python v3.4, hence do it by hand.
     return ( want, re.compile (r"\b" + (r if want else r[1:]) + r"\b") )
+
+# A list of all MCUs currently known to the lib.  These are the MCUs from
+# m4-gen/devices.m4  which  mlib-gen.py  generated from  gen-avr-lib-tree.sh.
+def known_mcus ():
+    filename = os.path.join ("@abs_top_srcdir@", "..", "m4-gen", "devices.m4")
+    filename = os.path.normpath (filename)
+    with open (filename) as file:
+        lines = [ l.strip() for l in file ]
+    # Use a set since a device may occur more than once in devices.m4.
+    mcus = set ([ l[1 + l.find("(") : l.find(")")] for l in lines ])
+    mcus -= set (["unknown"])
+    return mcus
+
+if sys.argv[1] == "*":
+    mcus = sorted (known_mcus())
 
 globs = tuple ( to_regex(s) for s in globs )
 

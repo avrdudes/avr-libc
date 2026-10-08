@@ -1,0 +1,3 @@
+!MCU=attiny85
+!Mcu="ATtiny85 (avr25, no MUL)"
+1&nbsp;

@@ -2,7 +2,7 @@
 
 # Allow to only generate for selected devices by providing DEVS.
 # Only when DEVS is not defined use the devices below.
-devs=${DEVS-"at43usb320 at43usb355 at76c711 at86rf401 at90c8534 at90can128 \
+devs="at43usb320 at43usb355 at76c711 at86rf401 at90c8534 at90can128 \
 at90can32 at90can64 at90pwm1 at90pwm2 at90pwm216 at90pwm2b at90pwm3 \
 at90pwm316 at90pwm3b at90pwm81 at90s1200 at90s2313 at90s2323 at90s2333 \
 at90s2343 at90s4414 at90s4433 at90s4434 at90s8515 at90s8535 at90scr100 \
@@ -65,12 +65,19 @@ avr32du14 avr32du20 avr32du28 avr32du32 avr64du28 avr64du32 \
 avr16la14 avr16la20 avr16la28 avr16la32 \
 avr32la14 avr32la20 avr32la28 avr32la32 \
 avr32sd20 avr32sd28 avr32sd32 \
-"}
+"
 
 if [ x"$ATDFDIR" = x ]
 then
     echo 'Please set $ATDFDIR in your environment' >&2
     exit 64
+fi
+
+# Allow DEVS to be a filter like "avr32la* atmega8* !atmega88*".
+
+if [ x"$DEVS" != x ]
+then
+    devs=`./filter-mcus.py "$devs" "$DEVS"`
 fi
 
 for dev in $devs
