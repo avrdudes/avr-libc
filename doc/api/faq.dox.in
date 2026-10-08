@@ -337,7 +337,7 @@ will need one additional word of ROM.
 Another side effect of optimization is that variable usage is
 restricted to the area of code where it is actually used.  So if a
 variable was placed in a register at the beginning of some function,
-this same register can be re-used later on if the compiler notices
+this same register can be reused later on if the compiler notices
 that the first variable is no longer used inside that function, even
 though the variable is still in lexical scope.  When trying to examine
 the variable in \c avr-gdb, the displayed result will then look
@@ -409,7 +409,7 @@ non-local labels when declaring a new function, and restrict anything
 else to local labels.  Local labels consist just of a number only.
 References to these labels consist of the number, followed by the
 letter \b b for a backward reference, or \b f for a forward reference.
-These local labels may be re-used within the source file, references
+These local labels may be reused within the source file, references
 will pick the closest label with the same number and given direction.
 
 Example:
@@ -571,7 +571,7 @@ and
 <dd>
   May be allocated by gcc for local data.
   You \e may use them freely in assembly subroutines.
-  Calling C subroutines can clobber any of them -
+  Calling C subroutines can clobber any of them --
   the caller is responsible for saving and restoring.
 
    For the Reduced Core architecture (ATtiny10 and relatives),
@@ -625,7 +625,7 @@ and
 
 <dt>Function call conventions</dt>
 <dd>
-  Arguments - allocated left to right, r25 to r8.
+  Arguments are allocated left to right, r25 to r8.
   All arguments are aligned to start in even-numbered
   registers (odd-sized arguments, including \c char, have
   one free register above them).  This allows making better
@@ -781,7 +781,7 @@ the different optimization levels, and added about 2.5 KB to the code.
 </table>
 
 (The difference between 955 &mu;s and 972 &mu;s was just a single
-timer-tick, so take this with a grain of salt.)
+timer tick, so take this with a grain of salt.)
 
 So generally, it seems <tt>-Os -mcall-prologues</tt> is the most
 universal "best" optimization level.  Only applications that need to
@@ -1133,7 +1133,7 @@ int main (void)
 There are times when you may need an array of strings which will never be
 modified. In this case, you don't want to waste RAM storing the constant
 strings.  For the rationale behind storing constant strings in RAM,
-see the previos section \ref faq_flashstrings and \ref pgmspace
+see the previous section \ref faq_flashstrings and \ref pgmspace
 
 \subsection faq_rom_array_progmem With PROGMEM
 
@@ -1558,7 +1558,7 @@ would read something like:
 .type asm_add, @function
 asm_add:
     add r24, r22
-    adc r24, zero_reg
+    adc r25, zero_reg
     ret
 .size asm_add, . - asm_add
 \endcode
@@ -1645,7 +1645,7 @@ or write an interface in inline assembly.
 
 \subsection faq_nonabi_asm Interface in Assembly
 
-The iterface function would look something like this, assuming that the
+The interface function would look something like this, assuming that the
 AVR device supports the \c MOVW and \c CALL instructions:
 
 \code{.asm}
@@ -1947,12 +1947,12 @@ then go into an infinite, do-nothing loop. The watchdog will then reset the
 processor.
 
 XMega parts have a specific bit <tt>RST_SWRST_bm</tt> in the
-<tt>RST.CTRL</tt> register, that generates a hardware reset.
+<tt>RST.CTRL</tt> register that generates a hardware reset.
 RST_SWRST_bm is protected by the XMega Configuration Change Protection
 system.
 
 The reason why using the watchdog timer or <tt>RST_SWRST_bm</tt> is
-preferable over jumping to the reset vector, is that when the watchdog
+preferable over jumping to the reset vector is that when the watchdog
 or <tt>RST_SWRST_bm</tt> resets the AVR, the registers will be reset
 to their known, default settings. Whereas jumping to the reset vector
 will leave the registers in their previous state, which is generally
@@ -2024,8 +2024,8 @@ to re-enterability is needed when using a multi-tasking
 operating system, or when using interrupts since an
 interrupt is really a temporary thread.
 
-The code generated natively by gcc is reentrant.  But, only
-some of the libraries in AVR-LibC are explicitly reentrant,
+The code generated natively by GCC is reentrant.  But only
+some of the functions in AVR-LibC are explicitly reentrant,
 and some are known not to be reentrant.  In general, any
 library call that reads and writes global variables
 (including I/O registers) is not reentrant.
@@ -2178,14 +2178,14 @@ the AVR while an EEPROM write is in progress.
 
 EEPROM writes can take up to tens of milliseconds to complete.  So
 that the CPU is not tied up for that long of time, an internal
-state-machine handles EEPROM write requests.  The EEPROM state-machine
+state machine handles EEPROM write requests.  The EEPROM state machine
 expects to have all of the EEPROM registers setup, then an EEPROM write
-request to start the process.  Once the EEPROM state-machine has
+request to start the process.  Once the EEPROM state machine has
 started, changing EEPROM related registers during an EEPROM write is
 guaranteed to corrupt the EEPROM write process.  The datasheet always
 shows the proper way to tell when a write is in progress, so that the
 registers are not changed by the user's program.  The EEPROM
-state-machine will \b always complete the write in progress unless
+state machine will \b always complete the write in progress unless
 power is removed from the device.
 
 As with all EEPROM technology, if power fails during an EEPROM write
@@ -2195,7 +2195,7 @@ In older generation AVRs the EEPROM Address Register (EEAR) is
 initialized to zero on reset, be it from Brown Out Detect, Watchdog or
 the Reset Pin.  If an EEPROM write has just started at the time of the
 reset, the write will be completed, but now at address zero instead of
-the requested address.  If the reset occurs later in the write process
+the requested address.  If the reset occurs later in the write process,
 both the requested address and address zero may be corrupted.
 
 To distinguish which AVRs may exhibit the corrupt of address zero
@@ -2227,20 +2227,20 @@ the EEPROM's inability to hold a charge from the excessive write wear.
 Some AVR datasheets give the following formula for calculating baud rates:
 
 \code
-(F_CPU / (UART_BAUD_RATE * 16L) - 1)
+F_CPU / (UART_BAUD_RATE * 16L) - 1
 \endcode
 
 Unfortunately that formula does not work with all combinations of
 clock speeds and baud rates due to integer truncation during the
 division operator.
 
-When doing integer division it is usually better to round to the nearest
-integer, rather than to the lowest.  To do this add 0.5 (i. e. half the
+When doing integer division, it is usually better to round to the nearest
+integer rather than to the lowest.  To do this, add 0.5 (i. e. half the
 value of the denominator) to the numerator before the division, resulting
 in the formula:
 
 \code
-((F_CPU + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1)
+(F_CPU + UART_BAUD_RATE * 8L) / (UART_BAUD_RATE * 16L) - 1
 \endcode
 
 This is also the way it is implemented in \ref util_setbaud.
@@ -2250,15 +2250,12 @@ This is also the way it is implemented in \ref util_setbaud.
 
 \section faq_funcptr_gt128kib On a device with more than 128 KiB of flash, how to make function pointers work?
 
-Function pointers beyond the "magical" 128 KiB barrier(s) on larger
-devices are supposed to be resolved through so-called
-<em>trampolines</em> by the linker, so the actual pointers used in
-the code can remain 16 bits wide.
+Function pointers beyond the "magical" 128 KiB barrier on larger devices are
+supposed to be resolved through so-called
+<em>linker stubs</em> / <em>trampolines</em> by the linker,
+so the actual pointers used in the code can remain 16 bits wide.
 
-In order for this to work, the option <tt>-mrelax</tt> must be given
-on the compiler command-line that is used to link the final ELF file.
-
-See also the avr-gcc online documentation on the
+See also the AVR GCC online documentation on the
 <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
    >\c EIND special function register</a> and indirect calls.
 
@@ -2285,18 +2282,6 @@ using explicit assignments instead:
   DDRB = 0xff;
   DDRD = 0xff;
 \endcode
-
-Even worse ist this, e. g. on an ATmega1281:
-
-\code
-  DDRA = DDRB = DDRC = DDRD = DDRE = DDRF = DDRG = 0xff;
-\endcode
-
-The same happens as outlined above.  However, when reading back
-register \c DDRG, this register only implements 6 out of the 8 bits,
-so the two topmost (unimplemented) bits read back as 0!  Consequently,
-all remaining <tt>DDR</tt><em>x</em> registers get assigned the value
-0x3f, which does not match the intention of the developer in any way.
 
 
 \section faq_headers Which header files are included in my program?
@@ -2524,11 +2509,11 @@ They influence how pars of the library behave.
 <tr>
   <td> \ref sec_memory_regions "text" starts at \c __TEXT_REGION_ORIGIN__
   <td> @HAVE_LDSCRIPT_PR31177_yesno@
-  <td> Starup code
+  <td> Startup code
 <tr>
   <td> \ref sec_memory_regions "data" starts at \c __DATA_REGION_ORIGIN__
   <td> @HAVE_LDSCRIPT_PR29741_yesno@
-  <td> Starup code
+  <td> Startup code
 <tr>
   <td> Compiler supports
     <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mcvt"

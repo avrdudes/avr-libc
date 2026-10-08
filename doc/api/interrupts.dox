@@ -77,8 +77,8 @@ explanation about interrupt routines written solely in assembly.
 <h3>Catch-all interrupt vector</h3>
 
 If an unexpected interrupt occurs (interrupt is enabled but no handler is
-installed, which usually indicates a bug), then the default action is to reset
-the device by jumping to the reset vector. You can override this by supplying
+installed, which usually indicates a bug), then the default action is to restart
+the program by jumping to the reset vector. You can override this by supplying
 a function named \c BADISR_vect which should be defined with
 #ISR() as such.
 The name \c BADISR_vect is actually an alias for \c __vector_default.

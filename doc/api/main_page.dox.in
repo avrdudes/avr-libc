@@ -100,7 +100,7 @@ for which the library has been configured and built.
 
 The following is a list of AVR devices currently supported by the library.
 Note that the actual support for a particular device depends on whether
-it is supported by the compiler at library compile-time.
+it is supported by the compiler at library compile time.
 
 \latexonly
 { \raggedright

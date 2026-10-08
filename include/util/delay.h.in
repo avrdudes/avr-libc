@@ -77,7 +77,7 @@
     In order for these functions to work as intended, compiler
     optimizations <em>must</em> be enabled, and the delay time
     <em>must</em> be an expression that is a known constant at
-    compile-time.  If these requirements are not met, the resulting
+    compile time.  If these requirements are not met, the resulting
     delay will be much longer (and basically unpredictable), and
     applications that otherwise do not use floating-point calculations
     will experience severe code bloat by the floating-point library

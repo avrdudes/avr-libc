@@ -364,7 +364,7 @@ Same applies for the lengths of all the regions, which is
 
 -# The \c rodata region is only present in the \c avrxmega2_flmap and
 \c avrxmega4_flmap emulations, which is the case for Binutils since
-v2.42 for the AVR64 and AVR128 devices without
+2.42 for the AVR64 and AVR128 devices without
 <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mrodata-in-ram"
    ><tt>-mrodata-in-ram</tt></a>.
 
@@ -498,26 +498,31 @@ empty ones, that are valid in a section name.
   at index <code><em>N</em></code>&nbsp;&ge;&nbsp;1.
   The default value for <code>__vector_<em>N</em></code> is
   <code>__bad_interrupt</code>, which jumps to weakly defined
-  <code>__vector_default</code>, which jumps to
+  <code>__vector_default</code> (#BADISR_vect), which jumps to
   \c __vectors, which is the start of the <code>.vectors</code> section.
 
   Implementing an interrupt service routine (ISR) is performed with the
-  help of the \c #ISR macro in C/C++ code.
+  help of the \c #ISR or \c #ISR_N macro in C/C++ code.
+</dd>
+<dt><code>SORT(.vectortext*)</code></dt>
+<dd>
+  For code that should be placed immediately after the interrupt vector
+  table. Since Binutils <a href="https://sourceware.org/PR34686">2.48</a>.
 </dd>
 <dt>\anchor sec_dot_progmem <code>.progmem.data</code></dt>
 <dt><code>.progmem.data.*</code></dt>
 <dt><code>.progmem.gcc.*</code></dt>
 <dd>
-  This section is used for read-only data declared with attribute
+  Used for read-only data declared with attribute
   #PROGMEM, and for data in address-space #__flash.
+  Since Binutils <a href="https://sourceware.org/PR32968">2.45</a>
+  the linker script asserts that these sections actually fit in the
+  lower 64 KiB block.
 
-  The compiler assumes that the <code>.progmem.data</code> sections are
-  located in the lower 64 KiB of program memory.  When it does not fit
-  in the lower 64 KiB block, then the program reads garbage except
-  address-space #__flashx or
-  \ref avr_pgmspace "pgm_read_*_far" is used. In that case however,
-  data can be located in the \ref sec_dot_progmemx ".progmemx.data"
-  section which does not require to be located in the lower program memory.
+  For read-only data that may reside at a higher flash location above
+  64 KiB, address-space #__flashx or #PROGMEM_FAR together with the
+  \ref avr_pgmspace "pgm_read_*_far" macros can be used.
+  See section \ref sec_dot_progmemx ".progmemx.data" below.
 </dd>
 <dt>\anchor sec_dot_trampolines .trampolines</dt>
 <dd>
@@ -527,6 +532,10 @@ empty ones, that are valid in a section name.
   on linker stubs, see the GCC documentation on
   <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#eind"
      >EIND</a>.
+</dd>
+<dt><code>.lowtext*</code></dt>
+<dd>
+  For code that should reside in the lower 128 KiB of the program memory.
 </dd>
 <dt>\anchor sec_text_text <code>.text</code></dt>
 <dt><code>.text.*</code></dt>
@@ -786,10 +795,11 @@ empty ones, that are valid in a section name.
   For data in address-space #__flashx there are support functions
   in \ref avr_flash "<avr/flash.h>".
 
-  The <tt>.progmemx.*</tt> input section pattern was added in Binutils v2.30.
+  The <tt>.progmemx.*</tt> input section pattern was added in Binutils
+  <a href="https://sourceware.org/PR21849">2.30</a>.
   In older versions, there was a catch all <tt>.progmem*</tt> pattern
-  for all data in program space, which will cause problems when progmem
-  data pushes the \c \.trampolines out of the lower 128 KiB segment.
+  for all data in program space, which caused problems when progmem
+  data pushed \c \.trampolines out of the lower 128 KiB segment.
 </dd>
 <dt>\anchor sec_dot_jumptables <tt>.jumptables*</tt></dt>
 <dd>
@@ -934,7 +944,7 @@ struct note_gnu_avr_deviceinfo
 The contents of this section can be displayed with
 
 - <tt>avr-objdump -P avr-deviceinfo <em>file</em></tt>, which is supported since
-Binutils v2.43.
+Binutils 2.43.
 
 - <tt>avr-readelf -n <em>file</em></tt>, which displays all notes.
 
@@ -967,7 +977,7 @@ avr-gcc ... -Ttext=0x100 -Wl,--defsym,__TEXT_REGION_ORIGIN__=0x100
   \endverbatim
 
   Notice that <tt>__DATA_REGION_ORIGIN__</tt> was only introduced since
-  Binutils <a href="https://sourceware.org/PR29741">v2.40</a>. Prior
+  Binutils <a href="https://sourceware.org/PR29741">2.40</a>. Prior
   to that, a core specific default value was used for the beginning
   of the data region, and thus defining this symbol had no effect.
 </dd>
@@ -991,23 +1001,23 @@ The application can read them to infer properties of the binary.
 <dt><tt>__data_start</tt></dt>
 <dt><tt>__data_end</tt></dt>
 <dd>
-  Start and (one past the) end \ref sec_vma "VMA" address of the
+  Start and (one past the) end \ref sec_vma "VMA" of the
   <tt>\ref sec_dot_data ".data"</tt> section in RAM.
 </dd>
 <dt><tt>__data_load_start</tt></dt>
 <dt><tt>__data_load_end</tt></dt>
 <dd>
-  Start and (one past the) end \ref sec_lma "LMA" address of the
+  Start and (one past the) end \ref sec_lma "LMA" of the
   <tt>\ref sec_dot_data ".data"</tt> section initializers located
   in program memory.
-  Used together with the VMA addresses above by the
+  Used together with the VMA above by the
   \ref sec_dot_init "startup code" to copy data initializers from
   program memory to RAM.
 </dd>
 <dt><tt>__bss_start</tt></dt>
 <dt><tt>__bss_end</tt></dt>
 <dd>
-  Start and (one past the) end VMA address of the
+  Start and (one past the) end VMA of the
   <tt>\ref sec_dot_bss ".bss"</tt> section.
   The startup code clears this part of the RAM.
 </dd>
@@ -1016,7 +1026,7 @@ The application can read them to infer properties of the binary.
 <dt><tt>__rodata_load_start</tt></dt>
 <dt><tt>__rodata_load_end</tt></dt>
 <dd>
-  Start and (one past the) end VMA resp. LMA address of the \c \.rodata
+  Start and (one past the) end VMA resp. LMA of the \c \.rodata
   output section. These symbols are only defined when \c \.rodata is not
   output to the \c text region, which is the case for emulations
   \c avrxmega2_flmap and \c avrxmega4_flmap.
@@ -1100,7 +1110,7 @@ is used although it is never called.
 
 - The \c unused attribute tells the compiler that it is fine that
 the function is unused, and silences respective diagnostics
-about the seemingly unused functions.
+about the seemingly unused function.
 
 - The \c naked attribute is required because the code is located in an
 init section.  The function <em>must not have a \c RET statement</em>

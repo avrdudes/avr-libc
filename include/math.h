@@ -80,9 +80,10 @@ extern "C" {
       <a href="https://gcc.gnu.org/gcc-10/changes.html#avr">GCC v10</a>
       and up.
       The size of the \c double and \c long \c double type can be selected
-      at compile-time with options like <tt>-mdouble=64</tt> and
+      at compile time with options like <tt>-mdouble=64</tt> and
       <tt>-mlong-double=32</tt>.  Whether such options are available,
-      and their default values, depend on how the compiler has been configured.
+      and their default values, depend on how the compiler has been
+      <a href="https://gcc.gnu.org/install/configure.html#avr">configured</a>.
     - The implementation of 64-bit floating-point arithmetic has some
       shortcomings and limitations, see the
       <a href="https://gcc.gnu.org/wiki/avr-gcc#Libf7">avr-gcc Wiki</a>

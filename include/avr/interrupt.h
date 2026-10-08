@@ -340,7 +340,12 @@
     executed when an IRQ fires with no accompanying ISR handler. This
     may be used along with the ISR() macro to create a catch-all for
     undefined but used ISRs for debugging purposes.  It cannot be used
-    with #ISR_N since there is no associated interrupt number.  */
+    with #ISR_N since there is no associated interrupt number.
+
+    Using option
+    <a href="https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html#index-mprune-vectab">-mprune-vectab</a>
+    to remove the tail end of unused vectors from the vector table
+    makes it harder to find such rogue IRQs.  */
 #  define BADISR_vect
 #else  /* !DOXYGEN */
 #  define BADISR_vect __vector_default
