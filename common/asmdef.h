@@ -1,6 +1,6 @@
 /* Copyright (c) 2002, 2005, 2006, 2007 Marek Michalkiewicz
    Copyright (c) 2006-2007 Dmitry Xmelkov
-   Copyright (c) 2025 Georg-Johann Lay
+   Copyright (c) 2025-2026 Georg-Johann Lay
    All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -261,50 +261,49 @@ _U(\lname):
 .endm
 
 
-/* Macro REGNO set the symbol name 'name' to integer which is a 'reg'
-   number (0..31). If 'reg' is not a valid register, compilation error.
-   Valid regs are: r0..r31, R0..R31 and 0..31
- */
-.macro	REGNO	name, reg
-  \name = -1
-
-  .L__regno = 0
-  .irp  sym,  r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, \
-	     r10,r11,r12,r13,r14,r15,r16,r17,r18,r19, \
-	     r20,r21,r22,r23,r24,r25,r26,r27,r28,r29, \
-	     r30,r31
-    .ifc  \sym,\reg
-      \name = .L__regno
-    .endif
-    .L__regno = .L__regno + 1
-  .endr
-
-  .L__regno = 0
-  .irp  sym,  R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, \
-	     R10,R11,R12,R13,R14,R15,R16,R17,R18,R19, \
-	     R20,R21,R22,R23,R24,R25,R26,R27,R28,R29, \
-	     R30,R31
-    .ifc  \sym,\reg
-      \name = .L__regno
-    .endif
-    .L__regno = .L__regno + 1
-  .endr
-
-  .if  \name < 0
-    .L__regno = 0
-    .rept 32
-      .if  \reg == .L__regno
-	\name = .L__regno
-      .endif
-      .L__regno = .L__regno + 1
+;;; REGNO sets symbol SYM to the register number of REG.
+;;; Valid REGs are: r0..r31, R0..R31 and XL, yh, ZH etc.
+;;; Expressions that evaluate to a number can also be used.
+.macro  REGNO sym, reg
+    .L..regno.done = 0
+    .L..regno = 0
+    .irp  name,                                                 \
+             r0,  r1,  r2,  r3,  r4,  r5,  r6,  r7,  r8,  r9,   \
+            r10, r11, r12, r13, r14, r15, r16, r17, r18, r19,   \
+            r20, r21, r22, r23, r24, r25, r26, r27, r28, r29,   \
+            r30, r31,                                           \
+             R0,  R1,  R2,  R3,  R4,  R5,  R6,  R7,  R8,  R9,   \
+            R10, R11, R12, R13, R14, R15, R16, R17, R18, R19,   \
+            R20, R21, R22, R23, R24, R25, R26, R27, R28, R29,   \
+            R30, R31
+        .ifc  \name,\reg
+            \sym = .L..regno % 32
+            .L..regno.done = 1
+        .endif
+        .L..regno = .L..regno + 1
     .endr
-  .endif
 
-  .if  \name < 0
-    .err	; Invalid dst arg of 'X_lpm' macro.
-  .endif
+    .L..regno = 0
+    .irp  name,                       \
+            xl, xh, yl, yh, zl, zh,   \
+            Xl, Xh, Yl, Yh, Zl, Zh,   \
+            xL, xH, yL, yH, zL, zH,   \
+            XL, XH, YL, YH, ZL, ZH,   \
+            x,  xh, y,  yh, z,  zh,   \
+            X,  XH, Y,  YH, Z,  ZH
+        .ifc  \name,\reg
+            \sym = 26 + .L..regno % 6
+            .L..regno.done = 1
+        .endif
+        .L..regno = .L..regno + 1
+    .endr
 
+    .if ! .L..regno.done
+        ;; Assume that \reg is some valid numeric expression.
+        \sym = \reg
+    .endif
 .endm	/* REGNO */
+
 
 /* Macro 'X_movw' extends enhanced movw instruction for classic chips.
  */
