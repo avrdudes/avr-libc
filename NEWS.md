@@ -21,6 +21,9 @@
     out of the CCP window.  Prior to writing the WDT config, make sure
     that WDT_SYNCBUSY_bp is clear ([#1065][1065], [#1068][1068]).
 
+  - Fixed swapped headers for ATxmega16E5 and ATxmega32A4 in
+    `<avr/io.h>` ([#1074][1074]).
+
 ## Pull Requests
 
   - On modern Xmega devices, `<avr/wdt.h>` now defines the following
@@ -35,6 +38,7 @@
 [1068]: https://github.com/avrdudes/avr-libc/issues/1068
 [1069]: https://github.com/avrdudes/avr-libc/issues/1069
 [1072]: https://github.com/avrdudes/avr-libc/issues/1072
+[1074]: https://github.com/avrdudes/avr-libc/issues/1074
 
 
 # Changes in AVR-LibC v2.3.2
