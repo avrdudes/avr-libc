@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float fmodf (float x, float y);
      The fmodf() function computes the remainder of dividing x by y. The

@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float expf (float x);
      The expf() function returns the value of e (the base of natural

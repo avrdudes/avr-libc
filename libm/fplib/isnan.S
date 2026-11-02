@@ -28,7 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* int isnanf (float)
      The isnanf() function returns a non-zero value if value is

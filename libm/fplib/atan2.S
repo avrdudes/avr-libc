@@ -54,7 +54,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 #define PI	0x40490fdb	/* Pi	*/
 #define PI_2	0x3fc90fdb	/* Pi/2	*/

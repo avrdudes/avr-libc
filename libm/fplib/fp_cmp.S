@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* GCC expects all these functions to return -1/0/1 as for __cmpsf2 -
    compare with gcc/config/fp-bit.c (the only difference is with NaNs

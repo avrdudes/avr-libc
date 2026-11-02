@@ -34,7 +34,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ENTRY   __unordsf2
 	XCALL	_U(__fp_cmp)	; return C=1, if any of args is NaN

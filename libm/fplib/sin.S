@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float sinf (float A);
      The sinf() function returns the sine of A, where A is given in radians.

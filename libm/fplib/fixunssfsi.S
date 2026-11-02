@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* unsigned long __fixunssfsi (float A);
      The __fixunssfsi() function converts A to the integer value. No

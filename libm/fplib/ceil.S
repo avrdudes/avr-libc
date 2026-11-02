@@ -36,7 +36,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 #define FL_P1	0x3f800000	/* +1.0	*/
 

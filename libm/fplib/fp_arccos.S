@@ -28,7 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* This is an asin/acos internal function. Arg must be  0 <= x <= 1  */
 

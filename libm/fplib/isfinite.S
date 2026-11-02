@@ -28,7 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* int isfinitef (float x);
      The isfinitef() function returns a nonzero value if x is finite: not

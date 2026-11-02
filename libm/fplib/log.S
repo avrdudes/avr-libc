@@ -29,7 +29,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ;; float logf (float A)
 ;; The logf() function returns the natural logarithm of A.

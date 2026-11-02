@@ -1,9 +1,7 @@
-/* Interprocedure conventions. In separate file: for math library
-   developers.	*/
-#ifndef	_FP32DEF_H
-#define	_FP32DEF_H
+/* Interprocedure conventions. In separate file: for libm developers.	*/
 
-#include "sectionname.h"
+#ifndef	FP32DEF_H
+#define	FP32DEF_H
 
 #define	rB0	r18
 #define	rB1	r19
@@ -18,21 +16,4 @@
 #define	rBE	r26
 #define	rAE	r27
 
-/* Put functions at this section.	*/
-#ifdef	FUNCTION
-# error	"The FUNCTION macro must be defined after FUNC_SEGNAME"
-#endif
-#define FUNC_SEGNAME	MLIB_SECTION
-
-#ifdef __AVR_HAVE_ELPM__
-#  define LDI_XH_hh8(sym)	ldi XH, hh8(sym)
-#else /* ELPM ? */
-#  define LDI_XH_hh8(sym)	/* empty */
-#endif /* ELPM ? */
-
-/* Bail out on the reduced core.  */
-#ifdef __AVR_TINY__
-	.end
-#endif /* __AVR_TINY__ */
-
-#endif	/* !_FP32DEF_H */
+#endif /* FP32DEF_H */

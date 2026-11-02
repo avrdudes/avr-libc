@@ -29,7 +29,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ;; float log2f (float A);
 ;; The log2f() function returns the base 2 logarithm of A.

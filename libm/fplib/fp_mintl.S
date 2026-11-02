@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float __fp_mintl (<non-standard>);
      Normalize value by shifting to left (only left) and merge parts of

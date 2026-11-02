@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float fmaf (float A, float B, float C)
      The `fmaf' function performs floating-point multiply-add. This is the

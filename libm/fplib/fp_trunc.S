@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* <non_standard> __fp_trunc (float A);
      This is an internal functions. __fp_trunc() splits argument and

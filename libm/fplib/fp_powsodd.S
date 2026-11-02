@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float __fp_powsodd (float A, [XH.]ZH.ZL);
      The __fp_powsodd() function calculates a polynomial with only odd

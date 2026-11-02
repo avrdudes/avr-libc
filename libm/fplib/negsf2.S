@@ -31,7 +31,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ENTRY   __negsf2
 	subi	rA3, 0x80

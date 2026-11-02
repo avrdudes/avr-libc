@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* float fdimf (float x, float y);
      The fdimf() function  return maxf(x-y,0). If x or y or both are NaN,

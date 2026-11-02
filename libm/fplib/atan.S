@@ -41,7 +41,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 #define FL_1	    0x3f800000		/* +1.0	*/
 #define HI40_PI_2   0x3fc90fda		/* high 4 bytes of Pi/2	*/

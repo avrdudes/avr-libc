@@ -29,7 +29,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* <non_standard> __fp_rempio2 (float x);
      The __fp_rempio2() function computes the remainder of dividing

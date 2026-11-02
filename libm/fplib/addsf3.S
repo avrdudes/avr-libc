@@ -32,7 +32,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ENTRY	__subsf3
 	subi	rB3, 0x80	; complement sign bit of B

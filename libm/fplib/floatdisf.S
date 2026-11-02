@@ -35,7 +35,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ENTRY   __floatdisf
 	bst	rA3, 7		; sign

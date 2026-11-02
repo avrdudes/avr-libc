@@ -33,7 +33,7 @@
  */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 ENTRY_FLOAT asinf asin asinl
         ;; Save A sign

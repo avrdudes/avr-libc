@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* flt40_t __fp_powser (float x, [XH.]ZH.ZL);
      The __fp_powser() function calculates the polynomial.

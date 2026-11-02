@@ -28,7 +28,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* long __fixsfsi (float A);
      The __fixsfsi() function converts A to the integer value. No rounding,

@@ -28,7 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* int isinff (float)
      The isinff() function returns -1 if value represents negative

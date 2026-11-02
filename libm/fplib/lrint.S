@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* long lrintf (float A);
      The lrintf() function rounds A to the nearest integer, rounding the

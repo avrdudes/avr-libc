@@ -27,7 +27,7 @@
    POSSIBILITY OF SUCH DAMAGE. */
 
 #include "fp32def.h"
-#include "asmdef.h"
+#include "fp32asm.h"
 
 /* double round (double A);
      The round() function rounds A to the nearest integer, but rounds
